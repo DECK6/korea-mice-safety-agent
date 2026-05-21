@@ -1,0 +1,130 @@
+{
+  "version": "0.1.0",
+  "generatedAt": "2026-05-21",
+  "storagePolicy": "Official venue operation/safety documents are cached for local research and converted to markdown for offline ontology work. Redistribution of the original documents must be reviewed per source terms.",
+  "items": [
+    {
+      "id": "coex_exhibition_guide_2025",
+      "venueId": "coex",
+      "sourceId": "COEX_EXHIBITION_GUIDE_2025",
+      "title": "코엑스 전시장 이용 안내서 2025",
+      "url": "https://business.coex.co.kr/wp-content/uploads/sites/2/2025/02/수정전시장-이용-안내서_2025_화물차량-주차할인제도-3차-변경완화_20250709.pdf",
+      "filename": "coex-exhibition-guide-2025.pdf"
+    },
+    {
+      "id": "coex_facility_operation_rule_2023",
+      "venueId": "coex",
+      "sourceId": "COEX_FACILITY_OPERATION_RULE_2023",
+      "title": "코엑스 전시장 시설운영규정 2023",
+      "url": "https://business.coex.co.kr/wp-content/uploads/sites/2/2023/01/전시장-시설운영규정_ver.2023.1월.pdf",
+      "filename": "coex-facility-operation-rule-2023.pdf"
+    },
+    {
+      "id": "coex_service_partner_manual",
+      "venueId": "coex",
+      "sourceId": "COEX_SERVICE_PARTNER_MANUAL",
+      "title": "코엑스 서비스협력업체 운영 매뉴얼",
+      "url": "https://lmsweb.coex.co.kr/com/attachfile/download.mvc?fileCateCD=NOTICE&fileKey=458&serialNo=2",
+      "filename": "coex-service-partner-manual.pdf"
+    },
+    {
+      "id": "kintex_safety_education",
+      "venueId": "kintex",
+      "sourceId": "KINTEX_SAFETY_EDUCATION",
+      "title": "킨텍스 전시장 작업자 안전교육자료",
+      "url": "https://www.kintex.com/download/formatModal/4.%EC%A7%80%EC%A0%95%EB%93%B1%EB%A1%9D%EC%97%85%EC%B2%B4%EC%95%88%EC%A0%84%EA%B5%90%EC%9C%A1%EC%9E%90%EB%A3%8C.pdf",
+      "filename": "kintex-safety-education.pdf"
+    },
+    {
+      "id": "kintex_organizer_manual",
+      "venueId": "kintex",
+      "sourceId": "KINTEX_ORGANIZER_MANUAL",
+      "title": "킨텍스 전시홀 주최자 매뉴얼",
+      "url": "https://www.kintex.com/download/formatModal/8.%EC%A0%84%EC%8B%9C%EC%A3%BC%EC%B5%9C%EC%9E%90%EB%A7%A4%EB%89%B4%EC%96%BC.pdf",
+      "filename": "kintex-organizer-manual.pdf"
+    },
+    {
+      "id": "bexco_operation_rules",
+      "venueId": "bexco",
+      "sourceId": "BEXCO_OPERATION_RULES",
+      "title": "벡스코 행사장 운영규정",
+      "url": "https://www.bexco.co.kr/organizer/ajx_json/UploadMgr/downloadRun.do?qcode=Qm9hcmQsMzI5NzYsWQ==",
+      "filename": "bexco-operation-rules.pdf"
+    },
+    {
+      "id": "bexco_operation_implementation_rules",
+      "venueId": "bexco",
+      "sourceId": "BEXCO_OPERATION_IMPLEMENTATION_RULES",
+      "title": "벡스코 행사장 운영규정 시행요령",
+      "url": "https://www.bexco.co.kr/organizer/ajx_json/UploadMgr/downloadRun.do?qcode=Qm9hcmQsMzI5NzcsWQ==",
+      "filename": "bexco-operation-implementation-rules.pdf"
+    },
+    {
+      "id": "bexco_construction_safety_manual",
+      "venueId": "bexco",
+      "sourceId": "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+      "title": "벡스코 행사장 공사 안전 매뉴얼",
+      "url": "https://www.bexco.co.kr/organizer/ajx_json/UploadMgr/downloadRun.do?qcode=Qm9hcmQsMzA5NjgsWQ==",
+      "filename": "bexco-construction-safety-manual.pdf"
+    },
+    {
+      "id": "setec_operating_guide_2025",
+      "venueId": "setec",
+      "sourceId": "SETEC_OPERATING_GUIDE_2025",
+      "title": "서울무역전시장 SETEC 운영 요령 2025",
+      "url": "https://www.setec.or.kr/resources/front/files/2025_SETEC.pdf",
+      "filename": "setec-operating-guide-2025.pdf"
+    },
+    {
+      "id": "suwonmesse_rules",
+      "venueId": "suwonmesse",
+      "sourceId": "SUWONMESSE_OPERATION_RULES",
+      "title": "수원메쎄 전시장 운영규정",
+      "url": "https://d70o0vfgysr3u.cloudfront.net/wp-content/uploads/2023/08/10171957/SUWONMESSE-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EC%B5%9C%EC%8B%A0%EB%B3%B8.pdf",
+      "filename": "suwonmesse-operation-rules.pdf"
+    },
+    {
+      "id": "songdo_operation_rules",
+      "venueId": "songdo_convensia",
+      "sourceId": "SONGDO_OPERATION_RULES",
+      "title": "송도컨벤시아 운영규정",
+      "url": "https://songdoconvensia.visitincheon.or.kr/file.do?n=5.+%EC%86%A1%EB%8F%84%EC%BB%A8%EB%B2%A4%EC%8B%9C%EC%95%84+%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf&path=202403%2F8d856c67-a47c-4599-9e2a-25e771e1a94f.pdf",
+      "filename": "songdo-convensia-operation-rules.pdf"
+    },
+    {
+      "id": "ceco_operation_rules",
+      "venueId": "ceco",
+      "sourceId": "CECO_OPERATION_RULES",
+      "title": "창원컨벤션센터 전시장 운영규정",
+      "url": "https://www.ceco.co.kr/bbx/download.php?bx_table=02_02_04_01&wr_id=28&no=0",
+      "referer": "https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=28",
+      "filename": "ceco-operation-rules.pdf"
+    },
+    {
+      "id": "ceco_work_safety_manual",
+      "venueId": "ceco",
+      "sourceId": "CECO_WORK_SAFETY_MANUAL",
+      "title": "창원컨벤션센터 전시장 작업 안전 관리 매뉴얼",
+      "url": "https://www.ceco.co.kr/bbx/download.php?bx_table=02_02_04_01&wr_id=45&no=0",
+      "referer": "https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=45",
+      "filename": "ceco-work-safety-manual.hwp",
+      "format": "hwp"
+    },
+    {
+      "id": "hico_facility_guide",
+      "venueId": "hico",
+      "sourceId": "HICO_FACILITY_GUIDE",
+      "title": "경주화백컨벤션센터 HICO 주최자 가이드북",
+      "url": "https://www.hico.or.kr/HICO_EXHIBITOR_GUIDEBOOK.pdf",
+      "filename": "hico-exhibitor-guidebook.pdf"
+    },
+    {
+      "id": "gsco_operation_rules",
+      "venueId": "gsco",
+      "sourceId": "GSCO_OPERATION_RULES",
+      "title": "군산새만금컨벤션센터 전시장 운영규정",
+      "url": "https://www.gsco.kr/files/GSCO%20%EC%A0%84%EC%8B%9C%EC%9E%A5%20%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf",
+      "filename": "gsco-operation-rules.pdf"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+node_modules/
+build/
+graphify-out/
+src/graphify-out/
+.DS_Store
+*.log
+*.tgz
+.env
+.env.*
+!.env.example
+data/raw/
+data/raw/venue-pdfs/.download-cookies.txt
+data/out-of-scope/
+data/.validation-store/

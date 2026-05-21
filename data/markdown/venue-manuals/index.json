@@ -1,0 +1,156 @@
+{
+  "generatedAt": "2026-05-21T03:25:27.002Z",
+  "count": 15,
+  "items": [
+    {
+      "id": "coex_exhibition_guide_2025",
+      "venueId": "coex",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/coex-exhibition-guide-2025.pdf",
+      "markdown": "data/markdown/venue-manuals/coex-exhibition-guide-2025.md",
+      "bytes": 3262305,
+      "sha256": "852760af0f9d741995b8980dcc0dbb4812830b550952fc3b429ea141f11edaca",
+      "chars": 21627
+    },
+    {
+      "id": "coex_facility_operation_rule_2023",
+      "venueId": "coex",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/coex-facility-operation-rule-2023.pdf",
+      "markdown": "data/markdown/venue-manuals/coex-facility-operation-rule-2023.md",
+      "bytes": 243611,
+      "sha256": "84f3df024e25f3ae651be2ab7c2fb62bfceb92c456ba3de458bc62a21e33b0d5",
+      "chars": 22718
+    },
+    {
+      "id": "coex_service_partner_manual",
+      "venueId": "coex",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/coex-service-partner-manual.pdf",
+      "markdown": "data/markdown/venue-manuals/coex-service-partner-manual.md",
+      "bytes": 343294,
+      "sha256": "a71ba006c73fc8ce8790dc6d9ca69e83c8abfd26e9f6402df7274c44c05c999f",
+      "chars": 38861
+    },
+    {
+      "id": "kintex_safety_education",
+      "venueId": "kintex",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/kintex-safety-education.pdf",
+      "markdown": "data/markdown/venue-manuals/kintex-safety-education.md",
+      "bytes": 5381741,
+      "sha256": "b7ca37e4d68005f598f84c2a5312b99e6ae741417b642380d32edb329b2a40a3",
+      "chars": 52855
+    },
+    {
+      "id": "kintex_organizer_manual",
+      "venueId": "kintex",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/kintex-organizer-manual.pdf",
+      "markdown": "data/markdown/venue-manuals/kintex-organizer-manual.md",
+      "bytes": 8107951,
+      "sha256": "5e7ba9504e7dfc057c17db59710a992adbbdf04ec0e2139714e7a0de6033c3c0",
+      "chars": 70664
+    },
+    {
+      "id": "bexco_operation_rules",
+      "venueId": "bexco",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/bexco-operation-rules.pdf",
+      "markdown": "data/markdown/venue-manuals/bexco-operation-rules.md",
+      "bytes": 271549,
+      "sha256": "be82fbc3352ce5d075765b04a4020609c3e6318daa6eb72ae03ab5dc1f7ce8ee",
+      "chars": 47245
+    },
+    {
+      "id": "bexco_operation_implementation_rules",
+      "venueId": "bexco",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/bexco-operation-implementation-rules.pdf",
+      "markdown": "data/markdown/venue-manuals/bexco-operation-implementation-rules.md",
+      "bytes": 312415,
+      "sha256": "52e13eb759347d5a8e55c1f6f4cb5bea84272e9066b502d9c9bb4bd9e49dfbdc",
+      "chars": 43110
+    },
+    {
+      "id": "bexco_construction_safety_manual",
+      "venueId": "bexco",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/bexco-construction-safety-manual.pdf",
+      "markdown": "data/markdown/venue-manuals/bexco-construction-safety-manual.md",
+      "bytes": 675032,
+      "sha256": "21c666c0a68d7deb5baeda0ea3e814706076ca2f236966a8061acc8a8b3959f3",
+      "chars": 51844
+    },
+    {
+      "id": "setec_operating_guide_2025",
+      "venueId": "setec",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/setec-operating-guide-2025.pdf",
+      "markdown": "data/markdown/venue-manuals/setec-operating-guide-2025.md",
+      "bytes": 635857,
+      "sha256": "91745c11ecd4ca6e6964cf823be8e7325499ed585ba09017ae3fc222d56f476a",
+      "chars": 56000
+    },
+    {
+      "id": "suwonmesse_rules",
+      "venueId": "suwonmesse",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/suwonmesse-operation-rules.pdf",
+      "markdown": "data/markdown/venue-manuals/suwonmesse-operation-rules.md",
+      "bytes": 278605,
+      "sha256": "c1bab0402c04eaf5972232a881a7a84e63c0ed2a53056161142c0aa11a1650b6",
+      "chars": 23654
+    },
+    {
+      "id": "songdo_operation_rules",
+      "venueId": "songdo_convensia",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/songdo-convensia-operation-rules.pdf",
+      "markdown": "data/markdown/venue-manuals/songdo-convensia-operation-rules.md",
+      "bytes": 1214903,
+      "sha256": "a49324e97b02779931bbc61cd1e2c637c08918f5c2b5fda01db612ec87687ca8",
+      "chars": 85872
+    },
+    {
+      "id": "ceco_operation_rules",
+      "venueId": "ceco",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/ceco-operation-rules.pdf",
+      "markdown": "data/markdown/venue-manuals/ceco-operation-rules.md",
+      "bytes": 472309,
+      "sha256": "102b3bc12e1e100e294fb90cc4b4ca8eabc45076b6143ccf9f3409e283b7a96b",
+      "chars": 61001
+    },
+    {
+      "id": "ceco_work_safety_manual",
+      "venueId": "ceco",
+      "downloaded": false,
+      "document": "data/raw/venue-hwp/ceco-work-safety-manual.hwp",
+      "markdown": "data/markdown/venue-manuals/ceco-work-safety-manual.md",
+      "bytes": 294400,
+      "sha256": "2912efaf02710f5a7b5efcc46018a3296e0b88ac6a27654ede5d21c144274d31",
+      "chars": 15325
+    },
+    {
+      "id": "hico_facility_guide",
+      "venueId": "hico",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/hico-exhibitor-guidebook.pdf",
+      "markdown": "data/markdown/venue-manuals/hico-exhibitor-guidebook.md",
+      "bytes": 24991246,
+      "sha256": "57b5df3ffbb7f0a0e100f5e44df10ae6a892024b96e0b281a3051dbd33619713",
+      "chars": 9968
+    },
+    {
+      "id": "gsco_operation_rules",
+      "venueId": "gsco",
+      "downloaded": false,
+      "document": "data/raw/venue-pdfs/gsco-operation-rules.pdf",
+      "markdown": "data/markdown/venue-manuals/gsco-operation-rules.md",
+      "bytes": 254524,
+      "sha256": "e7f17e577e9421334f9cdfc3e5d537aa40662b537543ca53acf6ca3626dc3061",
+      "chars": 29713
+    }
+  ]
+}

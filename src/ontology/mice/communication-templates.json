@@ -1,0 +1,146 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "scope": "Offline Korean MICE operation communication templates for command decisions, staff radio, public announcement, push/SMS, and agency updates.",
+  "placeholders": [
+    "eventName",
+    "zone",
+    "reason",
+    "safeRoute",
+    "resumeConditions",
+    "contactPoint"
+  ],
+  "templates": [
+    {
+      "id": "evacuation_start_public_announcement",
+      "decisionType": "evacuation_start",
+      "channel": "public_announcement",
+      "audience": "visitors",
+      "tone": "calm_direct",
+      "ko": "{zone} 구역 안전 확보를 위해 안내드립니다. 현장 스태프의 안내에 따라 가까운 비상구와 지정 대피 동선으로 천천히 이동해 주십시오. 뛰지 마시고, 유모차와 휠체어 이용객이 먼저 이동할 수 있도록 협조해 주십시오.",
+      "en": "For safety in the {zone} area, please follow staff instructions and move slowly to the nearest emergency exit or designated evacuation route. Do not run. Please give priority to visitors with strollers or wheelchairs.",
+      "ja": "{zone}エリアの安全確保のため、現場スタッフの案内に従い、最寄りの非常口または指定避難経路へゆっくり移動してください。走らず、ベビーカーや車いすをご利用の方が先に移動できるようご協力ください。",
+      "zh": "为确保{zone}区域安全，请按照现场工作人员指引，缓慢前往最近的紧急出口或指定疏散路线。请勿奔跑，并请优先让婴儿车和轮椅使用者通行。",
+      "checkpoints": [
+        "대피 방향을 구체적으로 말한다",
+        "뛰지 말라는 문구를 포함한다",
+        "교통약자 우선 이동을 포함한다"
+      ]
+    },
+    {
+      "id": "evacuation_start_staff_radio",
+      "decisionType": "evacuation_start",
+      "channel": "staff_radio",
+      "audience": "staff",
+      "tone": "command",
+      "ko": "운영본부에서 전파합니다. {zone} 구역 부분 대피 개시. 구역장은 대피동선 개방, 보안팀은 역류 차단, 의료팀은 {safeRoute} 인근 대기. 3분 단위로 상황 보고 바랍니다.",
+      "checkpoints": [
+        "역할별 행동을 분리한다",
+        "보고 주기를 명시한다",
+        "대피동선과 의료 대기 지점을 포함한다"
+      ]
+    },
+    {
+      "id": "event_pause_public_announcement",
+      "decisionType": "event_pause",
+      "channel": "public_announcement",
+      "audience": "visitors",
+      "tone": "calm_direct",
+      "ko": "{reason}으로 인해 {zone} 구역 운영을 잠시 중지합니다. 안내 스태프의 지시에 따라 대기선을 유지해 주시고, 우회 동선을 이용해 주십시오. 운영 재개 시 현장 방송과 안내판으로 다시 알려드리겠습니다.",
+      "en": "Operations in the {zone} area are temporarily paused due to {reason}. Please keep your place in line, follow staff instructions, and use the detour route. We will announce reopening through on-site announcements and signs.",
+      "ja": "{reason}のため、{zone}エリアの運営を一時停止します。案内スタッフの指示に従い、待機列を維持し、迂回動線をご利用ください。再開時は場内放送と案内表示でお知らせします。",
+      "zh": "因{reason}，{zone}区域运营暂时停止。请按照工作人员指示保持排队秩序，并使用绕行路线。恢复运营时，我们将通过现场广播和指示牌通知。",
+      "checkpoints": [
+        "중지 범위를 구역 단위로 말한다",
+        "대기/우회 행동을 명확히 한다",
+        "재개 안내 채널을 말한다"
+      ]
+    },
+    {
+      "id": "event_pause_staff_radio",
+      "decisionType": "event_pause",
+      "channel": "staff_radio",
+      "audience": "staff",
+      "tone": "command",
+      "ko": "운영본부 지시입니다. {zone} 운영 일시중지. 구역장은 입장 차단선 설치, 보안팀은 대기열을 보행동선 밖으로 이동, 안내팀은 우회 안내를 즉시 시행하십시오. 재개조건은 {resumeConditions}입니다.",
+      "checkpoints": [
+        "차단선, 대기열, 우회 안내를 분리한다",
+        "재개조건을 명시한다",
+        "담당팀별 행동을 명령형으로 쓴다"
+      ]
+    },
+    {
+      "id": "event_stop_public_announcement",
+      "decisionType": "event_stop",
+      "channel": "public_announcement",
+      "audience": "visitors",
+      "tone": "calm_direct",
+      "ko": "안전상의 이유로 {eventName} 운영을 중단합니다. 현장 스태프의 안내에 따라 출구와 대중교통 방향으로 순차 이동해 주십시오. 환불, 재입장, 후속 안내는 공식 채널을 통해 공지하겠습니다.",
+      "en": "{eventName} is being stopped for safety reasons. Please follow staff instructions and move in order toward exits and public transportation. Refunds, re-entry, and follow-up information will be announced through official channels.",
+      "ja": "安全上の理由により、{eventName}の運営を中止します。現場スタッフの案内に従い、出口および公共交通機関方面へ順番に移動してください。払い戻し、再入場、今後の案内は公式チャンネルでお知らせします。",
+      "zh": "出于安全原因，{eventName}将停止运营。请按照现场工作人员指引，有序前往出口和公共交通方向。退款、重新入场及后续信息将通过官方渠道通知。",
+      "checkpoints": [
+        "중단 사유를 과장하지 않는다",
+        "퇴장 방향을 안내한다",
+        "후속 공지 채널을 포함한다"
+      ]
+    },
+    {
+      "id": "shelter_in_place_public_announcement",
+      "decisionType": "shelter_in_place",
+      "channel": "public_announcement",
+      "audience": "visitors",
+      "tone": "calm_direct",
+      "ko": "{zone} 주변 이동을 잠시 멈춰 주십시오. 현재 위치에서 스태프 안내를 기다려 주시고, 출입구와 통로를 막지 않도록 한쪽으로 서 주십시오. 추가 이동 안내를 곧 전달하겠습니다.",
+      "en": "Please temporarily stop moving around the {zone} area. Stay where you are and wait for staff instructions. Keep entrances and aisles clear by standing to one side. Further movement guidance will be provided shortly.",
+      "ja": "{zone}周辺での移動を一時的にお控えください。現在の場所でスタッフの案内をお待ちいただき、出入口や通路をふさがないよう片側に寄ってください。追加の移動案内をまもなくお知らせします。",
+      "zh": "请暂时停止在{zone}周边移动。请在当前位置等待工作人员指引，并靠边站立，保持出入口和通道畅通。我们将很快提供进一步的移动指引。",
+      "checkpoints": [
+        "움직이지 말아야 하는 범위를 말한다",
+        "통로 확보를 포함한다",
+        "추가 안내 예정임을 알린다"
+      ]
+    },
+    {
+      "id": "event_resume_public_announcement",
+      "decisionType": "event_resume",
+      "channel": "public_announcement",
+      "audience": "visitors",
+      "tone": "calm_direct",
+      "ko": "{zone} 구역 안전 확인이 완료되어 운영을 재개합니다. 혼잡 방지를 위해 스태프 안내에 따라 순차 입장해 주십시오. 불편을 드려 죄송합니다.",
+      "en": "Safety checks in the {zone} area are complete and operations are resuming. To prevent congestion, please enter in order as directed by staff. Thank you for your patience.",
+      "ja": "{zone}エリアの安全確認が完了したため、運営を再開します。混雑防止のため、スタッフの案内に従って順番にご入場ください。ご協力ありがとうございます。",
+      "zh": "{zone}区域安全确认已完成，现恢复运营。为避免拥挤，请按照工作人员指引有序入场。感谢您的配合。",
+      "checkpoints": [
+        "안전 확인 완료를 말한다",
+        "순차 입장을 안내한다",
+        "불편 안내를 짧게 포함한다"
+      ]
+    },
+    {
+      "id": "all_clear_staff_radio",
+      "decisionType": "all_clear",
+      "channel": "staff_radio",
+      "audience": "staff",
+      "tone": "command",
+      "ko": "운영본부에서 전파합니다. {zone} 상황 해제. 각 팀은 배치 원위치, 잔여 대기열 확인, 조치 전후 사진과 보고서 입력을 완료해 주십시오.",
+      "checkpoints": [
+        "원위치 복귀",
+        "잔여 위험 확인",
+        "기록 완료를 포함한다"
+      ]
+    },
+    {
+      "id": "agency_update_sms",
+      "decisionType": "event_pause",
+      "channel": "agency_update",
+      "audience": "agency",
+      "tone": "factual",
+      "ko": "[{eventName}] {zone} 구역 운영 일시중지. 사유: {reason}. 초동조치: 대기열 분리, 우회동선 안내, 보안/의료 대기. 재개조건: {resumeConditions}. 연락: {contactPoint}",
+      "checkpoints": [
+        "사유/조치/재개조건/연락처를 한 문장으로 요약한다",
+        "확정되지 않은 원인 표현을 피한다"
+      ]
+    }
+  ]
+}

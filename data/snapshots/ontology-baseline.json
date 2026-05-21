@@ -1,0 +1,4844 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21T22:56:23.145Z",
+  "collections": {
+    "laws": [
+      {
+        "id": "building_act",
+        "label": "건축법 / 건축법 / verified",
+        "hash": "1783f5ff456e1d58"
+      },
+      {
+        "id": "building_act_enforcement_decree",
+        "label": "건축법 시행령 / 건축법 시행령 / verified",
+        "hash": "b89a732365fa796c"
+      },
+      {
+        "id": "building_act_enforcement_rule",
+        "label": "건축법 시행규칙 / 건축법 시행규칙 / verified",
+        "hash": "abe5e3151e42c73b"
+      },
+      {
+        "id": "electrical_safety_management_act",
+        "label": "전기안전관리법 / 전기안전관리법 / verified",
+        "hash": "033c8a5c9a1ba8ba"
+      },
+      {
+        "id": "elevator_safety_act",
+        "label": "승강기 안전관리법 / 승강기안전법 / verified",
+        "hash": "02f17b559ee771bf"
+      },
+      {
+        "id": "emergency_medical_service_act",
+        "label": "응급의료에 관한 법률 / 응급의료법 / verified",
+        "hash": "739bdfb76c89b30f"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_decree",
+        "label": "응급의료에 관한 법률 시행령 / 응급의료법 시행령 / verified",
+        "hash": "86f0e0cb573b6df0"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_rule",
+        "label": "응급의료에 관한 법률 시행규칙 / 응급의료법 시행규칙 / verified",
+        "hash": "2ec29218c1b475ba"
+      },
+      {
+        "id": "fire_facilities_act",
+        "label": "소방시설 설치 및 관리에 관한 법률 / 소방시설법 / verified",
+        "hash": "791ac173e502e766"
+      },
+      {
+        "id": "fire_facilities_act_enforcement_decree",
+        "label": "소방시설 설치 및 관리에 관한 법률 시행령 / 소방시설법 시행령 / verified",
+        "hash": "5b39ee8886eed6d2"
+      },
+      {
+        "id": "fire_prevention_act",
+        "label": "화재의 예방 및 안전관리에 관한 법률 / 화재예방법 / verified",
+        "hash": "524cbc3aeefdb699"
+      },
+      {
+        "id": "fire_prevention_act_enforcement_decree",
+        "label": "화재의 예방 및 안전관리에 관한 법률 시행령 / 화재예방법 시행령 / verified",
+        "hash": "8e204da8354c0e83"
+      },
+      {
+        "id": "food_sanitation_act",
+        "label": "식품위생법 / 식품위생법 / verified",
+        "hash": "b33449fedec89e3e"
+      },
+      {
+        "id": "food_sanitation_act_enforcement_rule",
+        "label": "식품위생법 시행규칙 / 식품위생법 시행규칙 / verified",
+        "hash": "6ef8a6b7e2ceb814"
+      },
+      {
+        "id": "framework_act_disaster_safety",
+        "label": "재난 및 안전관리 기본법 / 재난안전법 / verified",
+        "hash": "df96f1545adbd673"
+      },
+      {
+        "id": "lp_gas_safety_act",
+        "label": "액화석유가스의 안전관리 및 사업법 / 액화석유가스법 / verified",
+        "hash": "825ec52221ee10b0"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 액화석유가스법 시행규칙 / verified",
+        "hash": "b87f0252d6cea7e7"
+      },
+      {
+        "id": "multi_use_facility_crisis_manual_rule",
+        "label": "다중이용시설 등의 위기상황 매뉴얼 작성방법 및 기준 / 다중이용시설 위기상황 매뉴얼 기준 / verified",
+        "hash": "e9cb1589f6458f48"
+      },
+      {
+        "id": "occupational_safety_health_act",
+        "label": "산업안전보건법 / 산안법 / verified",
+        "hash": "259f3a4d2de09b8e"
+      },
+      {
+        "id": "occupational_safety_health_standards_rule",
+        "label": "산업안전보건기준에 관한 규칙 / 산안기준규칙 / source_verified",
+        "hash": "7341383558ca8acd"
+      },
+      {
+        "id": "outdoor_advertisements_act",
+        "label": "옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률 / 옥외광고물법 / verified",
+        "hash": "dfa06fa02fb08850"
+      },
+      {
+        "id": "outdoor_advertisements_act_enforcement_decree",
+        "label": "옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률 시행령 / 옥외광고물법 시행령 / verified",
+        "hash": "04f2c84ff4855135"
+      },
+      {
+        "id": "performance_act",
+        "label": "공연법 / 공연법 / verified",
+        "hash": "6be2200167797194"
+      },
+      {
+        "id": "performance_act_enforcement_decree",
+        "label": "공연법 시행령 / 공연법 시행령 / verified",
+        "hash": "1f3fd126da321355"
+      },
+      {
+        "id": "performance_act_enforcement_rule",
+        "label": "공연법 시행규칙 / 공연법 시행규칙 / verified",
+        "hash": "316f8f05756365b1"
+      },
+      {
+        "id": "personal_information_protection_act",
+        "label": "개인정보 보호법 / 개인정보보호법 / verified",
+        "hash": "ec03efd108660797"
+      },
+      {
+        "id": "personal_information_protection_act_enforcement_decree",
+        "label": "개인정보 보호법 시행령 / 개인정보보호법 시행령 / verified",
+        "hash": "216aeffbedbc05d1"
+      },
+      {
+        "id": "road_act",
+        "label": "도로법 / 도로법 / verified",
+        "hash": "8d6bedf68d594696"
+      },
+      {
+        "id": "road_act_enforcement_decree",
+        "label": "도로법 시행령 / 도로법 시행령 / verified",
+        "hash": "62ff20bd14d7b137"
+      },
+      {
+        "id": "road_act_enforcement_rule",
+        "label": "도로법 시행규칙 / 도로법 시행규칙 / verified",
+        "hash": "dd89f5ecfaf5b13f"
+      },
+      {
+        "id": "road_traffic_act",
+        "label": "도로교통법 / 도로교통법 / verified",
+        "hash": "7c9b5c28c1845778"
+      },
+      {
+        "id": "security_services_industry_act",
+        "label": "경비업법 / 경비업법 / verified",
+        "hash": "3d8ed3082d615db4"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_decree",
+        "label": "경비업법 시행령 / 경비업법 시행령 / verified",
+        "hash": "196c67012a8fede7"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_rule",
+        "label": "경비업법 시행규칙 / 경비업법 시행규칙 / verified",
+        "hash": "59a60a53e438dae6"
+      },
+      {
+        "id": "serious_accidents_punishment_act",
+        "label": "중대재해 처벌 등에 관한 법률 / 중대재해처벌법 / verified",
+        "hash": "30a3b74840d5fbd4"
+      }
+    ],
+    "legalArticles": [
+      {
+        "id": "building_act__article_49",
+        "label": "건축법 / 제49조 / 건축물의 피난시설 및 용도제한 등 / verified",
+        "hash": "3a4936cafc373265"
+      },
+      {
+        "id": "building_act_enforcement_decree__article_34",
+        "label": "건축법 시행령 / 제34조 / 직통계단의 설치 / verified",
+        "hash": "81f8e977689fb67a"
+      },
+      {
+        "id": "building_act_enforcement_decree__article_35",
+        "label": "건축법 시행령 / 제35조 / 피난계단의 설치 / verified",
+        "hash": "4b22cdf46601c27f"
+      },
+      {
+        "id": "building_act_enforcement_decree__article_36",
+        "label": "건축법 시행령 / 제36조 / 옥외 피난계단의 설치 / verified",
+        "hash": "3ae37ed4b4037be9"
+      },
+      {
+        "id": "building_act_enforcement_decree__article_37",
+        "label": "건축법 시행령 / 제37조 / 지하층과 피난층 사이의 개방공간 설치 / verified",
+        "hash": "d4c5b50cf5e12c3e"
+      },
+      {
+        "id": "electrical_safety_management_act__article_13",
+        "label": "전기안전관리법 / 제13조 / 여러 사람이 이용하는 시설 등에 대한 전기안전점검 / verified",
+        "hash": "a8eda22dc4ae737d"
+      },
+      {
+        "id": "elevator_safety_act__article_31",
+        "label": "승강기 안전관리법 / 제31조 / 승강기의 자체점검 / verified",
+        "hash": "14a30a7fad3730f8"
+      },
+      {
+        "id": "emergency_medical_service_act__article_47",
+        "label": "응급의료에 관한 법률 / 제47조 / 구급차등의 장비 / verified",
+        "hash": "a8dffd9092416eac"
+      },
+      {
+        "id": "emergency_medical_service_act__article_47_2",
+        "label": "응급의료에 관한 법률 / 제47조의2 / 심폐소생을 위한 응급장비의 구비 등의 의무 / verified",
+        "hash": "24129e33b3a5b067"
+      },
+      {
+        "id": "emergency_medical_service_act__article_50",
+        "label": "응급의료에 관한 법률 / 제50조 / 지도ㆍ감독 / verified",
+        "hash": "e56e8e3ac2a60c89"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_decree__article_26_7",
+        "label": "응급의료에 관한 법률 시행령 / 제26조의7 / 응급장비의 구비의무가 있는 공동주택 등 / verified",
+        "hash": "f0b4e16c3be6e03d"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_rule__article_38",
+        "label": "응급의료에 관한 법률 시행규칙 / 제38조 / 구급차등의 장비 및 관리 등 / verified",
+        "hash": "a0af340eee4b8a51"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_rule__article_38_2",
+        "label": "응급의료에 관한 법률 시행규칙 / 제38조의2 / 응급장비 설치 등에 관한 현황 파악 / verified",
+        "hash": "867a04b51a0b7d50"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_rule__article_38_3",
+        "label": "응급의료에 관한 법률 시행규칙 / 제38조의3 / 응급장비의 관리 / verified",
+        "hash": "277d601d1af3eea4"
+      },
+      {
+        "id": "fire_facilities_act__article_12",
+        "label": "소방시설 설치 및 관리에 관한 법률 / 제12조 / 특정소방대상물에 설치하는 소방시설의 관리 등 / verified",
+        "hash": "5555be1fd741d943"
+      },
+      {
+        "id": "fire_facilities_act__article_16",
+        "label": "소방시설 설치 및 관리에 관한 법률 / 제16조 / 피난시설, 방화구획 및 방화시설의 관리 / verified",
+        "hash": "4a90c7c22e8b0c25"
+      },
+      {
+        "id": "fire_facilities_act_enforcement_decree__article_36",
+        "label": "소방시설법 시행령 / 제36조 / 자체점검 결과 공개 / verified",
+        "hash": "9a02fb81a746a6a4"
+      },
+      {
+        "id": "fire_prevention_act__article_24",
+        "label": "화재의 예방 및 안전관리에 관한 법률 / 제24조 / 특정소방대상물의 소방안전관리 / verified",
+        "hash": "612067f17d8c9884"
+      },
+      {
+        "id": "fire_prevention_act__article_37",
+        "label": "화재의 예방 및 안전관리에 관한 법률 / 제37조 / 소방안전관리대상물 근무자 및 거주자 등에 대한 소방훈련 등 / verified",
+        "hash": "8e98d7b4459eaa17"
+      },
+      {
+        "id": "fire_prevention_act_enforcement_decree__article_26",
+        "label": "화재예방법 시행령 / 제26조 / 소방안전관리업무 전담 대상물 / verified",
+        "hash": "6318986e37e676d5"
+      },
+      {
+        "id": "food_sanitation_act__article_37",
+        "label": "식품위생법 / 제37조 / 영업허가 등 / verified",
+        "hash": "2df7ee6b342754c7"
+      },
+      {
+        "id": "food_sanitation_act__article_86",
+        "label": "식품위생법 / 제86조 / 식중독에 관한 조사 보고 등 / verified",
+        "hash": "b4f842cc24b4b0e8"
+      },
+      {
+        "id": "food_sanitation_act_enforcement_rule__article_2",
+        "label": "식품위생법 시행규칙 / 제2조 / 식품등의 위생적인 취급에 관한 기준 / verified",
+        "hash": "7cc6d43dc908e76d"
+      },
+      {
+        "id": "framework_act_disaster_safety__article_66_11",
+        "label": "재난 및 안전관리 기본법 / 제66조의11 / 지역축제 개최 시 안전관리조치 / verified",
+        "hash": "b817fddc0a4c959f"
+      },
+      {
+        "id": "framework_act_disaster_safety__article_66_12",
+        "label": "재난 및 안전관리 기본법 / 제66조의12 / 다중운집 시 재난 등 예방조치 / verified",
+        "hash": "ef47f892a8276df9"
+      },
+      {
+        "id": "lp_gas_safety_act__article_44",
+        "label": "액화석유가스의 안전관리 및 사업법 / 제44조 / 액화석유가스 사용시설의 설치와 검사 등 / verified",
+        "hash": "c28f606dd6b86f4c"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__article_45",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 제45조 / 안전관리규정의 실시 기록 / verified",
+        "hash": "cf0816a3ae6a755b"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__article_47",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 제47조 / 용기의 안전점검기준 등 / verified",
+        "hash": "6d8996aba83697ad"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__article_69",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 제69조 / 액화석유가스 사용시설의 시설기준과 기술기준 / verified",
+        "hash": "20dd96e62795fe27"
+      },
+      {
+        "id": "occupational_safety_health_act__article_36",
+        "label": "산업안전보건법 / 제36조 / 위험성평가의 실시 / verified",
+        "hash": "1741ceb06a309d95"
+      },
+      {
+        "id": "occupational_safety_health_act__article_63",
+        "label": "산업안전보건법 / 제63조 / 도급인의 안전조치 및 보건조치 / verified",
+        "hash": "1a01635d3f827ade"
+      },
+      {
+        "id": "occupational_safety_health_standards_rule__article_321",
+        "label": "산업안전보건기준에 관한 규칙 / 제321조 / 충전전로에서의 전기작업 / verified",
+        "hash": "a855e688b619e8ac"
+      },
+      {
+        "id": "occupational_safety_health_standards_rule__article_38",
+        "label": "산업안전보건기준에 관한 규칙 / 제38조 / 사전조사 및 작업계획서의 작성 등 / verified",
+        "hash": "60936fa0618a39cb"
+      },
+      {
+        "id": "occupational_safety_health_standards_rule__article_42",
+        "label": "산업안전보건기준에 관한 규칙 / 제42조 / 추락의 방지 / verified",
+        "hash": "44da2c9e9f0435c9"
+      },
+      {
+        "id": "outdoor_advertisements_act__article_3",
+        "label": "옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률 / 제3조 / 광고물등의 허가 또는 신고 / verified",
+        "hash": "d8f4e3e6c56fc47f"
+      },
+      {
+        "id": "outdoor_advertisements_act_enforcement_decree__article_12",
+        "label": "옥외광고물법 시행령 / 제12조 / 일반적 표시방법 / verified",
+        "hash": "4dd603b94593bee1"
+      },
+      {
+        "id": "outdoor_advertisements_act_enforcement_decree__article_14",
+        "label": "옥외광고물법 시행령 / 제14조 / 전기를 사용하는 광고물등의 표시방법 / verified",
+        "hash": "12b60cbfe1f1aab9"
+      },
+      {
+        "id": "outdoor_advertisements_act_enforcement_decree__article_5",
+        "label": "옥외광고물법 시행령 / 제5조 / 신고 대상 광고물 및 게시시설 / verified",
+        "hash": "4cd17cd25f599f9f"
+      },
+      {
+        "id": "outdoor_advertisements_act_enforcement_decree__article_7",
+        "label": "옥외광고물법 시행령 / 제7조 / 허가 및 신고의 절차 / verified",
+        "hash": "b73188ea4cc9f79d"
+      },
+      {
+        "id": "performance_act__article_11",
+        "label": "공연법 / 제11조 / 재해예방조치 / verified",
+        "hash": "b4c0ef874f6ae073"
+      },
+      {
+        "id": "performance_act__article_11_2",
+        "label": "공연법 / 제11조의2 / 안전관리비 / verified",
+        "hash": "2552ba1c5a8e4b66"
+      },
+      {
+        "id": "performance_act__article_11_3",
+        "label": "공연법 / 제11조의3 / 안전관리조직 / verified",
+        "hash": "e87279458bbdfb20"
+      },
+      {
+        "id": "performance_act__article_11_4",
+        "label": "공연법 / 제11조의4 / 안전교육 / verified",
+        "hash": "166aeb4fa0329f5c"
+      },
+      {
+        "id": "performance_act__article_11_5",
+        "label": "공연법 / 제11조의5 / 피난안내 / verified",
+        "hash": "e2beb5fddbd3a240"
+      },
+      {
+        "id": "performance_act_enforcement_decree__article_9",
+        "label": "공연법 시행령 / 제9조 / 재해대처계획의 신고 등 / verified",
+        "hash": "a0abfec51cab023e"
+      },
+      {
+        "id": "performance_act_enforcement_decree__article_9_2",
+        "label": "공연법 시행령 / 제9조의2 / 안전관리비 / verified",
+        "hash": "b2d98cd02229ca5a"
+      },
+      {
+        "id": "performance_act_enforcement_decree__article_9_3",
+        "label": "공연법 시행령 / 제9조의3 / 안전관리조직 / verified",
+        "hash": "ed3f5bab885c492a"
+      },
+      {
+        "id": "performance_act_enforcement_decree__article_9_4",
+        "label": "공연법 시행령 / 제9조의4 / 안전교육 / verified",
+        "hash": "67c430f779a98af8"
+      },
+      {
+        "id": "performance_act_enforcement_rule__article_6_3",
+        "label": "공연법 시행규칙 / 제6조의3 / 신고서식 / verified",
+        "hash": "96ff27f5906481b4"
+      },
+      {
+        "id": "personal_information_protection_act__article_15",
+        "label": "개인정보 보호법 / 제15조 / 개인정보의 수집ㆍ이용 / verified",
+        "hash": "7b37c89bdd21a690"
+      },
+      {
+        "id": "personal_information_protection_act__article_22",
+        "label": "개인정보 보호법 / 제22조 / 동의를 받는 방법 / verified",
+        "hash": "c42f2f68c5a8b3eb"
+      },
+      {
+        "id": "personal_information_protection_act__article_25",
+        "label": "개인정보 보호법 / 제25조 / 고정형 영상정보처리기기의 설치ㆍ운영 제한 / verified",
+        "hash": "6129e8ed5da7094a"
+      },
+      {
+        "id": "personal_information_protection_act__article_26",
+        "label": "개인정보 보호법 / 제26조 / 업무위탁에 따른 개인정보의 처리 제한 / verified",
+        "hash": "1e84e5a0046c1a7c"
+      },
+      {
+        "id": "personal_information_protection_act__article_29",
+        "label": "개인정보 보호법 / 제29조 / 안전조치의무 / verified",
+        "hash": "f004f151009027fb"
+      },
+      {
+        "id": "personal_information_protection_act__article_30",
+        "label": "개인정보 보호법 / 제30조 / 개인정보 처리방침의 수립 및 공개 / verified",
+        "hash": "cf7fb7d3b83ed400"
+      },
+      {
+        "id": "personal_information_protection_act_enforcement_decree__article_24",
+        "label": "개인정보 보호법 시행령 / 제24조 / 안내판의 설치 등 / verified",
+        "hash": "d96c8844f63bfae0"
+      },
+      {
+        "id": "personal_information_protection_act_enforcement_decree__article_25",
+        "label": "개인정보 보호법 시행령 / 제25조 / 고정형 영상정보처리기기 운영ㆍ관리 방침 / verified",
+        "hash": "84fa9ff6f9e5a62f"
+      },
+      {
+        "id": "personal_information_protection_act_enforcement_decree__article_26",
+        "label": "개인정보 보호법 시행령 / 제26조 / 공공기관의 고정형 영상정보처리기기 설치ㆍ운영 사무의 위탁 / verified",
+        "hash": "aad3300dfa378278"
+      },
+      {
+        "id": "personal_information_protection_act_enforcement_decree__article_30",
+        "label": "개인정보 보호법 시행령 / 제30조 / 개인정보의 안전성 확보 조치 / verified",
+        "hash": "92a903cbeb46af36"
+      },
+      {
+        "id": "personal_information_protection_act_enforcement_decree__article_31",
+        "label": "개인정보 보호법 시행령 / 제31조 / 개인정보 처리방침의 내용 및 공개방법 등 / verified",
+        "hash": "d23e9150bb9ef74f"
+      },
+      {
+        "id": "road_act__article_61",
+        "label": "도로법 / 제61조 / 도로의 점용 허가 / verified",
+        "hash": "79216d1c3e4b72ae"
+      },
+      {
+        "id": "road_act_enforcement_decree__article_54",
+        "label": "도로법 시행령 / 제54조 / 도로의 점용 허가 신청 등 / verified",
+        "hash": "1827411a6b78cbfd"
+      },
+      {
+        "id": "road_traffic_act__article_6",
+        "label": "도로교통법 / 제6조 / 통행의 금지 및 제한 / verified",
+        "hash": "5ac46a38ee70e870"
+      },
+      {
+        "id": "security_services_industry_act__article_12",
+        "label": "경비업법 / 제12조 / 경비지도사의 선임 등 / verified",
+        "hash": "0da4c6a155256696"
+      },
+      {
+        "id": "security_services_industry_act__article_13",
+        "label": "경비업법 / 제13조 / 경비원의 교육 등 / verified",
+        "hash": "1b61470767908263"
+      },
+      {
+        "id": "security_services_industry_act__article_18",
+        "label": "경비업법 / 제18조 / 경비원의 명부와 배치허가 등 / verified",
+        "hash": "2af2d1e27ece5cc5"
+      },
+      {
+        "id": "security_services_industry_act__article_4",
+        "label": "경비업법 / 제4조 / 경비업의 허가 / verified",
+        "hash": "f7b598f7e9aaf7eb"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_decree__article_10",
+        "label": "경비업법 시행령 / 제10조 / 경비지도사의 구분 / verified",
+        "hash": "392eb9984929e382"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_decree__article_16",
+        "label": "경비업법 시행령 / 제16조 / 경비지도사의 선임ㆍ배치 / verified",
+        "hash": "51ee28484e60e99b"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_decree__article_18",
+        "label": "경비업법 시행령 / 제18조 / 일반경비원에 대한 교육 / verified",
+        "hash": "44fc5e9b395ba782"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_decree__article_30",
+        "label": "경비업법 시행령 / 제30조 / 경비가 필요한 시설 등에 대한 경비의 요청 / verified",
+        "hash": "1b258247ce024816"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_rule__article_24",
+        "label": "경비업법 시행규칙 / 제24조 / 경비원의 배치 및 배치폐지의 신고 / verified",
+        "hash": "f8616bb566920c36"
+      },
+      {
+        "id": "serious_accidents_punishment_act__article_4",
+        "label": "중대재해 처벌 등에 관한 법률 / 제4조 / 사업주와 경영책임자등의 안전 및 보건 확보의무 / verified",
+        "hash": "037bad20d088b376"
+      },
+      {
+        "id": "serious_accidents_punishment_act__article_9",
+        "label": "중대재해 처벌 등에 관한 법률 / 제9조 / 사업주와 경영책임자등의 안전 및 보건 확보의무 / verified",
+        "hash": "fe7e35baebe41c3d"
+      }
+    ],
+    "legalAnnexes": [
+      {
+        "id": "building_act_enforcement_rule__form_17",
+        "label": "건축법 시행규칙 / 별지 제17호서식 / (임시)사용승인 신청서 / verified",
+        "hash": "9ac1edf87588056c"
+      },
+      {
+        "id": "building_act_enforcement_rule__form_8",
+        "label": "건축법 시행규칙 / 별지 제8호서식 / 가설건축물 축조신고서 / verified",
+        "hash": "a2a641ab3bdf12b3"
+      },
+      {
+        "id": "building_act_enforcement_rule__form_8_2",
+        "label": "건축법 시행규칙 / 별지 제8호의2서식 / 3층 이상인 가설건축물의 피난안전 확인서 / verified",
+        "hash": "dd598e86c2269cea"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_rule__annex_15",
+        "label": "응급의료법 시행규칙 / 별표 15 / 구급차등의 운용위탁에 대한 기준 및 절차 / verified",
+        "hash": "623e64f4810a0cb2"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_rule__annex_16",
+        "label": "응급의료법 시행규칙 / 별표 16 / 구급차등에 갖추어야 하는 의료장비·구급의약품 및 통신장비 기준 / verified",
+        "hash": "3554c645aa672e9d"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_rule__annex_17",
+        "label": "응급의료법 시행규칙 / 별표 17 / 구급차등에 갖추어야 하는 장비 등의 관리기준 / verified",
+        "hash": "614d778043ad3675"
+      },
+      {
+        "id": "emergency_medical_service_act_enforcement_rule__annex_2",
+        "label": "응급의료법 시행규칙 / 별표 2 / 구조 및 응급처치 교육의 내용 및 실시방법 / verified",
+        "hash": "35d6b6385cd8cdc2"
+      },
+      {
+        "id": "fire_facilities_act_enforcement_decree__annex_2",
+        "label": "소방시설법 시행령 / 별표 2 / 특정소방대상물 / verified",
+        "hash": "e0e3683b59b76ba2"
+      },
+      {
+        "id": "fire_facilities_act_enforcement_decree__annex_4",
+        "label": "소방시설법 시행령 / 별표 4 / 특정소방대상물에 설치·관리해야 하는 소방시설의 종류 / verified",
+        "hash": "98447c8cd66a3e1c"
+      },
+      {
+        "id": "fire_facilities_act_enforcement_decree__annex_7",
+        "label": "소방시설법 시행령 / 별표 7 / 수용인원의 산정 방법 / verified",
+        "hash": "f821c8db5ab67c30"
+      },
+      {
+        "id": "fire_facilities_act_enforcement_decree__annex_8",
+        "label": "소방시설법 시행령 / 별표 8 / 임시소방시설의 종류와 설치기준 등 / verified",
+        "hash": "7398157882bb2db3"
+      },
+      {
+        "id": "fire_prevention_act_enforcement_decree__annex_4",
+        "label": "화재예방법 시행령 / 별표 4 / 소방안전관리자를 선임해야 하는 소방안전관리대상물의 범위와 자격·인원기준 / verified",
+        "hash": "6bbe5dd8be1cf70c"
+      },
+      {
+        "id": "fire_prevention_act_enforcement_decree__annex_5",
+        "label": "화재예방법 시행령 / 별표 5 / 소방안전관리보조자를 선임해야 하는 대상물의 범위와 자격·인원기준 / verified",
+        "hash": "b75e3a843772a4aa"
+      },
+      {
+        "id": "food_sanitation_act_enforcement_rule__annex_1",
+        "label": "식품위생법 시행규칙 / 별표 1 / 식품등의 위생적인 취급에 관한 기준 / verified",
+        "hash": "30c2d978dcc861ad"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__annex_15",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 별표 15 / 가스공급자의 안전점검기준 등 / verified",
+        "hash": "eca58e8379b4bd85"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__annex_15_2",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 별표 15의2 / 공사계획의 승인대상 / verified",
+        "hash": "1604275e6d5578cf"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__annex_15_3",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 별표 15의3 / 공사계획의 신고대상 / verified",
+        "hash": "43566f168994ce35"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__annex_17",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 별표 17 / 용기의 안전점검기준 / verified",
+        "hash": "893e89434f4545ed"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__annex_20",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 별표 20 / 액화석유가스 사용시설의 시설·기술·검사기준 / verified",
+        "hash": "a5f39203348cd707"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__annex_23",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 별표 23 / 가스사고배상책임보험과 소비자보장책임보험의 보험금액 / verified",
+        "hash": "0b312dd31be3c6c5"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__form_36",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 별지 제36호서식 / (완성, 정기)검사 신청서 / verified",
+        "hash": "6b6b136a3093203f"
+      },
+      {
+        "id": "lp_gas_safety_act_enforcement_rule__form_37",
+        "label": "액화석유가스의 안전관리 및 사업법 시행규칙 / 별지 제37호서식 / (완성, 정기)검사증명서 / verified",
+        "hash": "99ff8f9872573b1e"
+      },
+      {
+        "id": "performance_act_enforcement_decree__annex_1",
+        "label": "공연법 시행령 / 별표 1 / 안전관리조직의 설치기준 / verified",
+        "hash": "f45904a373f54e6e"
+      },
+      {
+        "id": "performance_act_enforcement_decree__annex_1_2",
+        "label": "공연법 시행령 / 별표 1의2 / 안전교육의 내용 / verified",
+        "hash": "99176aca7c5ed73f"
+      },
+      {
+        "id": "performance_act_enforcement_rule__form_13_3",
+        "label": "공연법 시행규칙 / 별지 제13호의3서식 / 공연장/공연 재해대처계획 신고·변경신고서 / verified",
+        "hash": "ef9ad01202a0b173"
+      },
+      {
+        "id": "road_act_enforcement_decree__annex_2",
+        "label": "도로법 시행령 / 별표 2 / 도로점용허가의 기준 / verified",
+        "hash": "bee6ba2ae5565a51"
+      },
+      {
+        "id": "road_act_enforcement_rule__form_11",
+        "label": "도로법 시행규칙 / 별지 제11호서식 / 도로공사 시행 허가 신청서 / verified",
+        "hash": "61c4e0d4905ddc6e"
+      },
+      {
+        "id": "road_act_enforcement_rule__form_12",
+        "label": "도로법 시행규칙 / 별지 제12호서식 / 도로공사 착수 신고서 / verified",
+        "hash": "77d52e5f958a01f8"
+      },
+      {
+        "id": "road_act_enforcement_rule__form_13",
+        "label": "도로법 시행규칙 / 별지 제13호서식 / 도로공사 준공검사 신청서 / verified",
+        "hash": "c3167b6d30868587"
+      },
+      {
+        "id": "road_act_enforcement_rule__form_33",
+        "label": "도로법 시행규칙 / 별지 제33호서식 / 도로 점용공사 대행 통지서 / verified",
+        "hash": "eafedf314e630e86"
+      },
+      {
+        "id": "road_act_enforcement_rule__form_36",
+        "label": "도로법 시행규칙 / 별지 제36호서식 / (통행의 금지ㆍ제한, 차량의 운행 제한)공고 / verified",
+        "hash": "c905cc04a3d90fe2"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_decree__annex_1",
+        "label": "경비업법 시행령 / 별표 1 / 경비업의 경비인력 등의 기준 / verified",
+        "hash": "1474406f9844e4f0"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_decree__annex_3",
+        "label": "경비업법 시행령 / 별표 3 / 경비지도사의 선임·배치기준 / verified",
+        "hash": "3e1fc8a0c7371820"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_rule__form_14",
+        "label": "경비업법 시행규칙 / 별지 제14호서식 / 경비원 명부 / verified",
+        "hash": "1cb3e29fcadce529"
+      },
+      {
+        "id": "security_services_industry_act_enforcement_rule__form_15",
+        "label": "경비업법 시행규칙 / 별지 제15호서식 / 경비원 배치·배치폐지 신고서 / verified",
+        "hash": "627a1bfabf9297aa"
+      }
+    ],
+    "localOrdinances": [
+      {
+        "id": "outdoor_advertising:1355120",
+        "label": "경상북도 영양군 / 영양군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20180810 / verified",
+        "hash": "ae28a1d1fd1f9900"
+      },
+      {
+        "id": "outdoor_advertising:1373376",
+        "label": "강원특별자치도 정선군 / 정선군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20181214 / verified",
+        "hash": "f7d031461b3fe01d"
+      },
+      {
+        "id": "outdoor_advertising:1376477",
+        "label": "경상북도 성주군 / 성주군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240603 / verified",
+        "hash": "e7ec2e40140774b2"
+      },
+      {
+        "id": "outdoor_advertising:1413172",
+        "label": "경상북도 구미시 / 구미시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20191014 / verified",
+        "hash": "e0cfcb87192dc436"
+      },
+      {
+        "id": "outdoor_advertising:1416460",
+        "label": "경상북도 문경시 / 문경시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230913 / verified",
+        "hash": "a01997627bcc5298"
+      },
+      {
+        "id": "outdoor_advertising:1486975",
+        "label": "충청북도 음성군 / 음성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20200410 / verified",
+        "hash": "c3d2e1bb06a8adfb"
+      },
+      {
+        "id": "outdoor_advertising:1519645",
+        "label": "전라남도 무안군 / 무안군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20200720 / verified",
+        "hash": "d3d51b236f0ce053"
+      },
+      {
+        "id": "outdoor_advertising:1519997",
+        "label": "경상북도 울진군 / 울진군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20200720 / verified",
+        "hash": "3e416d1bdf9b1e9e"
+      },
+      {
+        "id": "outdoor_advertising:1530523",
+        "label": "전라남도 완도군 / 완도군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20200925 / verified",
+        "hash": "25e6157254401431"
+      },
+      {
+        "id": "outdoor_advertising:1556521",
+        "label": "경상남도 합천군 / 합천군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20201223 / verified",
+        "hash": "4c94531984f359e3"
+      },
+      {
+        "id": "outdoor_advertising:1559591",
+        "label": "경상북도 칠곡군 / 칠곡군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20201229 / verified",
+        "hash": "52f41536354d8253"
+      },
+      {
+        "id": "outdoor_advertising:1619219",
+        "label": "충청남도 서산시 / 서산시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20210801 / verified",
+        "hash": "5014174c172318e2"
+      },
+      {
+        "id": "outdoor_advertising:1619603",
+        "label": "경기도 이천시 / 이천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230314 / verified",
+        "hash": "570e85deebdee84d"
+      },
+      {
+        "id": "outdoor_advertising:1621115",
+        "label": "경상남도 하동군 / 하동군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20210809 / verified",
+        "hash": "29c969f8ba7c62ba"
+      },
+      {
+        "id": "outdoor_advertising:1625505",
+        "label": "충청북도 진천군 / 진천군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20210917 / verified",
+        "hash": "9c47ff5c300a34b3"
+      },
+      {
+        "id": "outdoor_advertising:1626381",
+        "label": "충청남도 계룡시 / 계룡시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20210923 / verified",
+        "hash": "5374ec347fef3836"
+      },
+      {
+        "id": "outdoor_advertising:1630429",
+        "label": "충청남도 보령시 / 보령시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20210930 / verified",
+        "hash": "2019028ad8a05949"
+      },
+      {
+        "id": "outdoor_advertising:1636311",
+        "label": "경상남도 김해시 / 김해시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211029 / verified",
+        "hash": "6b7c5f5297e6e5ec"
+      },
+      {
+        "id": "outdoor_advertising:1639831",
+        "label": "인천광역시 동구 / 인천광역시 동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211112 / verified",
+        "hash": "95b46323a02e4599"
+      },
+      {
+        "id": "outdoor_advertising:1641355",
+        "label": "경상남도 함안군 / 함안군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211115 / verified",
+        "hash": "dae79e41bdaab402"
+      },
+      {
+        "id": "outdoor_advertising:1641941",
+        "label": "인천광역시 옹진군 / 옹진군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211117 / verified",
+        "hash": "c30ff18bcd9ebc0c"
+      },
+      {
+        "id": "outdoor_advertising:1646375",
+        "label": "대구광역시 달서구 / 대구광역시달서구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220101 / verified",
+        "hash": "77e548fa7cfeee7a"
+      },
+      {
+        "id": "outdoor_advertising:1646777",
+        "label": "경상남도 남해군 / 남해군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211213 / verified",
+        "hash": "cbadd5be13a80986"
+      },
+      {
+        "id": "outdoor_advertising:1647595",
+        "label": "전라남도 해남군 / 해남군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211215 / verified",
+        "hash": "c3c7102b2fe0460c"
+      },
+      {
+        "id": "outdoor_advertising:1648925",
+        "label": "충청북도 괴산군 / 괴산군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211217 / verified",
+        "hash": "d718ecfce096769c"
+      },
+      {
+        "id": "outdoor_advertising:1653475",
+        "label": "경상남도 고성군 / 고성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211220 / verified",
+        "hash": "6bb412e1aa8fe5bc"
+      },
+      {
+        "id": "outdoor_advertising:1654793",
+        "label": "전라남도 곡성군 / 곡성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211229 / verified",
+        "hash": "86ea93c65915beca"
+      },
+      {
+        "id": "outdoor_advertising:1659791",
+        "label": "인천광역시 중구 / 인천광역시 중구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20211231 / verified",
+        "hash": "5bc32bc323fba782"
+      },
+      {
+        "id": "outdoor_advertising:1665231",
+        "label": "경기도 안산시 / 안산시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220105 / verified",
+        "hash": "cd37e38e57b00b2c"
+      },
+      {
+        "id": "outdoor_advertising:1679713",
+        "label": "부산광역시 사상구 / 부산광역시 사상구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220113 / verified",
+        "hash": "3f20fa6475fe6dc5"
+      },
+      {
+        "id": "outdoor_advertising:1693379",
+        "label": "부산광역시 중구 / 부산광역시 중구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220401 / verified",
+        "hash": "8a2f4861ac65572e"
+      },
+      {
+        "id": "outdoor_advertising:1695849",
+        "label": "충청남도 서천군 / 서천군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220408 / verified",
+        "hash": "903d87bf96b51160"
+      },
+      {
+        "id": "outdoor_advertising:1705655",
+        "label": "대구광역시 동구 / 대구광역시 동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220502 / verified",
+        "hash": "e58fd114f0197a4a"
+      },
+      {
+        "id": "outdoor_advertising:1709053",
+        "label": "부산광역시 사하구 / 부산광역시 사하구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220516 / verified",
+        "hash": "f68de3a6a5881015"
+      },
+      {
+        "id": "outdoor_advertising:1715365",
+        "label": "인천광역시 계양구 / 인천광역시 계양구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220708 / verified",
+        "hash": "2441cdcc95126d32"
+      },
+      {
+        "id": "outdoor_advertising:1723081",
+        "label": "충청남도 아산시 / 아산시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20220816 / verified",
+        "hash": "500c44b7dea4e669"
+      },
+      {
+        "id": "outdoor_advertising:1735499",
+        "label": "경상북도 영천시 / 영천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20221012 / verified",
+        "hash": "bad122cae223e238"
+      },
+      {
+        "id": "outdoor_advertising:1737673",
+        "label": "전라남도 구례군 / 구례군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20221011 / verified",
+        "hash": "21bc015c62ed066c"
+      },
+      {
+        "id": "outdoor_advertising:1742883",
+        "label": "서울특별시 동대문구 / 서울특별시 동대문구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20221103 / verified",
+        "hash": "391f3f78ef84c94e"
+      },
+      {
+        "id": "outdoor_advertising:1747759",
+        "label": "경상북도 봉화군 / 봉화군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20221114 / verified",
+        "hash": "f12295e73ff24815"
+      },
+      {
+        "id": "outdoor_advertising:1754405",
+        "label": "경기도 용인시 / 용인시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20221209 / verified",
+        "hash": "84502208b9f6b810"
+      },
+      {
+        "id": "outdoor_advertising:1754603",
+        "label": "전라남도 화순군 / 화순군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20221208 / verified",
+        "hash": "8833e6ef836f20b1"
+      },
+      {
+        "id": "outdoor_advertising:1764877",
+        "label": "전라남도 고흥군 / 고흥군 옥외광고물등의 관리와 옥외광고산업진흥에 관한 조례 / outdoor_advertising / 20221222 / verified",
+        "hash": "7c16b8291bf3e795"
+      },
+      {
+        "id": "outdoor_advertising:1773517",
+        "label": "인천광역시 미추홀구 / 인천광역시 미추홀구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230102 / verified",
+        "hash": "ab765b23f7ccd139"
+      },
+      {
+        "id": "outdoor_advertising:1773791",
+        "label": "전라남도 광양시 / 광양시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20221230 / verified",
+        "hash": "8fe0fb2e20b57f1b"
+      },
+      {
+        "id": "outdoor_advertising:1777357",
+        "label": "경기도 고양시 / 고양시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230110 / verified",
+        "hash": "c06a602217c39575"
+      },
+      {
+        "id": "outdoor_advertising:1777689",
+        "label": "경상남도 함양군 / 함양군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20221229 / verified",
+        "hash": "ab0e72c123b3a557"
+      },
+      {
+        "id": "outdoor_advertising:1778139",
+        "label": "전라남도 나주시 / 나주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230106 / verified",
+        "hash": "b8b11c3bd36dbf51"
+      },
+      {
+        "id": "outdoor_advertising:1781689",
+        "label": "전라남도 강진군 / 강진군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230202 / verified",
+        "hash": "66de90c2951b1156"
+      },
+      {
+        "id": "outdoor_advertising:1798681",
+        "label": "경상북도 고령군 / 고령군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230406 / verified",
+        "hash": "e3c2666321b355b8"
+      },
+      {
+        "id": "outdoor_advertising:1812807",
+        "label": "강원특별자치도 인제군 / 인제군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230611 / verified",
+        "hash": "d73d22cdd0cdf3d5"
+      },
+      {
+        "id": "outdoor_advertising:1813001",
+        "label": "전라남도 진도군 / 진도군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230525 / verified",
+        "hash": "9504604deee849c4"
+      },
+      {
+        "id": "outdoor_advertising:1815643",
+        "label": "강원특별자치도 화천군 / 화천군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230611 / verified",
+        "hash": "1d3b5d72c22e4188"
+      },
+      {
+        "id": "outdoor_advertising:1817913",
+        "label": "강원특별자치도 양구군 / 양구군 옥외광고물 등의 관리와 옥외광고산업진흥에 관한 조례 / outdoor_advertising / 20230611 / verified",
+        "hash": "60be5e49746630ba"
+      },
+      {
+        "id": "outdoor_advertising:1820751",
+        "label": "강원특별자치도 속초시 / 속초시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230611 / verified",
+        "hash": "2bceb970c98e2fd9"
+      },
+      {
+        "id": "outdoor_advertising:1821341",
+        "label": "강원특별자치도 삼척시 / 삼척시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230611 / verified",
+        "hash": "c65b0ebfdcc2b83c"
+      },
+      {
+        "id": "outdoor_advertising:1822533",
+        "label": "강원특별자치도 평창군 / 평창군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230611 / verified",
+        "hash": "5c2b7a5567c0b876"
+      },
+      {
+        "id": "outdoor_advertising:1823885",
+        "label": "강원특별자치도 홍천군 / 홍천군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230611 / verified",
+        "hash": "64e90ebf7abf1904"
+      },
+      {
+        "id": "outdoor_advertising:1823917",
+        "label": "강원특별자치도 고성군 / 고성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230611 / verified",
+        "hash": "92e3950e82eb59d4"
+      },
+      {
+        "id": "outdoor_advertising:1831401",
+        "label": "광주광역시 동구 / 광주광역시 동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230630 / verified",
+        "hash": "bd88f94200614a49"
+      },
+      {
+        "id": "outdoor_advertising:1831817",
+        "label": "서울특별시 강동구 / 서울특별시 강동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230705 / verified",
+        "hash": "d148f1f29de06e04"
+      },
+      {
+        "id": "outdoor_advertising:1836765",
+        "label": "경기도 연천군 / 연천군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230713 / verified",
+        "hash": "04125b47696b0640"
+      },
+      {
+        "id": "outdoor_advertising:1839625",
+        "label": "강원특별자치도 강릉시 / 강릉시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230719 / verified",
+        "hash": "7c47003559db0e21"
+      },
+      {
+        "id": "outdoor_advertising:1843343",
+        "label": "경상북도 영주시 / 영주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230801 / verified",
+        "hash": "18d9f443f2de488f"
+      },
+      {
+        "id": "outdoor_advertising:1845947",
+        "label": "경기도 시흥시 / 시흥시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230809 / verified",
+        "hash": "ad55249a79384791"
+      },
+      {
+        "id": "outdoor_advertising:1846839",
+        "label": "충청남도 / 충청남도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20230810 / verified",
+        "hash": "998f6f0452507782"
+      },
+      {
+        "id": "outdoor_advertising:1858423",
+        "label": "경기도 포천시 / 포천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231101 / verified",
+        "hash": "408ced30b8810d13"
+      },
+      {
+        "id": "outdoor_advertising:1860097",
+        "label": "서울특별시 중랑구 / 서울특별시 중랑구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231005 / verified",
+        "hash": "73c582befa4c075c"
+      },
+      {
+        "id": "outdoor_advertising:1860591",
+        "label": "충청북도 영동군 / 영동군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231005 / verified",
+        "hash": "6c56b1440cfaa430"
+      },
+      {
+        "id": "outdoor_advertising:1877633",
+        "label": "경상남도 밀양시 / 밀양시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231130 / verified",
+        "hash": "786134d56fb25f1f"
+      },
+      {
+        "id": "outdoor_advertising:1878893",
+        "label": "서울특별시 서초구 / 서울특별시 서초구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231208 / verified",
+        "hash": "ce1a9930ca3a85bb"
+      },
+      {
+        "id": "outdoor_advertising:1881771",
+        "label": "충청북도 제천시 / 제천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231215 / verified",
+        "hash": "24c988bab7332eae"
+      },
+      {
+        "id": "outdoor_advertising:1883565",
+        "label": "전북특별자치도 김제시 / 김제시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240118 / verified",
+        "hash": "cc25106f6ebdd2e3"
+      },
+      {
+        "id": "outdoor_advertising:1890729",
+        "label": "서울특별시 영등포구 / 서울특별시 영등포구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240101 / verified",
+        "hash": "28cd3c55d768fedc"
+      },
+      {
+        "id": "outdoor_advertising:1892661",
+        "label": "경상남도 통영시 / 통영시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231228 / verified",
+        "hash": "cb313c86c0a88af8"
+      },
+      {
+        "id": "outdoor_advertising:1895141",
+        "label": "전라남도 여수시 / 여수시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231229 / verified",
+        "hash": "d31e99ca16db1dea"
+      },
+      {
+        "id": "outdoor_advertising:1899433",
+        "label": "경상북도 울릉군 / 울릉군 옥외광고물 등 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20231226 / verified",
+        "hash": "482d36bcf0e9265f"
+      },
+      {
+        "id": "outdoor_advertising:1903111",
+        "label": "전북특별자치도 진안군 / 진안군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240118 / verified",
+        "hash": "94c5b3ba2b00265b"
+      },
+      {
+        "id": "outdoor_advertising:1913793",
+        "label": "전북특별자치도 익산시 / 익산시 옥외광고물 등의 관리와 옥외광고산업 진흥 조례 / outdoor_advertising / 20240320 / verified",
+        "hash": "78b318f1e4a0595b"
+      },
+      {
+        "id": "outdoor_advertising:1914909",
+        "label": "충청남도 태안군 / 태안군 옥외광고물 등의 관리와 옥외광고산업 진흥 조례 / outdoor_advertising / 20240325 / verified",
+        "hash": "5a5257ddbf8ec220"
+      },
+      {
+        "id": "outdoor_advertising:1916631",
+        "label": "경기도 구리시 / 구리시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240329 / verified",
+        "hash": "aa29984bc64136d8"
+      },
+      {
+        "id": "outdoor_advertising:1920397",
+        "label": "서울특별시 관악구 / 서울특별시 관악구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240411 / verified",
+        "hash": "6dd89dde4de7515c"
+      },
+      {
+        "id": "outdoor_advertising:1922009",
+        "label": "전라남도 함평군 / 함평군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240419 / verified",
+        "hash": "491735c9eac6e4af"
+      },
+      {
+        "id": "outdoor_advertising:1925819",
+        "label": "울산광역시 / 울산광역시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240517 / verified",
+        "hash": "2d5532eca03c6517"
+      },
+      {
+        "id": "outdoor_advertising:1926245",
+        "label": "경기도 양평군 / 양평군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240508 / verified",
+        "hash": "1ce0912cb46085fc"
+      },
+      {
+        "id": "outdoor_advertising:1927083",
+        "label": "경상남도 양산시 / 양산시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240509 / verified",
+        "hash": "23087fc76b12d2a7"
+      },
+      {
+        "id": "outdoor_advertising:1929723",
+        "label": "서울특별시 종로구 / 서울특별시 종로구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240517 / verified",
+        "hash": "a089e4c9c0dbadc8"
+      },
+      {
+        "id": "outdoor_advertising:1936571",
+        "label": "경상북도 안동시 / 안동시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240607 / verified",
+        "hash": "4953035ba84c048d"
+      },
+      {
+        "id": "outdoor_advertising:1938945",
+        "label": "부산광역시 부산진구 / 부산광역시 부산진구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240618 / verified",
+        "hash": "68f8bafcd1924066"
+      },
+      {
+        "id": "outdoor_advertising:1945935",
+        "label": "대구광역시 남구 / 대구광역시 남구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240701 / verified",
+        "hash": "aba5fda5010fd3a3"
+      },
+      {
+        "id": "outdoor_advertising:1948087",
+        "label": "경기도 동두천시 / 동두천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240703 / verified",
+        "hash": "29a3a7822f80a131"
+      },
+      {
+        "id": "outdoor_advertising:1949749",
+        "label": "서울특별시 용산구 / 서울특별시 용산구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240705 / verified",
+        "hash": "ec9e8507efa1644d"
+      },
+      {
+        "id": "outdoor_advertising:1951605",
+        "label": "광주광역시 남구 / 광주광역시 남구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240708 / verified",
+        "hash": "7dd277a2c5b78b3d"
+      },
+      {
+        "id": "outdoor_advertising:1955217",
+        "label": "경상북도 / 경상북도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240711 / verified",
+        "hash": "3404d14450f4d016"
+      },
+      {
+        "id": "outdoor_advertising:1958453",
+        "label": "경기도 / 경기도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240718 / verified",
+        "hash": "459f5bf860488a0d"
+      },
+      {
+        "id": "outdoor_advertising:1962077",
+        "label": "부산광역시 동구 / 부산광역시 동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240807 / verified",
+        "hash": "a1b466d261224d89"
+      },
+      {
+        "id": "outdoor_advertising:1963271",
+        "label": "부산광역시 영도구 / 부산광역시 영도구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240814 / verified",
+        "hash": "4ea43c271928476e"
+      },
+      {
+        "id": "outdoor_advertising:1963729",
+        "label": "경상남도 진주시 / 진주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240819 / verified",
+        "hash": "b2497d333b6d1ad7"
+      },
+      {
+        "id": "outdoor_advertising:1964563",
+        "label": "경상남도 의령군 / 의령군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240828 / verified",
+        "hash": "def340ee5f0bc680"
+      },
+      {
+        "id": "outdoor_advertising:1966999",
+        "label": "경상북도 청도군 / 청도군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 [제명개정 2020. 10. 5.] / outdoor_advertising / 20240913 / verified",
+        "hash": "aedfcddac538b943"
+      },
+      {
+        "id": "outdoor_advertising:1969171",
+        "label": "부산광역시 강서구 / 부산광역시 강서구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240924 / verified",
+        "hash": "af125239e471b17c"
+      },
+      {
+        "id": "outdoor_advertising:1971083",
+        "label": "경상남도 사천시 / 사천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240926 / verified",
+        "hash": "3b019b62fcd8b47b"
+      },
+      {
+        "id": "outdoor_advertising:1971151",
+        "label": "경상남도 산청군 / 산청군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240926 / verified",
+        "hash": "8d5abf79cf5d978e"
+      },
+      {
+        "id": "outdoor_advertising:1971625",
+        "label": "대전광역시 동구 / 대전광역시 동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240927 / verified",
+        "hash": "112ca15fb42c85c6"
+      },
+      {
+        "id": "outdoor_advertising:1971641",
+        "label": "대전광역시 서구 / 대전광역시 서구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20240927 / verified",
+        "hash": "370c73acca47d193"
+      },
+      {
+        "id": "outdoor_advertising:1976645",
+        "label": "강원특별자치도 영월군 / 영월군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241011 / verified",
+        "hash": "4b9c4132b1146c69"
+      },
+      {
+        "id": "outdoor_advertising:1980493",
+        "label": "부산광역시 남구 / 부산광역시 남구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241031 / verified",
+        "hash": "b4547c6bab338889"
+      },
+      {
+        "id": "outdoor_advertising:1980859",
+        "label": "서울특별시 강북구 / 서울특별시 강북구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241101 / verified",
+        "hash": "7575751261f5637b"
+      },
+      {
+        "id": "outdoor_advertising:1982365",
+        "label": "서울특별시 노원구 / 서울특별시 노원구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241107 / verified",
+        "hash": "8c5cdf84cb8f62bf"
+      },
+      {
+        "id": "outdoor_advertising:1987661",
+        "label": "서울특별시 양천구 / 서울특별시 양천구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250101 / verified",
+        "hash": "c1424c8c35285521"
+      },
+      {
+        "id": "outdoor_advertising:1988593",
+        "label": "울산광역시 동구 / 울산광역시 동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241121 / verified",
+        "hash": "b3189db75ad89635"
+      },
+      {
+        "id": "outdoor_advertising:1994523",
+        "label": "대구광역시 수성구 / 대구광역시 수성구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241220 / verified",
+        "hash": "14ba9c60171f3e95"
+      },
+      {
+        "id": "outdoor_advertising:1997343",
+        "label": "충청남도 예산군 / 예산군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241223 / verified",
+        "hash": "6483f011d8ab85d1"
+      },
+      {
+        "id": "outdoor_advertising:1997845",
+        "label": "서울특별시 성북구 / 서울특별시 성북구 옥외광고물 등의 관리와 옥외광고산업진흥에 관한 조례 / outdoor_advertising / 20241226 / verified",
+        "hash": "4b73d5263841efa5"
+      },
+      {
+        "id": "outdoor_advertising:1999843",
+        "label": "울산광역시 북구 / 울산광역시 북구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241226 / verified",
+        "hash": "29a32ce1da2511d3"
+      },
+      {
+        "id": "outdoor_advertising:2000617",
+        "label": "경상북도 경주시 / 경주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241227 / verified",
+        "hash": "9e58e80f6686a781"
+      },
+      {
+        "id": "outdoor_advertising:2001599",
+        "label": "대구광역시 중구 / 대구광역시 중구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241230 / verified",
+        "hash": "9690926429f469df"
+      },
+      {
+        "id": "outdoor_advertising:2002495",
+        "label": "충청북도 옥천군 / 옥천군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241230 / verified",
+        "hash": "fa24995e475e09d6"
+      },
+      {
+        "id": "outdoor_advertising:2002807",
+        "label": "전북특별자치도 전주시 / 전주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241230 / verified",
+        "hash": "fc4cd39ab6f791ee"
+      },
+      {
+        "id": "outdoor_advertising:2003715",
+        "label": "인천광역시 / 인천광역시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241230 / verified",
+        "hash": "2c4c0e28556e79e8"
+      },
+      {
+        "id": "outdoor_advertising:2004265",
+        "label": "서울특별시 중구 / 서울특별시 중구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241231 / verified",
+        "hash": "b8de43a22d43935f"
+      },
+      {
+        "id": "outdoor_advertising:2005629",
+        "label": "강원특별자치도 태백시 / 태백시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241231 / verified",
+        "hash": "486af870258c5db7"
+      },
+      {
+        "id": "outdoor_advertising:2006767",
+        "label": "경상북도 청송군 / 청송군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241231 / verified",
+        "hash": "759284ee102ad3f7"
+      },
+      {
+        "id": "outdoor_advertising:2010523",
+        "label": "대구광역시 서구 / 대구광역시 서구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241230 / verified",
+        "hash": "29997a23d14a8e5c"
+      },
+      {
+        "id": "outdoor_advertising:2012925",
+        "label": "전라남도 장성군 / 장성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250124 / verified",
+        "hash": "8cb53b08ce33668e"
+      },
+      {
+        "id": "outdoor_advertising:2014703",
+        "label": "인천광역시 강화군 / 강화군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250207 / verified",
+        "hash": "3bf7c695df929a4f"
+      },
+      {
+        "id": "outdoor_advertising:2014765",
+        "label": "대전광역시 대덕구 / 대전광역시 대덕구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241122 / verified",
+        "hash": "506e2e6642df0603"
+      },
+      {
+        "id": "outdoor_advertising:2015667",
+        "label": "강원특별자치도 양양군 / 양양군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250217 / verified",
+        "hash": "5c4545f6fcf46b32"
+      },
+      {
+        "id": "outdoor_advertising:2015859",
+        "label": "부산광역시 연제구 / 부산광역시 연제구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250220 / verified",
+        "hash": "58fc106f34d3dd1d"
+      },
+      {
+        "id": "outdoor_advertising:2017115",
+        "label": "서울특별시 광진구 / 서울특별시 광진구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250228 / verified",
+        "hash": "c9129da9c7d4357a"
+      },
+      {
+        "id": "outdoor_advertising:2017581",
+        "label": "광주광역시 / 광주광역시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250228 / verified",
+        "hash": "11e2aa5aec4c97e8"
+      },
+      {
+        "id": "outdoor_advertising:2018329",
+        "label": "부산광역시 / 부산광역시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250305 / verified",
+        "hash": "4adf0eb9889da86a"
+      },
+      {
+        "id": "outdoor_advertising:2018455",
+        "label": "서울특별시 구로구 / 서울특별시 구로구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250306 / verified",
+        "hash": "ba60c0388331dfe7"
+      },
+      {
+        "id": "outdoor_advertising:2020371",
+        "label": "경기도 수원시 / 수원시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250311 / verified",
+        "hash": "85ffc64c1440c5ef"
+      },
+      {
+        "id": "outdoor_advertising:2020541",
+        "label": "전북특별자치도 부안군 / 부안군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250310 / verified",
+        "hash": "ce6bc1d5e12046fc"
+      },
+      {
+        "id": "outdoor_advertising:2021647",
+        "label": "경기도 안성시 / 안성시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250314 / verified",
+        "hash": "038ba0a9a96d56ec"
+      },
+      {
+        "id": "outdoor_advertising:2022015",
+        "label": "경기도 의왕시 / 의왕시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250317 / verified",
+        "hash": "9960140404dbd539"
+      },
+      {
+        "id": "outdoor_advertising:2022987",
+        "label": "경상남도 거제시 / 거제시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250320 / verified",
+        "hash": "7834325326090bef"
+      },
+      {
+        "id": "outdoor_advertising:2023185",
+        "label": "서울특별시 강남구 / 서울특별시 강남구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250321 / verified",
+        "hash": "5360d2f59d2c9043"
+      },
+      {
+        "id": "outdoor_advertising:2025173",
+        "label": "제주특별자치도 / 제주특별자치도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250319 / verified",
+        "hash": "f364c6d640c98626"
+      },
+      {
+        "id": "outdoor_advertising:2027463",
+        "label": "경기도 부천시 / 부천시 옥외광고물 등 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250407 / verified",
+        "hash": "231040794f6ea127"
+      },
+      {
+        "id": "outdoor_advertising:2027711",
+        "label": "경상남도 / 경상남도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250407 / verified",
+        "hash": "821f91407c865991"
+      },
+      {
+        "id": "outdoor_advertising:2028519",
+        "label": "서울특별시 송파구 / 서울특별시 송파구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250410 / verified",
+        "hash": "2f1ceeba4c12f67a"
+      },
+      {
+        "id": "outdoor_advertising:2029101",
+        "label": "광주광역시 광산구 / 광주광역시 광산구 옥외광고물 등 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250414 / verified",
+        "hash": "c63092357863640f"
+      },
+      {
+        "id": "outdoor_advertising:2032901",
+        "label": "충청남도 금산군 / 금산군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250430 / verified",
+        "hash": "a77b39d59366490e"
+      },
+      {
+        "id": "outdoor_advertising:2033359",
+        "label": "전북특별자치도 군산시 / 군산시 옥외광고물 등의 관리와 옥외광고산업 진흥조례 / outdoor_advertising / 20250501 / verified",
+        "hash": "27145d8c5f65a519"
+      },
+      {
+        "id": "outdoor_advertising:2036941",
+        "label": "충청북도 증평군 / 증평군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250509 / verified",
+        "hash": "1bb3739fd9c1856f"
+      },
+      {
+        "id": "outdoor_advertising:2037839",
+        "label": "전북특별자치도 고창군 / 고창군 옥외광고물 등 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250515 / verified",
+        "hash": "aed76aec3c97f27c"
+      },
+      {
+        "id": "outdoor_advertising:2037959",
+        "label": "전라남도 / 전라남도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250515 / verified",
+        "hash": "a5d81d80235f387d"
+      },
+      {
+        "id": "outdoor_advertising:2039769",
+        "label": "전북특별자치도 임실군 / 임실군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250519 / verified",
+        "hash": "a65063666c3339ed"
+      },
+      {
+        "id": "outdoor_advertising:2047975",
+        "label": "전라남도 순천시 / 순천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250630 / verified",
+        "hash": "8e15602bda7556b1"
+      },
+      {
+        "id": "outdoor_advertising:2048097",
+        "label": "대구광역시 군위군 / 대구광역시 군위군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250630 / verified",
+        "hash": "6f23f4f8fe371202"
+      },
+      {
+        "id": "outdoor_advertising:2049097",
+        "label": "경기도 오산시 / 오산시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250701 / verified",
+        "hash": "d54024732b48b54b"
+      },
+      {
+        "id": "outdoor_advertising:2049509",
+        "label": "전라남도 목포시 / 목포시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250630 / verified",
+        "hash": "f91a9747ef15315a"
+      },
+      {
+        "id": "outdoor_advertising:2050387",
+        "label": "서울특별시 도봉구 / 서울특별시 도봉구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250703 / verified",
+        "hash": "404a89b1ab7c0c61"
+      },
+      {
+        "id": "outdoor_advertising:2052865",
+        "label": "서울특별시 서대문구 / 서울특별시 서대문구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250709 / verified",
+        "hash": "d0a99d1cd2d10a5d"
+      },
+      {
+        "id": "outdoor_advertising:2053601",
+        "label": "서울특별시 동작구 / 서울특별시 동작구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250710 / verified",
+        "hash": "b3f297089813ccca"
+      },
+      {
+        "id": "outdoor_advertising:2054349",
+        "label": "전북특별자치도 무주군 / 무주군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250709 / verified",
+        "hash": "44403916ddfec3b9"
+      },
+      {
+        "id": "outdoor_advertising:2055415",
+        "label": "인천광역시 서구 / 인천광역시 서구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250711 / verified",
+        "hash": "4d1bff55cdc0378c"
+      },
+      {
+        "id": "outdoor_advertising:2055745",
+        "label": "전북특별자치도 정읍시 / 정읍시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250711 / verified",
+        "hash": "d506de0fe9cebb28"
+      },
+      {
+        "id": "outdoor_advertising:2055921",
+        "label": "충청북도 청주시 / 청주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250711 / verified",
+        "hash": "bfbfb0037d96e0d6"
+      },
+      {
+        "id": "outdoor_advertising:2056011",
+        "label": "충청북도 / 충청북도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250711 / verified",
+        "hash": "004fc169bc26cf61"
+      },
+      {
+        "id": "outdoor_advertising:2056567",
+        "label": "대전광역시 유성구 / 대전광역시 유성구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250714 / verified",
+        "hash": "b91a22188cbc88e1"
+      },
+      {
+        "id": "outdoor_advertising:2060241",
+        "label": "서울특별시 금천구 / 서울특별시 금천구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250724 / verified",
+        "hash": "2bd3eccba3db023f"
+      },
+      {
+        "id": "outdoor_advertising:2063235",
+        "label": "인천광역시 남동구 / 남동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250808 / verified",
+        "hash": "7672f8fcc2412728"
+      },
+      {
+        "id": "outdoor_advertising:2064477",
+        "label": "경기도 하남시 / 하남시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250811 / verified",
+        "hash": "8268a70dcb8d203f"
+      },
+      {
+        "id": "outdoor_advertising:2065057",
+        "label": "충청남도 당진시 / 당진시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250814 / verified",
+        "hash": "bed89ee33781e941"
+      },
+      {
+        "id": "outdoor_advertising:2067687",
+        "label": "강원특별자치도 춘천시 / 춘천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250918 / verified",
+        "hash": "34b5dcb9067f63c8"
+      },
+      {
+        "id": "outdoor_advertising:2069027",
+        "label": "대구광역시 / 대구광역시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250922 / verified",
+        "hash": "8a2bed3d07fde5dc"
+      },
+      {
+        "id": "outdoor_advertising:2069579",
+        "label": "부산광역시 기장군 / 부산광역시 기장군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250924 / verified",
+        "hash": "1f6983650d56bdc1"
+      },
+      {
+        "id": "outdoor_advertising:2071127",
+        "label": "충청남도 홍성군 / 홍성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250530 / verified",
+        "hash": "d6af40e963c073bd"
+      },
+      {
+        "id": "outdoor_advertising:2072799",
+        "label": "인천광역시 부평구 / 인천광역시부평구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250929 / verified",
+        "hash": "652216162ab45a87"
+      },
+      {
+        "id": "outdoor_advertising:2073017",
+        "label": "세종특별자치시 / 세종특별자치시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250929 / verified",
+        "hash": "a0def8fdb69384b5"
+      },
+      {
+        "id": "outdoor_advertising:2073925",
+        "label": "전북특별자치도 완주군 / 완주군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250930 / verified",
+        "hash": "fe7f3e05128073f8"
+      },
+      {
+        "id": "outdoor_advertising:2074705",
+        "label": "서울특별시 강서구 / 서울특별시 강서구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251001 / verified",
+        "hash": "8b369a4dfebd02ca"
+      },
+      {
+        "id": "outdoor_advertising:2074757",
+        "label": "부산광역시 동래구 / 부산광역시동래구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250926 / verified",
+        "hash": "4cf2b018124f7dbe"
+      },
+      {
+        "id": "outdoor_advertising:2078681",
+        "label": "경기도 과천시 / 과천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251010 / verified",
+        "hash": "cf210ecbfefe77a1"
+      },
+      {
+        "id": "outdoor_advertising:2078861",
+        "label": "강원특별자치도 / 강원특별자치도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251002 / verified",
+        "hash": "8e1b60917a84aa68"
+      },
+      {
+        "id": "outdoor_advertising:2083517",
+        "label": "부산광역시 금정구 / 부산광역시 금정구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251107 / verified",
+        "hash": "0e4a38607c2ce61f"
+      },
+      {
+        "id": "outdoor_advertising:2084641",
+        "label": "광주광역시 북구 / 광주광역시 북구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251112 / verified",
+        "hash": "73f0ec0445fe4dad"
+      },
+      {
+        "id": "outdoor_advertising:2084693",
+        "label": "강원특별자치도 철원군 / 철원군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251112 / verified",
+        "hash": "ff2526b306387a51"
+      },
+      {
+        "id": "outdoor_advertising:2085769",
+        "label": "경상북도 김천시 / 김천시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260101 / verified",
+        "hash": "ca557171295bc1be"
+      },
+      {
+        "id": "outdoor_advertising:2086235",
+        "label": "경기도 김포시 / 김포시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251114 / verified",
+        "hash": "239e84b30992e660"
+      },
+      {
+        "id": "outdoor_advertising:2086961",
+        "label": "인천광역시 연수구 / 인천광역시 연수구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251117 / verified",
+        "hash": "df402a032b88b60b"
+      },
+      {
+        "id": "outdoor_advertising:2089031",
+        "label": "경기도 의정부시 / 의정부시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251125 / verified",
+        "hash": "54d5173bff747f25"
+      },
+      {
+        "id": "outdoor_advertising:2090857",
+        "label": "경기도 군포시 / 군포시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251210 / verified",
+        "hash": "7bcd1f7bd63a3cd8"
+      },
+      {
+        "id": "outdoor_advertising:2091043",
+        "label": "경상북도 포항시 / 포항시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251210 / verified",
+        "hash": "e06f4e1c0bb1fe54"
+      },
+      {
+        "id": "outdoor_advertising:2091305",
+        "label": "울산광역시 울주군 / 울산광역시 울주군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251211 / verified",
+        "hash": "4276f0568cf27c24"
+      },
+      {
+        "id": "outdoor_advertising:2091415",
+        "label": "충청남도 천안시 / 천안시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251211 / verified",
+        "hash": "7704efcb2a1c9d96"
+      },
+      {
+        "id": "outdoor_advertising:2091653",
+        "label": "부산광역시 서구 / 부산광역시 서구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251211 / verified",
+        "hash": "12bf591401256f82"
+      },
+      {
+        "id": "outdoor_advertising:2092007",
+        "label": "경기도 성남시 / 성남시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251215 / verified",
+        "hash": "fc884d9f1d2dc684"
+      },
+      {
+        "id": "outdoor_advertising:2092951",
+        "label": "부산광역시 북구 / 부산광역시 북구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251217 / verified",
+        "hash": "cd7fe12a81cd087b"
+      },
+      {
+        "id": "outdoor_advertising:2093671",
+        "label": "전라남도 영암군 / 영암군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251218 / verified",
+        "hash": "33c21313749a955b"
+      },
+      {
+        "id": "outdoor_advertising:2094001",
+        "label": "경기도 광주시 / 광주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251218 / verified",
+        "hash": "41d483ba4341ba0f"
+      },
+      {
+        "id": "outdoor_advertising:2094023",
+        "label": "경기도 여주시 / 여주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20241218 / verified",
+        "hash": "1918c420564ade08"
+      },
+      {
+        "id": "outdoor_advertising:2096059",
+        "label": "대전광역시 중구 / 대전광역시 중구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251223 / verified",
+        "hash": "22c5fb0c17e388b8"
+      },
+      {
+        "id": "outdoor_advertising:2096983",
+        "label": "서울특별시 은평구 / 서울특별시 은평구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251226 / verified",
+        "hash": "db82f4f27a02f6a9"
+      },
+      {
+        "id": "outdoor_advertising:2097029",
+        "label": "서울특별시 마포구 / 서울특별시 마포구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251226 / verified",
+        "hash": "48f3e6e3cc4a8382"
+      },
+      {
+        "id": "outdoor_advertising:2098529",
+        "label": "부산광역시 수영구 / 부산광역시 수영구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251226 / verified",
+        "hash": "22960612d93b0903"
+      },
+      {
+        "id": "outdoor_advertising:2099061",
+        "label": "경기도 평택시 / 평택시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251229 / verified",
+        "hash": "cdcbc59e1c184f9f"
+      },
+      {
+        "id": "outdoor_advertising:2099101",
+        "label": "경기도 남양주시 / 남양주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251229 / verified",
+        "hash": "390c488fc28c3003"
+      },
+      {
+        "id": "outdoor_advertising:2099503",
+        "label": "전라남도 장흥군 / 장흥군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251229 / verified",
+        "hash": "653491562e981711"
+      },
+      {
+        "id": "outdoor_advertising:2102203",
+        "label": "경기도 안양시 / 안양시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251231 / verified",
+        "hash": "1c787c6d25b40172"
+      },
+      {
+        "id": "outdoor_advertising:2103185",
+        "label": "전라남도 담양군 / 담양군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251231 / verified",
+        "hash": "ce772234eb50450f"
+      },
+      {
+        "id": "outdoor_advertising:2103559",
+        "label": "경상북도 의성군 / 의성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260101 / verified",
+        "hash": "46139758cbe240d4"
+      },
+      {
+        "id": "outdoor_advertising:2105491",
+        "label": "경상북도 상주시 / 상주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251231 / verified",
+        "hash": "63b3a30950dd3fbe"
+      },
+      {
+        "id": "outdoor_advertising:2106789",
+        "label": "강원특별자치도 원주시 / 원주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20251231 / verified",
+        "hash": "028a2e3886fcdc1c"
+      },
+      {
+        "id": "outdoor_advertising:2108811",
+        "label": "울산광역시 중구 / 울산광역시 중구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20250701 / verified",
+        "hash": "158bf176dcb29f28"
+      },
+      {
+        "id": "outdoor_advertising:2109781",
+        "label": "경기도 파주시 / 파주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260212 / verified",
+        "hash": "e01c3c6a95e896da"
+      },
+      {
+        "id": "outdoor_advertising:2113239",
+        "label": "충청북도 충주시 / 충주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260227 / verified",
+        "hash": "87f180bbe4e87242"
+      },
+      {
+        "id": "outdoor_advertising:2115009",
+        "label": "경기도 화성시 / 화성시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260310 / verified",
+        "hash": "a442fcf326b4b0d6"
+      },
+      {
+        "id": "outdoor_advertising:2116325",
+        "label": "경기도 광명시 / 광명시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260325 / verified",
+        "hash": "94c66736adbec35a"
+      },
+      {
+        "id": "outdoor_advertising:2116931",
+        "label": "광주광역시 서구 / 광주광역시 서구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260327 / verified",
+        "hash": "d52fd3442680a917"
+      },
+      {
+        "id": "outdoor_advertising:2118857",
+        "label": "대구광역시 북구 / 대구광역시 북구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260403 / verified",
+        "hash": "ed6269b1f42b57bc"
+      },
+      {
+        "id": "outdoor_advertising:2119673",
+        "label": "전북특별자치도 남원시 / 남원시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260407 / verified",
+        "hash": "7c32765243de42a3"
+      },
+      {
+        "id": "outdoor_advertising:2122181",
+        "label": "대전광역시 / 대전광역시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260410 / verified",
+        "hash": "828463df063cdb97"
+      },
+      {
+        "id": "outdoor_advertising:2122905",
+        "label": "충청남도 공주시 / 공주시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260415 / verified",
+        "hash": "bda182c1739f7115"
+      },
+      {
+        "id": "outdoor_advertising:2123105",
+        "label": "전북특별자치도 순창군 / 순창군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260415 / verified",
+        "hash": "c4afdaf006e66d86"
+      },
+      {
+        "id": "outdoor_advertising:2123295",
+        "label": "경상북도 경산시 / 경산시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260415 / verified",
+        "hash": "93b8bf68895ba52f"
+      },
+      {
+        "id": "outdoor_advertising:2124537",
+        "label": "경기도 가평군 / 가평군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260420 / verified",
+        "hash": "2c25919fda1da7a6"
+      },
+      {
+        "id": "outdoor_advertising:2125217",
+        "label": "강원특별자치도 횡성군 / 횡성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260416 / verified",
+        "hash": "8d320334d3b3c457"
+      },
+      {
+        "id": "outdoor_advertising:2126559",
+        "label": "대구광역시 달성군 / 대구광역시 달성군 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260430 / verified",
+        "hash": "088524fe4f2b9bba"
+      },
+      {
+        "id": "outdoor_advertising:2126605",
+        "label": "울산광역시 남구 / 울산광역시 남구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260430 / verified",
+        "hash": "82c4993d3f458a6f"
+      },
+      {
+        "id": "outdoor_advertising:2127235",
+        "label": "서울특별시 성동구 / 서울특별시 성동구 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260504 / verified",
+        "hash": "3e4c21f8bae4cdf3"
+      },
+      {
+        "id": "outdoor_advertising:2128495",
+        "label": "전북특별자치도 / 전북특별자치도 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260508 / verified",
+        "hash": "4b8836ef2f35d4d3"
+      },
+      {
+        "id": "outdoor_advertising:2129039",
+        "label": "강원특별자치도 동해시 / 동해시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260512 / verified",
+        "hash": "2016a5c3f6af374a"
+      },
+      {
+        "id": "outdoor_advertising:2129879",
+        "label": "경상남도 창원시 / 창원시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260515 / verified",
+        "hash": "69222ea9ffa9abe4"
+      },
+      {
+        "id": "outdoor_advertising:2130179",
+        "label": "서울특별시 / 서울특별시 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 조례 / outdoor_advertising / 20260518 / verified",
+        "hash": "2177e49b9fde982f"
+      },
+      {
+        "id": "outdoor_event_safety:1198226",
+        "label": "울산광역시 중구 / 울산광역시 중구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20151109 / verified",
+        "hash": "51c205c8b83a02ab"
+      },
+      {
+        "id": "outdoor_event_safety:1238004",
+        "label": "경기도 성남시 / 성남시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20160620 / verified",
+        "hash": "1f56dd91699d6a4b"
+      },
+      {
+        "id": "outdoor_event_safety:1255893",
+        "label": "강원특별자치도 횡성군 / 횡성군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20161013 / verified",
+        "hash": "a83982d5456a2fe9"
+      },
+      {
+        "id": "outdoor_event_safety:1274321",
+        "label": "울산광역시 남구 / 울산광역시 남구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20170105 / verified",
+        "hash": "b0aea7ebba204847"
+      },
+      {
+        "id": "outdoor_event_safety:1332055",
+        "label": "경기도 안성시 / 안성시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20171222 / verified",
+        "hash": "021f75e8dae6307b"
+      },
+      {
+        "id": "outdoor_event_safety:1380619",
+        "label": "전라남도 나주시 / 나주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20160630 / verified",
+        "hash": "e171855354154b76"
+      },
+      {
+        "id": "outdoor_event_safety:1381907",
+        "label": "광주광역시 남구 / 광주광역시 남구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20190108 / verified",
+        "hash": "9759e8f0b9d7239f"
+      },
+      {
+        "id": "outdoor_event_safety:1384835",
+        "label": "광주광역시 동구 / 광주광역시 동구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20190215 / verified",
+        "hash": "a2ccba6f1af5519f"
+      },
+      {
+        "id": "outdoor_event_safety:1385227",
+        "label": "대전광역시 중구 / 대전광역시 중구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20190218 / verified",
+        "hash": "88659037ff9e09d8"
+      },
+      {
+        "id": "outdoor_event_safety:1393180",
+        "label": "충청남도 논산시 / 논산시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20190430 / verified",
+        "hash": "1f1d1636e5e4df1c"
+      },
+      {
+        "id": "outdoor_event_safety:1398455",
+        "label": "대전광역시 대덕구 / 대전광역시 대덕구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20190621 / verified",
+        "hash": "236be77bf9307f6b"
+      },
+      {
+        "id": "outdoor_event_safety:1401948",
+        "label": "서울특별시 광진구 / 서울특별시 광진구 옥외행사 안전관리 조례 / outdoor_event_safety / 20190708 / verified",
+        "hash": "04f84fc637795dd8"
+      },
+      {
+        "id": "outdoor_event_safety:1415211",
+        "label": "전라남도 해남군 / 해남군 옥외행사 안전관리 조례 / outdoor_event_safety / 20191029 / verified",
+        "hash": "78a02c562d197b76"
+      },
+      {
+        "id": "outdoor_event_safety:1416334",
+        "label": "경상북도 구미시 / 구미시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230712 / verified",
+        "hash": "9fcfb499c935f270"
+      },
+      {
+        "id": "outdoor_event_safety:1417477",
+        "label": "서울특별시 강남구 / 서울특별시 강남구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20191108 / verified",
+        "hash": "908fc68fddcf9e74"
+      },
+      {
+        "id": "outdoor_event_safety:1454259",
+        "label": "강원특별자치도 원주시 / 원주시 옥외행사의 안전관리에 관한 조례 시행규칙 / outdoor_event_safety / 20200123 / verified",
+        "hash": "a7cad03981c5e54b"
+      },
+      {
+        "id": "outdoor_event_safety:1496101",
+        "label": "서울특별시 / 서울특별시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20201120 / verified",
+        "hash": "b8ced1ee3894250c"
+      },
+      {
+        "id": "outdoor_event_safety:1529119",
+        "label": "경상북도 영주시 / 영주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20200922 / verified",
+        "hash": "e09c9703643fc431"
+      },
+      {
+        "id": "outdoor_event_safety:1559809",
+        "label": "경상남도 거제시 / 거제시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20201229 / verified",
+        "hash": "39de9347f4613a23"
+      },
+      {
+        "id": "outdoor_event_safety:1578283",
+        "label": "대구광역시 동구 / 대구광역시 동구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20210310 / verified",
+        "hash": "20f87cd46b98c279"
+      },
+      {
+        "id": "outdoor_event_safety:1589943",
+        "label": "대전광역시 서구 / 대전광역시 서구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20210416 / verified",
+        "hash": "9b64b65658735685"
+      },
+      {
+        "id": "outdoor_event_safety:1672521",
+        "label": "충청남도 / 충청남도 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20211230 / verified",
+        "hash": "bd2f3d0ab1c55355"
+      },
+      {
+        "id": "outdoor_event_safety:1701049",
+        "label": "충청남도 서산시 / 서산시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20220510 / verified",
+        "hash": "65453b9726b5d6a2"
+      },
+      {
+        "id": "outdoor_event_safety:1755685",
+        "label": "서울특별시 동작구 / 서울특별시 동작구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221208 / verified",
+        "hash": "e39db3f2532a5cee"
+      },
+      {
+        "id": "outdoor_event_safety:1755959",
+        "label": "충청남도 공주시 / 공주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221213 / verified",
+        "hash": "7355adcd160cbc2d"
+      },
+      {
+        "id": "outdoor_event_safety:1758879",
+        "label": "경상남도 진주시 / 진주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221219 / verified",
+        "hash": "018aaf9806cb5e4a"
+      },
+      {
+        "id": "outdoor_event_safety:1759719",
+        "label": "서울특별시 강동구 / 서울특별시 강동구 옥외행사 안전관리 조례 / outdoor_event_safety / 20221221 / verified",
+        "hash": "f917a27443dcdba2"
+      },
+      {
+        "id": "outdoor_event_safety:1759899",
+        "label": "경기도 양평군 / 양평군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221221 / verified",
+        "hash": "4359a25a26b25787"
+      },
+      {
+        "id": "outdoor_event_safety:1760741",
+        "label": "인천광역시 남동구 / 남동구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221222 / verified",
+        "hash": "61f11688c0712d45"
+      },
+      {
+        "id": "outdoor_event_safety:1761933",
+        "label": "광주광역시 서구 / 광주광역시 서구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20221223 / verified",
+        "hash": "45b3528e49595bb2"
+      },
+      {
+        "id": "outdoor_event_safety:1763645",
+        "label": "광주광역시 북구 / 광주광역시 북구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221227 / verified",
+        "hash": "3e3de218bf6ece2f"
+      },
+      {
+        "id": "outdoor_event_safety:1764397",
+        "label": "서울특별시 강서구 / 서울특별시 강서구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221228 / verified",
+        "hash": "96d447f75fa179b8"
+      },
+      {
+        "id": "outdoor_event_safety:1764423",
+        "label": "부산광역시 영도구 / 부산광역시 영도구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221228 / verified",
+        "hash": "dc7df706f1fee95c"
+      },
+      {
+        "id": "outdoor_event_safety:1765745",
+        "label": "서울특별시 도봉구 / 서울특별시 도봉구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221229 / verified",
+        "hash": "3c9ba86376414fd9"
+      },
+      {
+        "id": "outdoor_event_safety:1766145",
+        "label": "인천광역시 부평구 / 인천광역시부평구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221229 / verified",
+        "hash": "75ae7049a6441cc6"
+      },
+      {
+        "id": "outdoor_event_safety:1767679",
+        "label": "서울특별시 중랑구 / 서울특별시 중랑구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221230 / verified",
+        "hash": "99683ed731c1e230"
+      },
+      {
+        "id": "outdoor_event_safety:1767809",
+        "label": "서울특별시 강북구 / 서울특별시 강북구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221230 / verified",
+        "hash": "600606595570bf83"
+      },
+      {
+        "id": "outdoor_event_safety:1772701",
+        "label": "경기도 하남시 / 하남시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230101 / verified",
+        "hash": "9345a36d722c2109"
+      },
+      {
+        "id": "outdoor_event_safety:1773497",
+        "label": "인천광역시 미추홀구 / 인천광역시 미추홀구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230102 / verified",
+        "hash": "7a03096a637dd673"
+      },
+      {
+        "id": "outdoor_event_safety:1774787",
+        "label": "인천광역시 / 인천광역시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20221230 / verified",
+        "hash": "80b782b25da6c918"
+      },
+      {
+        "id": "outdoor_event_safety:1775483",
+        "label": "경기도 의정부시 / 의정부시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221229 / verified",
+        "hash": "264be63e21e3b397"
+      },
+      {
+        "id": "outdoor_event_safety:1775583",
+        "label": "경기도 오산시 / 오산시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20221228 / verified",
+        "hash": "e97952724638b7e7"
+      },
+      {
+        "id": "outdoor_event_safety:1775995",
+        "label": "경기도 용인시 / 용인시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230106 / verified",
+        "hash": "ca6f91e1b91c15c0"
+      },
+      {
+        "id": "outdoor_event_safety:1776925",
+        "label": "경기도 군포시 / 군포시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230109 / verified",
+        "hash": "c34f9dbd6e1f2556"
+      },
+      {
+        "id": "outdoor_event_safety:1781793",
+        "label": "경상남도 / 경상남도 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230202 / verified",
+        "hash": "8ed97e389734ffd8"
+      },
+      {
+        "id": "outdoor_event_safety:1782139",
+        "label": "경기도 부천시 / 부천시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230206 / verified",
+        "hash": "e5c9f8f733878327"
+      },
+      {
+        "id": "outdoor_event_safety:1782263",
+        "label": "경기도 의왕시 / 의왕시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230207 / verified",
+        "hash": "f1abb41f4fe658a4"
+      },
+      {
+        "id": "outdoor_event_safety:1782399",
+        "label": "전라남도 광양시 / 광양시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230208 / verified",
+        "hash": "32b0aa3cadedd404"
+      },
+      {
+        "id": "outdoor_event_safety:1783387",
+        "label": "경기도 남양주시 / 남양주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230216 / verified",
+        "hash": "7d969f67c9039b80"
+      },
+      {
+        "id": "outdoor_event_safety:1784551",
+        "label": "서울특별시 서대문구 / 서울특별시 서대문구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230222 / verified",
+        "hash": "83ec9494f8989e16"
+      },
+      {
+        "id": "outdoor_event_safety:1785083",
+        "label": "경상북도 / 경상북도 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230223 / verified",
+        "hash": "10ccb3e5f137a0a0"
+      },
+      {
+        "id": "outdoor_event_safety:1785219",
+        "label": "부산광역시 기장군 / 부산광역시 기장군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230224 / verified",
+        "hash": "d3e5ae0f63ca810e"
+      },
+      {
+        "id": "outdoor_event_safety:1786267",
+        "label": "부산광역시 연제구 / 부산광역시 연제구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230228 / verified",
+        "hash": "88be6dad7f7046e0"
+      },
+      {
+        "id": "outdoor_event_safety:1788889",
+        "label": "강원특별자치도 춘천시 / 춘천시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230309 / verified",
+        "hash": "cecd9d7271bc6072"
+      },
+      {
+        "id": "outdoor_event_safety:1789713",
+        "label": "경기도 구리시 / 구리시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230313 / verified",
+        "hash": "94a2cf430c2b38aa"
+      },
+      {
+        "id": "outdoor_event_safety:1790709",
+        "label": "서울특별시 성북구 / 서울특별시 성북구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230316 / verified",
+        "hash": "3d665a73a00bec77"
+      },
+      {
+        "id": "outdoor_event_safety:1791525",
+        "label": "전라남도 보성군 / 보성군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230320 / verified",
+        "hash": "a646ace2beef47be"
+      },
+      {
+        "id": "outdoor_event_safety:1792423",
+        "label": "부산광역시 강서구 / 부산광역시 강서구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230324 / verified",
+        "hash": "dbb405bbf7e58dfa"
+      },
+      {
+        "id": "outdoor_event_safety:1793265",
+        "label": "경상북도 상주시 / 상주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230327 / verified",
+        "hash": "ef48f2710fed062a"
+      },
+      {
+        "id": "outdoor_event_safety:1793325",
+        "label": "경상남도 남해군 / 남해군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230328 / verified",
+        "hash": "c9659396e477f21a"
+      },
+      {
+        "id": "outdoor_event_safety:1793495",
+        "label": "전라남도 구례군 / 구례군 옥외행사 안전관리 조례 / outdoor_event_safety / 20230328 / verified",
+        "hash": "a7557eb3fc9bf2f2"
+      },
+      {
+        "id": "outdoor_event_safety:1794077",
+        "label": "경상남도 김해시 / 김해시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230330 / verified",
+        "hash": "c578ea0331937d29"
+      },
+      {
+        "id": "outdoor_event_safety:1798497",
+        "label": "부산광역시 동래구 / 부산광역시동래구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230407 / verified",
+        "hash": "a197f0dcd6283eb4"
+      },
+      {
+        "id": "outdoor_event_safety:1798829",
+        "label": "충청북도 / 충청북도 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230407 / verified",
+        "hash": "a2270aeb1c7f9253"
+      },
+      {
+        "id": "outdoor_event_safety:1799715",
+        "label": "충청남도 서천군 / 서천군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230410 / verified",
+        "hash": "397788940f28be94"
+      },
+      {
+        "id": "outdoor_event_safety:1800065",
+        "label": "경기도 광명시 / 광명시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230411 / verified",
+        "hash": "dea1dbd1e618e02d"
+      },
+      {
+        "id": "outdoor_event_safety:1800155",
+        "label": "경기도 가평군 / 가평군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230412 / verified",
+        "hash": "4215c67d35e6ed3e"
+      },
+      {
+        "id": "outdoor_event_safety:1800541",
+        "label": "서울특별시 동대문구 / 서울특별시 동대문구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230413 / verified",
+        "hash": "eaca2b2884aca725"
+      },
+      {
+        "id": "outdoor_event_safety:1801447",
+        "label": "경상북도 영천시 / 영천시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230414 / verified",
+        "hash": "4222203d16d54606"
+      },
+      {
+        "id": "outdoor_event_safety:1801459",
+        "label": "경상북도 의성군 / 의성군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230414 / verified",
+        "hash": "3bbd805cd5ef172f"
+      },
+      {
+        "id": "outdoor_event_safety:1802115",
+        "label": "세종특별자치시 / 세종특별자치시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230417 / verified",
+        "hash": "71b8a3a72a3402d1"
+      },
+      {
+        "id": "outdoor_event_safety:1802971",
+        "label": "서울특별시 마포구 / 서울특별시 마포구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230420 / verified",
+        "hash": "77444ade8416f1ff"
+      },
+      {
+        "id": "outdoor_event_safety:1803263",
+        "label": "충청북도 옥천군 / 옥천군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230420 / verified",
+        "hash": "bef381ec93589cb1"
+      },
+      {
+        "id": "outdoor_event_safety:1805909",
+        "label": "경기도 김포시 / 김포시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230503 / verified",
+        "hash": "cd96811e85e7875d"
+      },
+      {
+        "id": "outdoor_event_safety:1806529",
+        "label": "경상북도 청송군 / 청송군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230504 / verified",
+        "hash": "1d49de78e14df680"
+      },
+      {
+        "id": "outdoor_event_safety:1808409",
+        "label": "서울특별시 송파구 / 서울특별시 송파구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230511 / verified",
+        "hash": "9f68c6d90ee752b2"
+      },
+      {
+        "id": "outdoor_event_safety:1808451",
+        "label": "인천광역시 계양구 / 인천광역시 계양구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230512 / verified",
+        "hash": "e432f4f8ce6f901d"
+      },
+      {
+        "id": "outdoor_event_safety:1808553",
+        "label": "경기도 이천시 / 이천시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230512 / verified",
+        "hash": "bf8b8d8f20073cf2"
+      },
+      {
+        "id": "outdoor_event_safety:1809041",
+        "label": "부산광역시 금정구 / 부산광역시 금정구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230515 / verified",
+        "hash": "251ded3ecf4c5d50"
+      },
+      {
+        "id": "outdoor_event_safety:1809461",
+        "label": "대구광역시 달서구 / 대구광역시달서구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230511 / verified",
+        "hash": "509c61bfa725dbaf"
+      },
+      {
+        "id": "outdoor_event_safety:1811465",
+        "label": "경기도 안양시 / 안양시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230522 / verified",
+        "hash": "2091d718a6b12d32"
+      },
+      {
+        "id": "outdoor_event_safety:1816375",
+        "label": "부산광역시 남구 / 부산광역시 남구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230605 / verified",
+        "hash": "6ff840d1352f548b"
+      },
+      {
+        "id": "outdoor_event_safety:1816801",
+        "label": "부산광역시 북구 / 부산광역시 북구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230607 / verified",
+        "hash": "a5fc288accec2e5c"
+      },
+      {
+        "id": "outdoor_event_safety:1817163",
+        "label": "전북특별자치도 김제시 / 김제시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230607 / verified",
+        "hash": "46ca64c87bba19ba"
+      },
+      {
+        "id": "outdoor_event_safety:1817231",
+        "label": "제주특별자치도 / 제주특별자치도 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230607 / verified",
+        "hash": "d675dd7af8cf9d80"
+      },
+      {
+        "id": "outdoor_event_safety:1821795",
+        "label": "서울특별시 구로구 / 서울특별시 구로구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230615 / verified",
+        "hash": "44bda93a6b7fc385"
+      },
+      {
+        "id": "outdoor_event_safety:1825621",
+        "label": "경상남도 거창군 / 거창군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230628 / verified",
+        "hash": "fef3f18af4fe9682"
+      },
+      {
+        "id": "outdoor_event_safety:1826043",
+        "label": "경기도 시흥시 / 시흥시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230629 / verified",
+        "hash": "0da36d63073b8a39"
+      },
+      {
+        "id": "outdoor_event_safety:1826819",
+        "label": "대구광역시 중구 / 대구광역시 중구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230630 / verified",
+        "hash": "5b6ded252da66af5"
+      },
+      {
+        "id": "outdoor_event_safety:1831229",
+        "label": "경상남도 양산시 / 양산시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230703 / verified",
+        "hash": "075df639ac1e1b6f"
+      },
+      {
+        "id": "outdoor_event_safety:1832683",
+        "label": "경기도 포천시 / 포천시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230705 / verified",
+        "hash": "76e9835945d16173"
+      },
+      {
+        "id": "outdoor_event_safety:1835503",
+        "label": "서울특별시 성동구 / 서울특별시 성동구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230713 / verified",
+        "hash": "8937889a57cc98ed"
+      },
+      {
+        "id": "outdoor_event_safety:1837719",
+        "label": "대전광역시 / 대전광역시 옥외행사 안전관리조례 / outdoor_event_safety / 20230714 / verified",
+        "hash": "f63265dd76d42782"
+      },
+      {
+        "id": "outdoor_event_safety:1839845",
+        "label": "서울특별시 금천구 / 서울특별시 금천구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230720 / verified",
+        "hash": "71de26d2df3fe3b8"
+      },
+      {
+        "id": "outdoor_event_safety:1840141",
+        "label": "서울특별시 용산구 / 서울특별시 용산구 옥외행사 등의 안전관리에 관한 조례 / outdoor_event_safety / 20230721 / verified",
+        "hash": "0e429874081f12c4"
+      },
+      {
+        "id": "outdoor_event_safety:1842711",
+        "label": "전북특별자치도 고창군 / 고창군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20230801 / verified",
+        "hash": "74d616e985288081"
+      },
+      {
+        "id": "outdoor_event_safety:1844457",
+        "label": "강원특별자치도 / 강원특별자치도 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230804 / verified",
+        "hash": "33c4c28a76ce669d"
+      },
+      {
+        "id": "outdoor_event_safety:1851317",
+        "label": "경상남도 산청군 / 산청군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230914 / verified",
+        "hash": "7e35b35691b6fdcb"
+      },
+      {
+        "id": "outdoor_event_safety:1854681",
+        "label": "충청북도 충주시 / 충주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230922 / verified",
+        "hash": "d232404cce17d3ef"
+      },
+      {
+        "id": "outdoor_event_safety:1855627",
+        "label": "충청북도 진천군 / 진천군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230926 / verified",
+        "hash": "dfb48176e23b7c3e"
+      },
+      {
+        "id": "outdoor_event_safety:1858211",
+        "label": "경상남도 합천군 / 합천군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20230927 / verified",
+        "hash": "23aed12f31fe7dd2"
+      },
+      {
+        "id": "outdoor_event_safety:1859493",
+        "label": "경기도 안산시 / 안산시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231004 / verified",
+        "hash": "17f6e4ea5281a304"
+      },
+      {
+        "id": "outdoor_event_safety:1860841",
+        "label": "경상북도 영덕군 / 영덕군 옥외 행사 안전관리에 관한 조례 / outdoor_event_safety / 20231005 / verified",
+        "hash": "bd2931e152f4aef4"
+      },
+      {
+        "id": "outdoor_event_safety:1861507",
+        "label": "강원특별자치도 평창군 / 평창군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231006 / verified",
+        "hash": "2049c32469e1094d"
+      },
+      {
+        "id": "outdoor_event_safety:1861579",
+        "label": "전북특별자치도 완주군 / 완주군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231005 / verified",
+        "hash": "fdcb2440d6219d9f"
+      },
+      {
+        "id": "outdoor_event_safety:1861909",
+        "label": "경상남도 밀양시 / 밀양시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231006 / verified",
+        "hash": "9862985adc066d92"
+      },
+      {
+        "id": "outdoor_event_safety:1862421",
+        "label": "경기도 과천시 / 과천시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231006 / verified",
+        "hash": "a2b4d196963a0115"
+      },
+      {
+        "id": "outdoor_event_safety:1863359",
+        "label": "전라남도 목포시 / 목포시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231004 / verified",
+        "hash": "5287b39a33c74455"
+      },
+      {
+        "id": "outdoor_event_safety:1864953",
+        "label": "강원특별자치도 영월군 / 영월군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231016 / verified",
+        "hash": "9bed9ba0d8e2c09b"
+      },
+      {
+        "id": "outdoor_event_safety:1867613",
+        "label": "경상남도 함안군 / 함안군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231031 / verified",
+        "hash": "3e677fd3dd8fcf10"
+      },
+      {
+        "id": "outdoor_event_safety:1867783",
+        "label": "인천광역시 옹진군 / 옹진군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231101 / verified",
+        "hash": "1accc65a237058f0"
+      },
+      {
+        "id": "outdoor_event_safety:1871145",
+        "label": "서울특별시 노원구 / 서울특별시 노원구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231109 / verified",
+        "hash": "81cd0007bc95ac68"
+      },
+      {
+        "id": "outdoor_event_safety:1871257",
+        "label": "서울특별시 은평구 / 서울특별시 은평구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231109 / verified",
+        "hash": "dac01941e09f40f0"
+      },
+      {
+        "id": "outdoor_event_safety:1871347",
+        "label": "서울특별시 영등포구 / 서울특별시 영등포구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231109 / verified",
+        "hash": "736a2dc3572857d9"
+      },
+      {
+        "id": "outdoor_event_safety:1875387",
+        "label": "경상남도 하동군 / 하동군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231116 / verified",
+        "hash": "89e70dd704157b81"
+      },
+      {
+        "id": "outdoor_event_safety:1875449",
+        "label": "인천광역시 강화군 / 강화군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231120 / verified",
+        "hash": "725f0649cb39d509"
+      },
+      {
+        "id": "outdoor_event_safety:1876665",
+        "label": "강원특별자치도 홍천군 / 홍천군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231124 / verified",
+        "hash": "6f17ab07132e4635"
+      },
+      {
+        "id": "outdoor_event_safety:1878497",
+        "label": "전라남도 여수시 / 여수시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231206 / verified",
+        "hash": "3cc5df5ad58f797a"
+      },
+      {
+        "id": "outdoor_event_safety:1882765",
+        "label": "인천광역시 서구 / 인천광역시 서구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231218 / verified",
+        "hash": "95c774bd6b87afe6"
+      },
+      {
+        "id": "outdoor_event_safety:1884533",
+        "label": "충청남도 금산군 / 금산군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231220 / verified",
+        "hash": "fe0624946e63e271"
+      },
+      {
+        "id": "outdoor_event_safety:1885981",
+        "label": "전북특별자치도 / 전북특별자치도 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240118 / verified",
+        "hash": "fb9bb98ccc2bed63"
+      },
+      {
+        "id": "outdoor_event_safety:1887961",
+        "label": "인천광역시 중구 / 인천광역시 중구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231226 / verified",
+        "hash": "b57ac49d0fb6768f"
+      },
+      {
+        "id": "outdoor_event_safety:1889155",
+        "label": "서울특별시 중구 / 서울특별시 중구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231227 / verified",
+        "hash": "13a7d55d987dff47"
+      },
+      {
+        "id": "outdoor_event_safety:1889523",
+        "label": "강원특별자치도 정선군 / 정선군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231227 / verified",
+        "hash": "5815fbc86c6a4aec"
+      },
+      {
+        "id": "outdoor_event_safety:1892753",
+        "label": "경상남도 창녕군 / 창녕군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231228 / verified",
+        "hash": "b630b2b23b1ad1fd"
+      },
+      {
+        "id": "outdoor_event_safety:1893617",
+        "label": "서울특별시 서초구 / 서울특별시 서초구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231219 / verified",
+        "hash": "8097fb5c9ae810fb"
+      },
+      {
+        "id": "outdoor_event_safety:1894551",
+        "label": "강원특별자치도 삼척시 / 삼척시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231229 / verified",
+        "hash": "9127c8084038b160"
+      },
+      {
+        "id": "outdoor_event_safety:1894943",
+        "label": "전북특별자치도 익산시 / 익산시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20240118 / verified",
+        "hash": "b9494f295fe08247"
+      },
+      {
+        "id": "outdoor_event_safety:1897389",
+        "label": "강원특별자치도 동해시 / 동해시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20231228 / verified",
+        "hash": "6b4737a17917ccf2"
+      },
+      {
+        "id": "outdoor_event_safety:1899035",
+        "label": "전북특별자치도 전주시 / 전주시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20231226 / verified",
+        "hash": "da0e37fbbf5116e4"
+      },
+      {
+        "id": "outdoor_event_safety:1905499",
+        "label": "전북특별자치도 정읍시 / 정읍시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20240118 / verified",
+        "hash": "347b134209e90538"
+      },
+      {
+        "id": "outdoor_event_safety:1905875",
+        "label": "경상남도 의령군 / 의령군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240207 / verified",
+        "hash": "1497c651cd3f9d5d"
+      },
+      {
+        "id": "outdoor_event_safety:1906109",
+        "label": "강원특별자치도 양구군 / 양구군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20240208 / verified",
+        "hash": "9a06a8e58813cb99"
+      },
+      {
+        "id": "outdoor_event_safety:1906719",
+        "label": "대전광역시 유성구 / 대전광역시 유성구 옥외행사 안전관리 조례 / outdoor_event_safety / 20240214 / verified",
+        "hash": "27295821b2a90253"
+      },
+      {
+        "id": "outdoor_event_safety:1906799",
+        "label": "강원특별자치도 강릉시 / 강릉시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240214 / verified",
+        "hash": "ba57e1cf46ba5cc6"
+      },
+      {
+        "id": "outdoor_event_safety:1907081",
+        "label": "부산광역시 부산진구 / 부산광역시 부산진구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240305 / verified",
+        "hash": "79b76e5553950fcb"
+      },
+      {
+        "id": "outdoor_event_safety:1907755",
+        "label": "전라남도 / 전라남도 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240215 / verified",
+        "hash": "dac1f6b8cbbc78c3"
+      },
+      {
+        "id": "outdoor_event_safety:1914389",
+        "label": "강원특별자치도 속초시 / 속초시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240322 / verified",
+        "hash": "48de2740866f3ad6"
+      },
+      {
+        "id": "outdoor_event_safety:1915379",
+        "label": "전라남도 완도군 / 완도군 옥외행사 안전관리 조례 / outdoor_event_safety / 20240326 / verified",
+        "hash": "a23acb3d8003d232"
+      },
+      {
+        "id": "outdoor_event_safety:1920965",
+        "label": "강원특별자치도 고성군 / 고성군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240412 / verified",
+        "hash": "88bad77db265cd61"
+      },
+      {
+        "id": "outdoor_event_safety:1926749",
+        "label": "경상남도 고성군 / 고성군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240510 / verified",
+        "hash": "eac8fa99641cf3e9"
+      },
+      {
+        "id": "outdoor_event_safety:1927761",
+        "label": "충청남도 천안시 / 천안시 옥외행사 안전관리 조례 / outdoor_event_safety / 20240513 / verified",
+        "hash": "134565f85ccb8a1a"
+      },
+      {
+        "id": "outdoor_event_safety:1929765",
+        "label": "서울특별시 종로구 / 서울특별시 종로구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20240517 / verified",
+        "hash": "f74ef70c331cc31c"
+      },
+      {
+        "id": "outdoor_event_safety:1931637",
+        "label": "강원특별자치도 원주시 / 원주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240517 / verified",
+        "hash": "44fc1a8addb57a93"
+      },
+      {
+        "id": "outdoor_event_safety:1935893",
+        "label": "대구광역시 북구 / 대구광역시 북구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240605 / verified",
+        "hash": "5d097ce08c1dd753"
+      },
+      {
+        "id": "outdoor_event_safety:1938701",
+        "label": "광주광역시 광산구 / 광주광역시 광산구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240614 / verified",
+        "hash": "01c9103965ccfeb4"
+      },
+      {
+        "id": "outdoor_event_safety:1940163",
+        "label": "부산광역시 중구 / 부산광역시 중구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240624 / verified",
+        "hash": "c5a26223ae250f68"
+      },
+      {
+        "id": "outdoor_event_safety:1941673",
+        "label": "경기도 여주시 / 여주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240627 / verified",
+        "hash": "d614c831c206f583"
+      },
+      {
+        "id": "outdoor_event_safety:1942923",
+        "label": "충청북도 괴산군 / 괴산군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240628 / verified",
+        "hash": "5d14359899902162"
+      },
+      {
+        "id": "outdoor_event_safety:1948771",
+        "label": "강원특별자치도 인제군 / 인제군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20240704 / verified",
+        "hash": "898b439b2845493a"
+      },
+      {
+        "id": "outdoor_event_safety:1952911",
+        "label": "대전광역시 동구 / 대전광역시 동구 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20240710 / verified",
+        "hash": "8b4c97fc1e8b52e7"
+      },
+      {
+        "id": "outdoor_event_safety:1954217",
+        "label": "경상북도 경주시 / 경주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240712 / verified",
+        "hash": "951ea84d2fefd18b"
+      },
+      {
+        "id": "outdoor_event_safety:1954431",
+        "label": "경상남도 사천시 / 사천시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20240711 / verified",
+        "hash": "1d04d6d5c72bb6ce"
+      },
+      {
+        "id": "outdoor_event_safety:1956569",
+        "label": "전라남도 함평군 / 함평군 옥외행사 안전관리 조례 / outdoor_event_safety / 20240715 / verified",
+        "hash": "5cee9dde963270e5"
+      },
+      {
+        "id": "outdoor_event_safety:1960181",
+        "label": "강원특별자치도 철원군 / 철원군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240731 / verified",
+        "hash": "cb4e086359baa55f"
+      },
+      {
+        "id": "outdoor_event_safety:1960331",
+        "label": "전라남도 고흥군 / 고흥군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240731 / verified",
+        "hash": "d9083f10d10b07c9"
+      },
+      {
+        "id": "outdoor_event_safety:1961893",
+        "label": "광주광역시 / 광주광역시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20240807 / verified",
+        "hash": "3c335d86e3ead4bd"
+      },
+      {
+        "id": "outdoor_event_safety:1962517",
+        "label": "충청북도 제천시 / 제천시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240809 / verified",
+        "hash": "12786edcaa3c0934"
+      },
+      {
+        "id": "outdoor_event_safety:1970979",
+        "label": "충청남도 태안군 / 태안군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20240926 / verified",
+        "hash": "ae538dce33101081"
+      },
+      {
+        "id": "outdoor_event_safety:1974987",
+        "label": "전북특별자치도 부안군 / 부안군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20241002 / verified",
+        "hash": "2a8c61ed18ae045e"
+      },
+      {
+        "id": "outdoor_event_safety:1985183",
+        "label": "경기도 수원시 / 수원시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20241114 / verified",
+        "hash": "8176478ff1fa3128"
+      },
+      {
+        "id": "outdoor_event_safety:1996405",
+        "label": "인천광역시 연수구 / 인천광역시 연수구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20241223 / verified",
+        "hash": "d99dc6755ad6fb40"
+      },
+      {
+        "id": "outdoor_event_safety:2000293",
+        "label": "충청남도 예산군 / 예산군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20241223 / verified",
+        "hash": "7203d29536eac329"
+      },
+      {
+        "id": "outdoor_event_safety:2008211",
+        "label": "강원특별자치도 양양군 / 양양군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20241231 / verified",
+        "hash": "8750372f506e81d2"
+      },
+      {
+        "id": "outdoor_event_safety:2014581",
+        "label": "전라남도 강진군 / 강진군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20250207 / verified",
+        "hash": "213f4ec8c6b22906"
+      },
+      {
+        "id": "outdoor_event_safety:2020425",
+        "label": "경기도 고양시 / 고양시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250311 / verified",
+        "hash": "647bfe834482f106"
+      },
+      {
+        "id": "outdoor_event_safety:2029271",
+        "label": "부산광역시 서구 / 부산광역시 서구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250415 / verified",
+        "hash": "f026e74dffacb3f2"
+      },
+      {
+        "id": "outdoor_event_safety:2047059",
+        "label": "대구광역시 수성구 / 대구광역시 수성구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250630 / verified",
+        "hash": "54a74bd8edb52aca"
+      },
+      {
+        "id": "outdoor_event_safety:2048375",
+        "label": "충청남도 당진시 / 당진시 옥외 행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250630 / verified",
+        "hash": "c8be27099670d5dd"
+      },
+      {
+        "id": "outdoor_event_safety:2050839",
+        "label": "울산광역시 / 울산광역시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20250703 / verified",
+        "hash": "2cccb55ce14b6754"
+      },
+      {
+        "id": "outdoor_event_safety:2052029",
+        "label": "강원특별자치도 화천군 / 화천군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250707 / verified",
+        "hash": "86ec0467993ffcd2"
+      },
+      {
+        "id": "outdoor_event_safety:2053251",
+        "label": "경상북도 포항시 / 포항시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250709 / verified",
+        "hash": "ef8e5ba9b27c9db9"
+      },
+      {
+        "id": "outdoor_event_safety:2055705",
+        "label": "충청북도 단양군 / 단양군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250711 / verified",
+        "hash": "d970728138edfc31"
+      },
+      {
+        "id": "outdoor_event_safety:2064283",
+        "label": "경기도 / 경기도 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250812 / verified",
+        "hash": "6a491afbda5a98ef"
+      },
+      {
+        "id": "outdoor_event_safety:2071503",
+        "label": "부산광역시 사상구 / 부산광역시 사상구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20250925 / verified",
+        "hash": "548cb8d427c8f571"
+      },
+      {
+        "id": "outdoor_event_safety:2082739",
+        "label": "부산광역시 사하구 / 부산광역시 사하구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20251107 / verified",
+        "hash": "f4c9d3427691884c"
+      },
+      {
+        "id": "outdoor_event_safety:2086027",
+        "label": "부산광역시 수영구 / 부산광역시 수영구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20251114 / verified",
+        "hash": "8220ea785e05e2d4"
+      },
+      {
+        "id": "outdoor_event_safety:2086947",
+        "label": "인천광역시 동구 / 인천광역시 동구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20251114 / verified",
+        "hash": "fc6be8f2a182f3f5"
+      },
+      {
+        "id": "outdoor_event_safety:2093091",
+        "label": "전북특별자치도 남원시 / 남원시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20251217 / verified",
+        "hash": "4056bae86f11482a"
+      },
+      {
+        "id": "outdoor_event_safety:2093995",
+        "label": "경기도 광주시 / 광주시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20251218 / verified",
+        "hash": "e444eb4c2f2cd067"
+      },
+      {
+        "id": "outdoor_event_safety:2095589",
+        "label": "전라남도 무안군 / 무안군 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20251222 / verified",
+        "hash": "b46fd190c592b9ca"
+      },
+      {
+        "id": "outdoor_event_safety:2100225",
+        "label": "서울특별시 관악구 / 서울특별시 관악구 옥외행사의 안전관리에 대한 조례 / outdoor_event_safety / 20251230 / verified",
+        "hash": "8b53a960f1c24aeb"
+      },
+      {
+        "id": "outdoor_event_safety:2103899",
+        "label": "부산광역시 / 부산광역시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20251231 / verified",
+        "hash": "0b1fa683ffe1c65e"
+      },
+      {
+        "id": "outdoor_event_safety:2105585",
+        "label": "경상남도 통영시 / 통영시 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20260102 / verified",
+        "hash": "85b84bef884679e9"
+      },
+      {
+        "id": "outdoor_event_safety:2109739",
+        "label": "경기도 파주시 / 파주시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20260212 / verified",
+        "hash": "88947c4935985f8c"
+      },
+      {
+        "id": "outdoor_event_safety:2110911",
+        "label": "충청북도 청주시 / 청주시 옥외행사 안전관리에 관한 조례 / outdoor_event_safety / 20260220 / verified",
+        "hash": "4d124fbb36c08a9b"
+      },
+      {
+        "id": "outdoor_event_safety:2119275",
+        "label": "경상남도 함양군 / 함양군 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20260402 / verified",
+        "hash": "f7b57f471c3fdab5"
+      },
+      {
+        "id": "outdoor_event_safety:2124245",
+        "label": "부산광역시 해운대구 / 부산광역시 해운대구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20260420 / verified",
+        "hash": "8365afaca2cfdca3"
+      },
+      {
+        "id": "outdoor_event_safety:2124849",
+        "label": "부산광역시 동구 / 부산광역시 동구 옥외행사의 안전관리에 관한 조례 / outdoor_event_safety / 20260420 / verified",
+        "hash": "dd63ba751cad5d38"
+      },
+      {
+        "id": "regional_festival_safety:2002441",
+        "label": "강원특별자치도 화천군 / 화천군 안전관리위원회 구성ㆍ운영 및 지역축제 안전관리 조례 / regional_festival_safety / 20241230 / verified",
+        "hash": "39804451ba74098d"
+      },
+      {
+        "id": "road_occupancy:1004799",
+        "label": "서울특별시 양천구 / 서울특별시 양천구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20140627 / verified",
+        "hash": "c564c1d08cb20a8a"
+      },
+      {
+        "id": "road_occupancy:1018558",
+        "label": "광주광역시 북구 / 광주광역시 북구 도로점용공사장 교통소통 대책에 관한 조례 / road_occupancy / 20150429 / verified",
+        "hash": "bd28ea326cf7d71b"
+      },
+      {
+        "id": "road_occupancy:1024827",
+        "label": "강원특별자치도 춘천시 / 춘천시 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20141231 / verified",
+        "hash": "99a50ad46530f687"
+      },
+      {
+        "id": "road_occupancy:1047944",
+        "label": "경기도 군포시 / 군포시 도로점용 공사장 교통소통대책에 관한 조례 / road_occupancy / 20150323 / verified",
+        "hash": "f2af0d77b8c63923"
+      },
+      {
+        "id": "road_occupancy:1062397",
+        "label": "서울특별시 동작구 / 서울특별시동작구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20100520 / verified",
+        "hash": "48fb9b6f1b15677b"
+      },
+      {
+        "id": "road_occupancy:1065939",
+        "label": "서울특별시 관악구 / 서울특별시 관악구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20070517 / verified",
+        "hash": "55bed929a0c005fa"
+      },
+      {
+        "id": "road_occupancy:1079509",
+        "label": "서울특별시 동대문구 / 서울특별시 동대문구 도로점용 공사장 교통소통 대책에 관한 조례 시행규칙 / road_occupancy / 20071101 / verified",
+        "hash": "222ed41840351176"
+      },
+      {
+        "id": "road_occupancy:1095543",
+        "label": "서울특별시 강동구 / 서울특별시 강동구 도로점용허가 및 점용료 등 징수 조례 시행규칙 / road_occupancy / 20150527 / verified",
+        "hash": "bee7fc669fff3bb3"
+      },
+      {
+        "id": "road_occupancy:1163999",
+        "label": "서울특별시 송파구 / 서울특별시 송파구 도로점용료 징수 조례 시행규칙 / road_occupancy / 20150430 / verified",
+        "hash": "e795085dbe9d93bf"
+      },
+      {
+        "id": "road_occupancy:1165934",
+        "label": "부산광역시 영도구 / 부산광역시 영도구 도로점용료 등 징수 조례 / road_occupancy / 20150715 / verified",
+        "hash": "acad214c3c5387ea"
+      },
+      {
+        "id": "road_occupancy:1170869",
+        "label": "경기도 이천시 / 이천시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20150504 / verified",
+        "hash": "24dad6fc4245e27b"
+      },
+      {
+        "id": "road_occupancy:1181827",
+        "label": "전라남도 목포시 / 목포시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20150803 / verified",
+        "hash": "bdd7cdb64f82a8fa"
+      },
+      {
+        "id": "road_occupancy:1185583",
+        "label": "서울특별시 서대문구 / 서울특별시 서대문구 도로점용허가 및 점용료 등 징수조례 시행규칙 / road_occupancy / 20150902 / verified",
+        "hash": "c043fb3f725553f8"
+      },
+      {
+        "id": "road_occupancy:1188389",
+        "label": "경상북도 청도군 / 청도군 도로점용료 징수조례 / road_occupancy / 20161125 / verified",
+        "hash": "a0b3a770fe4ab635"
+      },
+      {
+        "id": "road_occupancy:1190391",
+        "label": "경상북도 울릉군 / 울릉군 도로점용료 징수 조례 / road_occupancy / 20150806 / verified",
+        "hash": "41f5b37dfd055686"
+      },
+      {
+        "id": "road_occupancy:1190917",
+        "label": "경상북도 경산시 / 경산시 도로점용료 징수 조례 / road_occupancy / 20151006 / verified",
+        "hash": "80a69a46004cd6e8"
+      },
+      {
+        "id": "road_occupancy:1191398",
+        "label": "강원특별자치도 정선군 / 정선군 도로점용료 징수 조례 / road_occupancy / 20151005 / verified",
+        "hash": "96d1dff9ca45f923"
+      },
+      {
+        "id": "road_occupancy:1192330",
+        "label": "경기도 남양주시 / 남양주시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20150930 / verified",
+        "hash": "aed9fc2c0c78b26c"
+      },
+      {
+        "id": "road_occupancy:1193663",
+        "label": "경상북도 상주시 / 상주시 도로점용료 등의 부과·징수조례 / road_occupancy / 20151002 / verified",
+        "hash": "c2c2c586feb3fa78"
+      },
+      {
+        "id": "road_occupancy:1194020",
+        "label": "경기도 연천군 / 연천군 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20151013 / verified",
+        "hash": "284b6c37c6a02055"
+      },
+      {
+        "id": "road_occupancy:1196658",
+        "label": "전라남도 완도군 / 완도군 도로점용료 및 과태료 부과징수 조례 / road_occupancy / 20171120 / verified",
+        "hash": "e996347ab9b8f847"
+      },
+      {
+        "id": "road_occupancy:1196762",
+        "label": "경상북도 칠곡군 / 칠곡군도로점용료징수조례 / road_occupancy / 20151030 / verified",
+        "hash": "aeafa4098fadf91b"
+      },
+      {
+        "id": "road_occupancy:1202535",
+        "label": "경상북도 의성군 / 의성군 도로점용료 징수 조례 / road_occupancy / 20151130 / verified",
+        "hash": "a2448be154306a3d"
+      },
+      {
+        "id": "road_occupancy:1206427",
+        "label": "경상북도 영천시 / 영천시 도로점용료 등의 부과·징수 조례 / road_occupancy / 20151221 / verified",
+        "hash": "3b66841384f4a201"
+      },
+      {
+        "id": "road_occupancy:1213624",
+        "label": "전라남도 해남군 / 해남군 도로점용료 및 도로무단점용자에 대한 과태료 부과징수조례 / road_occupancy / 20160107 / verified",
+        "hash": "a62b5fb1e4f7f6e0"
+      },
+      {
+        "id": "road_occupancy:1215891",
+        "label": "경기도 과천시 / 과천시 도로점용 공사장 교통소통 대책에 관한 조례 / road_occupancy / 20151113 / verified",
+        "hash": "2b4385dc0fdfb7b5"
+      },
+      {
+        "id": "road_occupancy:1218186",
+        "label": "경기도 시흥시 / 시흥시 도로점용 공사장 교통소통 대책에 관한 조례 / road_occupancy / 20160212 / verified",
+        "hash": "4cbf6ac35d4b715d"
+      },
+      {
+        "id": "road_occupancy:1220260",
+        "label": "경상북도 고령군 / 고령군 도로점용료 징수 조례 / road_occupancy / 20151224 / verified",
+        "hash": "19d756165ab24bf4"
+      },
+      {
+        "id": "road_occupancy:1222672",
+        "label": "강원특별자치도 태백시 / 태백시 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20160318 / verified",
+        "hash": "4c1b531a21044455"
+      },
+      {
+        "id": "road_occupancy:1225879",
+        "label": "강원특별자치도 동해시 / 동해시 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20160401 / verified",
+        "hash": "256cf44f7f182c31"
+      },
+      {
+        "id": "road_occupancy:1233555",
+        "label": "경기도 안양시 / 안양시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20160516 / verified",
+        "hash": "fb3fd3edc83233e9"
+      },
+      {
+        "id": "road_occupancy:1235763",
+        "label": "강원특별자치도 속초시 / 속초시 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20160603 / verified",
+        "hash": "675b87c2253ddaee"
+      },
+      {
+        "id": "road_occupancy:1235781",
+        "label": "강원특별자치도 원주시 / 원주시 도로점용료 징수 조례 / road_occupancy / 20160603 / verified",
+        "hash": "1e6a6d2c9ae13b8a"
+      },
+      {
+        "id": "road_occupancy:1244200",
+        "label": "서울특별시 강남구 / 서울특별시 강남구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20160708 / verified",
+        "hash": "ba5b6a470425d181"
+      },
+      {
+        "id": "road_occupancy:1247223",
+        "label": "전라남도 영광군 / 영광군 도로점용 공사장 교통소통 대책에 관한 조례 / road_occupancy / 20160812 / verified",
+        "hash": "b4d4d4fd8f4f6b3f"
+      },
+      {
+        "id": "road_occupancy:1260354",
+        "label": "충청북도 단양군 / 단양군 도로점용료 징수 조례 / road_occupancy / 20161021 / verified",
+        "hash": "badce17994fd6296"
+      },
+      {
+        "id": "road_occupancy:1261016",
+        "label": "충청남도 논산시 / 논산시 도로점용료 징수 조례 / road_occupancy / 20161031 / verified",
+        "hash": "773616c9e4b5ec70"
+      },
+      {
+        "id": "road_occupancy:1261669",
+        "label": "부산광역시 / 부산광역시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20161203 / verified",
+        "hash": "f064847038113aab"
+      },
+      {
+        "id": "road_occupancy:1261733",
+        "label": "서울특별시 강서구 / 서울특별시 강서구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20161102 / verified",
+        "hash": "766d59f728cad15d"
+      },
+      {
+        "id": "road_occupancy:1263908",
+        "label": "경기도 수원시 / 수원시 도로점용공사장 교통소통대책 조례 / road_occupancy / 20161114 / verified",
+        "hash": "6a355f521aab0993"
+      },
+      {
+        "id": "road_occupancy:1265326",
+        "label": "충청남도 금산군 / 금산군 도로점용허가 및 점용료 징수 조례 / road_occupancy / 20161123 / verified",
+        "hash": "f3474259c375a94a"
+      },
+      {
+        "id": "road_occupancy:1266419",
+        "label": "서울특별시 은평구 / 서울특별시 은평구 도로점용공사장 교통소통 대책에 관한 조례 / road_occupancy / 20161206 / verified",
+        "hash": "a9bb89ffec84fd3e"
+      },
+      {
+        "id": "road_occupancy:1267591",
+        "label": "전북특별자치도 군산시 / 군산시 도로점용 공사장 교통소통대책에 관한 조례 / road_occupancy / 20161215 / verified",
+        "hash": "15fe9a3176fb9c69"
+      },
+      {
+        "id": "road_occupancy:1271896",
+        "label": "강원특별자치도 평창군 / 평창군 도로점용료 징수 조례 / road_occupancy / 20161230 / verified",
+        "hash": "a0d509cad7202a87"
+      },
+      {
+        "id": "road_occupancy:1271905",
+        "label": "강원특별자치도 평창군 / 평창군 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20161230 / verified",
+        "hash": "37490fc9c33e1275"
+      },
+      {
+        "id": "road_occupancy:1278974",
+        "label": "부산광역시 사하구 / 부산광역시 사하구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20170228 / verified",
+        "hash": "2d5b2b027f3018f4"
+      },
+      {
+        "id": "road_occupancy:1280581",
+        "label": "경상남도 진주시 / 진주시 도로점용료 징수조례 시행규칙 / road_occupancy / 20170309 / verified",
+        "hash": "17e75e62f8ba747f"
+      },
+      {
+        "id": "road_occupancy:1281871",
+        "label": "전북특별자치도 고창군 / 고창군 도로점용료 징수 조례 / road_occupancy / 20161230 / verified",
+        "hash": "e6c9b0b26dfb30a0"
+      },
+      {
+        "id": "road_occupancy:1281879",
+        "label": "부산광역시 / 부산광역시 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20170322 / verified",
+        "hash": "0ad9b1c5064f9ee0"
+      },
+      {
+        "id": "road_occupancy:1284153",
+        "label": "충청남도 천안시 / 천안시 도로점용 공사장 교통소통대책 및 보행안전을 위한 조례 시행규칙 / road_occupancy / 20170410 / verified",
+        "hash": "7f0649c9b8b3edf3"
+      },
+      {
+        "id": "road_occupancy:1288382",
+        "label": "경상남도 사천시 / 사천시 도로점용료 징수조례 / road_occupancy / 20170530 / verified",
+        "hash": "7dbb997606be5ded"
+      },
+      {
+        "id": "road_occupancy:1290006",
+        "label": "경상남도 고성군 / 고성군 도로점용료 징수 조례 / road_occupancy / 20170601 / verified",
+        "hash": "eb5bfd568b918bc0"
+      },
+      {
+        "id": "road_occupancy:1292085",
+        "label": "울산광역시 / 울산광역시 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20170629 / verified",
+        "hash": "dba516c266fa2ebd"
+      },
+      {
+        "id": "road_occupancy:1292178",
+        "label": "서울특별시 종로구 / 서울특별시 종로구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20170630 / verified",
+        "hash": "18c530bfbdf9742a"
+      },
+      {
+        "id": "road_occupancy:1292660",
+        "label": "경상북도 영양군 / 영양군 도로점용료 등 징수 조례 / road_occupancy / 20170630 / verified",
+        "hash": "df3601fc941fab22"
+      },
+      {
+        "id": "road_occupancy:1293672",
+        "label": "충청남도 부여군 / 부여군 도로점용료 징수 조례 / road_occupancy / 20170706 / verified",
+        "hash": "76d30c4ba50db640"
+      },
+      {
+        "id": "road_occupancy:1294246",
+        "label": "충청북도 괴산군 / 괴산군 도로점용료 징수 조례 / road_occupancy / 20170707 / verified",
+        "hash": "79e3de41d9968da2"
+      },
+      {
+        "id": "road_occupancy:1301600",
+        "label": "경상북도 예천군 / 예천군 도로점용료 징수 조례 / road_occupancy / 20170918 / verified",
+        "hash": "56de3ccd10e9c142"
+      },
+      {
+        "id": "road_occupancy:1301613",
+        "label": "경상북도 / 경상북도 도로점용료 징수 조례 / road_occupancy / 20170918 / verified",
+        "hash": "e9ab8816baa9ad72"
+      },
+      {
+        "id": "road_occupancy:1301777",
+        "label": "전라남도 광양시 / 광양시 도로점용료 징수 조례 / road_occupancy / 20170920 / verified",
+        "hash": "baee8764d9272a7f"
+      },
+      {
+        "id": "road_occupancy:1303187",
+        "label": "경기도 양주시 / 양주시 도로점용료 등 징수 조례 / road_occupancy / 20170927 / verified",
+        "hash": "bf8ab1555c2e80e0"
+      },
+      {
+        "id": "road_occupancy:1303878",
+        "label": "경상북도 성주군 / 성주군 도로점용료 징수 조례 / road_occupancy / 20170928 / verified",
+        "hash": "714b285f07c22317"
+      },
+      {
+        "id": "road_occupancy:1304401",
+        "label": "전북특별자치도 김제시 / 김제시 도로점용료 징수 조례 / road_occupancy / 20170929 / verified",
+        "hash": "447ecba74b9ef9b9"
+      },
+      {
+        "id": "road_occupancy:1304468",
+        "label": "경상북도 안동시 / 안동시 도로점용료 징수 조례 / road_occupancy / 20170929 / verified",
+        "hash": "6924bec29e6fdb81"
+      },
+      {
+        "id": "road_occupancy:1304609",
+        "label": "경상남도 함안군 / 함안군 도로점용료 징수 조례 / road_occupancy / 20170929 / verified",
+        "hash": "e163b51a0ebf40bc"
+      },
+      {
+        "id": "road_occupancy:1305991",
+        "label": "전라남도 화순군 / 화순군 도로점용허가 및 점용료 등 징수조례 / road_occupancy / 20171010 / verified",
+        "hash": "9da6e0ac01c39b88"
+      },
+      {
+        "id": "road_occupancy:1307435",
+        "label": "강원특별자치도 강릉시 / 강릉시 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20171011 / verified",
+        "hash": "68507abb2543ce6c"
+      },
+      {
+        "id": "road_occupancy:1309383",
+        "label": "전라남도 순천시 / 순천시 도로점용료·변상금 및 과태료 부과징수 조례 / road_occupancy / 20171030 / verified",
+        "hash": "31fe1798375f4f8b"
+      },
+      {
+        "id": "road_occupancy:1310217",
+        "label": "경상남도 의령군 / 의령군 도로점용료 징수 조례 / road_occupancy / 20171108 / verified",
+        "hash": "e134e8ba11c703f1"
+      },
+      {
+        "id": "road_occupancy:1311076",
+        "label": "서울특별시 종로구 / 서울특별시 종로구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20171110 / verified",
+        "hash": "cd89b897d5e253ab"
+      },
+      {
+        "id": "road_occupancy:1311379",
+        "label": "경상남도 남해군 / 남해군 도로점용료 징수 조례 / road_occupancy / 20171110 / verified",
+        "hash": "6beb6d5674a0e0dd"
+      },
+      {
+        "id": "road_occupancy:1311798",
+        "label": "전북특별자치도 부안군 / 부안군 도로점용료 징수 조례 / road_occupancy / 20171113 / verified",
+        "hash": "2c634d686cbc75d7"
+      },
+      {
+        "id": "road_occupancy:1315064",
+        "label": "경상남도 거창군 / 거창군 도로점용료 징수 조례 / road_occupancy / 20171129 / verified",
+        "hash": "fe398d90efaa7451"
+      },
+      {
+        "id": "road_occupancy:1318137",
+        "label": "충청남도 공주시 / 공주시 도로점용료 징수조례 / road_occupancy / 20171208 / verified",
+        "hash": "a64639985e0a181c"
+      },
+      {
+        "id": "road_occupancy:1318378",
+        "label": "전라남도 장성군 / 장성군 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20210416 / verified",
+        "hash": "5c0c64e62a43396f"
+      },
+      {
+        "id": "road_occupancy:1320626",
+        "label": "충청북도 보은군 / 보은군 도로점용 허가 및 점용료 징수 조례 / road_occupancy / 20171226 / verified",
+        "hash": "a0d1285d897d15fa"
+      },
+      {
+        "id": "road_occupancy:1320687",
+        "label": "전북특별자치도 군산시 / 군산시 도로점용료 징수조례 / road_occupancy / 20171226 / verified",
+        "hash": "3f56017d92f1151e"
+      },
+      {
+        "id": "road_occupancy:1321934",
+        "label": "서울특별시 중구 / 서울특별시 중구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20171227 / verified",
+        "hash": "4ba544434b533c0f"
+      },
+      {
+        "id": "road_occupancy:1322280",
+        "label": "경상북도 김천시 / 김천시 도로점용료 징수 조례 / road_occupancy / 20171228 / verified",
+        "hash": "c1072609147750bb"
+      },
+      {
+        "id": "road_occupancy:1322313",
+        "label": "경상북도 영주시 / 영주시 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20171228 / verified",
+        "hash": "f8f89fd4dd6c2673"
+      },
+      {
+        "id": "road_occupancy:1325279",
+        "label": "전라남도 구례군 / 구례군 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20171229 / verified",
+        "hash": "e4fea5bb19486ea0"
+      },
+      {
+        "id": "road_occupancy:1325879",
+        "label": "경상북도 구미시 / 구미시 도로점용료 징수 조례 / road_occupancy / 20171229 / verified",
+        "hash": "1c197dfbbfafa964"
+      },
+      {
+        "id": "road_occupancy:1331615",
+        "label": "전라남도 나주시 / 나주시 도로점용료 징수 조례 / road_occupancy / 20171229 / verified",
+        "hash": "2b92066957bc4a06"
+      },
+      {
+        "id": "road_occupancy:1331980",
+        "label": "서울특별시 용산구 / 서울특별시 용산구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20180105 / verified",
+        "hash": "ce3d3f556e7aa14d"
+      },
+      {
+        "id": "road_occupancy:1332070",
+        "label": "강원특별자치도 양구군 / 양구군 도로점용료 징수조례 / road_occupancy / 20171227 / verified",
+        "hash": "9efc3f3fc6327109"
+      },
+      {
+        "id": "road_occupancy:1337253",
+        "label": "전라남도 장흥군 / 장흥군 도로점용료 및 과태료 부과 징수 조례 / road_occupancy / 20171229 / verified",
+        "hash": "0f68556ce23545e7"
+      },
+      {
+        "id": "road_occupancy:1342528",
+        "label": "충청북도 음성군 / 음성군 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20180326 / verified",
+        "hash": "ef11eecde058ffab"
+      },
+      {
+        "id": "road_occupancy:1342808",
+        "label": "부산광역시 동래구 / 부산광역시동래구 도로점용료 등 징수 조례 / road_occupancy / 20180330 / verified",
+        "hash": "48591bb9be343a53"
+      },
+      {
+        "id": "road_occupancy:1343353",
+        "label": "서울특별시 서대문구 / 서울특별시 서대문구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20180404 / verified",
+        "hash": "95b867d20c95f876"
+      },
+      {
+        "id": "road_occupancy:1350209",
+        "label": "전라남도 장흥군 / 장흥군 도로점용료 및 과태료 부과 징수 조례 시행규칙 / road_occupancy / 20180625 / verified",
+        "hash": "2ead23536819ccc7"
+      },
+      {
+        "id": "road_occupancy:1351332",
+        "label": "경상남도 거제시 / 거제시 도로점용료 부과·징수 조례 / road_occupancy / 20180709 / verified",
+        "hash": "3b45316df6e8af1d"
+      },
+      {
+        "id": "road_occupancy:1352150",
+        "label": "서울특별시 동작구 / 서울특별시 동작구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20180719 / verified",
+        "hash": "fde199cf9abfd537"
+      },
+      {
+        "id": "road_occupancy:1352774",
+        "label": "광주광역시 동구 / 광주광역시 동구 도로점용 허가 및 점용료 등 징수조례 / road_occupancy / 20180727 / verified",
+        "hash": "b03dcf507f082959"
+      },
+      {
+        "id": "road_occupancy:1358078",
+        "label": "전북특별자치도 익산시 / 익산시 도로점용료 부과 및 징수에 관한 조례 / road_occupancy / 20180914 / verified",
+        "hash": "d2b05ca3cac9d00c"
+      },
+      {
+        "id": "road_occupancy:1359989",
+        "label": "경기도 용인시 / 용인시 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20181101 / verified",
+        "hash": "d74244951d4dabe7"
+      },
+      {
+        "id": "road_occupancy:1361226",
+        "label": "서울특별시 도봉구 / 서울특별시 도봉구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20181004 / verified",
+        "hash": "b82ab48aa1610818"
+      },
+      {
+        "id": "road_occupancy:1361228",
+        "label": "서울특별시 도봉구 / 서울특별시 도봉구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20181004 / verified",
+        "hash": "4998511a11c3d8a9"
+      },
+      {
+        "id": "road_occupancy:1363922",
+        "label": "경상남도 창녕군 / 창녕군 도로점용료 징수 조례 시행규칙 / road_occupancy / 20181029 / verified",
+        "hash": "eb1802ea1c7d1889"
+      },
+      {
+        "id": "road_occupancy:1365982",
+        "label": "부산광역시 동구 / 부산광역시 동구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20181109 / verified",
+        "hash": "35ae3d32f17ebf65"
+      },
+      {
+        "id": "road_occupancy:1377949",
+        "label": "충청북도 / 충청북도 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20181228 / verified",
+        "hash": "b7908e58e013dd01"
+      },
+      {
+        "id": "road_occupancy:1378925",
+        "label": "충청남도 홍성군 / 홍성군 도로점용허가 및 도로점용료 부과·징수 조례 / road_occupancy / 20181231 / verified",
+        "hash": "5bc2ef92109e9891"
+      },
+      {
+        "id": "road_occupancy:1379551",
+        "label": "대구광역시 서구 / 대구광역시 서구 도로점용료 등 징수조례 / road_occupancy / 20181231 / verified",
+        "hash": "d0b292702f07d1a4"
+      },
+      {
+        "id": "road_occupancy:1384953",
+        "label": "전라남도 순천시 / 순천시 도로점용 공사장 교통소통대책에 관한 조례 / road_occupancy / 20190215 / verified",
+        "hash": "9b0c093e1c21de59"
+      },
+      {
+        "id": "road_occupancy:1386612",
+        "label": "경기도 하남시 / 하남시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20190305 / verified",
+        "hash": "43a78eded01e0637"
+      },
+      {
+        "id": "road_occupancy:1389578",
+        "label": "경상북도 영덕군 / 영덕군 도로점용료 징수 조례 / road_occupancy / 20190329 / verified",
+        "hash": "de75a76c0205293c"
+      },
+      {
+        "id": "road_occupancy:1392980",
+        "label": "경상남도 / 경상남도 도로점용료 징수 조례 / road_occupancy / 20190502 / verified",
+        "hash": "961698f734fa1d05"
+      },
+      {
+        "id": "road_occupancy:1396318",
+        "label": "울산광역시 중구 / 울산광역시 중구 도로점용허가 및 점용료 징수 조례 / road_occupancy / 20190603 / verified",
+        "hash": "793de48795b7cdd9"
+      },
+      {
+        "id": "road_occupancy:1396601",
+        "label": "인천광역시 / 인천광역시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20190603 / verified",
+        "hash": "1641c2538f3941ea"
+      },
+      {
+        "id": "road_occupancy:1397907",
+        "label": "부산광역시 남구 / 부산광역시 남구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20150925 / verified",
+        "hash": "e584c4506da42856"
+      },
+      {
+        "id": "road_occupancy:1399689",
+        "label": "전북특별자치도 익산시 / 익산시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20190628 / verified",
+        "hash": "9490a32b424e75b8"
+      },
+      {
+        "id": "road_occupancy:1400118",
+        "label": "대전광역시 동구 / 대전광역시 동구 도로점용 허가 및 점용료 등 징수조례 시행규칙 / road_occupancy / 20190701 / verified",
+        "hash": "1340e3ae9ae12e6a"
+      },
+      {
+        "id": "road_occupancy:1400802",
+        "label": "전라남도 화순군 / 화순군 도로점용허가 및 점용료 등 징수조례 시행규칙 / road_occupancy / 20190702 / verified",
+        "hash": "a8ad6f6c65a8aff7"
+      },
+      {
+        "id": "road_occupancy:1403596",
+        "label": "경기도 광주시 / 광주시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20190712 / verified",
+        "hash": "ce1e2e5ec4d806ce"
+      },
+      {
+        "id": "road_occupancy:1406869",
+        "label": "서울특별시 구로구 / 서울특별시 구로구 도로점용 허가 및 점용료 등 징수 조례 시행규칙 / road_occupancy / 20190812 / verified",
+        "hash": "0243c88be241d767"
+      },
+      {
+        "id": "road_occupancy:1407196",
+        "label": "전라남도 함평군 / 함평군 도로점용료 징수 조례 / road_occupancy / 20190814 / verified",
+        "hash": "1c2a0001a09f5624"
+      },
+      {
+        "id": "road_occupancy:1407331",
+        "label": "경기도 부천시 / 부천시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20190814 / verified",
+        "hash": "3ee8fde36b482155"
+      },
+      {
+        "id": "road_occupancy:1409084",
+        "label": "서울특별시 영등포구 / 서울특별시 영등포구 도로점용허가 및 점용료 등 징수 조례 시행규칙 / road_occupancy / 20190919 / verified",
+        "hash": "e6e75af31b8bdc59"
+      },
+      {
+        "id": "road_occupancy:1412352",
+        "label": "대구광역시 달성군 / 대구광역시 달성군 도로점용료 징수 조례 / road_occupancy / 20191010 / verified",
+        "hash": "c9691acbbbedcbf1"
+      },
+      {
+        "id": "road_occupancy:1413093",
+        "label": "충청북도 제천시 / 제천시 도로점용료 징수 조례 / road_occupancy / 20191011 / verified",
+        "hash": "292acbbd4a36b6d3"
+      },
+      {
+        "id": "road_occupancy:1413230",
+        "label": "서울특별시 광진구 / 서울특별시 광진구 도로점용허가 및 점용료등 징수조례 시행 규칙 / road_occupancy / 20191001 / verified",
+        "hash": "6c406c7abdf811b2"
+      },
+      {
+        "id": "road_occupancy:1413998",
+        "label": "충청남도 청양군 / 청양군 도로점용료 징수 조례 / road_occupancy / 20191017 / verified",
+        "hash": "b533dc13ea45602e"
+      },
+      {
+        "id": "road_occupancy:1414729",
+        "label": "울산광역시 북구 / 울산광역시 북구 도로점용료 징수 조례 / road_occupancy / 20191024 / verified",
+        "hash": "9135daa491c3bbbd"
+      },
+      {
+        "id": "road_occupancy:1415425",
+        "label": "서울특별시 양천구 / 서울특별시 양천구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20191031 / verified",
+        "hash": "9a07f980de78a4f0"
+      },
+      {
+        "id": "road_occupancy:1417749",
+        "label": "충청남도 서산시 / 서산시 도로점용료 징수 조례 / road_occupancy / 20191108 / verified",
+        "hash": "018474a5a2dbc45b"
+      },
+      {
+        "id": "road_occupancy:1418845",
+        "label": "경상남도 하동군 / 하동군 도로점용료 징수 조례 / road_occupancy / 20191111 / verified",
+        "hash": "cecbbbdd4503e703"
+      },
+      {
+        "id": "road_occupancy:1419501",
+        "label": "울산광역시 동구 / 울산광역시 동구 도로점용료 징수조례 / road_occupancy / 20191031 / verified",
+        "hash": "4d3bd14eefb532d8"
+      },
+      {
+        "id": "road_occupancy:1421603",
+        "label": "전라남도 무안군 / 무안군 도로점용료  및 과태료 부과징수에 관한 조례 / road_occupancy / 20191118 / verified",
+        "hash": "075a3148b50f025c"
+      },
+      {
+        "id": "road_occupancy:1423081",
+        "label": "충청남도 예산군 / 예산군 도로점용료 징수 조례 / road_occupancy / 20191115 / verified",
+        "hash": "3baa4151639ba5f0"
+      },
+      {
+        "id": "road_occupancy:1423781",
+        "label": "서울특별시 종로구 / 서울특별시 종로구 도로점용허가 및 점용료 등 징수 조례 시행규칙 / road_occupancy / 20191129 / verified",
+        "hash": "b48209b631ceb3f2"
+      },
+      {
+        "id": "road_occupancy:1429707",
+        "label": "충청북도 진천군 / 진천군 도로점용료 징수 조례 / road_occupancy / 20191206 / verified",
+        "hash": "b328e47fe0ef67c1"
+      },
+      {
+        "id": "road_occupancy:1429819",
+        "label": "전라남도 곡성군 / 곡성군 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20191206 / verified",
+        "hash": "0be1621592805dec"
+      },
+      {
+        "id": "road_occupancy:1435833",
+        "label": "경상남도 진주시 / 진주시 도로점용료 징수조례 / road_occupancy / 20191223 / verified",
+        "hash": "18b90f50b4f0f2da"
+      },
+      {
+        "id": "road_occupancy:1442417",
+        "label": "전라남도 영광군 / 영광군 도로점용료 부과ㆍ징수 조례 / road_occupancy / 20191231 / verified",
+        "hash": "7bbadb52857b073c"
+      },
+      {
+        "id": "road_occupancy:1481975",
+        "label": "대구광역시 수성구 / 대구광역시 수성구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20200330 / verified",
+        "hash": "6d72713f059ac7c6"
+      },
+      {
+        "id": "road_occupancy:1507517",
+        "label": "서울특별시 구로구 / 서울특별시 구로구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20200625 / verified",
+        "hash": "08b827b6c4370755"
+      },
+      {
+        "id": "road_occupancy:1507649",
+        "label": "경기도 광명시 / 광명시 도로점용 공사장 교통소통대책에 관한 조례 / road_occupancy / 20200619 / verified",
+        "hash": "bc5844e2177397fa"
+      },
+      {
+        "id": "road_occupancy:1511233",
+        "label": "전북특별자치도 임실군 / 임실군 도로점용료 등 부과·징수에 관한 조례 / road_occupancy / 20200701 / verified",
+        "hash": "d38ee865dfc664ae"
+      },
+      {
+        "id": "road_occupancy:1512207",
+        "label": "인천광역시 남동구 / 남동구 도로점용공사장의 교통소통대책에 관한 조례 / road_occupancy / 20200703 / verified",
+        "hash": "d57a4e565c972657"
+      },
+      {
+        "id": "road_occupancy:1518417",
+        "label": "강원특별자치도 양양군 / 양양군 도로점용료 징수 조례 / road_occupancy / 20200715 / verified",
+        "hash": "215645c1334bf87c"
+      },
+      {
+        "id": "road_occupancy:1518545",
+        "label": "경상북도 경주시 / 경주시 도로점용료 징수 조례 / road_occupancy / 20200710 / verified",
+        "hash": "9e933aa24dbf4005"
+      },
+      {
+        "id": "road_occupancy:1522507",
+        "label": "전라남도 고흥군 / 고흥군 도로점용허가 및 점용료 징수 조례 / road_occupancy / 20200803 / verified",
+        "hash": "72efc402b8b6f35d"
+      },
+      {
+        "id": "road_occupancy:1522973",
+        "label": "충청북도 / 충청북도 도로점용료 징수 조례 / road_occupancy / 20200807 / verified",
+        "hash": "d7de04cffc63ac7b"
+      },
+      {
+        "id": "road_occupancy:1528011",
+        "label": "서울특별시 양천구 / 서울특별시 양천구 도로점용허가 및 점용료 등 징수 조례 시행규칙 / road_occupancy / 20200917 / verified",
+        "hash": "d0038da76bbffa8a"
+      },
+      {
+        "id": "road_occupancy:1528223",
+        "label": "경상남도 양산시 / 양산시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20200917 / verified",
+        "hash": "b2c3a1444c9e2e52"
+      },
+      {
+        "id": "road_occupancy:1531427",
+        "label": "인천광역시 계양구 / 인천광역시 계양구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20200929 / verified",
+        "hash": "26cdbaaac98c4153"
+      },
+      {
+        "id": "road_occupancy:1533873",
+        "label": "대구광역시 / 대구광역시 도로점용 허가 및 점용료 징수 조례 / road_occupancy / 20201005 / verified",
+        "hash": "d0e5a06117b7776a"
+      },
+      {
+        "id": "road_occupancy:1538295",
+        "label": "부산광역시 강서구 / 부산광역시 강서구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20201012 / verified",
+        "hash": "cc7531cc01ab209c"
+      },
+      {
+        "id": "road_occupancy:1538695",
+        "label": "전북특별자치도 순창군 / 순창군 도로점용료 징수 조례 / road_occupancy / 20201014 / verified",
+        "hash": "a9e481f193578250"
+      },
+      {
+        "id": "road_occupancy:1541389",
+        "label": "경기도 파주시 / 파주시 도로점용료 징수 조례 / road_occupancy / 20201102 / verified",
+        "hash": "2293679f173af1e6"
+      },
+      {
+        "id": "road_occupancy:1544509",
+        "label": "충청남도 계룡시 / 계룡시 도로점용공사장 교통소통 대책 조례 / road_occupancy / 20201110 / verified",
+        "hash": "cbf47a4aef3db6be"
+      },
+      {
+        "id": "road_occupancy:1545677",
+        "label": "전라남도 담양군 / 담양군 도로점용료 및 과태료 부과징수 조례 / road_occupancy / 20201113 / verified",
+        "hash": "34b5b3392fa37e3b"
+      },
+      {
+        "id": "road_occupancy:1555187",
+        "label": "충청남도 서천군 / 서천군 도로점용료 징수 조례 / road_occupancy / 20201221 / verified",
+        "hash": "d12a3567585c6cac"
+      },
+      {
+        "id": "road_occupancy:1556523",
+        "label": "경상남도 합천군 / 합천군 도로점용료 징수 조례 / road_occupancy / 20201223 / verified",
+        "hash": "0d41b70a1abd0aa6"
+      },
+      {
+        "id": "road_occupancy:1562001",
+        "label": "서울특별시 용산구 / 서울특별시 용산구 도로점용허가 및 점용료 등 징수조례 시행규칙 / road_occupancy / 20201231 / verified",
+        "hash": "a482c60c878c35da"
+      },
+      {
+        "id": "road_occupancy:1574643",
+        "label": "광주광역시 광산구 / 광주광역시 광산구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20210215 / verified",
+        "hash": "598aa0ca1fca2804"
+      },
+      {
+        "id": "road_occupancy:1578401",
+        "label": "충청남도 논산시 / 논산시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20210310 / verified",
+        "hash": "59f3889efa798b90"
+      },
+      {
+        "id": "road_occupancy:1582047",
+        "label": "충청남도 서산시 / 서산시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20210325 / verified",
+        "hash": "06970404708d4383"
+      },
+      {
+        "id": "road_occupancy:1595775",
+        "label": "경상남도 창원시 / 창원시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20210514 / verified",
+        "hash": "5965f7a6f1f965d1"
+      },
+      {
+        "id": "road_occupancy:1599093",
+        "label": "부산광역시 남구 / 부산광역시 남구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20210512 / verified",
+        "hash": "5abff6bf5fb148e2"
+      },
+      {
+        "id": "road_occupancy:1605119",
+        "label": "대구광역시 북구 / 대구광역시 북구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20210621 / verified",
+        "hash": "a23fa1026dcdc756"
+      },
+      {
+        "id": "road_occupancy:1606991",
+        "label": "대구광역시 북구 / 대구광역시 북구 도로점용 허가 및 점용료 등 징수 조례 시행규칙 / road_occupancy / 20210630 / verified",
+        "hash": "2c25c4ed15abe036"
+      },
+      {
+        "id": "road_occupancy:1607957",
+        "label": "대전광역시 / 대전광역시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20210630 / verified",
+        "hash": "d306bf36c96ecf7b"
+      },
+      {
+        "id": "road_occupancy:1624427",
+        "label": "충청남도 천안시 / 천안시 도로점용허가 및 도로점용료 등 부과ㆍ징수 조례 / road_occupancy / 20210913 / verified",
+        "hash": "5c02b64e704e92fe"
+      },
+      {
+        "id": "road_occupancy:1625435",
+        "label": "경기도 연천군 / 연천군 도로점용료 징수조례 / road_occupancy / 20210916 / verified",
+        "hash": "2f7322f51b745ac1"
+      },
+      {
+        "id": "road_occupancy:1626647",
+        "label": "경기도 오산시 / 오산시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20210924 / verified",
+        "hash": "4bf0559e548a270b"
+      },
+      {
+        "id": "road_occupancy:1627011",
+        "label": "세종특별자치시 / 세종특별자치시 도로점용료 징수 조례 / road_occupancy / 20210924 / verified",
+        "hash": "16fc6ba10feee424"
+      },
+      {
+        "id": "road_occupancy:1633187",
+        "label": "충청북도 충주시 / 충주시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20211001 / verified",
+        "hash": "c9430be1dd773659"
+      },
+      {
+        "id": "road_occupancy:1635659",
+        "label": "서울특별시 광진구 / 서울특별시 광진구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20211029 / verified",
+        "hash": "38da64d16c5b9d5a"
+      },
+      {
+        "id": "road_occupancy:1635679",
+        "label": "서울특별시 광진구 / 서울특별시 광진구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20211029 / verified",
+        "hash": "f13260d09186bdff"
+      },
+      {
+        "id": "road_occupancy:1635863",
+        "label": "대구광역시 남구 / 대구광역시 남구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20211029 / verified",
+        "hash": "e61d0a13fde17f8a"
+      },
+      {
+        "id": "road_occupancy:1640295",
+        "label": "강원특별자치도 삼척시 / 삼척시 도로점용료 및 과태료 부과·징수조례 / road_occupancy / 20211112 / verified",
+        "hash": "15e614f2f45ecc48"
+      },
+      {
+        "id": "road_occupancy:1648803",
+        "label": "강원특별자치도 고성군 / 고성군 도로점용료 징수조례 / road_occupancy / 20211217 / verified",
+        "hash": "9760fe24b6182d9d"
+      },
+      {
+        "id": "road_occupancy:1651465",
+        "label": "경기도 과천시 / 과천시 도로점용료 징수 조례 / road_occupancy / 20220113 / verified",
+        "hash": "3b4d913424146e15"
+      },
+      {
+        "id": "road_occupancy:1652917",
+        "label": "경상북도 문경시 / 문경시 도로점용료 징수 조례 / road_occupancy / 20211222 / verified",
+        "hash": "c4d136f80d4d2a01"
+      },
+      {
+        "id": "road_occupancy:1655457",
+        "label": "경기도 포천시 / 포천시 도로점용료 징수 조례 / road_occupancy / 20220113 / verified",
+        "hash": "85b70905e34f7778"
+      },
+      {
+        "id": "road_occupancy:1657229",
+        "label": "경상북도 울진군 / 울진군 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20211227 / verified",
+        "hash": "c0e5dac07ade60c2"
+      },
+      {
+        "id": "road_occupancy:1663359",
+        "label": "서울특별시 성북구 / 서울특별시 성북구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20211231 / verified",
+        "hash": "1352c512f37e8dd4"
+      },
+      {
+        "id": "road_occupancy:1669151",
+        "label": "강원특별자치도 인제군 / 인제군 도로점용료 징수 조례 / road_occupancy / 20220113 / verified",
+        "hash": "fcb2dcb28f9788c9"
+      },
+      {
+        "id": "road_occupancy:1670445",
+        "label": "전북특별자치도 완주군 / 완주군 도로점용공사장 교통소통대책 조례 / road_occupancy / 20211230 / verified",
+        "hash": "995e6075b04ea5b2"
+      },
+      {
+        "id": "road_occupancy:1687181",
+        "label": "서울특별시 서대문구 / 서울특별시 서대문구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20220302 / verified",
+        "hash": "f325349d3099c00a"
+      },
+      {
+        "id": "road_occupancy:1688497",
+        "label": "경상남도 거창군 / 거창군 도로점용료 징수조례 시행규칙 / road_occupancy / 20220203 / verified",
+        "hash": "b177539b690ba8df"
+      },
+      {
+        "id": "road_occupancy:1691179",
+        "label": "서울특별시 서대문구 / 서울특별시 서대문구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20220316 / verified",
+        "hash": "c2744d3caaa914f3"
+      },
+      {
+        "id": "road_occupancy:1693131",
+        "label": "충청남도 태안군 / 태안군 도로점용허가 및 점용료 등 부과징수 조례 / road_occupancy / 20220331 / verified",
+        "hash": "f602b34974f3dab7"
+      },
+      {
+        "id": "road_occupancy:1695403",
+        "label": "전라남도 영암군 / 영암군 도로점용료 및 과태료 부과·징수 조례 / road_occupancy / 20220407 / verified",
+        "hash": "95eb40d1c61d02dc"
+      },
+      {
+        "id": "road_occupancy:1698081",
+        "label": "경상남도 창녕군 / 창녕군 도로점용료 징수 조례 / road_occupancy / 20220414 / verified",
+        "hash": "b9c2a7bcd553f5bd"
+      },
+      {
+        "id": "road_occupancy:1701325",
+        "label": "세종특별자치시 / 세종특별자치시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20220420 / verified",
+        "hash": "aececb3396035f30"
+      },
+      {
+        "id": "road_occupancy:1701953",
+        "label": "인천광역시 / 인천광역시 도로점용허가 및 점용료 징수 조례 / road_occupancy / 20220421 / verified",
+        "hash": "a205751e61a7193c"
+      },
+      {
+        "id": "road_occupancy:1707219",
+        "label": "전북특별자치도 정읍시 / 정읍시 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20220506 / verified",
+        "hash": "9c4fd28b9f23917a"
+      },
+      {
+        "id": "road_occupancy:1716133",
+        "label": "충청남도 서천군 / 서천군 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20220708 / verified",
+        "hash": "8e5d21dee19774cf"
+      },
+      {
+        "id": "road_occupancy:1720291",
+        "label": "경상남도 김해시 / 김해시 도로점용허가 및 점용료 징수 조례 / road_occupancy / 20220805 / verified",
+        "hash": "4a5b4b1c918629fd"
+      },
+      {
+        "id": "road_occupancy:1725377",
+        "label": "전북특별자치도 완주군 / 완주군 도로점용료 징수 조례 / road_occupancy / 20210524 / verified",
+        "hash": "a6f170675dc416fb"
+      },
+      {
+        "id": "road_occupancy:1726111",
+        "label": "경기도 하남시 / 하남시 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20220902 / verified",
+        "hash": "a109a5bc98e3a59d"
+      },
+      {
+        "id": "road_occupancy:1731189",
+        "label": "경기도 이천시 / 이천시 도로점용료 등의 부과·징수에 관한 조례 / road_occupancy / 20220930 / verified",
+        "hash": "76714fe9327faffa"
+      },
+      {
+        "id": "road_occupancy:1737345",
+        "label": "경기도 오산시 / 오산시 도로점용료 등 징수조례 / road_occupancy / 20220915 / verified",
+        "hash": "9d5c0e3b2fdc1808"
+      },
+      {
+        "id": "road_occupancy:1752727",
+        "label": "울산광역시 / 울산광역시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20221201 / verified",
+        "hash": "c2fd6749e35f996a"
+      },
+      {
+        "id": "road_occupancy:1753797",
+        "label": "부산광역시 중구 / 부산광역시 중구 도로점용료 등 징수 조례 / road_occupancy / 20221207 / verified",
+        "hash": "d7da29c4d25779f1"
+      },
+      {
+        "id": "road_occupancy:1760283",
+        "label": "강원특별자치도 화천군 / 화천군 도로점용료 징수조례 / road_occupancy / 20221221 / verified",
+        "hash": "be9e98792b66fb55"
+      },
+      {
+        "id": "road_occupancy:1784415",
+        "label": "광주광역시 북구 / 광주광역시 북구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20230221 / verified",
+        "hash": "8bf9cee65e09f089"
+      },
+      {
+        "id": "road_occupancy:1784641",
+        "label": "경기도 김포시 / 김포시 도로점용허가 및 도로점용료 등 징수 조례 / road_occupancy / 20230222 / verified",
+        "hash": "bb7832b57bc5be3f"
+      },
+      {
+        "id": "road_occupancy:1797571",
+        "label": "경기도 화성시 / 화성시 도로점용료 부과ㆍ징수조례 / road_occupancy / 20260201 / verified",
+        "hash": "1f1cc44839a4b90a"
+      },
+      {
+        "id": "road_occupancy:1802595",
+        "label": "경기도 화성시 / 화성시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20230414 / verified",
+        "hash": "51f758a2fb109c3b"
+      },
+      {
+        "id": "road_occupancy:1805145",
+        "label": "경기도 부천시 / 부천시 도로점용허가 및 도로점용료 등 징수 조례 시행규칙 / road_occupancy / 20230501 / verified",
+        "hash": "dbd6f33a52b5e652"
+      },
+      {
+        "id": "road_occupancy:1808687",
+        "label": "전라남도 나주시 / 나주시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20230512 / verified",
+        "hash": "9c72e571edeeb672"
+      },
+      {
+        "id": "road_occupancy:1810805",
+        "label": "충청북도 충주시 / 충주시 도로점용허가 및 점용료 징수 조례 / road_occupancy / 20230512 / verified",
+        "hash": "0c9a9f862a3ed42e"
+      },
+      {
+        "id": "road_occupancy:1811339",
+        "label": "인천광역시 중구 / 인천광역시 중구 도로점용허가 및 도로점용료 등 징수 조례 / road_occupancy / 20230522 / verified",
+        "hash": "4414ce359aa14f36"
+      },
+      {
+        "id": "road_occupancy:1826523",
+        "label": "부산광역시 동래구 / 부산광역시동래구 도로점용공사장 교통소통 대책에 관한 조례 / road_occupancy / 20230630 / verified",
+        "hash": "8d8d998655ddd49b"
+      },
+      {
+        "id": "road_occupancy:1828195",
+        "label": "대구광역시 군위군 / 대구광역시 군위군 도로점용료 징수 조례 / road_occupancy / 20230630 / verified",
+        "hash": "3f779c54818749be"
+      },
+      {
+        "id": "road_occupancy:1829267",
+        "label": "경기도 광주시 / 광주시 도로점용료 등 징수에 관한 조례 / road_occupancy / 20230701 / verified",
+        "hash": "e67a3c1a5792b9fe"
+      },
+      {
+        "id": "road_occupancy:1837911",
+        "label": "전라남도 신안군 / 신안군 도로점용료 징수 조례 / road_occupancy / 20230710 / verified",
+        "hash": "0161707282c38392"
+      },
+      {
+        "id": "road_occupancy:1842619",
+        "label": "충청남도 천안시 / 천안시 도로점용 공사장 교통소통대책 및 보행안전을 위한 조례 / road_occupancy / 20230801 / verified",
+        "hash": "4d13e3b1a20a7dfc"
+      },
+      {
+        "id": "road_occupancy:1844071",
+        "label": "광주광역시 남구 / 광주광역시 남구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20230804 / verified",
+        "hash": "58816b4606d60ad0"
+      },
+      {
+        "id": "road_occupancy:1844577",
+        "label": "대전광역시 동구 / 대전광역시 동구 도로점용 허가 및 점용료 등 징수조례 / road_occupancy / 20230804 / verified",
+        "hash": "94d31d6881593b55"
+      },
+      {
+        "id": "road_occupancy:1846833",
+        "label": "충청남도 / 충청남도 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20230810 / verified",
+        "hash": "362fefb916b3c6c1"
+      },
+      {
+        "id": "road_occupancy:1860109",
+        "label": "서울특별시 중랑구 / 서울특별시 중랑구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20231005 / verified",
+        "hash": "e2b4418ce67ccd54"
+      },
+      {
+        "id": "road_occupancy:1860745",
+        "label": "전라남도 강진군 / 강진군 도로점용료 징수 조례 / road_occupancy / 20231005 / verified",
+        "hash": "4d23b41461389671"
+      },
+      {
+        "id": "road_occupancy:1862755",
+        "label": "강원특별자치도 / 강원특별자치도 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20230927 / verified",
+        "hash": "47624d02637cd8c7"
+      },
+      {
+        "id": "road_occupancy:1864809",
+        "label": "전북특별자치도 진안군 / 진안군 도로점용료 징수 조례 / road_occupancy / 20231011 / verified",
+        "hash": "09b7c00f20fb5145"
+      },
+      {
+        "id": "road_occupancy:1868809",
+        "label": "서울특별시 강북구 / 서울특별시 강북구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20240101 / verified",
+        "hash": "628d396a8d8fc996"
+      },
+      {
+        "id": "road_occupancy:1871059",
+        "label": "서울특별시 동대문구 / 서울특별시 동대문구 도로점용 공사장 교통소통 대책에 관한 조례 / road_occupancy / 20231109 / verified",
+        "hash": "22a722f66faba7e5"
+      },
+      {
+        "id": "road_occupancy:1873099",
+        "label": "광주광역시 / 광주광역시 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20231110 / verified",
+        "hash": "04e2ef334f3a7b2b"
+      },
+      {
+        "id": "road_occupancy:1877101",
+        "label": "충청북도 음성군 / 음성군 도로점용허가 및 도로점용료 등 징수 조례 / road_occupancy / 20231005 / verified",
+        "hash": "7a433585e5c5965e"
+      },
+      {
+        "id": "road_occupancy:1878737",
+        "label": "부산광역시 사상구 / 부산광역시 사상구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20231207 / verified",
+        "hash": "af54ac19d2aba6fe"
+      },
+      {
+        "id": "road_occupancy:1879179",
+        "label": "경기도 고양시 / 고양시 도로점용허가 및 점용료 징수에 관한 조례 / road_occupancy / 20231208 / verified",
+        "hash": "ba679e04f9105469"
+      },
+      {
+        "id": "road_occupancy:1885123",
+        "label": "대구광역시 달서구 / 대구광역시달서구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20231221 / verified",
+        "hash": "0f349b5d08f7b236"
+      },
+      {
+        "id": "road_occupancy:1886167",
+        "label": "서울특별시 종로구 / 서울특별시 종로구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20231222 / verified",
+        "hash": "eb87381f2c8698d9"
+      },
+      {
+        "id": "road_occupancy:1887649",
+        "label": "광주광역시 서구 / 광주광역시 서구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20231223 / verified",
+        "hash": "fe7ace38c6a5e377"
+      },
+      {
+        "id": "road_occupancy:1888939",
+        "label": "경상남도 밀양시 / 밀양시 도로점용료 징수 조례 / road_occupancy / 20231226 / verified",
+        "hash": "79020065cf31c2e7"
+      },
+      {
+        "id": "road_occupancy:1890359",
+        "label": "서울특별시 노원구 / 서울특별시 노원구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20231228 / verified",
+        "hash": "cc2317c9d49e4061"
+      },
+      {
+        "id": "road_occupancy:1890401",
+        "label": "서울특별시 마포구 / 서울특별시마포구도로점용공사장교통소통대책에관한조례 / road_occupancy / 20231228 / verified",
+        "hash": "7b8b0f1b41a0da44"
+      },
+      {
+        "id": "road_occupancy:1890667",
+        "label": "서울특별시 구로구 / 서울특별시 구로구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20231228 / verified",
+        "hash": "1072484458b5950c"
+      },
+      {
+        "id": "road_occupancy:1890703",
+        "label": "서울특별시 구로구 / 서울특별시 구로구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20231228 / verified",
+        "hash": "af8e412f935cc681"
+      },
+      {
+        "id": "road_occupancy:1893593",
+        "label": "서울특별시 금천구 / 서울특별시 금천구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20231229 / verified",
+        "hash": "ab62001ede6da265"
+      },
+      {
+        "id": "road_occupancy:1897173",
+        "label": "강원특별자치도 / 강원특별자치도 도로점용료 징수 조례 / road_occupancy / 20231229 / verified",
+        "hash": "3aee676dc5b9143e"
+      },
+      {
+        "id": "road_occupancy:1899689",
+        "label": "경상남도 / 경상남도 도로점용료 징수 조례 시행규칙 / road_occupancy / 20240102 / verified",
+        "hash": "c0b281d5f4c39f79"
+      },
+      {
+        "id": "road_occupancy:1902153",
+        "label": "전북특별자치도 / 전북특별자치도 도로점용료 징수 조례 / road_occupancy / 20240118 / verified",
+        "hash": "8c2ae5e17283ab88"
+      },
+      {
+        "id": "road_occupancy:1904457",
+        "label": "서울특별시 노원구 / 서울특별시노원구도로점용공사장교통소통대책에관한조례시행규칙 / road_occupancy / 20240125 / verified",
+        "hash": "2eb04f969ed8ac9c"
+      },
+      {
+        "id": "road_occupancy:1906531",
+        "label": "대전광역시 중구 / 대전광역시 중구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20240207 / verified",
+        "hash": "3acd60ede18557db"
+      },
+      {
+        "id": "road_occupancy:1907941",
+        "label": "대전광역시 서구 / 대전광역시 서구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20240219 / verified",
+        "hash": "b7cc77899fde19bb"
+      },
+      {
+        "id": "road_occupancy:1911587",
+        "label": "전라남도 여수시 / 여수시 도로점용허가 및 도로점용료 징수 조례 / road_occupancy / 20240312 / verified",
+        "hash": "cffbd5267f043dd8"
+      },
+      {
+        "id": "road_occupancy:1913583",
+        "label": "경기도 군포시 / 군포시 도로점용허가 및 점용료 등 부과·징수조례 / road_occupancy / 20240319 / verified",
+        "hash": "7e273090125aed18"
+      },
+      {
+        "id": "road_occupancy:1919149",
+        "label": "충청북도 청주시 / 청주시 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20240405 / verified",
+        "hash": "e6b1310bb5b9bdbc"
+      },
+      {
+        "id": "road_occupancy:1919757",
+        "label": "경기도 광명시 / 광명시 도로점용허가 및 점용료등 징수 조례 / road_occupancy / 20240405 / verified",
+        "hash": "aa25dd121506b212"
+      },
+      {
+        "id": "road_occupancy:1923241",
+        "label": "충청남도 당진시 / 당진시 도로점용료 징수 조례 / road_occupancy / 20240430 / verified",
+        "hash": "86c1c6a127d6e2f8"
+      },
+      {
+        "id": "road_occupancy:1923815",
+        "label": "서울특별시 은평구 / 서울특별시 은평구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20240502 / verified",
+        "hash": "42925d1a03048353"
+      },
+      {
+        "id": "road_occupancy:1924057",
+        "label": "경기도 구리시 / 구리시 도로점용료 등 부과·징수 조례 / road_occupancy / 20240503 / verified",
+        "hash": "29ff0e0dbad99b05"
+      },
+      {
+        "id": "road_occupancy:1925105",
+        "label": "서울특별시 양천구 / 서울특별시 양천구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20240509 / verified",
+        "hash": "4dd81db8d93bb1f0"
+      },
+      {
+        "id": "road_occupancy:1925367",
+        "label": "충청북도 영동군 / 영동군 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20240507 / verified",
+        "hash": "8ea971b86e8c9258"
+      },
+      {
+        "id": "road_occupancy:1930779",
+        "label": "대구광역시 / 대구광역시 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20240517 / verified",
+        "hash": "481eda1e61afcd9b"
+      },
+      {
+        "id": "road_occupancy:1930857",
+        "label": "대구광역시 / 대구광역시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20240517 / verified",
+        "hash": "e0a6333634d11d62"
+      },
+      {
+        "id": "road_occupancy:1931017",
+        "label": "대전광역시 / 대전광역시 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20240517 / verified",
+        "hash": "c23ef26a0e219910"
+      },
+      {
+        "id": "road_occupancy:1932021",
+        "label": "전북특별자치도 전주시 / 전주시 도로점용료 징수 조례 / road_occupancy / 20240510 / verified",
+        "hash": "71c3ababcddcd29a"
+      },
+      {
+        "id": "road_occupancy:1935321",
+        "label": "경기도 의왕시 / 의왕시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20240603 / verified",
+        "hash": "101f779c3c3e0b7e"
+      },
+      {
+        "id": "road_occupancy:1935367",
+        "label": "경기도 파주시 / 파주시 도로점용공사장 교통소통 대책에 관한 조례 / road_occupancy / 20240701 / verified",
+        "hash": "5623607596da71d9"
+      },
+      {
+        "id": "road_occupancy:1949775",
+        "label": "서울특별시 관악구 / 서울특별시 관악구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20240704 / verified",
+        "hash": "c0766c36bdcb9669"
+      },
+      {
+        "id": "road_occupancy:1951181",
+        "label": "충청남도 보령시 / 보령시 도로점용료 징수 조례 / road_occupancy / 20230920 / verified",
+        "hash": "61dbddb9ec01416f"
+      },
+      {
+        "id": "road_occupancy:1953747",
+        "label": "전북특별자치도 남원시 / 남원시 도로점용료 징수 조례 / road_occupancy / 20240712 / verified",
+        "hash": "5082da761a8aadeb"
+      },
+      {
+        "id": "road_occupancy:1955097",
+        "label": "충청남도 / 충청남도 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20240710 / verified",
+        "hash": "32ba4f8f52011e96"
+      },
+      {
+        "id": "road_occupancy:1957543",
+        "label": "경기도 안산시 / 안산시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20240717 / verified",
+        "hash": "ad42668b065fc5ee"
+      },
+      {
+        "id": "road_occupancy:1966607",
+        "label": "울산광역시 울주군 / 울산광역시 울주군 도로점용료 징수 조례 / road_occupancy / 20240912 / verified",
+        "hash": "988a48c7a0577f67"
+      },
+      {
+        "id": "road_occupancy:1977195",
+        "label": "충청북도 제천시 / 제천시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20241011 / verified",
+        "hash": "4b24c3c1ed1f8a55"
+      },
+      {
+        "id": "road_occupancy:1982295",
+        "label": "서울특별시 성동구 / 서울특별시 성동구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20241107 / verified",
+        "hash": "66ccef81913ef028"
+      },
+      {
+        "id": "road_occupancy:1986563",
+        "label": "충청북도 청주시 / 청주시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20250216 / verified",
+        "hash": "4942720549f56e5d"
+      },
+      {
+        "id": "road_occupancy:1989429",
+        "label": "전라남도 / 전라남도 도로점용료 징수 조례 / road_occupancy / 20241024 / verified",
+        "hash": "0092e2bb81c4afb7"
+      },
+      {
+        "id": "road_occupancy:1989461",
+        "label": "서울특별시 성동구 / 서울특별시 성동구 도로점용 허가 및 점용료 등 징수조례 시행규칙 / road_occupancy / 20241205 / verified",
+        "hash": "3a505042e026b72c"
+      },
+      {
+        "id": "road_occupancy:1989493",
+        "label": "서울특별시 서초구 / 서울특별시 서초구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20250101 / verified",
+        "hash": "f98f1207f33a3bc9"
+      },
+      {
+        "id": "road_occupancy:1991447",
+        "label": "부산광역시 해운대구 / 부산광역시 해운대구 도로점용료 등 징수 조례 / road_occupancy / 20241212 / verified",
+        "hash": "31d08f4f7577687b"
+      },
+      {
+        "id": "road_occupancy:1992321",
+        "label": "경기도 성남시 / 성남시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20241216 / verified",
+        "hash": "a03f0f8587f25a6b"
+      },
+      {
+        "id": "road_occupancy:1992711",
+        "label": "충청남도 아산시 / 아산시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20250317 / verified",
+        "hash": "bab81592836a1866"
+      },
+      {
+        "id": "road_occupancy:1995589",
+        "label": "경상남도 창원시 / 창원시 도로점용료 징수 조례 / road_occupancy / 20241220 / verified",
+        "hash": "4176be236b81ce44"
+      },
+      {
+        "id": "road_occupancy:1998017",
+        "label": "서울특별시 마포구 / 서울특별시 마포구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20241226 / verified",
+        "hash": "9ad0d41e3f6aedad"
+      },
+      {
+        "id": "road_occupancy:2005677",
+        "label": "강원특별자치도 영월군 / 영월군 도로점용료 등 부과·징수 조례 / road_occupancy / 20241231 / verified",
+        "hash": "e73346f499db84ae"
+      },
+      {
+        "id": "road_occupancy:2010533",
+        "label": "대구광역시 서구 / 대구광역시 서구 도로점용료 등 징수조례 시행규칙 / road_occupancy / 20241230 / verified",
+        "hash": "0bc0be2d9245d74a"
+      },
+      {
+        "id": "road_occupancy:2011625",
+        "label": "전라남도 무안군 / 무안군 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20241230 / verified",
+        "hash": "a52ed7882cf1049d"
+      },
+      {
+        "id": "road_occupancy:2012269",
+        "label": "서울특별시 / 서울특별시 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20250120 / verified",
+        "hash": "85054370f8199c70"
+      },
+      {
+        "id": "road_occupancy:2012607",
+        "label": "경기도 / 경기도 도로점용허가 및 도로점용료 등 부과ㆍ징수 조례 / road_occupancy / 20250120 / verified",
+        "hash": "f280b2c3173c3591"
+      },
+      {
+        "id": "road_occupancy:2022037",
+        "label": "경기도 의왕시 / 의왕시 도로점용료 등 징수 조례 / road_occupancy / 20250317 / verified",
+        "hash": "8b593f6b5a309865"
+      },
+      {
+        "id": "road_occupancy:2029993",
+        "label": "서울특별시 관악구 / 서울특별시 관악구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20250417 / verified",
+        "hash": "ef4d4db0a30753f2"
+      },
+      {
+        "id": "road_occupancy:2033663",
+        "label": "경기도 동두천시 / 동두천시 도로점용 및 점용료 징수 조례 / road_occupancy / 20250502 / verified",
+        "hash": "e0c419263e171962"
+      },
+      {
+        "id": "road_occupancy:2038833",
+        "label": "경상남도 통영시 / 통영시 도로점용료 징수조례 / road_occupancy / 20250516 / verified",
+        "hash": "9f6d2177efbce651"
+      },
+      {
+        "id": "road_occupancy:2039563",
+        "label": "경기도 가평군 / 가평군 도로점용료 징수 조례 / road_occupancy / 20250519 / verified",
+        "hash": "fe58c1c76f3c3d73"
+      },
+      {
+        "id": "road_occupancy:2041039",
+        "label": "서울특별시 강남구 / 서울특별시 강남구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20250523 / verified",
+        "hash": "39d83c02b8b836b3"
+      },
+      {
+        "id": "road_occupancy:2046801",
+        "label": "전라남도 보성군 / 보성군 도로점용료 징수조례 / road_occupancy / 20250627 / verified",
+        "hash": "29a5f19483d3bbe3"
+      },
+      {
+        "id": "road_occupancy:2050733",
+        "label": "경상남도 양산시 / 양산시 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20250703 / verified",
+        "hash": "c437506c5d28403c"
+      },
+      {
+        "id": "road_occupancy:2052925",
+        "label": "서울특별시 강동구 / 서울특별시 강동구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20250709 / verified",
+        "hash": "ce50444e26efe79d"
+      },
+      {
+        "id": "road_occupancy:2052943",
+        "label": "서울특별시 강동구 / 서울특별시 강동구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20250709 / verified",
+        "hash": "aaa20426c4157542"
+      },
+      {
+        "id": "road_occupancy:2053845",
+        "label": "서울특별시 송파구 / 서울특별시 송파구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20250710 / verified",
+        "hash": "13d4a38a65881b3e"
+      },
+      {
+        "id": "road_occupancy:2055247",
+        "label": "서울특별시 용산구 / 서울특별시 용산구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20250711 / verified",
+        "hash": "a07160506fe7cfc3"
+      },
+      {
+        "id": "road_occupancy:2058225",
+        "label": "서울특별시 중구 / 서울특별시 중구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20250717 / verified",
+        "hash": "570d7816d7c6aae7"
+      },
+      {
+        "id": "road_occupancy:2058633",
+        "label": "경상북도 봉화군 / 봉화군 도로점용 허가 및 도로점용료 등의 부과·징수에 관한 조례 / road_occupancy / 20250717 / verified",
+        "hash": "ebfcab2a0a581c28"
+      },
+      {
+        "id": "road_occupancy:2058785",
+        "label": "서울특별시 중구 / 서울특별시 중구 도로점용허가 및 점용료 등 징수 조례 시행규칙 / road_occupancy / 20250717 / verified",
+        "hash": "d38b68d454b39b37"
+      },
+      {
+        "id": "road_occupancy:2060787",
+        "label": "강원특별자치도 홍천군 / 홍천군 도로점용료 징수 조례 / road_occupancy / 20250725 / verified",
+        "hash": "fa30fb1b2778092b"
+      },
+      {
+        "id": "road_occupancy:2063113",
+        "label": "광주광역시 / 광주광역시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20250806 / verified",
+        "hash": "9af96f9946b283cf"
+      },
+      {
+        "id": "road_occupancy:2067551",
+        "label": "서울특별시 영등포구 / 서울특별시 영등포구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20250918 / verified",
+        "hash": "2757de4d9fc3c3c6"
+      },
+      {
+        "id": "road_occupancy:2068621",
+        "label": "대구광역시 수성구 / 대구광역시 수성구 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20250922 / verified",
+        "hash": "92a9978b6d4d939e"
+      },
+      {
+        "id": "road_occupancy:2070351",
+        "label": "서울특별시 / 서울특별시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20250929 / verified",
+        "hash": "59da3bab3dce3fa4"
+      },
+      {
+        "id": "road_occupancy:2076347",
+        "label": "경기도 평택시 / 평택시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20251002 / verified",
+        "hash": "05424184c3fdb646"
+      },
+      {
+        "id": "road_occupancy:2076353",
+        "label": "경기도 평택시 / 평택시 도로점용 허가 및 점용료 등 징수 조례 / road_occupancy / 20251002 / verified",
+        "hash": "e2cd203b5906a12c"
+      },
+      {
+        "id": "road_occupancy:2077935",
+        "label": "경기도 여주시 / 여주시 도로점용료 등 징수 조례 / road_occupancy / 20250930 / verified",
+        "hash": "649ecdf59e6a8490"
+      },
+      {
+        "id": "road_occupancy:2078875",
+        "label": "서울특별시 은평구 / 서울특별시 은평구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20251014 / verified",
+        "hash": "d19096d900e1edf6"
+      },
+      {
+        "id": "road_occupancy:2078913",
+        "label": "서울특별시 은평구 / 서울특별시 은평구 도로점용허가 및 점용료 등 징수 조례 시행규칙 / road_occupancy / 20251014 / verified",
+        "hash": "5d7fafa028cdfb7a"
+      },
+      {
+        "id": "road_occupancy:2079645",
+        "label": "대구광역시 동구 / 대구광역시 동구 도로점용료 등에 관한 조례 / road_occupancy / 20251030 / verified",
+        "hash": "79b5f9bec23ba13e"
+      },
+      {
+        "id": "road_occupancy:2079691",
+        "label": "대구광역시 동구 / 대구광역시 동구 도로점용료 등에 관한 조례 시행규칙 / road_occupancy / 20251030 / verified",
+        "hash": "408528ef440ab0ff"
+      },
+      {
+        "id": "road_occupancy:2081573",
+        "label": "울산광역시 / 울산광역시 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20250925 / verified",
+        "hash": "1434814c9f63e239"
+      },
+      {
+        "id": "road_occupancy:2083539",
+        "label": "대구광역시 중구 / 대구광역시 중구 도로점용 허가 및 점용료 징수 조례 / road_occupancy / 20251110 / verified",
+        "hash": "a29a9ef1d395af17"
+      },
+      {
+        "id": "road_occupancy:2083557",
+        "label": "대구광역시 중구 / 대구광역시 중구 도로점용 허가 및 점용료 징수 조례 시행규칙 / road_occupancy / 20251110 / verified",
+        "hash": "8ed3497b5d1c9f98"
+      },
+      {
+        "id": "road_occupancy:2083829",
+        "label": "대전광역시 유성구 / 대전광역시 유성구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20251110 / verified",
+        "hash": "03148905900d1368"
+      },
+      {
+        "id": "road_occupancy:2087061",
+        "label": "경기도 양평군 / 양평군 도로점용료 징수 조례 / road_occupancy / 20251117 / verified",
+        "hash": "e6d157d5584a4dd0"
+      },
+      {
+        "id": "road_occupancy:2088289",
+        "label": "충청북도 옥천군 / 옥천군 도로점용료 징수조례 / road_occupancy / 20251120 / verified",
+        "hash": "c4953e50f3288865"
+      },
+      {
+        "id": "road_occupancy:2092113",
+        "label": "충청남도 아산시 / 아산시 도로점용허가 및 도로점용료 등 징수 조례 / road_occupancy / 20251215 / verified",
+        "hash": "f69a21d143249aaa"
+      },
+      {
+        "id": "road_occupancy:2093425",
+        "label": "부산광역시 강서구 / 부산광역시 강서구 도로점용료 징수 조례 / road_occupancy / 20251218 / verified",
+        "hash": "c333d48ec10a3d2f"
+      },
+      {
+        "id": "road_occupancy:2094503",
+        "label": "경기도 안성시 / 안성시 도로점용료 징수 조례 / road_occupancy / 20251219 / verified",
+        "hash": "d9066fb3bf15f088"
+      },
+      {
+        "id": "road_occupancy:2095649",
+        "label": "경상북도 청송군 / 청송군 도로점용허가 및 도로점용료 등 징수 조례 / road_occupancy / 20251222 / verified",
+        "hash": "62347cbf3a15e198"
+      },
+      {
+        "id": "road_occupancy:2105183",
+        "label": "인천광역시 강화군 / 강화군 도로점용료 징수 조례 / road_occupancy / 20251231 / verified",
+        "hash": "f71cfd79cb8fe5e4"
+      },
+      {
+        "id": "road_occupancy:2105231",
+        "label": "울산광역시 남구 / 울산광역시 남구 도로점용료 징수 조례 / road_occupancy / 20251230 / verified",
+        "hash": "52d60525316f4820"
+      },
+      {
+        "id": "road_occupancy:2106309",
+        "label": "경상북도 포항시 / 포항시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20260107 / verified",
+        "hash": "768071d23298b1cf"
+      },
+      {
+        "id": "road_occupancy:2106645",
+        "label": "서울특별시 동대문구 / 서울특별시 동대문구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20260108 / verified",
+        "hash": "95aa2d66464aea73"
+      },
+      {
+        "id": "road_occupancy:2107223",
+        "label": "서울특별시 영등포구 / 서울특별시 영등포구 도로점용허가 및 점용료 등 징수 조례 / road_occupancy / 20260108 / verified",
+        "hash": "a2c49c3b6f105782"
+      },
+      {
+        "id": "road_occupancy:2107781",
+        "label": "경기도 / 경기도 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20260115 / verified",
+        "hash": "e179518fe24f20fe"
+      },
+      {
+        "id": "road_occupancy:2112745",
+        "label": "경상남도 사천시 / 사천시 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20260226 / verified",
+        "hash": "8d583140c16b762d"
+      },
+      {
+        "id": "road_occupancy:2113225",
+        "label": "강원특별자치도 철원군 / 철원군 도로점용허가 및 점용료 등 징수조례 / road_occupancy / 20260227 / verified",
+        "hash": "3fad388c74a72feb"
+      },
+      {
+        "id": "road_occupancy:2120101",
+        "label": "서울특별시 강서구 / 서울특별시 강서구 도로점용공사장 교통소통대책에 관한 조례 / road_occupancy / 20260408 / verified",
+        "hash": "fd08151182718de0"
+      },
+      {
+        "id": "road_occupancy:2122357",
+        "label": "경기도 부천시 / 부천시 도로점용허가 및 도로점용료 등 징수 조례 / road_occupancy / 20260413 / verified",
+        "hash": "eee4ea1ca3b85209"
+      },
+      {
+        "id": "road_occupancy:2124621",
+        "label": "경기도 가평군 / 가평군 도로점용공사장 교통소통 대책에 관한 조례 / road_occupancy / 20260420 / verified",
+        "hash": "2de66824a5e80e05"
+      },
+      {
+        "id": "road_occupancy:2125163",
+        "label": "강원특별자치도 횡성군 / 횡성군 도로점용허가 및 도로점용료 부과·징수 조례 / road_occupancy / 20260416 / verified",
+        "hash": "e9979b408bd1df8f"
+      },
+      {
+        "id": "road_occupancy:2125241",
+        "label": "경상북도 포항시 / 포항시 도로점용료 징수 조례 / road_occupancy / 20260422 / verified",
+        "hash": "5f83f2e208e69393"
+      },
+      {
+        "id": "road_occupancy:2126415",
+        "label": "경기도 안산시 / 안산시 도로점용료 징수 조례 / road_occupancy / 20260429 / verified",
+        "hash": "9170770be56c9d3b"
+      },
+      {
+        "id": "road_occupancy:2128141",
+        "label": "경기도 시흥시 / 시흥시 도로점용허가 및 점용료 등의 징수에 관한 조례 / road_occupancy / 20260507 / verified",
+        "hash": "a92cac4fedd0398c"
+      },
+      {
+        "id": "road_occupancy:2129663",
+        "label": "경기도 남양주시 / 남양주시 도로점용허가 및 도로점용료 징수 조례 / road_occupancy / 20260515 / verified",
+        "hash": "4fe6cf96e277303a"
+      },
+      {
+        "id": "road_occupancy:846953",
+        "label": "서울특별시 금천구 / 서울특별시 금천구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20080117 / verified",
+        "hash": "4b132ac80c5c9409"
+      },
+      {
+        "id": "road_occupancy:849827",
+        "label": "서울특별시 용산구 / 서울특별시용산구 도로점용공사장 교통소통대책에 관한조례 시행규칙 / road_occupancy / 20070706 / verified",
+        "hash": "1e19db16ea478d15"
+      },
+      {
+        "id": "road_occupancy:934056",
+        "label": "경상북도 / 경상북도도로점용료징수조례시행규칙 / road_occupancy / 99991231 / verified",
+        "hash": "edb7edbe53454d11"
+      },
+      {
+        "id": "road_occupancy:949463",
+        "label": "서울특별시 중랑구 / 서울특별시중랑구 도로점용공사장 교통소통대책에 관한 조례 시행규칙 / road_occupancy / 20080409 / verified",
+        "hash": "daad509caa0ba351"
+      },
+      {
+        "id": "road_occupancy:979056",
+        "label": "서울특별시 강서구 / 서울특별시 강서구 도로점용공사장 교통소통 대책에 관한 조례 시행규칙 / road_occupancy / 20120605 / verified",
+        "hash": "2a3dc3a1a8462730"
+      }
+    ],
+    "workerSafetyReferences": [
+      {
+        "id": "kosha_guide_aerial_lift_scaffold",
+        "label": "KOSHA Guide 고소작업대·비계·작업발판 / kosha_guide / offline_derived",
+        "hash": "fec70d931f41c5d2"
+      },
+      {
+        "id": "kosha_guide_electrical_work",
+        "label": "KOSHA Guide 전기작업·수변전설비 작업안전 / kosha_guide / offline_derived",
+        "hash": "c2bad7385db8db37"
+      },
+      {
+        "id": "kosha_guide_forklift_loading_unloading",
+        "label": "KOSHA Guide 지게차·하역·상하차 작업 / kosha_guide / offline_derived",
+        "hash": "b157e7b7ef0f7de1"
+      },
+      {
+        "id": "kosha_guide_heavy_object_handling",
+        "label": "KOSHA Guide 중량물 취급·인양 작업 / kosha_guide / offline_derived",
+        "hash": "1c3f8066983ac888"
+      },
+      {
+        "id": "kosha_guide_hot_work_fire_watch",
+        "label": "KOSHA Guide 화재위험작업·화기작업 / kosha_guide / offline_derived",
+        "hash": "f0ae4756ad3d81e5"
+      },
+      {
+        "id": "kosha_guide_ladder_a_g_4_2025",
+        "label": "KOSHA Guide A-G-4-2025 이동식 사다리 사용 / kosha_guide / offline_derived",
+        "hash": "183c5e63386cbd3d"
+      },
+      {
+        "id": "osh_kosha_ppe_setup_teardown",
+        "label": "산안기준규칙/KOSHA Guide 보호구(PPE) 적용 / kosha_guide / offline_derived",
+        "hash": "fa71e54d988155f4"
+      },
+      {
+        "id": "osh_standards_rule_article_38_work_plan",
+        "label": "산업안전보건기준에 관한 규칙 제38조 및 별표 4 / law_article / source_verified",
+        "hash": "4923c6ae29e9a256"
+      },
+      {
+        "id": "osh_standards_rule_article_42_fall_prevention",
+        "label": "산업안전보건기준에 관한 규칙 제42조 추락 방지 / law_article / source_verified",
+        "hash": "3bda80e3e77798a2"
+      }
+    ],
+    "venueRules": [
+      {
+        "id": "atcenter",
+        "label": "aT센터 / 서울 양재",
+        "hash": "42da680d3fe63333"
+      },
+      {
+        "id": "bexco",
+        "label": "벡스코 / 부산",
+        "hash": "7a75aaf256fa8a2a"
+      },
+      {
+        "id": "ceco",
+        "label": "창원컨벤션센터(CECO) / 경남 창원",
+        "hash": "153e11cf91c79115"
+      },
+      {
+        "id": "coex",
+        "label": "코엑스 / 서울",
+        "hash": "31ee33331abd989d"
+      },
+      {
+        "id": "dcc",
+        "label": "대전컨벤션센터(DCC) / 대전 유성",
+        "hash": "8c9cb422c8d2ed63"
+      },
+      {
+        "id": "exco",
+        "label": "EXCO / 대구",
+        "hash": "cedee135f082a69f"
+      },
+      {
+        "id": "gsco",
+        "label": "군산새만금컨벤션센터(GSCO) / 전북 군산",
+        "hash": "7d2f5d00db72f46f"
+      },
+      {
+        "id": "gumico",
+        "label": "구미코(GUMICO) / 경북 구미",
+        "hash": "7803defe633d3c84"
+      },
+      {
+        "id": "hico",
+        "label": "경주화백컨벤션센터(HICO) / 경북 경주",
+        "hash": "c8232e5d25452271"
+      },
+      {
+        "id": "icc_jeju",
+        "label": "제주국제컨벤션센터(ICC JEJU) / 제주 서귀포",
+        "hash": "658fcdaed95a3024"
+      },
+      {
+        "id": "kdjcenter",
+        "label": "김대중컨벤션센터 / 광주",
+        "hash": "73a12c25883124b8"
+      },
+      {
+        "id": "kintex",
+        "label": "킨텍스 / 경기 고양",
+        "hash": "366ff1eab0d2e090"
+      },
+      {
+        "id": "osco",
+        "label": "청주오스코(OSCO) / 충북 청주 오송",
+        "hash": "9104f4367bb374d3"
+      },
+      {
+        "id": "setec",
+        "label": "서울무역전시장(SETEC) / 서울 강남",
+        "hash": "0c4356e00ae1b365"
+      },
+      {
+        "id": "songdo_convensia",
+        "label": "송도컨벤시아 / 인천 송도",
+        "hash": "deb3ba2d16229751"
+      },
+      {
+        "id": "suwon_convention_center",
+        "label": "수원컨벤션센터 / 경기 수원",
+        "hash": "96452ce307b87bac"
+      },
+      {
+        "id": "suwonmesse",
+        "label": "수원메쎄 / 경기 수원",
+        "hash": "bf9f87d5c3a698d4"
+      },
+      {
+        "id": "ueco",
+        "label": "울산전시컨벤션센터(UECO) / 울산",
+        "hash": "0a61e08e4d4440e1"
+      },
+      {
+        "id": "yeosu_expo",
+        "label": "여수엑스포컨벤션센터 / 전남 여수",
+        "hash": "441e65c1d5dcbe51"
+      }
+    ],
+    "venueFacilityIndex": [
+      {
+        "id": "atcenter",
+        "label": "aT센터 / 서울 양재",
+        "hash": "26ee361bb8d39c44"
+      },
+      {
+        "id": "bexco",
+        "label": "벡스코 / 부산",
+        "hash": "5f96729132a7d04d"
+      },
+      {
+        "id": "ceco",
+        "label": "창원컨벤션센터(CECO) / 경남 창원",
+        "hash": "5cd88b5822f13de8"
+      },
+      {
+        "id": "coex",
+        "label": "코엑스 / 서울",
+        "hash": "5af2b07132c1a58f"
+      },
+      {
+        "id": "dcc",
+        "label": "대전컨벤션센터(DCC) / 대전 유성",
+        "hash": "228cc04334680b56"
+      },
+      {
+        "id": "exco",
+        "label": "EXCO / 대구",
+        "hash": "4b4efecdbd32c17b"
+      },
+      {
+        "id": "gsco",
+        "label": "군산새만금컨벤션센터(GSCO) / 전북 군산",
+        "hash": "01d91655aa09c665"
+      },
+      {
+        "id": "gumico",
+        "label": "구미코(GUMICO) / 경북 구미",
+        "hash": "405768407209e708"
+      },
+      {
+        "id": "hico",
+        "label": "경주화백컨벤션센터(HICO) / 경북 경주",
+        "hash": "3be05a05dd1f1ef2"
+      },
+      {
+        "id": "icc_jeju",
+        "label": "제주국제컨벤션센터(ICC JEJU) / 제주 서귀포",
+        "hash": "e2b0938303ca8dc4"
+      },
+      {
+        "id": "kdjcenter",
+        "label": "김대중컨벤션센터 / 광주",
+        "hash": "0a25f842a8931932"
+      },
+      {
+        "id": "kintex",
+        "label": "킨텍스 / 경기 고양",
+        "hash": "d69f3a0564f9b96e"
+      },
+      {
+        "id": "osco",
+        "label": "청주오스코(OSCO) / 충북 청주 오송",
+        "hash": "7b020f65f14f6e8d"
+      },
+      {
+        "id": "setec",
+        "label": "서울무역전시장(SETEC) / 서울 강남",
+        "hash": "84917f6a74442059"
+      },
+      {
+        "id": "songdo_convensia",
+        "label": "송도컨벤시아 / 인천 송도",
+        "hash": "a7c808cde29dc2db"
+      },
+      {
+        "id": "suwon_convention_center",
+        "label": "수원컨벤션센터 / 경기 수원",
+        "hash": "21e03be6e717161a"
+      },
+      {
+        "id": "suwonmesse",
+        "label": "수원메쎄 / 경기 수원",
+        "hash": "38de2bbfcab6c17f"
+      },
+      {
+        "id": "ueco",
+        "label": "울산전시컨벤션센터(UECO) / 울산",
+        "hash": "daeba44216314059"
+      },
+      {
+        "id": "yeosu_expo",
+        "label": "여수엑스포컨벤션센터 / 전남 여수",
+        "hash": "e08b711b0285cb60"
+      }
+    ],
+    "incidentTaxonomy": [
+      {
+        "id": "blocked_exit",
+        "label": "비상구·피난통로 차단 / 시설·소방팀 / critical",
+        "hash": "ff71d38e90b53809"
+      },
+      {
+        "id": "crowd_bottleneck",
+        "label": "인파 병목·대기열 침범 / 인파·동선팀 / high",
+        "hash": "2150d51a98a9c0a8"
+      },
+      {
+        "id": "electrical_hazard",
+        "label": "임시전기·케이블·분전반 위험 / 시설·전기팀 / high",
+        "hash": "a7902998feddb3f5"
+      },
+      {
+        "id": "fire_smoke",
+        "label": "화재·연기·화기 위험 / 소방·시설팀 / critical",
+        "hash": "71b369891d0b343c"
+      },
+      {
+        "id": "food_safety",
+        "label": "식음료 위생·식중독 의심 / 식음료 안전팀 / high",
+        "hash": "ec76a9e72d06e421"
+      },
+      {
+        "id": "gas_lpg",
+        "label": "LPG·가스 누출·화기 / 가스·소방팀 / critical",
+        "hash": "3a6f74f739dc7893"
+      },
+      {
+        "id": "lost_child",
+        "label": "미아·보호자 이탈 / 운영본부·보안팀 / medium",
+        "hash": "cdf0e3b12c9b182c"
+      },
+      {
+        "id": "medical_emergency",
+        "label": "응급환자·AED 대응 / 의료팀 / critical",
+        "hash": "6bcb3a7f8d5a9abf"
+      },
+      {
+        "id": "security_access",
+        "label": "출입통제·보안검색 이상 / 보안팀 / high",
+        "hash": "62a1a0bda02830d1"
+      },
+      {
+        "id": "stage_rigging_structure",
+        "label": "공연·무대·리깅 구조 이상 / 공연·무대 안전팀 / critical",
+        "hash": "748410a1894d33fb"
+      },
+      {
+        "id": "unhosted_crowd_surge",
+        "label": "무주최 다중운집 급증 / 관계기관 합동상황반 / critical",
+        "hash": "c99b411efd51e71f"
+      },
+      {
+        "id": "weather_outdoor",
+        "label": "우천·강풍·폭염 등 기상악화 / 운영본부·시설팀 / high",
+        "hash": "1ad7e3353558446d"
+      },
+      {
+        "id": "worker_safety",
+        "label": "설치·철거 작업자 안전 / 작업안전팀 / high",
+        "hash": "92911cbbca664e39"
+      }
+    ],
+    "communicationTemplates": [
+      {
+        "id": "agency_update_sms",
+        "label": "event_pause / agency_update / agency",
+        "hash": "b67d57064d6c2825"
+      },
+      {
+        "id": "all_clear_staff_radio",
+        "label": "all_clear / staff_radio / staff",
+        "hash": "954e32d2e75a29ff"
+      },
+      {
+        "id": "evacuation_start_public_announcement",
+        "label": "evacuation_start / public_announcement / visitors",
+        "hash": "7f92dd7d377b4ec5"
+      },
+      {
+        "id": "evacuation_start_staff_radio",
+        "label": "evacuation_start / staff_radio / staff",
+        "hash": "452ad9508720a302"
+      },
+      {
+        "id": "event_pause_public_announcement",
+        "label": "event_pause / public_announcement / visitors",
+        "hash": "b3a605e940654636"
+      },
+      {
+        "id": "event_pause_staff_radio",
+        "label": "event_pause / staff_radio / staff",
+        "hash": "08576e95e9a28623"
+      },
+      {
+        "id": "event_resume_public_announcement",
+        "label": "event_resume / public_announcement / visitors",
+        "hash": "fee5cb1e4bded6f2"
+      },
+      {
+        "id": "event_stop_public_announcement",
+        "label": "event_stop / public_announcement / visitors",
+        "hash": "83190a089eac018a"
+      },
+      {
+        "id": "shelter_in_place_public_announcement",
+        "label": "shelter_in_place / public_announcement / visitors",
+        "hash": "195047ace415b87f"
+      }
+    ]
+  }
+}

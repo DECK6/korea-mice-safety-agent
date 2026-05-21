@@ -1,0 +1,483 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "scope": "Korean MICE site-operation safety applicability domain pack. Deterministic guidance only; final legal decisions require current law text, local ordinance, and venue approval verification.",
+  "commonLawIds": [
+    "serious_accidents_punishment_act",
+    "occupational_safety_health_act",
+    "framework_act_disaster_safety",
+    "fire_prevention_act",
+    "fire_facilities_act",
+    "personal_information_protection_act",
+    "emergency_medical_service_act",
+    "electrical_safety_management_act"
+  ],
+  "eventTypes": [
+    {
+      "id": "festival",
+      "label": "축제/옥외행사",
+      "matchFlags": [
+        "outdoor",
+        "roadUse",
+        "largeCrowd"
+      ],
+      "conditions": [
+        "야외 공간 사용",
+        "불특정 다수 방문",
+        "도로·광장·공원 점용 또는 교통통제 가능성"
+      ],
+      "conditionalLawIds": [
+        "framework_act_disaster_safety",
+        "road_act",
+        "road_traffic_act",
+        "outdoor_advertisements_act",
+        "emergency_medical_service_act_enforcement_rule"
+      ],
+      "dutyIds": [
+        "mice_event_safety_management_plan",
+        "mice_crowd_management_plan",
+        "medical_aed_response_plan",
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "hazardIds": [
+        "crowd_density_high",
+        "ingress_egress_bottleneck",
+        "weather_outdoor_event",
+        "medical_emergency"
+      ]
+    },
+    {
+      "id": "exhibition",
+      "label": "전시회/박람회",
+      "matchFlags": [
+        "temporaryStructures",
+        "boothBuild",
+        "venue"
+      ],
+      "conditions": [
+        "전시장·컨벤션센터 사용",
+        "부스 시공·반입반출·철거",
+        "전시품/물류/관람객 동선 혼재"
+      ],
+      "conditionalLawIds": [
+        "building_act",
+        "multi_use_facility_crisis_manual_rule",
+        "elevator_safety_act",
+        "emergency_medical_service_act_enforcement_rule"
+      ],
+      "dutyIds": [
+        "venue_crisis_response_manual_check",
+        "booth_construction_safety_checklist",
+        "temporary_electrical_safety_check",
+        "privacy_cctv_registration_check",
+        "fire_evacuation_facility_management",
+        "elevator_escalator_crowd_control"
+      ],
+      "hazardIds": [
+        "blocked_evacuation_route",
+        "temporary_structure_collapse",
+        "temporary_electrical_fire_shock",
+        "personal_data_cctv_privacy"
+      ]
+    },
+    {
+      "id": "conference",
+      "label": "컨벤션/국제회의",
+      "matchFlags": [
+        "venue",
+        "registration",
+        "personalDataProcessing",
+        "vipSecurity"
+      ],
+      "conditions": [
+        "등록·출입증 운영",
+        "회의실·로비·부대공간 사용",
+        "VIP/연사/보안 민감 가능성"
+      ],
+      "conditionalLawIds": [
+        "multi_use_facility_crisis_manual_rule",
+        "security_services_industry_act",
+        "personal_information_protection_act_enforcement_decree",
+        "security_services_industry_act_enforcement_decree",
+        "security_services_industry_act_enforcement_rule",
+        "emergency_medical_service_act_enforcement_rule"
+      ],
+      "dutyIds": [
+        "venue_crisis_response_manual_check",
+        "privacy_cctv_registration_check",
+        "security_access_control_plan",
+        "medical_aed_response_plan",
+        "fire_evacuation_facility_management",
+        "elevator_escalator_crowd_control"
+      ],
+      "hazardIds": [
+        "ingress_egress_bottleneck",
+        "personal_data_cctv_privacy",
+        "medical_emergency",
+        "security_access_control_gap"
+      ]
+    },
+    {
+      "id": "performance",
+      "label": "공연/콘서트 포함 행사",
+      "matchFlags": [
+        "performance",
+        "stage",
+        "standingAudience"
+      ],
+      "conditions": [
+        "공연 프로그램 포함",
+        "공연장 또는 공연장 외 무대 운영",
+        "관객 입퇴장·스탠딩 구역·피난안내 필요"
+      ],
+      "conditionalLawIds": [
+        "performance_act",
+        "building_act",
+        "fire_prevention_act",
+        "fire_facilities_act",
+        "emergency_medical_service_act_enforcement_rule"
+      ],
+      "dutyIds": [
+        "performance_disaster_countermeasure_plan",
+        "performance_safety_org_and_training",
+        "mice_crowd_management_plan",
+        "medical_aed_response_plan",
+        "fire_evacuation_facility_management"
+      ],
+      "hazardIds": [
+        "crowd_density_high",
+        "temporary_structure_collapse",
+        "blocked_evacuation_route",
+        "medical_emergency"
+      ]
+    },
+    {
+      "id": "food_event",
+      "label": "식음료/푸드트럭/케이터링 포함 행사",
+      "matchFlags": [
+        "foodService",
+        "lpg",
+        "temporaryFoodBooth"
+      ],
+      "conditions": [
+        "식음료 판매·제공",
+        "푸드트럭·케이터링·임시 조리",
+        "LPG/가스/화기 사용 가능성"
+      ],
+      "conditionalLawIds": [
+        "food_sanitation_act",
+        "lp_gas_safety_act",
+        "fire_prevention_act"
+      ],
+      "dutyIds": [
+        "temporary_food_business_and_poisoning_plan",
+        "fire_and_hazardous_material_permit_check",
+        "temporary_electrical_safety_check"
+      ],
+      "hazardIds": [
+        "food_poisoning",
+        "fire_hazard_hot_work_lpg",
+        "temporary_electrical_fire_shock"
+      ]
+    },
+    {
+      "id": "vip_event",
+      "label": "VIP/보안 민감 행사",
+      "matchFlags": [
+        "vipSecurity",
+        "accessControl",
+        "securityCheck"
+      ],
+      "conditions": [
+        "VIP/고위급 방문",
+        "보안검색·출입통제",
+        "개인정보·동선·민원 대응 필요"
+      ],
+      "conditionalLawIds": [
+        "personal_information_protection_act",
+        "security_services_industry_act",
+        "personal_information_protection_act_enforcement_decree",
+        "security_services_industry_act_enforcement_decree",
+        "security_services_industry_act_enforcement_rule",
+        "emergency_medical_service_act_enforcement_rule"
+      ],
+      "dutyIds": [
+        "security_access_control_plan",
+        "privacy_cctv_registration_check",
+        "medical_aed_response_plan"
+      ],
+      "hazardIds": [
+        "personal_data_cctv_privacy",
+        "ingress_egress_bottleneck",
+        "medical_emergency",
+        "security_access_control_gap"
+      ]
+    }
+  ],
+  "featureRules": [
+    {
+      "id": "large_crowd_rule",
+      "match": {
+        "field": "expectedCrowd",
+        "operator": ">=",
+        "value": 1000
+      },
+      "label": "대규모 인파 예상",
+      "lawIds": [
+        "framework_act_disaster_safety",
+        "emergency_medical_service_act",
+        "emergency_medical_service_act_enforcement_rule"
+      ],
+      "dutyIds": [
+        "mice_crowd_management_plan",
+        "medical_aed_response_plan",
+        "elevator_escalator_crowd_control"
+      ],
+      "hazardIds": [
+        "crowd_density_high",
+        "ingress_egress_bottleneck",
+        "medical_emergency"
+      ]
+    },
+    {
+      "id": "unhosted_crowd_rule",
+      "match": {
+        "flag": "unhostedCrowd"
+      },
+      "label": "무주최·자발적 다중운집",
+      "lawIds": [
+        "framework_act_disaster_safety",
+        "emergency_medical_service_act",
+        "emergency_medical_service_act_enforcement_rule",
+        "fire_prevention_act",
+        "fire_facilities_act"
+      ],
+      "dutyIds": [
+        "mice_event_safety_management_plan",
+        "mice_crowd_management_plan",
+        "unhosted_crowd_multi_agency_response_plan",
+        "medical_aed_response_plan"
+      ],
+      "hazardIds": [
+        "crowd_density_high",
+        "ingress_egress_bottleneck",
+        "unhosted_crowd_governance_gap",
+        "medical_emergency",
+        "weather_outdoor_event"
+      ]
+    },
+    {
+      "id": "temporary_structure_rule",
+      "match": {
+        "flag": "temporaryStructures"
+      },
+      "label": "임시구조물/부스/무대/트러스 설치",
+      "lawIds": [
+        "occupational_safety_health_act",
+        "occupational_safety_health_standards_rule",
+        "building_act",
+        "fire_facilities_act"
+      ],
+      "dutyIds": [
+        "booth_construction_safety_checklist",
+        "worker_safety_work_plan",
+        "fire_evacuation_facility_management"
+      ],
+      "hazardIds": [
+        "temporary_structure_collapse",
+        "worker_fall_height",
+        "heavy_object_handling",
+        "blocked_evacuation_route"
+      ]
+    },
+    {
+      "id": "temporary_electricity_rule",
+      "match": {
+        "flag": "temporaryElectricity"
+      },
+      "label": "임시전기/부스전원/발전기 사용",
+      "lawIds": [
+        "electrical_safety_management_act",
+        "fire_prevention_act",
+        "occupational_safety_health_standards_rule"
+      ],
+      "dutyIds": [
+        "temporary_electrical_safety_check",
+        "worker_safety_work_plan"
+      ],
+      "hazardIds": [
+        "temporary_electrical_fire_shock"
+      ]
+    },
+    {
+      "id": "food_service_rule",
+      "match": {
+        "flag": "foodService"
+      },
+      "label": "식음료 판매·제공",
+      "lawIds": [
+        "food_sanitation_act",
+        "lp_gas_safety_act"
+      ],
+      "dutyIds": [
+        "temporary_food_business_and_poisoning_plan",
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "hazardIds": [
+        "food_poisoning",
+        "fire_hazard_hot_work_lpg"
+      ]
+    },
+    {
+      "id": "personal_data_rule",
+      "match": {
+        "flag": "personalDataProcessing"
+      },
+      "label": "개인정보/QR/출입증/CCTV/촬영 처리",
+      "lawIds": [
+        "personal_information_protection_act",
+        "personal_information_protection_act_enforcement_decree"
+      ],
+      "dutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "hazardIds": [
+        "personal_data_cctv_privacy"
+      ]
+    },
+    {
+      "id": "setup_teardown_worker_rule",
+      "match": {
+        "flag": "setupTeardown"
+      },
+      "label": "설치·철거 작업자 안전관리",
+      "lawIds": [
+        "occupational_safety_health_act",
+        "occupational_safety_health_standards_rule"
+      ],
+      "dutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "hazardIds": [
+        "worker_fall_height",
+        "heavy_object_handling",
+        "temporary_structure_collapse",
+        "temporary_electrical_fire_shock"
+      ]
+    },
+    {
+      "id": "work_at_height_rule",
+      "match": {
+        "flag": "workAtHeight"
+      },
+      "label": "사다리·고소작업대·비계 등 높이 작업",
+      "lawIds": [
+        "occupational_safety_health_act",
+        "occupational_safety_health_standards_rule"
+      ],
+      "dutyIds": [
+        "worker_safety_work_plan"
+      ],
+      "hazardIds": [
+        "worker_fall_height"
+      ]
+    },
+    {
+      "id": "heavy_object_rule",
+      "match": {
+        "flag": "heavyObjectHandling"
+      },
+      "label": "중량물 반입·적재·양중",
+      "lawIds": [
+        "occupational_safety_health_act",
+        "occupational_safety_health_standards_rule"
+      ],
+      "dutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "hazardIds": [
+        "heavy_object_handling",
+        "temporary_structure_collapse"
+      ]
+    },
+    {
+      "id": "hot_work_rule",
+      "match": {
+        "flag": "hotWork"
+      },
+      "label": "화기·용접·절단·불꽃 발생 작업",
+      "lawIds": [
+        "fire_prevention_act",
+        "occupational_safety_health_act",
+        "occupational_safety_health_standards_rule"
+      ],
+      "dutyIds": [
+        "fire_and_hazardous_material_permit_check",
+        "worker_safety_work_plan"
+      ],
+      "hazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ]
+    },
+    {
+      "id": "lpg_use_rule",
+      "match": {
+        "flag": "lpgUse"
+      },
+      "label": "LPG·가스용기 사용",
+      "lawIds": [
+        "lp_gas_safety_act",
+        "fire_prevention_act"
+      ],
+      "dutyIds": [
+        "fire_and_hazardous_material_permit_check",
+        "temporary_food_business_and_poisoning_plan"
+      ],
+      "hazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ]
+    },
+    {
+      "id": "road_use_rule",
+      "match": {
+        "flag": "roadUse"
+      },
+      "label": "도로점용·교통통제·옥외 안내물",
+      "lawIds": [
+        "road_act",
+        "road_traffic_act",
+        "outdoor_advertisements_act"
+      ],
+      "dutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "hazardIds": [
+        "ingress_egress_bottleneck",
+        "weather_outdoor_event"
+      ]
+    },
+    {
+      "id": "vip_security_rule",
+      "match": {
+        "flag": "vipSecurity"
+      },
+      "label": "VIP/보안검색/민간경비 배치",
+      "lawIds": [
+        "security_services_industry_act",
+        "security_services_industry_act_enforcement_decree",
+        "security_services_industry_act_enforcement_rule"
+      ],
+      "dutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "hazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck",
+        "personal_data_cctv_privacy"
+      ]
+    }
+  ]
+}

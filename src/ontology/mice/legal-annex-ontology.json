@@ -1,0 +1,1434 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "sourceTool": "korean-law-mcp get_annexes",
+  "storagePolicy": "별표/서식 원문 전체 재배포 대신 MICE 실무 체크리스트에 필요한 요약·항목·출처 메타데이터만 오프라인 저장한다.",
+  "annexes": [
+    {
+      "id": "performance_act_enforcement_decree__annex_1",
+      "lawEntryId": "performance_act_enforcement_decree",
+      "lawName": "공연법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 1",
+      "bylSeq": "000100",
+      "title": "안전관리조직의 설치기준",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법시행령/별표1",
+      "summary": "객석 500석 이상 공연장 또는 공연장 외 1천명 이상 관람 예상 공연의 안전총괄책임자와 안전관리담당자 최소 배치 기준.",
+      "checklistItems": [
+        "500석 이상 1천석 미만 공연장: 안전총괄책임자 1명, 안전관리담당자 1명 이상",
+        "1천석 이상 공연장: 안전총괄책임자 1명, 안전관리담당자 2명 이상",
+        "공연장 외 1천명 이상 3천명 미만 공연: 안전총괄책임자 1명, 안전관리담당자 1명 이상",
+        "공연장 외 3천명 이상 공연: 안전총괄책임자 1명, 안전관리담당자 2명 이상"
+      ],
+      "dutyTypes": [
+        "staff_deployment",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_safety_org_and_training",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "medical_emergency",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법 시행령",
+      "sourceId": "별표 1",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "performance_act_enforcement_decree__annex_1_2",
+      "lawEntryId": "performance_act_enforcement_decree",
+      "lawName": "공연법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 1의2",
+      "bylSeq": "000102",
+      "title": "안전교육의 내용",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법시행령/별표1의2",
+      "summary": "공연자, 안전총괄책임자, 안전관리담당자별 공연 안전교육 내용.",
+      "checklistItems": [
+        "공연자: 무대시설 위험성, 작업 순서와 동선, 공연 전 점검, 유해·위험요인, 보호장비, 긴급조치",
+        "안전총괄책임자: 책임과 직무, 안전 제도·정책, 환경 개선, 안전관리비 계상·사용, 사고사례와 예방대책",
+        "안전관리담당자: 안전관리계획 수립·시행, 사고 대처 요령, 무대·조명·음향 분야별 안전관리, 사고예방 대책"
+      ],
+      "dutyTypes": [
+        "training",
+        "staff_deployment"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_safety_org_and_training"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법 시행령",
+      "sourceId": "별표 1의2",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "performance_act_enforcement_rule__form_13_3",
+      "lawEntryId": "performance_act_enforcement_rule",
+      "lawName": "공연법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제13호의3서식",
+      "bylSeq": "001303",
+      "title": "공연장/공연 재해대처계획 신고·변경신고서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법시행규칙/별지제13호의3서식",
+      "summary": "공연장 또는 공연 재해대처계획 신고·변경신고에 쓰는 서식. 처리기간, 공연장/공연 작성사항, 변경사항, 첨부서류와 소방서 협조 절차를 확인한다.",
+      "checklistItems": [
+        "공연장 운영자, 공연장 명칭·소재지·시설 설치내역·객석규모 작성",
+        "공연 주최자, 공연명, 공연기간, 공연단 규모, 무대·좌석 추가 설치와 관람예상인원 작성",
+        "시설별 관리자 임무와 관리조직, 평면도·배치도 관리자 표기 첨부",
+        "비상조치와 연락처, 화재예방 및 인명피해 방지조치 첨부",
+        "공연장 외 1천명 이상 공연은 공연계획서와 안전관리인력 확보·배치계획 첨부"
+      ],
+      "dutyTypes": [
+        "plan_submission",
+        "recordkeeping",
+        "agency_coordination"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_disaster_countermeasure_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "blocked_evacuation_route"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법 시행규칙",
+      "sourceId": "별지 제13호의3서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "food_sanitation_act_enforcement_rule__annex_1",
+      "lawEntryId": "food_sanitation_act_enforcement_rule",
+      "lawName": "식품위생법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 1",
+      "bylSeq": "000100",
+      "title": "식품등의 위생적인 취급에 관한 기준",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/식품위생법시행규칙/별표1",
+      "summary": "행사장 식음료 제조·조리·저장·운반·진열 과정의 이물·오염 방지, 냉장·냉동, 개인위생, 기구 세척·살균 기준.",
+      "checklistItems": [
+        "식품 제조·조리·저장·운반·진열 시 이물 혼입과 병원성 미생물 오염 방지",
+        "원료보관실, 조리실, 포장실 등 식품 취급 공간 청결 유지",
+        "부패·변질 우려 식품은 냉동·냉장시설에 보관·관리",
+        "보관·운반·진열은 보존·유통 기준에 맞추고 냉동·냉장시설을 정상 작동 상태로 유지",
+        "직접 조리·포장 종사자는 위생모·마스크 등 개인위생 관리",
+        "기계·기구·음식기는 사용 후 세척·살균하고 어류·육류·채소류 칼·도마를 구분",
+        "소비기한 경과 식품 판매·진열·보관 금지"
+      ],
+      "dutyTypes": [
+        "inspection",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "food_booth",
+        "catering",
+        "food_truck",
+        "temporary_food_service"
+      ],
+      "relatedDutyIds": [
+        "temporary_food_business_and_poisoning_plan"
+      ],
+      "relatedHazardIds": [
+        "food_poisoning"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "식품위생법 시행규칙",
+      "sourceId": "별표 1",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__annex_17",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 17",
+      "bylSeq": "001700",
+      "title": "용기의 안전점검기준",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/별표17",
+      "summary": "LPG 용기 내·외면, 표시, 스커트, 열 영향, 캡·프로텍터, 재검사기간, 밸브와 실내보관 금지 표시 확인 기준.",
+      "checklistItems": [
+        "용기 안쪽·바깥 면의 부식, 금, 주름 등 사용 지장 결함 확인",
+        "용기 도색과 표시, 스커트 찌그러짐과 적정 간격 확인",
+        "열 영향을 받은 용기는 재검사 대상 여부 확인",
+        "용기 캡 또는 프로텍터 부착 여부 확인",
+        "각인을 통해 재검사기간 도래 여부 확인",
+        "밸브 몸통, 충전구나사, 안전밸브 결함과 개폐 핸들 상태 확인",
+        "내용적 15L 이하 용기 등의 실내보관 금지 표시 여부 확인"
+      ],
+      "dutyTypes": [
+        "inspection",
+        "fire_prevention"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "별표 17",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__annex_20",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 20",
+      "bylSeq": "002000",
+      "title": "액화석유가스 사용시설의 시설·기술·검사기준",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/별표20",
+      "summary": "LPG 용기 사용시설, 소형저장탱크, 저장탱크, 음식판매자동차 등 사용시설의 배치·저장·호스·배관·연소기·누출방지·점검 기준.",
+      "checklistItems": [
+        "저장설비·배관 이음매는 화기 취급장소와 저장능력별 우회거리 또는 가스 유동 방지시설 확보",
+        "용기는 원칙적으로 환기 양호한 옥외에 두고 직사광선·눈·빗물 위해 방지",
+        "호스는 안전한 성능의 것을 쓰고 일반 호스 길이, T형 연결 금지, 접속부 고정 상태 확인",
+        "충전용기 전도방지, 누출 감지·차단, 환기구, 부식 방지, 경계·위험표지 확인",
+        "가스사용자는 설비 작동상황을 1일 1회 이상 점검하고 이상 시 필요한 조치",
+        "음식판매자동차 LPG 사용시설은 산업통상부장관 고시 기준 적용 여부 확인"
+      ],
+      "dutyTypes": [
+        "inspection",
+        "fire_prevention",
+        "permit_check"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "별표 20",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__form_36",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제36호서식",
+      "bylSeq": "003600",
+      "title": "(완성, 정기)검사 신청서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/별지제36호서식",
+      "summary": "LPG 사용시설·공급시설 등의 완성검사 또는 정기검사 신청 서식. 행사 임시 조리구역과 푸드트럭 운영 시 검사 대상 여부를 사전에 확인한다.",
+      "checklistItems": [
+        "임시 조리시설, 푸드트럭, 용기 집합설비가 검사 신청 대상인지 가스공급자·지자체·검사기관에 확인",
+        "시설 종류, 설치 장소, 검사 구분, 신청인·사업자 정보와 검사 희망일을 행사 준비 일정표에 반영",
+        "검사 전 배관·호스·조정기·차단장치·환기·소화기·전도방지 상태를 자체 점검",
+        "개장 전 검사 완료 증빙 또는 대상 제외 확인서를 운영본부 증빙철에 보관"
+      ],
+      "dutyTypes": [
+        "permit_check",
+        "inspection",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "별지 제36호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__form_37",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제37호서식",
+      "bylSeq": "003700",
+      "title": "(완성, 정기)검사증명서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/별지제37호서식",
+      "summary": "완성검사 또는 정기검사 결과를 증명하는 서식. 행사장 LPG 반입 승인과 개장 전 안전확인 증빙으로 연결한다.",
+      "checklistItems": [
+        "검사증명서의 시설명, 소재지, 검사 종류, 검사일, 유효 범위가 실제 행사장 설치 범위와 일치하는지 확인",
+        "검사증명서 사본을 베뉴, 주최자, 안전총괄, 식음료 운영자에게 공유",
+        "검사 이후 설비 위치·배관·용기 수량 변경 시 재확인 또는 변경검사 필요 여부 확인",
+        "검사증명서와 일일 누출점검 기록을 사고보고서 증빙 체계에 연결"
+      ],
+      "dutyTypes": [
+        "inspection",
+        "recordkeeping",
+        "fire_prevention"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "별지 제37호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__annex_15",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 15",
+      "bylSeq": "001500",
+      "title": "가스공급자의 안전점검기준 등",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/별표15",
+      "summary": "가스공급자가 수요자 설비를 점검할 때 보는 안전점검 기준. 행사장 임시 조리·푸드트럭은 공급자 점검 항목과 주최자 일일점검 항목을 분리한다.",
+      "checklistItems": [
+        "공급자 안전점검 대상, 점검 주체, 점검 주기, 점검 결과 통보·조치 절차 확인",
+        "용기·조정기·호스·배관·연소기·환기·차단장치·누출 여부를 개장 전 체크",
+        "부적합 발견 시 영업 중지, 용기 교체, 밸브 차단, 관할기관 보고 기준을 사전에 정함",
+        "공급자 점검표와 주최자 일일점검표를 별도로 보관"
+      ],
+      "dutyTypes": [
+        "inspection",
+        "vendor_management",
+        "fire_prevention",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check",
+        "temporary_food_business_and_poisoning_plan"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg",
+        "food_poisoning"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "별표 15",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__annex_15_2",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 15의2",
+      "bylSeq": "001502",
+      "title": "공사계획의 승인대상",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/별표15의2",
+      "summary": "LPG 시설 공사계획 승인 대상. 행사장 임시 가스공급 구조가 단순 용기 반입인지, 승인 대상 공사인지 구분한다.",
+      "checklistItems": [
+        "저장설비, 배관, 공급방식 변경이 공사계획 승인 대상인지 확인",
+        "승인 대상이면 행사 개장일 역산 일정에 승인 신청, 시공, 검사, 보완 기간 반영",
+        "단순 용기 반입으로 판단한 경우에도 공급자와 관할기관 확인 기록 보관",
+        "승인 대상 공사와 베뉴 반입 승인, 소방·전기 작업허가를 별도 관리"
+      ],
+      "dutyTypes": [
+        "permit_check",
+        "plan_submission",
+        "inspection"
+      ],
+      "appliesTo": [
+        "lpg",
+        "outdoor_cooking",
+        "temporary_food_service",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "별표 15의2",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__annex_15_3",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 15의3",
+      "bylSeq": "001503",
+      "title": "공사계획의 신고대상",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/별표15의3",
+      "summary": "LPG 시설 공사계획 신고 대상. 승인 대상보다 낮은 변경이라도 신고 대상이면 행사 전 신고·검사 일정을 반영한다.",
+      "checklistItems": [
+        "배관, 저장설비, 사용시설 변경이 신고 대상인지 확인",
+        "신고 대상이면 시공 전 신고와 개장 전 검사 완료 일정을 안전계획서에 명시",
+        "신고 제외 판단 근거를 공급자 확인서 또는 관할기관 문의 기록으로 남김",
+        "신고·검사·베뉴 승인 서류를 식음료/LPG 점검표와 연결"
+      ],
+      "dutyTypes": [
+        "permit_check",
+        "plan_submission",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "lpg",
+        "outdoor_cooking",
+        "temporary_food_service",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "별표 15의3",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__annex_23",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 23",
+      "bylSeq": "002300",
+      "title": "가스사고배상책임보험과 소비자보장책임보험의 보험금액",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/별표23",
+      "summary": "LPG 관련 사고 배상책임보험·소비자보장책임보험 금액 기준. 푸드트럭·임시조리 운영자의 보험 증빙 확인 항목으로 연결한다.",
+      "checklistItems": [
+        "LPG 취급 사업자와 푸드트럭 운영자의 보험 가입 대상 여부 확인",
+        "보험증권의 피보험자, 보장기간, 보장범위, 장소가 행사 조건과 맞는지 확인",
+        "보험 미가입 또는 기간 불일치 업체는 LPG 반입 승인 전 보완 요구",
+        "식음료 참가업체 제출서류 목록에 보험증빙과 검사증명서를 함께 요구"
+      ],
+      "dutyTypes": [
+        "insurance_liability",
+        "vendor_management",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check",
+        "temporary_food_business_and_poisoning_plan"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "별표 23",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "road_act_enforcement_decree__annex_2",
+      "lawEntryId": "road_act_enforcement_decree",
+      "lawName": "도로법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 2",
+      "bylSeq": "000200",
+      "title": "도로점용허가의 기준",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/도로법시행령/별표2",
+      "summary": "도로점용허가의 장소, 기간, 구조, 공사방법, 시기, 복구, 매설물 위치표시 기준. 행사성 도로점용은 보행자·차량 안전과 교통소통대책으로 연결한다.",
+      "checklistItems": [
+        "점용물은 도로 구조 또는 교통에 지장을 주지 않는 위치에 설치",
+        "교차·접속·굴곡 부분 점용물 설치 제한 여부 확인",
+        "점용물 구조는 무너짐·낙하·벗겨짐·화재·하중 등으로 도로 구조안전 또는 교통에 지장을 주지 않아야 함",
+        "도로 한쪽 통행 유지와 교통 지장 최소화, 1개 차로 이상 차단 시 교통소통대책 수립",
+        "공사현장은 울타리 또는 덮개, 야간 적색등·황색등 등 위험방지 조치",
+        "가능한 교통량이 적은 시간대에 공사 또는 설치·철거 시행",
+        "굴착·복구가 있으면 도로 구조와 기능을 원상 유지하고 품질관리 기준 확인"
+      ],
+      "dutyTypes": [
+        "permit_check",
+        "plan_submission",
+        "crowd_control",
+        "inspection"
+      ],
+      "appliesTo": [
+        "festival",
+        "outdoor_event",
+        "road_use",
+        "traffic_control"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로법 시행령",
+      "sourceId": "별표 2",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "road_act_enforcement_rule__form_11",
+      "lawEntryId": "road_act_enforcement_rule",
+      "lawName": "도로법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제11호서식",
+      "bylSeq": "001100",
+      "title": "도로공사 시행 허가 신청서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/도로법시행규칙/별지제11호서식",
+      "summary": "도로구역에서 공사 또는 임시시설 설치가 필요한 경우 도로공사 시행 허가 신청 항목을 확인하는 서식.",
+      "checklistItems": [
+        "행사 설치물이 단순 점용인지 도로공사 시행 허가 대상인지 도로관리청에 확인",
+        "공사 위치, 기간, 면적, 구조, 시공방법, 교통처리, 안전시설 계획을 신청 전 정리",
+        "보행자 우회로, 차로 축소, 야간 설치·철거, 복구계획을 도면과 함께 준비",
+        "허가 조건을 스태프 브리핑과 일일 안전점검표에 반영"
+      ],
+      "dutyTypes": [
+        "permit_check",
+        "plan_submission",
+        "crowd_control"
+      ],
+      "appliesTo": [
+        "road_use",
+        "traffic_control",
+        "temporary_structure",
+        "road_installation"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로법 시행규칙",
+      "sourceId": "별지 제11호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "road_act_enforcement_rule__form_12",
+      "lawEntryId": "road_act_enforcement_rule",
+      "lawName": "도로법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제12호서식",
+      "bylSeq": "001200",
+      "title": "도로공사 착수 신고서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/도로법시행규칙/별지제12호서식",
+      "summary": "허가받은 도로공사 또는 행사 임시시설 설치 공사의 실제 착수 신고 서식. 설치·철거 시작 시점 통제와 연결한다.",
+      "checklistItems": [
+        "착수일, 공사 구간, 시공자, 현장책임자, 비상연락처를 운영본부와 공유",
+        "착수 전 교통안전시설, 보행자 우회 안내, 야간 경광등, 현장 울타리 설치 확인",
+        "관람객 운영 시간과 공사·철거 시간이 겹치면 통제구역과 스태프 배치 확정",
+        "착수 신고와 베뉴/지자체/경찰 협의 내역을 같은 증빙철에 보관"
+      ],
+      "dutyTypes": [
+        "plan_submission",
+        "agency_coordination",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "road_use",
+        "traffic_control",
+        "road_installation"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로법 시행규칙",
+      "sourceId": "별지 제12호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "road_act_enforcement_rule__form_13",
+      "lawEntryId": "road_act_enforcement_rule",
+      "lawName": "도로법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제13호서식",
+      "bylSeq": "001300",
+      "title": "도로공사 준공검사 신청서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/도로법시행규칙/별지제13호서식",
+      "summary": "도로공사 완료 후 준공검사 신청 서식. 행사 종료 후 원상복구와 사후 점검 항목으로 연결한다.",
+      "checklistItems": [
+        "철거 후 포장, 보도블록, 경계석, 배수, 표지, 차선 등 원상복구 상태 확인",
+        "준공검사 전후 사진, 현장 책임자 확인, 도로관리청 보완 지시 이행 기록 보관",
+        "행사 종료 뒤 임시시설 잔재와 보행 장애물이 없는지 야간까지 재점검",
+        "복구 지연 시 교통안전시설과 보행자 안내를 유지"
+      ],
+      "dutyTypes": [
+        "inspection",
+        "recordkeeping",
+        "incident_report"
+      ],
+      "appliesTo": [
+        "road_use",
+        "traffic_control",
+        "road_installation"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로법 시행규칙",
+      "sourceId": "별지 제13호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "road_act_enforcement_rule__form_33",
+      "lawEntryId": "road_act_enforcement_rule",
+      "lawName": "도로법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제33호서식",
+      "bylSeq": "003300",
+      "title": "도로 점용공사 대행 통지서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/도로법시행규칙/별지제33호서식",
+      "summary": "도로 점용공사를 대행하는 경우 통지하는 서식. 행사 대행사·시공사·지자체 간 책임 경계 확인에 활용한다.",
+      "checklistItems": [
+        "도로 점용공사 대행 주체와 현장책임자, 보험, 하도급 관계를 확인",
+        "대행 통지 범위가 실제 설치·철거·복구 작업 범위와 일치하는지 확인",
+        "교통안전시설 설치·유지·철거 책임과 사고 발생 시 보고 책임을 계약서에 명시",
+        "대행 통지서와 허가 조건을 운영본부 문서철에 연결"
+      ],
+      "dutyTypes": [
+        "vendor_management",
+        "agency_coordination",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "road_use",
+        "traffic_control",
+        "road_installation"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로법 시행규칙",
+      "sourceId": "별지 제33호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "road_act_enforcement_rule__form_36",
+      "lawEntryId": "road_act_enforcement_rule",
+      "lawName": "도로법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제36호서식",
+      "bylSeq": "003600",
+      "title": "(통행의 금지ㆍ제한, 차량의 운행 제한)공고",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/도로법시행규칙/별지제36호서식",
+      "summary": "행사에 따른 통행 금지·제한 또는 차량 운행 제한 공고 서식. 차 없는 거리, 퍼레이드, 도로변 축제의 사전 안내 기준으로 연결한다.",
+      "checklistItems": [
+        "통행 제한 구간, 기간, 제한 대상, 우회도로, 사유, 문의처를 공고·현장안내·온라인 안내에 일치시킴",
+        "경찰, 도로관리청, 지자체, 버스·택시·주차 운영자와 우회 동선과 통제 시간을 합의",
+        "공고 내용과 현장 표지·입간판·배너 문구가 다른지 개장 전 점검",
+        "비상차량 접근 동선과 대피동선은 통행 제한 계획에서 예외로 관리"
+      ],
+      "dutyTypes": [
+        "traffic_restriction",
+        "agency_coordination",
+        "public_notice",
+        "crowd_control"
+      ],
+      "appliesTo": [
+        "festival",
+        "outdoor_event",
+        "road_use",
+        "traffic_control",
+        "parade"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로법 시행규칙",
+      "sourceId": "별지 제36호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "building_act_enforcement_rule__form_8",
+      "lawEntryId": "building_act_enforcement_rule",
+      "lawName": "건축법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제8호서식",
+      "bylSeq": "000800",
+      "title": "가설건축물 축조신고서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/건축법시행규칙/별지제8호서식",
+      "summary": "행사장 임시 건축물, 대형 텐트, 임시 전시장·매표소·부대시설이 가설건축물 축조신고 대상인지 확인하는 서식.",
+      "checklistItems": [
+        "임시 구조물의 규모, 용도, 존치기간, 위치가 가설건축물 신고 대상인지 관할 건축부서에 확인",
+        "평면도, 배치도, 구조·재료, 피난·방화, 전기·가스 사용 계획을 신고 전 정리",
+        "신고필증 또는 대상 제외 확인을 베뉴 승인·소방 협의 문서와 함께 보관",
+        "신고한 존치기간과 실제 설치·철거 일정이 일치하는지 운영 일정표에 반영"
+      ],
+      "dutyTypes": [
+        "permit_check",
+        "plan_submission",
+        "evacuation",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "temporary_structure",
+        "festival",
+        "exhibition",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "booth_construction_safety_checklist",
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "blocked_evacuation_route"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "건축법 시행규칙",
+      "sourceId": "별지 제8호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "building_act_enforcement_rule__form_8_2",
+      "lawEntryId": "building_act_enforcement_rule",
+      "lawName": "건축법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제8호의2서식",
+      "bylSeq": "000802",
+      "title": "3층 이상인 가설건축물의 피난안전 확인서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/건축법시행규칙/별지제8호의2서식",
+      "summary": "3층 이상 가설건축물의 피난안전 확인 서식. 복층·다층 임시 구조물, 관람석, 임시 전시시설의 피난 검토 체크포인트로 쓴다.",
+      "checklistItems": [
+        "층수, 수용인원, 계단·출구 수, 피난거리, 난간·추락방지, 비상조명 기준 확인",
+        "복층 부스 또는 임시 관람석이 3층 이상 가설건축물에 해당하지 않는지도 구조검토서로 확인",
+        "피난안전 확인 결과를 소방·피난 점검표와 인파·동선 계획에 반영",
+        "피난안전 보완 지시가 있으면 개장 전 이행 사진과 책임자 확인을 남김"
+      ],
+      "dutyTypes": [
+        "evacuation",
+        "inspection",
+        "building_capacity_review",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "temporary_structure",
+        "multi_level_booth",
+        "temporary_seating",
+        "festival",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "booth_construction_safety_checklist",
+        "fire_evacuation_facility_management",
+        "mice_crowd_management_plan"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "blocked_evacuation_route",
+        "crowd_density_high"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "건축법 시행규칙",
+      "sourceId": "별지 제8호의2서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "building_act_enforcement_rule__form_17",
+      "lawEntryId": "building_act_enforcement_rule",
+      "lawName": "건축법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제17호서식",
+      "bylSeq": "001700",
+      "title": "(임시)사용승인 신청서",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/건축법시행규칙/별지제17호서식",
+      "summary": "건축물 또는 임시 사용승인 신청 서식. 행사장이 공사 중이거나 임시 사용 구역을 운영하는 경우 사용승인 상태 확인에 연결한다.",
+      "checklistItems": [
+        "행사 구역이 사용승인 전 건축물 또는 임시 사용승인 구역인지 확인",
+        "사용승인 범위, 사용 가능 구역, 제한 조건, 소방·피난·전기·승강기 사용 조건을 베뉴와 대조",
+        "사용승인 조건이 부스 배치, 수용인원, 출입구, 피난동선과 충돌하는지 확인",
+        "승인서와 제한 조건을 행사 안전관리계획서 근거 문서로 보관"
+      ],
+      "dutyTypes": [
+        "permit_check",
+        "inspection",
+        "evacuation",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "temporary_use",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "venue_crisis_response_manual_check",
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "건축법 시행규칙",
+      "sourceId": "별지 제17호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "fire_prevention_act_enforcement_decree__annex_4",
+      "lawEntryId": "fire_prevention_act_enforcement_decree",
+      "lawName": "화재예방법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 4",
+      "bylSeq": "000400",
+      "title": "소방안전관리자를 선임해야 하는 소방안전관리대상물의 범위와 자격·인원기준",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/화재의예방및안전관리에관한법률시행령/별표4",
+      "summary": "특급·1급·2급·3급 소방안전관리대상물 범위와 소방안전관리자 자격·선임인원 기준. 대형 전시장·컨벤션센터는 시설 측 선임 등급과 행사 운영조직의 역할분담 확인이 필요하다.",
+      "checklistItems": [
+        "연면적 10만㎡ 이상 또는 30층 이상 등 특급 소방안전관리대상물 여부 확인",
+        "연면적 1만5천㎡ 이상 또는 11층 이상 등 1급 소방안전관리대상물 여부 확인",
+        "옥내소화전·스프링클러·물분무등소화설비 설치 대상 등 2급 여부 확인",
+        "간이스프링클러 또는 자동화재탐지설비 설치 대상 등 3급 여부 확인",
+        "베뉴 소방안전관리자 성명, 연락처, 행사 중 협업 역할을 운영본부 연락망에 반영"
+      ],
+      "dutyTypes": [
+        "staff_deployment",
+        "fire_prevention",
+        "inspection"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "화재예방법 시행령",
+      "sourceId": "별표 4",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "fire_prevention_act_enforcement_decree__annex_5",
+      "lawEntryId": "fire_prevention_act_enforcement_decree",
+      "lawName": "화재예방법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 5",
+      "bylSeq": "000500",
+      "title": "소방안전관리보조자를 선임해야 하는 대상물의 범위와 자격·인원기준",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/화재의예방및안전관리에관한법률시행령/별표5",
+      "summary": "소방안전관리보조자 선임 대상과 면적·세대수별 추가 선임 기준. 연면적 1만5천㎡ 이상 특정소방대상물은 보조자 선임 기준 확인이 필요하다.",
+      "checklistItems": [
+        "소방안전관리자 선임 대상 중 연면적 1만5천㎡ 이상 특정소방대상물 여부 확인",
+        "연면적 1만5천㎡ 초과분마다 보조자 추가 선임 기준 확인",
+        "방재실 자위소방대 24시간 상시 근무 및 소방차 운용 조건이 있는 경우 완화 기준 확인",
+        "야간·휴일 미이용 확인 등 보조자 선임 제외 조건을 관할 소방서 확인",
+        "행사 중 베뉴 보조자와 구역장·보안팀의 피난 유도 역할을 분리"
+      ],
+      "dutyTypes": [
+        "staff_deployment",
+        "fire_prevention",
+        "inspection"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "crowd_density_high"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "화재예방법 시행령",
+      "sourceId": "별표 5",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "fire_facilities_act_enforcement_decree__annex_2",
+      "lawEntryId": "fire_facilities_act_enforcement_decree",
+      "lawName": "소방시설법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 2",
+      "bylSeq": "000200",
+      "title": "특정소방대상물",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/소방시설설치및관리에관한법률시행령/별표2",
+      "summary": "특정소방대상물 용도 분류. MICE에서는 문화 및 집회시설의 공연장, 집회장, 관람장, 전시장, 관광휴게시설, 판매시설, 운수시설, 복합건축물 해당 여부를 확인한다.",
+      "checklistItems": [
+        "전시장: 박물관, 미술관, 과학관, 문화관, 체험관, 기념관, 산업전시장, 박람회장, 견본주택 등 해당 여부 확인",
+        "집회장: 회의장, 공회당, 예식장 등 해당 여부 확인",
+        "공연장: 근린생활시설 규모를 초과하는 공연장 또는 야외음악당·야외극장 여부 확인",
+        "판매시설, 운수시설, 관광휴게시설, 복합건축물로 함께 분류되는 구역 확인",
+        "용도 혼재 행사에서는 베뉴 주용도와 행사 임시 사용용도를 모두 소방담당자와 확인"
+      ],
+      "dutyTypes": [
+        "inspection",
+        "fire_prevention",
+        "evacuation"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance",
+        "festival"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management",
+        "venue_crisis_response_manual_check"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "crowd_density_high"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "소방시설법 시행령",
+      "sourceId": "별표 2",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "fire_facilities_act_enforcement_decree__annex_4",
+      "lawEntryId": "fire_facilities_act_enforcement_decree",
+      "lawName": "소방시설법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 4",
+      "bylSeq": "000400",
+      "title": "특정소방대상물에 설치·관리해야 하는 소방시설의 종류",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/소방시설설치및관리에관한법률시행령/별표4",
+      "summary": "특정소방대상물별 소화설비, 경보설비, 피난구조설비, 소화용수설비, 소화활동설비 설치·관리 기준. 행사 전 베뉴 소방시설 설치 상태와 임시 설치물 차단 여부를 대조한다.",
+      "checklistItems": [
+        "문화 및 집회시설 등 수용인원 100명 이상인 경우 스프링클러설비 대상 여부 확인",
+        "연면적·지하층·무창층·층수 조건에 따른 옥내소화전, 자동화재탐지, 비상방송 대상 여부 확인",
+        "문화 및 집회시설은 피난구유도등·통로유도등·객석유도등 설치 상태 확인",
+        "가스시설 설치 구역의 가스누설경보기 대상 여부 확인",
+        "무대부 면적, 지하·무창층 조건에 따른 제연설비 대상 여부 확인",
+        "임시부스·전시품·자재가 소화기구, 소화전, 유도등, 비상방송, 제연설비 접근성을 막지 않는지 확인"
+      ],
+      "dutyTypes": [
+        "inspection",
+        "fire_prevention",
+        "evacuation"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance",
+        "food_event"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "소방시설법 시행령",
+      "sourceId": "별표 4",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "fire_facilities_act_enforcement_decree__annex_7",
+      "lawEntryId": "fire_facilities_act_enforcement_decree",
+      "lawName": "소방시설법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 7",
+      "bylSeq": "000700",
+      "title": "수용인원의 산정 방법",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/소방시설설치및관리에관한법률시행령/별표7",
+      "summary": "특정소방대상물 수용인원 산정 방법. 문화 및 집회시설·운동시설·종교시설은 바닥면적/4.6㎡ 또는 고정식 의자 수 기준을 검토한다.",
+      "checklistItems": [
+        "문화 및 집회시설, 운동시설, 종교시설은 해당 바닥면적 합계를 4.6㎡로 나누어 수용인원 산정",
+        "관람석 고정식 의자는 의자 수로 산정",
+        "긴 의자는 정면너비를 0.45m로 나누어 산정",
+        "그 밖의 특정소방대상물은 바닥면적 합계/3㎡ 기준 검토",
+        "복도, 계단, 화장실 등 제외 면적 기준을 시설 도면과 대조"
+      ],
+      "dutyTypes": [
+        "building_capacity_review",
+        "crowd_control",
+        "inspection"
+      ],
+      "appliesTo": [
+        "venue_capacity",
+        "exhibition",
+        "conference",
+        "performance",
+        "festival"
+      ],
+      "relatedDutyIds": [
+        "mice_crowd_management_plan",
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "소방시설법 시행령",
+      "sourceId": "별표 7",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "fire_facilities_act_enforcement_decree__annex_8",
+      "lawEntryId": "fire_facilities_act_enforcement_decree",
+      "lawName": "소방시설법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 8",
+      "bylSeq": "000800",
+      "title": "임시소방시설의 종류와 설치기준 등",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/소방시설설치및관리에관한법률시행령/별표8",
+      "summary": "공사 중 화재위험작업현장의 임시소방시설 종류와 규모별 설치 기준. MICE 설치·철거 중 용접·용단·가스 작업이 있으면 임시소방시설 체크리스트로 연결한다.",
+      "checklistItems": [
+        "화재위험작업현장에는 소화기 설치 기준 확인",
+        "연면적 3천㎡ 이상 또는 지하층·무창층·4층 이상 일정 면적 공사는 간이소화장치 대상 여부 확인",
+        "연면적 400㎡ 이상 또는 지하층·무창층 일정 면적 공사는 비상경보장치 대상 여부 확인",
+        "지하층·무창층 150㎡ 이상 화재위험작업현장은 가스누설경보기, 간이피난유도선, 비상조명등 대상 여부 확인",
+        "용접·용단 작업 현장에는 방화포 설치 확인",
+        "기존 비상방송, 자동화재탐지, 유도등 등 대체 인정 시설 상태 확인"
+      ],
+      "dutyTypes": [
+        "fire_prevention",
+        "worker_safety",
+        "inspection"
+      ],
+      "appliesTo": [
+        "setup_teardown",
+        "hot_work",
+        "temporary_structure",
+        "booth_build",
+        "stage_build"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check",
+        "worker_safety_work_plan"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg",
+        "temporary_structure_collapse",
+        "temporary_electrical_fire_shock"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "소방시설법 시행령",
+      "sourceId": "별표 8",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_decree__annex_1",
+      "lawEntryId": "security_services_industry_act_enforcement_decree",
+      "lawName": "경비업법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 1",
+      "bylSeq": "000100",
+      "title": "경비업의 경비인력 등의 기준",
+      "summary": "시설경비, 신변보호, 혼잡·교통유도경비 등 경비업 허가 업무별 최소 경비인력·자본금·장비 기준.",
+      "checklistItems": [
+        "시설경비업무: 일반경비원 10명 이상과 경비지도사 1명 이상 기준 확인",
+        "신변보호업무: 무술유단자인 일반경비원 5명 이상과 경비지도사 1명 이상 기준 확인",
+        "혼잡·교통유도경비업무: 일반경비원 10명 이상, 경비지도사 1명 이상, 무전기·경광봉 등 장비 기준 확인",
+        "계약 경비업체 허가 업무 범위가 실제 행사 업무와 일치하는지 확인"
+      ],
+      "dutyTypes": [
+        "licensed_security_vendor",
+        "security_staffing",
+        "permit_check"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행령/별표1",
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행령",
+      "sourceId": "별표 1",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_decree__annex_3",
+      "lawEntryId": "security_services_industry_act_enforcement_decree",
+      "lawName": "경비업법 시행령",
+      "annexType": "annex",
+      "annexNo": "별표 3",
+      "bylSeq": "000300",
+      "title": "경비지도사의 선임·배치기준",
+      "summary": "관할 시·도경찰청 구역별 경비원 수에 따른 경비지도사 선임·배치 기준.",
+      "checklistItems": [
+        "관할 시·도경찰청 관할구역별 경비원 200명까지 경비지도사 1명 선임·배치",
+        "200명 초과 시 초과 경비원 100명 단위마다 경비지도사 1명 추가 선임·배치",
+        "인접 관할구역 30명 이하 예외 적용 시 총 지도·감독 경비원 수 200명 이하 확인",
+        "시설경비·신변보호·혼잡교통유도 등 복수 업무는 경비원 수 합산 기준으로 산정"
+      ],
+      "dutyTypes": [
+        "security_staffing",
+        "training",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap"
+      ],
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행령/별표3",
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행령",
+      "sourceId": "별표 3",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_rule__form_14",
+      "lawEntryId": "security_services_industry_act_enforcement_rule",
+      "lawName": "경비업법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제14호서식",
+      "bylSeq": "001400",
+      "title": "경비원 명부",
+      "summary": "경비원 인적사항, 배치지, 신임교육 이수증, 교육훈련·경력 기록을 관리하는 명부 서식.",
+      "checklistItems": [
+        "경비원 성명·생년월일·주소·연락처와 배치지 기록",
+        "신임교육 이수증 교부번호 확인",
+        "교육훈련·경력 기록 보존",
+        "특수경비원 해당 시 신체조건 등 추가 항목 확인"
+      ],
+      "dutyTypes": [
+        "recordkeeping",
+        "security_staffing",
+        "training"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap"
+      ],
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행규칙/별지제14호서식",
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행규칙",
+      "sourceId": "별지 제14호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_rule__form_15",
+      "lawEntryId": "security_services_industry_act_enforcement_rule",
+      "lawName": "경비업법 시행규칙",
+      "annexType": "form",
+      "annexNo": "별지 제15호서식",
+      "bylSeq": "001500",
+      "title": "경비원 배치·배치폐지 신고서",
+      "summary": "경비원 배치장소, 배치일시, 배치폐지 예정일시, 경비 목적·내용, 경비원 명단과 신임교육 이수증 번호를 신고하는 서식.",
+      "checklistItems": [
+        "법인명·허가번호·배치장소·연락처 기재",
+        "배치일시와 배치폐지 예정일시 기재",
+        "경비 목적 또는 내용을 구체적으로 작성",
+        "경비원 명단, 배치 경비업무, 신임교육 이수증 번호 확인"
+      ],
+      "dutyTypes": [
+        "permit_check",
+        "recordkeeping",
+        "security_staffing"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap"
+      ],
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행규칙/별지제15호서식",
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행규칙",
+      "sourceId": "별지 제15호서식",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "emergency_medical_service_act_enforcement_rule__annex_2",
+      "lawEntryId": "emergency_medical_service_act_enforcement_rule",
+      "lawName": "응급의료법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 2",
+      "bylSeq": "000200",
+      "title": "구조 및 응급처치 교육의 내용 및 실시방법",
+      "summary": "응급활동 원칙·안전수칙·응급의료 법령, 기본인명구조술 이론·실습 4시간 교육 구성.",
+      "checklistItems": [
+        "응급활동 원칙과 응급구조 시 안전수칙 교육 포함",
+        "응급의료 관련 법령 1시간 교육 포함",
+        "기본인명구조술 이론 1시간과 실습 2시간 편성",
+        "스태프/AED 담당자 교육 이수자와 교육일시 기록"
+      ],
+      "dutyTypes": [
+        "training",
+        "medical_response",
+        "recordkeeping"
+      ],
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료법시행규칙/별표2",
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료법 시행규칙",
+      "sourceId": "별표 2",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "emergency_medical_service_act_enforcement_rule__annex_15",
+      "lawEntryId": "emergency_medical_service_act_enforcement_rule",
+      "lawName": "응급의료법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 15",
+      "bylSeq": "001500",
+      "title": "구급차등의 운용위탁에 대한 기준 및 절차",
+      "summary": "위탁 구급차 등록번호, 이송업 허가번호, 운용 인력 명단·자격, 정기 지도·점검, 월별 운행기록 제출 기준.",
+      "checklistItems": [
+        "위탁계약서에 구급차 등록번호, 이송업 허가번호, 운용 신고번호, 운용 인력 명단·자격 기재",
+        "위탁 기관에 대해 6개월 1회 이상 정기 지도·점검 기준 확인",
+        "위탁 구급차 즉시 운용 가능 상태 확인",
+        "월별 운행기록 제출·보관 절차 확인"
+      ],
+      "dutyTypes": [
+        "ambulance_operation",
+        "vendor_management",
+        "recordkeeping"
+      ],
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료법시행규칙/별표15",
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료법 시행규칙",
+      "sourceId": "별표 15",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "emergency_medical_service_act_enforcement_rule__annex_16",
+      "lawEntryId": "emergency_medical_service_act_enforcement_rule",
+      "lawName": "응급의료법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 16",
+      "bylSeq": "001600",
+      "title": "구급차등에 갖추어야 하는 의료장비·구급의약품 및 통신장비 기준",
+      "summary": "특수/일반 구급차의 환자평가, 기도·호흡·순환·외상 처치 장비, AED, 구급의약품, 통신장비 기준.",
+      "checklistItems": [
+        "특수구급차 환자감시장치, 혈당측정기, 체온계, 혈압계, 산소포화도 측정기 확인",
+        "기도확보·호흡유지·흡인·산소공급 장비 확인",
+        "자동심장충격기와 심폐소생술 구급의약품 확인",
+        "응급의료기관/응급의료지원센터와 교신 가능한 통신장비 확인"
+      ],
+      "dutyTypes": [
+        "ambulance_equipment",
+        "medical_response",
+        "inspection"
+      ],
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료법시행규칙/별표16",
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료법 시행규칙",
+      "sourceId": "별표 16",
+      "sourceConfidence": "official_law_go_verified_annex"
+    },
+    {
+      "id": "emergency_medical_service_act_enforcement_rule__annex_17",
+      "lawEntryId": "emergency_medical_service_act_enforcement_rule",
+      "lawName": "응급의료법 시행규칙",
+      "annexType": "annex",
+      "annexNo": "별표 17",
+      "bylSeq": "001700",
+      "title": "구급차등에 갖추어야 하는 장비 등의 관리기준",
+      "summary": "구급차 소독, 장비 사용 가능 상태, 적정 온습도, 연료, 보험, 통신장비 교신, 운행기록 3년 보관 기준.",
+      "checklistItems": [
+        "구급차 주 1회 이상 소독 및 사용 후 의료장비 소독 확인",
+        "의료장비·구급의약품·통신장비를 항상 사용 가능한 상태로 유지",
+        "구급의약품 적정 온도·습도 관리와 연료 4분의 1 이상 유지 확인",
+        "구급차 운행기록 대장 작성 및 3년 보관 확인"
+      ],
+      "dutyTypes": [
+        "ambulance_management",
+        "inspection",
+        "recordkeeping"
+      ],
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료법시행규칙/별표17",
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료법 시행규칙",
+      "sourceId": "별표 17",
+      "sourceConfidence": "official_law_go_verified_annex"
+    }
+  ]
+}
