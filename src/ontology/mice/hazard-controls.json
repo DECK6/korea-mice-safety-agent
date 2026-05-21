@@ -1,0 +1,513 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "hazards": [
+    {
+      "id": "crowd_density_high",
+      "label": "군중 밀집도 상승",
+      "eventTypes": [
+        "festival",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "triggers": [
+        "expectedCrowd>=1000",
+        "peakIngress",
+        "stageFront",
+        "queueMerge",
+        "popularBooth"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "구역별 수용능력과 순간 최대 인원 기준을 사전에 정한다.",
+        "입장·퇴장·대기열을 분리하고 병목 구간에는 일방통행 또는 우회 동선을 둔다.",
+        "밀집 구역에는 스태프를 고정 배치하고 혼잡 단계별 통제 문구를 준비한다.",
+        "경찰·소방·지자체와 다중운집 대응 연락체계를 확인한다."
+      ],
+      "lawRefs": [
+        "framework_act_disaster_safety:제66조의12",
+        "fire_facilities_act_enforcement_decree:별표7"
+      ],
+      "sourceRefs": [
+        "MOIS_CROWD_GUIDELINE",
+        "MOIS_FESTIVAL_MANUAL_2024",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "ingress_egress_bottleneck",
+      "label": "입퇴장 병목",
+      "eventTypes": [
+        "festival",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "triggers": [
+        "singleGate",
+        "ticketScan",
+        "securityCheck",
+        "rainShelter",
+        "endOfProgram"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "게이트별 처리량, 대기열 길이, 우회 동선을 사전 산정한다.",
+        "입장 피크와 프로그램 종료 피크의 스태프 배치를 분리한다.",
+        "임시 펜스·바리케이드는 피난 방향을 막지 않도록 배치한다."
+      ],
+      "lawRefs": [
+        "framework_act_disaster_safety:제66조의12",
+        "fire_facilities_act_enforcement_decree:별표7"
+      ],
+      "sourceRefs": [
+        "MOIS_CROWD_GUIDELINE",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "unhosted_crowd_governance_gap",
+      "label": "무주최 다중운집 책임·지휘 공백",
+      "eventTypes": [
+        "festival",
+        "outdoor_event"
+      ],
+      "triggers": [
+        "unhostedCrowd",
+        "spontaneousGathering",
+        "stationArea",
+        "noOrganizer",
+        "multiAgencyBoundary"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "주최자 없음 또는 책임 공백을 전제로 지자체·경찰·소방·시설관리자·교통 운영기관의 공동 현장지휘 체계를 사전에 정한다.",
+        "관찰, 주의, 경계, 심각 등 상황 단계별로 인파 분산, 일방통행, 출입구 폐쇄, 대중교통 증편·무정차 요청, 대피개시 기준을 정한다.",
+        "역사, 광장, 상가, 도로, 공개공지처럼 관리주체가 나뉘는 구역은 현장 연락망과 권한 경계를 도면에 표시한다.",
+        "주최자가 없더라도 방송·문자·전광판·SNS·현장 안내를 통한 분산 안내와 사후 기록 보존 책임자를 지정한다."
+      ],
+      "lawRefs": [
+        "framework_act_disaster_safety:제66조의12"
+      ],
+      "sourceRefs": [
+        "MOIS_CROWD_GUIDELINE"
+      ]
+    },
+    {
+      "id": "blocked_evacuation_route",
+      "label": "비상구·피난통로 폐쇄 또는 적재",
+      "eventTypes": [
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "triggers": [
+        "boothLayout",
+        "freight",
+        "storage",
+        "backOfHall"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "부스·전시품·자재가 비상구, 소화전, EPS, 후면 소방통로를 막지 않도록 배치한다.",
+        "개장 전과 피크 전 비상구·소방통로 개방상태를 사진으로 증빙한다.",
+        "시설 도면의 피난동선과 실제 설치물을 대조한다."
+      ],
+      "lawRefs": [
+        "fire_facilities_act:*",
+        "fire_facilities_act_enforcement_decree:제36조",
+        "fire_prevention_act_enforcement_decree:제26조",
+        "building_act_enforcement_decree:제34조",
+        "building_act_enforcement_decree:제35조",
+        "building_act_enforcement_decree:제36조",
+        "building_act_enforcement_decree:제37조",
+        "building_act_enforcement_rule:별지제17호서식",
+        "fire_prevention_act_enforcement_decree:별표4",
+        "fire_prevention_act_enforcement_decree:별표5",
+        "fire_facilities_act_enforcement_decree:별표2",
+        "fire_facilities_act_enforcement_decree:별표4"
+      ],
+      "sourceRefs": [
+        "COEX_SERVICE_PARTNER_MANUAL",
+        "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "temporary_structure_collapse",
+      "label": "임시구조물·부스·무대·트러스 전도/붕괴",
+      "eventTypes": [
+        "exhibition",
+        "festival",
+        "performance"
+      ],
+      "triggers": [
+        "temporaryStructures",
+        "twoStoryBooth",
+        "rigging",
+        "outdoorWind",
+        "heavyObject"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "독립부스, 복층, 리깅, 대형 구조물은 베뉴 승인과 구조검토 대상 여부를 확인한다.",
+        "설치·해체 작업 전 작업신고서와 고소작업/중량물 작업 계획을 확인한다.",
+        "야외 구조물은 풍속 기준과 중지·철거 트리거를 둔다."
+      ],
+      "lawRefs": [
+        "occupational_safety_health_act:제36조",
+        "occupational_safety_health_act:제63조",
+        "occupational_safety_health_standards_rule:제38조",
+        "occupational_safety_health_standards_rule:제42조",
+        "building_act:*",
+        "building_act_enforcement_rule:별지제8호서식",
+        "building_act_enforcement_rule:별지제8호의2서식"
+      ],
+      "sourceRefs": [
+        "COEX_SERVICE_PARTNER_MANUAL",
+        "KINTEX_ORGANIZER_MANUAL",
+        "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+        "KDJ_PARTNER_DOCS",
+        "OSH_STANDARDS_RULE_WORK_PLAN",
+        "KOSHA_WORKER_SAFETY_GUIDE_SET"
+      ]
+    },
+    {
+      "id": "temporary_electrical_fire_shock",
+      "label": "임시전기 감전·누전·화재",
+      "eventTypes": [
+        "exhibition",
+        "festival",
+        "performance",
+        "food_event"
+      ],
+      "triggers": [
+        "temporaryElectricity",
+        "boothPower",
+        "generator",
+        "wetWeather",
+        "cableCrossing"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "분전반, 누전차단기, 케이블 포설, 통로 횡단 보호, 접지 상태를 점검한다.",
+        "전기 작업은 지정협력업체·자격 보유자·베뉴 기술지원 절차를 따른다.",
+        "물 사용 구역, 야외 우천, 푸드부스 주변 전기설비를 별도 점검한다."
+      ],
+      "lawRefs": [
+        "electrical_safety_management_act:제13조",
+        "occupational_safety_health_act:제36조",
+        "occupational_safety_health_standards_rule:제321조",
+        "outdoor_advertisements_act_enforcement_decree:제14조"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL",
+        "KINTEX_ORGANIZER_MANUAL",
+        "KDJ_PARTNER_DOCS",
+        "KOSHA_WORKER_SAFETY_GUIDE_SET"
+      ]
+    },
+    {
+      "id": "fire_hazard_hot_work_lpg",
+      "label": "화기·위험물·LPG 화재/폭발",
+      "eventTypes": [
+        "festival",
+        "food_event",
+        "exhibition",
+        "performance"
+      ],
+      "triggers": [
+        "foodService",
+        "lpg",
+        "nakedFlame",
+        "hazardousMaterial",
+        "pyrotechnics"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "위험물·화기·가스 반입 허가 대상 여부를 사전에 확인한다.",
+        "소화기 위치, 화기 이격거리, 가스용기 전도방지, 누출점검을 확인한다.",
+        "베뉴별 금지 물질과 반입 절차를 참가업체 매뉴얼에 반영한다."
+      ],
+      "lawRefs": [
+        "fire_prevention_act:*",
+        "lp_gas_safety_act:*",
+        "food_sanitation_act:제37조",
+        "occupational_safety_health_standards_rule:화재위험작업",
+        "fire_prevention_act_enforcement_decree:제26조",
+        "lp_gas_safety_act_enforcement_rule:제45조",
+        "lp_gas_safety_act_enforcement_rule:제47조",
+        "lp_gas_safety_act_enforcement_rule:제69조",
+        "lp_gas_safety_act_enforcement_rule:별지제36호서식",
+        "lp_gas_safety_act_enforcement_rule:별지제37호서식",
+        "lp_gas_safety_act_enforcement_rule:별표15",
+        "lp_gas_safety_act_enforcement_rule:별표23",
+        "fire_facilities_act_enforcement_decree:별표8",
+        "fire_facilities_act_enforcement_decree:별표4"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL",
+        "COEX_SERVICE_PARTNER_MANUAL",
+        "KDJ_EXHIBITION_FORMS",
+        "KOSHA_WORKER_SAFETY_GUIDE_SET"
+      ]
+    },
+    {
+      "id": "worker_fall_height",
+      "label": "설치·철거 작업자 추락",
+      "eventTypes": [
+        "festival",
+        "outdoor_event",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "triggers": [
+        "setupTeardown",
+        "workAtHeight",
+        "ladder",
+        "aerialLift",
+        "scaffold",
+        "rigging",
+        "stageBuild"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "고소작업은 작업발판·고소작업대·비계 등 안전한 접근수단을 우선 적용한다.",
+        "사다리 작업은 제한적으로 허용하고 넘어짐 방지, 작업구역 통제, 2인1조, 안전대 필요 여부를 확인한다.",
+        "트러스·무대·독립부스 상부 작업은 작업중지 풍속·우천 기준과 추락방지 조치를 작업계획서에 넣는다."
+      ],
+      "lawRefs": [
+        "occupational_safety_health_standards_rule:제42조",
+        "occupational_safety_health_act:제36조"
+      ],
+      "sourceRefs": [
+        "OSH_STANDARDS_RULE_WORK_PLAN",
+        "KOSHA_WORKER_SAFETY_GUIDE_SET",
+        "KINTEX_SAFETY_EDUCATION",
+        "BEXCO_CONSTRUCTION_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "heavy_object_handling",
+      "label": "중량물 반입·적재·양중 사고",
+      "eventTypes": [
+        "festival",
+        "outdoor_event",
+        "exhibition",
+        "performance"
+      ],
+      "triggers": [
+        "setupTeardown",
+        "heavyObjectHandling",
+        "freight",
+        "forklift",
+        "rigging",
+        "largeExhibit",
+        "stageTruss"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "전시품·트러스·LED·음향장비의 중량, 무게중심, 이동경로, 적재위치를 사전에 확인한다.",
+        "지게차·크레인·리프트 사용 시 작업지휘자, 하부 출입금지, 신호수, 줄걸이 상태를 계획서에 둔다.",
+        "반입·반출 시간에는 관람객 동선과 물류 동선을 분리하고 임시 적재가 비상구·소방시설을 막지 않도록 한다."
+      ],
+      "lawRefs": [
+        "occupational_safety_health_standards_rule:제38조",
+        "occupational_safety_health_act:제36조",
+        "occupational_safety_health_act:제63조"
+      ],
+      "sourceRefs": [
+        "OSH_STANDARDS_RULE_WORK_PLAN",
+        "KOSHA_WORKER_SAFETY_GUIDE_SET",
+        "COEX_SERVICE_PARTNER_MANUAL",
+        "KINTEX_ORGANIZER_MANUAL"
+      ]
+    },
+    {
+      "id": "food_poisoning",
+      "label": "식중독·식품위생 사고",
+      "eventTypes": [
+        "food_event",
+        "festival",
+        "exhibition"
+      ],
+      "triggers": [
+        "foodService",
+        "catering",
+        "foodTruck",
+        "temporaryFoodBooth",
+        "highTemperature"
+      ],
+      "riskLevel": "medium",
+      "controls": [
+        "영업허가·신고·등록 대상 여부와 푸드트럭/임시영업 조건을 확인한다.",
+        "냉장·보온, 손위생, 조리구역 오염방지, 알레르기·표시 기준을 점검한다.",
+        "식중독 의심 발생 시 보고·보존·조사 연락체계를 운영본부에 둔다."
+      ],
+      "lawRefs": [
+        "food_sanitation_act:제37조",
+        "food_sanitation_act:제86조",
+        "food_sanitation_act_enforcement_rule:제2조"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "medical_emergency",
+      "label": "응급환자 발생",
+      "eventTypes": [
+        "festival",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "triggers": [
+        "largeCrowd",
+        "heat",
+        "standingAudience",
+        "elderlyParticipants",
+        "sportsEvent"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "의무실, AED, 구급차 접근동선, 응급 이송 병원을 행사 전 확인한다.",
+        "AED 관리책임자, 월 1회 이상 점검, 사용교육, 관리서류 비치 상태를 확인한다.",
+        "구급차 또는 이송 협력기관이 있으면 장비·의약품·통신장비·소독·운행기록 기준을 확인한다.",
+        "운영본부, 의료팀, 보안팀, 119 신고 역할을 분리한다."
+      ],
+      "lawRefs": [
+        "emergency_medical_service_act:제47조의2",
+        "emergency_medical_service_act_enforcement_decree:제26조의7",
+        "emergency_medical_service_act:제47조",
+        "emergency_medical_service_act:제50조",
+        "emergency_medical_service_act_enforcement_rule:제38조",
+        "emergency_medical_service_act_enforcement_rule:제38조의2",
+        "emergency_medical_service_act_enforcement_rule:제38조의3",
+        "emergency_medical_service_act_enforcement_rule:별표2",
+        "emergency_medical_service_act_enforcement_rule:별표15",
+        "emergency_medical_service_act_enforcement_rule:별표16",
+        "emergency_medical_service_act_enforcement_rule:별표17"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL",
+        "MOIS_FESTIVAL_MANUAL_2024"
+      ]
+    },
+    {
+      "id": "personal_data_cctv_privacy",
+      "label": "참가자 개인정보·CCTV 처리 리스크",
+      "eventTypes": [
+        "exhibition",
+        "conference",
+        "performance",
+        "vip_event"
+      ],
+      "triggers": [
+        "registration",
+        "qrBadge",
+        "cctv",
+        "photoVideo",
+        "outsourcedRegistration"
+      ],
+      "riskLevel": "medium",
+      "controls": [
+        "수집항목, 이용목적, 보관기간, 처리위탁, 파기 기준을 참가자 고지와 개인정보 처리방침에 반영한다.",
+        "CCTV는 설치 목적, 촬영 범위·시간, 관리책임자 연락처, 수탁자 명칭·연락처 안내를 확인한다.",
+        "QR/출입증/등록대행 수탁자와 재위탁 제한, 접근권한, 접속기록, 암호화, 현장 단말 잠금 기준을 문서화한다.",
+        "행사 촬영·홍보 이용은 별도 동의 또는 안내 기준을 정한다."
+      ],
+      "lawRefs": [
+        "personal_information_protection_act:제25조",
+        "personal_information_protection_act:제15조",
+        "personal_information_protection_act:제22조",
+        "personal_information_protection_act:제26조",
+        "personal_information_protection_act:제29조",
+        "personal_information_protection_act:제30조",
+        "personal_information_protection_act_enforcement_decree:제24조",
+        "personal_information_protection_act_enforcement_decree:제25조",
+        "personal_information_protection_act_enforcement_decree:제26조",
+        "personal_information_protection_act_enforcement_decree:제30조",
+        "personal_information_protection_act_enforcement_decree:제31조"
+      ],
+      "sourceRefs": [
+        "KINTEX_CCTV_POLICY",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "weather_outdoor_event",
+      "label": "기상악화·폭염·강풍·호우",
+      "eventTypes": [
+        "festival",
+        "outdoor_event",
+        "performance"
+      ],
+      "triggers": [
+        "outdoor",
+        "temporaryStructures",
+        "summer",
+        "rain",
+        "wind"
+      ],
+      "riskLevel": "high",
+      "controls": [
+        "강풍·호우·폭염 기준별 중지, 대피, 구조물 보강, 참가자 안내 트리거를 정한다.",
+        "기상 모니터링 담당자와 의사결정권자를 명확히 둔다.",
+        "야외 전기, 미끄럼, 배수, 그늘·급수, 온열질환 대응을 별도 점검한다."
+      ],
+      "lawRefs": [
+        "framework_act_disaster_safety:제66조의11"
+      ],
+      "sourceRefs": [
+        "MOIS_FESTIVAL_MANUAL_2024",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "security_access_control_gap",
+      "label": "출입통제·보안검색·경비원 배치 공백",
+      "eventTypes": [
+        "conference",
+        "vip_event",
+        "exhibition",
+        "festival",
+        "outdoor_event"
+      ],
+      "triggers": [
+        "vipSecurity",
+        "securityCheck",
+        "accessControl",
+        "speakerProtection",
+        "largeCrowd",
+        "trafficGuidanceSecurity"
+      ],
+      "riskLevel": "medium",
+      "controls": [
+        "민간경비를 쓰는 경우 경비업 허가 업무 범위가 시설경비·신변보호·혼잡교통유도 등 실제 업무와 일치하는지 확인한다.",
+        "경비지도사 선임·배치, 경비원 신임교육·직무교육, 경비원 명부와 배치신고 대상 여부를 확인한다.",
+        "보안검색 대기열이 피난통로·소방시설·주요 게이트를 막지 않도록 인파관리계획과 통합한다.",
+        "경찰·소방·베뉴 보안실과 VIP 동선, 통제선, 반입금지품, 돌발 민원 대응 기준을 사전 공유한다."
+      ],
+      "lawRefs": [
+        "security_services_industry_act:제4조",
+        "security_services_industry_act:제12조",
+        "security_services_industry_act:제13조",
+        "security_services_industry_act:제18조",
+        "security_services_industry_act_enforcement_decree:제10조",
+        "security_services_industry_act_enforcement_decree:제16조",
+        "security_services_industry_act_enforcement_decree:제18조",
+        "security_services_industry_act_enforcement_decree:제30조",
+        "security_services_industry_act_enforcement_decree:별표1",
+        "security_services_industry_act_enforcement_decree:별표3",
+        "security_services_industry_act_enforcement_rule:제24조"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL",
+        "KDJ_PARTNER_DOCS"
+      ]
+    }
+  ]
+}

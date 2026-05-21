@@ -1,0 +1,1095 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "reusePolicy": "Venue manuals are stored as links plus compact checklist concepts. Do not redistribute full venue PDFs through this ontology without source permission.",
+  "venues": [
+    {
+      "id": "coex",
+      "name": "코엑스",
+      "region": "서울",
+      "operator": "Coex",
+      "website": "https://www.coex.co.kr/",
+      "sourceRefs": [
+        "COEX_EXHIBITION_GUIDE_2025",
+        "COEX_FACILITY_OPERATION_RULE_2023",
+        "COEX_SERVICE_PARTNER_MANUAL"
+      ],
+      "spaces": [
+        {
+          "id": "hall_a",
+          "name": "Hall A",
+          "facts": [
+            "공식 페이지 기준 면적 10,368㎡",
+            "3m x 3m 기준 최대 520부스",
+            "전시부스 배치 시 기본 도면과 홀별 도면 확인 필요"
+          ],
+          "sourceUrl": "https://business.coex.co.kr/exhibition-hall/hall-a/"
+        }
+      ],
+      "rules": [
+        {
+          "id": "coex_aisle_fire_lane_clearance",
+          "category": "egress_fire_lane",
+          "summary": "전시부스 통로, 비상구, EPS 출입문, 소화전, 화장실 입구, 후면 소방통로는 피난·소방 동선으로 관리한다.",
+          "checkpoints": [
+            "통로 폭과 부스 배치가 베뉴 도면·운영규정에 맞는지 확인",
+            "비상구·소화전·EPS·화장실 입구를 부스나 적재물로 막지 않기",
+            "후면 소방통로에 화물·자재·비품 적재 금지",
+            "개장 전 사진 증빙"
+          ],
+          "sourceRefs": [
+            "COEX_SERVICE_PARTNER_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "coex_booth_structure_approval",
+          "category": "temporary_structure",
+          "summary": "독립부스, 복층, 구조물은 코엑스 승인·구조검토·안전확인서 대상 여부를 확인한다.",
+          "checkpoints": [
+            "독립부스 승인 여부",
+            "복층/대형 구조물 구조계산서·제작도·현장감리 확인서 대상 여부",
+            "기존 시설물 고정 금지 여부",
+            "위반 시 확인서·경고·출입정지 등 제재 가능성 확인"
+          ],
+          "sourceRefs": [
+            "COEX_SERVICE_PARTNER_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "coex_hazardous_material_fire_rules",
+          "category": "fire_hazardous_material",
+          "summary": "화기, 위험물질, 고압가스, 프로판 등 베뉴 허가·금지 항목을 참가업체 매뉴얼에 반영한다.",
+          "checkpoints": [
+            "naked flame 사용 허가 필요 여부",
+            "위험물질 운반·보관 허가 필요 여부",
+            "프로판 등 전시장 내 반입 금지 여부",
+            "소화기와 화재예방 조치 확인"
+          ],
+          "sourceRefs": [
+            "COEX_SERVICE_PARTNER_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "coex_freight_parking_route",
+          "category": "logistics_traffic",
+          "summary": "화물차 로딩덕 진입 동선, 작업용 차량 무료주차 조건, 전시기간 주차 운영을 사전 안내한다.",
+          "checkpoints": [
+            "Hall A/B와 Hall C/D 화물차 진입 동선 분리 확인",
+            "준비·철거 기간 작업용 화물차 무료주차 조건 확인",
+            "전시장 내 관람객 동선과 물류 동선 분리"
+          ],
+          "sourceRefs": [
+            "COEX_EXHIBITION_GUIDE_2025"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "facilityFacts": [
+        "서울 강남권 대형 전시장. Hall A 기준 10,368㎡와 최대 520부스 시설정보를 로컬 온톨로지에 반영.",
+        "운영규정·시설운영규정·협력업체 작업안전 매뉴얼 PDF/MD 오프라인 보관."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "COEX_EXHIBITION_GUIDE_2025",
+          "COEX_FACILITY_OPERATION_RULE_2023",
+          "COEX_SERVICE_PARTNER_MANUAL"
+        ],
+        "gaps": [],
+        "lastReviewedAt": "2026-05-21"
+      }
+    },
+    {
+      "id": "kintex",
+      "name": "킨텍스",
+      "region": "경기 고양",
+      "operator": "KINTEX",
+      "website": "https://www.kintex.com/",
+      "sourceRefs": [
+        "KINTEX_SAFETY_EDUCATION",
+        "KINTEX_ORGANIZER_MANUAL",
+        "KINTEX_CCTV_POLICY"
+      ],
+      "rules": [
+        {
+          "id": "kintex_worker_safety_training",
+          "category": "work_safety_training",
+          "summary": "전시홀 안전관리지침과 작업자 안전교육 이수·준수 여부를 확인한다.",
+          "checkpoints": [
+            "전시장 사용자 및 관람객 안전 확보 목적의 안전관리지침 확인",
+            "작업 전 안전점검과 무사고·무재해 목표 공유",
+            "설치·철거·전기 등 현장 작업자 안전교육 이수 확인"
+          ],
+          "sourceRefs": [
+            "KINTEX_SAFETY_EDUCATION"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "kintex_cctv_privacy",
+          "category": "privacy_cctv",
+          "summary": "시설 안전·화재 예방·범죄 예방 목적의 영상정보처리기기 운영 방침과 행사 개인정보 처리 고지를 분리해 관리한다.",
+          "checkpoints": [
+            "CCTV 촬영시간과 보관기간 확인",
+            "영상정보 접근권한자와 위탁 운영자 확인",
+            "행사 자체 촬영·등록정보 처리와 베뉴 CCTV 방침의 역할 분리"
+          ],
+          "sourceRefs": [
+            "KINTEX_CCTV_POLICY"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "facilityFacts": [
+        "경기 고양권 대형 전시장. 주최자 매뉴얼과 작업자 안전교육 자료 PDF/MD 오프라인 보관.",
+        "CCTV 운영방침을 개인정보/CCTV 체크에 연결."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "KINTEX_SAFETY_EDUCATION",
+          "KINTEX_ORGANIZER_MANUAL",
+          "KINTEX_CCTV_POLICY"
+        ],
+        "gaps": [],
+        "lastReviewedAt": "2026-05-21"
+      }
+    },
+    {
+      "id": "bexco",
+      "name": "벡스코",
+      "region": "부산",
+      "operator": "BEXCO",
+      "website": "https://www.bexco.co.kr/",
+      "sourceRefs": [
+        "BEXCO_USER_GUIDEBOOK",
+        "BEXCO_OPERATION_RULES",
+        "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+        "BEXCO_OPERATION_IMPLEMENTATION_RULES"
+      ],
+      "rules": [
+        {
+          "id": "bexco_user_guidebook_required",
+          "category": "organizer_manual",
+          "summary": "전시장 임차인은 전시장 사용자 가이드북과 행사장 운영규정/시행요령 최신본을 확인한다.",
+          "checkpoints": [
+            "전시장 사용자 가이드북 최신 업데이트 확인",
+            "행사장 운영규정 및 시행요령 적용 여부 확인",
+            "임대 관련 자료 게시판 첨부파일 개정일 확인"
+          ],
+          "sourceRefs": [
+            "BEXCO_USER_GUIDEBOOK",
+            "BEXCO_OPERATION_RULES"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "bexco_construction_safety_manual",
+          "category": "construction_safety",
+          "summary": "행사장 공사 안전 매뉴얼을 설치·철거 단계 작업허가 및 현장 작업안전 기준으로 사용한다.",
+          "checkpoints": [
+            "행사장 공사 안전 매뉴얼 공유",
+            "부스 설치·철거·전기·리깅 등 작업 전 안전교육 확인",
+            "현장 작업 중 보호구, 통제선, 정리정돈 점검"
+          ],
+          "sourceRefs": [
+            "BEXCO_CONSTRUCTION_SAFETY_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "facilityFacts": [
+        "부산권 대형 전시컨벤션센터. 운영규정, 시행요령, 행사장 공사 안전 매뉴얼 PDF/MD 오프라인 보관."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "BEXCO_USER_GUIDEBOOK",
+          "BEXCO_OPERATION_RULES",
+          "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+          "BEXCO_OPERATION_IMPLEMENTATION_RULES"
+        ],
+        "gaps": [],
+        "lastReviewedAt": "2026-05-21"
+      }
+    },
+    {
+      "id": "kdjcenter",
+      "name": "김대중컨벤션센터",
+      "region": "광주",
+      "operator": "김대중컨벤션센터",
+      "website": "https://kdjcenter.gjto.or.kr/",
+      "sourceRefs": [
+        "KDJ_EXHIBITION_FORMS",
+        "KDJ_PARTNER_DOCS"
+      ],
+      "rules": [
+        {
+          "id": "kdj_exhibition_forms_and_permits",
+          "category": "permit_forms",
+          "summary": "전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.",
+          "checkpoints": [
+            "전시장 운영규정 확인",
+            "위험작업허가서 대상 작업 식별",
+            "위험물·중량물 반입 신청 대상 확인",
+            "방화관리책임자 및 상주요원/경비원 명단 제출 여부 확인"
+          ],
+          "sourceRefs": [
+            "KDJ_EXHIBITION_FORMS"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "kdj_work_submission_docs",
+          "category": "work_submission_control",
+          "summary": "기본부스, 독립부스, 전기, 파이텍스, 경비 등 작업 유형별 제출서류와 안전대책 계획서를 구분한다.",
+          "checkpoints": [
+            "기본/독립 부스 설치신청서와 작업신고서",
+            "독립부스 방염증빙서류",
+            "전기 기술지원신청서·작업신고서·전기설비도면",
+            "경비계획서, 근무일정표, 안전대책 계획서"
+          ],
+          "sourceRefs": [
+            "KDJ_PARTNER_DOCS"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "facilityFacts": [
+        "광주권 거점 컨벤션센터. 운영규정, 위험작업허가, 위험물·중량물 반입, 방화관리 책임 서식을 온톨로지에 반영."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "KDJ_EXHIBITION_FORMS",
+          "KDJ_PARTNER_DOCS"
+        ],
+        "gaps": [],
+        "lastReviewedAt": "2026-05-21"
+      }
+    },
+    {
+      "id": "ueco",
+      "name": "울산전시컨벤션센터(UECO)",
+      "region": "울산",
+      "operator": "울산전시컨벤션센터",
+      "website": "https://ueco.or.kr/",
+      "sourceRefs": [
+        "UECO_FACILITY_INFO"
+      ],
+      "rules": [
+        {
+          "id": "ueco_facility_capacity_review",
+          "category": "capacity_layout",
+          "summary": "회의실/컨벤션홀 수용능력과 도면을 기준으로 세팅, 피난, 혼잡도를 검토한다.",
+          "checkpoints": [
+            "행사 세팅별 수용능력 확인",
+            "도면 기반 피난동선·대기열·등록대 위치 검토",
+            "운영규정 본문 추가 확보 필요"
+          ],
+          "sourceRefs": [
+            "UECO_FACILITY_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "facilityFacts": [
+        "울산권 전시컨벤션센터. 현재 시설정보 중심으로 수용능력·도면 검토를 반영하고, 운영규정 원문 확보가 필요."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "UECO_FACILITY_INFO"
+        ],
+        "gaps": [
+          "운영규정/시행규정/작업안전 매뉴얼 원문 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      }
+    },
+    {
+      "id": "setec",
+      "name": "서울무역전시장(SETEC)",
+      "region": "서울 강남",
+      "province": "서울특별시",
+      "city": "서울",
+      "operator": "SETEC",
+      "website": "https://www.setec.or.kr/",
+      "sourceRefs": [
+        "SETEC_OPERATING_GUIDE_2025"
+      ],
+      "facilityFacts": [
+        "3개 전시실과 컨벤션/회의 기능을 갖춘 서울권 전시장.",
+        "2025 운영요령 PDF와 Markdown을 오프라인 보관."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "SETEC_OPERATING_GUIDE_2025"
+        ],
+        "gaps": [
+          "시설별 세부 안전 매뉴얼 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "setec_operating_guide_review",
+          "category": "operation_rule",
+          "summary": "SETEC 운영요령 최신본을 기준으로 대관, 설치·철거, 반입·반출, 제출서류를 행사 전 확인한다.",
+          "checkpoints": [
+            "운영요령 개정일 확인",
+            "설치·철거 작업시간과 반입·반출 동선 확인",
+            "안전관리계획 및 보험·신고 서류 대상 확인"
+          ],
+          "sourceRefs": [
+            "SETEC_OPERATING_GUIDE_2025"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ]
+    },
+    {
+      "id": "atcenter",
+      "name": "aT센터",
+      "region": "서울 양재",
+      "province": "서울특별시",
+      "city": "서울",
+      "operator": "한국농수산식품유통공사",
+      "website": "https://www.at.or.kr/home/acko000000/index.action",
+      "sourceRefs": [
+        "ATCENTER_FACILITY_INFO",
+        "ATCENTER_RENTAL_INFO"
+      ],
+      "facilityFacts": [
+        "제1전시장 3,793㎡, 제2전시장 4,254㎡, 전관 8,047㎡.",
+        "제1전시장 바닥하중 1.5ton/㎡, 189부스 기준 시설정보 확인."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "ATCENTER_FACILITY_INFO",
+          "ATCENTER_RENTAL_INFO"
+        ],
+        "gaps": [
+          "전시장 운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "atcenter_capacity_floor_load_review",
+          "category": "capacity_layout",
+          "summary": "전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.",
+          "checkpoints": [
+            "제1·제2전시장별 면적과 위치 확인",
+            "중량 전시품 바닥하중 검토",
+            "전원·통신·급배수 사용 위치 확인"
+          ],
+          "sourceRefs": [
+            "ATCENTER_FACILITY_INFO",
+            "ATCENTER_RENTAL_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "atcenter_fire_egress_confirmation",
+          "category": "fire_egress_confirmation",
+          "summary": "전시장별 비상구, 피난동선, 소방시설 위치는 행사 도면 확정 전 대관 담당과 별도 확인한다.",
+          "checkpoints": [
+            "부스 배치도에 비상구와 피난동선 표시",
+            "소방시설·소화전 주변 적재 금지 구역 지정",
+            "개장 전 소방·피난 사진 증빙 확보"
+          ],
+          "sourceRefs": [
+            "ATCENTER_FACILITY_INFO",
+            "ATCENTER_RENTAL_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ]
+    },
+    {
+      "id": "songdo_convensia",
+      "name": "송도컨벤시아",
+      "region": "인천 송도",
+      "province": "인천광역시",
+      "city": "인천",
+      "operator": "송도컨벤시아",
+      "website": "https://songdoconvensia.visitincheon.or.kr/",
+      "sourceRefs": [
+        "SONGDO_OPERATION_RULES"
+      ],
+      "facilityFacts": [
+        "인천 송도권 대형 전시장. 운영규정 PDF/MD 오프라인 보관.",
+        "전시장 운영규정 기반으로 설치·철거·반입·반출·안전질서 책임을 확인."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "SONGDO_OPERATION_RULES"
+        ],
+        "gaps": [
+          "시설별 최신 면적·피난도면 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "songdo_operation_rule_safety_review",
+          "category": "operation_rule",
+          "summary": "송도컨벤시아 운영규정에 따라 전시장 사용, 안전·질서 유지, 장치·철거, 반입·반출 조건을 확인한다.",
+          "checkpoints": [
+            "운영규정 최신본 확인",
+            "피난통로·방화시설 주변 적재 금지",
+            "작업시간·반입반출 동선과 차량 통제 확인"
+          ],
+          "sourceRefs": [
+            "SONGDO_OPERATION_RULES"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ]
+    },
+    {
+      "id": "suwon_convention_center",
+      "name": "수원컨벤션센터",
+      "region": "경기 수원",
+      "province": "경기도",
+      "city": "수원",
+      "operator": "수원컨벤션센터",
+      "website": "https://www.scc.or.kr/",
+      "sourceRefs": [
+        "SUWON_CONVENTION_FACILITY_INFO"
+      ],
+      "facilityFacts": [
+        "공식 페이지 기준 전시 면적 7,877㎡.",
+        "광교중앙역 인접 대형 컨벤션·전시장."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "SUWON_CONVENTION_FACILITY_INFO"
+        ],
+        "gaps": [
+          "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "suwon_convention_capacity_route_review",
+          "category": "capacity_layout",
+          "summary": "전시장 7,877㎡ 기준으로 행사 규모, 부스 배치, 등록대, 피난·대기열 동선을 검토한다.",
+          "checkpoints": [
+            "전시홀 도면과 등록대 위치 검토",
+            "광교중앙역·주차장 유입 동선 분리",
+            "피난통로와 소방시설 주변 적재 금지"
+          ],
+          "sourceRefs": [
+            "SUWON_CONVENTION_FACILITY_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "suwon_convention_electrical_confirmation",
+          "category": "electrical_utility_confirmation",
+          "summary": "전시홀 전기·분전·유틸리티 사용 조건은 부스 배치와 시설 사용 신청 전 확인한다.",
+          "checkpoints": [
+            "전기 용량과 분전 위치 확인",
+            "임시 전기 사용 시 전기공사·접지·누전차단 점검",
+            "전원 케이블이 피난통로와 관람객 동선을 침범하지 않도록 정리"
+          ],
+          "sourceRefs": [
+            "SUWON_CONVENTION_FACILITY_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ]
+    },
+    {
+      "id": "suwonmesse",
+      "name": "수원메쎄",
+      "region": "경기 수원",
+      "province": "경기도",
+      "city": "수원",
+      "operator": "Suwon Messe",
+      "website": "https://suwonmesse.com/",
+      "sourceRefs": [
+        "SUWONMESSE_OPERATION_RULES"
+      ],
+      "facilityFacts": [
+        "수원권 전시장. 전시장 운영규정 PDF/MD 오프라인 보관.",
+        "전시장 사용·철거·원상복구·운영시간을 운영규정 기준으로 확인."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "SUWONMESSE_OPERATION_RULES"
+        ],
+        "gaps": [
+          "시설별 면적·피난도면 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "suwonmesse_operation_rule_review",
+          "category": "operation_rule",
+          "summary": "수원메쎄 운영규정에 따라 작업시간, 반입·반출, 시설 훼손, 원상복구, 안전관리 책임을 확인한다.",
+          "checkpoints": [
+            "운영규정 최신본 확인",
+            "설치·철거 작업시간 확인",
+            "시설보호와 원상복구 책임 확인"
+          ],
+          "sourceRefs": [
+            "SUWONMESSE_OPERATION_RULES"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ]
+    },
+    {
+      "id": "dcc",
+      "name": "대전컨벤션센터(DCC)",
+      "region": "대전 유성",
+      "province": "대전광역시",
+      "city": "대전",
+      "operator": "대전컨벤션센터",
+      "website": "https://www.dcckorea.or.kr/",
+      "sourceRefs": [
+        "DCC_FACILITY_INFO",
+        "DCC_RENTAL_INFO"
+      ],
+      "facilityFacts": [
+        "제2전시장 1~4홀은 각 약 2,524~2,574㎡ 규모.",
+        "제2전시장 상황실 연락 체계를 운영본부 연락망에 반영."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "DCC_FACILITY_INFO",
+          "DCC_RENTAL_INFO"
+        ],
+        "gaps": [
+          "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "dcc_facility_contact_and_setup_review",
+          "category": "operation_contact",
+          "summary": "시설안내와 상황실 연락망을 기준으로 현장 지원, 외부장비 반입, 설치·철거 대응 연락체계를 둔다.",
+          "checkpoints": [
+            "상황실·AV·시설 담당 연락망 확인",
+            "외부장비 반입·작업신고 서류 확인",
+            "홀별 면적과 시간외 사용 조건 확인"
+          ],
+          "sourceRefs": [
+            "DCC_FACILITY_INFO",
+            "DCC_RENTAL_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "dcc_electrical_fire_egress_confirmation",
+          "category": "electrical_fire_egress_confirmation",
+          "summary": "제2전시장 홀별 전기, 소방시설, 비상구·피난동선은 상황실·시설 담당 연락망으로 행사 전 확정한다.",
+          "checkpoints": [
+            "전기 사용량과 분전 위치를 시설 담당과 확인",
+            "소방시설·소화전 주변 적재 금지와 소방통로 확보",
+            "비상구·피난동선과 외부장비 반입 동선 분리"
+          ],
+          "sourceRefs": [
+            "DCC_FACILITY_INFO",
+            "DCC_RENTAL_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ]
+    },
+    {
+      "id": "osco",
+      "name": "청주오스코(OSCO)",
+      "region": "충북 청주 오송",
+      "province": "충청북도",
+      "city": "청주",
+      "operator": "OSCO",
+      "website": "https://osco.or.kr/",
+      "sourceRefs": [
+        "OSCO_EXHIBITION_RENTAL_INFO"
+      ],
+      "facilityFacts": [
+        "전시장 총 10,031㎡, Hall 1~3 각 3,344㎡.",
+        "총 600부스 규모 기준으로 동선·혼잡·작업구역 분리 검토."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "OSCO_EXHIBITION_RENTAL_INFO"
+        ],
+        "gaps": [
+          "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "osco_hall_capacity_booth_review",
+          "category": "capacity_layout",
+          "summary": "Hall 1~3 분할/전관 사용 여부에 따라 부스 수, 피난통로, 반입·반출 동선을 분리해 검토한다.",
+          "checkpoints": [
+            "홀별 3,344㎡와 200부스 기준 확인",
+            "전관 600부스 행사 시 입퇴장 병목 검토",
+            "관리비 예치금·사용시간·설치철거 시간 조건 확인"
+          ],
+          "sourceRefs": [
+            "OSCO_EXHIBITION_RENTAL_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "osco_electrical_fire_document_confirmation",
+          "category": "electrical_fire_document_confirmation",
+          "summary": "전관 600부스 규모 행사에서는 전기 사용, 소방시설, 피난통로, 제출서류를 홀별로 분리 확인한다.",
+          "checkpoints": [
+            "홀별 전기 용량·분전·케이블 동선 확인",
+            "소방시설·비상구·피난통로 주변 부스/적재물 배치 금지",
+            "관리비 예치금, 사용시간, 설치·철거 관련 제출서류 확인"
+          ],
+          "sourceRefs": [
+            "OSCO_EXHIBITION_RENTAL_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ]
+    },
+    {
+      "id": "exco",
+      "name": "EXCO",
+      "region": "대구",
+      "province": "대구광역시",
+      "city": "대구",
+      "operator": "EXCO",
+      "website": "https://exco.co.kr/",
+      "sourceRefs": [
+        "EXCO_FACILITY_INFO"
+      ],
+      "facilityFacts": [
+        "서관 제1전시장 22,159㎡, 동관 제2전시장 15,024㎡.",
+        "홀별 바닥하중, 천정고, Floor Box, 전기·급배수·가스·압축공기 조건 확인 대상."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "EXCO_FACILITY_INFO"
+        ],
+        "gaps": [
+          "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "exco_hall_utility_floor_load_review",
+          "category": "capacity_layout",
+          "summary": "서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.",
+          "checkpoints": [
+            "홀별 바닥하중과 천정고 확인",
+            "전기·급배수·압축공기·가스 사용 신청 조건 확인",
+            "대형 행사 시 서관/동관 간 관람객 동선 분리"
+          ],
+          "sourceRefs": [
+            "EXCO_FACILITY_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "exco_fire_document_confirmation",
+          "category": "fire_document_confirmation",
+          "summary": "서관/동관 분산 행사에서는 소방시설·피난동선과 전기·가스·압축공기 사용 신청서류를 홀별로 확인한다.",
+          "checkpoints": [
+            "홀별 소방시설·소화전·비상구 주변 적재 금지",
+            "전기·급배수·압축공기·가스 사용 신청서류 확인",
+            "서관/동관 간 관람객 동선과 피난동선 분리"
+          ],
+          "sourceRefs": [
+            "EXCO_FACILITY_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ]
+    },
+    {
+      "id": "hico",
+      "name": "경주화백컨벤션센터(HICO)",
+      "region": "경북 경주",
+      "province": "경상북도",
+      "city": "경주",
+      "operator": "HICO",
+      "website": "https://www.hico.or.kr/",
+      "sourceRefs": [
+        "HICO_FACILITY_GUIDE"
+      ],
+      "facilityFacts": [
+        "전시장 Hall 1+2는 2,273㎡, 57.6m x 36.9m x 8m, 115부스 기준.",
+        "1F 전시장 바닥하중은 3ton/㎡, 화물출입구 높이는 4.2m.",
+        "3F 대회의실 전체는 3,421㎡, theater 3,000명, 전시부스 180개 기준.",
+        "로비와 3F 대회의실 바닥하중은 0.5ton/㎡, 제한높이는 5m로 관리."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "HICO_FACILITY_GUIDE"
+        ],
+        "gaps": [
+          "별도 운영규정/작업안전 전문 문서 추가 확보 시 세부 수칙 보강 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "hico_capacity_floor_load_review",
+          "category": "capacity_layout",
+          "summary": "HICO 전시장·회의실·대회의실은 면적, 부스 수, 수용인원, 바닥하중, 제한높이를 기준으로 행사 배치와 장치물 계획을 검토한다.",
+          "checkpoints": [
+            "Hall 1+2 2,273㎡, 115부스 기준과 실제 부스 레이아웃 비교",
+            "3F 대회의실 3,421㎡, theater 3,000명, 부스 180개 기준과 실제 세팅 비교",
+            "전시장 바닥하중 3ton/㎡와 로비/대회의실 0.5ton/㎡ 초과 여부 확인",
+            "로비·대회의실 제한높이 5m와 화물출입구 4.2m 조건 확인"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "hico_fire_egress_and_fixed_facility",
+          "category": "egress_fire_lane",
+          "summary": "행사 구조물과 부스는 소화전, 방화셔터, 비상구, 비상대피로, 소방통로와 충돌하지 않도록 배치한다.",
+          "checkpoints": [
+            "소화전이 보이도록 부스·장치물·적재물 배치",
+            "방화셔터 구간을 피해 구조물 설치",
+            "비상구와 비상대피로 폐쇄 여부 확인",
+            "소방통로 최소 폭 1m 확보",
+            "층별 AED, 청정소화기, 캐비닛소화기, 분말소화기 위치 현장 확인"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "hico_pre_event_documents_and_supervision",
+          "category": "pre_event_documents",
+          "summary": "전시장·회의실 사용 전 홀매니저 협의, 작업·안전 서류 제출, 보험증권, 설치감독 조건을 준비한다.",
+          "checkpoints": [
+            "행사 2주 전까지 마킹·설치·철거·공용부분 사용·경비인력·광고물·VIP 일정 협의",
+            "행사 1주 전까지 작업신고서, 안전작업서약서, 기술지원신청서 제출",
+            "상주요원과 장비원 명단, 행사보험 또는 영업배상책임보험 증권 준비",
+            "부스·전기·급배수 등 설비 설치는 HICO 감독 하 진행",
+            "세팅 변경은 최소 3일 전까지 홀매니저와 협의"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "hico_signage_weather_approval",
+          "category": "signage_advertising",
+          "summary": "내·외부 현수막과 광고물은 설치 위치·규격·수량을 사전 협의하고, 외부 설치물은 기상악화 시 사전 철거한다.",
+          "checkpoints": [
+            "모든 홍보물 설치 장소와 시기 홀매니저 사전 협의",
+            "외부 광고·안내시설물 태풍 등 기상이변 예보 시 사전 철거",
+            "현수막 규격, 수량, 설치 위치 준수",
+            "빔프로젝터 화면을 가리지 않는 현수막 폭 확인"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "hico_lobby_utility_and_sales_restrictions",
+          "category": "utility_and_use_restriction",
+          "summary": "로비와 회의실은 유틸리티, 판매, 외부음식, 시설훼손 금지 조건을 별도로 확인한다.",
+          "checkpoints": [
+            "로비는 전기·전화·인터넷 사용 가능, 가스·수도·압축공기 사용 불가",
+            "로비 장치물 높이 5m 이하, 무게 500kg/㎡ 이하 확인",
+            "회의실 내 물품 판매 원칙적 금지",
+            "회의실 구멍뚫기, 못박기, 접착제 사용 등 시설 훼손 작업 금지",
+            "전시장 내 흡연과 외부음식 반입 금지"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ]
+    },
+    {
+      "id": "gumico",
+      "name": "구미코(GUMICO)",
+      "region": "경북 구미",
+      "province": "경상북도",
+      "city": "구미",
+      "operator": "GUMICO",
+      "website": "https://gumico.com/",
+      "sourceRefs": [
+        "GUMICO_EXHIBITION_INFO",
+        "GUMICO_SAFETY_ORG_INFO"
+      ],
+      "facilityFacts": [
+        "전시장 3,402㎡, 180부스, 바닥하중 1.5t/㎡.",
+        "시설 안전관리 및 홀매니징 연락 기능이 공식 조직도에 공개."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "GUMICO_EXHIBITION_INFO",
+          "GUMICO_SAFETY_ORG_INFO"
+        ],
+        "gaps": [
+          "시설가이드 PDF/작업신고서 직접 다운로드와 MD화 필요",
+          "지정등록업체 모집 공고는 핵심 코퍼스에서 제외"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "gumico_exhibition_facility_work_report_review",
+          "category": "capacity_layout",
+          "summary": "전시장 면적, 바닥하중, 전기·통신·급배수·압축공기 조건과 작업신고 서류를 설치·철거 계획에 반영한다.",
+          "checkpoints": [
+            "3,402㎡/180부스 기준 배치 검토",
+            "바닥하중 1.5t/㎡와 중량물 반입 확인",
+            "홀매니저·시설안전관리 연락망 확인"
+          ],
+          "sourceRefs": [
+            "GUMICO_EXHIBITION_INFO",
+            "GUMICO_SAFETY_ORG_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "gumico_fire_egress_confirmation",
+          "category": "fire_egress_confirmation",
+          "summary": "전시장 작업신고와 홀매니징 연락망을 기준으로 소방시설, 비상구, 피난동선을 행사 전 확인한다.",
+          "checkpoints": [
+            "소방시설·소화전 주변 적재 금지",
+            "비상구와 피난동선이 부스·중량물 반입 동선과 겹치지 않게 배치",
+            "시설안전관리·홀매니저 연락망을 운영본부 비상연락망에 반영"
+          ],
+          "sourceRefs": [
+            "GUMICO_EXHIBITION_INFO",
+            "GUMICO_SAFETY_ORG_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ]
+    },
+    {
+      "id": "ceco",
+      "name": "창원컨벤션센터(CECO)",
+      "region": "경남 창원",
+      "province": "경상남도",
+      "city": "창원",
+      "operator": "CECO",
+      "website": "https://www.ceco.co.kr/",
+      "sourceRefs": [
+        "CECO_OPERATION_RULES",
+        "CECO_WORK_SAFETY_MANUAL"
+      ],
+      "facilityFacts": [
+        "전시장 운영규정 PDF와 작업 안전 관리 매뉴얼 HWP/MD 오프라인 보관.",
+        "작업안전 HWP에서 화기·위험물·통로·차량·공구 제한 수칙 추출 완료."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "CECO_OPERATION_RULES",
+          "CECO_WORK_SAFETY_MANUAL"
+        ],
+        "gaps": [],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "ceco_work_approval_and_hot_work_control",
+          "category": "work_safety",
+          "summary": "전시장 작업은 CECO 작업신고·승인 후 수행하고, 위험물·화기·전기톱·가스통 등은 사전 승인 없이는 제한한다.",
+          "checkpoints": [
+            "작업신고 승인 확인",
+            "위험물·화기·가스 취급 사전 승인 확인",
+            "흡연·음주 금지와 보호구 착용 확인"
+          ],
+          "sourceRefs": [
+            "CECO_WORK_SAFETY_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "ceco_fire_lane_and_vehicle_limits",
+          "category": "egress_fire_lane",
+          "summary": "소화전, 비상구, EPS, 화장실 입구와 벽체 주변 통로를 확보하고, 대형 차량·고위험 공구 반입 제한을 확인한다.",
+          "checkpoints": [
+            "소화전·비상구·EPS·화장실 입구 차단 금지",
+            "벽면/구조물 주변 이격 확보",
+            "5t 초과 또는 높이 4m 이상 차량 진입 제한 확인"
+          ],
+          "sourceRefs": [
+            "CECO_WORK_SAFETY_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ]
+    },
+    {
+      "id": "gsco",
+      "name": "군산새만금컨벤션센터(GSCO)",
+      "region": "전북 군산",
+      "province": "전북특별자치도",
+      "city": "군산",
+      "operator": "GSCO",
+      "website": "https://www.gsco.kr/",
+      "sourceRefs": [
+        "GSCO_OPERATION_RULES"
+      ],
+      "facilityFacts": [
+        "전시장 운영규정 PDF/MD 오프라인 보관.",
+        "공식 시설정보 기준 실내전시장과 야외전시장 병행 사용 가능성을 고려."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "GSCO_OPERATION_RULES"
+        ],
+        "gaps": [
+          "작업안전 매뉴얼과 세부 시설도면 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "gsco_operation_rule_safety_control",
+          "category": "operation_rule",
+          "summary": "GSCO 전시장 운영규정에 따라 안전관리, 출입·반입, 시설보전, 원상복구, 공용공간 사용 조건을 확인한다.",
+          "checkpoints": [
+            "운영규정 최신본 확인",
+            "주최자 안전·질서 유지 책임 확인",
+            "전기·가스·화기 사용 승인 필요성 확인"
+          ],
+          "sourceRefs": [
+            "GSCO_OPERATION_RULES"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ]
+    },
+    {
+      "id": "icc_jeju",
+      "name": "제주국제컨벤션센터(ICC JEJU)",
+      "region": "제주 서귀포",
+      "province": "제주특별자치도",
+      "city": "서귀포",
+      "operator": "ICC JEJU",
+      "website": "https://www.iccjeju.co.kr/",
+      "sourceRefs": [
+        "ICCJEJU_EXHIBITION_INFO",
+        "ICCJEJU_TAMNA_INFO"
+      ],
+      "facilityFacts": [
+        "전시장 A+B+C 2,503㎡, 3개 분할 가능, 허용하중 2,000kg/㎡.",
+        "탐라홀 A+B+C 4,061㎡, 극장식 4,300명 규모."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "ICCJEJU_EXHIBITION_INFO",
+          "ICCJEJU_TAMNA_INFO"
+        ],
+        "gaps": [
+          "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "iccjeju_capacity_loading_review",
+          "category": "capacity_layout",
+          "summary": "전시장·탐라홀 수용능력, 화물출입구, 허용하중, 급배수·전원·통신 조건을 배치와 피난계획에 반영한다.",
+          "checkpoints": [
+            "탐라홀/전시장 행사 유형별 수용인원 확인",
+            "전시장 화물출입구 2.3m와 허용하중 확인",
+            "관광지형 대규모 이동 동선과 셔틀/버스 승하차 계획 확인"
+          ],
+          "sourceRefs": [
+            "ICCJEJU_EXHIBITION_INFO",
+            "ICCJEJU_TAMNA_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "iccjeju_fire_booth_document_confirmation",
+          "category": "fire_booth_document_confirmation",
+          "summary": "전시장·탐라홀 대규모 행사는 소방시설, 부스 배치, 안전 관련 제출서류를 수용인원과 화물출입구 조건에 맞춰 확인한다.",
+          "checkpoints": [
+            "소방시설·비상구·피난동선 주변 적재 금지",
+            "부스 배치와 관람객 동선이 화물출입구 및 대피동선과 충돌하지 않게 검토",
+            "안전관리 계획서·작업신고·시설 사용 신청서류 대상 확인"
+          ],
+          "sourceRefs": [
+            "ICCJEJU_EXHIBITION_INFO",
+            "ICCJEJU_TAMNA_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ]
+    },
+    {
+      "id": "yeosu_expo",
+      "name": "여수엑스포컨벤션센터",
+      "region": "전남 여수",
+      "province": "전라남도",
+      "city": "여수",
+      "operator": "여수엑스포컨벤션센터",
+      "website": "https://yeosuexpoconvention.kr/",
+      "sourceRefs": [
+        "YEOSU_EXPO_DOCUMENT_ROOM",
+        "YEOSU_EXPO_FACILITY_INFO"
+      ],
+      "facilityFacts": [
+        "자료실에 시설운영규정, 시행세칙, 작업신고서, 전시·대관시설 이용 안전관리 신고 및 신청서가 공개.",
+        "전시실 D1~D5와 엑스포디지털갤러리(EDG)를 전시·대형 행사 공간으로 운영."
+      ],
+      "safetyProfile": {
+        "offlineCoverage": [
+          "YEOSU_EXPO_DOCUMENT_ROOM",
+          "YEOSU_EXPO_FACILITY_INFO"
+        ],
+        "gaps": [
+          "자료실 개별 첨부 파일 다운로드와 PDF/HWP Markdown 변환 필요"
+        ],
+        "lastReviewedAt": "2026-05-21"
+      },
+      "rules": [
+        {
+          "id": "yeosu_expo_document_room_safety_forms",
+          "category": "operation_rule",
+          "summary": "시설운영규정, 시행세칙, 작업신고서, 전시·대관시설 안전관리 신고서를 행사 전 필수 제출/검토 후보로 둔다.",
+          "checkpoints": [
+            "시설운영규정 최신 개정일 확인",
+            "작업신고서 제출 대상 작업 식별",
+            "전시·대관시설 이용 안전관리 신고 및 신청서 대상 확인"
+          ],
+          "sourceRefs": [
+            "YEOSU_EXPO_DOCUMENT_ROOM"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "yeosu_expo_fire_egress_booth_confirmation",
+          "category": "fire_egress_booth_confirmation",
+          "summary": "전시실 D1~D5와 EDG 사용 시 소방시설, 비상구·피난동선, 부스·전기 사용 조건을 시설운영규정과 신청서류로 확인한다.",
+          "checkpoints": [
+            "소방시설·소화전·비상구 주변 적재 금지",
+            "전시실별 피난동선과 관람객 입퇴장 동선 분리",
+            "부스 배치, 전기 사용, 작업신고서, 전시·대관시설 안전관리 신고서 확인"
+          ],
+          "sourceRefs": [
+            "YEOSU_EXPO_DOCUMENT_ROOM",
+            "YEOSU_EXPO_FACILITY_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ]
+    }
+  ]
+}

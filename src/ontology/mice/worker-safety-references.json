@@ -1,0 +1,251 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "scope": "MICE setup, teardown, booth build, stage, electrical, hot work, ladder, scaffold, aerial lift, and heavy object handling worker-safety references organized for this project. agent-safety-oss is recorded only as related design context for OSH/KOSHA coverage review.",
+  "references": [
+    {
+      "id": "osh_standards_rule_article_38_work_plan",
+      "kind": "law_article",
+      "title": "산업안전보건기준에 관한 규칙 제38조 및 별표 4",
+      "appliesWhen": "부스·무대·트러스 설치/철거, 하역운반, 전기작업, 중량물 취급, 해체, 고소작업 등 산안기준규칙 별표 4 대상 또는 동등 위험작업이 포함될 때",
+      "dutyTypes": [
+        "pre_investigation",
+        "work_plan",
+        "worker_instruction",
+        "recordkeeping"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_standards_rule:제38조"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "temporary_electrical_fire_shock",
+        "worker_fall_height",
+        "heavy_object_handling"
+      ],
+      "summary": "작업 전 사전조사, 작업계획서 작성, 작업계획에 따른 작업, 작업자 고지를 MICE 설치·철거 작업계획 레이어로 적용한다.",
+      "offlineSourcePath": "data/markdown/worker-safety/osh-standards-rule-work-plan.md",
+      "sourceUrl": "https://www.law.go.kr/법령/산업안전보건기준에관한규칙/제38조",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "osh_standards_rule_article_42_fall_prevention",
+      "kind": "law_article",
+      "title": "산업안전보건기준에 관한 규칙 제42조 추락 방지",
+      "appliesWhen": "사다리, 고소작업대, 무대 상부, 트러스, 독립부스 상부 등 추락 위험이 있는 작업",
+      "dutyTypes": [
+        "fall_prevention",
+        "work_platform",
+        "ppe",
+        "work_stop"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_standards_rule:제42조"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan"
+      ],
+      "relatedHazardIds": [
+        "worker_fall_height",
+        "temporary_structure_collapse"
+      ],
+      "summary": "높이 작업은 작업발판 등 안전한 작업면 확보가 우선이며, 곤란한 경우 추락방호망·안전대 등 대체 조치를 계획서에 명시한다.",
+      "offlineSourcePath": "data/markdown/worker-safety/osh-standards-rule-work-plan.md",
+      "sourceUrl": "https://www.law.go.kr/법령/산업안전보건기준에관한규칙/제42조",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "kosha_guide_ladder_a_g_4_2025",
+      "kind": "kosha_guide",
+      "title": "KOSHA Guide A-G-4-2025 이동식 사다리 사용",
+      "appliesWhen": "현수막, 조명, 부스 장식, 안내물 설치 등 이동식 사다리 작업이 포함될 때",
+      "dutyTypes": [
+        "ladder_safety",
+        "fall_prevention",
+        "worker_training"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_standards_rule:제42조"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan"
+      ],
+      "relatedHazardIds": [
+        "worker_fall_height"
+      ],
+      "summary": "사다리는 통행·접근용 또는 제한적 작업용으로 보고 넘어짐 방지, 설치각, 상부 고정, 작업구역 통제를 계획한다.",
+      "offlineSourcePath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "sourceUrl": "https://www.kosha.or.kr/kosha/data/guideExp.do",
+      "verificationStatus": "offline_derived"
+    },
+    {
+      "id": "kosha_guide_aerial_lift_scaffold",
+      "kind": "kosha_guide",
+      "title": "KOSHA Guide 고소작업대·비계·작업발판",
+      "appliesWhen": "무대, 트러스, 전시장 상부 사인, 대형부스 설치·해체 작업",
+      "dutyTypes": [
+        "aerial_lift",
+        "scaffold",
+        "work_platform",
+        "fall_prevention"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_standards_rule:제42조"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "worker_fall_height",
+        "temporary_structure_collapse"
+      ],
+      "summary": "고소작업대·비계는 장비 선정, 사전점검, 작업구역 출입통제, 난간·안전대, 작업중지 기준을 계획서에 포함한다.",
+      "offlineSourcePath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "sourceUrl": "https://www.kosha.or.kr/kosha/data/guideExp.do",
+      "verificationStatus": "offline_derived"
+    },
+    {
+      "id": "kosha_guide_hot_work_fire_watch",
+      "kind": "kosha_guide",
+      "title": "KOSHA Guide 화재위험작업·화기작업",
+      "appliesWhen": "용접, 절단, 연마, 불꽃 발생 작업, LPG·푸드부스 화기 사용, 위험물 반입",
+      "dutyTypes": [
+        "hot_work_permit",
+        "fire_watch",
+        "extinguisher",
+        "hazardous_material_control"
+      ],
+      "relatedLawRefs": [
+        "fire_prevention_act:*",
+        "occupational_safety_health_standards_rule:화재위험작업"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check",
+        "worker_safety_work_plan"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "summary": "화기작업은 베뉴 승인, 가연물 격리, 소화기, 화재감시, 작업 후 잔불 점검을 작업조건으로 둔다.",
+      "offlineSourcePath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "sourceUrl": "https://www.kosha.or.kr/kosha/data/guideExp.do",
+      "verificationStatus": "offline_derived"
+    },
+    {
+      "id": "kosha_guide_electrical_work",
+      "kind": "kosha_guide",
+      "title": "KOSHA Guide 전기작업·수변전설비 작업안전",
+      "appliesWhen": "임시전기, 분전반, 발전기, 충전전로 인근 작업, 통로 횡단 케이블 포설",
+      "dutyTypes": [
+        "electrical_safety",
+        "lockout",
+        "insulation",
+        "ppe"
+      ],
+      "relatedLawRefs": [
+        "electrical_safety_management_act:제13조",
+        "occupational_safety_health_standards_rule:제321조"
+      ],
+      "relatedDutyIds": [
+        "temporary_electrical_safety_check",
+        "worker_safety_work_plan"
+      ],
+      "relatedHazardIds": [
+        "temporary_electrical_fire_shock"
+      ],
+      "summary": "전기작업은 차단·검전·접지·절연·보호구·유자격자·작업구역 통제를 계획하고 습윤·야외 구역은 별도 점검한다.",
+      "offlineSourcePath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "sourceUrl": "https://www.kosha.or.kr/kosha/data/guideExp.do",
+      "verificationStatus": "offline_derived"
+    },
+    {
+      "id": "kosha_guide_heavy_object_handling",
+      "kind": "kosha_guide",
+      "title": "KOSHA Guide 중량물 취급·인양 작업",
+      "appliesWhen": "전시품, 구조물, 트러스, LED, 음향장비, 부스 자재 반입·적재·양중",
+      "dutyTypes": [
+        "heavy_object_plan",
+        "lifting",
+        "manual_handling",
+        "exclusion_zone"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_standards_rule:제38조"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "heavy_object_handling",
+        "temporary_structure_collapse"
+      ],
+      "summary": "중량물 작업은 품목·중량·무게중심, 장비·줄걸이, 작업순서, 하부 출입금지, 작업지휘자를 작업계획서에 넣는다.",
+      "offlineSourcePath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "sourceUrl": "https://www.kosha.or.kr/kosha/data/guideExp.do",
+      "verificationStatus": "offline_derived"
+    },
+    {
+      "id": "kosha_guide_forklift_loading_unloading",
+      "kind": "kosha_guide",
+      "title": "KOSHA Guide 지게차·하역·상하차 작업",
+      "appliesWhen": "전시품, 부스 자재, 무대 장비, 식음료 자재 반입·반출에 지게차·파렛트·화물차 하역이 포함될 때",
+      "dutyTypes": [
+        "forklift",
+        "loading_unloading",
+        "traffic_separation",
+        "signal_person"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_standards_rule:제38조"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "heavy_object_handling",
+        "ingress_egress_bottleneck"
+      ],
+      "summary": "하역 구역은 관람객 동선과 분리하고, 유도자·작업반경 통제·후진 경보·적재 안정·야간 조명·차량 동선 계획을 작업계획서에 포함한다.",
+      "offlineSourcePath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "sourceUrl": "https://www.kosha.or.kr/kosha/data/guideExp.do",
+      "verificationStatus": "offline_derived"
+    },
+    {
+      "id": "osh_kosha_ppe_setup_teardown",
+      "kind": "kosha_guide",
+      "title": "산안기준규칙/KOSHA Guide 보호구(PPE) 적용",
+      "appliesWhen": "설치·철거, 고소, 전기, 화기, 하역, 중량물, 절단·연마 작업 등 작업자 노출 위험이 있는 모든 MICE 준비·철거 작업",
+      "dutyTypes": [
+        "ppe",
+        "worker_training",
+        "site_control",
+        "recordkeeping"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_act:*",
+        "occupational_safety_health_standards_rule:보호구"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "worker_fall_height",
+        "heavy_object_handling",
+        "temporary_electrical_fire_shock",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "summary": "안전모, 안전화, 안전대, 절연보호구, 보안경, 방진·방독 보호구 등 작업별 보호구 지급·착용·점검·교육과 미착용 시 작업중지 기준을 문서화한다.",
+      "offlineSourcePath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "sourceUrl": "https://www.kosha.or.kr/kosha/data/guideExp.do",
+      "verificationStatus": "offline_derived"
+    }
+  ]
+}

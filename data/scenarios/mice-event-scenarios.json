@@ -1,0 +1,407 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "purpose": "Regression fixtures for judging whether the offline MICE safety ontology is useful across exhibitions, outdoor festivals, performances, conferences, food events, and venue-specific operations.",
+  "scenarios": [
+    {
+      "id": "indoor_exhibition_osco_6000",
+      "label": "청주오스코 대형 전시회",
+      "input": {
+        "eventTypes": [
+          "exhibition"
+        ],
+        "venueId": "osco",
+        "expectedCrowd": 6000,
+        "temporaryStructures": true,
+        "temporaryElectricity": true,
+        "setupTeardown": true,
+        "workAtHeight": true,
+        "heavyObjectHandling": true,
+        "personalDataProcessing": true
+      },
+      "expected": {
+        "laws": [
+          "serious_accidents_punishment_act",
+          "occupational_safety_health_act",
+          "occupational_safety_health_standards_rule",
+          "framework_act_disaster_safety",
+          "fire_prevention_act",
+          "fire_facilities_act",
+          "personal_information_protection_act",
+          "emergency_medical_service_act",
+          "electrical_safety_management_act",
+          "building_act",
+          "multi_use_facility_crisis_manual_rule",
+          "elevator_safety_act"
+        ],
+        "duties": [
+          "mice_crowd_management_plan",
+          "venue_crisis_response_manual_check",
+          "booth_construction_safety_checklist",
+          "worker_safety_work_plan",
+          "temporary_electrical_safety_check",
+          "fire_evacuation_facility_management",
+          "privacy_cctv_registration_check",
+          "medical_aed_response_plan",
+          "elevator_escalator_crowd_control"
+        ],
+        "hazards": [
+          "crowd_density_high",
+          "ingress_egress_bottleneck",
+          "blocked_evacuation_route",
+          "temporary_structure_collapse",
+          "worker_fall_height",
+          "heavy_object_handling",
+          "temporary_electrical_fire_shock",
+          "personal_data_cctv_privacy",
+          "medical_emergency"
+        ],
+        "venueRulesMin": 1
+      }
+    },
+    {
+      "id": "outdoor_festival_road_food_5000",
+      "label": "도로 점용·푸드부스 포함 옥외축제",
+      "input": {
+        "eventTypes": [
+          "festival",
+          "food_event"
+        ],
+        "expectedCrowd": 5000,
+        "outdoor": true,
+        "roadUse": true,
+        "temporaryStructures": true,
+        "temporaryElectricity": true,
+        "setupTeardown": true,
+        "workAtHeight": true,
+        "heavyObjectHandling": true,
+        "lpgUse": true,
+        "foodService": true
+      },
+      "expected": {
+        "laws": [
+          "framework_act_disaster_safety",
+          "road_act",
+          "road_traffic_act",
+          "outdoor_advertisements_act",
+          "food_sanitation_act",
+          "lp_gas_safety_act",
+          "fire_prevention_act",
+          "fire_facilities_act",
+          "emergency_medical_service_act",
+          "electrical_safety_management_act",
+          "occupational_safety_health_standards_rule"
+        ],
+        "duties": [
+          "mice_event_safety_management_plan",
+          "mice_crowd_management_plan",
+          "road_traffic_and_outdoor_signage_permit",
+          "temporary_food_business_and_poisoning_plan",
+          "fire_and_hazardous_material_permit_check",
+          "temporary_electrical_safety_check",
+          "worker_safety_work_plan",
+          "medical_aed_response_plan"
+        ],
+        "hazards": [
+          "crowd_density_high",
+          "ingress_egress_bottleneck",
+          "weather_outdoor_event",
+          "medical_emergency",
+          "food_poisoning",
+          "fire_hazard_hot_work_lpg",
+          "temporary_structure_collapse",
+          "worker_fall_height",
+          "heavy_object_handling",
+          "temporary_electrical_fire_shock"
+        ],
+        "venueRulesMin": 0
+      }
+    },
+    {
+      "id": "performance_concert_stage_12000",
+      "label": "스탠딩 관객 포함 대형 공연",
+      "input": {
+        "eventTypes": [
+          "performance"
+        ],
+        "expectedCrowd": 12000,
+        "performance": true,
+        "temporaryStructures": true,
+        "temporaryElectricity": true,
+        "setupTeardown": true,
+        "workAtHeight": true,
+        "heavyObjectHandling": true,
+        "personalDataProcessing": true
+      },
+      "expected": {
+        "laws": [
+          "performance_act",
+          "framework_act_disaster_safety",
+          "fire_prevention_act",
+          "fire_facilities_act",
+          "building_act",
+          "emergency_medical_service_act",
+          "occupational_safety_health_act",
+          "occupational_safety_health_standards_rule",
+          "personal_information_protection_act"
+        ],
+        "duties": [
+          "performance_disaster_countermeasure_plan",
+          "performance_safety_org_and_training",
+          "mice_crowd_management_plan",
+          "fire_evacuation_facility_management",
+          "medical_aed_response_plan",
+          "booth_construction_safety_checklist",
+          "worker_safety_work_plan",
+          "temporary_electrical_safety_check",
+          "privacy_cctv_registration_check"
+        ],
+        "hazards": [
+          "crowd_density_high",
+          "temporary_structure_collapse",
+          "worker_fall_height",
+          "heavy_object_handling",
+          "blocked_evacuation_route",
+          "medical_emergency",
+          "temporary_electrical_fire_shock",
+          "personal_data_cctv_privacy"
+        ],
+        "venueRulesMin": 0
+      }
+    },
+    {
+      "id": "conference_vip_privacy_800",
+      "label": "VIP·보안검색 포함 국제회의",
+      "input": {
+        "eventTypes": [
+          "conference",
+          "vip_event"
+        ],
+        "expectedCrowd": 800,
+        "personalDataProcessing": true,
+        "vipSecurity": true
+      },
+      "expected": {
+        "laws": [
+          "serious_accidents_punishment_act",
+          "framework_act_disaster_safety",
+          "fire_prevention_act",
+          "fire_facilities_act",
+          "personal_information_protection_act",
+          "emergency_medical_service_act",
+          "security_services_industry_act",
+          "multi_use_facility_crisis_manual_rule"
+        ],
+        "duties": [
+          "venue_crisis_response_manual_check",
+          "privacy_cctv_registration_check",
+          "security_access_control_plan",
+          "medical_aed_response_plan",
+          "fire_evacuation_facility_management",
+          "elevator_escalator_crowd_control"
+        ],
+        "hazards": [
+          "ingress_egress_bottleneck",
+          "personal_data_cctv_privacy",
+          "medical_emergency"
+        ],
+        "venueRulesMin": 0
+      }
+    },
+    {
+      "id": "food_expo_ceco_lpg",
+      "label": "CECO 식음료 박람회",
+      "input": {
+        "eventTypes": [
+          "exhibition",
+          "food_event"
+        ],
+        "venueId": "ceco",
+        "expectedCrowd": 2000,
+        "temporaryStructures": true,
+        "temporaryElectricity": true,
+        "setupTeardown": true,
+        "heavyObjectHandling": true,
+        "lpgUse": true,
+        "foodService": true
+      },
+      "expected": {
+        "laws": [
+          "food_sanitation_act",
+          "lp_gas_safety_act",
+          "fire_prevention_act",
+          "fire_facilities_act",
+          "occupational_safety_health_act",
+          "occupational_safety_health_standards_rule",
+          "electrical_safety_management_act",
+          "building_act",
+          "framework_act_disaster_safety"
+        ],
+        "duties": [
+          "temporary_food_business_and_poisoning_plan",
+          "fire_and_hazardous_material_permit_check",
+          "temporary_electrical_safety_check",
+          "booth_construction_safety_checklist",
+          "worker_safety_work_plan",
+          "fire_evacuation_facility_management",
+          "mice_crowd_management_plan"
+        ],
+        "hazards": [
+          "food_poisoning",
+          "fire_hazard_hot_work_lpg",
+          "temporary_electrical_fire_shock",
+          "temporary_structure_collapse",
+          "heavy_object_handling",
+          "blocked_evacuation_route"
+        ],
+        "venueRulesMin": 2
+      }
+    },
+    {
+      "id": "rainy_night_outdoor_concert_food",
+      "label": "우천 가능 야간 야외공연·푸드부스",
+      "input": {
+        "eventTypes": [
+          "festival",
+          "performance",
+          "food_event"
+        ],
+        "expectedCrowd": 8000,
+        "outdoorEvent": true,
+        "roadUse": true,
+        "performance": true,
+        "temporaryStructures": true,
+        "temporaryElectricity": true,
+        "setupTeardown": true,
+        "workAtHeight": true,
+        "heavyObjectHandling": true,
+        "lpgUse": true,
+        "foodService": true,
+        "hotWork": true,
+        "personalDataProcessing": true
+      },
+      "expected": {
+        "laws": [
+          "performance_act",
+          "framework_act_disaster_safety",
+          "road_act",
+          "road_traffic_act",
+          "outdoor_advertisements_act",
+          "food_sanitation_act",
+          "lp_gas_safety_act",
+          "fire_prevention_act",
+          "fire_facilities_act",
+          "emergency_medical_service_act",
+          "occupational_safety_health_standards_rule",
+          "personal_information_protection_act"
+        ],
+        "duties": [
+          "performance_disaster_countermeasure_plan",
+          "performance_safety_org_and_training",
+          "mice_event_safety_management_plan",
+          "mice_crowd_management_plan",
+          "road_traffic_and_outdoor_signage_permit",
+          "temporary_food_business_and_poisoning_plan",
+          "fire_and_hazardous_material_permit_check",
+          "worker_safety_work_plan",
+          "temporary_electrical_safety_check",
+          "medical_aed_response_plan"
+        ],
+        "hazards": [
+          "crowd_density_high",
+          "ingress_egress_bottleneck",
+          "weather_outdoor_event",
+          "medical_emergency",
+          "food_poisoning",
+          "fire_hazard_hot_work_lpg",
+          "temporary_structure_collapse",
+          "worker_fall_height",
+          "heavy_object_handling",
+          "temporary_electrical_fire_shock",
+          "personal_data_cctv_privacy"
+        ],
+        "venueRulesMin": 0
+      }
+    },
+    {
+      "id": "urban_parade_road_occupancy",
+      "label": "도심 퍼레이드·행진 도로점용 행사",
+      "input": {
+        "eventTypes": [
+          "outdoor_event"
+        ],
+        "expectedCrowd": 2500,
+        "outdoorEvent": true,
+        "roadUse": true,
+        "foodService": false,
+        "lpgUse": false,
+        "performance": false,
+        "setupTeardown": false
+      },
+      "expected": {
+        "laws": [
+          "framework_act_disaster_safety",
+          "road_act",
+          "road_traffic_act",
+          "outdoor_advertisements_act",
+          "fire_prevention_act",
+          "fire_facilities_act",
+          "emergency_medical_service_act"
+        ],
+        "duties": [
+          "mice_event_safety_management_plan",
+          "mice_crowd_management_plan",
+          "road_traffic_and_outdoor_signage_permit",
+          "medical_aed_response_plan"
+        ],
+        "hazards": [
+          "crowd_density_high",
+          "ingress_egress_bottleneck",
+          "weather_outdoor_event",
+          "medical_emergency"
+        ],
+        "venueRulesMin": 0
+      }
+    },
+    {
+      "id": "unhosted_crowd_station_area",
+      "label": "무주최 다중운집 대응",
+      "input": {
+        "eventTypes": [
+          "outdoor_event"
+        ],
+        "expectedCrowd": 10000,
+        "outdoorEvent": true,
+        "unhostedCrowd": true,
+        "roadUse": false,
+        "foodService": false,
+        "lpgUse": false,
+        "performance": false,
+        "setupTeardown": false,
+        "temporaryStructures": false
+      },
+      "expected": {
+        "laws": [
+          "framework_act_disaster_safety",
+          "fire_prevention_act",
+          "fire_facilities_act",
+          "emergency_medical_service_act"
+        ],
+        "duties": [
+          "mice_event_safety_management_plan",
+          "mice_crowd_management_plan",
+          "unhosted_crowd_multi_agency_response_plan",
+          "medical_aed_response_plan"
+        ],
+        "hazards": [
+          "crowd_density_high",
+          "ingress_egress_bottleneck",
+          "unhosted_crowd_governance_gap",
+          "weather_outdoor_event",
+          "medical_emergency"
+        ],
+        "venueRulesMin": 0
+      }
+    }
+  ]
+}

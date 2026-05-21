@@ -1,0 +1,100 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21T22:56:23.365Z",
+  "baselineGeneratedAt": "2026-05-21T22:56:23.145Z",
+  "currentGeneratedAt": "2026-05-21T22:56:23.363Z",
+  "summary": {
+    "laws": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "legalArticles": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "legalAnnexes": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "localOrdinances": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "workerSafetyReferences": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "venueRules": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "venueFacilityIndex": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "incidentTaxonomy": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "communicationTemplates": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    }
+  },
+  "collections": {
+    "laws": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "legalArticles": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "legalAnnexes": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "localOrdinances": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "workerSafetyReferences": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "venueRules": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "venueFacilityIndex": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "incidentTaxonomy": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    "communicationTemplates": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    }
+  }
+}

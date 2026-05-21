@@ -1,0 +1,377 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "scope": "Offline MICE incident taxonomy for routing, SLA, escalation, and first-response playbooks.",
+  "statusFlow": [
+    "open",
+    "assigned",
+    "in_progress",
+    "resolved",
+    "verified"
+  ],
+  "issueTypes": [
+    {
+      "id": "crowd_bottleneck",
+      "label": "인파 병목·대기열 침범",
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck",
+        "crowd_density_high"
+      ],
+      "recommendedTeam": "인파·동선팀",
+      "defaultPriority": "high",
+      "slaMinutesBySeverity": {
+        "critical": 5,
+        "high": 10,
+        "medium": 20,
+        "low": 45
+      },
+      "escalationPath": [
+        "구역장",
+        "운영본부",
+        "보안팀",
+        "경찰/소방 협의"
+      ],
+      "playbookSteps": [
+        "대기열을 보행동선 밖으로 재배치",
+        "우회동선과 안내표지 설치",
+        "스태프 추가 투입",
+        "혼잡 단계 상향 여부를 운영본부에 보고"
+      ]
+    },
+    {
+      "id": "unhosted_crowd_surge",
+      "label": "무주최 다중운집 급증",
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "ingress_egress_bottleneck",
+        "unhosted_crowd_governance_gap"
+      ],
+      "recommendedTeam": "관계기관 합동상황반",
+      "defaultPriority": "critical",
+      "slaMinutesBySeverity": {
+        "critical": 3,
+        "high": 5,
+        "medium": 10,
+        "low": 20
+      },
+      "escalationPath": [
+        "현장 합동상황반",
+        "지자체 재난안전상황실",
+        "경찰 현장지휘",
+        "소방 현장지휘",
+        "철도/교통 운영기관"
+      ],
+      "playbookSteps": [
+        "주최자 없음과 책임 공백을 명시하고 지자체·경찰·소방 공동 현장지휘로 전환",
+        "역사/광장/상가/도로 관리주체별 통제 권한과 연락선을 확인",
+        "대기열 분산, 일방통행, 출입구 제한, 대중교통 운영 조정을 단계별 시행",
+        "방송·전광판·SNS·문자 안내와 현장 사진/무전 로그를 즉시 기록"
+      ]
+    },
+    {
+      "id": "blocked_exit",
+      "label": "비상구·피난통로 차단",
+      "relatedHazardIds": [
+        "blocked_egress_fire_lane"
+      ],
+      "recommendedTeam": "시설·소방팀",
+      "defaultPriority": "critical",
+      "slaMinutesBySeverity": {
+        "critical": 3,
+        "high": 5,
+        "medium": 15,
+        "low": 30
+      },
+      "escalationPath": [
+        "구역장",
+        "시설/소방 담당",
+        "운영본부",
+        "베뉴 방재실"
+      ],
+      "playbookSteps": [
+        "차단물 즉시 제거",
+        "피난통로 폭과 방화문 작동 확인",
+        "조치 전후 사진 기록",
+        "반복 차단 원인 업체 또는 구역 통제"
+      ]
+    },
+    {
+      "id": "medical_emergency",
+      "label": "응급환자·AED 대응",
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "recommendedTeam": "의료팀",
+      "defaultPriority": "critical",
+      "slaMinutesBySeverity": {
+        "critical": 3,
+        "high": 5,
+        "medium": 10,
+        "low": 20
+      },
+      "escalationPath": [
+        "의료담당",
+        "운영본부",
+        "119",
+        "이송병원"
+      ],
+      "playbookSteps": [
+        "응급처치자와 AED를 현장 이동",
+        "119 신고 기준 확인",
+        "주변 인파 통제",
+        "이송동선 확보와 기록 담당 분리"
+      ]
+    },
+    {
+      "id": "fire_smoke",
+      "label": "화재·연기·화기 위험",
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg",
+        "temporary_electrical_fire_shock"
+      ],
+      "recommendedTeam": "소방·시설팀",
+      "defaultPriority": "critical",
+      "slaMinutesBySeverity": {
+        "critical": 2,
+        "high": 5,
+        "medium": 10,
+        "low": 20
+      },
+      "escalationPath": [
+        "시설/소방 담당",
+        "베뉴 방재실",
+        "운영본부",
+        "119"
+      ],
+      "playbookSteps": [
+        "화기·전원·가스 차단",
+        "초기소화 가능 여부 판단",
+        "피난 안내와 위험구역 통제",
+        "소방 신고와 베뉴 방재실 동시 공유"
+      ]
+    },
+    {
+      "id": "stage_rigging_structure",
+      "label": "공연·무대·리깅 구조 이상",
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "worker_fall_height",
+        "heavy_object_handling",
+        "temporary_electrical_fire_shock",
+        "crowd_density_high"
+      ],
+      "recommendedTeam": "공연·무대 안전팀",
+      "defaultPriority": "critical",
+      "slaMinutesBySeverity": {
+        "critical": 2,
+        "high": 5,
+        "medium": 15,
+        "low": 30
+      },
+      "escalationPath": [
+        "무대감독",
+        "공연안전 담당",
+        "시설·전기 담당",
+        "운영본부",
+        "필요 시 경찰/소방 협의"
+      ],
+      "playbookSteps": [
+        "공연 일시중지 또는 리허설 중지 기준 확인",
+        "무대·리깅·전기 위험구역 접근 통제",
+        "관객 현 위치 대기 또는 분산 안내",
+        "구조검토·리깅 승인·전원 차단·조치 전후 사진 기록"
+      ]
+    },
+    {
+      "id": "worker_safety",
+      "label": "설치·철거 작업자 안전",
+      "relatedHazardIds": [
+        "worker_fall_height",
+        "heavy_object_handling",
+        "temporary_structure_collapse"
+      ],
+      "recommendedTeam": "작업안전팀",
+      "defaultPriority": "high",
+      "slaMinutesBySeverity": {
+        "critical": 5,
+        "high": 10,
+        "medium": 30,
+        "low": 60
+      },
+      "escalationPath": [
+        "작업책임자",
+        "안전총괄",
+        "베뉴 담당",
+        "필요 시 작업중지"
+      ],
+      "playbookSteps": [
+        "위험작업 즉시 중지",
+        "작업구역 관람객 출입 차단",
+        "보호구·작업발판·하역계획 확인",
+        "재개 전 사진과 책임자 승인 기록"
+      ]
+    },
+    {
+      "id": "electrical_hazard",
+      "label": "임시전기·케이블·분전반 위험",
+      "relatedHazardIds": [
+        "temporary_electrical_fire_shock"
+      ],
+      "recommendedTeam": "시설·전기팀",
+      "defaultPriority": "high",
+      "slaMinutesBySeverity": {
+        "critical": 3,
+        "high": 10,
+        "medium": 20,
+        "low": 45
+      },
+      "escalationPath": [
+        "전기담당",
+        "시설/소방 담당",
+        "운영본부",
+        "베뉴 담당"
+      ],
+      "playbookSteps": [
+        "노출 케이블 접근 차단",
+        "누전/과부하 의심 구간 전원 차단",
+        "전기설비 승인도면 확인",
+        "조치 전후 사진 기록"
+      ]
+    },
+    {
+      "id": "food_safety",
+      "label": "식음료 위생·식중독 의심",
+      "relatedHazardIds": [
+        "food_poisoning"
+      ],
+      "recommendedTeam": "식음료 안전팀",
+      "defaultPriority": "high",
+      "slaMinutesBySeverity": {
+        "critical": 5,
+        "high": 10,
+        "medium": 30,
+        "low": 60
+      },
+      "escalationPath": [
+        "F&B 담당",
+        "운영본부",
+        "관할 보건소",
+        "의료팀"
+      ],
+      "playbookSteps": [
+        "의심 식품 판매 중지",
+        "검체/보존식 보관",
+        "환자 정보와 섭취 이력 기록",
+        "보건소 신고 기준 확인"
+      ]
+    },
+    {
+      "id": "gas_lpg",
+      "label": "LPG·가스 누출·화기",
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "recommendedTeam": "가스·소방팀",
+      "defaultPriority": "critical",
+      "slaMinutesBySeverity": {
+        "critical": 2,
+        "high": 5,
+        "medium": 15,
+        "low": 30
+      },
+      "escalationPath": [
+        "가스 담당",
+        "시설/소방 담당",
+        "운영본부",
+        "119"
+      ],
+      "playbookSteps": [
+        "화기 사용 즉시 중지",
+        "밸브 차단과 환기",
+        "주변 인파 통제",
+        "가스용기 전도방지와 누출점검 기록"
+      ]
+    },
+    {
+      "id": "security_access",
+      "label": "출입통제·보안검색 이상",
+      "relatedHazardIds": [
+        "security_access_control_gap"
+      ],
+      "recommendedTeam": "보안팀",
+      "defaultPriority": "high",
+      "slaMinutesBySeverity": {
+        "critical": 5,
+        "high": 10,
+        "medium": 20,
+        "low": 45
+      },
+      "escalationPath": [
+        "보안팀장",
+        "운영본부",
+        "경비지도사",
+        "경찰 협의"
+      ],
+      "playbookSteps": [
+        "검색대와 대기열 재배치",
+        "반입금지품 처리 기준 적용",
+        "VIP/일반 동선 충돌 여부 확인",
+        "민원·위협 상황 기록"
+      ]
+    },
+    {
+      "id": "weather_outdoor",
+      "label": "우천·강풍·폭염 등 기상악화",
+      "relatedHazardIds": [
+        "weather_outdoor_event"
+      ],
+      "recommendedTeam": "운영본부·시설팀",
+      "defaultPriority": "high",
+      "slaMinutesBySeverity": {
+        "critical": 5,
+        "high": 10,
+        "medium": 30,
+        "low": 60
+      },
+      "escalationPath": [
+        "운영본부",
+        "시설팀",
+        "지자체",
+        "경찰/소방 협의"
+      ],
+      "playbookSteps": [
+        "현수막·무대·텐트 고정상태 확인",
+        "우천/강풍 단계별 중지 기준 확인",
+        "대피장소와 안내문구 송출",
+        "취소·축소 의사결정 기록"
+      ]
+    },
+    {
+      "id": "lost_child",
+      "label": "미아·보호자 이탈",
+      "relatedHazardIds": [
+        "crowd_density_high"
+      ],
+      "recommendedTeam": "운영본부·보안팀",
+      "defaultPriority": "medium",
+      "slaMinutesBySeverity": {
+        "critical": 5,
+        "high": 10,
+        "medium": 20,
+        "low": 45
+      },
+      "escalationPath": [
+        "운영본부",
+        "보안팀",
+        "안내데스크",
+        "경찰 협의"
+      ],
+      "playbookSteps": [
+        "보호구역 이동과 신원정보 최소 기록",
+        "방송/앱 안내 시 개인정보 노출 금지",
+        "출입구 보안팀 공유",
+        "보호자 인계 기록"
+      ]
+    }
+  ]
+}

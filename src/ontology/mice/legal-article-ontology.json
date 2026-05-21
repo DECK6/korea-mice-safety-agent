@@ -1,0 +1,2598 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "sourceTool": "korean-law-mcp",
+  "storagePolicy": "MICE safety agents must answer core legal-duty questions from this local ontology first. Network law lookup is reserved for freshness checks and unmapped articles.",
+  "articles": [
+    {
+      "id": "serious_accidents_punishment_act__article_4",
+      "lawEntryId": "serious_accidents_punishment_act",
+      "lawName": "중대재해 처벌 등에 관한 법률",
+      "article": "제4조",
+      "title": "사업주와 경영책임자등의 안전 및 보건 확보의무",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "228817",
+      "sourceLawId": "013993",
+      "sourceUrl": "https://www.law.go.kr/법령/중대재해처벌등에관한법률/제4조",
+      "text": "사업주 또는 경영책임자등은 실질적으로 지배ㆍ운영ㆍ관리하는 사업 또는 사업장에서 종사자의 안전ㆍ보건상 유해 또는 위험을 방지하기 위해 재해예방 인력ㆍ예산 등 안전보건관리체계 구축 및 이행, 재해 발생 시 재발방지 대책 수립 및 이행, 관계기관 개선ㆍ시정명령 이행, 안전ㆍ보건 관계 법령상 의무이행에 필요한 관리상 조치를 하여야 한다. 제1호와 제4호 조치의 구체적 사항은 대통령령으로 정한다.",
+      "dutyTypes": [
+        "safety_management_system",
+        "budget_and_staffing",
+        "recurrence_prevention",
+        "legal_duty_management"
+      ],
+      "appliesTo": [
+        "all_mice",
+        "outsourced_work",
+        "booth_build",
+        "security_work",
+        "cleaning",
+        "food_service_work"
+      ],
+      "relatedDutyIds": [
+        "mice_event_safety_management_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "temporary_electrical_fire_shock",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "중대재해 처벌 등에 관한 법률",
+      "sourceId": "228817:013993",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "serious_accidents_punishment_act__article_9",
+      "lawEntryId": "serious_accidents_punishment_act",
+      "lawName": "중대재해 처벌 등에 관한 법률",
+      "article": "제9조",
+      "title": "사업주와 경영책임자등의 안전 및 보건 확보의무",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "228817",
+      "sourceLawId": "013993",
+      "sourceUrl": "https://www.law.go.kr/법령/중대재해처벌등에관한법률/제9조",
+      "text": "사업주 또는 경영책임자등은 원료ㆍ제조물의 설계ㆍ제조ㆍ관리상 결함, 공중이용시설 또는 공중교통수단의 설계ㆍ설치ㆍ관리상 결함으로 인한 이용자 등의 생명ㆍ신체 안전을 위해 안전보건관리체계 구축 및 이행, 재발방지 대책, 관계기관 명령 이행, 관계 법령 의무이행 관리 조치를 하여야 한다. 공중이용시설 관련 도급ㆍ용역ㆍ위탁을 행한 경우에도 해당 시설ㆍ장비ㆍ장소에 실질적 지배ㆍ운영ㆍ관리 책임이 있으면 같은 조치를 하여야 한다.",
+      "dutyTypes": [
+        "public_use_facility_safety",
+        "outsourcing_control",
+        "recurrence_prevention"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "public_use_facility",
+        "outsourced_work"
+      ],
+      "relatedDutyIds": [
+        "venue_crisis_response_manual_check",
+        "security_access_control_plan"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "crowd_density_high",
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "중대재해 처벌 등에 관한 법률",
+      "sourceId": "228817:013993",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "occupational_safety_health_act__article_36",
+      "lawEntryId": "occupational_safety_health_act",
+      "lawName": "산업안전보건법",
+      "article": "제36조",
+      "title": "위험성평가의 실시",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "276853",
+      "sourceLawId": "001766",
+      "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제36조",
+      "text": "사업주는 건설물, 기계ㆍ기구ㆍ설비, 원재료, 가스, 증기, 분진, 근로자의 작업행동 또는 그 밖의 업무로 인한 유해ㆍ위험요인을 찾아 위험성을 평가하고 그 결과에 따라 법령상 조치 및 필요한 추가 조치를 해야 한다. 평가 시 근로자를 참여시켜야 하며, 평가 결과와 조치사항을 기록ㆍ보존해야 한다.",
+      "dutyTypes": [
+        "risk_assessment",
+        "worker_participation",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "booth_build",
+        "stage_build",
+        "electrical_work",
+        "cleaning",
+        "security_work",
+        "food_service_work"
+      ],
+      "relatedDutyIds": [
+        "booth_construction_safety_checklist",
+        "temporary_electrical_safety_check"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "temporary_electrical_fire_shock",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "산업안전보건법",
+      "sourceId": "276853:001766",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "occupational_safety_health_act__article_63",
+      "lawEntryId": "occupational_safety_health_act",
+      "lawName": "산업안전보건법",
+      "article": "제63조",
+      "title": "도급인의 안전조치 및 보건조치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "276853",
+      "sourceLawId": "001766",
+      "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제63조",
+      "text": "도급인은 관계수급인 근로자가 도급인의 사업장에서 작업하는 경우 자신의 근로자와 관계수급인 근로자의 산업재해를 예방하기 위해 안전 및 보건 시설 설치 등 필요한 안전조치와 보건조치를 해야 한다. 보호구 착용 지시 등 관계수급인 근로자의 작업행동에 관한 직접 조치는 제외된다.",
+      "dutyTypes": [
+        "contractor_control",
+        "site_safety_measures"
+      ],
+      "appliesTo": [
+        "outsourced_work",
+        "booth_build",
+        "stage_build",
+        "electrical_work"
+      ],
+      "relatedDutyIds": [
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "temporary_electrical_fire_shock"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "산업안전보건법",
+      "sourceId": "276853:001766",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "occupational_safety_health_standards_rule__article_38",
+      "lawEntryId": "occupational_safety_health_standards_rule",
+      "lawName": "산업안전보건기준에 관한 규칙",
+      "article": "제38조",
+      "title": "사전조사 및 작업계획서의 작성 등",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/산업안전보건기준에관한규칙/제38조",
+      "text": "별표 4의 위험작업은 사전조사 결과를 기록·보존하고 그 결과를 고려해 작업계획서를 작성하며, 작업계획에 따라 작업하도록 해야 한다. MICE에서는 전기작업, 중량물 취급, 하역운반, 해체·철거, 고소·구조물 설치 작업에 우선 연결한다.",
+      "dutyTypes": [
+        "pre_investigation",
+        "work_plan",
+        "worker_instruction",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "booth_build",
+        "stage_build",
+        "setup_teardown",
+        "electrical_work",
+        "heavy_object_handling"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist",
+        "temporary_electrical_safety_check"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "temporary_electrical_fire_shock",
+        "worker_fall_height",
+        "heavy_object_handling"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "산업안전보건기준에 관한 규칙",
+      "sourceId": "occupational_safety_health_standards_rule__article_38",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "needs_review"
+    },
+    {
+      "id": "occupational_safety_health_standards_rule__article_42",
+      "lawEntryId": "occupational_safety_health_standards_rule",
+      "lawName": "산업안전보건기준에 관한 규칙",
+      "article": "제42조",
+      "title": "추락의 방지",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/산업안전보건기준에관한규칙/제42조",
+      "text": "추락 위험이 있는 장소에서 작업할 때에는 작업발판 등 필요한 조치를 우선 검토하고, 곤란한 경우 추락방호망 또는 안전대 등 추락방지 조치를 계획한다.",
+      "dutyTypes": [
+        "fall_prevention",
+        "work_platform",
+        "ppe",
+        "work_stop"
+      ],
+      "appliesTo": [
+        "work_at_height",
+        "booth_build",
+        "stage_build",
+        "setup_teardown"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "worker_fall_height",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "산업안전보건기준에 관한 규칙",
+      "sourceId": "occupational_safety_health_standards_rule__article_42",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "needs_review"
+    },
+    {
+      "id": "occupational_safety_health_standards_rule__article_321",
+      "lawEntryId": "occupational_safety_health_standards_rule",
+      "lawName": "산업안전보건기준에 관한 규칙",
+      "article": "제321조",
+      "title": "충전전로에서의 전기작업",
+      "currentAsOf": "2026-05-21",
+      "sourceUrl": "https://www.law.go.kr/법령/산업안전보건기준에관한규칙/제321조",
+      "text": "충전전로 또는 그 인근 작업은 전원 차단, 충전부 방호, 절연용 보호구, 절연용 방호구, 활선작업용 기구 등 감전 방지 조치를 검토해야 한다.",
+      "dutyTypes": [
+        "electrical_safety",
+        "insulation",
+        "ppe",
+        "work_plan"
+      ],
+      "appliesTo": [
+        "temporary_electricity",
+        "booth_power",
+        "generator",
+        "electrical_work"
+      ],
+      "relatedDutyIds": [
+        "temporary_electrical_safety_check",
+        "worker_safety_work_plan"
+      ],
+      "relatedHazardIds": [
+        "temporary_electrical_fire_shock"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "산업안전보건기준에 관한 규칙",
+      "sourceId": "occupational_safety_health_standards_rule__article_321",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "needs_review"
+    },
+    {
+      "id": "framework_act_disaster_safety__article_66_11",
+      "lawEntryId": "framework_act_disaster_safety",
+      "lawName": "재난 및 안전관리 기본법",
+      "article": "제66조의11",
+      "title": "지역축제 개최 시 안전관리조치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "268803",
+      "sourceLawId": "009640",
+      "sourceUrl": "https://www.law.go.kr/법령/재난및안전관리기본법/제66조의11",
+      "text": "중앙행정기관장 또는 지방자치단체장은 대통령령으로 정하는 지역축제를 개최하려면 안전관리계획을 수립하고 필요한 안전관리 조치를 해야 한다. 민간 개최자도 해당 지역축제가 안전하게 진행될 수 있도록 안전관리계획을 수립하여 관할 시장ㆍ군수ㆍ구청장에게 사전 통보해야 하며, 보완 요구를 받으면 정당한 사유가 없는 한 따라야 한다. 필요 시 경찰ㆍ소방 등 관계기관 협조와 역할분담 요청, 지역안전협의회 구성이 가능하다.",
+      "dutyTypes": [
+        "festival_safety_plan",
+        "local_notice",
+        "agency_coordination",
+        "local_safety_council"
+      ],
+      "appliesTo": [
+        "festival",
+        "outdoor_event",
+        "large_crowd",
+        "local_government_coordination"
+      ],
+      "relatedDutyIds": [
+        "mice_event_safety_management_plan",
+        "mice_crowd_management_plan"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "weather_outdoor_event",
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "재난 및 안전관리 기본법",
+      "sourceId": "268803:009640",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "framework_act_disaster_safety__article_66_12",
+      "lawEntryId": "framework_act_disaster_safety",
+      "lawName": "재난 및 안전관리 기본법",
+      "article": "제66조의12",
+      "title": "다중운집 시 재난 등 예방조치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "268803",
+      "sourceLawId": "009640",
+      "sourceUrl": "https://www.law.go.kr/법령/재난및안전관리기본법/제66조의12",
+      "text": "지방자치단체장은 다중운집으로 인한 재난ㆍ사고 예방을 위해 다중운집 일시ㆍ장소, 순간 최대 인원 또는 총인원, 공간 수용능력, 밀집도 및 유동시간 등을 포함한 실태조사를 실시해야 한다. 위험 우려가 있으면 긴급안전점검을 하거나 요청할 수 있고, 위험이 크다고 인정되면 소유자ㆍ관리자ㆍ점유자 또는 행사 주최자에게 안전조치를 명할 수 있으며, 질서유지와 안전 확보가 어렵다고 판단되면 행사 중단 또는 해산을 권고할 수 있다.",
+      "dutyTypes": [
+        "crowd_survey",
+        "density_monitoring",
+        "emergency_inspection",
+        "event_stop_recommendation"
+      ],
+      "appliesTo": [
+        "festival",
+        "exhibition",
+        "conference",
+        "performance",
+        "large_crowd"
+      ],
+      "relatedDutyIds": [
+        "mice_crowd_management_plan"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "재난 및 안전관리 기본법",
+      "sourceId": "268803:009640",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act__article_11",
+      "lawEntryId": "performance_act",
+      "lawName": "공연법",
+      "article": "제11조",
+      "title": "재해예방조치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "265897",
+      "sourceLawId": "001613",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법/제11조",
+      "text": "공연장운영자는 화재나 그 밖의 재해를 예방하기 위해 공연장 종업원의 임무ㆍ배치 등 재해대처계획을 수립하여 매년 관할 지자체장에게 신고해야 하며, 지자체장은 이를 소방서장과 경찰서장에게 통보한다. 신고된 계획이 미흡하면 보완 요구가 가능하고, 공연장 외 장소에서 대통령령으로 정하는 규모의 관람자가 예상되는 공연에도 준용된다. 재해대처계획에는 안전관리비, 안전관리조직, 안전교육, 피난안내 사항이 포함되어야 한다.",
+      "dutyTypes": [
+        "disaster_countermeasure_plan",
+        "fire_police_notice",
+        "plan_supplement"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_disaster_countermeasure_plan",
+        "performance_safety_org_and_training"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "blocked_evacuation_route",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법",
+      "sourceId": "265897:001613",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act__article_11_2",
+      "lawEntryId": "performance_act",
+      "lawName": "공연법",
+      "article": "제11조의2",
+      "title": "안전관리비",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "265897",
+      "sourceLawId": "001613",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법/제11조의2",
+      "text": "공연장운영자등은 공연장 및 공연의 안전관리에 필요한 비용인 안전관리비를 대통령령으로 정하는 바에 따라 공연장운영 또는 공연비용에 계상해야 한다. 대통령령 기준에 미달하는 공연장운영자등은 계상하지 않을 수 있으며, 규모ㆍ종류별 사용방법 기준은 대통령령으로 정한다.",
+      "dutyTypes": [
+        "safety_budget"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_disaster_countermeasure_plan"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법",
+      "sourceId": "265897:001613",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act__article_11_3",
+      "lawEntryId": "performance_act",
+      "lawName": "공연법",
+      "article": "제11조의3",
+      "title": "안전관리조직",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "265897",
+      "sourceLawId": "001613",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법/제11조의3",
+      "text": "재해대처계획을 수립하는 공연장운영자등은 공연 안전업무를 총괄하는 안전총괄책임자와 공연 현장에서 안전관리를 담당하는 안전관리담당자로 구성된 안전관리조직을 두어야 한다. 대통령령 기준에 미달하면 설치하지 않을 수 있으며 설치기준ㆍ구성ㆍ직무는 대통령령으로 정한다.",
+      "dutyTypes": [
+        "safety_org",
+        "safety_lead",
+        "safety_staff"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_safety_org_and_training"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법",
+      "sourceId": "265897:001613",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act__article_11_4",
+      "lawEntryId": "performance_act",
+      "lawName": "공연법",
+      "article": "제11조의4",
+      "title": "안전교육",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "265897",
+      "sourceLawId": "001613",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법/제11조의4",
+      "text": "재해대처계획을 수립하는 공연장운영자등은 공연 안전관리를 위해 공연에 참여하는 공연자, 안전총괄책임자, 안전관리담당자 등에게 안전교육을 실시해야 한다. 교육 시기와 방법 등은 대통령령으로 정한다.",
+      "dutyTypes": [
+        "safety_training"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_safety_org_and_training"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법",
+      "sourceId": "265897:001613",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act__article_11_5",
+      "lawEntryId": "performance_act",
+      "lawName": "공연법",
+      "article": "제11조의5",
+      "title": "피난안내",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "265897",
+      "sourceLawId": "001613",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법/제11조의5",
+      "text": "공연장운영자는 화재 등 재해나 위급상황 발생 시 관람자가 안전하게 피난할 수 있도록 피난계단ㆍ피난통로ㆍ피난설비 등이 표시된 피난안내도를 갖추거나, 피난절차, 노약자ㆍ장애인 등 거동이 불편한 관람자의 피난방법, 공연 특수상황 등 비상시 관람자가 알아야 할 사항을 공연 시작 전 주지시켜야 한다. 공연장 외 장소에서 대통령령으로 정하는 규모의 관람자가 예상되는 공연에도 준용된다.",
+      "dutyTypes": [
+        "evacuation_notice",
+        "accessibility_evacuation"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_safety_org_and_training",
+        "venue_crisis_response_manual_check"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "crowd_density_high"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법",
+      "sourceId": "265897:001613",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act__article_25",
+      "lawEntryId": "personal_information_protection_act",
+      "lawName": "개인정보 보호법",
+      "article": "제25조",
+      "title": "고정형 영상정보처리기기의 설치ㆍ운영 제한",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "270351",
+      "sourceLawId": "011357",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법/제25조",
+      "text": "공개장소 CCTV 설치·운영의 허용사유, 안내판, 녹음 금지, 안전성 확보, 운영방침, 위탁 요건을 검토한다.",
+      "dutyTypes": [
+        "cctv_notice",
+        "cctv_purpose_limitation",
+        "cctv_security",
+        "outsourced_cctv_operation"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법",
+      "sourceId": "270351:011357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "emergency_medical_service_act__article_47_2",
+      "lawEntryId": "emergency_medical_service_act",
+      "lawName": "응급의료에 관한 법률",
+      "article": "제47조의2",
+      "title": "심폐소생을 위한 응급장비의 구비 등의 의무",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "279729",
+      "sourceLawId": "000218",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료에관한법률/제47조의2",
+      "text": "대통령령으로 정하는 다중이용시설 등에서 자동심장충격기 등 응급장비 구비, 신고, 월 1회 이상 점검, 안내표지판을 검토한다.",
+      "dutyTypes": [
+        "aed_installation",
+        "aed_report",
+        "monthly_check",
+        "aed_signage"
+      ],
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료에 관한 법률",
+      "sourceId": "279729:000218",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "electrical_safety_management_act__article_13",
+      "lawEntryId": "electrical_safety_management_act",
+      "lawName": "전기안전관리법",
+      "article": "제13조",
+      "title": "여러 사람이 이용하는 시설 등에 대한 전기안전점검",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "268805",
+      "sourceLawId": "013718",
+      "sourceUrl": "https://www.law.go.kr/법령/전기안전관리법/제13조",
+      "text": "여러 사람이 이용하는 특정 시설을 운영하거나 증축ㆍ개축하려는 자는 관련 허가ㆍ등록ㆍ인가ㆍ신고 또는 건축물 사용승인 신청 전에 해당 전기설비에 대해 안전공사의 안전점검을 받아야 한다. 안전공사는 점검 업무 수행 시 정해진 사항을 기록ㆍ보존해야 한다.",
+      "dutyTypes": [
+        "electrical_safety_inspection"
+      ],
+      "appliesTo": [
+        "temporary_electricity",
+        "booth_power",
+        "generator",
+        "electrical_work"
+      ],
+      "relatedDutyIds": [
+        "temporary_electrical_safety_check"
+      ],
+      "relatedHazardIds": [
+        "temporary_electrical_fire_shock"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "전기안전관리법",
+      "sourceId": "268805:013718",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "food_sanitation_act__article_37",
+      "lawEntryId": "food_sanitation_act",
+      "lawName": "식품위생법",
+      "article": "제37조",
+      "title": "영업허가 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "277149",
+      "sourceLawId": "001805",
+      "sourceUrl": "https://www.law.go.kr/법령/식품위생법/제37조",
+      "text": "식품 관련 영업 중 대통령령으로 정하는 영업은 영업 종류별 또는 영업소별로 허가를 받아야 하며, 일부 영업은 신고 또는 등록 대상이다. 허가ㆍ신고ㆍ등록 사항 변경, 폐업, 식품 또는 식품첨가물 제조ㆍ가공 보고, 처리기간 및 수리 간주 규정 등을 검토해야 한다.",
+      "dutyTypes": [
+        "food_business_license",
+        "food_business_report",
+        "food_business_registration"
+      ],
+      "appliesTo": [
+        "food_booth",
+        "catering",
+        "food_truck",
+        "temporary_food_service"
+      ],
+      "relatedDutyIds": [
+        "temporary_food_business_and_poisoning_plan"
+      ],
+      "relatedHazardIds": [
+        "food_poisoning",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "식품위생법",
+      "sourceId": "277149:001805",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "food_sanitation_act__article_86",
+      "lawEntryId": "food_sanitation_act",
+      "lawName": "식품위생법",
+      "article": "제86조",
+      "title": "식중독에 관한 조사 보고 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "277149",
+      "sourceLawId": "001805",
+      "sourceUrl": "https://www.law.go.kr/법령/식품위생법/제86조",
+      "text": "식중독 환자나 의심자를 진단한 의사ㆍ한의사 또는 집단급식소 식품으로 인한 식중독 의심 증세를 발견한 집단급식소 설치ㆍ운영자는 지체 없이 관할 지자체장에게 보고해야 한다. 지자체장은 식품의약품안전처장 및 시ㆍ도지사에게 통보하고 원인을 조사하여 결과를 제출해야 한다.",
+      "dutyTypes": [
+        "food_poisoning_report",
+        "food_poisoning_investigation"
+      ],
+      "appliesTo": [
+        "food_booth",
+        "catering",
+        "food_truck",
+        "temporary_food_service"
+      ],
+      "relatedDutyIds": [
+        "temporary_food_business_and_poisoning_plan"
+      ],
+      "relatedHazardIds": [
+        "food_poisoning"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "식품위생법",
+      "sourceId": "277149:001805",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "fire_prevention_act__article_24",
+      "lawEntryId": "fire_prevention_act",
+      "lawName": "화재의 예방 및 안전관리에 관한 법률",
+      "article": "제24조",
+      "title": "특정소방대상물의 소방안전관리",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "283705",
+      "sourceLawId": "014189",
+      "sourceUrl": "https://www.law.go.kr/법령/화재의예방및안전관리에관한법률/제24조",
+      "text": "소방안전관리대상물 관계인은 소방안전관리자 선임, 소방계획서 작성·시행, 자위소방대와 초기대응체계, 피난시설·방화시설 관리, 소방훈련, 화기 취급 감독, 초기대응 및 기록 유지 업무를 검토해야 한다.",
+      "dutyTypes": [
+        "fire_safety_manager",
+        "fire_plan",
+        "initial_response",
+        "hot_work_supervision"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance",
+        "food_event"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "화재의 예방 및 안전관리에 관한 법률",
+      "sourceId": "283705:014189",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "fire_prevention_act__article_37",
+      "lawEntryId": "fire_prevention_act",
+      "lawName": "화재의 예방 및 안전관리에 관한 법률",
+      "article": "제37조",
+      "title": "소방안전관리대상물 근무자 및 거주자 등에 대한 소방훈련 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "283705",
+      "sourceLawId": "014189",
+      "sourceUrl": "https://www.law.go.kr/법령/화재의예방및안전관리에관한법률/제37조",
+      "text": "소방안전관리대상물 관계인은 근무자 등에게 소화·통보·피난 훈련과 교육을 실시해야 하며, 피난훈련에는 출입자를 안전한 장소로 대피·유도하는 훈련이 포함된다.",
+      "dutyTypes": [
+        "fire_drill",
+        "evacuation_training",
+        "fire_safety_training"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance",
+        "food_event"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "화재의 예방 및 안전관리에 관한 법률",
+      "sourceId": "283705:014189",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "fire_facilities_act__article_12",
+      "lawEntryId": "fire_facilities_act",
+      "lawName": "소방시설 설치 및 관리에 관한 법률",
+      "article": "제12조",
+      "title": "특정소방대상물에 설치하는 소방시설의 관리 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "236977",
+      "sourceLawId": "009503",
+      "sourceUrl": "https://www.law.go.kr/법령/소방시설설치및관리에관한법률/제12조",
+      "text": "특정소방대상물 관계인은 소방시설을 화재안전기준에 따라 설치·관리해야 하며, 화재 시 기능·성능에 지장을 주는 폐쇄·차단 등을 해서는 안 된다.",
+      "dutyTypes": [
+        "fire_facility_management",
+        "fire_facility_no_blocking"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "소방시설 설치 및 관리에 관한 법률",
+      "sourceId": "236977:009503",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "fire_facilities_act__article_16",
+      "lawEntryId": "fire_facilities_act",
+      "lawName": "소방시설 설치 및 관리에 관한 법률",
+      "article": "제16조",
+      "title": "피난시설, 방화구획 및 방화시설의 관리",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "236977",
+      "sourceLawId": "009503",
+      "sourceUrl": "https://www.law.go.kr/법령/소방시설설치및관리에관한법률/제16조",
+      "text": "피난시설, 방화구획, 방화시설을 폐쇄·훼손하거나 주변에 물건을 쌓아두거나 장애물을 설치해 용도와 소방활동에 지장을 주는 행위를 금지한다.",
+      "dutyTypes": [
+        "evacuation_route_management",
+        "fire_compartment_management",
+        "no_obstruction"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "소방시설 설치 및 관리에 관한 법률",
+      "sourceId": "236977:009503",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "road_act__article_61",
+      "lawEntryId": "road_act",
+      "lawName": "도로법",
+      "article": "제61조",
+      "title": "도로의 점용 허가",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "276971",
+      "sourceLawId": "001821",
+      "sourceUrl": "https://www.law.go.kr/법령/도로법/제61조",
+      "text": "도로에 공작물·물건·시설을 설치하거나 제거하는 등 도로를 점용하려면 도로관리청 허가와 변경허가 필요성을 검토해야 한다.",
+      "dutyTypes": [
+        "road_occupancy_permit"
+      ],
+      "appliesTo": [
+        "festival",
+        "outdoor_event",
+        "road_use",
+        "traffic_control"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로법",
+      "sourceId": "276971:001821",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "road_traffic_act__article_6",
+      "lawEntryId": "road_traffic_act",
+      "lawName": "도로교통법",
+      "article": "제6조",
+      "title": "통행의 금지 및 제한",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "281875",
+      "sourceLawId": "001638",
+      "sourceUrl": "https://www.law.go.kr/법령/도로교통법/제6조",
+      "text": "시·도경찰청장 또는 경찰서장은 도로 위험 방지와 교통 안전·소통 확보를 위해 구간을 정해 보행자·차량 등의 통행을 금지하거나 제한할 수 있다.",
+      "dutyTypes": [
+        "traffic_restriction",
+        "police_coordination"
+      ],
+      "appliesTo": [
+        "festival",
+        "outdoor_event",
+        "traffic_control",
+        "shuttle"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로교통법",
+      "sourceId": "281875:001638",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "outdoor_advertisements_act__article_3",
+      "lawEntryId": "outdoor_advertisements_act",
+      "lawName": "옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률",
+      "article": "제3조",
+      "title": "광고물등의 허가 또는 신고",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "273367",
+      "sourceLawId": "001020",
+      "sourceUrl": "https://www.law.go.kr/법령/옥외광고물등의관리와옥외광고산업진흥에관한법률/제3조",
+      "text": "도시지역, 도로 주변 등에서 대통령령으로 정하는 광고물·게시시설을 표시·설치하려면 지자체 허가 또는 신고 대상 여부와 설치 기준을 검토해야 한다.",
+      "dutyTypes": [
+        "outdoor_signage_permit",
+        "public_hazard_prevention"
+      ],
+      "appliesTo": [
+        "outdoor_signage",
+        "festival",
+        "road_use"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률",
+      "sourceId": "273367:001020",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "building_act__article_49",
+      "lawEntryId": "building_act",
+      "lawName": "건축법",
+      "article": "제49조",
+      "title": "건축물의 피난시설 및 용도제한 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "273437",
+      "sourceLawId": "001823",
+      "sourceUrl": "https://www.law.go.kr/법령/건축법/제49조",
+      "text": "대통령령으로 정하는 용도·규모의 건축물은 복도·계단·출입구 등 피난시설과 피난·소화 통로, 방화구획, 배연 등 안전·위생·방화 기준을 검토해야 한다.",
+      "dutyTypes": [
+        "evacuation_facilities",
+        "fire_compartment",
+        "building_capacity_review"
+      ],
+      "appliesTo": [
+        "venue_capacity",
+        "evacuation",
+        "temporary_structure",
+        "building_use"
+      ],
+      "relatedDutyIds": [
+        "venue_crisis_response_manual_check",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "건축법",
+      "sourceId": "273437:001823",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "elevator_safety_act__article_31",
+      "lawEntryId": "elevator_safety_act",
+      "lawName": "승강기 안전관리법",
+      "article": "제31조",
+      "title": "승강기의 자체점검",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "259475",
+      "sourceLawId": "001458",
+      "sourceUrl": "https://www.law.go.kr/법령/승강기안전관리법/제31조",
+      "text": "승강기 관리주체는 월 1회 이상 자체점검을 하고 결함 발견 시 즉시 보수하며, 보수가 끝날 때까지 해당 승강기 운행을 중지해야 한다.",
+      "dutyTypes": [
+        "elevator_monthly_check",
+        "defect_stop_operation"
+      ],
+      "appliesTo": [
+        "escalator",
+        "elevator",
+        "crowd_flow",
+        "accessibility"
+      ],
+      "relatedDutyIds": [
+        "elevator_escalator_crowd_control"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "승강기 안전관리법",
+      "sourceId": "259475:001458",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "lp_gas_safety_act__article_44",
+      "lawEntryId": "lp_gas_safety_act",
+      "lawName": "액화석유가스의 안전관리 및 사업법",
+      "article": "제44조",
+      "title": "액화석유가스 사용시설의 설치와 검사 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "276549",
+      "sourceLawId": "001849",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법/제44조",
+      "text": "LPG 사용자는 시설기준·기술기준에 맞는 사용시설과 가스용품을 갖추어야 하며, 특정사용자는 완성검사와 정기검사, 공급 전 검사 여부 확인을 검토해야 한다.",
+      "dutyTypes": [
+        "lpg_facility_standards",
+        "completion_inspection",
+        "regular_inspection",
+        "supply_check"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법",
+      "sourceId": "276549:001849",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act__article_4",
+      "lawEntryId": "security_services_industry_act",
+      "lawName": "경비업법",
+      "article": "제4조",
+      "title": "경비업의 허가",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "268091",
+      "sourceLawId": "000980",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법/제4조",
+      "text": "경비업 법인은 도급받을 경비업무를 특정해 관할 시·도경찰청장 허가를 받아야 하며 인력·시설·장비 요건을 갖춰야 한다.",
+      "dutyTypes": [
+        "licensed_security_vendor",
+        "security_staffing"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법",
+      "sourceId": "268091:000980",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act_enforcement_decree__article_9",
+      "lawEntryId": "performance_act_enforcement_decree",
+      "lawName": "공연법 시행령",
+      "article": "제9조",
+      "title": "재해대처계획의 신고 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "284681",
+      "sourceLawId": "002357",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법시행령/제9조",
+      "text": "재해대처계획에는 공연장 시설 관리자의 임무와 조직, 비상조치와 연락처, 화재예방 및 인명피해 방지조치, 안전관리비·안전관리조직·안전교육 사항이 포함되어야 한다. 공연장운영자는 다음 연도 계획을 매년 12월 31일까지 신고하고, 공연장 외 장소에서 1천명 이상 관람이 예상되는 공연은 공연 개시 14일 전까지 신고하며 변경은 공연 7일 전까지 신고한다.",
+      "dutyTypes": [
+        "disaster_countermeasure_plan",
+        "plan_submission",
+        "fire_police_notice",
+        "staff_deployment"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_disaster_countermeasure_plan"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "blocked_evacuation_route",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법 시행령",
+      "sourceId": "284681:002357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act_enforcement_decree__article_9_2",
+      "lawEntryId": "performance_act_enforcement_decree",
+      "lawName": "공연법 시행령",
+      "article": "제9조의2",
+      "title": "안전관리비",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "284681",
+      "sourceLawId": "002357",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법시행령/제9조의2",
+      "text": "객석 수 500석 이상 공연장과 공연장 외 1천명 이상 관람 예상 공연은 안전관리비를 계상해야 한다. 공연장운영자는 공연장운영비 1% 이상, 공연장 외 공연은 1천명 이상 3천명 미만 공연비용 1.15% 이상, 3천명 이상 공연비용 1.21% 이상을 기준으로 하며, 안전관리 인력·설비·보호장비·교육·훈련·안전진단·보험 등에 사용한다. 사용내역은 공연장운영자는 매년 2월 말일, 공연장 외 공연자는 종료일부터 30일 이내 제출한다.",
+      "dutyTypes": [
+        "safety_budget",
+        "recordkeeping",
+        "plan_submission"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_disaster_countermeasure_plan",
+        "performance_safety_org_and_training"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법 시행령",
+      "sourceId": "284681:002357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act_enforcement_decree__article_9_3",
+      "lawEntryId": "performance_act_enforcement_decree",
+      "lawName": "공연법 시행령",
+      "article": "제9조의3",
+      "title": "안전관리조직",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "284681",
+      "sourceLawId": "002357",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법시행령/제9조의3",
+      "text": "객석 수 500석 이상 공연장운영자 또는 공연장 외 장소에서 1천명 이상 관람 예상 공연자는 안전관리조직을 설치해야 하며, 안전총괄책임자와 안전관리담당자의 인적사항 및 업무 수행 내용을 기록·보관해야 한다.",
+      "dutyTypes": [
+        "staff_deployment",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_safety_org_and_training",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법 시행령",
+      "sourceId": "284681:002357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act_enforcement_decree__article_9_4",
+      "lawEntryId": "performance_act_enforcement_decree",
+      "lawName": "공연법 시행령",
+      "article": "제9조의4",
+      "title": "안전교육",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "284681",
+      "sourceLawId": "002357",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법시행령/제9조의4",
+      "text": "재해대처계획 수립 대상 공연은 공연자에게 공연 전 1시간 이상 안전교육을 실시한다. 안전총괄책임자는 지정 후 6개월 이내 4시간 이상 및 2년 주기 4시간 이상, 안전관리담당자는 지정 후 6개월 이내 8시간 이상 및 2년 주기 8시간 이상 교육을 검토한다.",
+      "dutyTypes": [
+        "training",
+        "staff_deployment"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_safety_org_and_training",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse",
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법 시행령",
+      "sourceId": "284681:002357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "performance_act_enforcement_rule__article_6_3",
+      "lawEntryId": "performance_act_enforcement_rule",
+      "lawName": "공연법 시행규칙",
+      "article": "제6조의3",
+      "title": "신고서식",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282561",
+      "sourceLawId": "006338",
+      "sourceUrl": "https://www.law.go.kr/법령/공연법시행규칙/제6조의3",
+      "text": "공연법 시행령 제9조제1항부터 제3항까지에 따른 재해대처계획의 신고 및 변경신고는 별지 제13호의3서식의 신고서로 한다.",
+      "dutyTypes": [
+        "plan_submission",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "performance",
+        "concert",
+        "festival_with_stage"
+      ],
+      "relatedDutyIds": [
+        "performance_disaster_countermeasure_plan"
+      ],
+      "relatedHazardIds": [
+        "crowd_density_high",
+        "blocked_evacuation_route"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "공연법 시행규칙",
+      "sourceId": "282561:006338",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "food_sanitation_act_enforcement_rule__article_2",
+      "lawEntryId": "food_sanitation_act_enforcement_rule",
+      "lawName": "식품위생법 시행규칙",
+      "article": "제2조",
+      "title": "식품등의 위생적인 취급에 관한 기준",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282565",
+      "sourceLawId": "007634",
+      "sourceUrl": "https://www.law.go.kr/법령/식품위생법시행규칙/제2조",
+      "text": "식품위생법 제3조제3항에 따른 식품, 식품첨가물, 기구, 용기·포장의 위생적인 취급 기준은 별표 1에 따른다. 행사장에서는 임시 조리·시식·케이터링·푸드트럭의 보관온도, 손위생, 교차오염 방지 체크리스트와 연결한다.",
+      "dutyTypes": [
+        "inspection",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "food_booth",
+        "catering",
+        "food_truck",
+        "temporary_food_service"
+      ],
+      "relatedDutyIds": [
+        "temporary_food_business_and_poisoning_plan"
+      ],
+      "relatedHazardIds": [
+        "food_poisoning"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "식품위생법 시행규칙",
+      "sourceId": "282565:007634",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__article_45",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "article": "제45조",
+      "title": "안전관리규정의 실시 기록",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282369",
+      "sourceLawId": "007667",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/제45조",
+      "text": "액화석유가스 안전관리규정의 실시 기록은 3년간 보존해야 한다. 행사장 LPG 사용 시 공급·점검·조치 기록 보존 항목과 연결한다.",
+      "dutyTypes": [
+        "recordkeeping",
+        "inspection"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "282369:007667",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__article_47",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "article": "제47조",
+      "title": "용기의 안전점검기준 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282369",
+      "sourceLawId": "007667",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/제47조",
+      "text": "LPG 충전사업자가 점검해야 하는 용기의 안전점검기준은 별표 17에 따른다. 행사장에서는 반입 용기 외관, 전도방지, 밸브·호스, 누출 확인과 공급자 점검 확인으로 연결한다.",
+      "dutyTypes": [
+        "inspection",
+        "fire_prevention"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "282369:007667",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "lp_gas_safety_act_enforcement_rule__article_69",
+      "lawEntryId": "lp_gas_safety_act_enforcement_rule",
+      "lawName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "article": "제69조",
+      "title": "액화석유가스 사용시설의 시설기준과 기술기준",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282369",
+      "sourceLawId": "007667",
+      "sourceUrl": "https://www.law.go.kr/법령/액화석유가스의안전관리및사업법시행규칙/제69조",
+      "text": "액화석유가스 사용시설의 시설기준과 기술기준은 별표 20에 따른다. 푸드트럭·야외 조리부스는 용기 설치, 배관·호스, 환기, 화기 이격, 누출점검 체크포인트와 연결한다.",
+      "dutyTypes": [
+        "inspection",
+        "fire_prevention",
+        "permit_check"
+      ],
+      "appliesTo": [
+        "food_truck",
+        "lpg",
+        "outdoor_cooking",
+        "gas_cylinder"
+      ],
+      "relatedDutyIds": [
+        "fire_and_hazardous_material_permit_check"
+      ],
+      "relatedHazardIds": [
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "액화석유가스의 안전관리 및 사업법 시행규칙",
+      "sourceId": "282369:007667",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "road_act_enforcement_decree__article_54",
+      "lawEntryId": "road_act_enforcement_decree",
+      "lawName": "도로법 시행령",
+      "article": "제54조",
+      "title": "도로의 점용 허가 신청 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "285835",
+      "sourceLawId": "003400",
+      "sourceUrl": "https://www.law.go.kr/법령/도로법시행령/제54조",
+      "text": "도로점용허가 신청에는 점용 목적, 장소와 면적, 기간, 점용물 구조, 공사 방법, 공사 시기, 복구방법을 적고 설계도면을 첨부한다. 굴착 수반 시 지하매설물 의견서, 사후관리계획, 도로관리심의회 안전대책 반영 서류가 추가될 수 있다. 허가 시 허가증서 발급, 허가내용 공고, 허가대장 관리와 도로점용허가 기준 별표 2를 검토한다.",
+      "dutyTypes": [
+        "permit_check",
+        "plan_submission",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "festival",
+        "outdoor_event",
+        "road_use",
+        "traffic_control"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "도로법 시행령",
+      "sourceId": "285835:003400",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "outdoor_advertisements_act_enforcement_decree__article_5",
+      "lawEntryId": "outdoor_advertisements_act_enforcement_decree",
+      "lawName": "옥외광고물법 시행령",
+      "article": "제5조",
+      "title": "신고 대상 광고물 및 게시시설",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282903",
+      "sourceLawId": "004242",
+      "sourceUrl": "https://www.law.go.kr/법령/옥외광고물등의관리와옥외광고산업진흥에관한법률시행령/제5조",
+      "text": "신고하고 표시해야 하는 광고물에는 일정 벽면 이용 간판, 공연간판, 돌출간판, 지주 이용 간판, 입간판, 현수막, 교통수단 이용 광고물, 벽보, 전단 등이 포함된다. 행사 안내물 설치 전 관할 조례와 신고 대상 여부를 확인한다.",
+      "dutyTypes": [
+        "permit_check",
+        "plan_submission"
+      ],
+      "appliesTo": [
+        "outdoor_signage",
+        "festival",
+        "road_use"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "옥외광고물법 시행령",
+      "sourceId": "282903:004242",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "outdoor_advertisements_act_enforcement_decree__article_7",
+      "lawEntryId": "outdoor_advertisements_act_enforcement_decree",
+      "lawName": "옥외광고물법 시행령",
+      "article": "제7조",
+      "title": "허가 및 신고의 절차",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282903",
+      "sourceLawId": "004242",
+      "sourceUrl": "https://www.law.go.kr/법령/옥외광고물등의관리와옥외광고산업진흥에관한법률시행령/제7조",
+      "text": "광고물 허가 신청에는 장소 주변 원색사진과 도안, 모양·규격·재료·구조·디자인 설명서와 설계도서, 소유자·관리자 승낙서, 심의서류, 구조안전확인서류가 필요할 수 있다. 신고 시에도 소유자 승낙, 심의, 구조안전 서류 대상 여부를 확인한다.",
+      "dutyTypes": [
+        "permit_check",
+        "plan_submission",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "outdoor_signage",
+        "festival",
+        "road_use"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "옥외광고물법 시행령",
+      "sourceId": "282903:004242",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "outdoor_advertisements_act_enforcement_decree__article_12",
+      "lawEntryId": "outdoor_advertisements_act_enforcement_decree",
+      "lawName": "옥외광고물법 시행령",
+      "article": "제12조",
+      "title": "일반적 표시방법",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282903",
+      "sourceLawId": "004242",
+      "sourceUrl": "https://www.law.go.kr/법령/옥외광고물등의관리와옥외광고산업진흥에관한법률시행령/제12조",
+      "text": "광고물은 보행자와 차량 통행에 지장이 없도록 표시해야 하며, 바람이나 충격으로 떨어지거나 넘어지지 않도록 해야 한다. 지면, 건물, 인공구조물 등에 고정되어야 하고 이동식 간판은 원칙적으로 제한된다.",
+      "dutyTypes": [
+        "inspection",
+        "crowd_control",
+        "fire_prevention"
+      ],
+      "appliesTo": [
+        "outdoor_signage",
+        "festival",
+        "road_use"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "relatedHazardIds": [
+        "ingress_egress_bottleneck",
+        "temporary_structure_collapse"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "옥외광고물법 시행령",
+      "sourceId": "282903:004242",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "outdoor_advertisements_act_enforcement_decree__article_14",
+      "lawEntryId": "outdoor_advertisements_act_enforcement_decree",
+      "lawName": "옥외광고물법 시행령",
+      "article": "제14조",
+      "title": "전기를 사용하는 광고물등의 표시방법",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282903",
+      "sourceLawId": "004242",
+      "sourceUrl": "https://www.law.go.kr/법령/옥외광고물등의관리와옥외광고산업진흥에관한법률시행령/제14조",
+      "text": "전기 사용 광고물은 안전인증 전기자재를 사용해야 하고, 전기배선은 외부에 노출하지 않으며 전선 연결부는 감싸야 한다. 전기공사의 설계와 시공은 전기공사업법에 맞게 해야 하고, 점멸·전광류 광고물은 도로·신호기 주변 표시 제한을 검토한다.",
+      "dutyTypes": [
+        "inspection",
+        "fire_prevention",
+        "worker_safety"
+      ],
+      "appliesTo": [
+        "outdoor_signage",
+        "festival",
+        "road_use",
+        "temporary_electricity"
+      ],
+      "relatedDutyIds": [
+        "road_traffic_and_outdoor_signage_permit",
+        "temporary_electrical_safety_check"
+      ],
+      "relatedHazardIds": [
+        "temporary_electrical_fire_shock",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "옥외광고물법 시행령",
+      "sourceId": "282903:004242",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "fire_prevention_act_enforcement_decree__article_26",
+      "lawEntryId": "fire_prevention_act_enforcement_decree",
+      "lawName": "화재예방법 시행령",
+      "article": "제26조",
+      "title": "소방안전관리업무 전담 대상물",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "284919",
+      "sourceLawId": "014353",
+      "sourceUrl": "https://www.law.go.kr/법령/화재의예방및안전관리에관한법률시행령/제26조",
+      "text": "소방안전관리업무 전담 대상물은 별표 4 제1호의 특급 소방안전관리대상물과 별표 4 제2호의 1급 소방안전관리대상물이다. 대형 전시장·컨벤션센터의 행사 운영 시 시설 측 전담 소방안전관리체계와 행사 운영조직의 역할분담을 확인한다.",
+      "dutyTypes": [
+        "staff_deployment",
+        "fire_prevention",
+        "inspection"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "fire_hazard_hot_work_lpg"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "화재예방법 시행령",
+      "sourceId": "284919:014353",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "fire_facilities_act_enforcement_decree__article_36",
+      "lawEntryId": "fire_facilities_act_enforcement_decree",
+      "lawName": "소방시설법 시행령",
+      "article": "제36조",
+      "title": "자체점검 결과 공개",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "284781",
+      "sourceLawId": "009694",
+      "sourceUrl": "https://www.law.go.kr/법령/소방시설설치및관리에관한법률시행령/제36조",
+      "text": "소방본부장 또는 소방서장이 자체점검 결과를 공개하는 경우 30일 이상 전산시스템 또는 인터넷 홈페이지 등에 공개하며, 공개 기간·내용·방법을 특정소방대상물 관계인에게 미리 알려야 한다. 행사 전 베뉴 소방시설 자체점검 공개·이력 확인 항목으로 연결한다.",
+      "dutyTypes": [
+        "inspection",
+        "recordkeeping",
+        "fire_prevention"
+      ],
+      "appliesTo": [
+        "venue_operation",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "소방시설법 시행령",
+      "sourceId": "284781:009694",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "emergency_medical_service_act_enforcement_decree__article_26_7",
+      "lawEntryId": "emergency_medical_service_act_enforcement_decree",
+      "lawName": "응급의료에 관한 법률 시행령",
+      "article": "제26조의7",
+      "title": "응급장비의 구비의무가 있는 공동주택 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "282889",
+      "sourceLawId": "004480",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료에관한법률시행령/제26조의7",
+      "text": "AED 등 응급장비 구비 의무가 있는 시설에는 500세대 이상 공동주택, 관광지·관광단지 공공편익시설지구의 관리사무소 및 안내시설, 일정 규모 철도역사·여객자동차터미널·항만 대합실, 2천㎡ 이상 카지노, 경마장·경주장, 총 관람석 5천석 이상 전문체육시설 중 운동장·종합운동장, 일정 중앙행정기관·시도 청사가 포함된다. MICE에서는 베뉴 자체 AED 의무 여부와 행사 주최자의 임시 AED·의무실 보강 필요성을 구분해 확인한다.",
+      "dutyTypes": [
+        "medical_response",
+        "inspection",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "large_crowd",
+        "venue_operation",
+        "transport_hub"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료에 관한 법률 시행령",
+      "sourceId": "282889:004480",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "building_act_enforcement_decree__article_34",
+      "lawEntryId": "building_act_enforcement_decree",
+      "lawName": "건축법 시행령",
+      "article": "제34조",
+      "title": "직통계단의 설치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "273503",
+      "sourceLawId": "002118",
+      "sourceUrl": "https://www.law.go.kr/법령/건축법시행령/제34조",
+      "text": "피난층 외 층에서는 피난층 또는 지상으로 통하는 직통계단을 거실 각 부분에서 계단까지의 보행거리가 원칙적으로 30m 이하가 되도록 설치해야 한다. 지하층에 설치하는 바닥면적 합계 300㎡ 이상 공연장·집회장·관람장·전시장은 완화 예외에서 제외된다. 일정 용도·규모의 층에는 직통계단 2개소 이상 설치 대상 여부를 검토한다.",
+      "dutyTypes": [
+        "evacuation",
+        "inspection",
+        "building_capacity_review"
+      ],
+      "appliesTo": [
+        "venue_capacity",
+        "evacuation",
+        "exhibition",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management",
+        "venue_crisis_response_manual_check"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "crowd_density_high"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "건축법 시행령",
+      "sourceId": "273503:002118",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "building_act_enforcement_decree__article_35",
+      "lawEntryId": "building_act_enforcement_decree",
+      "lawName": "건축법 시행령",
+      "article": "제35조",
+      "title": "피난계단의 설치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "273503",
+      "sourceLawId": "002118",
+      "sourceUrl": "https://www.law.go.kr/법령/건축법시행령/제35조",
+      "text": "5층 이상 또는 지하 2층 이하 층의 직통계단은 기준에 따라 피난계단 또는 특별피난계단으로 설치해야 한다. 11층 이상 또는 지하 3층 이하 중 일정 면적 이상 층은 특별피난계단 대상이다. 5층 이상 전시장·판매시설 등은 바닥면적 2천㎡ 초과분마다 추가 피난계단 또는 특별피난계단 설치 필요성을 검토한다.",
+      "dutyTypes": [
+        "evacuation",
+        "inspection"
+      ],
+      "appliesTo": [
+        "venue_capacity",
+        "evacuation",
+        "exhibition",
+        "performance"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management",
+        "venue_crisis_response_manual_check"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "건축법 시행령",
+      "sourceId": "273503:002118",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "building_act_enforcement_decree__article_36",
+      "lawEntryId": "building_act_enforcement_decree",
+      "lawName": "건축법 시행령",
+      "article": "제36조",
+      "title": "옥외 피난계단의 설치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "273503",
+      "sourceLawId": "002118",
+      "sourceUrl": "https://www.law.go.kr/법령/건축법시행령/제36조",
+      "text": "3층 이상 층 중 일정 규모 공연장 또는 문화 및 집회시설 중 집회장으로 쓰는 층에는 직통계단 외에 지상으로 통하는 옥외피난계단 설치 대상 여부를 검토한다.",
+      "dutyTypes": [
+        "evacuation",
+        "inspection"
+      ],
+      "appliesTo": [
+        "evacuation",
+        "performance",
+        "conference"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management",
+        "venue_crisis_response_manual_check"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "건축법 시행령",
+      "sourceId": "273503:002118",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "building_act_enforcement_decree__article_37",
+      "lawEntryId": "building_act_enforcement_decree",
+      "lawName": "건축법 시행령",
+      "article": "제37조",
+      "title": "지하층과 피난층 사이의 개방공간 설치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "273503",
+      "sourceLawId": "002118",
+      "sourceUrl": "https://www.law.go.kr/법령/건축법시행령/제37조",
+      "text": "지하층에 바닥면적 합계 3천㎡ 이상 공연장·집회장·관람장 또는 전시장을 설치하는 경우 각 실의 이용자가 지하층에서 건축물 밖으로 피난해 옥외 계단 또는 경사로 등을 통해 피난층으로 대피할 수 있도록 천장이 개방된 외부 공간 설치 대상 여부를 검토한다.",
+      "dutyTypes": [
+        "evacuation",
+        "inspection",
+        "building_capacity_review"
+      ],
+      "appliesTo": [
+        "evacuation",
+        "exhibition",
+        "performance",
+        "conference"
+      ],
+      "relatedDutyIds": [
+        "fire_evacuation_facility_management",
+        "venue_crisis_response_manual_check"
+      ],
+      "relatedHazardIds": [
+        "blocked_evacuation_route",
+        "crowd_density_high"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "건축법 시행령",
+      "sourceId": "273503:002118",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act__article_15",
+      "lawEntryId": "personal_information_protection_act",
+      "lawName": "개인정보 보호법",
+      "article": "제15조",
+      "title": "개인정보의 수집ㆍ이용",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "270351",
+      "sourceLawId": "011357",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법/제15조",
+      "text": "참가자 등록·출입증·QR 발급 등 개인정보 수집은 동의, 계약 이행, 법령상 의무 등 처리 근거와 수집 목적·항목·보유기간·거부권 고지가 필요하다.",
+      "dutyTypes": [
+        "privacy_notice",
+        "registration_data_minimization",
+        "consent_management"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법",
+      "sourceId": "270351:011357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act__article_22",
+      "lawEntryId": "personal_information_protection_act",
+      "lawName": "개인정보 보호법",
+      "article": "제22조",
+      "title": "동의를 받는 방법",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "270351",
+      "sourceLawId": "011357",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법/제22조",
+      "text": "동의 항목은 수집·이용, 제3자 제공, 홍보성 이용 등 목적별로 구분해 명확히 고지하고 선택 동의 거부에 따른 불이익을 과도하게 두지 않아야 한다.",
+      "dutyTypes": [
+        "consent_management",
+        "privacy_notice"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법",
+      "sourceId": "270351:011357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act__article_26",
+      "lawEntryId": "personal_information_protection_act",
+      "lawName": "개인정보 보호법",
+      "article": "제26조",
+      "title": "업무위탁에 따른 개인정보의 처리 제한",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "270351",
+      "sourceLawId": "011357",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법/제26조",
+      "text": "등록대행, QR/출입증 발급, 현장 앱 운영 등 개인정보 처리 위탁은 목적 외 처리 금지, 보호조치, 수탁자 공개, 교육·감독, 재위탁 통제를 문서화해야 한다.",
+      "dutyTypes": [
+        "outsourced_registration",
+        "vendor_management",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법",
+      "sourceId": "270351:011357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act__article_29",
+      "lawEntryId": "personal_information_protection_act",
+      "lawName": "개인정보 보호법",
+      "article": "제29조",
+      "title": "안전조치의무",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "270351",
+      "sourceLawId": "011357",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법/제29조",
+      "text": "개인정보 분실·도난·유출·위조·변조·훼손을 방지하기 위해 내부관리계획, 접근권한, 접속기록, 암호화, 물리적 보호조치를 확인한다.",
+      "dutyTypes": [
+        "privacy_security",
+        "access_control",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법",
+      "sourceId": "270351:011357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act__article_30",
+      "lawEntryId": "personal_information_protection_act",
+      "lawName": "개인정보 보호법",
+      "article": "제30조",
+      "title": "개인정보 처리방침의 수립 및 공개",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "270351",
+      "sourceLawId": "011357",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법/제30조",
+      "text": "처리 목적, 보유기간, 제3자 제공, 파기, 위탁, 정보주체 권리, 보호책임자 연락처 등을 포함한 처리방침을 쉽게 확인할 수 있게 공개한다.",
+      "dutyTypes": [
+        "privacy_policy",
+        "privacy_notice",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법",
+      "sourceId": "270351:011357",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act_enforcement_decree__article_24",
+      "lawEntryId": "personal_information_protection_act_enforcement_decree",
+      "lawName": "개인정보 보호법 시행령",
+      "article": "제24조",
+      "title": "안내판의 설치 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "286175",
+      "sourceLawId": "011468",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법시행령/제24조",
+      "text": "CCTV 설치·운영 사실과 설치 목적·장소, 촬영 범위·시간, 관리책임자 연락처 등이 포함된 안내판 또는 대체 공개 방법을 확인한다.",
+      "dutyTypes": [
+        "cctv_notice",
+        "privacy_notice"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법 시행령",
+      "sourceId": "286175:011468",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act_enforcement_decree__article_25",
+      "lawEntryId": "personal_information_protection_act_enforcement_decree",
+      "lawName": "개인정보 보호법 시행령",
+      "article": "제25조",
+      "title": "고정형 영상정보처리기기 운영ㆍ관리 방침",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "286175",
+      "sourceLawId": "011468",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법시행령/제25조",
+      "text": "CCTV 설치 근거·목적, 대수·위치·촬영범위, 접근권한자, 보관기간, 열람 절차, 보호조치를 운영방침에 포함한다.",
+      "dutyTypes": [
+        "cctv_policy",
+        "recordkeeping",
+        "privacy_security"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법 시행령",
+      "sourceId": "286175:011468",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act_enforcement_decree__article_26",
+      "lawEntryId": "personal_information_protection_act_enforcement_decree",
+      "lawName": "개인정보 보호법 시행령",
+      "article": "제26조",
+      "title": "공공기관의 고정형 영상정보처리기기 설치ㆍ운영 사무의 위탁",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "286175",
+      "sourceLawId": "011468",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법시행령/제26조",
+      "text": "공공기관 CCTV 위탁은 목적·범위, 재위탁 제한, 접근 제한, 관리현황 점검, 책임 조항을 문서화하고 안내판에 수탁자 정보를 포함한다.",
+      "dutyTypes": [
+        "outsourced_cctv_operation",
+        "vendor_management",
+        "privacy_security"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법 시행령",
+      "sourceId": "286175:011468",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act_enforcement_decree__article_30",
+      "lawEntryId": "personal_information_protection_act_enforcement_decree",
+      "lawName": "개인정보 보호법 시행령",
+      "article": "제30조",
+      "title": "개인정보의 안전성 확보 조치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "286175",
+      "sourceLawId": "011468",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법시행령/제30조",
+      "text": "내부관리계획, 취급자 교육, 접근권한 관리, 접근통제, 암호화, 접속기록 보관, 악성프로그램 대응, 물리적 보호를 점검한다.",
+      "dutyTypes": [
+        "privacy_security",
+        "access_control",
+        "incident_response",
+        "recordkeeping",
+        "incident_report"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법 시행령",
+      "sourceId": "286175:011468",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "personal_information_protection_act_enforcement_decree__article_31",
+      "lawEntryId": "personal_information_protection_act_enforcement_decree",
+      "lawName": "개인정보 보호법 시행령",
+      "article": "제31조",
+      "title": "개인정보 처리방침의 내용 및 공개방법 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "286175",
+      "sourceLawId": "011468",
+      "sourceUrl": "https://www.law.go.kr/법령/개인정보보호법시행령/제31조",
+      "text": "처리 항목, 국외이전, 안전성 확보조치 등 추가 항목과 홈페이지·현장 게시 등 공개 방법을 확인한다.",
+      "dutyTypes": [
+        "privacy_policy",
+        "privacy_notice",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "registration",
+        "qr_badge",
+        "cctv",
+        "photo_video",
+        "outsourced_registration",
+        "personal_data_processing"
+      ],
+      "relatedDutyIds": [
+        "privacy_cctv_registration_check"
+      ],
+      "relatedHazardIds": [
+        "personal_data_cctv_privacy"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "개인정보 보호법 시행령",
+      "sourceId": "286175:011468",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act__article_12",
+      "lawEntryId": "security_services_industry_act",
+      "lawName": "경비업법",
+      "article": "제12조",
+      "title": "경비지도사의 선임 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "268091",
+      "sourceLawId": "000980",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법/제12조",
+      "text": "경비업자는 경비지도사를 선임하고, 경비지도사는 교육계획 수립·기록, 순회점검, 경찰·소방 연락방법 지도 등을 수행한다.",
+      "dutyTypes": [
+        "security_staffing",
+        "training",
+        "agency_coordination",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법",
+      "sourceId": "268091:000980",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act__article_13",
+      "lawEntryId": "security_services_industry_act",
+      "lawName": "경비업법",
+      "article": "제13조",
+      "title": "경비원의 교육 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "268091",
+      "sourceLawId": "000980",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법/제13조",
+      "text": "경비원은 신임교육과 직무교육 대상이며 특수경비원은 신임교육 없이 특수경비업무에 종사할 수 없다.",
+      "dutyTypes": [
+        "training",
+        "security_staffing"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법",
+      "sourceId": "268091:000980",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act__article_18",
+      "lawEntryId": "security_services_industry_act",
+      "lawName": "경비업법",
+      "article": "제18조",
+      "title": "경비원의 명부와 배치허가 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "268091",
+      "sourceLawId": "000980",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법/제18조",
+      "text": "경비업자는 경비원 명부를 작성·비치하고 배치·폐지 신고, 신변보호·특수경비·집단민원현장 배치허가, 근무상황 기록 보관 요건을 확인해야 한다.",
+      "dutyTypes": [
+        "security_staffing",
+        "permit_check",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법",
+      "sourceId": "268091:000980",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_decree__article_10",
+      "lawEntryId": "security_services_industry_act_enforcement_decree",
+      "lawName": "경비업법 시행령",
+      "article": "제10조",
+      "title": "경비지도사의 구분",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "280451",
+      "sourceLawId": "002146",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행령/제10조",
+      "text": "시설경비, 신변보호, 특수경비, 혼잡·교통유도경비는 일반경비지도사 지도·감독·교육 범위에 해당한다.",
+      "dutyTypes": [
+        "security_staffing",
+        "licensed_security_vendor"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행령",
+      "sourceId": "280451:002146",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_decree__article_16",
+      "lawEntryId": "security_services_industry_act_enforcement_decree",
+      "lawName": "경비업법 시행령",
+      "article": "제16조",
+      "title": "경비지도사의 선임ㆍ배치",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "280451",
+      "sourceLawId": "002146",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행령/제16조",
+      "text": "경비업자는 별표 3 기준에 따라 경비지도사를 선임·배치하고 결원 시 15일 이내 충원해야 한다.",
+      "dutyTypes": [
+        "security_staffing",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행령",
+      "sourceId": "280451:002146",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_decree__article_18",
+      "lawEntryId": "security_services_industry_act_enforcement_decree",
+      "lawName": "경비업법 시행령",
+      "article": "제18조",
+      "title": "일반경비원에 대한 교육",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "280451",
+      "sourceLawId": "002146",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행령/제18조",
+      "text": "일반경비원 채용 시 신임교육 대상 여부와 매월 직무교육 실시 여부를 확인한다.",
+      "dutyTypes": [
+        "training",
+        "security_staffing"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행령",
+      "sourceId": "280451:002146",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_decree__article_30",
+      "lawEntryId": "security_services_industry_act_enforcement_decree",
+      "lawName": "경비업법 시행령",
+      "article": "제30조",
+      "title": "경비가 필요한 시설 등에 대한 경비의 요청",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "280451",
+      "sourceLawId": "002146",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행령/제30조",
+      "text": "경찰은 행사장 등 많은 사람이 모이는 장소에서 혼잡 위험 방지를 위해 주최자나 시설 관리자에게 경비원 배치를 요청할 수 있다.",
+      "dutyTypes": [
+        "staff_deployment",
+        "crowd_control",
+        "agency_coordination"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행령",
+      "sourceId": "280451:002146",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "security_services_industry_act_enforcement_rule__article_24",
+      "lawEntryId": "security_services_industry_act_enforcement_rule",
+      "lawName": "경비업법 시행규칙",
+      "article": "제24조",
+      "title": "경비원의 배치 및 배치폐지의 신고",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "264977",
+      "sourceLawId": "006221",
+      "sourceUrl": "https://www.law.go.kr/법령/경비업법시행규칙/제24조",
+      "text": "20일 이상 경비원 배치 또는 신변보호·특수경비 등은 관할 경찰관서 신고 시기와 신고서 제출 요건을 확인한다.",
+      "dutyTypes": [
+        "permit_check",
+        "recordkeeping",
+        "security_staffing"
+      ],
+      "appliesTo": [
+        "security_staff",
+        "access_control",
+        "vip_security",
+        "crowd_security"
+      ],
+      "relatedDutyIds": [
+        "security_access_control_plan",
+        "staff_assignment_roster"
+      ],
+      "relatedHazardIds": [
+        "security_access_control_gap",
+        "ingress_egress_bottleneck"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "경비업법 시행규칙",
+      "sourceId": "264977:006221",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "emergency_medical_service_act__article_47",
+      "lawEntryId": "emergency_medical_service_act",
+      "lawName": "응급의료에 관한 법률",
+      "article": "제47조",
+      "title": "구급차등의 장비",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "279729",
+      "sourceLawId": "000218",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료에관한법률/제47조",
+      "text": "구급차등은 응급처치 의료장비·구급의약품·통신장비를 갖추고 구급의약품 적정상태 유지, 이송상황 기록·보존 기준을 확인한다.",
+      "dutyTypes": [
+        "ambulance_equipment",
+        "medical_response",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료에 관한 법률",
+      "sourceId": "279729:000218",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "emergency_medical_service_act__article_50",
+      "lawEntryId": "emergency_medical_service_act",
+      "lawName": "응급의료에 관한 법률",
+      "article": "제50조",
+      "title": "지도ㆍ감독",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "279729",
+      "sourceLawId": "000218",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료에관한법률/제50조",
+      "text": "지자체는 구급차등 운용상황과 AED 등 응급장비 설치·관리 실태를 매년 점검하고 필요한 조치를 할 수 있다.",
+      "dutyTypes": [
+        "inspection",
+        "aed_management",
+        "ambulance_inspection"
+      ],
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료에 관한 법률",
+      "sourceId": "279729:000218",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "emergency_medical_service_act_enforcement_rule__article_38",
+      "lawEntryId": "emergency_medical_service_act_enforcement_rule",
+      "lawName": "응급의료에 관한 법률 시행규칙",
+      "article": "제38조",
+      "title": "구급차등의 장비 및 관리 등",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "283863",
+      "sourceLawId": "007858",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료에관한법률시행규칙/제38조",
+      "text": "구급차 종류, 의료장비·구급의약품·통신장비 기준, 장착 장비와 관리기준 별표 적용 여부를 확인한다.",
+      "dutyTypes": [
+        "ambulance_equipment",
+        "medical_response",
+        "inspection"
+      ],
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료에 관한 법률 시행규칙",
+      "sourceId": "283863:007858",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "emergency_medical_service_act_enforcement_rule__article_38_2",
+      "lawEntryId": "emergency_medical_service_act_enforcement_rule",
+      "lawName": "응급의료에 관한 법률 시행규칙",
+      "article": "제38조의2",
+      "title": "응급장비 설치 등에 관한 현황 파악",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "283863",
+      "sourceLawId": "007858",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료에관한법률시행규칙/제38조의2",
+      "text": "AED 등 응급장비 설치 시 설치 신고서 제출, 등록대장 관리, 관리상황 보고, 양도·폐기·이전 신고를 확인한다.",
+      "dutyTypes": [
+        "aed_report",
+        "recordkeeping",
+        "inspection"
+      ],
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료에 관한 법률 시행규칙",
+      "sourceId": "283863:007858",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    },
+    {
+      "id": "emergency_medical_service_act_enforcement_rule__article_38_3",
+      "lawEntryId": "emergency_medical_service_act_enforcement_rule",
+      "lawName": "응급의료에 관한 법률 시행규칙",
+      "article": "제38조의3",
+      "title": "응급장비의 관리",
+      "currentAsOf": "2026-05-21",
+      "sourceMst": "283863",
+      "sourceLawId": "007858",
+      "sourceUrl": "https://www.law.go.kr/법령/응급의료에관한법률시행규칙/제38조의3",
+      "text": "AED 관리책임자 지정, 월 1회 이상 점검, 사용교육, 관리 서류 작성·비치, 사용 시 응급의료지원센터 통보를 확인한다.",
+      "dutyTypes": [
+        "aed_management",
+        "monthly_check",
+        "training",
+        "recordkeeping"
+      ],
+      "appliesTo": [
+        "medical_response",
+        "aed",
+        "ambulance",
+        "large_crowd",
+        "venue_operation"
+      ],
+      "relatedDutyIds": [
+        "medical_aed_response_plan"
+      ],
+      "relatedHazardIds": [
+        "medical_emergency"
+      ],
+      "verificationStatus": "verified",
+      "lawOrOrdinanceName": "응급의료에 관한 법률 시행규칙",
+      "sourceId": "283863:007858",
+      "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
+      "sourceConfidence": "official_law_go_verified_article"
+    }
+  ]
+}

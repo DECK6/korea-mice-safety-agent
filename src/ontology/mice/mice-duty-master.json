@@ -1,0 +1,433 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "duties": [
+    {
+      "id": "mice_event_safety_management_plan",
+      "title": "행사 안전관리계획서",
+      "eventTypes": [
+        "festival",
+        "outdoor_event",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "requiredWhen": "지역축제, 다중운집, 지자체·베뉴 요구, 대규모 또는 고위험 행사의 경우",
+      "strictness": "local_required",
+      "cycle": "per_event",
+      "lawRefs": [
+        "framework_act_disaster_safety:제66조의11"
+      ],
+      "sourceRefs": [
+        "MOIS_FESTIVAL_MANUAL_2024",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "mice_crowd_management_plan",
+      "title": "인파·동선·입퇴장 관리계획",
+      "eventTypes": [
+        "festival",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "requiredWhen": "예상 방문객, 장소 수용능력, 입퇴장 피크, 병목·대기열 위험이 있는 경우",
+      "strictness": "administrative_rule",
+      "cycle": "per_event",
+      "lawRefs": [
+        "framework_act_disaster_safety:제66조의12",
+        "fire_facilities_act_enforcement_decree:별표7"
+      ],
+      "sourceRefs": [
+        "MOIS_CROWD_GUIDELINE"
+      ]
+    },
+    {
+      "id": "unhosted_crowd_multi_agency_response_plan",
+      "title": "무주최 다중운집 관계기관 공동대응계획",
+      "eventTypes": [
+        "outdoor_event",
+        "festival"
+      ],
+      "requiredWhen": "주최자·주관자가 특정되지 않거나 자발적·예측형 다중운집으로 책임 공백이 생길 수 있는 경우",
+      "strictness": "administrative_rule",
+      "cycle": "per_event_or_risk_period",
+      "lawRefs": [
+        "framework_act_disaster_safety:제66조의12"
+      ],
+      "sourceRefs": [
+        "MOIS_CROWD_GUIDELINE",
+        "MOIS_FESTIVAL_MANUAL_2024"
+      ]
+    },
+    {
+      "id": "venue_crisis_response_manual_check",
+      "title": "베뉴 위기상황 매뉴얼 확인 및 행사 반영표",
+      "eventTypes": [
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "requiredWhen": "컨벤션센터, 전시장, 공연장 등 다중이용시설에서 개최되는 경우",
+      "strictness": "administrative_rule",
+      "cycle": "per_event",
+      "lawRefs": [
+        "multi_use_facility_crisis_manual_rule:*"
+      ],
+      "sourceRefs": [
+        "MOIS_MULTI_USE_FACILITY_MANUAL"
+      ]
+    },
+    {
+      "id": "performance_disaster_countermeasure_plan",
+      "title": "공연 재해대처계획",
+      "eventTypes": [
+        "performance",
+        "festival_with_stage"
+      ],
+      "requiredWhen": "공연장 또는 대통령령으로 정하는 규모의 공연장 외 공연이 포함되는 경우",
+      "strictness": "statutory_required",
+      "cycle": "per_event_or_annual",
+      "lawRefs": [
+        "performance_act:제11조",
+        "performance_act_enforcement_decree:제9조",
+        "performance_act_enforcement_rule:제6조의3"
+      ],
+      "sourceRefs": [
+        "MCST_PERFORMANCE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "performance_safety_org_and_training",
+      "title": "공연 안전관리조직·안전교육·피난안내",
+      "eventTypes": [
+        "performance",
+        "festival_with_stage"
+      ],
+      "requiredWhen": "공연법상 재해대처계획 수립 대상인 경우",
+      "strictness": "statutory_required",
+      "cycle": "per_event",
+      "lawRefs": [
+        "performance_act:제11조의3",
+        "performance_act:제11조의4",
+        "performance_act:제11조의5",
+        "performance_act_enforcement_decree:제9조의2",
+        "performance_act_enforcement_decree:제9조의3",
+        "performance_act_enforcement_decree:제9조의4"
+      ],
+      "sourceRefs": [
+        "MCST_PERFORMANCE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "booth_construction_safety_checklist",
+      "title": "부스 시공·반입반출·철거 안전 체크리스트",
+      "eventTypes": [
+        "exhibition",
+        "conference",
+        "festival"
+      ],
+      "requiredWhen": "부스, 독립부스, 복층, 리깅, 중량물, 전기, 파이텍스, 급배수, 철거 작업이 있는 경우",
+      "strictness": "venue_required",
+      "cycle": "setup_teardown",
+      "lawRefs": [
+        "occupational_safety_health_act:제36조",
+        "occupational_safety_health_act:제63조",
+        "building_act_enforcement_rule:별지제8호서식",
+        "building_act_enforcement_rule:별지제8호의2서식"
+      ],
+      "sourceRefs": [
+        "COEX_SERVICE_PARTNER_MANUAL",
+        "KINTEX_ORGANIZER_MANUAL",
+        "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+        "KDJ_PARTNER_DOCS"
+      ]
+    },
+    {
+      "id": "worker_safety_work_plan",
+      "title": "설치·철거 작업자 안전계획서",
+      "eventTypes": [
+        "festival",
+        "outdoor_event",
+        "exhibition",
+        "conference",
+        "performance",
+        "food_event"
+      ],
+      "requiredWhen": "부스·무대·트러스·전기·하역·중량물·고소·화기·철거 등 산안기준규칙 제38조 별표 4 대상 또는 동등 위험작업이 포함되는 경우",
+      "strictness": "statutory_required",
+      "cycle": "setup_teardown",
+      "lawRefs": [
+        "occupational_safety_health_act:제36조",
+        "occupational_safety_health_act:제63조",
+        "occupational_safety_health_standards_rule:제38조",
+        "occupational_safety_health_standards_rule:제42조",
+        "fire_facilities_act_enforcement_decree:별표8"
+      ],
+      "sourceRefs": [
+        "OSH_STANDARDS_RULE_WORK_PLAN",
+        "KOSHA_WORKER_SAFETY_GUIDE_SET",
+        "COEX_SERVICE_PARTNER_MANUAL",
+        "KINTEX_SAFETY_EDUCATION",
+        "BEXCO_CONSTRUCTION_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "temporary_electrical_safety_check",
+      "title": "임시전기 안전점검표",
+      "eventTypes": [
+        "exhibition",
+        "festival",
+        "performance",
+        "food_event"
+      ],
+      "requiredWhen": "전시부스 전원, 발전기, 임시 배선, 분전반, 통로 횡단 케이블이 있는 경우",
+      "strictness": "needs_review",
+      "cycle": "setup_daily_teardown",
+      "lawRefs": [
+        "electrical_safety_management_act:제13조",
+        "occupational_safety_health_standards_rule:제321조"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL",
+        "KINTEX_ORGANIZER_MANUAL",
+        "KOSHA_WORKER_SAFETY_GUIDE_SET"
+      ]
+    },
+    {
+      "id": "fire_and_hazardous_material_permit_check",
+      "title": "화기·위험물·가스 반입/사용 허가 점검표",
+      "eventTypes": [
+        "food_event",
+        "festival",
+        "exhibition",
+        "performance"
+      ],
+      "requiredWhen": "화기, LPG, 위험물, 특수효과, 조리, 프로판 등 베뉴 반입 제한 물질이 있는 경우",
+      "strictness": "venue_required",
+      "cycle": "per_event_and_setup",
+      "lawRefs": [
+        "fire_prevention_act:*",
+        "lp_gas_safety_act:*",
+        "fire_prevention_act_enforcement_decree:제26조",
+        "lp_gas_safety_act_enforcement_rule:제45조",
+        "lp_gas_safety_act_enforcement_rule:제47조",
+        "lp_gas_safety_act_enforcement_rule:제69조",
+        "lp_gas_safety_act_enforcement_rule:별지제36호서식",
+        "lp_gas_safety_act_enforcement_rule:별지제37호서식",
+        "lp_gas_safety_act_enforcement_rule:별표15",
+        "lp_gas_safety_act_enforcement_rule:별표15의2",
+        "lp_gas_safety_act_enforcement_rule:별표15의3",
+        "lp_gas_safety_act_enforcement_rule:별표23",
+        "fire_facilities_act_enforcement_decree:별표8"
+      ],
+      "sourceRefs": [
+        "COEX_SERVICE_PARTNER_MANUAL",
+        "KDJ_EXHIBITION_FORMS",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "temporary_food_business_and_poisoning_plan",
+      "title": "식음료 영업·위생·식중독 대응 점검표",
+      "eventTypes": [
+        "food_event",
+        "festival",
+        "exhibition"
+      ],
+      "requiredWhen": "식음료 판매·제공, 케이터링, 푸드트럭, 임시 조리·시식이 있는 경우",
+      "strictness": "statutory_required",
+      "cycle": "per_event_daily",
+      "lawRefs": [
+        "food_sanitation_act:제37조",
+        "food_sanitation_act:제86조",
+        "food_sanitation_act_enforcement_rule:제2조"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "medical_aed_response_plan",
+      "title": "응급의료·AED·구급 이송 계획",
+      "eventTypes": [
+        "festival",
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "requiredWhen": "대규모 인파, 고령자/영유아/장애인 참가, 스탠딩 공연, 폭염·야외행사 등 응급 리스크가 있는 경우",
+      "strictness": "needs_review",
+      "cycle": "per_event_daily",
+      "lawRefs": [
+        "emergency_medical_service_act:제47조의2",
+        "emergency_medical_service_act_enforcement_decree:제26조의7",
+        "emergency_medical_service_act:제47조",
+        "emergency_medical_service_act:제50조",
+        "emergency_medical_service_act_enforcement_rule:제38조",
+        "emergency_medical_service_act_enforcement_rule:제38조의2",
+        "emergency_medical_service_act_enforcement_rule:제38조의3",
+        "emergency_medical_service_act_enforcement_rule:별표2",
+        "emergency_medical_service_act_enforcement_rule:별표15",
+        "emergency_medical_service_act_enforcement_rule:별표16",
+        "emergency_medical_service_act_enforcement_rule:별표17"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL",
+        "MOIS_FESTIVAL_MANUAL_2024"
+      ]
+    },
+    {
+      "id": "privacy_cctv_registration_check",
+      "title": "개인정보·출입증·CCTV 처리 점검표",
+      "eventTypes": [
+        "exhibition",
+        "conference",
+        "performance",
+        "vip_event"
+      ],
+      "requiredWhen": "사전등록, QR/출입증, CCTV, 촬영, 개인정보 처리위탁, 홍보용 사진·영상 이용이 있는 경우",
+      "strictness": "statutory_required",
+      "cycle": "per_event_and_retention",
+      "lawRefs": [
+        "personal_information_protection_act:제25조",
+        "personal_information_protection_act:제15조",
+        "personal_information_protection_act:제22조",
+        "personal_information_protection_act:제26조",
+        "personal_information_protection_act:제29조",
+        "personal_information_protection_act:제30조",
+        "personal_information_protection_act_enforcement_decree:제24조",
+        "personal_information_protection_act_enforcement_decree:제25조",
+        "personal_information_protection_act_enforcement_decree:제26조",
+        "personal_information_protection_act_enforcement_decree:제30조",
+        "personal_information_protection_act_enforcement_decree:제31조"
+      ],
+      "sourceRefs": [
+        "KINTEX_CCTV_POLICY",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "security_access_control_plan",
+      "title": "출입통제·보안검색·VIP 동선 계획",
+      "eventTypes": [
+        "vip_event",
+        "conference",
+        "exhibition"
+      ],
+      "requiredWhen": "VIP, 고위급 연사, 국제회의, 보안검색, 출입통제, 민간경비·혼잡교통유도경비 배치가 필요한 경우",
+      "strictness": "needs_review",
+      "cycle": "per_event",
+      "lawRefs": [
+        "security_services_industry_act:*",
+        "security_services_industry_act:제4조",
+        "security_services_industry_act:제12조",
+        "security_services_industry_act:제13조",
+        "security_services_industry_act:제18조",
+        "security_services_industry_act_enforcement_decree:제10조",
+        "security_services_industry_act_enforcement_decree:제16조",
+        "security_services_industry_act_enforcement_decree:제18조",
+        "security_services_industry_act_enforcement_decree:제30조",
+        "security_services_industry_act_enforcement_decree:별표1",
+        "security_services_industry_act_enforcement_decree:별표3",
+        "security_services_industry_act_enforcement_rule:제24조",
+        "security_services_industry_act_enforcement_rule:별지제14호서식",
+        "security_services_industry_act_enforcement_rule:별지제15호서식"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL",
+        "KDJ_PARTNER_DOCS"
+      ]
+    },
+    {
+      "id": "fire_evacuation_facility_management",
+      "title": "소방시설·피난시설·방화구획 관리 점검표",
+      "eventTypes": [
+        "exhibition",
+        "conference",
+        "performance",
+        "festival"
+      ],
+      "requiredWhen": "전시장, 컨벤션센터, 공연장 등 특정소방대상물 또는 다중이용 행사장에서 비상구·피난통로·소방시설 차단 위험이 있는 경우",
+      "strictness": "statutory_required",
+      "cycle": "setup_daily_peak_teardown",
+      "lawRefs": [
+        "fire_prevention_act:제24조",
+        "fire_prevention_act:제37조",
+        "fire_facilities_act:제12조",
+        "fire_facilities_act:제16조",
+        "fire_prevention_act_enforcement_decree:제26조",
+        "fire_facilities_act_enforcement_decree:제36조",
+        "building_act_enforcement_decree:제34조",
+        "building_act_enforcement_decree:제35조",
+        "building_act_enforcement_decree:제36조",
+        "building_act_enforcement_decree:제37조",
+        "building_act_enforcement_rule:별지제8호서식",
+        "building_act_enforcement_rule:별지제8호의2서식",
+        "building_act_enforcement_rule:별지제17호서식",
+        "fire_prevention_act_enforcement_decree:별표4",
+        "fire_prevention_act_enforcement_decree:별표5",
+        "fire_facilities_act_enforcement_decree:별표2",
+        "fire_facilities_act_enforcement_decree:별표4",
+        "fire_facilities_act_enforcement_decree:별표7"
+      ],
+      "sourceRefs": [
+        "KTO_MICE_SAFETY_MANUAL",
+        "MOIS_MULTI_USE_FACILITY_MANUAL",
+        "COEX_SERVICE_PARTNER_MANUAL",
+        "CECO_WORK_SAFETY_MANUAL"
+      ]
+    },
+    {
+      "id": "road_traffic_and_outdoor_signage_permit",
+      "title": "도로점용·교통통제·옥외광고물 인허가 점검표",
+      "eventTypes": [
+        "festival",
+        "outdoor_event",
+        "performance"
+      ],
+      "requiredWhen": "도로 점용, 임시 안내물·현수막, 셔틀/승하차장, 차 없는 거리, 행진·퍼레이드 등 외부 동선 통제가 있는 경우",
+      "strictness": "local_required",
+      "cycle": "per_event",
+      "lawRefs": [
+        "road_act:제61조",
+        "road_traffic_act:제6조",
+        "outdoor_advertisements_act:제3조",
+        "road_act_enforcement_decree:제54조",
+        "road_act_enforcement_rule:별지제11호서식",
+        "road_act_enforcement_rule:별지제12호서식",
+        "road_act_enforcement_rule:별지제13호서식",
+        "road_act_enforcement_rule:별지제33호서식",
+        "road_act_enforcement_rule:별지제36호서식",
+        "outdoor_advertisements_act_enforcement_decree:제5조",
+        "outdoor_advertisements_act_enforcement_decree:제7조",
+        "outdoor_advertisements_act_enforcement_decree:제12조",
+        "outdoor_advertisements_act_enforcement_decree:제14조"
+      ],
+      "sourceRefs": [
+        "MOIS_FESTIVAL_MANUAL_2024",
+        "MOIS_CROWD_GUIDELINE"
+      ]
+    },
+    {
+      "id": "elevator_escalator_crowd_control",
+      "title": "승강기·에스컬레이터 혼잡 및 고장 대응 점검표",
+      "eventTypes": [
+        "exhibition",
+        "conference",
+        "performance"
+      ],
+      "requiredWhen": "층간 이동, 고령자/장애인 동선, 입퇴장 피크에 승강기·에스컬레이터 혼잡 또는 정지 리스크가 있는 경우",
+      "strictness": "needs_review",
+      "cycle": "setup_daily_peak",
+      "lawRefs": [
+        "elevator_safety_act:제31조"
+      ],
+      "sourceRefs": [
+        "MOIS_MULTI_USE_FACILITY_MANUAL",
+        "KTO_MICE_SAFETY_MANUAL"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,810 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-21",
+  "sources": [
+    {
+      "id": "KTO_MICE_SAFETY_MANUAL",
+      "title": "마이스(MICE) 안전관리 매뉴얼",
+      "publisher": "한국관광공사 / Korea MICE",
+      "url": "https://k-mice.visitkorea.or.kr/convention/upload/MICE_safety_management_manual.pdf",
+      "priority": "A+",
+      "coverage": [
+        "participant_management",
+        "venue_setup",
+        "crowd",
+        "fire",
+        "medical",
+        "security",
+        "incident",
+        "food",
+        "transport",
+        "legal_checklist"
+      ],
+      "reuseCaution": "PDF 공개 확인. 공공누리/이용조건 별도 확인 필요; 원문 재배포보다 출처표시·요약/링크 방식 권장.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "MOIS_FESTIVAL_MANUAL_2024",
+      "title": "지역축제장 안전관리 매뉴얼(2024)",
+      "publisher": "행정안전부 재난안전점검과",
+      "url": "https://www.mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000015&nttId=113047",
+      "priority": "A+",
+      "coverage": [
+        "festival_safety_plan",
+        "crowd",
+        "temporary_structure",
+        "fire",
+        "electricity",
+        "gas",
+        "weather",
+        "medical",
+        "agency_coordination"
+      ],
+      "reuseCaution": "행안부 공개 자료. 첨부별 공공누리 유형과 저작권정책 확인 필요.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "MOIS_CROWD_GUIDELINE",
+      "title": "다중운집인파사고 안전관리 가이드라인",
+      "publisher": "행정안전부 사회재난대응총괄과",
+      "url": "https://mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000015&nttId=121405",
+      "priority": "A+",
+      "coverage": [
+        "crowd_density",
+        "bottleneck",
+        "ingress_egress",
+        "queue",
+        "monitoring",
+        "agency_coordination",
+        "incident_response"
+      ],
+      "reuseCaution": "행안부 공개 PDF. 첨부별 공공누리 유형 확인 필요.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "MOIS_MULTI_USE_FACILITY_MANUAL",
+      "title": "다중이용시설 위기상황 매뉴얼 표준안 및 훈련 가이드북",
+      "publisher": "행정안전부",
+      "url": "https://www.mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000012&nttId=85437",
+      "priority": "A",
+      "coverage": [
+        "crisis_manual",
+        "training",
+        "evacuation",
+        "communication",
+        "role_assignment"
+      ],
+      "reuseCaution": "공공누리 제4유형 표시 사례 확인; 변형/상업 이용 주의.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "MCST_PERFORMANCE_SAFETY_MANUAL",
+      "title": "공연장 안전 매뉴얼(2009, 증보판)",
+      "publisher": "문화체육관광부 공연전통예술과",
+      "url": "https://www.mcst.go.kr/site/s_policy/dept/deptView.jsp?pSeq=759&pMenuCD=0417000000",
+      "priority": "A",
+      "coverage": [
+        "stage",
+        "audience",
+        "fire",
+        "evacuation",
+        "electricity",
+        "machinery",
+        "operator_safety"
+      ],
+      "reuseCaution": "페이지에 공공누리 제4유형 명시; 원문 변경/상업적 재사용 제한.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "OSH_STANDARDS_RULE_WORK_PLAN",
+      "title": "MICE 설치·철거 작업자 안전: 산안기준규칙 작업계획 레이어",
+      "publisher": "내부 요약 / OSH worker-safety reference reviewed with agent-safety-oss as related design context",
+      "url": "https://www.law.go.kr/법령/산업안전보건기준에관한규칙",
+      "priority": "A",
+      "coverage": [
+        "worker_safety",
+        "work_plan",
+        "setup_teardown",
+        "fall_prevention",
+        "electrical_work",
+        "heavy_object"
+      ],
+      "reuseCaution": "agent-safety-oss는 worker-safety 연결 구조를 검토할 때 참고한 관련 프로젝트다. MICE용 요약과 온톨로지는 행사 설치·철거 작업 관점으로 정리하며 원문 확인은 법령/KOSHA 출처에서 수행한다.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "mixed",
+      "localMarkdownPath": "data/markdown/worker-safety/osh-standards-rule-work-plan.md",
+      "offlineTextStatus": "offline_derived"
+    },
+    {
+      "id": "KOSHA_WORKER_SAFETY_GUIDE_SET",
+      "title": "MICE 설치·철거 작업 관련 KOSHA Guide 요약팩",
+      "publisher": "내부 요약 / KOSHA worker-safety reference reviewed with agent-safety-oss as related design context",
+      "url": "https://www.kosha.or.kr/kosha/data/guideExp.do",
+      "priority": "A",
+      "coverage": [
+        "kosha_guide",
+        "worker_safety",
+        "ladder",
+        "aerial_lift",
+        "scaffold",
+        "hot_work",
+        "electrical_work",
+        "heavy_object"
+      ],
+      "reuseCaution": "agent-safety-oss는 KOSHA Guide 커버리지 확인 시 참고한 관련 프로젝트다. MICE용 체크포인트는 행사 설치·철거 작업 관점의 요약이며 정확한 원문은 KOSHA 출처에서 확인한다.",
+      "verificationStatus": "offline_derived",
+      "documentFormat": "mixed",
+      "localMarkdownPath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "offlineTextStatus": "offline_derived"
+    },
+    {
+      "id": "LOCAL_ORDINANCE_PACK_2026",
+      "title": "MICE 지역 조례 오프라인 팩",
+      "publisher": "법제처 국가법령정보센터 자치법규 API 기반 로컬 인덱스",
+      "url": "https://www.law.go.kr/LSW/lsRvsRqInfoListP.do",
+      "priority": "A",
+      "coverage": [
+        "local_ordinance",
+        "regional_festival",
+        "outdoor_event",
+        "road_occupancy",
+        "outdoor_advertising",
+        "local_permit"
+      ],
+      "reuseCaution": "LAW_OC는 수집 시점에만 사용하고 저장하지 않는다. 지역별 최신 조례는 행사 인허가 전 관할 지자체 원문으로 재확인한다.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "mixed",
+      "localMarkdownPath": "data/markdown/legal/local-ordinance-pack.md",
+      "offlineTextStatus": "extracted"
+    },
+    {
+      "id": "COEX_EXHIBITION_GUIDE_2025",
+      "title": "전시장 이용 안내서(2025)",
+      "publisher": "코엑스 BUSINESS",
+      "url": "https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9D%B4%EC%9A%A9-%EC%95%88%EB%82%B4%EC%84%9Cver-2023-10-10/",
+      "priority": "B+",
+      "coverage": [
+        "venue_use",
+        "freight",
+        "parking",
+        "booth",
+        "operation"
+      ],
+      "reuseCaution": "베뉴 문서. 원문 복제보다 링크와 체크포인트 요약 사용.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/coex-exhibition-guide-2025.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/coex-exhibition-guide-2025.md",
+      "offlineTextStatus": "extracted"
+    },
+    {
+      "id": "COEX_FACILITY_OPERATION_RULE_2023",
+      "title": "2023년 전시장 시설운영규정(국/영문)",
+      "publisher": "코엑스 BUSINESS",
+      "url": "https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%8B%9C%EC%84%A4%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EA%B5%AD-%EC%98%81%EB%AC%B8/",
+      "priority": "B+",
+      "coverage": [
+        "facility_operation",
+        "venue_rules"
+      ],
+      "reuseCaution": "베뉴 운영규정. 최신 개정본 여부 확인 필요.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/coex-facility-operation-rule-2023.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/coex-facility-operation-rule-2023.md",
+      "offlineTextStatus": "extracted"
+    },
+    {
+      "id": "COEX_SERVICE_PARTNER_MANUAL",
+      "title": "코엑스 서비스협력업체 운영 매뉴얼",
+      "publisher": "코엑스 LMS",
+      "url": "https://lmsweb.coex.co.kr/com/attachfile/download.mvc?fileCateCD=NOTICE&fileKey=458&serialNo=2",
+      "priority": "B+",
+      "coverage": [
+        "booth_construction",
+        "aisle",
+        "fire_lane",
+        "ppe",
+        "structure_review",
+        "violation_points"
+      ],
+      "reuseCaution": "베뉴 협력업체 문서. 원문 복제보다 체크포인트 요약 사용.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/coex-service-partner-manual.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/coex-service-partner-manual.md",
+      "offlineTextStatus": "extracted"
+    },
+    {
+      "id": "KINTEX_SAFETY_EDUCATION",
+      "title": "킨텍스 전시장 작업자 안전교육자료",
+      "publisher": "KINTEX",
+      "url": "https://www.kintex.com/download/formatModal/4.%EC%A7%80%EC%A0%95%EB%93%B1%EB%A1%9D%EC%97%85%EC%B2%B4%EC%95%88%EC%A0%84%EA%B5%90%EC%9C%A1%EC%9E%90%EB%A3%8C.pdf",
+      "priority": "B+",
+      "coverage": [
+        "worker_safety_training",
+        "exhibition_hall_safety_guideline",
+        "work_safety"
+      ],
+      "reuseCaution": "베뉴 교육자료. 원문 복제보다 링크와 체크포인트 요약 사용.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/kintex-safety-education.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/kintex-safety-education.md",
+      "offlineTextStatus": "extracted"
+    },
+    {
+      "id": "KINTEX_ORGANIZER_MANUAL",
+      "title": "전시홀 주최자 매뉴얼",
+      "publisher": "KINTEX",
+      "url": "https://www.kintex.com/download/formatModal/8.%EC%A0%84%EC%8B%9C%EC%A3%BC%EC%B5%9C%EC%9E%90%EB%A7%A4%EB%89%B4%EC%96%BC.pdf",
+      "priority": "B+",
+      "coverage": [
+        "organizer_manual",
+        "booth",
+        "electricity",
+        "security",
+        "operation"
+      ],
+      "reuseCaution": "베뉴 주최자 매뉴얼. 최신본 확인 필요.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/kintex-organizer-manual.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/kintex-organizer-manual.md",
+      "offlineTextStatus": "extracted"
+    },
+    {
+      "id": "KINTEX_CCTV_POLICY",
+      "title": "고정형 영상정보처리기기 운영·관리 방침",
+      "publisher": "KINTEX",
+      "url": "https://www.kintex.com/web/ko/management_of_image_information.do",
+      "priority": "B",
+      "coverage": [
+        "cctv",
+        "privacy",
+        "retention",
+        "outsourcing"
+      ],
+      "reuseCaution": "개인정보/CCTV 방침은 최신 페이지 확인 필요.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "BEXCO_USER_GUIDEBOOK",
+      "title": "벡스코 전시장 사용자 가이드북",
+      "publisher": "BEXCO",
+      "url": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=5338&mCode=MN059&mgr_seq=36&mode=view",
+      "priority": "B+",
+      "coverage": [
+        "exhibition_hall",
+        "user_guide",
+        "organizer"
+      ],
+      "reuseCaution": "Google Drive 바로보기 링크를 포함한 베뉴 자료. 원문 재배포 금지.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "BEXCO_OPERATION_RULES",
+      "title": "행사장 운영규정 및 행사장 운영규정 시행요령",
+      "publisher": "BEXCO",
+      "url": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2130&mCode=MN059&mgr_seq=36&mode=view",
+      "priority": "B+",
+      "coverage": [
+        "venue_rules",
+        "operation_rule",
+        "implementation_rule"
+      ],
+      "reuseCaution": "베뉴 운영규정. 최신 파일과 개정일 확인 필요.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/bexco-operation-rules.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/bexco-operation-rules.md",
+      "offlineTextStatus": "extracted"
+    },
+    {
+      "id": "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+      "title": "벡스코 행사장 공사 안전 매뉴얼",
+      "publisher": "BEXCO",
+      "url": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2854&mCode=MN059&mgr_seq=36&mode=view",
+      "priority": "B+",
+      "coverage": [
+        "construction_safety",
+        "booth_build",
+        "work_safety"
+      ],
+      "reuseCaution": "베뉴 공사안전 매뉴얼. 원문 재배포 금지.",
+      "verificationStatus": "source_verified",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/bexco-construction-safety-manual.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/bexco-construction-safety-manual.md",
+      "offlineTextStatus": "extracted"
+    },
+    {
+      "id": "KDJ_EXHIBITION_FORMS",
+      "title": "김대중컨벤션센터 전시장 임대신청 서식",
+      "publisher": "김대중컨벤션센터",
+      "url": "https://kdjcenter.gjto.or.kr/rental/forms/show-room",
+      "priority": "B+",
+      "coverage": [
+        "operation_rule",
+        "work_permit",
+        "hazardous_material",
+        "heavy_object",
+        "fire_manager",
+        "security_staff"
+      ],
+      "reuseCaution": "HWP 서식 링크. 원문 변환/재배포 전 이용조건 확인 필요.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "KDJ_PARTNER_DOCS",
+      "title": "김대중컨벤션센터 작업·전기·경비 제출 서류 안내",
+      "publisher": "김대중컨벤션센터",
+      "url": "https://kdjcenter.gjto.or.kr/partner/partnerLeaseappform",
+      "priority": "B+",
+      "coverage": [
+        "booth_install",
+        "electrical",
+        "fire_retardant",
+        "security_plan",
+        "safety_plan"
+      ],
+      "reuseCaution": "베뉴 서식 안내. 최신성 확인 필요.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "UECO_FACILITY_INFO",
+      "title": "울산전시컨벤션센터 시설안내",
+      "publisher": "UECO",
+      "url": "https://ueco.or.kr/eng/facility/Conference",
+      "priority": "C+",
+      "coverage": [
+        "facility_capacity",
+        "meeting_room",
+        "floor_plan"
+      ],
+      "reuseCaution": "시설정보 페이지. 안전 운영규정은 별도 확인 필요.",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "BEXCO_OPERATION_IMPLEMENTATION_RULES",
+      "title": "행사장 운영규정 시행요령",
+      "publisher": "BEXCO",
+      "url": "https://www.bexco.co.kr/organizer/ajx_json/UploadMgr/downloadRun.do?qcode=Qm9hcmQsMzI5NzcsWQ==",
+      "priority": "B+",
+      "coverage": [
+        "implementation_rule",
+        "venue_rules",
+        "operation_rule"
+      ],
+      "reuseCaution": "베뉴 시행요령. 원문 재배포보다 링크와 요약 사용.",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/bexco-operation-implementation-rules.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/bexco-operation-implementation-rules.md",
+      "offlineTextStatus": "extracted",
+      "offlineExtracts": [
+        "행사장 운영규정과 함께 적용되는 시행요령으로, 임대·운영·설치·철거·시설 사용 세부 절차 확인 대상이다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "SETEC_OPERATING_GUIDE_2025",
+      "title": "서울무역전시장 SETEC 운영 요령 2025",
+      "publisher": "SETEC",
+      "url": "https://www.setec.or.kr/resources/front/files/2025_SETEC.pdf",
+      "priority": "B+",
+      "coverage": [
+        "operation_rule",
+        "venue_use",
+        "setup_teardown",
+        "safety_documents"
+      ],
+      "reuseCaution": "베뉴 운영요령. 원문 재배포보다 링크와 체크포인트 요약 사용.",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/setec-operating-guide-2025.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/setec-operating-guide-2025.md",
+      "offlineTextStatus": "extracted",
+      "offlineExtracts": [
+        "대관, 반입·반출, 설치·철거, 운영 협의, 제출서류를 행사 전 점검해야 한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "SUWONMESSE_OPERATION_RULES",
+      "title": "수원메쎄 전시장 운영규정",
+      "publisher": "Suwon Messe",
+      "url": "https://d70o0vfgysr3u.cloudfront.net/wp-content/uploads/2023/08/10171957/SUWONMESSE-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EC%B5%9C%EC%8B%A0%EB%B3%B8.pdf",
+      "priority": "B+",
+      "coverage": [
+        "operation_rule",
+        "venue_rules",
+        "setup_teardown",
+        "restoration"
+      ],
+      "reuseCaution": "베뉴 운영규정. 최신 개정본 확인 필요.",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/suwonmesse-operation-rules.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/suwonmesse-operation-rules.md",
+      "offlineTextStatus": "extracted",
+      "offlineExtracts": [
+        "전시장 사용, 설치·철거, 반입·반출, 시설 훼손 및 원상복구, 운영시간 확인 대상이다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "SONGDO_OPERATION_RULES",
+      "title": "송도컨벤시아 운영규정",
+      "publisher": "송도컨벤시아",
+      "url": "https://songdoconvensia.visitincheon.or.kr/file.do?n=5.+%EC%86%A1%EB%8F%84%EC%BB%A8%EB%B2%A4%EC%8B%9C%EC%95%84+%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf&path=202403%2F8d856c67-a47c-4599-9e2a-25e771e1a94f.pdf",
+      "priority": "B+",
+      "coverage": [
+        "operation_rule",
+        "venue_rules",
+        "exhibition_hall",
+        "setup_teardown"
+      ],
+      "reuseCaution": "베뉴 운영규정. 원문 재배포보다 링크와 요약 사용.",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/songdo-convensia-operation-rules.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/songdo-convensia-operation-rules.md",
+      "offlineTextStatus": "extracted",
+      "offlineExtracts": [
+        "전시장 사용 절차, 장치·철거, 반입·반출, 안전·질서 유지 책임을 운영 체크포인트로 반영한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "CECO_OPERATION_RULES",
+      "title": "창원컨벤션센터 전시장 운영규정",
+      "publisher": "CECO",
+      "url": "https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=28",
+      "priority": "B+",
+      "coverage": [
+        "operation_rule",
+        "venue_rules",
+        "exhibition_hall"
+      ],
+      "reuseCaution": "베뉴 운영규정. 원문 재배포보다 링크와 요약 사용.",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/ceco-operation-rules.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/ceco-operation-rules.md",
+      "offlineTextStatus": "extracted",
+      "offlineExtracts": [
+        "전시장 사용, 설치·철거, 시설보전, 운영 절차 확인 대상이다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "CECO_WORK_SAFETY_MANUAL",
+      "title": "창원컨벤션센터 전시장 작업 안전 관리 매뉴얼",
+      "publisher": "CECO",
+      "url": "https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=45",
+      "priority": "A-",
+      "coverage": [
+        "work_safety",
+        "booth_build",
+        "hot_work",
+        "fire_lane",
+        "hazardous_material",
+        "vehicle_entry"
+      ],
+      "reuseCaution": "베뉴 작업안전 HWP. 원문 재배포보다 체크포인트 요약 사용.",
+      "documentFormat": "hwp",
+      "localDocumentPath": "data/raw/venue-hwp/ceco-work-safety-manual.hwp",
+      "localMarkdownPath": "data/markdown/venue-manuals/ceco-work-safety-manual.md",
+      "offlineTextStatus": "extracted",
+      "offlineExtracts": [
+        "전시장 내 흡연·음주 금지, 작업 신고 후 승인 필요.",
+        "위험물·전기톱·가스통·화기 취급은 사전 승인 없이는 제한.",
+        "소화전, 비상구, EPS, 화장실 입구와 벽체 주변 통로 확보 필요.",
+        "일정 규모 이상 차량과 고위험 공구 반입은 제한 또는 사전 승인 대상."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "HICO_FACILITY_GUIDE",
+      "title": "경주화백컨벤션센터 HICO 주최자 가이드북",
+      "publisher": "HICO",
+      "url": "https://www.hico.or.kr/HICO_EXHIBITOR_GUIDEBOOK.pdf",
+      "priority": "B",
+      "coverage": [
+        "facility_guide",
+        "organizer_manual",
+        "floor_plan",
+        "fire_egress",
+        "utility",
+        "signage",
+        "capacity_layout"
+      ],
+      "reuseCaution": "베뉴 PDF. 이미지 기반 원문이므로 로컬 Markdown은 직접 시각 판독 기반 구조화 요약으로 보관.",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/hico-exhibitor-guidebook.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/hico-exhibitor-guidebook.md",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "전시장 Hall 1+2는 2,273㎡, 115부스, 화물출입구 높이 4.2m, 바닥하중 3ton/㎡로 정리.",
+        "3층 대회의실은 3,421㎡, theater 3,000명, 전시부스 180개 기준 세팅 정보가 수록.",
+        "전시장·회의실 사용 전 작업신고서, 안전작업서약서, 기술지원신청서, 상주요원/장비원 명단, 보험증권 제출 체크.",
+        "소화전 가시성, 방화셔터 회피, 비상구·대피로·소방통로 최소 폭 1m 확보를 배치 체크포인트로 반영.",
+        "외부 현수막·광고물은 홀매니저 사전 협의와 태풍 등 기상이변 시 사전 철거 조건을 반영."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "GSCO_OPERATION_RULES",
+      "title": "군산새만금컨벤션센터 전시장 운영규정",
+      "publisher": "GSCO",
+      "url": "https://www.gsco.kr/files/GSCO%20%EC%A0%84%EC%8B%9C%EC%9E%A5%20%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf",
+      "priority": "B+",
+      "coverage": [
+        "operation_rule",
+        "venue_rules",
+        "exhibition_hall",
+        "safety_control"
+      ],
+      "reuseCaution": "베뉴 운영규정. 원문 재배포보다 링크와 요약 사용.",
+      "documentFormat": "pdf",
+      "localDocumentPath": "data/raw/venue-pdfs/gsco-operation-rules.pdf",
+      "localMarkdownPath": "data/markdown/venue-manuals/gsco-operation-rules.md",
+      "offlineTextStatus": "extracted",
+      "offlineExtracts": [
+        "전시장 운영, 안전관리, 출입·반입, 시설보전, 원상복구 확인 대상이다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "ATCENTER_FACILITY_INFO",
+      "title": "aT센터 제1전시장 시설 안내",
+      "publisher": "한국농수산식품유통공사 aT센터",
+      "url": "https://www.at.or.kr/contents/acko321111/view.action",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "floor_load",
+        "booth_capacity",
+        "utility"
+      ],
+      "reuseCaution": "공식 시설 페이지. 운영규정 원문은 별도 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "제1전시장 3,793㎡, 189부스, 바닥하중 1.5ton/㎡, Trench/전원/통신/급배수 설비 확인 대상."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "ATCENTER_RENTAL_INFO",
+      "title": "aT센터 전시장 임대료 및 임대시설 현황",
+      "publisher": "한국농수산식품유통공사 aT센터",
+      "url": "https://www.at.or.kr/contents/acko322200/view.action",
+      "priority": "B",
+      "coverage": [
+        "rental_info",
+        "operation_time",
+        "overtime",
+        "facility_capacity"
+      ],
+      "reuseCaution": "공식 임대 안내 페이지. 운영 안전 규정은 별도 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "제1전시장 3,793㎡, 제2전시장 4,254㎡, 합계 8,047㎡ 기준으로 임대면적과 운영시간을 검토한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "SUWON_CONVENTION_FACILITY_INFO",
+      "title": "수원컨벤션센터 시설 안내",
+      "publisher": "수원컨벤션센터",
+      "url": "https://www.scc.or.kr/",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "exhibition_hall",
+        "meeting_room"
+      ],
+      "reuseCaution": "공식 시설 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "공식 페이지 기준 전시 면적 7,877㎡를 핵심 시설용량으로 검토한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "DCC_FACILITY_INFO",
+      "title": "대전컨벤션센터 시설안내",
+      "publisher": "대전컨벤션센터",
+      "url": "https://www.dcckorea.or.kr/content/view.do?contentKey=98&menuKey=179",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "control_room",
+        "safety_contact"
+      ],
+      "reuseCaution": "공식 시설 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "시설안내와 제2전시장 상황실 연락체계를 행사 운영본부 연락망에 반영한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "DCC_RENTAL_INFO",
+      "title": "대전컨벤션센터 전시장 요금안내",
+      "publisher": "대전컨벤션센터",
+      "url": "https://dcckorea.or.kr/content/view.do?contentKey=78&menuKey=173",
+      "priority": "B",
+      "coverage": [
+        "exhibition_hall",
+        "rental_info",
+        "operation_time"
+      ],
+      "reuseCaution": "공식 임대 안내 페이지. 안전 세부 규정 추가 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "제2전시장 1~4홀은 각 약 2,524~2,574㎡ 규모, 기본 사용시간 08:00~20:00 기준으로 운영된다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "EXCO_FACILITY_INFO",
+      "title": "EXCO 전시장 시설 안내",
+      "publisher": "EXCO",
+      "url": "https://exco.co.kr/eng/facility/sub01.html",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "exhibition_hall",
+        "floor_load",
+        "utilities"
+      ],
+      "reuseCaution": "공식 시설 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "서관 제1전시장 22,159㎡, 동관 제2전시장 15,024㎡. 홀별 바닥하중, 천정고, 전기·급배수·압축공기 조건을 배치 검토에 반영한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "OSCO_EXHIBITION_RENTAL_INFO",
+      "title": "청주오스코 전시장 임대 안내",
+      "publisher": "OSCO",
+      "url": "https://osco.or.kr/lease/leasing-process/",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "exhibition_hall",
+        "booth_capacity",
+        "rental_process"
+      ],
+      "reuseCaution": "공식 임대 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "전시장 총 10,031㎡, Hall 1~3 각 3,344㎡, 총 600부스 기준으로 수용능력과 동선 계획을 검토한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "GUMICO_EXHIBITION_INFO",
+      "title": "구미코 전시장 시설 안내",
+      "publisher": "GUMICO",
+      "url": "https://gumico.com/infra-info/exhibition",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "floor_load",
+        "utilities",
+        "booth_capacity",
+        "work_report"
+      ],
+      "reuseCaution": "공식 시설 페이지. 지정등록업체 공고는 핵심 코퍼스에서 제외하고 시설/작업신고 정보만 사용.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "전시장 3,402㎡, 180부스, 바닥하중 1.5t/㎡, Floor Box 36개, 전기·통신·급배수·압축공기 조건 확인 대상."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "GUMICO_SAFETY_ORG_INFO",
+      "title": "구미코 조직도 및 시설 안전관리 연락 정보",
+      "publisher": "GUMICO",
+      "url": "https://gumico.com/infra-info/organizational",
+      "priority": "B",
+      "coverage": [
+        "safety_contact",
+        "facility_safety_management",
+        "hall_manager"
+      ],
+      "reuseCaution": "공식 조직도. 담당자 최신성 확인 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "시설 안전관리, 홀매니징 및 시설·안전관리 업무 지원 연락 기능을 행사 운영본부 연락망에 반영한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "ICCJEJU_EXHIBITION_INFO",
+      "title": "ICC JEJU 전시장 시설 안내",
+      "publisher": "ICC JEJU",
+      "url": "https://www.iccjeju.co.kr/info/02.php",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "exhibition_hall",
+        "floor_load",
+        "loading"
+      ],
+      "reuseCaution": "공식 시설 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "전시장 A+B+C 2,503㎡, 3개 분할 가능, 화물출입구 높이 2.3m, 허용하중 2,000kg/㎡, 급배수·전원·통신 제공."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "ICCJEJU_TAMNA_INFO",
+      "title": "ICC JEJU 탐라홀 시설 안내",
+      "publisher": "ICC JEJU",
+      "url": "https://www.iccjeju.co.kr/info/01.php",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "large_hall",
+        "evacuation_capacity"
+      ],
+      "reuseCaution": "공식 시설 페이지. 행사별 수용인원과 피난계획 별도 확인 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "탐라홀 A+B+C 4,061㎡, 극장식 4,300명, 연회식 2,000명, 교실식 3,500명 기준으로 밀집·피난 계획을 검토한다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "YEOSU_EXPO_DOCUMENT_ROOM",
+      "title": "여수엑스포컨벤션센터 자료실",
+      "publisher": "여수엑스포컨벤션센터",
+      "url": "https://yeosuexpoconvention.kr/yeosu/DocumentRoom",
+      "priority": "B+",
+      "coverage": [
+        "operation_rule",
+        "implementation_rule",
+        "work_report",
+        "safety_management_report"
+      ],
+      "reuseCaution": "공식 자료실. 개별 첨부 파일 직접 다운로드와 Markdown 변환이 후속 과제.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "시설운영규정(2026.02.10), 시설 운영 규정 시행세칙(2024.02.16), 작업신고서, 전시·대관시설 이용 안전관리 신고 및 신청서가 공개 자료실에 있다."
+      ],
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "YEOSU_EXPO_FACILITY_INFO",
+      "title": "여수엑스포컨벤션센터 시설 안내",
+      "publisher": "여수엑스포컨벤션센터",
+      "url": "https://yeosuexpoconvention.kr/yeosu/FacilityInfoEx",
+      "priority": "B",
+      "coverage": [
+        "facility_capacity",
+        "exhibition_hall",
+        "unique_venue"
+      ],
+      "reuseCaution": "공식 시설 페이지. 운영규정 첨부 원문 확보 필요.",
+      "documentFormat": "html",
+      "offlineTextStatus": "offline_derived",
+      "offlineExtracts": [
+        "전시실 D1~D5와 엑스포디지털갤러리(EDG)를 전시·대형 행사 공간으로 운영한다. 전기 등 제사용료, 냉난방 비용, 이용보증금 조건을 확인한다."
+      ],
+      "verificationStatus": "source_verified"
+    }
+  ]
+}
