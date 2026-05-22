@@ -16,6 +16,22 @@ program
   });
 
 program
+  .command("web")
+  .description("Start local web simulator for MICE safety applicability checklists")
+  .option("--host <host>", "Host to bind", process.env.HOST ?? "127.0.0.1")
+  .option("-p, --port <port>", "Port to bind", process.env.PORT ?? "4317")
+  .action(async (opts: { host?: string; port?: string }) => {
+    const port = Number(opts.port ?? 4317);
+    if (!Number.isInteger(port) || port <= 0 || port > 65535) {
+      // eslint-disable-next-line no-console
+      console.error(`Invalid port: ${opts.port}`);
+      process.exit(2);
+    }
+    const { startWebServer } = await import("./web/server.js");
+    await startWebServer({ host: opts.host, port });
+  });
+
+program
   .command("tools")
   .description("List registered MCP tools")
   .option("--json", "JSON output")
@@ -106,4 +122,3 @@ program.parseAsync(process.argv).catch((err) => {
   console.error(err);
   process.exit(1);
 });
-
