@@ -240,6 +240,13 @@ function formatLocalOrdinance(record: AnyRecord): string {
   ].join("\n");
 }
 
+function localOrdinanceTitle(record: AnyRecord): string {
+  const jurisdiction = String(record.jurisdiction ?? "").trim();
+  const name = String(record.name ?? record.ordinanceName ?? "조례").trim();
+  if (!jurisdiction || name.startsWith(jurisdiction)) return name;
+  return `${jurisdiction} ${name}`;
+}
+
 function localOrdinanceBand(record: AnyRecord): string {
   const band = String(record.priorityBand ?? "reference");
   return ["primary", "secondary", "reference"].includes(band) ? band : "reference";
@@ -249,6 +256,20 @@ function formatLocalOrdinanceGroup(records: AnyRecord[], bands: string[]): strin
   return records
     .filter((record) => bands.includes(localOrdinanceBand(record)))
     .map(formatLocalOrdinance);
+}
+
+function isLocalOrdinanceApplicableToInput(record: AnyRecord, input: Input): boolean {
+  const category = String(record.categoryId ?? record.category ?? "");
+  const hasOutdoor = Boolean(input.outdoor || input.outdoorEvent || inputHasEvent(input, "festival") || inputHasEvent(input, "outdoor_event"));
+  const hasRoadUse = input.roadUse === true;
+  if (["outdoor_event_safety", "regional_festival_safety"].includes(category)) return hasOutdoor;
+  if (category === "road_occupancy") return hasRoadUse;
+  if (category === "outdoor_advertising") return hasOutdoor || hasRoadUse;
+  return true;
+}
+
+function filterLocalOrdinancesForInput(records: AnyRecord[], input: Input): AnyRecord[] {
+  return records.filter((record) => isLocalOrdinanceApplicableToInput(record, input));
 }
 
 function formatWorkerRef(ref: AnyRecord): string {
@@ -334,24 +355,50 @@ function formatRoadTrafficControlPlan(input: Input, options: {
     ].join("\n");
   }
 
+  const roadOrdinanceCategories = input.roadUse
+    ? ["road_occupancy", "outdoor_advertising", "outdoor_event_safety", "regional_festival_safety"]
+    : ["outdoor_advertising", "outdoor_event_safety", "regional_festival_safety"];
   const roadOrdinances = options.localOrdinances
-    .filter((item) => ["road_occupancy", "outdoor_advertising", "outdoor_event_safety", "regional_festival_safety"].includes(String(item.categoryId ?? item.category)))
+    .filter((item) => roadOrdinanceCategories.includes(String(item.categoryId ?? item.category)))
     .slice(0, 6)
-    .map((item) => `- ${item.jurisdiction ?? "관할"} ${item.name ?? item.ordinanceName ?? "조례"}: ${item.appliesWhen ?? "적용조건 확인"} / 제출기한 ${item.submissionDeadline ?? "확인 필요"}`);
+    .map((item) => `- ${localOrdinanceTitle(item)}: ${item.appliesWhen ?? "적용조건 확인"} / 제출기한 ${item.submissionDeadline ?? "확인 필요"}`);
+  const title = input.roadUse ? "도로·교통 실행계획" : "외부 동선·교통 영향 확인 계획";
+  const coordinationLines = input.roadUse
+    ? [
+      "- 도로관리청/교통부서/경찰과 도로점용허가, 교통소통대책, 차로·보도 통제, 원상복구 범위를 확인한다.",
+      "- 통행금지·차량 운행 제한이 있으면 공고, 우회도로, 문의처, 비상차량 접근로를 사전 고지한다.",
+      "- 지자체 옥외행사 안전관리계획과 도로점용/교통소통 조례의 제출기한을 제출 일정·RACI에 반영한다.",
+    ]
+    : [
+      "- 현재 입력에서는 도로점용·교통통제 조건이 확정되지 않았다.",
+      "- 외부 대기열, 승하차장, 보행자 흐름, 비상차량 접근로를 현장 확인하고, 도로·보도·광장 점용이나 통행 제한이 확정될 때만 도로점용허가·교통소통대책 제출 액션으로 전환한다.",
+      "- 전환 전에는 관할기관 제출 의무가 아니라 운영본부 확인후보로 관리한다.",
+    ];
+  const evidenceLines = input.roadUse
+    ? [
+      "- 도로점용허가증 또는 협의 회신",
+      "- 교통소통대책/통제 도면",
+      "- 통행금지·차량 운행 제한 공고 또는 안내 캡처",
+      "- 경찰·도로관리청·지자체 협의 메모",
+      "- 현장 설치 전/후 사진과 원상복구 확인 사진",
+    ]
+    : [
+      "- 외부 대기열·승하차장·비상차량 접근로 확인 사진",
+      "- 도로·보도·광장 점용 없음 또는 조건부 전환 판단 메모",
+      "- 현장 변경 시 관할 도로관리청/경찰 협의 기록",
+    ];
 
   return [
-    `# ${input.eventName} 도로·교통 실행계획`,
+    `# ${input.eventName} ${title}`,
     "",
     "## 적용 조건",
     input.roadUse ? "- 도로·보도·광장 점용 또는 통행 제한 조건 있음" : "- 옥외행사/축제 조건으로 도로·보도·광장 영향 가능성을 조건부 확인",
     options.hasOutdoor ? "- 행사장 외부 보행자 유입, 대기열, 주차장·대중교통 접근 동선 확인 필요" : "- 외부 교통영향은 입력 조건 추가 시 재검토",
     "",
     "## 허가·협의",
-    "- 도로관리청/교통부서/경찰과 도로점용허가, 교통소통대책, 차로·보도 통제, 원상복구 범위를 확인한다.",
-    "- 통행금지·차량 운행 제한이 있으면 공고, 우회도로, 문의처, 비상차량 접근로를 사전 고지한다.",
-    "- 지자체 옥외행사 안전관리계획과 도로점용/교통소통 조례의 제출기한을 제출 일정·RACI에 반영한다.",
+    ...coordinationLines,
     ...roadOrdinances,
-    ...options.roadAnnexItems.map((item) => `- ${item}`),
+    ...(input.roadUse ? options.roadAnnexItems.map((item) => `- ${item}`) : []),
     "",
     "## 교통통제 도면",
     "- 교통통제 도면에는 통제구간, 보행자 동선, 차량 우회동선, 비상차량 접근로, 하역/반입 동선, 셔틀·택시·버스 승하차 지점을 한 도면에 표시한다.",
@@ -369,11 +416,7 @@ function formatRoadTrafficControlPlan(input: Input, options: {
     "- 안내표지는 피난유도등, 소화전, 비상구, 교통표지, 신호등, CCTV, 점자블록을 가리지 않게 설치한다.",
     "",
     "## 필수 증빙",
-    "- 도로점용허가증 또는 협의 회신",
-    "- 교통소통대책/통제 도면",
-    "- 통행금지·차량 운행 제한 공고 또는 안내 캡처",
-    "- 경찰·도로관리청·지자체 협의 메모",
-    "- 현장 설치 전/후 사진과 원상복구 확인 사진",
+    ...evidenceLines,
   ].join("\n");
 }
 
@@ -659,8 +702,8 @@ function isLegalAnnexApplicable(annex: AnyRecord, input: Input): boolean {
   if (lawEntryId.startsWith("performance_act")) return Boolean(isPerformance);
   if (lawEntryId === "food_sanitation_act_enforcement_rule") return Boolean(isFood);
   if (lawEntryId === "lp_gas_safety_act_enforcement_rule") return Boolean(input.lpgUse);
-  if (lawEntryId === "road_act_enforcement_decree") return Boolean(input.roadUse || isFestival);
-  if (lawEntryId === "road_act_enforcement_rule") return Boolean(input.roadUse || isFestival);
+  if (lawEntryId === "road_act_enforcement_decree") return Boolean(input.roadUse);
+  if (lawEntryId === "road_act_enforcement_rule") return Boolean(input.roadUse);
   if (lawEntryId === "building_act_enforcement_rule") return Boolean(input.temporaryStructures || isIndoorMice || isPerformance || hasWorkerWork);
   if (lawEntryId.startsWith("security_services_industry")) return Boolean(input.vipSecurity || inputHasEvent(input, "vip_event"));
   if (lawEntryId === "fire_prevention_act_enforcement_decree") return Boolean(isIndoorMice || isPerformance);
@@ -718,19 +761,25 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
   const medicalAnnexItems = legalAnnexes
     .filter((annex) => String(annex.lawEntryId) === "emergency_medical_service_act_enforcement_rule")
     .flatMap((annex) => asArray<string>(annex.checklistItems).slice(0, 4).map((item) => `${annex.lawName ?? annex.lawEntryId} ${annex.annexNo ?? ""}: ${item}`));
-  const localOrdinanceDeadline = localOrdinances.find((item) => String(item.submissionDeadline ?? "").trim())?.submissionDeadline;
+  const hasOutdoor = Boolean(input.outdoor || input.outdoorEvent || inputHasEvent(input, "festival") || inputHasEvent(input, "outdoor_event"));
+  const hasRoadUse = input.roadUse === true;
+  const hasPrivacyInput = Boolean(input.personalDataProcessing || inputHasEvent(input, "conference") || inputHasEvent(input, "vip_event"));
+  const hasSecurityInput = Boolean(input.vipSecurity || inputHasEvent(input, "vip_event"));
+  const relevantOutdoorOrdinances = hasOutdoor
+    ? localOrdinances.filter((item) => ["outdoor_event_safety", "regional_festival_safety"].includes(String(item.categoryId ?? item.category)))
+    : [];
+  const localOrdinanceDeadline = relevantOutdoorOrdinances.find((item) => String(item.submissionDeadline ?? "").trim())?.submissionDeadline;
   const hasLocalOutdoorOrdinance = localOrdinances.some((item) => ["outdoor_event_safety", "regional_festival_safety"].includes(String(item.categoryId ?? item.category)));
   const hasRoadOrdinance = localOrdinances.some((item) => String(item.categoryId ?? item.category) === "road_occupancy");
   const hasAdvertisingOrdinance = localOrdinances.some((item) => String(item.categoryId ?? item.category) === "outdoor_advertising");
   const hasBuildingAnnex = buildingAnnexItems.length > 0;
   const hasRoadAnnex = roadAnnexItems.length > 0;
-  const hasSecurity = securityHazards.length > 0 || securityLawItems.length > 0;
+  const hasSecurity = hasSecurityInput;
   const hasMedical = medicalHazards.length > 0 || medicalLawItems.length > 0 || (typeof input.expectedCrowd === "number" && input.expectedCrowd >= 1000);
-  const hasPrivacy = privacyHazards.length > 0 || privacyLawItems.length > 0;
+  const hasPrivacy = hasPrivacyInput;
   const hasWorker = workerHazards.length > 0 || sections.workerSafety.length > 0;
   const hasFood = Boolean(input.foodService || inputHasEvent(input, "food_event"));
-  const hasOutdoor = Boolean(input.outdoor || input.outdoorEvent || inputHasEvent(input, "festival") || inputHasEvent(input, "outdoor_event"));
-  const hasRoad = Boolean(input.roadUse || hasRoadOrdinance || hasRoadAnnex);
+  const hasRoad = Boolean(hasRoadUse || (hasOutdoor && (hasRoadOrdinance || hasRoadAnnex)));
   const hasUnhostedCrowd = Boolean(input.unhostedCrowd);
   const roadTrafficControlPlan = formatRoadTrafficControlPlan(input, {
     hasRoad,
@@ -761,7 +810,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
       "공연법 시행령/시행규칙, 공연법 별표·서식, 베뉴 리깅·무대 규정",
       "open",
     ] : undefined,
-    hasLocalOutdoorOrdinance ? [
+    hasOutdoor && hasLocalOutdoorOrdinance ? [
       input.jurisdiction ? `${input.jurisdiction} 안전/행사 담당부서` : "관할 지자체 안전/행사 담당부서",
       "옥외행사·지역축제 안전관리계획서",
       "옥외축제, 야외 공연, 주최/주관 행사 또는 순간 최대 인파 기준 해당 시",
@@ -769,7 +818,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
       "지자체 조례 우선순위 후보와 재난안전법 지역축제/다중운집 조항 확인",
       "open",
     ] : undefined,
-    hasRoadOrdinance || input.roadUse || hasRoadAnnex ? [
+    hasRoadUse ? [
       "도로관리청/교통부서/경찰",
       "도로점용허가, 교통소통대책, 도로공사 시행·착수·준공 서식",
       "도로·보도·광장 점용, 차 없는 거리, 퍼레이드, 셔틀 승하차장, 임시시설 설치",
@@ -777,7 +826,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
       "도로법 시행령 별표 2, 도로법 시행규칙 별지 제11·12·13·33호서식",
       "open",
     ] : undefined,
-    input.roadUse || hasRoadAnnex ? [
+    hasRoadUse ? [
       "도로관리청/경찰/지자체 홍보 채널",
       "통행금지·제한 또는 차량 운행 제한 공고",
       "일부 차로·보도·도로 통행 제한 또는 차량 운행 제한이 있는 경우",
@@ -785,7 +834,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
       "도로법 시행규칙 별지 제36호서식, 우회도로·문의처·비상차량 동선 포함",
       "open",
     ] : undefined,
-    hasAdvertisingOrdinance ? [
+    hasOutdoor && hasAdvertisingOrdinance ? [
       "옥외광고 담당부서/베뉴",
       "현수막·배너·안내판·전기 광고물 허가/신고",
       "옥외 임시 안내물, 지주형 표시물, 전광류 또는 전기 사용 광고물을 설치하는 경우",
@@ -1132,6 +1181,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   const venueRules = asArray<AnyRecord>(data.venueRules);
   const workerSafetyReferences = asArray<AnyRecord>(data.workerSafetyReferences);
   const localOrdinances = asArray<AnyRecord>(data.localOrdinances);
+  const documentLocalOrdinances = filterLocalOrdinancesForInput(localOrdinances, input);
   const venue = data.venue as AnyRecord | null | undefined;
   const venueFacility = buildVenueFacilitySummary(input, venue);
   const legalAnnexes = uniqueById([
@@ -1154,9 +1204,9 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     ].filter((item): item is string => Boolean(item)),
     legalBasis: laws.map(formatLaw),
     legalAnnexes: legalAnnexes.map((annex) => formatLegalAnnex(annex as unknown as AnyRecord)),
-    localOrdinances: localOrdinances.map(formatLocalOrdinance),
-    primaryLocalOrdinances: formatLocalOrdinanceGroup(localOrdinances, ["primary", "secondary"]),
-    referenceLocalOrdinances: formatLocalOrdinanceGroup(localOrdinances, ["reference"]),
+    localOrdinances: documentLocalOrdinances.map(formatLocalOrdinance),
+    primaryLocalOrdinances: formatLocalOrdinanceGroup(documentLocalOrdinances, ["primary", "secondary"]),
+    referenceLocalOrdinances: formatLocalOrdinanceGroup(documentLocalOrdinances, ["reference"]),
     requiredDocuments: duties.map(formatDuty),
     hazardControls: hazards.map(formatHazard),
     venueRules: [
@@ -1169,7 +1219,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     ],
     workerSafety: workerSafetyReferences.map(formatWorkerRef),
   };
-  const documentBundle = buildDocumentBundle(input, sections, { ...data, legalAnnexes });
+  const documentBundle = buildDocumentBundle(input, sections, { ...data, localOrdinances: documentLocalOrdinances, legalAnnexes });
 
   const markdown = [
     `# ${input.eventName} 안전관리계획서 초안`,

@@ -369,7 +369,17 @@ function ordinancePriorityForInput(item: AnyRecord, input: AnyRecord): number {
 function primaryLocalOrdinancesForBrief(items: AnyRecord[], input: AnyRecord): AnyRecord[] {
   const target = String(input.jurisdiction ?? "").trim();
   const [province] = target.split(/\s+/);
+  const hasOutdoor = Boolean(input.outdoor || input.outdoorEvent || hasEventType(input, "festival") || hasEventType(input, "outdoor_event"));
+  const hasRoadUse = input.roadUse === true;
+  const allowedByInput = (item: AnyRecord): boolean => {
+    const category = String(item.categoryId ?? item.category ?? "");
+    if (["outdoor_event_safety", "regional_festival_safety"].includes(category)) return hasOutdoor;
+    if (category === "road_occupancy") return hasRoadUse;
+    if (category === "outdoor_advertising") return hasOutdoor || hasRoadUse;
+    return true;
+  };
   const ranked = items
+    .filter(allowedByInput)
     .map((item) => ({ item, score: ordinancePriorityForInput(item, input) }))
     .filter(({ item, score }) => {
       if (!target) return true;
@@ -491,6 +501,15 @@ function buildExecutiveReport(options: {
     .map((item) => String(item.sourceConfidence ?? ""))
     .filter(Boolean);
   const sourceConfidenceLabels = Array.from(new Set(sourceConfidence.map(confidenceLabel)));
+  const reviewCounts = review.counts as AnyRecord | undefined;
+  const reviewFindingCount = Number(reviewCounts?.total ?? 0);
+  const reviewStatus = review.verdict === "needs_revision"
+    ? "수정 필요"
+    : review.verdict === "usable_with_review"
+      ? "조건부 검토 가능"
+      : review.verdict === "usable"
+        ? "초안 검토 가능"
+        : "미검수";
 
   return [
     `# ${input.eventName ?? "행사명 미정"} 핵심 안전 브리프`,
@@ -498,7 +517,8 @@ function buildExecutiveReport(options: {
     "> 먼저 읽는 요약 보고서입니다. 법령 조항 원문과 체크리스트는 뒤 파일에 두고, 여기서는 현장 의사결정과 제출 액션만 요약합니다.",
     "",
     "## 결론",
-    `- 자동 검수 판정: ${review.verdict ?? "미검수"} / 점수: ${review.score ?? "미산정"} / 주요 누락: ${String((review.counts as AnyRecord | undefined)?.total ?? 0)}건`,
+    `- 초안 상태: ${reviewStatus} (자동 커버리지 검수 finding ${reviewFindingCount}건)`,
+    `- 검수 점수: ${review.score ?? "미산정"}점. 법적 적합성 점수가 아니라 문서·조건 커버리지 자동 점검값`,
     `- 행사일/장소: ${eventDateLabelForBrief(input)} / ${input.location ?? "미입력"}`,
     `- 관할/베뉴: ${input.jurisdiction ?? "미입력"} / ${input.venueId ?? "베뉴 미지정"}`,
     `- 예상 인원: ${formatCrowd(input.expectedCrowd)}${typeof input.expectedCrowd === "number" ? " (공개자료 미확인 시 안전계획용 가정값)" : ""}`,
@@ -509,7 +529,7 @@ function buildExecutiveReport(options: {
     "- 피크 시간대, 병목 구역, 퇴장 동선, 비상차량 접근로를 한 장 도면으로 확정한다.",
     "- 안전총괄, 구역장, 의료, 시설·전기, 보안, 교통 담당의 현장 의사결정 권한을 문서에 적는다.",
     "- 행사 중지, 입장 제한, 현 위치 대기, 우회 안내, 대피개시 기준을 운영본부가 사전 승인한다.",
-    "- 모든 법령·조례 항목은 최종 제출 전 최신 원문과 관할 담당자 답변으로 확인한다.",
+    "- 법령·조례 적용 여부는 자동 후보이며, 최종 제출 전 최신 원문과 관할 담당자 답변으로 확정한다.",
     "",
     "## 핵심 위험 우선순위",
     "| 위험 | 수준 | 바로 할 통제 | 남길 증빙 |",
@@ -536,7 +556,6 @@ function buildExecutiveReport(options: {
     ], "베뉴 또는 조례 후보 없음. 관할/베뉴 입력을 보강해야 함", 8),
     "",
     "## 바로 열어볼 파일",
-    "- `01-event-safety-plan.md`: 제출용 안전관리계획서 뼈대",
     "- `bundle/documents/01-event-safety-plan.md`: 제출용 안전관리계획서 뼈대",
     "- `bundle/documents/02-crowd-flow-plan.md`: 인파·동선 운영계획",
     "- `bundle/documents/18-submission-raci-calendar.md`: 제출 일정·담당·증빙 매트릭스",
@@ -964,7 +983,7 @@ function buildPackageMarkdown(
     input.organizer ? `- 주최/주관: ${input.organizer}` : undefined,
     `- 목적: ${packageMeta.description}`,
     `- 공유등급: ${packageMeta.sharingScope} / ${packageMeta.redactionLevel}`,
-    `- 자체 검수: ${review.verdict ?? "미실행"} / 점수 ${review.score ?? "미기록"} / finding ${reviewCounts?.total ?? "미기록"}건`,
+    `- 자체 검수: ${review.verdict ?? "미실행"} / 커버리지 점수 ${review.score ?? "미기록"} / finding ${reviewCounts?.total ?? "미기록"}건`,
     "",
     "## 공유범위·민감정보 처리",
     ...packageMeta.redactionNotes.map((note) => `- ${note}`),
