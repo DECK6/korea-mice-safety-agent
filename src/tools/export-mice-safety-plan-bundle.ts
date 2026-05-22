@@ -276,6 +276,282 @@ function markdownTableRecords(markdown: string): AnyRecord[] {
   return rows.slice(1).map((row) => Object.fromEntries(headers.map((header, index) => [header, row[index] ?? ""])));
 }
 
+function recordArray(value: unknown): AnyRecord[] {
+  return Array.isArray(value) ? value as AnyRecord[] : [];
+}
+
+function stringArray(value: unknown): string[] {
+  return Array.isArray(value) ? value.map((item) => String(item)).filter(Boolean) : [];
+}
+
+function yesNo(value: boolean): string {
+  return value ? "적용" : "비적용";
+}
+
+function formatCrowd(value: unknown): string {
+  if (typeof value !== "number") return "미입력";
+  return `${value.toLocaleString("ko-KR")}명`;
+}
+
+function eventDateLabelForBrief(input: { date?: string; eventDate?: string }): string {
+  return input.date ?? input.eventDate ?? "미입력";
+}
+
+function compactList(items: string[], fallback: string, limit = 8): string[] {
+  const unique = Array.from(new Set(items.map((item) => item.trim()).filter(Boolean)));
+  if (unique.length === 0) return [`- ${fallback}`];
+  return unique.slice(0, limit).map((item) => `- ${item}`);
+}
+
+function confidenceLabel(value: string): string {
+  switch (value) {
+    case "official_law_go_offline_snapshot":
+      return "법제처 오프라인 스냅샷";
+    case "official_law_go_verified_article":
+      return "법제처 조문 검증";
+    case "needs_review":
+      return "원문 재확인 필요";
+    case "summary_only":
+      return "요약 전용";
+    default:
+      return value || "미표시";
+  }
+}
+
+function hasEventType(input: AnyRecord, eventType: string): boolean {
+  return Array.isArray(input.eventTypes) && input.eventTypes.includes(eventType);
+}
+
+function inputFlagSummary(input: AnyRecord): string[] {
+  const flags: string[] = [];
+  if (input.venueId) flags.push(`베뉴 규정: ${input.venueId}`);
+  if (input.outdoor || input.outdoorEvent || hasEventType(input, "festival") || hasEventType(input, "outdoor_event")) flags.push("옥외/축제");
+  if (input.roadUse) flags.push("도로점용/교통통제");
+  if (input.performance || hasEventType(input, "performance")) flags.push("공연/무대");
+  if (input.foodService || hasEventType(input, "food_event")) flags.push("식음료");
+  if (input.lpgUse) flags.push("LPG/가스");
+  if (input.temporaryStructures) flags.push("임시구조물");
+  if (input.temporaryElectricity) flags.push("임시전기");
+  if (input.setupTeardown) flags.push("설치·철거");
+  if (input.workAtHeight) flags.push("고소작업");
+  if (input.heavyObjectHandling) flags.push("중량물/하역");
+  if (input.personalDataProcessing) flags.push("개인정보/CCTV");
+  if (input.vipSecurity || hasEventType(input, "vip_event")) flags.push("VIP/보안");
+  if (input.unhostedCrowd) flags.push("무주최 다중운집");
+  return flags;
+}
+
+function localOrdinanceLabel(item: AnyRecord): string {
+  const jurisdiction = String(item.jurisdiction ?? "").trim();
+  const name = String(item.name ?? item.ordinanceName ?? "조례").trim();
+  if (!jurisdiction || name.startsWith(jurisdiction)) return name;
+  return `${jurisdiction} ${name}`;
+}
+
+function ordinancePriorityForInput(item: AnyRecord, input: AnyRecord): number {
+  const target = String(input.jurisdiction ?? "").trim();
+  if (!target) return Number(item.priorityScore ?? 0);
+  const jurisdiction = String(item.jurisdiction ?? "").trim();
+  const matchedHints = stringArray(item.matchedJurisdictionHints);
+  const [province, cityOrDistrict] = target.split(/\s+/);
+  let score = 0;
+  if (jurisdiction === target) score += 1000;
+  if (matchedHints.includes(target)) score += 800;
+  if (cityOrDistrict && jurisdiction.includes(cityOrDistrict)) score += 600;
+  if (province && jurisdiction === province) score += 500;
+  if (province && jurisdiction.startsWith(province)) score += 200;
+  if (String(item.priorityBand ?? "") === "primary") score += 50;
+  if (String(item.priorityBand ?? "") === "secondary") score += 20;
+  score += Math.min(Number(item.priorityScore ?? 0), 99);
+  return score;
+}
+
+function primaryLocalOrdinancesForBrief(items: AnyRecord[], input: AnyRecord): AnyRecord[] {
+  const target = String(input.jurisdiction ?? "").trim();
+  const [province] = target.split(/\s+/);
+  const ranked = items
+    .map((item) => ({ item, score: ordinancePriorityForInput(item, input) }))
+    .filter(({ item, score }) => {
+      if (!target) return true;
+      const jurisdiction = String(item.jurisdiction ?? "");
+      return score >= 500 || jurisdiction === province || jurisdiction === target;
+    })
+    .sort((a, b) => b.score - a.score);
+  const seen = new Set<string>();
+  const unique: AnyRecord[] = [];
+  for (const { item } of ranked) {
+    const key = `${String(item.jurisdiction ?? "")}:${String(item.name ?? item.ordinanceName ?? "")}:${String(item.categoryId ?? item.category ?? "")}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(item);
+  }
+  return unique;
+}
+
+function actionLabelFromSchedule(item: SubmissionScheduleItem): string {
+  return `${item.audience}: ${item.document} (${item.recommendedDueLabel}, ${item.recommendedDueDate})`;
+}
+
+function buildDecisionRows(input: AnyRecord): string[][] {
+  const hasOutdoor = Boolean(input.outdoor || input.outdoorEvent || hasEventType(input, "festival") || hasEventType(input, "outdoor_event"));
+  const hasPerformance = Boolean(input.performance || hasEventType(input, "performance"));
+  const hasFood = Boolean(input.foodService || hasEventType(input, "food_event"));
+  const hasWorker = Boolean(input.setupTeardown || input.temporaryStructures || input.temporaryElectricity || input.workAtHeight || input.heavyObjectHandling || input.hotWork);
+  const hasPrivacy = Boolean(input.personalDataProcessing || hasEventType(input, "conference") || hasEventType(input, "vip_event"));
+  return [
+    ["지자체 옥외행사/지역축제 안전관리", yesNo(hasOutdoor), hasOutdoor ? "옥외·축제 조건이 있어 관할 지자체 안전관리계획 제출/협의 후보" : "실내 행사만 입력됨"],
+    ["도로점용/교통통제", input.roadUse ? "필수" : hasOutdoor ? "조건부 확인" : "비적용", input.roadUse ? "도로·보도·광장 점용 또는 통행 제한 입력됨" : hasOutdoor ? "옥외행사라 외부 대기열·승하차·보도 점용 여부 확인 필요" : "도로점용 조건 없음"],
+    ["공연법/공연 재해대처계획", yesNo(hasPerformance), hasPerformance ? "공연·무대·스탠딩/무대장치 조건 입력됨" : "공연 조건 없음. 필수 적용하지 않음"],
+    ["식품위생/LPG", hasFood || input.lpgUse ? "적용" : "비적용", hasFood || input.lpgUse ? "식음료·LPG 조건 입력됨" : "식음료·LPG 조건 없음. 필수 적용하지 않음"],
+    ["설치·철거 작업자 안전계획", yesNo(hasWorker), hasWorker ? "부스·무대·전기·하역·고소·중량물 작업 조건 입력됨" : "설치·철거 위험 조건 없음. 필수 적용하지 않음"],
+    ["개인정보/CCTV", yesNo(hasPrivacy), hasPrivacy ? "등록·QR·CCTV·컨벤션/VIP 조건으로 고지·위탁·접근권한 점검 필요" : "개인정보 처리 조건 없음"],
+  ];
+}
+
+function buildRiskRows(input: AnyRecord, hazards: AnyRecord[]): string[][] {
+  const evidenceByHazard: Record<string, string> = {
+    crowd_density_high: "구역별 수용인원표, 피크시간 인원계수 로그, 밀집 단계별 방송·통제 기록",
+    ingress_egress_bottleneck: "게이트 처리량 산정표, 대기열 배치도, 피크 전·후 현장 사진",
+    blocked_evacuation_route: "개장 전·피크 전 비상구/소화전/피난통로 사진, 점검자 서명표",
+    temporary_structure_collapse: "베뉴 승인서, 구조검토/설치확인서, 설치 완료 사진",
+    temporary_electrical_fire_shock: "분전반·누전차단기 점검표, 케이블 보호 사진, 전기 작업자 확인",
+    worker_fall_height: "작업계획서, TBM 기록, PPE 착용 사진, 작업구역 통제 사진",
+    heavy_object_handling: "중량물 작업계획서, 장비 점검표, 신호수 배치 사진",
+    fire_hazard_hot_work_lpg: "화기/LPG 반입 승인, 소화기 배치 사진, 누출·차단 점검표",
+    food_poisoning: "영업신고/위생점검표, 보관온도 기록, 조리구역 사진",
+    medical_emergency: "AED 점검표, 의료부스 위치도, 이송병원·119 연락 기록",
+    weather_outdoor_event: "기상 모니터링 로그, 풍속·호우 중지 기준, 구조물 보강 확인",
+    personal_data_cctv_privacy: "개인정보 처리 고지, 위탁계약, CCTV 안내문, 접근권한 점검 기록",
+    security_access_control_gap: "경비 배치표, 출입통제 구역도, 보안검색 절차 기록",
+    unhosted_crowd_governance_gap: "공동대응 연락망, 상황 단계별 의사결정 로그, 안내방송·문자 기록",
+  };
+  const priorityIds = [
+    "crowd_density_high",
+    "ingress_egress_bottleneck",
+    "blocked_evacuation_route",
+    "temporary_structure_collapse",
+    "temporary_electrical_fire_shock",
+    "worker_fall_height",
+    "heavy_object_handling",
+    "fire_hazard_hot_work_lpg",
+    "food_poisoning",
+    "medical_emergency",
+    "weather_outdoor_event",
+    "personal_data_cctv_privacy",
+    "security_access_control_gap",
+    "unhosted_crowd_governance_gap",
+  ];
+  const byId = new Map(hazards.map((hazard) => [String(hazard.id ?? ""), hazard]));
+  const rows = priorityIds
+    .map((id) => byId.get(id))
+    .filter((hazard): hazard is AnyRecord => Boolean(hazard))
+    .slice(0, 7)
+    .map((hazard) => {
+      const controls = stringArray(hazard.controls);
+      const hazardId = String(hazard.id ?? "");
+      return [
+        String(hazard.label ?? hazard.id ?? "위험요인"),
+        String(hazard.riskLevel ?? "확인"),
+        controls[0] ?? "현장 통제대책 지정 필요",
+        evidenceByHazard[hazardId] ?? "점검표, 사진, 담당자 서명, 관할·베뉴 확인 기록",
+      ];
+    });
+  if (rows.length > 0) return rows;
+  return [[
+    input.expectedCrowd ? "인파·동선 기본 리스크" : "행사 기본 리스크",
+    "확인",
+    "예상 인원, 구역별 수용능력, 피난동선, 응급동선을 현장 도면으로 재확인",
+    "관할기관·베뉴·운영본부 확인 기록 보관",
+  ]];
+}
+
+function buildExecutiveReport(options: {
+  input: AnyRecord;
+  structured: AnyRecord;
+  review: AnyRecord;
+  submissionSchedule: SubmissionScheduleItem[];
+  submissionPackages: SubmissionPackage[];
+}): string {
+  const { input, structured, review, submissionSchedule, submissionPackages } = options;
+  const applicability = (structured.applicability ?? {}) as AnyRecord;
+  const hazards = recordArray(applicability.hazards);
+  const venueRules = recordArray(applicability.venueRules);
+  const localOrdinances = recordArray(applicability.localOrdinances);
+  const primaryLocalOrdinances = primaryLocalOrdinancesForBrief(localOrdinances, input);
+  const decisionRows = buildDecisionRows(input);
+  const riskRows = buildRiskRows(input, hazards);
+  const urgentActions = submissionSchedule.slice(0, 7).map(actionLabelFromSchedule);
+  const packageRows = submissionPackages.map((item) => [
+    item.title,
+    item.audience,
+    item.fileName,
+    item.redactionLevel,
+  ]);
+  const sourceConfidence = localOrdinances
+    .map((item) => String(item.sourceConfidence ?? ""))
+    .filter(Boolean);
+  const sourceConfidenceLabels = Array.from(new Set(sourceConfidence.map(confidenceLabel)));
+
+  return [
+    `# ${input.eventName ?? "행사명 미정"} 핵심 안전 브리프`,
+    "",
+    "> 먼저 읽는 요약 보고서입니다. 법령 조항 원문과 체크리스트는 뒤 파일에 두고, 여기서는 현장 의사결정과 제출 액션만 요약합니다.",
+    "",
+    "## 결론",
+    `- 자동 검수 판정: ${review.verdict ?? "미검수"} / 점수: ${review.score ?? "미산정"} / 주요 누락: ${String((review.counts as AnyRecord | undefined)?.total ?? 0)}건`,
+    `- 행사일/장소: ${eventDateLabelForBrief(input)} / ${input.location ?? "미입력"}`,
+    `- 관할/베뉴: ${input.jurisdiction ?? "미입력"} / ${input.venueId ?? "베뉴 미지정"}`,
+    `- 예상 인원: ${formatCrowd(input.expectedCrowd)}${typeof input.expectedCrowd === "number" ? " (공개자료 미확인 시 안전계획용 가정값)" : ""}`,
+    `- 입력 조건: ${inputFlagSummary(input).join(", ") || "특이 조건 미입력"}`,
+    "",
+    "## 운영자가 먼저 결정할 것",
+    "- 관할기관 제출 대상과 제출기한을 실제 접수창구 기준으로 확정한다.",
+    "- 피크 시간대, 병목 구역, 퇴장 동선, 비상차량 접근로를 한 장 도면으로 확정한다.",
+    "- 안전총괄, 구역장, 의료, 시설·전기, 보안, 교통 담당의 현장 의사결정 권한을 문서에 적는다.",
+    "- 행사 중지, 입장 제한, 현 위치 대기, 우회 안내, 대피개시 기준을 운영본부가 사전 승인한다.",
+    "- 모든 법령·조례 항목은 최종 제출 전 최신 원문과 관할 담당자 답변으로 확인한다.",
+    "",
+    "## 핵심 위험 우선순위",
+    "| 위험 | 수준 | 바로 할 통제 | 남길 증빙 |",
+    "| --- | --- | --- | --- |",
+    ...riskRows.map((row) => `| ${row.map(markdownTableCell).join(" | ")} |`),
+    "",
+    "## 적용/비적용 판단",
+    "| 영역 | 판단 | 이유 |",
+    "| --- | --- | --- |",
+    ...decisionRows.map((row) => `| ${row.map(markdownTableCell).join(" | ")} |`),
+    "",
+    "## 제출·협의 우선 액션",
+    ...compactList(urgentActions, "제출·협의 일정 없음. 행사 조건 입력과 관할기관 확인 필요", 10),
+    "",
+    "## 현장 실행 패키지",
+    "| 패키지 | 대상 | 파일 | 공유 수준 |",
+    "| --- | --- | --- | --- |",
+    ...packageRows.map((row) => `| ${row.map(markdownTableCell).join(" | ")} |`),
+    "",
+    "## 베뉴·조례 확인 포인트",
+    ...compactList([
+      ...venueRules.slice(0, 4).map((item) => `베뉴: ${String(item.summary ?? item.id ?? "규정 확인")}`),
+      ...primaryLocalOrdinances.slice(0, 6).map((item) => `조례: ${localOrdinanceLabel(item)} / ${String(item.submissionDeadline ?? "제출기한 확인 필요")}`),
+    ], "베뉴 또는 조례 후보 없음. 관할/베뉴 입력을 보강해야 함", 8),
+    "",
+    "## 바로 열어볼 파일",
+    "- `01-event-safety-plan.md`: 제출용 안전관리계획서 뼈대",
+    "- `bundle/documents/01-event-safety-plan.md`: 제출용 안전관리계획서 뼈대",
+    "- `bundle/documents/02-crowd-flow-plan.md`: 인파·동선 운영계획",
+    "- `bundle/documents/18-submission-raci-calendar.md`: 제출 일정·담당·증빙 매트릭스",
+    "- `bundle/documents/16-operations-runsheet.md`: 당일 운영 런시트",
+    "- `bundle/documents/17-review-summary.md`: 자동 검수 결과",
+    "- `bundle/submission-packages/`: 지자체, 베뉴, 소방·경찰·의료, 협력사용 분리 패키지",
+    "",
+    "## 신뢰도와 남은 리스크",
+    `- 조례 출처 신뢰도: ${sourceConfidenceLabels.slice(0, 5).join(", ") || "미표시"}`,
+    `- 베뉴 규정 수: ${venueRules.length}건 / 우선 조례 후보 수: ${primaryLocalOrdinances.length}건 / 전체 조례 후보 수: ${localOrdinances.length}건 / 위험요인 수: ${hazards.length}건`,
+    "- 예상 인원, 세부 도면, 실제 교통통제 여부, 무대/부스 배치, 식음료·LPG 유무, 개인정보 수집 방식은 주최 측 최신 운영계획으로 대체해야 한다.",
+    "- 이 보고서는 안전관리 실무 초안이며 법률 자문이나 관할기관 승인을 대체하지 않는다.",
+  ].join("\n");
+}
+
 function addRowsSheet(sheets: XlsxSheet[], name: string, rows: Array<Record<string, string>>): void {
   sheets.push({
     name,
@@ -881,20 +1157,38 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   const submissionPackages = buildSubmissionPackages(input, exportDocumentBundle, review, submissionSchedule);
   const bundleDir = input.outputDir ?? join(defaultRoot(), "plan-bundles", `${safeName(input.eventName)}-${nowStamp()}`);
   mkdirSync(bundleDir, { recursive: true });
+  const detailsDir = join(bundleDir, "bundle");
+  const documentsDir = join(detailsDir, "documents");
+  const tablesDir = join(detailsDir, "tables");
+  const metadataDir = join(detailsDir, "metadata");
+  mkdirSync(documentsDir, { recursive: true });
+  mkdirSync(tablesDir, { recursive: true });
+  mkdirSync(metadataDir, { recursive: true });
 
   const files: string[] = [];
-  const fullPlanPath = join(bundleDir, "00-full-safety-plan.md");
+  const executiveReport = buildExecutiveReport({
+    input: input as AnyRecord,
+    structured: structured as AnyRecord,
+    review,
+    submissionSchedule,
+    submissionPackages,
+  });
+  const executiveReportPath = join(bundleDir, "00-executive-report.md");
+  writeFileSync(executiveReportPath, `${executiveReport}\n`);
+  files.push(executiveReportPath);
+
+  const fullPlanPath = join(documentsDir, "00-full-safety-plan.md");
   writeFileSync(fullPlanPath, `${planMarkdown}\n`);
   files.push(fullPlanPath);
 
-  const docxPath = join(bundleDir, "safety-plan.docx");
+  const docxPath = join(documentsDir, "safety-plan.docx");
   await writeDocx(planMarkdown, docxPath);
   files.push(docxPath);
 
   for (const [key, fileName] of Object.entries(documentFileNames)) {
     const value = exportDocumentBundle[key];
     if (typeof value !== "string" || value.trim().length === 0) continue;
-    const filePath = join(bundleDir, fileName);
+    const filePath = join(documentsDir, fileName);
     writeFileSync(filePath, `${value}\n`);
     files.push(filePath);
   }
@@ -915,7 +1209,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   ];
   for (const [fileName, title, markdown] of checklistSources) {
     if (!markdown.trim()) continue;
-    const filePath = join(bundleDir, fileName);
+    const filePath = join(tablesDir, fileName);
     const csv = fileName === "submission-checklist.csv" || fileName === "operations-runsheet.csv" ? tableToCsv(markdown) : bulletsToCsv(markdown, title);
     writeFileSync(filePath, `${csv}\n`);
     files.push(filePath);
@@ -923,18 +1217,18 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
 
   const foodLpgExecutionCsv = tableToCsv(String(documentBundle.foodLpgChecklist ?? ""));
   if (foodLpgExecutionCsv.trim()) {
-    const filePath = join(bundleDir, "food-lpg-execution.csv");
+    const filePath = join(tablesDir, "food-lpg-execution.csv");
     writeFileSync(filePath, `${foodLpgExecutionCsv}\n`);
     files.push(filePath);
   }
   const performanceStageExecutionCsv = tableToCsv(String(documentBundle.performanceStagePlan ?? ""));
   if (performanceStageExecutionCsv.trim()) {
-    const filePath = join(bundleDir, "performance-stage-execution.csv");
+    const filePath = join(tablesDir, "performance-stage-execution.csv");
     writeFileSync(filePath, `${performanceStageExecutionCsv}\n`);
     files.push(filePath);
   }
 
-  const visitorNoticesCsvPath = join(bundleDir, "visitor-safety-notices.csv");
+  const visitorNoticesCsvPath = join(tablesDir, "visitor-safety-notices.csv");
   const visitorNoticeRows = [
     ["Scenario", "Template ID", "Language", "Notice", "Checkpoints"],
     ...noticeBundle.notices.flatMap((notice) => noticeBundle.languages
@@ -950,11 +1244,11 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   writeFileSync(visitorNoticesCsvPath, `${visitorNoticeRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`);
   files.push(visitorNoticesCsvPath);
 
-  const reviewSummaryPath = join(bundleDir, "17-review-summary.md");
+  const reviewSummaryPath = join(documentsDir, "17-review-summary.md");
   writeFileSync(reviewSummaryPath, `${reviewMarkdown}\n`);
   files.push(reviewSummaryPath);
 
-  const reviewCoveragePath = join(bundleDir, "review-coverage-matrix.csv");
+  const reviewCoveragePath = join(tablesDir, "review-coverage-matrix.csv");
   const coverageRows = [
     ["Document ID", "Title", "Requirement", "Status", "Applies When", "Evidence Line"],
     ...(Array.isArray(review.documentCoverageMatrix) ? review.documentCoverageMatrix as AnyRecord[] : []).map((row) => [
@@ -969,7 +1263,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   writeFileSync(reviewCoveragePath, `${coverageRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`);
   files.push(reviewCoveragePath);
 
-  const reviewFindingsPath = join(bundleDir, "review-findings.csv");
+  const reviewFindingsPath = join(tablesDir, "review-findings.csv");
   const findingRows = [
     ["Requirement ID", "Severity", "Category", "Message", "Recommendation", "Evidence Line"],
     ...(Array.isArray(review.findings) ? review.findings as AnyRecord[] : []).map((finding) => [
@@ -984,18 +1278,18 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   writeFileSync(reviewFindingsPath, `${findingRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`);
   files.push(reviewFindingsPath);
 
-  const submissionSchedulePath = join(bundleDir, "18-submission-raci-calendar.md");
+  const submissionSchedulePath = join(documentsDir, "18-submission-raci-calendar.md");
   writeFileSync(submissionSchedulePath, `${submissionScheduleMarkdown(input, submissionSchedule)}\n`);
   files.push(submissionSchedulePath);
 
-  const submissionScheduleCsvPath = join(bundleDir, "submission-raci-calendar.csv");
+  const submissionScheduleCsvPath = join(tablesDir, "submission-raci-calendar.csv");
   const submissionScheduleCsv = submissionScheduleRows(submissionSchedule)
     .map((row) => row.map(csvEscape).join(","))
     .join("\n");
   writeFileSync(submissionScheduleCsvPath, `${submissionScheduleCsv}\n`);
   files.push(submissionScheduleCsvPath);
 
-  const packageDir = join(bundleDir, "submission-packages");
+  const packageDir = join(detailsDir, "submission-packages");
   mkdirSync(packageDir, { recursive: true });
   const packageIndexRows = [
     ["Package ID", "Title", "Audience", "Sharing Scope", "Redaction Level", "File", "Documents", "Redaction Notes"],
@@ -1041,12 +1335,12 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     files.push(filePath);
   }
 
-  const xlsxPath = join(bundleDir, "safety-checklists.xlsx");
+  const xlsxPath = join(tablesDir, "safety-checklists.xlsx");
   await writeXlsx(exportDocumentBundle, input, xlsxPath, noticeBundle, review, submissionPackages, submissionSchedule);
   files.push(xlsxPath);
 
   const operationsRunsheetCount = Math.max(0, tableRows(String(exportDocumentBundle.operationsRunsheet ?? "")).length - 1);
-  const manifestPath = join(bundleDir, "manifest.json");
+  const manifestPath = join(metadataDir, "manifest.json");
   const manifestFiles = [...files, manifestPath];
   const manifest = {
     version: VERSION,
@@ -1062,6 +1356,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     reviewFindingCount: (review.counts as AnyRecord | undefined)?.total,
     submissionScheduleCount: submissionSchedule.length,
     submissionPackageCount: submissionPackages.length,
+    executiveReportPath,
     submissionSchedule: submissionSchedule.map((item) => ({
       no: item.no,
       audience: item.audience,
@@ -1112,6 +1407,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
         counts: review.counts,
         documentCoverageMatrix: review.documentCoverageMatrix,
       },
+      executiveReportPath,
       submissionSchedule,
       submissionPackages: submissionPackages.map((item) => ({
         id: item.id,

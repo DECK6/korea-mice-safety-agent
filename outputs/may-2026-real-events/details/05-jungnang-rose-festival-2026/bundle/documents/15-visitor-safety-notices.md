@@ -1,0 +1,104 @@
+# 다국어 방문객 안전 안내문
+
+- 용도: 현장 방송, 안내판, 푸시/SMS 초안
+
+- 언어: 한국어, English, 日本語, 中文
+
+- 주의: 고유 지명, 브랜드명, 환불/입장 정책은 행사 주최자 확정 문구로 최종 교정
+
+
+
+# 대피개시
+- languages: 한국어, English, 日本語, 中文
+
+## evacuation_start_public_announcement
+- decisionType: evacuation_start
+### 한국어
+주요 혼잡 구역 안전 확보를 위해 안내드립니다. 현장 스태프의 안내에 따라 가까운 비상구와 지정 대피 동선으로 천천히 이동해 주십시오. 뛰지 마시고, 유모차와 휠체어 이용객이 먼저 이동할 수 있도록 협조해 주십시오.
+### English
+For safety in the main congestion area, please follow staff instructions and move slowly to the nearest emergency exit or designated evacuation route. Do not run. Please give priority to visitors with strollers or wheelchairs.
+### 日本語
+主要混雑エリアの安全確保のため、現場スタッフの案内に従い、最寄りの非常口または指定避難経路へゆっくり移動してください。走らず、ベビーカーや車いすをご利用の方が先に移動できるようご協力ください。
+### 中文
+为确保主要拥挤区域安全，请按照现场工作人员指引，缓慢前往最近的紧急出口或指定疏散路线。请勿奔跑，并请优先让婴儿车和轮椅使用者通行。
+
+체크포인트:
+- 대피 방향을 구체적으로 말한다
+- 뛰지 말라는 문구를 포함한다
+- 교통약자 우선 이동을 포함한다
+
+# 행사 일시중지
+- languages: 한국어, English, 日本語, 中文
+
+## event_pause_public_announcement
+- decisionType: event_pause
+### 한국어
+인파 밀집으로 인해 주요 혼잡 구역 운영을 잠시 중지합니다. 안내 스태프의 지시에 따라 대기선을 유지해 주시고, 우회 동선을 이용해 주십시오. 운영 재개 시 현장 방송과 안내판으로 다시 알려드리겠습니다.
+### English
+Operations in the main congestion area are temporarily paused due to crowd congestion. Please keep your place in line, follow staff instructions, and use the detour route. We will announce reopening through on-site announcements and signs.
+### 日本語
+人の密集のため、主要混雑エリアの運営を一時停止します。案内スタッフの指示に従い、待機列を維持し、迂回動線をご利用ください。再開時は場内放送と案内表示でお知らせします。
+### 中文
+因人群拥挤，主要拥挤区域运营暂时停止。请按照工作人员指示保持排队秩序，并使用绕行路线。恢复运营时，我们将通过现场广播和指示牌通知。
+
+체크포인트:
+- 중지 범위를 구역 단위로 말한다
+- 대기/우회 행동을 명확히 한다
+- 재개 안내 채널을 말한다
+
+# 행사 중단
+- languages: 한국어, English, 日本語, 中文
+
+## event_stop_public_announcement
+- decisionType: event_stop
+### 한국어
+안전상의 이유로 제18회 중랑 서울장미축제 운영을 중단합니다. 현장 스태프의 안내에 따라 출구와 대중교통 방향으로 순차 이동해 주십시오. 환불, 재입장, 후속 안내는 공식 채널을 통해 공지하겠습니다.
+### English
+제18회 중랑 서울장미축제 is being stopped for safety reasons. Please follow staff instructions and move in order toward exits and public transportation. Refunds, re-entry, and follow-up information will be announced through official channels.
+### 日本語
+安全上の理由により、제18회 중랑 서울장미축제の運営を中止します。現場スタッフの案内に従い、出口および公共交通機関方面へ順番に移動してください。払い戻し、再入場、今後の案内は公式チャンネルでお知らせします。
+### 中文
+出于安全原因，제18회 중랑 서울장미축제将停止运营。请按照现场工作人员指引，有序前往出口和公共交通方向。退款、重新入场及后续信息将通过官方渠道通知。
+
+체크포인트:
+- 중단 사유를 과장하지 않는다
+- 퇴장 방향을 안내한다
+- 후속 공지 채널을 포함한다
+
+# 현 위치 대기
+- languages: 한국어, English, 日本語, 中文
+
+## shelter_in_place_public_announcement
+- decisionType: shelter_in_place
+### 한국어
+주요 혼잡 주변 이동을 잠시 멈춰 주십시오. 현재 위치에서 스태프 안내를 기다려 주시고, 출입구와 통로를 막지 않도록 한쪽으로 서 주십시오. 추가 이동 안내를 곧 전달하겠습니다.
+### English
+Please temporarily stop moving around the main congestion area. Stay where you are and wait for staff instructions. Keep entrances and aisles clear by standing to one side. Further movement guidance will be provided shortly.
+### 日本語
+主要混雑周辺での移動を一時的にお控えください。現在の場所でスタッフの案内をお待ちいただき、出入口や通路をふさがないよう片側に寄ってください。追加の移動案内をまもなくお知らせします。
+### 中文
+请暂时停止在主要拥挤周边移动。请在当前位置等待工作人员指引，并靠边站立，保持出入口和通道畅通。我们将很快提供进一步的移动指引。
+
+체크포인트:
+- 움직이지 말아야 하는 범위를 말한다
+- 통로 확보를 포함한다
+- 추가 안내 예정임을 알린다
+
+# 운영 재개
+- languages: 한국어, English, 日本語, 中文
+
+## event_resume_public_announcement
+- decisionType: event_resume
+### 한국어
+주요 혼잡 구역 안전 확인이 완료되어 운영을 재개합니다. 혼잡 방지를 위해 스태프 안내에 따라 순차 입장해 주십시오. 불편을 드려 죄송합니다.
+### English
+Safety checks in the main congestion area are complete and operations are resuming. To prevent congestion, please enter in order as directed by staff. Thank you for your patience.
+### 日本語
+主要混雑エリアの安全確認が完了したため、運営を再開します。混雑防止のため、スタッフの案内に従って順番にご入場ください。ご協力ありがとうございます。
+### 中文
+主要拥挤区域安全确认已完成，现恢复运营。为避免拥挤，请按照工作人员指引有序入场。感谢您的配合。
+
+체크포인트:
+- 안전 확인 완료를 말한다
+- 순차 입장을 안내한다
+- 불편 안내를 짧게 포함한다

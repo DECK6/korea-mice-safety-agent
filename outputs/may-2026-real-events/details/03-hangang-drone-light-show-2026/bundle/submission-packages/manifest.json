@@ -1,0 +1,170 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-22T00:16:16.265Z",
+  "eventName": "2026 한강 드론 라이트 쇼 어린이날 특별공연",
+  "packages": [
+    {
+      "id": "local_government",
+      "title": "지자체 제출 패키지",
+      "audience": "서울특별시 송파구",
+      "sharingScope": "public_agency",
+      "redactionLevel": "summary_only",
+      "redactionNotes": [
+        "법령·조례·안전관리 요약 중심으로 공유",
+        "VIP 세부 동선, 개인정보 원자료, 내부 보안 운영 세부는 별도 전용 패키지에서만 공유"
+      ],
+      "fileName": "01-local-government-package.md",
+      "documents": [
+        "행사 안전관리계획서",
+        "인파·동선 관리계획",
+        "도로·교통 실행계획",
+        "공연·무대 실행계획",
+        "제출·협의 체크리스트",
+        "현장 운영 런시트",
+        "응급의료·AED·구급 이송 계획",
+        "소방·피난 점검표",
+        "사고보고서 템플릿",
+        "다국어 방문객 안전 안내문"
+      ],
+      "coverageIds": [
+        "event_safety_plan",
+        "crowd_flow_plan",
+        "road_traffic_control_plan",
+        "performance_stage_execution_plan",
+        "submission_checklist",
+        "operations_runsheet",
+        "medical_response_plan",
+        "fire_evacuation_checklist",
+        "incident_report_template",
+        "visitor_safety_notices"
+      ],
+      "scheduleItemNos": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "8"
+      ]
+    },
+    {
+      "id": "venue",
+      "title": "베뉴·현장 시설 제출 패키지",
+      "audience": "현장 시설/전기/방재 담당",
+      "sharingScope": "venue_facility",
+      "redactionLevel": "limited_external",
+      "redactionNotes": [
+        "시설·전기·방재·하역 승인에 필요한 범위로 공유",
+        "개인정보/CCTV 세부, VIP/보안검색 세부, 주최자 환불·입장 정책은 제한"
+      ],
+      "fileName": "02-venue-package.md",
+      "documents": [
+        "행사 안전관리계획서",
+        "베뉴 시설·수용·하역·전기 제약 체크",
+        "도로·교통 실행계획",
+        "공연·무대 실행계획",
+        "현장 운영 런시트",
+        "소방·피난 점검표",
+        "일일 안전점검표",
+        "스태프 배치표",
+        "비상연락망"
+      ],
+      "coverageIds": [
+        "event_safety_plan",
+        "venue_facility_plan",
+        "road_traffic_control_plan",
+        "performance_stage_execution_plan",
+        "operations_runsheet",
+        "fire_evacuation_checklist",
+        "daily_safety_checklist",
+        "staff_assignment",
+        "emergency_contacts"
+      ],
+      "scheduleItemNos": [
+        "1",
+        "5",
+        "6",
+        "7",
+        "10"
+      ]
+    },
+    {
+      "id": "fire_police_medical",
+      "title": "소방·경찰·의료 협의 패키지",
+      "audience": "소방서/경찰/119·의료기관",
+      "sharingScope": "emergency_agency",
+      "redactionLevel": "summary_only",
+      "redactionNotes": [
+        "인파·피난·응급·상황전파와 현장 통제에 필요한 범위로 공유",
+        "개인정보 원자료, VIP 세부 동선, 내부 보안검색 운영 세부는 제한"
+      ],
+      "fileName": "03-fire-police-medical-package.md",
+      "documents": [
+        "인파·동선 관리계획",
+        "도로·교통 실행계획",
+        "공연·무대 실행계획",
+        "현장 운영 런시트",
+        "소방·피난 점검표",
+        "응급의료·AED·구급 이송 계획",
+        "스태프 배치표",
+        "비상연락망",
+        "다국어 방문객 안전 안내문",
+        "사고보고서 템플릿"
+      ],
+      "coverageIds": [
+        "crowd_flow_plan",
+        "road_traffic_control_plan",
+        "performance_stage_execution_plan",
+        "operations_runsheet",
+        "fire_evacuation_checklist",
+        "medical_response_plan",
+        "staff_assignment",
+        "emergency_contacts",
+        "visitor_safety_notices",
+        "incident_report_template"
+      ],
+      "scheduleItemNos": [
+        "3",
+        "4",
+        "6",
+        "7",
+        "9"
+      ]
+    },
+    {
+      "id": "worker_contractor",
+      "title": "협력사 작업자 안전 패키지",
+      "audience": "시공/하역/전기/무대/부스 협력사",
+      "sharingScope": "contractor",
+      "redactionLevel": "limited_external",
+      "redactionNotes": [
+        "작업계획, 작업중지 기준, 하역·전기·화기·소방통로 확인에 필요한 범위로 공유",
+        "관계기관 직접 연락망, 개인정보/CCTV, VIP/보안 세부는 운영본부 승인 없이 공유하지 않음"
+      ],
+      "fileName": "04-worker-contractor-package.md",
+      "documents": [
+        "설치·철거 작업자 안전계획서",
+        "공연·무대 실행계획",
+        "베뉴 시설·수용·하역·전기 제약 체크",
+        "현장 운영 런시트",
+        "소방·피난 점검표",
+        "일일 안전점검표",
+        "비상연락망"
+      ],
+      "coverageIds": [
+        "worker_safety_plan",
+        "performance_stage_execution_plan",
+        "venue_facility_plan",
+        "operations_runsheet",
+        "fire_evacuation_checklist",
+        "daily_safety_checklist",
+        "emergency_contacts"
+      ],
+      "scheduleItemNos": [
+        "1",
+        "7",
+        "10"
+      ]
+    }
+  ]
+}
