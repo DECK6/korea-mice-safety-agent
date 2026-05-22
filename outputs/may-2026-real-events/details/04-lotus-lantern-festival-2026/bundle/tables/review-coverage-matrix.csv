@@ -15,6 +15,6 @@ staff_assignment,스태프 배치표,required,present,모든 운영 행사,772
 emergency_contacts,비상연락망,required,present,모든 운영 행사,615
 daily_safety_checklist,일일 안전점검표,required,present,모든 운영 행사,67
 operations_runsheet,현장 운영 런시트,required,present,"방문객 운영이 있는 모든 행사. 개장 전, 운영 중, 피크, 폐장, 철거 단계별 실행 확인용",807
-submission_checklist,제출·협의 체크리스트,required,present,모든 행사. 관할기관·베뉴·협력사 확인용,845
+submission_checklist,제출·협의 체크리스트,required,present,모든 행사. 관할기관·베뉴·협력사 확인용,844
 incident_report_template,사고보고서 템플릿,required,present,모든 운영 행사,287
-visitor_safety_notices,다국어 방문객 안전 안내문,required,present,방문객이 있는 모든 행사. 대규모/옥외/국제행사는 필수에 가깝게 검토,875
+visitor_safety_notices,다국어 방문객 안전 안내문,required,present,방문객이 있는 모든 행사. 대규모/옥외/국제행사는 필수에 가깝게 검토,873

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-22T00:16:16.100Z",
+  "generatedAt": "2026-05-22T01:15:36.306Z",
   "eventName": "PlayX4 2026 플레이엑스포",
   "packages": [
     {
@@ -40,10 +40,7 @@
       ],
       "scheduleItemNos": [
         "2",
-        "3",
-        "4",
-        "7",
-        "8"
+        "5"
       ]
     },
     {
@@ -81,12 +78,10 @@
       ],
       "scheduleItemNos": [
         "1",
+        "2",
         "3",
         "4",
-        "5",
-        "6",
-        "8",
-        "10"
+        "7"
       ]
     },
     {
@@ -125,11 +120,10 @@
         "incident_report_template"
       ],
       "scheduleItemNos": [
+        "2",
+        "3",
         "4",
-        "5",
-        "6",
-        "8",
-        "9"
+        "6"
       ]
     },
     {
@@ -163,9 +157,9 @@
       ],
       "scheduleItemNos": [
         "1",
-        "5",
-        "6",
-        "10"
+        "3",
+        "4",
+        "7"
       ]
     },
     {
@@ -194,8 +188,7 @@
         "incident_report_template"
       ],
       "scheduleItemNos": [
-        "7",
-        "8"
+        "5"
       ]
     }
   ]

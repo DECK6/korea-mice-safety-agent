@@ -6,7 +6,7 @@
 - 주최/주관: 경기도 / 경기콘텐츠진흥원 / 킨텍스
 - 목적: 등록·QR·CCTV·촬영·VIP 보안검색·민간경비 운영 확인용
 - 공유등급: restricted_internal / none
-- 자체 검수: usable / 점수 100 / finding 0건
+- 자체 검수: usable / 커버리지 점수 100 / finding 0건
 ## 공유범위·민감정보 처리
 - 개인정보/CCTV/VIP/경비업 세부 검토 전용
 - 외부 공유 전 개인정보보호책임자와 보안책임자의 재검토 필요
@@ -17,14 +17,13 @@
 - 비상연락망
 - 사고보고서 템플릿
 ## 문서 커버리지
-- 개인정보/CCTV 점검표: required/present (line 795)
-- 출입통제·보안검색·VIP 동선 계획: conditional/present (line 294)
-- 스태프 배치표: required/present (line 865)
-- 비상연락망: required/present (line 683)
-- 사고보고서 템플릿: required/present (line 379)
+- 개인정보/CCTV 점검표: required/present (line 602)
+- 출입통제·보안검색·VIP 동선 계획: conditional/present (line 143)
+- 스태프 배치표: required/present (line 672)
+- 비상연락망: required/present (line 490)
+- 사고보고서 템플릿: required/present (line 228)
 ## 제출 일정·RACI
 - T-14 사전점검 (2026-05-07): 개인정보 처리방침, 위탁계약, CCTV 안내, 접근권한·접속기록 점검 / R 개인정보보호책임자 / 증빙 처리방침/위탁계약/안내문/CCTV 고지 사진/접속기록 점검표
-- T-7 담당기관 확인 (2026-05-14): 경비업 허가 범위, 경비지도사, 경비원 명부, 배치·폐지 신고 / R 교통·대외협력 담당 / 증빙 제출본 PDF/접수증/승인메일/담당자 확인 메모
 ## 제출 전 확인
 - 담당기관 최신 서식, 접수 방식, 제출기한, 담당자 연락처는 제출 직전 재확인한다.
 - 이 패키지는 실무 검토용 초안이며, 법령·조례·베뉴 승인·관계기관 협의를 대체하지 않는다.

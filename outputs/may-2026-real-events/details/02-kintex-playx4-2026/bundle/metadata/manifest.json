@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-22T00:16:16.107Z",
+  "generatedAt": "2026-05-22T01:15:36.313Z",
   "input": {
     "eventName": "PlayX4 2026 플레이엑스포",
     "eventDate": "2026-05-21",
@@ -20,60 +20,60 @@
     "heavyObjectHandling": true,
     "performance": true,
     "personalDataProcessing": true,
-    "outputDir": "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026"
+    "outputDir": "outputs/may-2026-real-events/details/02-kintex-playx4-2026"
   },
-  "bundleDir": "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026",
+  "bundleDir": "outputs/may-2026-real-events/details/02-kintex-playx4-2026",
   "files": [
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/00-executive-report.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/00-full-safety-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/safety-plan.docx",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/01-event-safety-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/02-crowd-flow-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/19-road-traffic-control-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/20-unhosted-crowd-response-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/03-venue-facility-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/04-worker-safety-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/21-performance-stage-execution-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/05-fire-evacuation-checklist.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/06-food-lpg-checklist.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/07-privacy-cctv-checklist.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/08-security-access-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/09-medical-response-plan.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/10-staff-assignment.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/11-emergency-contacts.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/12-daily-safety-checklist.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/13-submission-checklist.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/14-incident-report-template.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/15-visitor-safety-notices.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/16-operations-runsheet.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/venue-facility-plan.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/road-traffic-control-plan.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/unhosted-crowd-response-plan.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/performance-stage-execution-plan.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/fire-evacuation-checklist.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/food-lpg-checklist.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/privacy-cctv-checklist.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/security-access-plan.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/medical-response-plan.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/daily-safety-checklist.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/submission-checklist.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/operations-runsheet.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/performance-stage-execution.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/visitor-safety-notices.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/17-review-summary.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/review-coverage-matrix.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/review-findings.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/18-submission-raci-calendar.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/submission-raci-calendar.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/package-index.csv",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/manifest.json",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/01-local-government-package.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/02-venue-package.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/03-fire-police-medical-package.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/04-worker-contractor-package.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/05-privacy-security-package.md",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/safety-checklists.xlsx",
-    "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/metadata/manifest.json"
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/00-executive-report.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/00-full-safety-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/safety-plan.docx",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/01-event-safety-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/02-crowd-flow-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/19-road-traffic-control-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/20-unhosted-crowd-response-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/03-venue-facility-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/04-worker-safety-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/21-performance-stage-execution-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/05-fire-evacuation-checklist.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/06-food-lpg-checklist.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/07-privacy-cctv-checklist.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/08-security-access-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/09-medical-response-plan.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/10-staff-assignment.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/11-emergency-contacts.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/12-daily-safety-checklist.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/13-submission-checklist.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/14-incident-report-template.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/15-visitor-safety-notices.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/16-operations-runsheet.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/venue-facility-plan.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/road-traffic-control-plan.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/unhosted-crowd-response-plan.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/performance-stage-execution-plan.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/fire-evacuation-checklist.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/food-lpg-checklist.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/privacy-cctv-checklist.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/security-access-plan.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/medical-response-plan.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/daily-safety-checklist.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/submission-checklist.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/operations-runsheet.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/performance-stage-execution.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/visitor-safety-notices.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/17-review-summary.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/review-coverage-matrix.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/review-findings.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/18-submission-raci-calendar.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/submission-raci-calendar.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/package-index.csv",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/manifest.json",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/01-local-government-package.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/02-venue-package.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/03-fire-police-medical-package.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/04-worker-contractor-package.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/submission-packages/05-privacy-security-package.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/tables/safety-checklists.xlsx",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/metadata/manifest.json"
   ],
   "visitorNoticeCount": 5,
   "visitorNoticeLanguages": [
@@ -82,13 +82,13 @@
     "ja",
     "zh"
   ],
-  "operationsRunsheetCount": 24,
+  "operationsRunsheetCount": 23,
   "reviewVerdict": "usable",
   "reviewScore": 100,
   "reviewFindingCount": 0,
-  "submissionScheduleCount": 10,
+  "submissionScheduleCount": 7,
   "submissionPackageCount": 5,
-  "executiveReportPath": "/Volumes/data/Dev/korea-mice-safety-agent/outputs/may-2026-real-events/details/02-kintex-playx4-2026/00-executive-report.md",
+  "executiveReportPath": "outputs/may-2026-real-events/details/02-kintex-playx4-2026/00-executive-report.md",
   "submissionSchedule": [
     {
       "no": "1",
@@ -108,37 +108,6 @@
     },
     {
       "no": "2",
-      "audience": "경기도 고양시 안전/행사 담당부서",
-      "document": "옥외행사·지역축제 안전관리계획서",
-      "packageIds": [
-        "local_government"
-      ],
-      "recommendedDueLabel": "T-7 설치·작업 전 승인",
-      "recommendedDueDate": "2026-05-14",
-      "finalCheckpoint": "2026-05-20 개장 전 현장 확인",
-      "responsible": "안전총괄",
-      "accountable": "운영총괄",
-      "requiredEvidence": "제출본 PDF/접수증/승인메일/담당자 확인 메모",
-      "status": "open"
-    },
-    {
-      "no": "3",
-      "audience": "옥외광고 담당부서/베뉴",
-      "document": "현수막·배너·안내판·전기 광고물 허가/신고",
-      "packageIds": [
-        "local_government",
-        "venue"
-      ],
-      "recommendedDueLabel": "T-7 설치·작업 전 승인",
-      "recommendedDueDate": "2026-05-14",
-      "finalCheckpoint": "2026-05-20 개장 전 현장 확인",
-      "responsible": "시설·방재 담당",
-      "accountable": "안전총괄",
-      "requiredEvidence": "광고물 허가·신고필증/베뉴 설치 승인/설치 사진",
-      "status": "open"
-    },
-    {
-      "no": "4",
       "audience": "관할 건축부서/베뉴 시설팀",
       "document": "가설건축물 축조신고서, 피난안전 확인서, 임시사용승인 확인",
       "packageIds": [
@@ -155,7 +124,7 @@
       "status": "open"
     },
     {
-      "no": "5",
+      "no": "3",
       "audience": "베뉴 운영/시설/전기/방재 담당",
       "document": "부스 시공, 전기, 하역, 소방통로, 반입제한, 제출 안전서류",
       "packageIds": [
@@ -172,7 +141,7 @@
       "status": "open"
     },
     {
-      "no": "6",
+      "no": "4",
       "audience": "소방서/베뉴 방재실/안전총괄",
       "document": "소방·피난 점검표, 화기·위험물 반입 승인, 임시소방시설 확인",
       "packageIds": [
@@ -189,7 +158,7 @@
       "status": "open"
     },
     {
-      "no": "7",
+      "no": "5",
       "audience": "개인정보 보호책임자/등록 대행사/보안 담당",
       "document": "개인정보 처리방침, 위탁계약, CCTV 안내, 접근권한·접속기록 점검",
       "packageIds": [
@@ -205,25 +174,7 @@
       "status": "open"
     },
     {
-      "no": "8",
-      "audience": "경찰/경비업체/베뉴 보안실",
-      "document": "경비업 허가 범위, 경비지도사, 경비원 명부, 배치·폐지 신고",
-      "packageIds": [
-        "local_government",
-        "venue",
-        "fire_police_medical",
-        "privacy_security"
-      ],
-      "recommendedDueLabel": "T-7 담당기관 확인",
-      "recommendedDueDate": "2026-05-14",
-      "finalCheckpoint": "2026-05-20 최종 확인",
-      "responsible": "교통·대외협력 담당",
-      "accountable": "안전총괄",
-      "requiredEvidence": "제출본 PDF/접수증/승인메일/담당자 확인 메모",
-      "status": "open"
-    },
-    {
-      "no": "9",
+      "no": "6",
       "audience": "의료담당/AED 관리책임자/119·이송병원",
       "document": "응급의료·AED·구급 이송 계획, AED 점검·교육·관리서류",
       "packageIds": [
@@ -238,7 +189,7 @@
       "status": "open"
     },
     {
-      "no": "10",
+      "no": "7",
       "audience": "시공/하역/전기 협력사/안전총괄",
       "document": "설치·철거 작업자 안전계획서, 작업계획서, 교육명단, PPE·작업중지 기준",
       "packageIds": [

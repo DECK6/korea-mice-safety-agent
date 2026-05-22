@@ -8,13 +8,13 @@
 
 ## 행사별 결과
 
-| 행사 | 유형 | 관할/베뉴 | 핵심 적용 판단 | 자동검수 | 먼저 볼 보고서 |
+| 행사 | 유형 | 관할/베뉴 | 핵심 적용 판단 | 초안 상태 | 먼저 볼 보고서 |
 | --- | --- | --- | --- | --- | --- |
-| KOBA 2026 제34회 국제 방송·미디어·음향·조명 전시회 | exhibition, conference | 서울특별시 강남구 / coex | 설치·철거 작업자 안전계획 적용<br>개인정보/CCTV 적용 | usable / 100 | [열기](details/01-coex-koba-2026/00-executive-report.md) |
-| PlayX4 2026 플레이엑스포 | exhibition, conference | 경기도 고양시 / kintex | 공연/무대 적용<br>설치·철거 작업자 안전계획 적용<br>개인정보/CCTV 적용 | usable / 100 | [열기](details/02-kintex-playx4-2026/00-executive-report.md) |
-| 2026 한강 드론 라이트 쇼 어린이날 특별공연 | festival, outdoor_event, performance | 서울특별시 송파구 / 베뉴 미지정 | 공연/무대 적용<br>설치·철거 작업자 안전계획 적용 | usable / 100 | [열기](details/03-hangang-drone-light-show-2026/00-executive-report.md) |
-| 2026 연등회 연등행렬 | festival, outdoor_event, performance | 서울특별시 종로구 / 베뉴 미지정 | 도로점용 필수<br>공연/무대 적용<br>설치·철거 작업자 안전계획 적용 | usable / 100 | [열기](details/04-lotus-lantern-festival-2026/00-executive-report.md) |
-| 제18회 중랑 서울장미축제 | festival, outdoor_event, performance | 서울특별시 중랑구 / 베뉴 미지정 | 공연/무대 적용<br>설치·철거 작업자 안전계획 적용 | usable / 100 | [열기](details/05-jungnang-rose-festival-2026/00-executive-report.md) |
+| KOBA 2026 제34회 국제 방송·미디어·음향·조명 전시회 | exhibition, conference | 서울특별시 강남구 / coex | 설치·철거 작업자 안전계획 적용<br>개인정보/CCTV 적용 | 초안 검토 가능<br>커버리지 finding 0건 | [열기](details/01-coex-koba-2026/00-executive-report.md) |
+| PlayX4 2026 플레이엑스포 | exhibition, conference | 경기도 고양시 / kintex | 공연/무대 적용<br>설치·철거 작업자 안전계획 적용<br>개인정보/CCTV 적용 | 초안 검토 가능<br>커버리지 finding 0건 | [열기](details/02-kintex-playx4-2026/00-executive-report.md) |
+| 2026 한강 드론 라이트 쇼 어린이날 특별공연 | festival, outdoor_event, performance | 서울특별시 송파구 / 베뉴 미지정 | 공연/무대 적용<br>설치·철거 작업자 안전계획 적용 | 초안 검토 가능<br>커버리지 finding 0건 | [열기](details/03-hangang-drone-light-show-2026/00-executive-report.md) |
+| 2026 연등회 연등행렬 | festival, outdoor_event, performance | 서울특별시 종로구 / 베뉴 미지정 | 도로점용 필수<br>공연/무대 적용<br>설치·철거 작업자 안전계획 적용 | 초안 검토 가능<br>커버리지 finding 0건 | [열기](details/04-lotus-lantern-festival-2026/00-executive-report.md) |
+| 제18회 중랑 서울장미축제 | festival, outdoor_event, performance | 서울특별시 중랑구 / 베뉴 미지정 | 공연/무대 적용<br>설치·철거 작업자 안전계획 적용 | 초안 검토 가능<br>커버리지 finding 0건 | [열기](details/05-jungnang-rose-festival-2026/00-executive-report.md) |
 
 ## 우선 확인해야 할 공통 리스크
 
@@ -43,3 +43,4 @@
 ## 주의
 
 이 결과는 안전관리 실무 초안입니다. 법률 자문이나 관할기관 승인을 대체하지 않으며, 행사 도면·부스 배치·경비/의료 배치·교통통제 계획은 실제 운영자료로 보정해야 합니다.
+자동 점수는 법적 적합성 점수가 아니라 입력 조건 대비 문서·항목 커버리지 점검값입니다.

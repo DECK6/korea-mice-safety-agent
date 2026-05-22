@@ -403,6 +403,7 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, isOutdoor && !includesAny(text, ["조례 우선순위", "우선순위 primary", "우선순위 secondary"]), "warning", "local_ordinance_priority", "조례 후보 우선순위 근거가 약합니다.", "베뉴 소재지, 관할 지자체, 옥외행사/도로점용/옥외광고물 조건별로 광역·기초 조례 우선순위를 표시하세요.", { requirementId: "REQ_LOCAL_ORDINANCE_PRIORITY" });
   addFinding(findings, isOutdoor && !includesAny(text, ["제출기한", "일 전", "신고"]), "warning", "submission_deadline", "지자체 제출기한 또는 신고기한이 명확하지 않습니다.", "조례의 행사 개시 전 제출/신고 기한을 계획서 요약에 표시하세요.", { requirementId: "REQ_LOCAL_DEADLINE" });
   addFinding(findings, isOutdoor && !includesAny(text, ["관계기관", "경찰", "소방", "합동점검"]), "warning", "agency_coordination", "관계기관 협의 내용이 부족합니다.", "관할 지자체, 경찰, 소방, 의료/보건, 시설 관계자 협의 항목을 넣으세요.", { requirementId: "REQ_AGENCY_COORDINATION" });
+  addFinding(findings, !isOutdoor && includesAny(text, ["옥외행사·지역축제 안전관리계획서"]), "warning", "over_application", "실내/비옥외 행사인데 옥외행사·지역축제 안전관리계획서가 제출 액션처럼 보입니다.", "옥외/축제 조건이 없으면 옥외행사 조례는 참고 후보로 내리거나 제거하세요.", { requirementId: "REQ_NO_OUTDOOR_ORDINANCE_OVERAPPLY", evidenceTerms: ["옥외행사·지역축제 안전관리계획서"], text });
 
   addFinding(findings, unhostedCrowd && !includesAny(text, ["무주최 다중운집 관계기관 공동대응계획", "주최자 없음", "공동 현장지휘"]), "error", "unhosted_crowd_governance", "무주최 다중운집 공동대응계획이 부족합니다.", "주최자 없음, 책임 공백, 공동 현장지휘, 관계기관 합동상황반, 기관별 권한 경계를 별도 문서로 분리하세요.", { requirementId: "REQ_UNHOSTED_CROWD_RESPONSE" });
   addFinding(findings, unhostedCrowd && !includesAny(text, ["지자체 재난안전상황실", "경찰 현장지휘", "소방 현장지휘", "시설관리자", "교통 운영기관"]), "error", "unhosted_crowd_raci", "무주최 상황의 기관별 RACI가 부족합니다.", "지자체, 경찰, 소방, 시설관리자, 철도/버스/택시 등 교통 운영기관의 Responsible/Accountable/Consulted/Informed를 명시하세요.", { requirementId: "REQ_UNHOSTED_CROWD_RACI" });
@@ -421,6 +422,7 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, input.roadUse === true && !includesAny(text, ["셔틀", "주차장", "승하차", "버스정류장", "택시"]), "warning", "external_queue_transport", "외부 교통·승하차·주차 대기열 관리가 부족합니다.", "셔틀·택시·버스 승하차장, 주차장 진입 대기, 역/정류장 대기열, 보행자 역류 방지 기준을 넣으세요.", { requirementId: "REQ_EXTERNAL_QUEUE_TRANSPORT" });
   addFinding(findings, input.roadUse === true && !includesAny(text, ["옥외광고물", "현수막", "배너", "안내판", "전광"]), "warning", "outdoor_signage", "옥외광고물·임시 안내표지 기준이 부족합니다.", "현수막, 배너, 안내판, 지주형 표시물, 전광류/전기 사용 광고물의 허가·신고·고정·보행 방해 여부를 확인하세요.", { requirementId: "REQ_OUTDOOR_SIGNAGE" });
   addFinding(findings, input.roadUse !== true && includesAny(text, ["도로법", "도로점용허가"]) && !isOutdoor, "warning", "over_application", "도로점용 조건이 없는데 도로 법령이 적용됐을 수 있습니다.", "실내행사 또는 도로 미사용 행사라면 도로점용 법령을 조건부 후보로 낮추세요.", { requirementId: "REQ_NO_ROAD_OVERAPPLY", evidenceTerms: ["도로법", "도로점용허가"], text });
+  addFinding(findings, input.roadUse !== true && includesAny(text, ["| 도로관리청/교통부서/경찰 | 도로점용허가", "도로관리청/교통부서/경찰,도로점용허가"]), "warning", "over_application", "도로점용 조건이 없는데 도로점용허가가 제출 일정으로 승격됐습니다.", "도로·보도·광장 점용 또는 통행 제한이 확정될 때만 제출 액션으로 올리고, 그 전에는 조건부 확인으로 유지하세요.", { requirementId: "REQ_NO_ROAD_SUBMISSION_OVERAPPLY", evidenceTerms: ["도로관리청/교통부서/경찰"], text });
 
   addFinding(findings, hasFood && !includesAny(text, ["식품위생", "식중독"]), "error", "food_safety", "식음료/식중독 관리가 누락됐습니다.", "영업허가·신고, 위생, 냉장/보온, 식중독 보고 절차를 넣으세요.", { requirementId: "REQ_FOOD_SAFETY" });
   addFinding(findings, input.lpgUse === true && !includesAny(text, ["LPG", "액화석유가스", "가스용기"]), "error", "gas_safety", "LPG/가스 안전 항목이 누락됐습니다.", "가스용기 전도방지, 누출점검, 이격거리, 소화기, 베뉴 반입승인을 넣으세요.", { requirementId: "REQ_LPG_GAS" });
@@ -444,8 +446,10 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
 
   addFinding(findings, input.personalDataProcessing === true && !includesAny(text, ["개인정보", "CCTV", "출입증", "QR"]), "error", "privacy", "개인정보/CCTV 처리 항목이 누락됐습니다.", "수집항목, 목적, 보관기간, 위탁, CCTV 안내, 촬영 고지를 넣으세요.", { requirementId: "REQ_PRIVACY_CCTV" });
   addFinding(findings, input.personalDataProcessing === true && !includesAny(text, ["처리방침", "수탁자", "접근권한", "접속기록", "암호화"]), "warning", "privacy_security", "개인정보 처리방침/위탁/안전성 확보 조치가 약합니다.", "등록·QR·출입증 위탁, 수탁자 공개, 접근권한, 접속기록, 암호화, 현장 단말 잠금 기준을 넣으세요.", { requirementId: "REQ_PRIVACY_SECURITY" });
+  addFinding(findings, !context.hasPrivacy && includesAny(text, ["개인정보 보호책임자/등록 대행사/보안 담당"]), "warning", "over_application", "개인정보 처리 조건이 없는데 개인정보 제출 액션이 생성됐습니다.", "등록, QR/출입증, CCTV, 촬영, 앱 신고, VIP/초청자 명단 처리 조건이 확인될 때만 제출 액션으로 올리세요.", { requirementId: "REQ_NO_PRIVACY_SUBMISSION_OVERAPPLY", evidenceTerms: ["개인정보 보호책임자/등록 대행사/보안 담당"], text });
   addFinding(findings, Boolean(input.vipSecurity || hasEvent(input, "vip_event")) && !includesAny(text, ["경비업법", "경비지도사", "경비원 명부", "배치신고", "보안검색"]), "error", "security_access", "VIP/보안검색 조건인데 경비업·출입통제 계획이 부족합니다.", "민간경비 허가 업무 범위, 경비지도사, 경비원 교육·명부, 배치신고, 경찰·소방·베뉴 보안실 연락 기준을 넣으세요.", { requirementId: "REQ_SECURITY_ACCESS_CONTROL" });
   addFinding(findings, !Boolean(input.vipSecurity || hasEvent(input, "vip_event")) && includesAny(text, ["경비업법 시행령 별표", "경비원 배치·배치폐지 신고서"]), "warning", "over_application", "VIP/민간경비 조건이 없는데 경비업 하위기준이 적용됐을 수 있습니다.", "단순 안내 스태프만 배치하는 행사라면 경비업법 하위기준을 조건부 후보로 낮추세요.", { requirementId: "REQ_NO_SECURITY_OVERAPPLY", evidenceTerms: ["경비업법 시행령 별표", "경비원 배치·배치폐지 신고서"], text });
+  addFinding(findings, !context.hasVipSecurity && includesAny(text, ["| 경찰/경비업체/베뉴 보안실 | 경비업 허가 범위", "경찰/경비업체/베뉴 보안실,경비업 허가 범위"]), "warning", "over_application", "VIP/민간경비 조건이 없는데 경비업 제출 액션이 생성됐습니다.", "VIP, 보안검색, 민간경비, 혼잡·교통유도경비가 확정될 때만 경비업 제출 액션으로 올리세요.", { requirementId: "REQ_NO_SECURITY_SUBMISSION_OVERAPPLY", evidenceTerms: ["경찰/경비업체/베뉴 보안실"], text });
   addFinding(findings, Boolean(input.venueId) && !includesAny(text, ["베뉴", "시설 체크", "금지", "반입", "운영규정"]), "warning", "venue_rules", "베뉴 규정 반영이 약합니다.", "venueId에 해당하는 베뉴 금지물품, 반입/하역, 소방통로, 작업승인 규정을 넣으세요.", { requirementId: "REQ_VENUE_RULES" });
   addFinding(findings, Boolean(input.venueId) && !includesAny(text, ["베뉴 시설·수용", "바닥하중", "하역", "전기", "추정 밀도"]), "warning", "venue_facility_constraints", "베뉴 수용/하중/전기/하역 제약 반영이 약합니다.", "venue-facility-index의 수용·면적, 바닥하중, 층고, 반입·하역, 전기, 소방·피난 sourceSpan을 계획서에 반영하세요.", { requirementId: "REQ_VENUE_FACILITY_CONSTRAINTS" });
   addCoverageFindings(findings, documentCoverageMatrix);
@@ -468,6 +472,8 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   const text = [
     "# MICE 안전계획 검수 결과",
     `판정: ${verdict} / 점수: ${score} (${grade}) / error=${errorCount}, warning=${warningCount}`,
+    "",
+    "> 점수는 법적 적합성 점수가 아니라 입력 조건 대비 문서·항목 커버리지 자동 점검값입니다. 최종 제출 전 최신 법령 원문, 조례, 관할기관 답변, 베뉴 승인조건으로 확인해야 합니다.",
     "",
     formatDocumentCoverageMarkdown(documentCoverageMatrix),
     "",
