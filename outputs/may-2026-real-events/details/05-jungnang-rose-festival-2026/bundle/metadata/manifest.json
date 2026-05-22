@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-22T01:33:34.310Z",
+  "generatedAt": "2026-05-22T02:54:16.986Z",
   "input": {
     "eventName": "제18회 중랑 서울장미축제",
     "eventDate": "2026-05-15",
@@ -26,6 +26,7 @@
   "bundleDir": "outputs/may-2026-real-events/details/05-jungnang-rose-festival-2026",
   "files": [
     "outputs/may-2026-real-events/details/05-jungnang-rose-festival-2026/00-executive-report.md",
+    "outputs/may-2026-real-events/details/05-jungnang-rose-festival-2026/00-executive-report.html",
     "outputs/may-2026-real-events/details/05-jungnang-rose-festival-2026/bundle/documents/00-full-safety-plan.md",
     "outputs/may-2026-real-events/details/05-jungnang-rose-festival-2026/bundle/documents/safety-plan.docx",
     "outputs/may-2026-real-events/details/05-jungnang-rose-festival-2026/bundle/documents/01-event-safety-plan.md",
@@ -89,6 +90,7 @@
   "submissionScheduleCount": 6,
   "submissionPackageCount": 4,
   "executiveReportPath": "outputs/may-2026-real-events/details/05-jungnang-rose-festival-2026/00-executive-report.md",
+  "executiveHtmlReportPath": "outputs/may-2026-real-events/details/05-jungnang-rose-festival-2026/00-executive-report.html",
   "submissionSchedule": [
     {
       "no": "1",

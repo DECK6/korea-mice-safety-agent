@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-22T01:33:33.478Z",
+  "generatedAt": "2026-05-22T02:54:16.128Z",
   "input": {
     "eventName": "KOBA 2026 제34회 국제 방송·미디어·음향·조명 전시회",
     "eventDate": "2026-05-12",
@@ -24,6 +24,7 @@
   "bundleDir": "outputs/may-2026-real-events/details/01-coex-koba-2026",
   "files": [
     "outputs/may-2026-real-events/details/01-coex-koba-2026/00-executive-report.md",
+    "outputs/may-2026-real-events/details/01-coex-koba-2026/00-executive-report.html",
     "outputs/may-2026-real-events/details/01-coex-koba-2026/bundle/documents/00-full-safety-plan.md",
     "outputs/may-2026-real-events/details/01-coex-koba-2026/bundle/documents/safety-plan.docx",
     "outputs/may-2026-real-events/details/01-coex-koba-2026/bundle/documents/01-event-safety-plan.md",
@@ -87,6 +88,7 @@
   "submissionScheduleCount": 6,
   "submissionPackageCount": 5,
   "executiveReportPath": "outputs/may-2026-real-events/details/01-coex-koba-2026/00-executive-report.md",
+  "executiveHtmlReportPath": "outputs/may-2026-real-events/details/01-coex-koba-2026/00-executive-report.html",
   "submissionSchedule": [
     {
       "no": "1",

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-22T01:33:33.892Z",
+  "generatedAt": "2026-05-22T02:54:16.561Z",
   "input": {
     "eventName": "2026 한강 드론 라이트 쇼 어린이날 특별공연",
     "eventDate": "2026-05-05",
@@ -26,6 +26,7 @@
   "bundleDir": "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026",
   "files": [
     "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026/00-executive-report.md",
+    "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026/00-executive-report.html",
     "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026/bundle/documents/00-full-safety-plan.md",
     "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026/bundle/documents/safety-plan.docx",
     "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026/bundle/documents/01-event-safety-plan.md",
@@ -89,6 +90,7 @@
   "submissionScheduleCount": 6,
   "submissionPackageCount": 4,
   "executiveReportPath": "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026/00-executive-report.md",
+  "executiveHtmlReportPath": "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026/00-executive-report.html",
   "submissionSchedule": [
     {
       "no": "1",

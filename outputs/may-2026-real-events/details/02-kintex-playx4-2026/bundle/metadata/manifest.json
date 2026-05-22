@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-22T01:33:33.686Z",
+  "generatedAt": "2026-05-22T02:54:16.346Z",
   "input": {
     "eventName": "PlayX4 2026 플레이엑스포",
     "eventDate": "2026-05-21",
@@ -25,6 +25,7 @@
   "bundleDir": "outputs/may-2026-real-events/details/02-kintex-playx4-2026",
   "files": [
     "outputs/may-2026-real-events/details/02-kintex-playx4-2026/00-executive-report.md",
+    "outputs/may-2026-real-events/details/02-kintex-playx4-2026/00-executive-report.html",
     "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/00-full-safety-plan.md",
     "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/safety-plan.docx",
     "outputs/may-2026-real-events/details/02-kintex-playx4-2026/bundle/documents/01-event-safety-plan.md",
@@ -89,6 +90,7 @@
   "submissionScheduleCount": 7,
   "submissionPackageCount": 5,
   "executiveReportPath": "outputs/may-2026-real-events/details/02-kintex-playx4-2026/00-executive-report.md",
+  "executiveHtmlReportPath": "outputs/may-2026-real-events/details/02-kintex-playx4-2026/00-executive-report.html",
   "submissionSchedule": [
     {
       "no": "1",
