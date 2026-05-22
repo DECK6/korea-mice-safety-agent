@@ -27,6 +27,7 @@ const inputSchema = z.object({
   outdoor: z.boolean().optional(),
   outdoorEvent: z.boolean().optional(),
   roadUse: z.boolean().optional(),
+  outdoorAdvertising: z.boolean().optional().describe("현수막, 배너, 지주형 안내판, 전광류 등 옥외광고물/외부 안내표지 설치 여부"),
   unhostedCrowd: z.boolean().optional().describe("주최자·주관자 없이 자발적/예측형 다중운집이 발생하는 상황"),
   temporaryStructures: z.boolean().optional(),
   temporaryElectricity: z.boolean().optional(),
@@ -423,6 +424,7 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, input.roadUse === true && !includesAny(text, ["옥외광고물", "현수막", "배너", "안내판", "전광"]), "warning", "outdoor_signage", "옥외광고물·임시 안내표지 기준이 부족합니다.", "현수막, 배너, 안내판, 지주형 표시물, 전광류/전기 사용 광고물의 허가·신고·고정·보행 방해 여부를 확인하세요.", { requirementId: "REQ_OUTDOOR_SIGNAGE" });
   addFinding(findings, input.roadUse !== true && includesAny(text, ["도로법", "도로점용허가"]) && !isOutdoor, "warning", "over_application", "도로점용 조건이 없는데 도로 법령이 적용됐을 수 있습니다.", "실내행사 또는 도로 미사용 행사라면 도로점용 법령을 조건부 후보로 낮추세요.", { requirementId: "REQ_NO_ROAD_OVERAPPLY", evidenceTerms: ["도로법", "도로점용허가"], text });
   addFinding(findings, input.roadUse !== true && includesAny(text, ["| 도로관리청/교통부서/경찰 | 도로점용허가", "도로관리청/교통부서/경찰,도로점용허가"]), "warning", "over_application", "도로점용 조건이 없는데 도로점용허가가 제출 일정으로 승격됐습니다.", "도로·보도·광장 점용 또는 통행 제한이 확정될 때만 제출 액션으로 올리고, 그 전에는 조건부 확인으로 유지하세요.", { requirementId: "REQ_NO_ROAD_SUBMISSION_OVERAPPLY", evidenceTerms: ["도로관리청/교통부서/경찰"], text });
+  addFinding(findings, input.outdoorAdvertising !== true && includesAny(text, ["| 옥외광고 담당부서/베뉴 | 현수막", "옥외광고 담당부서/베뉴,현수막"]), "warning", "over_application", "옥외광고물 설치 조건이 없는데 허가/신고가 제출 일정으로 승격됐습니다.", "현수막, 배너, 지주형 표시물, 전광류 설치가 확정될 때만 제출 액션으로 올리고, 그 전에는 조건부 확인으로 유지하세요.", { requirementId: "REQ_NO_OUTDOOR_AD_SUBMISSION_OVERAPPLY", evidenceTerms: ["옥외광고 담당부서/베뉴"], text });
 
   addFinding(findings, hasFood && !includesAny(text, ["식품위생", "식중독"]), "error", "food_safety", "식음료/식중독 관리가 누락됐습니다.", "영업허가·신고, 위생, 냉장/보온, 식중독 보고 절차를 넣으세요.", { requirementId: "REQ_FOOD_SAFETY" });
   addFinding(findings, input.lpgUse === true && !includesAny(text, ["LPG", "액화석유가스", "가스용기"]), "error", "gas_safety", "LPG/가스 안전 항목이 누락됐습니다.", "가스용기 전도방지, 누출점검, 이격거리, 소화기, 베뉴 반입승인을 넣으세요.", { requirementId: "REQ_LPG_GAS" });

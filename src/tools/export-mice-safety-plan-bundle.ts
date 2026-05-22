@@ -37,6 +37,7 @@ const inputSchema = z.object({
   outdoor: z.boolean().optional(),
   outdoorEvent: z.boolean().optional(),
   roadUse: z.boolean().optional(),
+  outdoorAdvertising: z.boolean().optional().describe("현수막, 배너, 지주형 안내판, 전광류 등 옥외광고물/외부 안내표지 설치 여부"),
   unhostedCrowd: z.boolean().optional().describe("주최자·주관자 없이 자발적/예측형 다중운집이 발생하는 상황"),
   temporaryStructures: z.boolean().optional(),
   temporaryElectricity: z.boolean().optional(),
@@ -327,6 +328,7 @@ function inputFlagSummary(input: AnyRecord): string[] {
   if (input.venueId) flags.push(`베뉴 규정: ${input.venueId}`);
   if (input.outdoor || input.outdoorEvent || hasEventType(input, "festival") || hasEventType(input, "outdoor_event")) flags.push("옥외/축제");
   if (input.roadUse) flags.push("도로점용/교통통제");
+  if (input.outdoorAdvertising) flags.push("옥외광고물/외부 안내표지");
   if (input.performance || hasEventType(input, "performance")) flags.push("공연/무대");
   if (input.foodService || hasEventType(input, "food_event")) flags.push("식음료");
   if (input.lpgUse) flags.push("LPG/가스");
@@ -398,8 +400,41 @@ function primaryLocalOrdinancesForBrief(items: AnyRecord[], input: AnyRecord): A
   return unique;
 }
 
-function actionLabelFromSchedule(item: SubmissionScheduleItem): string {
-  return `${item.audience}: ${item.document} (${item.recommendedDueLabel}, ${item.recommendedDueDate})`;
+function actionRowsFromSchedule(items: SubmissionScheduleItem[]): string[][] {
+  return items.map((item) => [
+    item.audience,
+    item.document,
+    item.condition,
+    item.recommendedDueDate ? `${item.recommendedDueLabel} / ${item.recommendedDueDate}` : item.recommendedDueLabel,
+    item.requiredEvidence,
+  ]);
+}
+
+function executiveActionPriority(item: SubmissionScheduleItem): number {
+  const document = item.document;
+  const audience = item.audience;
+  const text = `${audience} ${document} ${item.condition} ${item.basis}`;
+  if (/도로점용허가|교통소통대책|통행금지|차량 운행 제한/.test(document)) return 100;
+  if (/옥외행사|지역축제/.test(document)) return 95;
+  if (/LPG|가스|식품|위생|푸드|케이터링|시식/.test(document)) return 92;
+  if (/공연 재해대처|공연·무대 실행|무대 실행계획/.test(document)) return 90;
+  if (/설치·철거 작업자|작업자 안전계획|작업계획서/.test(document)) return 88;
+  if (/소방|피난|방재|위험물/.test(document)) return 86;
+  if (/가설건축물|피난안전|임시사용/.test(document)) return 82;
+  if (/응급의료|AED|구급|이송/.test(document)) return 78;
+  if (/베뉴 운영|부스 시공|반입제한|제출 안전서류/.test(text)) return 72;
+  if (/개인정보|CCTV|QR|출입증|위탁|접속기록/.test(document)) return 70;
+  if (/경비|보안|VIP/.test(document)) return 68;
+  if (/옥외광고|현수막|배너|안내판|전광/.test(document)) return 55;
+  return 50;
+}
+
+function selectExecutiveActions(items: SubmissionScheduleItem[], limit = 8): SubmissionScheduleItem[] {
+  return [...items]
+    .map((item, index) => ({ item, index, priority: executiveActionPriority(item) }))
+    .sort((a, b) => b.priority - a.priority || a.index - b.index)
+    .slice(0, limit)
+    .map(({ item }) => item);
 }
 
 function buildDecisionRows(input: AnyRecord): string[][] {
@@ -408,14 +443,40 @@ function buildDecisionRows(input: AnyRecord): string[][] {
   const hasFood = Boolean(input.foodService || hasEventType(input, "food_event"));
   const hasWorker = Boolean(input.setupTeardown || input.temporaryStructures || input.temporaryElectricity || input.workAtHeight || input.heavyObjectHandling || input.hotWork);
   const hasPrivacy = Boolean(input.personalDataProcessing || hasEventType(input, "conference") || hasEventType(input, "vip_event"));
+  const hasOutdoorAdvertising = input.outdoorAdvertising === true;
   return [
     ["지자체 옥외행사/지역축제 안전관리", yesNo(hasOutdoor), hasOutdoor ? "옥외·축제 조건이 있어 관할 지자체 안전관리계획 제출/협의 후보" : "실내 행사만 입력됨"],
     ["도로점용/교통통제", input.roadUse ? "필수" : hasOutdoor ? "조건부 확인" : "비적용", input.roadUse ? "도로·보도·광장 점용 또는 통행 제한 입력됨" : hasOutdoor ? "옥외행사라 외부 대기열·승하차·보도 점용 여부 확인 필요" : "도로점용 조건 없음"],
+    ["옥외광고물/외부 안내표지", hasOutdoorAdvertising ? "적용" : hasOutdoor ? "조건부 확인" : "비적용", hasOutdoorAdvertising ? "현수막·배너·지주형 표시물·전광류 등 외부 안내물 설치 조건 입력됨" : hasOutdoor ? "옥외 안내물 설치 여부가 미확정이면 허가/신고가 아니라 확인후보로 유지" : "옥외 광고물 조건 없음"],
     ["공연법/공연 재해대처계획", yesNo(hasPerformance), hasPerformance ? "공연·무대·스탠딩/무대장치 조건 입력됨" : "공연 조건 없음. 필수 적용하지 않음"],
     ["식품위생/LPG", hasFood || input.lpgUse ? "적용" : "비적용", hasFood || input.lpgUse ? "식음료·LPG 조건 입력됨" : "식음료·LPG 조건 없음. 필수 적용하지 않음"],
     ["설치·철거 작업자 안전계획", yesNo(hasWorker), hasWorker ? "부스·무대·전기·하역·고소·중량물 작업 조건 입력됨" : "설치·철거 위험 조건 없음. 필수 적용하지 않음"],
     ["개인정보/CCTV", yesNo(hasPrivacy), hasPrivacy ? "등록·QR·CCTV·컨벤션/VIP 조건으로 고지·위탁·접근권한 점검 필요" : "개인정보 처리 조건 없음"],
   ];
+}
+
+function buildConditionalRows(input: AnyRecord): string[][] {
+  const hasOutdoor = Boolean(input.outdoor || input.outdoorEvent || hasEventType(input, "festival") || hasEventType(input, "outdoor_event"));
+  const hasFood = Boolean(input.foodService || input.lpgUse || hasEventType(input, "food_event"));
+  const hasPrivacy = Boolean(input.personalDataProcessing || hasEventType(input, "conference") || hasEventType(input, "vip_event"));
+  const hasWorker = Boolean(input.setupTeardown || input.temporaryStructures || input.temporaryElectricity || input.workAtHeight || input.heavyObjectHandling || input.hotWork);
+  const rows: string[][] = [];
+  if (hasOutdoor && input.roadUse !== true) {
+    rows.push(["도로점용/교통통제", "보도·차도·광장 점용, 차 없는 거리, 퍼레이드, 승하차장 통제가 확정될 때 제출 액션으로 전환", "통제구간 도면, 경찰·도로관리청 회신, 비상차량 접근로"]);
+  }
+  if (hasOutdoor && input.outdoorAdvertising !== true) {
+    rows.push(["옥외광고물/안내표지", "현수막·배너·지주형 표시물·전광류 설치가 확정될 때 허가/신고 후보로 전환", "설치 위치·규격·수량, 고정방식, 베뉴/지자체 승인"]);
+  }
+  if (!hasFood) {
+    rows.push(["식음료/LPG", "푸드트럭, 시식, 케이터링, LPG 조리가 추가될 때만 식품위생/LPG 패키지로 전환", "입점업체 목록, 조리 방식, 가스 사용 여부"]);
+  }
+  if (!hasPrivacy) {
+    rows.push(["개인정보/CCTV", "QR 등록, 출입증, 앱 신고, 촬영·CCTV 운영이 확정될 때만 개인정보 패키지로 전환", "수집항목, 위탁사, 촬영 고지, 보관·파기 기준"]);
+  }
+  if (!hasWorker) {
+    rows.push(["설치·철거 작업자 안전", "부스·무대·전기·하역·고소·중량물 작업이 생길 때만 작업자 안전계획 필수 전환", "작업 범위, 협력사, 작업시간, 장비·PPE"]);
+  }
+  return rows.slice(0, 5);
 }
 
 function buildRiskRows(input: AnyRecord, hazards: AnyRecord[]): string[][] {
@@ -489,8 +550,9 @@ function buildExecutiveReport(options: {
   const localOrdinances = recordArray(applicability.localOrdinances);
   const primaryLocalOrdinances = primaryLocalOrdinancesForBrief(localOrdinances, input);
   const decisionRows = buildDecisionRows(input);
+  const conditionalRows = buildConditionalRows(input);
   const riskRows = buildRiskRows(input, hazards);
-  const urgentActions = submissionSchedule.slice(0, 7).map(actionLabelFromSchedule);
+  const urgentActionRows = actionRowsFromSchedule(selectExecutiveActions(submissionSchedule));
   const packageRows = submissionPackages.map((item) => [
     item.title,
     item.audience,
@@ -518,7 +580,7 @@ function buildExecutiveReport(options: {
     "",
     "## 결론",
     `- 초안 상태: ${reviewStatus} (자동 커버리지 검수 finding ${reviewFindingCount}건)`,
-    `- 검수 점수: ${review.score ?? "미산정"}점. 법적 적합성 점수가 아니라 문서·조건 커버리지 자동 점검값`,
+    "- 자동 검수는 법적 적합성 점수가 아니라 입력 조건 대비 문서·조건 커버리지 점검입니다.",
     `- 행사일/장소: ${eventDateLabelForBrief(input)} / ${input.location ?? "미입력"}`,
     `- 관할/베뉴: ${input.jurisdiction ?? "미입력"} / ${input.venueId ?? "베뉴 미지정"}`,
     `- 예상 인원: ${formatCrowd(input.expectedCrowd)}${typeof input.expectedCrowd === "number" ? " (공개자료 미확인 시 안전계획용 가정값)" : ""}`,
@@ -541,8 +603,19 @@ function buildExecutiveReport(options: {
     "| --- | --- | --- |",
     ...decisionRows.map((row) => `| ${row.map(markdownTableCell).join(" | ")} |`),
     "",
+    "## 조건부 확인 항목",
+    "| 항목 | 전환 기준 | 확인할 증빙 |",
+    "| --- | --- | --- |",
+    ...(conditionalRows.length > 0
+      ? conditionalRows.map((row) => `| ${row.map(markdownTableCell).join(" | ")} |`)
+      : ["| 조건부 항목 없음 | 현재 입력 조건 기준 추가 전환 후보 없음 | - |"]),
+    "",
     "## 제출·협의 우선 액션",
-    ...compactList(urgentActions, "제출·협의 일정 없음. 행사 조건 입력과 관할기관 확인 필요", 10),
+    "| 확인처 | 해야 할 일 | 적용 트리거 | 기한 | 보관 증빙 |",
+    "| --- | --- | --- | --- | --- |",
+    ...(urgentActionRows.length > 0
+      ? urgentActionRows.map((row) => `| ${row.map(markdownTableCell).join(" | ")} |`)
+      : ["| - | 제출·협의 일정 없음 | 행사 조건 입력과 관할기관 확인 필요 | - | - |"]),
     "",
     "## 현장 실행 패키지",
     "| 패키지 | 대상 | 파일 | 공유 수준 |",
@@ -566,6 +639,7 @@ function buildExecutiveReport(options: {
     "## 신뢰도와 남은 리스크",
     `- 조례 출처 신뢰도: ${sourceConfidenceLabels.slice(0, 5).join(", ") || "미표시"}`,
     `- 베뉴 규정 수: ${venueRules.length}건 / 우선 조례 후보 수: ${primaryLocalOrdinances.length}건 / 전체 조례 후보 수: ${localOrdinances.length}건 / 위험요인 수: ${hazards.length}건`,
+    `- 상세 커버리지 점수: ${review.score ?? "미산정"}점. 누락 탐지 보조값이며 법령 적합성 보증이 아니다.`,
     "- 예상 인원, 세부 도면, 실제 교통통제 여부, 무대/부스 배치, 식음료·LPG 유무, 개인정보 수집 방식은 주최 측 최신 운영계획으로 대체해야 한다.",
     "- 이 보고서는 안전관리 실무 초안이며 법률 자문이나 관할기관 승인을 대체하지 않는다.",
   ].join("\n");
@@ -852,6 +926,9 @@ function inferRaci(audience: string, document: string, condition: string): Pick<
   if (/의료|AED|119|구급|이송/.test(text)) {
     return { responsible: "의료담당", accountable: "안전총괄", consulted: "119/이송병원/AED 관리책임자", informed: "운영본부/구역장" };
   }
+  if (/공연 재해대처|공연·무대 실행|무대 실행계획/.test(document)) {
+    return { responsible: "공연안전 담당", accountable: "안전총괄", consulted: "공연/문화 담당부서·베뉴 기술지원", informed: "운영본부/무대감독/보안·의료팀" };
+  }
   if (/소방|피난|방재|위험물|가설건축물/.test(text)) {
     return { responsible: "시설·방재 담당", accountable: "안전총괄", consulted: "소방서/베뉴 방재실/시설팀", informed: "운영본부/구역장" };
   }
@@ -871,7 +948,9 @@ function evidenceFor(document: string, audience: string): string {
   const text = `${document} ${audience}`;
   if (/도로|교통|통행/.test(text)) return "도로점용허가증/교통소통대책 승인/통제 공고 캡처";
   if (/옥외광고|현수막|배너|안내판|전광/.test(text)) return "광고물 허가·신고필증/베뉴 설치 승인/설치 사진";
+  if (/공연|재해대처|무대 실행|무대장치|스탠딩|리깅/.test(text)) return "공연 재해대처계획/안전교육 명단/무대·리깅 승인/공연중지 기준";
   if (/가설건축물|피난안전|임시사용/.test(text)) return "가설건축물 신고필증/피난안전 확인서/임시사용 승인 확인";
+  if (/베뉴 운영|부스 시공|반입제한|제출 안전서류/.test(text)) return "베뉴 제출 승인서/부스·전기 신청서/반입·하역 승인/현장 확인 사진";
   if (/소방|피난|화기|위험물/.test(text)) return "소방·피난 점검표/위험물 반입 승인/개장 전 사진";
   if (/LPG|가스/.test(text)) return "검사증명서/보험증빙/공급자 안전점검표";
   if (/식품|위생|푸드|케이터링|시식/.test(text)) return "영업 신고·허가 확인/위생점검표/보존식 기록";

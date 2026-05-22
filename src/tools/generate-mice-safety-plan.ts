@@ -29,6 +29,7 @@ const inputSchema = z.object({
   outdoor: z.boolean().optional(),
   outdoorEvent: z.boolean().optional(),
   roadUse: z.boolean().optional(),
+  outdoorAdvertising: z.boolean().optional().describe("현수막, 배너, 지주형 안내판, 전광류 등 옥외광고물/외부 안내표지 설치 여부"),
   unhostedCrowd: z.boolean().optional().describe("주최자·주관자 없이 자발적/예측형 다중운집이 발생하는 상황"),
   temporaryStructures: z.boolean().optional(),
   temporaryElectricity: z.boolean().optional(),
@@ -178,6 +179,7 @@ function flagSummary(input: Input): string[] {
   const flags: string[] = [];
   if (input.outdoor || input.outdoorEvent) flags.push("옥외행사");
   if (input.roadUse) flags.push("도로점용/교통통제");
+  if (input.outdoorAdvertising) flags.push("옥외광고물/외부 안내표지");
   if (input.unhostedCrowd) flags.push("무주최 다중운집");
   if (input.temporaryStructures) flags.push("임시구조물/부스/무대");
   if (input.temporaryElectricity) flags.push("임시전기");
@@ -763,6 +765,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
     .flatMap((annex) => asArray<string>(annex.checklistItems).slice(0, 4).map((item) => `${annex.lawName ?? annex.lawEntryId} ${annex.annexNo ?? ""}: ${item}`));
   const hasOutdoor = Boolean(input.outdoor || input.outdoorEvent || inputHasEvent(input, "festival") || inputHasEvent(input, "outdoor_event"));
   const hasRoadUse = input.roadUse === true;
+  const hasOutdoorAdvertising = input.outdoorAdvertising === true;
   const hasPrivacyInput = Boolean(input.personalDataProcessing || inputHasEvent(input, "conference") || inputHasEvent(input, "vip_event"));
   const hasSecurityInput = Boolean(input.vipSecurity || inputHasEvent(input, "vip_event"));
   const relevantOutdoorOrdinances = hasOutdoor
@@ -834,7 +837,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
       "도로법 시행규칙 별지 제36호서식, 우회도로·문의처·비상차량 동선 포함",
       "open",
     ] : undefined,
-    hasOutdoor && hasAdvertisingOrdinance ? [
+    hasOutdoorAdvertising && hasAdvertisingOrdinance ? [
       "옥외광고 담당부서/베뉴",
       "현수막·배너·안내판·전기 광고물 허가/신고",
       "옥외 임시 안내물, 지주형 표시물, 전광류 또는 전기 사용 광고물을 설치하는 경우",
