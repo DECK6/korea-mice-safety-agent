@@ -30,6 +30,7 @@ cd /Volumes/data/Dev/korea-mice-safety-agent
 npm install
 npm run build
 node build/cli.js tools
+node build/cli.js web --host 127.0.0.1 --port 4317
 node build/cli.js call query_mice_safety_applicability --inputJson '{"eventTypes":["exhibition"],"venueId":"coex","expectedCrowd":5000,"temporaryStructures":true,"temporaryElectricity":true,"personalDataProcessing":true}'
 node build/cli.js call query_mice_safety_applicability --inputJson '{"eventTypes":["conference","vip_event"],"expectedCrowd":800,"personalDataProcessing":true,"vipSecurity":true}'
 node build/cli.js call query_mice_safety_applicability --inputJson '{"eventTypes":["outdoor_event","food_event"],"jurisdiction":"경기도 고양시","expectedCrowd":5000,"outdoorEvent":true,"roadUse":true,"foodService":true,"lpgUse":true,"temporaryStructures":true,"temporaryElectricity":true,"setupTeardown":true,"workAtHeight":true,"heavyObjectHandling":true}'
@@ -43,6 +44,26 @@ node build/cli.js call register_mice_safety_issue --inputJson '{"eventName":"고
 ```
 
 `outdoor_event`는 입력 편의용 별칭이며 내부 적용성 판정에서는 `festival`로 정규화합니다.
+
+웹 시뮬레이터:
+
+```bash
+npm run build
+npm run web
+# 또는
+node build/cli.js web --host 127.0.0.1 --port 4317
+```
+
+브라우저에서 `http://127.0.0.1:4317`을 열면 행사 유형, 예상 인파 수, 베뉴, 관할 지자체, 도로점용, 식음료/LPG, 설치·철거, 개인정보, VIP/보안, 무주최 다중운집 조건을 입력해 카드형 체크리스트를 바로 확인할 수 있습니다. 웹 시뮬레이터는 별도 네트워크 조회 없이 `query_mice_safety_applicability`와 동일한 오프라인 온톨로지를 사용합니다.
+
+API로도 호출할 수 있습니다.
+
+```bash
+curl -sS http://127.0.0.1:4317/api/options
+curl -sS -X POST http://127.0.0.1:4317/api/simulate \
+  -H 'content-type: application/json' \
+  --data '{"eventName":"고양 야외 푸드 페스티벌","eventTypes":["festival","outdoor_event","food_event"],"jurisdiction":"경기도 고양시","expectedCrowd":8000,"outdoorEvent":true,"roadUse":true,"foodService":true,"lpgUse":true,"temporaryStructures":true,"temporaryElectricity":true,"setupTeardown":true}'
+```
 
 MCP 서버:
 
