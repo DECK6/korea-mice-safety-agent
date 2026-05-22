@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-22T01:15:36.106Z",
+  "generatedAt": "2026-05-22T01:33:33.478Z",
   "input": {
     "eventName": "KOBA 2026 제34회 국제 방송·미디어·음향·조명 전시회",
     "eventDate": "2026-05-12",
@@ -119,7 +119,7 @@
       "finalCheckpoint": "2026-05-12 운영 중 재점검",
       "responsible": "시설·방재 담당",
       "accountable": "안전총괄",
-      "requiredEvidence": "소방·피난 점검표/위험물 반입 승인/개장 전 사진",
+      "requiredEvidence": "베뉴 제출 승인서/부스·전기 신청서/반입·하역 승인/현장 확인 사진",
       "status": "open"
     },
     {

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-05-22T01:15:36.519Z",
+  "generatedAt": "2026-05-22T01:33:33.892Z",
   "input": {
     "eventName": "2026 한강 드론 라이트 쇼 어린이날 특별공연",
     "eventDate": "2026-05-05",
@@ -86,7 +86,7 @@
   "reviewVerdict": "usable",
   "reviewScore": 100,
   "reviewFindingCount": 0,
-  "submissionScheduleCount": 7,
+  "submissionScheduleCount": 6,
   "submissionPackageCount": 4,
   "executiveReportPath": "outputs/may-2026-real-events/details/03-hangang-drone-light-show-2026/00-executive-report.md",
   "submissionSchedule": [
@@ -101,9 +101,9 @@
       "recommendedDueLabel": "T-7 담당기관 확인",
       "recommendedDueDate": "2026-04-28",
       "finalCheckpoint": "2026-05-04 최종 확인",
-      "responsible": "작업책임자",
+      "responsible": "공연안전 담당",
       "accountable": "안전총괄",
-      "requiredEvidence": "작업계획서/교육명단/PPE 지급/작업허가·작업중지 기준",
+      "requiredEvidence": "공연 재해대처계획/안전교육 명단/무대·리깅 승인/공연중지 기준",
       "status": "open"
     },
     {
@@ -123,22 +123,6 @@
     },
     {
       "no": "3",
-      "audience": "옥외광고 담당부서/베뉴",
-      "document": "현수막·배너·안내판·전기 광고물 허가/신고",
-      "packageIds": [
-        "local_government",
-        "venue"
-      ],
-      "recommendedDueLabel": "T-7 설치·작업 전 승인",
-      "recommendedDueDate": "2026-04-28",
-      "finalCheckpoint": "2026-05-04 개장 전 현장 확인",
-      "responsible": "시설·방재 담당",
-      "accountable": "안전총괄",
-      "requiredEvidence": "광고물 허가·신고필증/베뉴 설치 승인/설치 사진",
-      "status": "open"
-    },
-    {
-      "no": "4",
       "audience": "관할 건축부서/베뉴 시설팀",
       "document": "가설건축물 축조신고서, 피난안전 확인서, 임시사용승인 확인",
       "packageIds": [
@@ -155,7 +139,7 @@
       "status": "open"
     },
     {
-      "no": "5",
+      "no": "4",
       "audience": "소방서/베뉴 방재실/안전총괄",
       "document": "소방·피난 점검표, 화기·위험물 반입 승인, 임시소방시설 확인",
       "packageIds": [
@@ -172,7 +156,7 @@
       "status": "open"
     },
     {
-      "no": "6",
+      "no": "5",
       "audience": "의료담당/AED 관리책임자/119·이송병원",
       "document": "응급의료·AED·구급 이송 계획, AED 점검·교육·관리서류",
       "packageIds": [
@@ -187,7 +171,7 @@
       "status": "open"
     },
     {
-      "no": "7",
+      "no": "6",
       "audience": "시공/하역/전기 협력사/안전총괄",
       "document": "설치·철거 작업자 안전계획서, 작업계획서, 교육명단, PPE·작업중지 기준",
       "packageIds": [
