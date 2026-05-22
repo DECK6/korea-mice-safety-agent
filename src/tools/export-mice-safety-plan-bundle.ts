@@ -157,6 +157,15 @@ function csvEscape(value: string): string {
   return `"${value.replace(/"/g, '""')}"`;
 }
 
+function htmlEscape(value: unknown): string {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function bulletsToCsv(markdown: string, title: string): string {
   const rows = markdown
     .split(/\r?\n/)
@@ -643,6 +652,313 @@ function buildExecutiveReport(options: {
     "- 예상 인원, 세부 도면, 실제 교통통제 여부, 무대/부스 배치, 식음료·LPG 유무, 개인정보 수집 방식은 주최 측 최신 운영계획으로 대체해야 한다.",
     "- 이 보고서는 안전관리 실무 초안이며 법률 자문이나 관할기관 승인을 대체하지 않는다.",
   ].join("\n");
+}
+
+function decisionTone(value: string): string {
+  if (/비적용/.test(value)) return "tone-muted";
+  if (/조건부|확인/.test(value)) return "tone-warning";
+  if (/필수|적용/.test(value)) return "tone-good";
+  return "tone-muted";
+}
+
+function riskTone(value: string): string {
+  if (/critical|high|긴급|높|상|심각/i.test(value)) return "tone-danger";
+  if (/medium|보통|중|확인/i.test(value)) return "tone-warning";
+  return "tone-muted";
+}
+
+function renderHtmlChips(items: string[]): string {
+  if (items.length === 0) return `<span class="chip tone-muted">특이 조건 미입력</span>`;
+  return items.map((item) => `<span class="chip">${htmlEscape(item)}</span>`).join("\n");
+}
+
+function renderHtmlTable(headers: string[], rows: string[][]): string {
+  if (rows.length === 0) return `<p class="muted">표시할 항목이 없습니다.</p>`;
+  return [
+    `<div class="table-wrap">`,
+    `<table>`,
+    `<thead><tr>${headers.map((header) => `<th>${htmlEscape(header)}</th>`).join("")}</tr></thead>`,
+    `<tbody>`,
+    ...rows.map((row) => `<tr>${row.map((cell) => `<td>${htmlEscape(cell || "확인 필요")}</td>`).join("")}</tr>`),
+    `</tbody>`,
+    `</table>`,
+    `</div>`,
+  ].join("\n");
+}
+
+function renderRiskCards(rows: string[][]): string {
+  return rows.map((row) => [
+    `<article class="mini-card risk-card ${riskTone(row[1] ?? "")}">`,
+    `<div class="card-topline"><strong>${htmlEscape(row[0])}</strong><span class="pill">${htmlEscape(row[1] || "확인")}</span></div>`,
+    `<p>${htmlEscape(row[2] || "현장 통제대책 지정 필요")}</p>`,
+    `<small>증빙: ${htmlEscape(row[3] || "점검표, 사진, 담당자 확인 기록")}</small>`,
+    `</article>`,
+  ].join("\n")).join("\n");
+}
+
+function renderDecisionCards(rows: string[][]): string {
+  return rows.map((row) => [
+    `<article class="mini-card decision-card ${decisionTone(row[1] ?? "")}">`,
+    `<div class="card-topline"><strong>${htmlEscape(row[0])}</strong><span class="pill">${htmlEscape(row[1] || "확인")}</span></div>`,
+    `<p>${htmlEscape(row[2] || "판단 근거 확인 필요")}</p>`,
+    `</article>`,
+  ].join("\n")).join("\n");
+}
+
+function buildExecutiveHtmlReport(options: {
+  input: AnyRecord;
+  structured: AnyRecord;
+  review: AnyRecord;
+  submissionSchedule: SubmissionScheduleItem[];
+  submissionPackages: SubmissionPackage[];
+}): string {
+  const { input, structured, review, submissionSchedule, submissionPackages } = options;
+  const applicability = (structured.applicability ?? {}) as AnyRecord;
+  const hazards = recordArray(applicability.hazards);
+  const venueRules = recordArray(applicability.venueRules);
+  const localOrdinances = recordArray(applicability.localOrdinances);
+  const primaryLocalOrdinances = primaryLocalOrdinancesForBrief(localOrdinances, input);
+  const decisionRows = buildDecisionRows(input);
+  const conditionalRows = buildConditionalRows(input);
+  const riskRows = buildRiskRows(input, hazards);
+  const selectedActions = selectExecutiveActions(submissionSchedule);
+  const urgentActionRows = actionRowsFromSchedule(selectedActions);
+  const sourceConfidence = localOrdinances
+    .map((item) => String(item.sourceConfidence ?? ""))
+    .filter(Boolean);
+  const sourceConfidenceLabels = Array.from(new Set(sourceConfidence.map(confidenceLabel)));
+  const reviewCounts = review.counts as AnyRecord | undefined;
+  const reviewFindingCount = Number(reviewCounts?.total ?? 0);
+  const reviewStatus = review.verdict === "needs_revision"
+    ? "수정 필요"
+    : review.verdict === "usable_with_review"
+      ? "조건부 검토 가능"
+      : review.verdict === "usable"
+        ? "초안 검토 가능"
+        : "미검수";
+  const venueAndOrdinancePoints = [
+    ...venueRules.slice(0, 4).map((item) => `베뉴: ${String(item.summary ?? item.id ?? "규정 확인")}`),
+    ...primaryLocalOrdinances.slice(0, 6).map((item) => `조례: ${localOrdinanceLabel(item)} / ${String(item.submissionDeadline ?? "제출기한 확인 필요")}`),
+  ];
+  const quickFiles = [
+    ["bundle/documents/01-event-safety-plan.md", "행사 안전관리계획서"],
+    ["bundle/documents/02-crowd-flow-plan.md", "인파·동선 운영계획"],
+    ["bundle/documents/18-submission-raci-calendar.md", "제출 일정·담당·증빙 매트릭스"],
+    ["bundle/documents/16-operations-runsheet.md", "당일 운영 런시트"],
+    ["bundle/documents/17-review-summary.md", "자동 검수 결과"],
+    ["bundle/submission-packages/", "대상별 제출 패키지"],
+  ];
+
+  return `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${htmlEscape(input.eventName ?? "행사명 미정")} 핵심 안전 브리프</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fb;
+      --paper: #ffffff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d9e0ea;
+      --blue: #315fc7;
+      --blue-soft: #eaf1ff;
+      --green: #157a4f;
+      --green-soft: #eaf8f1;
+      --yellow: #98690a;
+      --yellow-soft: #fff5d6;
+      --red: #c23a3a;
+      --red-soft: #fff0ee;
+      --shadow: 0 18px 50px rgba(39, 51, 82, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      line-height: 1.58;
+      letter-spacing: 0;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page { max-width: 1180px; margin: 0 auto; padding: 32px 24px 56px; }
+    .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; }
+    .badge, .button-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      color: #334155;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .badge.primary { color: var(--blue); border-color: #b9c9f5; background: var(--blue-soft); }
+    .button-link { cursor: pointer; margin-left: auto; }
+    .hero, .card, .mini-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .hero { padding: 30px; margin-bottom: 18px; }
+    h1 { margin: 0 0 10px; font-size: clamp(30px, 5vw, 52px); line-height: 1.08; }
+    h2 { margin: 0 0 16px; font-size: 22px; line-height: 1.22; }
+    h3 { margin: 0 0 8px; font-size: 16px; }
+    p { margin: 0 0 10px; }
+    .lead { color: var(--muted); font-size: 18px; max-width: 900px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .chip, .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #334155;
+      padding: 5px 9px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pill { font-size: 12px; padding: 4px 8px; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 18px 0; }
+    .stat { padding: 18px; }
+    .stat strong { display: block; font-size: 27px; line-height: 1.15; color: var(--blue); }
+    .stat span { color: var(--muted); font-size: 13px; font-weight: 700; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .card { padding: 22px; margin-bottom: 16px; }
+    .mini-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .mini-card { padding: 16px; box-shadow: none; }
+    .card-topline { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+    .mini-card p { color: #334155; margin-bottom: 8px; }
+    .mini-card small { color: var(--muted); display: block; }
+    .tone-good { border-color: #93d5b7; background: var(--green-soft); }
+    .tone-good .pill, .tone-good strong { color: var(--green); }
+    .tone-warning { border-color: #ead28a; background: var(--yellow-soft); }
+    .tone-warning .pill, .tone-warning strong { color: var(--yellow); }
+    .tone-danger { border-color: #f1a5a5; background: var(--red-soft); }
+    .tone-danger .pill, .tone-danger strong { color: var(--red); }
+    .tone-muted { border-color: var(--line); background: #f8fafc; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { padding: 12px 13px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: #f8fafc; color: #475569; font-size: 13px; }
+    tr:last-child td { border-bottom: 0; }
+    ul { margin: 0; padding-left: 20px; }
+    li + li { margin-top: 7px; }
+    .file-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .file-list a { display: block; border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: #fbfdff; font-weight: 700; }
+    .muted { color: var(--muted); }
+    .notice { border-left: 4px solid var(--yellow); background: #fffaf0; padding: 14px 16px; border-radius: 8px; color: #56410c; }
+    @media (max-width: 820px) {
+      .page { padding: 22px 14px 40px; }
+      .hero { padding: 22px; }
+      .stats, .grid, .mini-grid, .file-list { grid-template-columns: 1fr; }
+      .button-link { margin-left: 0; }
+    }
+    @media print {
+      body { background: #fff; }
+      .page { max-width: none; padding: 0; }
+      .toolbar, .button-link { display: none; }
+      .hero, .card, .mini-card { box-shadow: none; break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="toolbar">
+      <span class="badge primary">korea-mice-safety-agent v${htmlEscape(VERSION)}</span>
+      <span class="badge">export_mice_safety_plan_bundle</span>
+      <a class="badge" href="00-executive-report.md">Markdown 보기</a>
+      <button class="button-link" type="button" onclick="window.print()">인쇄</button>
+    </div>
+
+    <section class="hero">
+      <h1>${htmlEscape(input.eventName ?? "행사명 미정")} 핵심 안전 브리프</h1>
+      <p class="lead">법령 조항 원문과 체크리스트는 뒤 파일에 두고, 여기서는 현장 의사결정·제출 액션·남은 확인사항만 먼저 보여줍니다.</p>
+      <div class="chips">${renderHtmlChips(inputFlagSummary(input))}</div>
+    </section>
+
+    <section class="stats">
+      <div class="card stat"><strong>${htmlEscape(reviewStatus)}</strong><span>초안 상태</span></div>
+      <div class="card stat"><strong>${htmlEscape(reviewFindingCount)}</strong><span>커버리지 finding</span></div>
+      <div class="card stat"><strong>${htmlEscape(formatCrowd(input.expectedCrowd))}</strong><span>예상 인원</span></div>
+      <div class="card stat"><strong>${htmlEscape(hazards.length)}</strong><span>도출 위험요인</span></div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>결론</h2>
+        <ul>
+          <li>행사일/장소: ${htmlEscape(eventDateLabelForBrief(input))} / ${htmlEscape(input.location ?? "미입력")}</li>
+          <li>관할/베뉴: ${htmlEscape(input.jurisdiction ?? "미입력")} / ${htmlEscape(input.venueId ?? "베뉴 미지정")}</li>
+          <li>자동 검수는 법적 적합성 점수가 아니라 입력 조건 대비 커버리지 점검입니다.</li>
+          <li>최종 제출 전 최신 원문, 행사 도면, 관할기관 답변으로 보정해야 합니다.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>먼저 결정할 것</h2>
+        <ul>
+          <li>관할기관 제출 대상과 제출기한을 실제 접수창구 기준으로 확정</li>
+          <li>피크 시간대, 병목 구역, 퇴장 동선, 비상차량 접근로를 한 장 도면으로 확정</li>
+          <li>안전총괄, 구역장, 의료, 시설·전기, 보안, 교통 담당 권한 확정</li>
+          <li>행사 중지, 입장 제한, 우회 안내, 대피개시 기준 사전 승인</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>핵심 위험 우선순위</h2>
+      <div class="mini-grid">${renderRiskCards(riskRows)}</div>
+    </section>
+
+    <section class="card">
+      <h2>적용/비적용 판단</h2>
+      <div class="mini-grid">${renderDecisionCards(decisionRows)}</div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>조건부 확인 항목</h2>
+        ${renderHtmlTable(["항목", "전환 기준", "확인할 증빙"], conditionalRows.length > 0 ? conditionalRows : [["조건부 항목 없음", "현재 입력 조건 기준 추가 전환 후보 없음", "-"]])}
+      </div>
+      <div class="card">
+        <h2>베뉴·조례 확인 포인트</h2>
+        <ul>${(venueAndOrdinancePoints.length > 0 ? venueAndOrdinancePoints.slice(0, 8) : ["베뉴 또는 조례 후보 없음. 관할/베뉴 입력을 보강해야 함"]).map((item) => `<li>${htmlEscape(item)}</li>`).join("")}</ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>제출·협의 우선 액션</h2>
+      ${renderHtmlTable(["확인처", "해야 할 일", "적용 트리거", "기한", "보관 증빙"], urgentActionRows)}
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>바로 열어볼 파일</h2>
+        <ul class="file-list">${quickFiles.map(([href, label]) => `<li><a href="${htmlEscape(href)}">${htmlEscape(label)}</a></li>`).join("")}</ul>
+      </div>
+      <div class="card">
+        <h2>대상별 제출 패키지</h2>
+        <ul class="file-list">${submissionPackages.map((item) => `<li><a href="bundle/submission-packages/${htmlEscape(item.fileName)}">${htmlEscape(item.title)}<br><span class="muted">${htmlEscape(item.audience)} · ${htmlEscape(item.redactionLevel)}</span></a></li>`).join("")}</ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>신뢰도와 남은 리스크</h2>
+      <p>조례 출처 신뢰도: ${htmlEscape(sourceConfidenceLabels.slice(0, 5).join(", ") || "미표시")}</p>
+      <p>베뉴 규정 수: ${htmlEscape(venueRules.length)}건 / 우선 조례 후보 수: ${htmlEscape(primaryLocalOrdinances.length)}건 / 전체 조례 후보 수: ${htmlEscape(localOrdinances.length)}건 / 커버리지 점수: ${htmlEscape(review.score ?? "미산정")}점</p>
+      <div class="notice">이 보고서는 안전관리 실무 초안입니다. 법률 자문이나 관할기관 승인을 대체하지 않으며, 실제 배치도·운영계획·관할기관 답변으로 최종 보정해야 합니다.</div>
+    </section>
+  </main>
+</body>
+</html>`;
 }
 
 function addRowsSheet(sheets: XlsxSheet[], name: string, rows: Array<Record<string, string>>): void {
@@ -1271,9 +1587,19 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     submissionSchedule,
     submissionPackages,
   });
+  const executiveHtmlReport = buildExecutiveHtmlReport({
+    input: input as AnyRecord,
+    structured: structured as AnyRecord,
+    review,
+    submissionSchedule,
+    submissionPackages,
+  });
   const executiveReportPath = join(bundleDir, "00-executive-report.md");
   writeFileSync(executiveReportPath, `${executiveReport}\n`);
   files.push(executiveReportPath);
+  const executiveHtmlReportPath = join(bundleDir, "00-executive-report.html");
+  writeFileSync(executiveHtmlReportPath, `${executiveHtmlReport}\n`);
+  files.push(executiveHtmlReportPath);
 
   const fullPlanPath = join(documentsDir, "00-full-safety-plan.md");
   writeFileSync(fullPlanPath, `${planMarkdown}\n`);
@@ -1455,6 +1781,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     submissionScheduleCount: submissionSchedule.length,
     submissionPackageCount: submissionPackages.length,
     executiveReportPath,
+    executiveHtmlReportPath,
     submissionSchedule: submissionSchedule.map((item) => ({
       no: item.no,
       audience: item.audience,
@@ -1506,6 +1833,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
         documentCoverageMatrix: review.documentCoverageMatrix,
       },
       executiveReportPath,
+      executiveHtmlReportPath,
       submissionSchedule,
       submissionPackages: submissionPackages.map((item) => ({
         id: item.id,
