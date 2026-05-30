@@ -11,11 +11,14 @@ const inputSchema = z.object({
   capturedAt: z.string().optional(),
   ttlMinutes: z.number().int().min(1).max(24 * 60).optional().default(30),
   useFixtures: z.boolean().optional().default(false),
+  live: z.boolean().optional().default(true),
+  seoulAreaName: z.string().optional().describe("서울 실시간 도시데이터 장소명. 예: 강남역, 여의도한강공원"),
+  airStationName: z.string().optional().describe("에어코리아 측정소명. 예: 종로구"),
 });
 
-function handler(rawInput: unknown): McpToolResult {
+async function handler(rawInput: unknown): Promise<McpToolResult> {
   const input = inputSchema.parse(rawInput ?? {});
-  const snapshot = generateEventDaySnapshot(input);
+  const snapshot = await generateEventDaySnapshot(input);
   const text = [
     "# MICE event-day snapshot",
     `- capturedAt: ${snapshot.capturedAt}`,
@@ -23,7 +26,7 @@ function handler(rawInput: unknown): McpToolResult {
     `- isStale: ${snapshot.isStale}`,
     `- location: ${snapshot.location.jurisdiction ?? snapshot.location.venueId ?? "미입력"}`,
     "",
-    ...snapshot.sources.map((source) => `- ${source.sourceId}: ${source.status}${source.warnings.length ? ` / ${source.warnings.join("; ")}` : ""}`),
+    ...snapshot.sources.map((source) => `- ${source.sourceId}: ${source.status}, records=${source.records?.length ?? 0}${source.warnings.length ? ` / ${source.warnings.join("; ")}` : ""}`),
   ].join("\n");
 
   return {
@@ -36,7 +39,7 @@ export const generateMiceEventDaySnapshotTool: ToolDefinition = {
   name: "generate_mice_event_day_snapshot",
   title: "MICE 행사 당일 snapshot 생성",
   description:
-    "서울 실시간 도시데이터, 에어코리아, ITS, 재난문자 등 P1 source의 snapshot 상태를 생성합니다. missing/pending key는 구조화된 fallback으로 반환합니다.",
+    "서울 실시간 도시데이터, 에어코리아, ITS, 재난문자 등 P1 source의 snapshot을 생성합니다. live=true이면 준비된 API를 실제 호출하고 missing/pending key는 구조화된 fallback으로 반환합니다.",
   inputSchema,
   handler,
 };

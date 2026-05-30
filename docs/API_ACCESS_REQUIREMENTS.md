@@ -197,16 +197,32 @@ available-key-first P0/P1/P2 경로는 다음 MCP/CLI 도구로 확인한다.
 
 ```bash
 node build/cli.js call query_mice_api_access_status --inputJson '{}'
-node build/cli.js call collect_mice_p0_ready_sources --inputJson '{"dryRun":true,"includeFixtures":true}'
-node build/cli.js call generate_mice_event_day_snapshot --inputJson '{"jurisdiction":"서울특별시 서초구"}'
-node build/cli.js call query_mice_live_operations_status --inputJson '{"jurisdiction":"서울특별시 서초구"}'
+node build/cli.js call collect_mice_p0_ready_sources --inputJson '{"liveProbe":true,"limit":3,"startDate":"20260501","endDate":"20260531"}'
+node build/cli.js call generate_mice_event_day_snapshot --inputJson '{"jurisdiction":"서울특별시 강남구","seoulAreaName":"강남역","airStationName":"종로구","live":true}'
+node build/cli.js call query_mice_live_operations_status --inputJson '{"jurisdiction":"서울특별시 강남구","seoulAreaName":"강남역","airStationName":"종로구","nx":61,"ny":125,"live":true}'
 ```
 
 - `query_mice_api_access_status`는 키 값 없이 configured/missing/pending/externally_available/no_key_required 상태만 반환한다.
-- `collect_mice_p0_ready_sources`는 기본적으로 dry-run이며 파일을 쓰거나 live API를 호출하지 않는다.
-- `generate_mice_event_day_snapshot`은 P1 snapshot 형식과 missing/pending key fallback을 검증한다.
-- `query_mice_live_operations_status`는 P2 데이터를 `operationalEvidence` 아래에만 반환한다.
-- 테스트는 `npm test`로 실행하며 live API를 호출하지 않는다.
+- `collect_mice_p0_ready_sources`는 기본적으로 dry-run이지만, `liveProbe:true`이면 KCISA KOPIS 공연시설, KOPIS 공연목록, TourAPI 축제/행사, NEMC 응급의료기관/AED, 식품안전나라 회수·판매중지 API를 소량 호출해 실제 응답과 정규화 결과를 검증한다. 파일은 쓰지 않고 키 값도 출력하지 않는다.
+- `generate_mice_event_day_snapshot`은 `live:true`에서 서울 실시간 도시데이터와 에어코리아를 실제 호출해 snapshot record와 관측 요약을 반환한다. ITS/재난문자는 키 발급 전까지 `pending_key` fallback이다.
+- `query_mice_live_operations_status`는 `live:true`에서 기상청 API Hub 초단기실황, 서울 실시간 도시데이터, 에어코리아를 실제 호출하고, P2 데이터는 법령 근거가 아닌 `operationalEvidence` 아래에만 반환한다.
+- 테스트는 `npm test`로 실행하며 mock 응답을 사용한다. 실제 API smoke 검증은 위 CLI 명령으로 수행한다.
+
+### 2026-05-30 live smoke 결과
+
+키 값을 출력하지 않는 요약 기준으로 다음을 확인했다.
+
+| Source | 결과 | 목적 적합성 |
+| --- | --- | --- |
+| `KCISA_KOPIS_PERFORMANCE_FACILITY` | `live_verified`, totalCount 2,111 | 공연시설 관할·주소 보강 |
+| `KOPIS_PERFORMANCE_CATALOG` | `live_verified`, 2026년 5월 공연 샘플 반환 | 공연 포함 행사 판단 보강 |
+| `TOUR_API_EVENT_CATALOG` | `live_verified`, 2026년 5월 축제/행사 totalCount 153 | 실존 축제·행사 샘플과 관할 보강 |
+| `NEMC_EMERGENCY_MEDICAL` | `live_verified`, 서울 강남구 응급의료기관 샘플 반환 | 응급의료·이송 후보 보강 |
+| `NEMC_AED` | `live_verified`, 코엑스 주변 AED 샘플 반환 | AED 배치·현장 의료 계획 보강 |
+| `FOOD_SAFETY_KOREA` | `live_verified`, 회수·판매중지 `I0490` 샘플 반환 | 식음료 행사 위험 보강 |
+| `SEOUL_REALTIME_CITY_DATA` | `configured`, live record 1건 | 서울권 인파/혼잡도 운영 판단 |
+| `AIRKOREA_AIR_QUALITY` | `configured`, live record 1건 | 야외 대기열·취약자 보호 판단 |
+| `KMA_APIHUB_WEATHER` | `configured`, live 초단기실황 record 1건 | 기상 악화에 따른 행사중지/작업중지 판단 |
 
 ## 공식 확인 근거
 
