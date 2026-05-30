@@ -135,9 +135,9 @@ npm run diff:ontology
 
 - `query_mice_safety_applicability`: 행사 유형/특징/베뉴 기반 적용성 조회
 - `query_mice_api_access_status`: P0/P1/P2 개발에 필요한 API 키 상태를 키 값 없이 configured/missing/pending/externally_available/no_key_required로 조회
-- `collect_mice_p0_ready_sources`: available-key-first P0 source의 오프라인 pack 준비 상태와 dry-run collector action 조회
-- `generate_mice_event_day_snapshot`: P1 행사 당일 snapshot 형식으로 서울 실시간 도시데이터, 에어코리아, ITS, 재난문자 source 상태와 freshness metadata 조회
-- `query_mice_live_operations_status`: P2 live adapter 상태를 법령 근거가 아닌 `operationalEvidence`로 조회
+- `collect_mice_p0_ready_sources`: available-key-first P0 source의 오프라인 pack 준비 상태 조회. `liveProbe:true`이면 KCISA/KOPIS/TourAPI/NEMC/FoodSafety를 소량 실제 호출해 정규화 결과를 검증
+- `generate_mice_event_day_snapshot`: P1 행사 당일 snapshot. `live:true`이면 서울 실시간 도시데이터와 에어코리아를 실제 호출하고, ITS/재난문자는 pending fallback으로 처리
+- `query_mice_live_operations_status`: P2 live adapter. `live:true`이면 기상청 API Hub 초단기실황, 서울 실시간 도시데이터, 에어코리아를 실제 호출해 법령 근거가 아닌 `operationalEvidence`로 반환
 - `generate_mice_safety_plan`: 오프라인 온톨로지 기반 안전관리계획서, 도로·교통 실행계획, 무주최 다중운집 관계기관 공동대응계획, 현장 운영 런시트, 제출·협의 체크리스트, 다국어 방문객 안내 초안 생성
 - `export_mice_safety_plan_bundle`: 생성 계획서를 Markdown/CSV/docx/xlsx 파일 묶음으로 저장. 도로·교통 실행계획, 무주최 다중운집 대응계획, 공연·무대 실행 상태표 CSV, 식음료/LPG 실행 상태표 CSV, 현장 운영 런시트, 제출·협의 체크리스트, 제출 일정·RACI·증빙 매트릭스, 다국어 방문객 안전 안내문, 자체 검수 요약, 공유범위 필터가 적용된 관할기관별 제출 패키지를 포함
 - `review_mice_safety_plan`: 생성 계획서의 법령/조례/베뉴/작업자 안전/도로·교통/무주최 다중운집/공연·무대/식음료·LPG 현장 실행 기준 누락, 과잉 적용 후보, 문서 커버리지 매트릭스 검수
