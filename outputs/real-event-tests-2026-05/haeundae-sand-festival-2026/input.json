@@ -1,0 +1,29 @@
+{
+  "sourceNote": "2026 해운대 모래축제: 2026.05.15-05.18, 해운대해수욕장/해운대광장 구남로 일원, 세계모래조각전·체험·공연",
+  "eventName": "2026 해운대 모래축제",
+  "eventDate": "2026-05-15",
+  "location": "해운대해수욕장 및 해운대광장 구남로 일원, 부산광역시 해운대구",
+  "organizer": "해운대구 / 해운대문화원",
+  "eventTypes": [
+    "festival",
+    "outdoor_event",
+    "performance"
+  ],
+  "jurisdiction": "부산광역시 해운대구",
+  "expectedCrowd": 200000,
+  "outdoor": true,
+  "outdoorEvent": true,
+  "performance": true,
+  "temporaryStructures": true,
+  "temporaryElectricity": true,
+  "setupTeardown": true,
+  "workAtHeight": true,
+  "heavyObjectHandling": true,
+  "foodService": false,
+  "lpgUse": false,
+  "outdoorAdvertising": true,
+  "roadUse": false,
+  "personalDataProcessing": false,
+  "vipSecurity": false,
+  "output": "markdown"
+}

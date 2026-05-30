@@ -1,0 +1,26 @@
+{
+  "slug": "haeundae-sand-festival-2026",
+  "eventName": "2026 해운대 모래축제",
+  "eventDate": "2026-05-15",
+  "jurisdiction": "부산광역시 해운대구",
+  "venueId": null,
+  "expectedCrowd": 200000,
+  "sourceNote": "2026 해운대 모래축제: 2026.05.15-05.18, 해운대해수욕장/해운대광장 구남로 일원, 세계모래조각전·체험·공연",
+  "reviewVerdict": "확인 필요",
+  "findings": {
+    "errors": 0,
+    "warnings": 0,
+    "overAppliedMentioned": true
+  },
+  "counts": {
+    "laws": 26,
+    "localOrdinances": 4,
+    "submittedDocuments": 11,
+    "hazards": 9
+  },
+  "outputFiles": [
+    "haeundae-sand-festival-2026/input.json",
+    "haeundae-sand-festival-2026/plan.md",
+    "haeundae-sand-festival-2026/review.md"
+  ]
+}

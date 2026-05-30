@@ -4,6 +4,7 @@ import type { McpToolResult, ToolDefinition } from "../lib/types.js";
 import {
   findDuties,
   findHazards,
+  findPerformanceVenue,
   findLaws,
   findLocalOrdinances,
   findSources,
@@ -113,6 +114,41 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   const matchedEvents = MICE_DATA.applicability.eventTypes.filter((event) => requestedEventTypes.includes(event.id));
   const matchedFeatureRules = MICE_DATA.applicability.featureRules.filter((rule) => isFeatureMatched(rule, input));
   const venue = input.venueId ? MICE_DATA.venues.find((item) => item.id === input.venueId) : undefined;
+  const performanceVenue = input.venueId ? findPerformanceVenue(input.venueId) : undefined;
+  const resolvedJurisdiction = input.jurisdiction ?? performanceVenue?.jurisdiction;
+  const resolvedVenue = venue
+    ? {
+      id: venue.id,
+      name: venue.name,
+      region: venue.region,
+      website: venue.website,
+      facilityFacts: venue.facilityFacts ?? [],
+      safetyProfile: venue.safetyProfile ?? null,
+      source: "venue_safety_rules",
+    }
+    : performanceVenue
+      ? {
+        id: performanceVenue.venueId,
+        name: performanceVenue.name,
+        region: performanceVenue.jurisdiction || performanceVenue.sido,
+        website: performanceVenue.sourceUrl,
+        address: performanceVenue.address,
+        jurisdiction: performanceVenue.jurisdiction,
+        category: performanceVenue.category,
+        contact: performanceVenue.contact,
+        facilityFacts: [
+          performanceVenue.address ? `주소: ${performanceVenue.address}` : undefined,
+          performanceVenue.category ? `KOPIS 시설 분류: ${performanceVenue.category}` : undefined,
+          performanceVenue.contact ? `대표 연락처: ${performanceVenue.contact}` : undefined,
+        ].filter((item): item is string => Boolean(item)),
+        safetyProfile: {
+          offlineCoverage: ["KOPIS 공연시설명·주소·관할·분류·연락처"],
+          gaps: ["수용인원, 피난·소방 도면, 대관/반입/작업 안전 규정은 해당 시설 원문으로 별도 확인 필요"],
+          lastReviewedAt: "KOPIS offline directory",
+        },
+        source: "kopis_performance_facility",
+      }
+      : null;
 
   const commonLaws = findLaws(MICE_DATA.applicability.commonLawIds);
   const conditionalLawIds = [
@@ -134,7 +170,8 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     ...sourceIdsFromItems(duties),
     ...sourceIdsFromItems(hazards),
     ...(venue?.sourceRefs ?? []),
-    ...(input.jurisdiction || requestedEventTypes.includes("festival") ? ["LOCAL_ORDINANCE_PACK_2026"] : []),
+    ...(performanceVenue ? ["KCISA_KOPIS_PERFORMANCE_FACILITY"] : []),
+    ...(resolvedJurisdiction || requestedEventTypes.includes("festival") ? ["LOCAL_ORDINANCE_PACK_2026"] : []),
   ]));
   const sources = findSources(sourceIds);
   const venueRules = venue?.rules ?? [];
@@ -143,7 +180,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     ...hazards.flatMap((hazard) => findWorkerSafetyReferences({ hazardId: hazard.id })),
   ]);
   const localOrdinances = findLocalOrdinances({
-    jurisdiction: input.jurisdiction,
+    jurisdiction: resolvedJurisdiction,
     venueId: input.venueId,
     eventType: requestedEventTypes.includes("festival") ? "festival" : requestedEventTypes[0],
     eventTypes: requestedEventTypes,
@@ -168,18 +205,10 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   const structuredContent = {
     version: MICE_DATA.applicability.version,
     input,
+    resolvedJurisdiction,
     matchedEventTypes: matchedEvents.map((event) => ({ id: event.id, label: event.label, conditions: event.conditions })),
     matchedFeatureRules: matchedFeatureRules.map((rule) => ({ id: rule.id, label: rule.label })),
-    venue: venue
-      ? {
-        id: venue.id,
-        name: venue.name,
-        region: venue.region,
-        website: venue.website,
-        facilityFacts: venue.facilityFacts ?? [],
-        safetyProfile: venue.safetyProfile ?? null,
-      }
-      : null,
+    venue: resolvedVenue,
     laws,
     duties,
     hazards,
@@ -200,8 +229,8 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
       ? matchedEvents.map((event) => `- ${event.label} (${event.id})`).join("\n")
       : "- 특정 유형 없음. 공통 법령 후보만 반환",
     matchedFeatureRules.length > 0 ? matchedFeatureRules.map((rule) => `- ${rule.label} (${rule.id})`).join("\n") : "",
-    venue ? `- 베뉴: ${venue.name} (${venue.id})` : "",
-    venue?.facilityFacts?.length ? venue.facilityFacts.map((fact) => `- 베뉴 시설: ${fact}`).join("\n") : "",
+    resolvedVenue ? `- 베뉴: ${resolvedVenue.name} (${resolvedVenue.id})` : "",
+    resolvedVenue?.facilityFacts?.length ? resolvedVenue.facilityFacts.map((fact) => `- 베뉴 시설: ${fact}`).join("\n") : "",
     "",
     "## 법령 후보",
     ...laws.map(formatLaw),

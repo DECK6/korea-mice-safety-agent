@@ -6,6 +6,7 @@ import hazardControls from "../ontology/mice/hazard-controls.json" with { type: 
 import legalArticleOntology from "../ontology/mice/legal-article-ontology.json" with { type: "json" };
 import legalAnnexOntology from "../ontology/mice/legal-annex-ontology.json" with { type: "json" };
 import venueRules from "../ontology/mice/venue-safety-rules.json" with { type: "json" };
+import kopisVenueDirectory from "../ontology/mice/kopis-venue-directory.json" with { type: "json" };
 import sourceRegistry from "../ontology/mice/source-registry.json" with { type: "json" };
 import workerSafetyReferences from "../ontology/mice/worker-safety-references.json" with { type: "json" };
 import localOrdinancePack from "../ontology/mice/local-ordinance-pack.json" with { type: "json" };
@@ -165,6 +166,27 @@ export interface VenueEntry {
   rules: VenueRule[];
 }
 
+export interface KopisVenueEntry {
+  venueId: string;
+  name: string;
+  sido: string;
+  sigungu: string;
+  jurisdiction: string;
+  address: string;
+  category: string;
+  contact: string;
+  sourceUrl: string;
+}
+
+export interface KopisVenueDirectory {
+  provider: string;
+  sourceUrl: string;
+  resultCode: string;
+  totalCount: number;
+  fetchedCount: number;
+  venues: KopisVenueEntry[];
+}
+
 export interface WorkerSafetyReference {
   id: string;
   kind: "law_article" | "kosha_guide";
@@ -269,6 +291,7 @@ const legalAnnexData = legalAnnexOntology as { version: string; generatedAt: str
 const dutyData = dutyMaster as { version: string; generatedAt: string; duties: DutyEntry[] };
 const hazardData = hazardControls as { version: string; generatedAt: string; hazards: HazardEntry[] };
 const venueData = venueRules as { version: string; generatedAt: string; venues: VenueEntry[] };
+const kopisVenueData = kopisVenueDirectory as KopisVenueDirectory;
 const sourceData = sourceRegistry as { version: string; generatedAt: string; sources: SourceEntry[] };
 const workerSafetyData = workerSafetyReferences as { version: string; generatedAt: string; references: WorkerSafetyReference[] };
 const localOrdinanceData = localOrdinancePack as {
@@ -297,6 +320,7 @@ export const MICE_DATA = {
   duties: dutyData.duties,
   hazards: hazardData.hazards,
   venues: venueData.venues,
+  performanceVenues: kopisVenueData.venues,
   sources: sourceData.sources,
   workerSafetyReferences: workerSafetyData.references,
   localOrdinances: localOrdinanceData,
@@ -373,6 +397,11 @@ export function findSources(ids: string[]): SourceEntry[] {
   return MICE_DATA.sources.filter((source) => idSet.has(source.id));
 }
 
+export function findPerformanceVenue(venueId?: string): KopisVenueEntry | undefined {
+  if (!venueId) return undefined;
+  return MICE_DATA.performanceVenues.find((venue) => venue.venueId === venueId);
+}
+
 export function findWorkerSafetyReferences(filters: {
   dutyId?: string;
   hazardId?: string;
@@ -416,7 +445,13 @@ function uniqueStrings(items: Array<string | undefined>): string[] {
 
 export function jurisdictionHintsForVenue(venueId?: string): string[] {
   if (!venueId) return [];
-  return VENUE_JURISDICTION_HINTS[venueId] ?? [];
+  const fixedHints = VENUE_JURISDICTION_HINTS[venueId] ?? [];
+  const performanceVenue = findPerformanceVenue(venueId);
+  return uniqueStrings([
+    ...fixedHints,
+    performanceVenue?.jurisdiction,
+    performanceVenue?.sido,
+  ]);
 }
 
 function jurisdictionPriority(record: LocalOrdinanceRecord, hints: string[]): { score: number; reasons: string[]; matches: string[] } {

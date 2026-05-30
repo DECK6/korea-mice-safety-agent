@@ -1,0 +1,26 @@
+{
+  "slug": "hangang-drone-light-show-2026-05-16",
+  "eventName": "2026 한강 불빛 공연 드론라이트쇼 4회차",
+  "eventDate": "2026-05-16",
+  "jurisdiction": "서울특별시 광진구",
+  "venueId": null,
+  "expectedCrowd": 50000,
+  "sourceNote": "2026 한강 불빛 공연(드론라이트쇼): 2026.05.16 뚝섬한강공원, 20:30-20:45, 기상 지연/취소 가능",
+  "reviewVerdict": "확인 필요",
+  "findings": {
+    "errors": 0,
+    "warnings": 0,
+    "overAppliedMentioned": true
+  },
+  "counts": {
+    "laws": 26,
+    "localOrdinances": 5,
+    "submittedDocuments": 11,
+    "hazards": 9
+  },
+  "outputFiles": [
+    "hangang-drone-light-show-2026-05-16/input.json",
+    "hangang-drone-light-show-2026-05-16/plan.md",
+    "hangang-drone-light-show-2026-05-16/review.md"
+  ]
+}

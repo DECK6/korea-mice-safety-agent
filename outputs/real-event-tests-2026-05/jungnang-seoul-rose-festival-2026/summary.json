@@ -1,0 +1,26 @@
+{
+  "slug": "jungnang-seoul-rose-festival-2026",
+  "eventName": "제18회 중랑 서울장미축제",
+  "eventDate": "2026-05-15",
+  "jurisdiction": "서울특별시 중랑구",
+  "venueId": null,
+  "expectedCrowd": 300000,
+  "sourceNote": "제18회 중랑 서울장미축제: 2026.05.15-05.23, 중랑천/중랑장미공원 일대, 5.45km 장미터널",
+  "reviewVerdict": "확인 필요",
+  "findings": {
+    "errors": 0,
+    "warnings": 1,
+    "overAppliedMentioned": true
+  },
+  "counts": {
+    "laws": 30,
+    "localOrdinances": 5,
+    "submittedDocuments": 13,
+    "hazards": 11
+  },
+  "outputFiles": [
+    "jungnang-seoul-rose-festival-2026/input.json",
+    "jungnang-seoul-rose-festival-2026/plan.md",
+    "jungnang-seoul-rose-festival-2026/review.md"
+  ]
+}

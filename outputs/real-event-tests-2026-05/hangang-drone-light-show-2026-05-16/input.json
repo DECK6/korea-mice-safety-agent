@@ -1,0 +1,29 @@
+{
+  "sourceNote": "2026 한강 불빛 공연(드론라이트쇼): 2026.05.16 뚝섬한강공원, 20:30-20:45, 기상 지연/취소 가능",
+  "eventName": "2026 한강 불빛 공연 드론라이트쇼 4회차",
+  "eventDate": "2026-05-16",
+  "location": "뚝섬한강공원 일대, 서울특별시 광진구",
+  "organizer": "서울특별시 / 운영주체 확인 필요",
+  "eventTypes": [
+    "festival",
+    "outdoor_event",
+    "performance"
+  ],
+  "jurisdiction": "서울특별시 광진구",
+  "expectedCrowd": 50000,
+  "outdoor": true,
+  "outdoorEvent": true,
+  "performance": true,
+  "temporaryStructures": true,
+  "temporaryElectricity": true,
+  "setupTeardown": true,
+  "workAtHeight": false,
+  "heavyObjectHandling": true,
+  "personalDataProcessing": false,
+  "roadUse": false,
+  "foodService": false,
+  "lpgUse": false,
+  "outdoorAdvertising": true,
+  "vipSecurity": false,
+  "output": "markdown"
+}

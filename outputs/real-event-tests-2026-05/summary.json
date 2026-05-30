@@ -1,0 +1,137 @@
+[
+  {
+    "slug": "coex-seoul-money-show-2026",
+    "eventName": "2026 서울머니쇼",
+    "eventDate": "2026-05-07",
+    "jurisdiction": "서울특별시 강남구",
+    "venueId": "coex",
+    "expectedCrowd": 15000,
+    "sourceNote": "코엑스 행사일정: 2026 서울머니쇼, 2026.05.07-05.09, Hall B",
+    "reviewVerdict": "usable",
+    "findings": {
+      "errors": 0,
+      "warnings": 0,
+      "overAppliedMentioned": true
+    },
+    "counts": {
+      "laws": 23,
+      "localOrdinances": 2,
+      "submittedDocuments": 10,
+      "hazards": 10
+    },
+    "outputFiles": [
+      "coex-seoul-money-show-2026/input.json",
+      "coex-seoul-money-show-2026/plan.md",
+      "coex-seoul-money-show-2026/review.md"
+    ],
+    "reviewScore": "100 (A)"
+  },
+  {
+    "slug": "kintex-playx4-2026",
+    "eventName": "PlayX4 2026",
+    "eventDate": "2026-05-21",
+    "jurisdiction": "경기도 고양시",
+    "venueId": "kintex",
+    "expectedCrowd": 45000,
+    "sourceNote": "PlayX4 2026: 2026.05.21-05.24, KINTEX 제1전시장 3-5홀/3,4,5B",
+    "reviewVerdict": "usable",
+    "findings": {
+      "errors": 0,
+      "warnings": 0,
+      "overAppliedMentioned": true
+    },
+    "counts": {
+      "laws": 23,
+      "localOrdinances": 2,
+      "submittedDocuments": 10,
+      "hazards": 10
+    },
+    "outputFiles": [
+      "kintex-playx4-2026/input.json",
+      "kintex-playx4-2026/plan.md",
+      "kintex-playx4-2026/review.md"
+    ],
+    "reviewScore": "100 (A)"
+  },
+  {
+    "slug": "hangang-drone-light-show-2026-05-16",
+    "eventName": "2026 한강 불빛 공연 드론라이트쇼 4회차",
+    "eventDate": "2026-05-16",
+    "jurisdiction": "서울특별시 광진구",
+    "venueId": null,
+    "expectedCrowd": 50000,
+    "sourceNote": "2026 한강 불빛 공연(드론라이트쇼): 2026.05.16 뚝섬한강공원, 20:30-20:45, 기상 지연/취소 가능",
+    "reviewVerdict": "usable",
+    "findings": {
+      "errors": 0,
+      "warnings": 0,
+      "overAppliedMentioned": true
+    },
+    "counts": {
+      "laws": 26,
+      "localOrdinances": 5,
+      "submittedDocuments": 11,
+      "hazards": 9
+    },
+    "outputFiles": [
+      "hangang-drone-light-show-2026-05-16/input.json",
+      "hangang-drone-light-show-2026-05-16/plan.md",
+      "hangang-drone-light-show-2026-05-16/review.md"
+    ],
+    "reviewScore": "100 (A)"
+  },
+  {
+    "slug": "jungnang-seoul-rose-festival-2026",
+    "eventName": "제18회 중랑 서울장미축제",
+    "eventDate": "2026-05-15",
+    "jurisdiction": "서울특별시 중랑구",
+    "venueId": null,
+    "expectedCrowd": 300000,
+    "sourceNote": "제18회 중랑 서울장미축제: 2026.05.15-05.23, 중랑천/중랑장미공원 일대, 5.45km 장미터널",
+    "reviewVerdict": "usable_with_review",
+    "findings": {
+      "errors": 0,
+      "warnings": 1,
+      "overAppliedMentioned": true
+    },
+    "counts": {
+      "laws": 30,
+      "localOrdinances": 5,
+      "submittedDocuments": 13,
+      "hazards": 11
+    },
+    "outputFiles": [
+      "jungnang-seoul-rose-festival-2026/input.json",
+      "jungnang-seoul-rose-festival-2026/plan.md",
+      "jungnang-seoul-rose-festival-2026/review.md"
+    ],
+    "reviewScore": "95 (A)"
+  },
+  {
+    "slug": "haeundae-sand-festival-2026",
+    "eventName": "2026 해운대 모래축제",
+    "eventDate": "2026-05-15",
+    "jurisdiction": "부산광역시 해운대구",
+    "venueId": null,
+    "expectedCrowd": 200000,
+    "sourceNote": "2026 해운대 모래축제: 2026.05.15-05.18, 해운대해수욕장/해운대광장 구남로 일원, 세계모래조각전·체험·공연",
+    "reviewVerdict": "usable",
+    "findings": {
+      "errors": 0,
+      "warnings": 0,
+      "overAppliedMentioned": true
+    },
+    "counts": {
+      "laws": 26,
+      "localOrdinances": 4,
+      "submittedDocuments": 11,
+      "hazards": 9
+    },
+    "outputFiles": [
+      "haeundae-sand-festival-2026/input.json",
+      "haeundae-sand-festival-2026/plan.md",
+      "haeundae-sand-festival-2026/review.md"
+    ],
+    "reviewScore": "100 (A)"
+  }
+]

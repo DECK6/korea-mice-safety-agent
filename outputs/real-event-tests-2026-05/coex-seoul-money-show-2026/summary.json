@@ -1,0 +1,26 @@
+{
+  "slug": "coex-seoul-money-show-2026",
+  "eventName": "2026 서울머니쇼",
+  "eventDate": "2026-05-07",
+  "jurisdiction": "서울특별시 강남구",
+  "venueId": "coex",
+  "expectedCrowd": 15000,
+  "sourceNote": "코엑스 행사일정: 2026 서울머니쇼, 2026.05.07-05.09, Hall B",
+  "reviewVerdict": "확인 필요",
+  "findings": {
+    "errors": 0,
+    "warnings": 0,
+    "overAppliedMentioned": true
+  },
+  "counts": {
+    "laws": 23,
+    "localOrdinances": 2,
+    "submittedDocuments": 10,
+    "hazards": 10
+  },
+  "outputFiles": [
+    "coex-seoul-money-show-2026/input.json",
+    "coex-seoul-money-show-2026/plan.md",
+    "coex-seoul-money-show-2026/review.md"
+  ]
+}

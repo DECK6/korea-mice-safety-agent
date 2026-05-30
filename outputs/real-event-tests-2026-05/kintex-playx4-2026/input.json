@@ -1,0 +1,26 @@
+{
+  "sourceNote": "PlayX4 2026: 2026.05.21-05.24, KINTEX 제1전시장 3-5홀/3,4,5B",
+  "eventName": "PlayX4 2026",
+  "eventDate": "2026-05-21",
+  "location": "KINTEX 제1전시장 3-5홀, 경기도 고양시",
+  "organizer": "경기도 / 경기콘텐츠진흥원",
+  "eventTypes": [
+    "exhibition"
+  ],
+  "venueId": "kintex",
+  "jurisdiction": "경기도 고양시",
+  "expectedCrowd": 45000,
+  "temporaryStructures": true,
+  "temporaryElectricity": true,
+  "setupTeardown": true,
+  "workAtHeight": true,
+  "heavyObjectHandling": true,
+  "personalDataProcessing": true,
+  "outdoor": false,
+  "roadUse": false,
+  "foodService": false,
+  "lpgUse": false,
+  "performance": false,
+  "vipSecurity": false,
+  "output": "markdown"
+}

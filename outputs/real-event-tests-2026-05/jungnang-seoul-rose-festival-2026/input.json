@@ -1,0 +1,29 @@
+{
+  "sourceNote": "제18회 중랑 서울장미축제: 2026.05.15-05.23, 중랑천/중랑장미공원 일대, 5.45km 장미터널",
+  "eventName": "제18회 중랑 서울장미축제",
+  "eventDate": "2026-05-15",
+  "location": "중랑천 중랑장미공원 일대, 묵동교-겸재교, 서울특별시 중랑구",
+  "organizer": "서울특별시 중랑구",
+  "eventTypes": [
+    "festival",
+    "outdoor_event",
+    "food_event"
+  ],
+  "jurisdiction": "서울특별시 중랑구",
+  "expectedCrowd": 300000,
+  "outdoor": true,
+  "outdoorEvent": true,
+  "performance": true,
+  "temporaryStructures": true,
+  "temporaryElectricity": true,
+  "setupTeardown": true,
+  "workAtHeight": true,
+  "heavyObjectHandling": true,
+  "foodService": true,
+  "lpgUse": false,
+  "outdoorAdvertising": true,
+  "roadUse": false,
+  "personalDataProcessing": false,
+  "vipSecurity": false,
+  "output": "markdown"
+}

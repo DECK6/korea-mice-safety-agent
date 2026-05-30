@@ -1,0 +1,26 @@
+{
+  "slug": "kintex-playx4-2026",
+  "eventName": "PlayX4 2026",
+  "eventDate": "2026-05-21",
+  "jurisdiction": "경기도 고양시",
+  "venueId": "kintex",
+  "expectedCrowd": 45000,
+  "sourceNote": "PlayX4 2026: 2026.05.21-05.24, KINTEX 제1전시장 3-5홀/3,4,5B",
+  "reviewVerdict": "확인 필요",
+  "findings": {
+    "errors": 0,
+    "warnings": 0,
+    "overAppliedMentioned": true
+  },
+  "counts": {
+    "laws": 23,
+    "localOrdinances": 2,
+    "submittedDocuments": 10,
+    "hazards": 10
+  },
+  "outputFiles": [
+    "kintex-playx4-2026/input.json",
+    "kintex-playx4-2026/plan.md",
+    "kintex-playx4-2026/review.md"
+  ]
+}

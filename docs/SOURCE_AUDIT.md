@@ -4,8 +4,8 @@ MICE 안전 에이전트는 법령/조례/안전수칙/베뉴 정보를 런타�
 
 ## Status Counts
 
-- reusable: 1
-- summary_only: 27
+- reusable: 3
+- summary_only: 36
 - link_only: 2
 - needs_license_review: 9
 - no_redistribution: 2
@@ -63,6 +63,17 @@ MICE 안전 에이전트는 법령/조례/안전수칙/베뉴 정보를 런타�
 | ICCJEJU_TAMNA_INFO | needs_license_review | html | offline_derived | source_verified | 이용조건 또는 최신성 확인이 남아 있다. |
 | YEOSU_EXPO_DOCUMENT_ROOM | summary_only | html | offline_derived | source_verified | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
 | YEOSU_EXPO_FACILITY_INFO | summary_only | html | offline_derived | source_verified | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| KOPIS_PERFORMANCE_CATALOG | summary_only | api | pending | needs_source_review | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| TOUR_API_EVENT_CATALOG | summary_only | api | pending | needs_source_review | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| NEMC_EMERGENCY_MEDICAL | summary_only | api | pending | needs_source_review | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| FOOD_SAFETY_KOREA | summary_only | api | pending | needs_source_review | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| SEOUL_REALTIME_CITY_DATA | reusable | api | not_applicable | needs_source_review | 법령/조례 원문 기반 메타데이터와 필요한 조문 발췌를 오프라인 검증팩으로 사용한다. 제출 전 최신 원문 확인은 필수다. |
+| KMA_APIHUB_WEATHER | summary_only | api | not_applicable | needs_source_review | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| AIRKOREA_AIR_QUALITY | summary_only | api | not_applicable | needs_source_review | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| ITS_TRAFFIC_OPENAPI | summary_only | api | not_applicable | todo | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| SAFETY_DATA_DISASTER_MESSAGE | reusable | api | not_applicable | todo | 법령/조례 원문 기반 메타데이터와 필요한 조문 발췌를 오프라인 검증팩으로 사용한다. 제출 전 최신 원문 확인은 필수다. |
+| ESHARE_PUBLIC_FACILITY | summary_only | api | not_applicable | todo | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
+| KCISA_KOPIS_PERFORMANCE_FACILITY | summary_only | api | offline_derived | source_verified | 안전 운영 요약과 출처 링크 중심으로 사용하는 기본 정책을 적용한다. |
 
 ## Notes
 
