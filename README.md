@@ -18,7 +18,7 @@ Korean MICE 현장 운영 안전용 MCP 서버입니다. 축제·박람회·컨�
 ## 릴리스 상태
 
 - 현재 버전: `1.0.0`
-- 성숙도: 법령·조례·안전관리 적용성 기준의 1.0.0. 오프라인 법령/조례/베뉴/위험 온톨로지로 실무 안전계획 초안 생성·검수·export·운영 루프 smoke를 통과합니다.
+- 성숙도: 법령·조례·안전관리 적용성 기준의 1.0.0. 오프라인 법령/조례/베뉴/위험 온톨로지로 실무 안전계획 초안 생성·검수·export·운영 루프 smoke를 통과합니다. P0/P1/P2 API 경로는 현재 확보된 키와 공개 API 범위에서 상태 확인, 오프라인 반영, 행사일 스냅샷, 실시간 운영 증거 조회의 안전한 실패 처리를 포함합니다.
 - 릴리스 게이트와 배포 경계는 [RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)에 정리합니다.
 - npm 패키지는 raw PDF/HWP, `.env`, 다운로드 쿠키, 검증 출력 저장소, graphify 캐시를 포함하지 않습니다.
 - clean tarball install 기준 `npm audit --omit=dev`를 통과합니다. xlsx export는 외부 spreadsheet 패키지 없이 내장 OOXML writer로 생성합니다.
@@ -134,12 +134,17 @@ npm run diff:ontology
 ## 도구
 
 - `query_mice_safety_applicability`: 행사 유형/특징/베뉴 기반 적용성 조회
+- `query_mice_api_access_status`: P0/P1/P2 개발에 필요한 API 키 상태를 키 값 없이 configured/missing/pending/externally_available/no_key_required로 조회
+- `collect_mice_p0_ready_sources`: available-key-first P0 source의 오프라인 pack 준비 상태와 dry-run collector action 조회
+- `generate_mice_event_day_snapshot`: P1 행사 당일 snapshot 형식으로 서울 실시간 도시데이터, 에어코리아, ITS, 재난문자 source 상태와 freshness metadata 조회
+- `query_mice_live_operations_status`: P2 live adapter 상태를 법령 근거가 아닌 `operationalEvidence`로 조회
 - `generate_mice_safety_plan`: 오프라인 온톨로지 기반 안전관리계획서, 도로·교통 실행계획, 무주최 다중운집 관계기관 공동대응계획, 현장 운영 런시트, 제출·협의 체크리스트, 다국어 방문객 안내 초안 생성
 - `export_mice_safety_plan_bundle`: 생성 계획서를 Markdown/CSV/docx/xlsx 파일 묶음으로 저장. 도로·교통 실행계획, 무주최 다중운집 대응계획, 공연·무대 실행 상태표 CSV, 식음료/LPG 실행 상태표 CSV, 현장 운영 런시트, 제출·협의 체크리스트, 제출 일정·RACI·증빙 매트릭스, 다국어 방문객 안전 안내문, 자체 검수 요약, 공유범위 필터가 적용된 관할기관별 제출 패키지를 포함
 - `review_mice_safety_plan`: 생성 계획서의 법령/조례/베뉴/작업자 안전/도로·교통/무주최 다중운집/공연·무대/식음료·LPG 현장 실행 기준 누락, 과잉 적용 후보, 문서 커버리지 매트릭스 검수
 - `query_mice_local_ordinances`: 지자체 조례 오프라인 인덱스/조문 발췌 조회와 베뉴/관할/행사조건 기반 우선순위 산정
 - `query_mice_worker_safety_references`: 산안기준규칙/KOSHA 기반 설치·철거 작업자 안전 근거 조회
 - `query_mice_venue_safety_rules`: 베뉴별 안전수칙·출처 조회
+- `query_performance_venues`: 문체부 문화데이터(KOPIS 공연시설별상세, 전국 약 2,111곳)를 오프라인 온톨로지로 구축한 인덱스에서 시설명·지역·분류로 공연시설을 검색하고 관할 지자체·주소를 보강
 - `register_mice_safety_issue`: 현장 안전 이슈 등록
 - `record_mice_evidence`: 사진/영상/문서/메모 증빙 경로와 설명 기록
 - `record_mice_command_decision`: 대피개시, 행사 일시중지, 행사 중단, 재개승인, 상황해제 같은 운영본부 지휘 판단 기록

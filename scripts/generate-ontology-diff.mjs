@@ -69,6 +69,20 @@ const sources = [
     }),
   },
   {
+    key: "kopisVenueDirectory",
+    file: "src/ontology/mice/kopis-venue-directory.json",
+    path: ["venues"],
+    idField: "venueId",
+    labelFields: ["name", "jurisdiction", "category"],
+  },
+  {
+    key: "p0OfflineEvidencePack",
+    file: "src/ontology/mice/p0-offline-evidence-pack.json",
+    path: ["sources"],
+    idField: "sourceId",
+    labelFields: ["label", "collectionStatus", "verificationStatus"],
+  },
+  {
     key: "incidentTaxonomy",
     file: "src/ontology/mice/incident-taxonomy.json",
     path: ["issueTypes"],

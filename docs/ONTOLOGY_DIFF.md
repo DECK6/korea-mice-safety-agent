@@ -1,7 +1,7 @@
 # Ontology Diff Report
 
-- generatedAt: 2026-05-21T22:56:23.365Z
-- baselineGeneratedAt: 2026-05-21T22:56:23.145Z
+- generatedAt: 2026-05-30T14:29:13.524Z
+- baselineGeneratedAt: 2026-05-29T13:38:26.847Z
 
 ## Summary
 
@@ -14,6 +14,8 @@
 | workerSafetyReferences | 0 | 0 | 0 |
 | venueRules | 0 | 0 | 0 |
 | venueFacilityIndex | 0 | 0 | 0 |
+| kopisVenueDirectory | 0 | 0 | 0 |
+| p0OfflineEvidencePack | 6 | 0 | 0 |
 | incidentTaxonomy | 0 | 0 | 0 |
 | communicationTemplates | 0 | 0 | 0 |
 

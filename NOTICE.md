@@ -22,8 +22,14 @@ ontology pack for Korean MICE site-operation safety.
   the relevant local government before submission or approval.
 - Some public documents may be under KOGL Type 4 or venue-specific terms. Treat
   those sources as "link and summarize" unless reuse terms are confirmed.
-- `LAW_OC` must never be committed. Pass it through the process environment
-  when using korean-law-mcp.
+- Performance-facility directory data comes from the KCISA (Korea Culture
+  Information Service Agency) KOPIS open API, a free Ministry of Culture, Sports
+  and Tourism cultural-data feed with no reuse restriction. Only directory-level
+  metadata (facility name, address, category, contact) is stored offline in
+  `kopis-venue-directory.json` for jurisdiction lookup. Reconfirm jurisdiction
+  and contacts with the venue before an actual event.
+- API service keys (`LAW_OC`, `KCISA_KOPIS_FACILITY_KEY`) must never be
+  committed. Pass them through the process environment or `.env` (git-ignored).
 
 ## Legal Disclaimer
 

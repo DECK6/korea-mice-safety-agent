@@ -35,13 +35,15 @@
     "call": "node build/cli.js call",
     "sync:venue-pdfs": "node scripts/sync-venue-pdfs.mjs",
     "build:venue-index": "node scripts/build-venue-facility-index.mjs",
+    "build:kopis-directory": "node build/cli.js build-venue-directory",
     "validate:venue-corpus": "node scripts/validate-venue-corpus.mjs",
     "collect:local-ordinances": "node scripts/collect-local-ordinances.mjs",
     "audit:sources": "node scripts/generate-source-audit.mjs",
     "snapshot:ontology": "node scripts/generate-ontology-diff.mjs --write-baseline",
     "diff:ontology": "node scripts/generate-ontology-diff.mjs",
     "validate:scenarios": "node scripts/validate-scenarios.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --test tests/*.test.mjs"
   },
   "keywords": [
     "mcp",
