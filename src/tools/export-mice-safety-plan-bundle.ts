@@ -91,6 +91,7 @@ interface SubmissionScheduleItem {
 }
 
 const documentFileNames: Record<string, string> = {
+  publicApiOperationalEvidence: "22-public-api-operational-evidence.md",
   eventSafetyPlan: "01-event-safety-plan.md",
   crowdFlowPlan: "02-crowd-flow-plan.md",
   roadTrafficControlPlan: "19-road-traffic-control-plan.md",
@@ -113,6 +114,7 @@ const documentFileNames: Record<string, string> = {
 };
 
 const documentTitles: Record<string, string> = {
+  publicApiOperationalEvidence: "공공 API 운영 증거",
   eventSafetyPlan: "행사 안전관리계획서",
   crowdFlowPlan: "인파·동선 관리계획",
   roadTrafficControlPlan: "도로·교통 실행계획",
@@ -1424,8 +1426,8 @@ function buildSubmissionPackages(
         "VIP 세부 동선, 개인정보 원자료, 내부 보안 운영 세부는 별도 전용 패키지에서만 공유",
       ],
       fileName: "01-local-government-package.md",
-      documentKeys: ["eventSafetyPlan", "crowdFlowPlan", "roadTrafficControlPlan", ...(hasUnhostedCrowd ? ["unhostedCrowdResponsePlan"] : []), ...(hasPerformance ? ["performanceStagePlan"] : []), "submissionChecklist", "operationsRunsheet", "medicalResponsePlan", "fireEvacuationChecklist", "incidentReportTemplate", "visitorSafetyNotices"],
-      coverageIds: ["event_safety_plan", "crowd_flow_plan", "road_traffic_control_plan", ...(hasUnhostedCrowd ? ["unhosted_crowd_response_plan"] : []), ...(hasPerformance ? ["performance_stage_execution_plan"] : []), "submission_checklist", "operations_runsheet", "medical_response_plan", "fire_evacuation_checklist", "incident_report_template", "visitor_safety_notices"],
+      documentKeys: ["eventSafetyPlan", "publicApiOperationalEvidence", "crowdFlowPlan", "roadTrafficControlPlan", ...(hasUnhostedCrowd ? ["unhostedCrowdResponsePlan"] : []), ...(hasPerformance ? ["performanceStagePlan"] : []), "submissionChecklist", "operationsRunsheet", "medicalResponsePlan", "fireEvacuationChecklist", "incidentReportTemplate", "visitorSafetyNotices"],
+      coverageIds: ["event_safety_plan", "public_api_operational_evidence", "crowd_flow_plan", "road_traffic_control_plan", ...(hasUnhostedCrowd ? ["unhosted_crowd_response_plan"] : []), ...(hasPerformance ? ["performance_stage_execution_plan"] : []), "submission_checklist", "operations_runsheet", "medical_response_plan", "fire_evacuation_checklist", "incident_report_template", "visitor_safety_notices"],
       include: true,
     },
     {
@@ -1440,8 +1442,8 @@ function buildSubmissionPackages(
         "개인정보/CCTV 세부, VIP/보안검색 세부, 주최자 환불·입장 정책은 제한",
       ],
       fileName: "02-venue-package.md",
-      documentKeys: ["eventSafetyPlan", "venueFacilityPlan", "roadTrafficControlPlan", ...(hasUnhostedCrowd ? ["unhostedCrowdResponsePlan"] : []), ...(hasPerformance ? ["performanceStagePlan"] : []), "operationsRunsheet", "fireEvacuationChecklist", "dailySafetyChecklist", "staffAssignment", "emergencyContacts", ...(hasFoodOrLpg ? ["foodLpgChecklist"] : [])],
-      coverageIds: ["event_safety_plan", "venue_facility_plan", "road_traffic_control_plan", ...(hasUnhostedCrowd ? ["unhosted_crowd_response_plan"] : []), ...(hasPerformance ? ["performance_stage_execution_plan"] : []), "operations_runsheet", "fire_evacuation_checklist", "daily_safety_checklist", "staff_assignment", "emergency_contacts", ...(hasFoodOrLpg ? ["food_lpg_checklist"] : [])],
+      documentKeys: ["eventSafetyPlan", "publicApiOperationalEvidence", "venueFacilityPlan", "roadTrafficControlPlan", ...(hasUnhostedCrowd ? ["unhostedCrowdResponsePlan"] : []), ...(hasPerformance ? ["performanceStagePlan"] : []), "operationsRunsheet", "fireEvacuationChecklist", "dailySafetyChecklist", "staffAssignment", "emergencyContacts", ...(hasFoodOrLpg ? ["foodLpgChecklist"] : [])],
+      coverageIds: ["event_safety_plan", "public_api_operational_evidence", "venue_facility_plan", "road_traffic_control_plan", ...(hasUnhostedCrowd ? ["unhosted_crowd_response_plan"] : []), ...(hasPerformance ? ["performance_stage_execution_plan"] : []), "operations_runsheet", "fire_evacuation_checklist", "daily_safety_checklist", "staff_assignment", "emergency_contacts", ...(hasFoodOrLpg ? ["food_lpg_checklist"] : [])],
       include: true,
     },
     {
@@ -1456,8 +1458,8 @@ function buildSubmissionPackages(
         "개인정보 원자료, VIP 세부 동선, 내부 보안검색 운영 세부는 제한",
       ],
       fileName: "03-fire-police-medical-package.md",
-      documentKeys: ["crowdFlowPlan", "roadTrafficControlPlan", ...(hasUnhostedCrowd ? ["unhostedCrowdResponsePlan"] : []), ...(hasPerformance ? ["performanceStagePlan"] : []), "operationsRunsheet", "fireEvacuationChecklist", "medicalResponsePlan", "staffAssignment", "emergencyContacts", "visitorSafetyNotices", "incidentReportTemplate"],
-      coverageIds: ["crowd_flow_plan", "road_traffic_control_plan", ...(hasUnhostedCrowd ? ["unhosted_crowd_response_plan"] : []), ...(hasPerformance ? ["performance_stage_execution_plan"] : []), "operations_runsheet", "fire_evacuation_checklist", "medical_response_plan", "staff_assignment", "emergency_contacts", "visitor_safety_notices", "incident_report_template"],
+      documentKeys: ["publicApiOperationalEvidence", "crowdFlowPlan", "roadTrafficControlPlan", ...(hasUnhostedCrowd ? ["unhostedCrowdResponsePlan"] : []), ...(hasPerformance ? ["performanceStagePlan"] : []), "operationsRunsheet", "fireEvacuationChecklist", "medicalResponsePlan", "staffAssignment", "emergencyContacts", "visitorSafetyNotices", "incidentReportTemplate"],
+      coverageIds: ["public_api_operational_evidence", "crowd_flow_plan", "road_traffic_control_plan", ...(hasUnhostedCrowd ? ["unhosted_crowd_response_plan"] : []), ...(hasPerformance ? ["performance_stage_execution_plan"] : []), "operations_runsheet", "fire_evacuation_checklist", "medical_response_plan", "staff_assignment", "emergency_contacts", "visitor_safety_notices", "incident_report_template"],
       include: true,
     },
     {
@@ -1472,8 +1474,8 @@ function buildSubmissionPackages(
         "관계기관 직접 연락망, 개인정보/CCTV, VIP/보안 세부는 운영본부 승인 없이 공유하지 않음",
       ],
       fileName: "04-worker-contractor-package.md",
-      documentKeys: ["workerSafetyPlan", ...(hasPerformance ? ["performanceStagePlan"] : []), "venueFacilityPlan", "operationsRunsheet", "fireEvacuationChecklist", "dailySafetyChecklist", "emergencyContacts", ...(hasFoodOrLpg ? ["foodLpgChecklist"] : [])],
-      coverageIds: ["worker_safety_plan", ...(hasPerformance ? ["performance_stage_execution_plan"] : []), "venue_facility_plan", "operations_runsheet", "fire_evacuation_checklist", "daily_safety_checklist", "emergency_contacts", ...(hasFoodOrLpg ? ["food_lpg_checklist"] : [])],
+      documentKeys: ["workerSafetyPlan", "publicApiOperationalEvidence", ...(hasPerformance ? ["performanceStagePlan"] : []), "venueFacilityPlan", "operationsRunsheet", "fireEvacuationChecklist", "dailySafetyChecklist", "emergencyContacts", ...(hasFoodOrLpg ? ["foodLpgChecklist"] : [])],
+      coverageIds: ["worker_safety_plan", "public_api_operational_evidence", ...(hasPerformance ? ["performance_stage_execution_plan"] : []), "venue_facility_plan", "operations_runsheet", "fire_evacuation_checklist", "daily_safety_checklist", "emergency_contacts", ...(hasFoodOrLpg ? ["food_lpg_checklist"] : [])],
       include: hasWorker,
     },
     {
@@ -1517,6 +1519,7 @@ async function writeXlsx(
   }
   sheets.push({ name: "Overview", rows: overview });
 
+  addRowsSheet(sheets, "Public API Evidence", bulletRows(String(documentBundle.publicApiOperationalEvidence ?? ""), "공공 API 운영 증거"));
   addRowsSheet(sheets, "Venue Facility", bulletRows(String(documentBundle.venueFacilityPlan ?? ""), "베뉴 시설"));
   addRowsSheet(sheets, "Road Traffic", bulletRows(String(documentBundle.roadTrafficControlPlan ?? ""), "도로·교통"));
   addRowsSheet(sheets, "Unhosted Crowd", bulletRows(String(documentBundle.unhostedCrowdResponsePlan ?? ""), "무주최 다중운집"));
@@ -1618,6 +1621,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   }
 
   const checklistSources = [
+    ["public-api-operational-evidence.csv", "공공 API 운영 증거", String(documentBundle.publicApiOperationalEvidence ?? "")],
     ["venue-facility-plan.csv", "베뉴 시설", String(documentBundle.venueFacilityPlan ?? "")],
     ["road-traffic-control-plan.csv", "도로·교통", String(documentBundle.roadTrafficControlPlan ?? "")],
     ["unhosted-crowd-response-plan.csv", "무주최 다중운집", String(documentBundle.unhostedCrowdResponsePlan ?? "")],
@@ -1854,7 +1858,7 @@ export const exportMiceSafetyPlanBundleTool: ToolDefinition = {
   name: "export_mice_safety_plan_bundle",
   title: "MICE 안전계획 파일 묶음 export",
   description:
-    "generate_mice_safety_plan 결과를 로컬 디렉터리에 Markdown 문서 묶음, CSV 체크리스트, 도로·교통 실행계획, 무주최 다중운집 대응계획, 현장 운영 런시트, 다국어 방문객 안내문, 자체 검수 요약, docx/xlsx로 저장합니다.",
+    "generate_mice_safety_plan 결과를 로컬 디렉터리에 Markdown 문서 묶음, 공공 API 운영 증거, CSV 체크리스트, 도로·교통 실행계획, 무주최 다중운집 대응계획, 현장 운영 런시트, 다국어 방문객 안내문, 자체 검수 요약, docx/xlsx로 저장합니다.",
   inputSchema,
   handler,
 };

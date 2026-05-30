@@ -9,6 +9,16 @@
 
 위 파일은 원본을 수정하지 않고 설계 검토와 비교 기준으로 참고했다. 특히 `agent-safety-oss`의 법령·위험·통제·문서·증빙 연결 방식은 이 프로젝트의 참고점 중 하나다.
 
+## 공공 API 운영 증거 반영
+
+2026-05-31 live smoke에서 KCISA KOPIS 공연시설, KOPIS 공연 catalog, TourAPI 축제/행사, NEMC 응급의료기관/AED, 식품안전나라 회수·판매중지, 기상청 API Hub, 서울 실시간 도시데이터, 에어코리아가 키 값 노출 없이 정상 정규화되는 것을 확인했다.
+
+- 오프라인 스냅샷: `src/ontology/mice/public-api-operational-evidence.json`
+- 생성 반영: `generate_mice_safety_plan`은 행사 조건별로 KOPIS/TourAPI/NEMC/FoodSafety/KMA/Seoul/AirKorea 증거를 “법령 근거”가 아니라 “운영 증거와 D-day 확인 액션”으로 출력한다.
+- 검수 반영: `review_mice_safety_plan`은 대규모·옥외·공연·식음료 조건에서 NEMC/AED, 기상·대기질, KOPIS, 식품안전나라 증거가 빠지면 warning을 낸다.
+- 과잉 적용 방지: 비공연 옥외축제에는 KOPIS 공연 catalog를 자동 적용하지 않고, 식음료 조건이 없으면 식품안전나라 확인을 필수로 올리지 않는다.
+- 한계: P2 live 데이터는 오래된 snapshot을 안전 판단 근거로 쓰면 안 되며, 실제 행사일에는 live 재조회와 관할기관·베뉴 확인이 필요하다.
+
 ## law.go.kr / korean-law-mcp 검증 상태
 
 `LAW_OC` 환경변수로 실제 조회 확인한 항목:

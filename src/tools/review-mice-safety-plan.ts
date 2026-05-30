@@ -310,6 +310,14 @@ const documentCoverageDefinitions: DocumentCoverageDefinition[] = [
     missingSeverity: "warning",
   },
   {
+    documentId: "public_api_operational_evidence",
+    title: "공공 API 운영 증거",
+    terms: ["공공 API 운영 증거", "NEMC", "식품안전나라", "기상청 API Hub", "KOPIS", "TourAPI"],
+    appliesWhen: "대규모, 옥외, 공연, 식음료, 무주최 다중운집 등 live/offline 공공 API 증거가 안전 운영 판단을 보강하는 경우",
+    requirement: (_input, ctx) => (ctx.largeCrowd || ctx.isOutdoor || ctx.isPerformance || ctx.hasFood || ctx.unhostedCrowd ? "required" : "conditional"),
+    missingSeverity: "warning",
+  },
+  {
     documentId: "incident_report_template",
     title: "사고보고서 템플릿",
     terms: ["사고보고서 템플릿", "사고 일시", "초동조치", "재발방지"],
@@ -414,6 +422,7 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, largeCrowd && !includesAny(text, ["인파", "동선", "혼잡", "밀집"]), "error", "crowd_control", "대규모 인파 관리계획이 누락됐습니다.", "구역별 수용능력, 게이트 처리량, 대기열, 우회동선, 혼잡 단계별 통제 기준을 넣으세요.", { requirementId: "REQ_CROWD_FLOW" });
   addFinding(findings, largeCrowd && !includesAny(text, ["AED", "응급", "의무실", "119"]), "warning", "medical_response", "응급의료/AED 대응이 부족합니다.", "AED, 의무실, 119 신고, 구급차 접근동선, 이송병원 정보를 넣으세요.", { requirementId: "REQ_MEDICAL_RESPONSE" });
   addFinding(findings, largeCrowd && !includesAny(text, ["관리책임자", "월 1회", "사용교육", "응급장비", "구급차"]), "warning", "medical_aed_management", "AED 관리책임자·점검·사용교육 또는 구급 이송 기준이 부족합니다.", "AED 관리책임자, 월 1회 점검, 사용교육, 관리서류, 구급차 장비·소독·통신·운행기록 기준을 넣으세요.", { requirementId: "REQ_MEDICAL_AED_MANAGEMENT" });
+  addFinding(findings, largeCrowd && !includesAny(text, ["NEMC", "응급의료기관 정보", "AED 위치 정보", "NEMC_AED"]), "warning", "public_api_evidence", "대규모 행사인데 응급의료기관/AED 공공 API 운영 증거가 부족합니다.", "NEMC 응급의료기관/AED 후보를 오프라인 스냅샷 또는 D-day live 조회로 확인하고 실제 접근 가능성, 이송병원, 119 협의 기준을 계획서에 넣으세요.", { requirementId: "REQ_PUBLIC_API_NEMC_AED" });
   addFinding(findings, largeCrowd && !includesAny(text, ["특정소방대상물", "수용인원", "별표 7", "소방안전관리자"]), "warning", "fire_evacuation_annex", "대규모 행사 소방 하위기준 체크포인트가 부족합니다.", "특정소방대상물, 수용인원 산정, 소방시설, 소방안전관리자/보조자 기준을 점검표에 반영하세요.", { requirementId: "REQ_FIRE_FACILITY_ANNEX" });
   addFinding(findings, needsBuildingEgressReview && !includesAny(text, ["직통계단", "피난계단", "옥외 피난계단", "피난층", "가설건축물", "피난안전 확인서", "임시사용승인"]), "warning", "building_egress", "건축 피난시설 근거가 약합니다.", "직통계단, 피난계단, 옥외 피난계단, 가설건축물 피난안전 확인, 임시사용승인 등 건축 하위 기준을 확인하세요.", { requirementId: "REQ_BUILDING_EGRESS" });
 
@@ -427,6 +436,7 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, input.outdoorAdvertising !== true && includesAny(text, ["| 옥외광고 담당부서/베뉴 | 현수막", "옥외광고 담당부서/베뉴,현수막"]), "warning", "over_application", "옥외광고물 설치 조건이 없는데 허가/신고가 제출 일정으로 승격됐습니다.", "현수막, 배너, 지주형 표시물, 전광류 설치가 확정될 때만 제출 액션으로 올리고, 그 전에는 조건부 확인으로 유지하세요.", { requirementId: "REQ_NO_OUTDOOR_AD_SUBMISSION_OVERAPPLY", evidenceTerms: ["옥외광고 담당부서/베뉴"], text });
 
   addFinding(findings, hasFood && !includesAny(text, ["식품위생", "식중독"]), "error", "food_safety", "식음료/식중독 관리가 누락됐습니다.", "영업허가·신고, 위생, 냉장/보온, 식중독 보고 절차를 넣으세요.", { requirementId: "REQ_FOOD_SAFETY" });
+  addFinding(findings, hasFoodService && !includesAny(text, ["식품안전나라", "FOOD_SAFETY_KOREA", "I0490", "회수·판매중지"]), "warning", "public_api_evidence", "식음료 행사인데 식품안전나라 회수·판매중지 확인 증거가 부족합니다.", "D-1/D-day 식품안전나라 회수·판매중지 조회를 반입검수, 보존식, 온도기록, 보건소 연락 기준과 연결하세요.", { requirementId: "REQ_PUBLIC_API_FOOD_SAFETY" });
   addFinding(findings, input.lpgUse === true && !includesAny(text, ["LPG", "액화석유가스", "가스용기"]), "error", "gas_safety", "LPG/가스 안전 항목이 누락됐습니다.", "가스용기 전도방지, 누출점검, 이격거리, 소화기, 베뉴 반입승인을 넣으세요.", { requirementId: "REQ_LPG_GAS" });
   addFinding(findings, hasFood && !includesAny(text, ["식품등의 위생적인 취급", "별표 1", "별표 17", "별표 20", "하위 별표"]), "warning", "legal_annex", "식품/LPG 별표 체크포인트가 부족합니다.", "식품위생 취급기준, LPG 용기 안전점검기준, LPG 사용시설 시설·기술·검사기준을 점검표에 반영하세요.", { requirementId: "REQ_FOOD_LPG_ANNEX" });
   addFinding(findings, input.lpgUse === true && !includesAny(text, ["완성, 정기", "검사증명서", "가스공급자의 안전점검기준", "보험금액", "공사계획"]), "warning", "lpg_forms", "LPG 검사·보험·공사계획 서식 체크포인트가 약합니다.", "완성/정기검사 신청서, 검사증명서, 공급자 안전점검기준, 공사계획 승인·신고, 보험금액 기준을 반영하세요.", { requirementId: "REQ_LPG_FORMS" });
@@ -436,6 +446,7 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, !hasFood && includesAny(text, ["식품위생법", "액화석유가스법", "식중독"]), "warning", "over_application", "식음료 조건이 없는데 식품/LPG 법령이 적용됐을 수 있습니다.", "식음료가 없는 행사라면 해당 법령을 제거하거나 조건부 후보로 표시하세요.", { requirementId: "REQ_NO_FOOD_OVERAPPLY", evidenceTerms: ["식품위생법", "액화석유가스법", "식중독"], text });
 
   addFinding(findings, isPerformance && !includesAny(text, ["공연법", "재해대처계획", "피난안내"]), "error", "performance_safety", "공연 안전 법령/재해대처계획이 누락됐습니다.", "공연법 재해대처계획, 안전관리조직, 안전교육, 피난안내를 넣으세요.", { requirementId: "REQ_PERFORMANCE_SAFETY" });
+  addFinding(findings, isPerformance && !includesAny(text, ["KOPIS", "공연/축제 catalog", "공연시설별상세정보"]), "warning", "public_api_evidence", "공연 포함 행사인데 KOPIS 기반 공연/시설 확인 증거가 부족합니다.", "KOPIS 공연 catalog와 공연시설 디렉터리를 프로그램·베뉴·공연법 적용 판단의 운영 증거로 연결하세요.", { requirementId: "REQ_PUBLIC_API_KOPIS" });
   addFinding(findings, isPerformance && !includesAny(text, ["별표 1", "별표 1의2", "별지 제13호의3", "하위 별표"]), "warning", "legal_annex", "공연법 시행령 별표/시행규칙 서식 체크포인트가 부족합니다.", "안전관리조직 설치기준, 안전교육 내용, 재해대처계획 신고서식 첨부서류를 반영하세요.", { requirementId: "REQ_PERFORMANCE_ANNEX_FORM" });
   addFinding(findings, isPerformance && !includesAll(text, ["공연·무대 실행계획", "현장 실행 상태표", "무대·트러스 구조검토", "리깅 승인", "방염확인서", "스탠딩 펜스", "피난안내", "공연중지 기준", "무대감독"]), "warning", "performance_stage_execution", "공연·무대 현장 실행 기준이 부족합니다.", "공연·무대 실행계획에 무대·트러스 구조검토, 리깅 승인, 방염확인서, 스탠딩 펜스, 피난안내, 공연중지 기준, 무대감독 중지 신호를 넣으세요.", { requirementId: "REQ_PERFORMANCE_STAGE_EXECUTION", evidenceTerms: ["공연·무대 실행계획", "현장 실행 상태표", "무대·트러스 구조검토", "리깅 승인", "방염확인서", "스탠딩 펜스", "피난안내", "공연중지 기준", "무대감독"], text });
   addFinding(findings, isPerformance && !includesAll(text, ["무대 전면 압박", "아티스트/무대감독 중지 신호", "전원 차단", "관객 현 위치 대기", "조치 전후 사진"]), "warning", "performance_stop_resume", "공연 중지·재개 증빙 기준이 약합니다.", "무대 전면 압박, 아티스트/무대감독 중지 신호, 전원 차단, 관객 현 위치 대기, 조치 전후 사진 기준을 명시하세요.", { requirementId: "REQ_PERFORMANCE_STOP_RESUME", evidenceTerms: ["무대 전면 압박", "아티스트/무대감독 중지 신호", "전원 차단", "관객 현 위치 대기", "조치 전후 사진"], text });
@@ -454,6 +465,7 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, !context.hasVipSecurity && includesAny(text, ["| 경찰/경비업체/베뉴 보안실 | 경비업 허가 범위", "경찰/경비업체/베뉴 보안실,경비업 허가 범위"]), "warning", "over_application", "VIP/민간경비 조건이 없는데 경비업 제출 액션이 생성됐습니다.", "VIP, 보안검색, 민간경비, 혼잡·교통유도경비가 확정될 때만 경비업 제출 액션으로 올리세요.", { requirementId: "REQ_NO_SECURITY_SUBMISSION_OVERAPPLY", evidenceTerms: ["경찰/경비업체/베뉴 보안실"], text });
   addFinding(findings, Boolean(input.venueId) && !includesAny(text, ["베뉴", "시설 체크", "금지", "반입", "운영규정"]), "warning", "venue_rules", "베뉴 규정 반영이 약합니다.", "venueId에 해당하는 베뉴 금지물품, 반입/하역, 소방통로, 작업승인 규정을 넣으세요.", { requirementId: "REQ_VENUE_RULES" });
   addFinding(findings, Boolean(input.venueId) && !includesAny(text, ["베뉴 시설·수용", "바닥하중", "하역", "전기", "추정 밀도"]), "warning", "venue_facility_constraints", "베뉴 수용/하중/전기/하역 제약 반영이 약합니다.", "venue-facility-index의 수용·면적, 바닥하중, 층고, 반입·하역, 전기, 소방·피난 sourceSpan을 계획서에 반영하세요.", { requirementId: "REQ_VENUE_FACILITY_CONSTRAINTS" });
+  addFinding(findings, isOutdoor && !includesAny(text, ["기상청 API Hub", "KMA_APIHUB_WEATHER", "초단기실황", "에어코리아", "AIRKOREA_AIR_QUALITY"]), "warning", "public_api_evidence", "옥외행사인데 기상·대기질 live 운영 증거가 부족합니다.", "기상청 API Hub 초단기실황과 에어코리아 값을 법령 근거가 아닌 운영증거로 분리하고, 확인 시각·확인자·조치 기준을 런시트에 넣으세요.", { requirementId: "REQ_PUBLIC_API_WEATHER_AIR" });
   addCoverageFindings(findings, documentCoverageMatrix);
 
   return { findings, documentCoverageMatrix };
@@ -507,7 +519,7 @@ export const reviewMiceSafetyPlanTool: ToolDefinition = {
   name: "review_mice_safety_plan",
   title: "MICE 안전계획 검수",
   description:
-    "생성된 MICE 안전관리계획서가 법령/조례/베뉴/작업자 안전/도로·교통/무주최 다중운집/인파/소방/응급/증빙 요건을 충족하는지 검수하고 과잉 적용 후보를 지적합니다.",
+    "생성된 MICE 안전관리계획서가 법령/조례/베뉴/작업자 안전/도로·교통/무주최 다중운집/인파/소방/응급/공공 API 운영 증거/증빙 요건을 충족하는지 검수하고 과잉 적용 후보를 지적합니다.",
   inputSchema,
   handler,
 };
