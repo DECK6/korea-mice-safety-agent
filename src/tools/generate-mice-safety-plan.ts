@@ -3,6 +3,7 @@ import { COMMON_RESPONSE_META } from "../config/constants.js";
 import type { McpToolResult, Strictness, ToolDefinition } from "../lib/types.js";
 import { findLegalAnnexes, strictnessLabel, uniqueById } from "../lib/mice-data.js";
 import { buildDefaultMiceVisitorNoticeBundle } from "../lib/mice-visitor-notices.js";
+import { buildPublicApiOperationalEvidence, type PublicApiOperationalEvidenceBundle } from "../lib/public-api-operational-evidence.js";
 import venueFacilityIndex from "../ontology/mice/venue-facility-index.json" with { type: "json" };
 import { queryMiceSafetyApplicabilityTool } from "./query-mice-safety-applicability.js";
 
@@ -293,6 +294,36 @@ function formatChecklist(title: string, items: string[]): string {
   ].join("\n");
 }
 
+function publicApiLinesFor(evidence: PublicApiOperationalEvidenceBundle, sourceIds: string[]): string[] {
+  const sourceSet = new Set(sourceIds);
+  return evidence.selectedSources
+    .filter((source) => sourceSet.has(source.sourceId))
+    .flatMap((source) => [
+      `${source.label}: ${source.operationalUse}`,
+      ...source.planningActions.map((action) => `실행(${source.sourceId}): ${action}`),
+      ...source.limitations.map((limitation) => `한계(${source.sourceId}): ${limitation}`),
+    ]);
+}
+
+function formatPublicApiOperationalEvidence(evidence: PublicApiOperationalEvidenceBundle): string {
+  return [
+    "# 공공 API 운영 증거",
+    "",
+    `- 오프라인 스냅샷 생성: ${evidence.generatedAt}`,
+    `- 검증상태: ${evidence.verificationStatus}`,
+    "- 성격: 법령·조례 근거가 아니라 행사 전/당일 운영 판단을 보강하는 증거다.",
+    "",
+    "## 적용 API 증거",
+    ...lineList(evidence.applicableLines, "현재 입력 조건에 맞는 공공 API 운영 증거 없음"),
+    "",
+    "## 실무 액션",
+    ...lineList(evidence.actionLines, "공공 API 기반 실무 액션 없음"),
+    "",
+    "## 한계와 재확인",
+    ...lineList(evidence.cautionLines, "최신 live 조회와 관할기관 확인 필요"),
+  ].join("\n");
+}
+
 function tableCell(value: string | undefined): string {
   return (value ?? "확인 필요").replace(/\|/g, "/").replace(/\s+/g, " ").trim();
 }
@@ -492,6 +523,7 @@ function formatFoodLpgExecutionChecklist(input: Input, options: {
   foodHazards: AnyRecord[];
   foodLpgAnnexItems: string[];
   venueFacility: ReturnType<typeof buildVenueFacilitySummary>;
+  publicApiLines: string[];
 }): string {
   if (!options.hasFood && !options.hasLpg) {
     return [
@@ -551,6 +583,9 @@ function formatFoodLpgExecutionChecklist(input: Input, options: {
     ] : []),
     "- 조치 전후 사진과 운영본부 확인 메모",
     "",
+    "## 공공 API 운영 증거",
+    ...lineList(options.publicApiLines, "식음료/LPG 조건에 연결된 공공 API 증거 없음. 식음료가 추가되면 식품안전나라 회수·판매중지 조회를 수행"),
+    "",
     "## 법령·별표 체크포인트",
     ...lineList([
       ...hazardControls,
@@ -565,6 +600,7 @@ function formatPerformanceStageExecutionPlan(input: Input, options: {
   performanceAnnexItems: string[];
   stageHazards: AnyRecord[];
   venueFacility: ReturnType<typeof buildVenueFacilitySummary>;
+  publicApiLines: string[];
 }): string {
   if (!options.isPerformance) {
     return [
@@ -614,6 +650,9 @@ function formatPerformanceStageExecutionPlan(input: Input, options: {
     "- 무대·트러스 구조검토서, 리깅 승인서, 방염확인서",
     "- 전기·음향·조명 도면, 발전차·분전반 점검, 전원 차단 확인",
     "- 공연중지 판단, 아티스트/무대감독 중지 신호, 조치 전후 사진",
+    "",
+    "## 공공 API 운영 증거",
+    ...lineList(options.publicApiLines, "공연 조건에 연결된 공공 API 증거 없음. 공연 프로그램이 추가되면 KOPIS catalog와 베뉴 공연시설 정보를 확인"),
     "",
     "## 법령·별표·베뉴 체크포인트",
     ...lineList([
@@ -725,6 +764,12 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
   const legalAnnexes = asArray<AnyRecord>(data.legalAnnexes);
   const venueFacility = buildVenueFacilitySummary(input, venue);
   const isPerformance = Boolean(input.performance || inputHasEvent(input, "performance"));
+  const publicApiEvidence = buildPublicApiOperationalEvidence(input);
+  const publicApiOperationalEvidence = formatPublicApiOperationalEvidence(publicApiEvidence);
+  const medicalPublicApiLines = publicApiLinesFor(publicApiEvidence, ["NEMC_EMERGENCY_MEDICAL", "NEMC_AED"]);
+  const foodPublicApiLines = publicApiLinesFor(publicApiEvidence, ["FOOD_SAFETY_KOREA"]);
+  const performancePublicApiLines = publicApiLinesFor(publicApiEvidence, ["KOPIS_PERFORMANCE_CATALOG", "KCISA_KOPIS_PERFORMANCE_FACILITY"]);
+  const operationsPublicApiLines = publicApiLinesFor(publicApiEvidence, ["KMA_APIHUB_WEATHER", "SEOUL_REALTIME_CITY_DATA", "AIRKOREA_AIR_QUALITY"]);
 
   const crowdHazards = hazards.filter((hazard) => ["crowd_density_high", "ingress_egress_bottleneck", "weather_outdoor_event"].includes(String(hazard.id)));
   const foodHazards = hazards.filter((hazard) => ["food_poisoning", "fire_hazard_hot_work_lpg"].includes(String(hazard.id)));
@@ -941,6 +986,9 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
     "",
     "## 주요 위험과 통제",
     ...lineList(sections.hazardControls.slice(0, 10), "조건부 위험요인 없음"),
+    "",
+    "## 공공 API 운영 증거 요약",
+    ...lineList(publicApiEvidence.applicableLines.slice(0, 8), "현재 입력 조건에 맞는 공공 API 운영 증거 없음"),
   ].join("\n");
 
   const crowdFlowPlan = [
@@ -1016,6 +1064,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
     foodHazards,
     foodLpgAnnexItems,
     venueFacility,
+    publicApiLines: foodPublicApiLines,
   });
 
   const performanceStagePlan = formatPerformanceStageExecutionPlan(input, {
@@ -1023,6 +1072,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
     performanceAnnexItems,
     stageHazards,
     venueFacility,
+    publicApiLines: performancePublicApiLines,
   });
 
   const privacyChecklist = formatChecklist("개인정보·CCTV 점검표", [
@@ -1056,6 +1106,10 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
     "- AED 관리책임자, 월 1회 이상 점검, 사용교육, 관리서류 비치, 사용 시 응급의료지원센터 통보 절차를 확인한다.",
     "- 폭염, 고령자/영유아/장애인 참가, 스탠딩 공연, 야간·우천 행사 등 고위험 조건별 응급대응 인력을 조정한다.",
     "- 구급차 또는 이송 협력기관을 두는 경우 장비·의약품·통신장비, 소독, 연료, 보험, 운행기록 보관 기준을 확인한다.",
+    "",
+    "## 공공 API 운영 증거",
+    ...lineList(medicalPublicApiLines, "대규모/공연/옥외/식음료 조건이 아니면 NEMC/AED 후보 조회는 조건부 확인으로 둔다"),
+    "",
     ...medicalLawItems.map((item) => `- ${item}`),
     ...medicalAnnexItems.map((item) => `- ${item}`),
   ].join("\n");
@@ -1108,6 +1162,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
     "임시전기, 케이블 보호, 분전반 접근통제 확인",
     "부스·무대·트러스·현수막 전도/낙하 위험 확인",
     "AED, 의무실, 구급차 접근동선 확인",
+    ...operationsPublicApiLines.slice(0, 6).map((line) => `공공 API 운영증거: ${line}`),
     "식음료·LPG·화기 구역 점검",
     ...(isPerformance ? ["공연중지 기준, 무대감독 중지 신호, 스탠딩 펜스, 피난안내 방송문 확인"] : []),
     ...(hasUnhostedCrowd ? ["무주최 다중운집 단계 판단, 공동 상황방, 기관별 통제 권한, 해산·분산 안내 기준 확인"] : []),
@@ -1149,6 +1204,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
   const visitorSafetyNotices = buildDefaultMiceVisitorNoticeBundle(input).markdown;
 
   return {
+    publicApiOperationalEvidence,
     eventSafetyPlan,
     crowdFlowPlan,
     roadTrafficControlPlan,
@@ -1232,47 +1288,52 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     "## 1. 행사 개요",
     ...lineList(sections.overview, "행사 개요 입력 필요"),
     "",
-    "## 2. 적용 법령·근거",
+    "## 2. 공공 API 운영 증거",
+    ...documentBundle.publicApiOperationalEvidence.split(/\r?\n/).filter((line) => line.trim()).slice(3, 18),
+    "",
+    "## 3. 적용 법령·근거",
     ...lineList(sections.legalBasis, "공통 법령 외 조건부 법령 없음"),
     "",
-    "## 3. 하위 별표·서식 체크포인트",
+    "## 4. 하위 별표·서식 체크포인트",
     ...lineList(sections.legalAnnexes, "조건부 별표·서식 없음"),
     "",
-    "## 4. 지자체 조례·인허가 확인",
+    "## 5. 지자체 조례·인허가 확인",
     "### 우선 적용 조례 후보",
     ...lineList(sections.primaryLocalOrdinances, "우선 적용 조례 후보 없음. 관할 지자체와 베뉴 소재지를 확인하세요"),
     "",
     "### 참고 후보",
     ...lineList(sections.referenceLocalOrdinances, "참고 후보 없음"),
     "",
-    "## 5. 제출·승인 문서",
+    "## 6. 제출·승인 문서",
     ...lineList(sections.requiredDocuments, "조건부 제출 문서 없음"),
     "",
-    "## 6. 주요 위험요인 및 통제대책",
+    "## 7. 주요 위험요인 및 통제대책",
     ...lineList(sections.hazardControls, "조건부 위험요인 없음"),
     "",
-    "## 7. 베뉴·시설 체크",
+    "## 8. 베뉴·시설 체크",
     ...lineList(sections.venueRules, "베뉴 미지정 또는 베뉴 규정 없음"),
     "",
-    "## 8. 설치·철거 작업자 안전",
+    "## 9. 설치·철거 작업자 안전",
     ...lineList(sections.workerSafety, "설치·철거/고소/전기/화기/중량물 작업자 안전 조건 없음"),
     "",
-    "## 9. 인파·동선 운영",
+    "## 10. 인파·동선 운영",
     "- 구역별 수용인원, 게이트 처리량, 대기열, 우회동선, 피난동선을 도면에 표시한다.",
     "- 피크 시간대 스태프 배치와 혼잡 단계별 안내 문구를 운영본부가 사전 승인한다.",
     "- 비상구, 소화전, 후면 소방통로, 구급차 접근동선은 설치·운영·철거 전 기간 차단하지 않는다.",
     ...(input.unhostedCrowd ? ["- 무주최 다중운집은 주최자 없음, 공동 현장지휘, 기관별 권한 경계, 해산·분산 안내 기준을 별도 문서로 관리한다."] : []),
     "",
-    "## 10. 소방·응급·상황전파",
+    "## 11. 소방·응급·상황전파",
     "- 소방시설, 피난시설, 화기·가스 반입, 임시전기, AED, 의무실, 119 신고·이송 동선을 일일 점검한다.",
     "- 운영본부, 안전총괄, 구역장, 보안, 의료, 베뉴, 소방·경찰 연락체계를 하나의 연락망으로 배포한다.",
     "- 사고 발생 시 신고, 현장통제, 응급처치, 기록, 재발방지 조치 담당을 분리한다.",
     "",
-    "## 11. 증빙·기록",
+    "## 12. 증빙·기록",
     "- 안전관리계획서, 인파관리계획, 작업자 안전계획, 체크리스트, 교육명단, 현장사진, 개선조치 기록을 행사 종료 후 보존한다.",
     "- 법령·조례·베뉴 규정 인용은 최종 제출 전 원문 URL과 시행일을 재확인한다.",
     "",
     "# 부록: 실무 문서 묶음",
+    "",
+    documentBundle.publicApiOperationalEvidence,
     "",
     documentBundle.eventSafetyPlan,
     "",
@@ -1330,7 +1391,7 @@ export const generateMiceSafetyPlanTool: ToolDefinition = {
   name: "generate_mice_safety_plan",
   title: "MICE 안전관리계획서 초안 생성",
   description:
-    "행사 유형·베뉴·관할 지자체·위험 조건을 입력하면 오프라인 법령/조례/베뉴/KOSHA 온톨로지에 기반한 안전관리계획서, 도로·교통 실행계획, 무주최 다중운집 대응계획, 런시트를 Markdown으로 생성합니다.",
+    "행사 유형·베뉴·관할 지자체·위험 조건을 입력하면 오프라인 법령/조례/베뉴/KOSHA 온톨로지와 공공 API 운영 증거 스냅샷에 기반한 안전관리계획서, 도로·교통 실행계획, 무주최 다중운집 대응계획, 런시트를 Markdown으로 생성합니다.",
   inputSchema,
   handler,
 };

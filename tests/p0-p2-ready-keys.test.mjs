@@ -6,6 +6,7 @@ import { generateEventDaySnapshot, isSnapshotStale } from "../build/lib/event-da
 import { queryLiveOperationsStatus } from "../build/lib/live-operations-adapters.js";
 import { fetchFoodSafetyRecalls, fetchKmaUltraShort, fetchTourApiFestivalCatalog, parseXmlRecords } from "../build/lib/mice-public-api-clients.js";
 import { getP0ReadinessReport, normalizeP0FixtureRecords } from "../build/lib/p0-ready-sources.js";
+import { buildPublicApiOperationalEvidence } from "../build/lib/public-api-operational-evidence.js";
 
 test("API access status never serializes key values", () => {
   const secret = "SECRET-VALUE-DO-NOT-LEAK";
@@ -128,4 +129,37 @@ test("public API clients normalize real provider response shapes without leaking
   assert.equal(food.records[0].title, "테스트 식품");
   assert.equal(weather.records[0].fields.temperatureC, "22.0");
   assert.equal(serialized.includes(secret), false);
+});
+
+test("public API operational evidence selects purpose-fit offline sources", () => {
+  const outdoorFood = buildPublicApiOperationalEvidence({
+    eventTypes: ["festival", "food_event"],
+    jurisdiction: "서울특별시 강남구",
+    expectedCrowd: 5000,
+    outdoorEvent: true,
+    roadUse: true,
+    foodService: true,
+    lpgUse: true,
+  });
+  const outdoorSourceIds = new Set(outdoorFood.selectedSources.map((source) => source.sourceId));
+  assert(outdoorSourceIds.has("TOUR_API_EVENT_CATALOG"));
+  assert(outdoorSourceIds.has("NEMC_EMERGENCY_MEDICAL"));
+  assert(outdoorSourceIds.has("NEMC_AED"));
+  assert(outdoorSourceIds.has("FOOD_SAFETY_KOREA"));
+  assert(outdoorSourceIds.has("KMA_APIHUB_WEATHER"));
+  assert(outdoorSourceIds.has("SEOUL_REALTIME_CITY_DATA"));
+  assert(outdoorSourceIds.has("AIRKOREA_AIR_QUALITY"));
+  assert.equal(outdoorSourceIds.has("KOPIS_PERFORMANCE_CATALOG"), false);
+
+  const indoorConference = buildPublicApiOperationalEvidence({
+    eventTypes: ["conference"],
+    expectedCrowd: 300,
+    roadUse: false,
+    foodService: false,
+    lpgUse: false,
+  });
+  const indoorSourceIds = new Set(indoorConference.selectedSources.map((source) => source.sourceId));
+  assert.equal(indoorSourceIds.has("FOOD_SAFETY_KOREA"), false);
+  assert.equal(indoorSourceIds.has("KOPIS_PERFORMANCE_CATALOG"), false);
+  assert.equal(indoorSourceIds.has("TOUR_API_EVENT_CATALOG"), false);
 });

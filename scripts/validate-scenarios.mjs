@@ -460,7 +460,7 @@ const planResult = callTool("generate_mice_safety_plan", {
 }).structuredContent;
 
 const planMarkdown = planResult.planMarkdown ?? "";
-const planNeedles = ["안전관리계획서", "지자체 조례", "우선 적용 조례 후보", "참고 후보", "조례 우선순위", "설치·철거 작업자 안전", "산업안전보건기준", "별표·서식", "수용인원", "응급의료·AED", "관리책임자", "구급차", "도로·교통 실행계획", "교통통제 도면", "비상차량 접근로", "셔틀·택시·버스 승하차", "옥외광고물", "원상복구", "도로공사 시행 허가 신청서", "통행의 금지", "가설건축물", "피난안전 확인서", "완성, 정기", "검사증명서", "가스용기 반입대장", "누설점검", "밸브 차단", "화기 사용 즉시 중지", "냉장·보온 온도기록", "보존식 라벨", "판매중지", "제출·협의 체크리스트", "제출/확인처", "도로관리청/교통부서", "가스공급자/검사기관", "현장 운영 런시트", "개장 승인 hold point", "피크 T-30", "폐장 T-30", "사고보고서 템플릿", "다국어 방문객 안전 안내문", "roadside event area", "道路隣接エリア", "道路邻近区域"];
+const planNeedles = ["안전관리계획서", "공공 API 운영 증거", "식품안전나라", "NEMC", "기상청 API Hub", "TourAPI", "에어코리아", "지자체 조례", "우선 적용 조례 후보", "참고 후보", "조례 우선순위", "설치·철거 작업자 안전", "산업안전보건기준", "별표·서식", "수용인원", "응급의료·AED", "관리책임자", "구급차", "도로·교통 실행계획", "교통통제 도면", "비상차량 접근로", "셔틀·택시·버스 승하차", "옥외광고물", "원상복구", "도로공사 시행 허가 신청서", "통행의 금지", "가설건축물", "피난안전 확인서", "완성, 정기", "검사증명서", "가스용기 반입대장", "누설점검", "밸브 차단", "화기 사용 즉시 중지", "냉장·보온 온도기록", "보존식 라벨", "판매중지", "제출·협의 체크리스트", "제출/확인처", "도로관리청/교통부서", "가스공급자/검사기관", "현장 운영 런시트", "개장 승인 hold point", "피크 T-30", "폐장 T-30", "사고보고서 템플릿", "다국어 방문객 안전 안내문", "roadside event area", "道路隣接エリア", "道路邻近区域"];
 const missingPlanNeedles = planNeedles.filter((needle) => !planMarkdown.includes(needle));
 if (missingPlanNeedles.length > 0) {
   console.error(`FAIL safety_plan_generation missing=${missingPlanNeedles.join(",")}`);
@@ -499,7 +499,7 @@ const performancePlanResult = callTool("generate_mice_safety_plan", {
 const performancePlanMarkdown = performancePlanResult.planMarkdown ?? "";
 const performanceStageDoc = performancePlanResult.documentBundle?.performanceStagePlan ?? "";
 const performanceAnnexText = (performancePlanResult.sections?.legalAnnexes ?? []).join("\n");
-const performanceStageNeedles = ["공연·무대 실행계획", "현장 실행 상태표", "공연 재해대처계획", "무대·트러스 구조검토", "리깅 승인", "방염확인서", "스탠딩 펜스", "공연중지 기준", "무대감독", "아티스트/무대감독 중지 신호", "전원 차단", "관객 현 위치 대기"];
+const performanceStageNeedles = ["공연·무대 실행계획", "현장 실행 상태표", "KOPIS", "공연 재해대처계획", "무대·트러스 구조검토", "리깅 승인", "방염확인서", "스탠딩 펜스", "공연중지 기준", "무대감독", "아티스트/무대감독 중지 신호", "전원 차단", "관객 현 위치 대기"];
 const missingPerformanceStageNeedles = performanceStageNeedles.filter((needle) => !performancePlanMarkdown.includes(needle) && !performanceStageDoc.includes(needle));
 const performanceReview = callTool("review_mice_safety_plan", {
   eventName: "공연 포함 행사",
@@ -749,41 +749,42 @@ const datedExportResult = callTool("export_mice_safety_plan_bundle", {
   setupTeardown: true,
   outputDir: join(root, "data/.validation-store/dated-plan-export"),
 }).structuredContent;
-const visitorNoticeExportPath = join(root, "data/.validation-store/plan-export/15-visitor-safety-notices.md");
+const visitorNoticeExportPath = join(root, "data/.validation-store/plan-export/bundle/documents/15-visitor-safety-notices.md");
 const visitorNoticeExportMarkdown = readFileSync(visitorNoticeExportPath, "utf8");
-const operationsRunsheetPath = join(root, "data/.validation-store/plan-export/16-operations-runsheet.md");
+const operationsRunsheetPath = join(root, "data/.validation-store/plan-export/bundle/documents/16-operations-runsheet.md");
 const operationsRunsheetMarkdown = readFileSync(operationsRunsheetPath, "utf8");
-const operationsRunsheetCsv = readFileSync(join(root, "data/.validation-store/plan-export/operations-runsheet.csv"), "utf8");
-const foodLpgChecklistPath = join(root, "data/.validation-store/plan-export/06-food-lpg-checklist.md");
+const operationsRunsheetCsv = readFileSync(join(root, "data/.validation-store/plan-export/bundle/tables/operations-runsheet.csv"), "utf8");
+const foodLpgChecklistPath = join(root, "data/.validation-store/plan-export/bundle/documents/06-food-lpg-checklist.md");
 const foodLpgMarkdown = readFileSync(foodLpgChecklistPath, "utf8");
-const foodLpgExecutionCsv = readFileSync(join(root, "data/.validation-store/plan-export/food-lpg-execution.csv"), "utf8");
-const roadTrafficPath = join(root, "data/.validation-store/plan-export/19-road-traffic-control-plan.md");
+const foodLpgExecutionCsv = readFileSync(join(root, "data/.validation-store/plan-export/bundle/tables/food-lpg-execution.csv"), "utf8");
+const roadTrafficPath = join(root, "data/.validation-store/plan-export/bundle/documents/19-road-traffic-control-plan.md");
 const roadTrafficMarkdown = readFileSync(roadTrafficPath, "utf8");
-const roadTrafficCsv = readFileSync(join(root, "data/.validation-store/plan-export/road-traffic-control-plan.csv"), "utf8");
-const submissionSchedulePath = join(root, "data/.validation-store/plan-export/18-submission-raci-calendar.md");
+const roadTrafficCsv = readFileSync(join(root, "data/.validation-store/plan-export/bundle/tables/road-traffic-control-plan.csv"), "utf8");
+const submissionSchedulePath = join(root, "data/.validation-store/plan-export/bundle/documents/18-submission-raci-calendar.md");
 const submissionScheduleMarkdown = readFileSync(submissionSchedulePath, "utf8");
-const submissionScheduleCsv = readFileSync(join(root, "data/.validation-store/plan-export/submission-raci-calendar.csv"), "utf8");
-const packageIndexPath = join(root, "data/.validation-store/plan-export/submission-packages/package-index.csv");
-const localGovernmentPackagePath = join(root, "data/.validation-store/plan-export/submission-packages/01-local-government-package.md");
-const agencyPackagePath = join(root, "data/.validation-store/plan-export/submission-packages/03-fire-police-medical-package.md");
-const workerPackagePath = join(root, "data/.validation-store/plan-export/submission-packages/04-worker-contractor-package.md");
+const submissionScheduleCsv = readFileSync(join(root, "data/.validation-store/plan-export/bundle/tables/submission-raci-calendar.csv"), "utf8");
+const publicApiEvidenceMarkdown = readFileSync(join(root, "data/.validation-store/plan-export/bundle/documents/22-public-api-operational-evidence.md"), "utf8");
+const packageIndexPath = join(root, "data/.validation-store/plan-export/bundle/submission-packages/package-index.csv");
+const localGovernmentPackagePath = join(root, "data/.validation-store/plan-export/bundle/submission-packages/01-local-government-package.md");
+const agencyPackagePath = join(root, "data/.validation-store/plan-export/bundle/submission-packages/03-fire-police-medical-package.md");
+const workerPackagePath = join(root, "data/.validation-store/plan-export/bundle/submission-packages/04-worker-contractor-package.md");
 const packageIndexCsv = readFileSync(packageIndexPath, "utf8");
 const localGovernmentPackageMarkdown = readFileSync(localGovernmentPackagePath, "utf8");
 const agencyPackageMarkdown = readFileSync(agencyPackagePath, "utf8");
 const workerPackageMarkdown = readFileSync(workerPackagePath, "utf8");
-const privacyVenuePackageMarkdown = readFileSync(join(root, "data/.validation-store/privacy-package-export/submission-packages/02-venue-package.md"), "utf8");
-const privacySecurityPackageMarkdown = readFileSync(join(root, "data/.validation-store/privacy-package-export/submission-packages/05-privacy-security-package.md"), "utf8");
-const privacyPackageIndexCsv = readFileSync(join(root, "data/.validation-store/privacy-package-export/submission-packages/package-index.csv"), "utf8");
-const unhostedExportMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/20-unhosted-crowd-response-plan.md"), "utf8");
-const unhostedExportCsv = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/unhosted-crowd-response-plan.csv"), "utf8");
-const unhostedOperationsRunsheetMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/16-operations-runsheet.md"), "utf8");
-const unhostedLocalGovernmentPackageMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/submission-packages/01-local-government-package.md"), "utf8");
-const unhostedAgencyPackageMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/submission-packages/03-fire-police-medical-package.md"), "utf8");
-const performanceStageExportMarkdown = readFileSync(join(root, "data/.validation-store/performance-plan-export/21-performance-stage-execution-plan.md"), "utf8");
-const performanceStageExecutionCsv = readFileSync(join(root, "data/.validation-store/performance-plan-export/performance-stage-execution.csv"), "utf8");
-const datedSubmissionScheduleMarkdown = readFileSync(join(root, "data/.validation-store/dated-plan-export/18-submission-raci-calendar.md"), "utf8");
-const datedSubmissionScheduleCsv = readFileSync(join(root, "data/.validation-store/dated-plan-export/submission-raci-calendar.csv"), "utf8");
-const datedOperationsRunsheetMarkdown = readFileSync(join(root, "data/.validation-store/dated-plan-export/16-operations-runsheet.md"), "utf8");
+const privacyVenuePackageMarkdown = readFileSync(join(root, "data/.validation-store/privacy-package-export/bundle/submission-packages/02-venue-package.md"), "utf8");
+const privacySecurityPackageMarkdown = readFileSync(join(root, "data/.validation-store/privacy-package-export/bundle/submission-packages/05-privacy-security-package.md"), "utf8");
+const privacyPackageIndexCsv = readFileSync(join(root, "data/.validation-store/privacy-package-export/bundle/submission-packages/package-index.csv"), "utf8");
+const unhostedExportMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/documents/20-unhosted-crowd-response-plan.md"), "utf8");
+const unhostedExportCsv = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/tables/unhosted-crowd-response-plan.csv"), "utf8");
+const unhostedOperationsRunsheetMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/documents/16-operations-runsheet.md"), "utf8");
+const unhostedLocalGovernmentPackageMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/submission-packages/01-local-government-package.md"), "utf8");
+const unhostedAgencyPackageMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/submission-packages/03-fire-police-medical-package.md"), "utf8");
+const performanceStageExportMarkdown = readFileSync(join(root, "data/.validation-store/performance-plan-export/bundle/documents/21-performance-stage-execution-plan.md"), "utf8");
+const performanceStageExecutionCsv = readFileSync(join(root, "data/.validation-store/performance-plan-export/bundle/tables/performance-stage-execution.csv"), "utf8");
+const datedSubmissionScheduleMarkdown = readFileSync(join(root, "data/.validation-store/dated-plan-export/bundle/documents/18-submission-raci-calendar.md"), "utf8");
+const datedSubmissionScheduleCsv = readFileSync(join(root, "data/.validation-store/dated-plan-export/bundle/tables/submission-raci-calendar.csv"), "utf8");
+const datedOperationsRunsheetMarkdown = readFileSync(join(root, "data/.validation-store/dated-plan-export/bundle/documents/16-operations-runsheet.md"), "utf8");
 
 if (
   datedExportResult.review?.verdict === "needs_revision"
@@ -813,6 +814,8 @@ if (
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("food-lpg-execution.csv"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("20-unhosted-crowd-response-plan.md"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("unhosted-crowd-response-plan.csv"))
+  || !(exportResult.files ?? []).some((file) => String(file).endsWith("22-public-api-operational-evidence.md"))
+  || !(exportResult.files ?? []).some((file) => String(file).endsWith("public-api-operational-evidence.csv"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("17-review-summary.md"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("review-coverage-matrix.csv"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("review-findings.csv"))
@@ -824,7 +827,7 @@ if (
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("submission-packages/04-worker-contractor-package.md"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("safety-plan.docx"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("safety-checklists.xlsx"))
-  || !zipLooksValid(join(root, "data/.validation-store/plan-export/safety-checklists.xlsx"))
+  || !zipLooksValid(join(root, "data/.validation-store/plan-export/bundle/tables/safety-checklists.xlsx"))
   || !(privacySecurityExportResult.files ?? []).some((file) => String(file).endsWith("submission-packages/05-privacy-security-package.md"))
   || !(performanceExportResult.files ?? []).some((file) => String(file).endsWith("21-performance-stage-execution-plan.md"))
   || !(performanceExportResult.files ?? []).some((file) => String(file).endsWith("performance-stage-execution.csv"))
@@ -844,6 +847,10 @@ if (
   || !packageIndexCsv.includes("Sharing Scope")
   || !packageIndexCsv.includes("limited_external")
   || !localGovernmentPackageMarkdown.includes("제출·협의 체크리스트")
+  || !localGovernmentPackageMarkdown.includes("공공 API 운영 증거")
+  || !publicApiEvidenceMarkdown.includes("식품안전나라")
+  || !publicApiEvidenceMarkdown.includes("NEMC_AED")
+  || !publicApiEvidenceMarkdown.includes("기상청 API Hub")
   || !localGovernmentPackageMarkdown.includes("현장 운영 런시트")
   || !localGovernmentPackageMarkdown.includes("도로·교통 실행계획")
   || !agencyPackageMarkdown.includes("현장 운영 런시트")
@@ -1068,7 +1075,7 @@ const performanceRunsheetInitResult = callTool("initialize_mice_runsheet_executi
   temporaryStructures: true,
   temporaryElectricity: true,
   setupTeardown: true,
-  operationsRunsheetMarkdown: readFileSync(join(root, "data/.validation-store/performance-plan-export/16-operations-runsheet.md"), "utf8"),
+  operationsRunsheetMarkdown: readFileSync(join(root, "data/.validation-store/performance-plan-export/bundle/documents/16-operations-runsheet.md"), "utf8"),
   source: "validation-performance-runsheet",
 }).structuredContent;
 const performanceRunsheetTarget = (performanceRunsheetInitResult.items ?? []).find((item) => /공연중지 기준|무대감독|무대 전면 압박|리깅 승인/.test(String(item.task ?? "")));

@@ -138,9 +138,9 @@ npm run diff:ontology
 - `collect_mice_p0_ready_sources`: available-key-first P0 source의 오프라인 pack 준비 상태 조회. `liveProbe:true`이면 KCISA/KOPIS/TourAPI/NEMC/FoodSafety를 소량 실제 호출해 정규화 결과를 검증
 - `generate_mice_event_day_snapshot`: P1 행사 당일 snapshot. `live:true`이면 서울 실시간 도시데이터와 에어코리아를 실제 호출하고, ITS/재난문자는 pending fallback으로 처리
 - `query_mice_live_operations_status`: P2 live adapter. `live:true`이면 기상청 API Hub 초단기실황, 서울 실시간 도시데이터, 에어코리아를 실제 호출해 법령 근거가 아닌 `operationalEvidence`로 반환
-- `generate_mice_safety_plan`: 오프라인 온톨로지 기반 안전관리계획서, 도로·교통 실행계획, 무주최 다중운집 관계기관 공동대응계획, 현장 운영 런시트, 제출·협의 체크리스트, 다국어 방문객 안내 초안 생성
-- `export_mice_safety_plan_bundle`: 생성 계획서를 Markdown/CSV/docx/xlsx 파일 묶음으로 저장. 도로·교통 실행계획, 무주최 다중운집 대응계획, 공연·무대 실행 상태표 CSV, 식음료/LPG 실행 상태표 CSV, 현장 운영 런시트, 제출·협의 체크리스트, 제출 일정·RACI·증빙 매트릭스, 다국어 방문객 안전 안내문, 자체 검수 요약, 공유범위 필터가 적용된 관할기관별 제출 패키지를 포함
-- `review_mice_safety_plan`: 생성 계획서의 법령/조례/베뉴/작업자 안전/도로·교통/무주최 다중운집/공연·무대/식음료·LPG 현장 실행 기준 누락, 과잉 적용 후보, 문서 커버리지 매트릭스 검수
+- `generate_mice_safety_plan`: 오프라인 온톨로지 기반 안전관리계획서, 공공 API 운영 증거, 도로·교통 실행계획, 무주최 다중운집 관계기관 공동대응계획, 현장 운영 런시트, 제출·협의 체크리스트, 다국어 방문객 안내 초안 생성
+- `export_mice_safety_plan_bundle`: 생성 계획서를 Markdown/CSV/docx/xlsx 파일 묶음으로 저장. 공공 API 운영 증거, 도로·교통 실행계획, 무주최 다중운집 대응계획, 공연·무대 실행 상태표 CSV, 식음료/LPG 실행 상태표 CSV, 현장 운영 런시트, 제출·협의 체크리스트, 제출 일정·RACI·증빙 매트릭스, 다국어 방문객 안전 안내문, 자체 검수 요약, 공유범위 필터가 적용된 관할기관별 제출 패키지를 포함
+- `review_mice_safety_plan`: 생성 계획서의 법령/조례/베뉴/작업자 안전/도로·교통/무주최 다중운집/공연·무대/식음료·LPG 현장 실행 기준, 공공 API 운영 증거 누락, 과잉 적용 후보, 문서 커버리지 매트릭스 검수
 - `query_mice_local_ordinances`: 지자체 조례 오프라인 인덱스/조문 발췌 조회와 베뉴/관할/행사조건 기반 우선순위 산정
 - `query_mice_worker_safety_references`: 산안기준규칙/KOSHA 기반 설치·철거 작업자 안전 근거 조회
 - `query_mice_venue_safety_rules`: 베뉴별 안전수칙·출처 조회
@@ -168,6 +168,8 @@ npm run diff:ontology
 - `plan_korean_law_mcp_queries`: 추가 법령 검증용 korean-law-mcp CLI 명령 생성
 
 ## 데이터 파일
+
+- `src/ontology/mice/public-api-operational-evidence.json`: KCISA/KOPIS/TourAPI/NEMC/식품안전나라/기상청/서울/에어코리아 live probe 결과를 키 없이 요약한 오프라인 운영 증거 스냅샷. 법령 근거가 아니라 행사 전·당일 확인 액션으로만 사용합니다.
 
 - [law-registry.json](src/ontology/mice/law-registry.json)
 - [source-registry.json](src/ontology/mice/source-registry.json)

@@ -1,6 +1,6 @@
 # API Access Requirements
 
-이 문서는 P0/P1/P2 개발에 필요한 공공 API와 회원가입, 활용신청, 인증키, 오프라인 저장 가능 여부를 정리한다. 확인 기준일은 2026-05-30이다. API 이용조건과 트래픽, 승인 방식은 변동될 수 있으므로 collector 구현 전 각 공식 페이지에서 다시 확인한다.
+이 문서는 P0/P1/P2 개발에 필요한 공공 API와 회원가입, 활용신청, 인증키, 오프라인 저장 가능 여부를 정리한다. 확인 기준일은 2026-05-31이다. API 이용조건과 트래픽, 승인 방식은 변동될 수 있으므로 collector 구현 전 각 공식 페이지에서 다시 확인한다.
 
 ## 기본 원칙
 
@@ -13,7 +13,7 @@
 
 ## 현재 키 확보 현황
 
-확인 기준: 2026-05-30. 실제 키 값은 문서에 기록하지 않고, 로컬 `.env` 또는 외부 보관처 존재 여부만 상태로 표시한다.
+확인 기준: 2026-05-31. 실제 키 값은 문서에 기록하지 않고, 로컬 `.env` 또는 외부 보관처 존재 여부만 상태로 표시한다.
 
 ### 전체 요약
 
@@ -208,7 +208,7 @@ node build/cli.js call query_mice_live_operations_status --inputJson '{"jurisdic
 - `query_mice_live_operations_status`는 `live:true`에서 기상청 API Hub 초단기실황, 서울 실시간 도시데이터, 에어코리아를 실제 호출하고, P2 데이터는 법령 근거가 아닌 `operationalEvidence` 아래에만 반환한다.
 - 테스트는 `npm test`로 실행하며 mock 응답을 사용한다. 실제 API smoke 검증은 위 CLI 명령으로 수행한다.
 
-### 2026-05-30 live smoke 결과
+### 2026-05-31 live smoke 결과
 
 키 값을 출력하지 않는 요약 기준으로 다음을 확인했다.
 
@@ -218,11 +218,13 @@ node build/cli.js call query_mice_live_operations_status --inputJson '{"jurisdic
 | `KOPIS_PERFORMANCE_CATALOG` | `live_verified`, 2026년 5월 공연 샘플 반환 | 공연 포함 행사 판단 보강 |
 | `TOUR_API_EVENT_CATALOG` | `live_verified`, 2026년 5월 축제/행사 totalCount 153 | 실존 축제·행사 샘플과 관할 보강 |
 | `NEMC_EMERGENCY_MEDICAL` | `live_verified`, 서울 강남구 응급의료기관 샘플 반환 | 응급의료·이송 후보 보강 |
-| `NEMC_AED` | `live_verified`, 코엑스 주변 AED 샘플 반환 | AED 배치·현장 의료 계획 보강 |
+| `NEMC_AED` | `live_verified`, 코엑스 주변 AED 샘플 반환, totalCount 15,014 | AED 배치·현장 의료 계획 보강 |
 | `FOOD_SAFETY_KOREA` | `live_verified`, 회수·판매중지 `I0490` 샘플 반환 | 식음료 행사 위험 보강 |
 | `SEOUL_REALTIME_CITY_DATA` | `configured`, live record 1건 | 서울권 인파/혼잡도 운영 판단 |
 | `AIRKOREA_AIR_QUALITY` | `configured`, live record 1건 | 야외 대기열·취약자 보호 판단 |
 | `KMA_APIHUB_WEATHER` | `configured`, live 초단기실황 record 1건 | 기상 악화에 따른 행사중지/작업중지 판단 |
+
+이 smoke 결과는 `src/ontology/mice/public-api-operational-evidence.json`에 키 없이 오프라인 운영 증거 스냅샷으로 요약 저장했다. 생성 계획서는 이 스냅샷을 법령 근거가 아니라 D-1/D-day 확인 액션, 담당자, 증빙 항목으로 반영한다.
 
 ## 공식 확인 근거
 
