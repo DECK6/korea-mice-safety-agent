@@ -1,6 +1,6 @@
 {
   "name": "korea-mice-safety-agent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Korean MICE site-operation safety MCP agent with law, venue, hazard, duty, and checklist ontology packs.",
   "type": "module",
   "main": "build/index.js",
