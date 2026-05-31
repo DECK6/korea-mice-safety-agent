@@ -18,7 +18,8 @@ Korean MICE 현장 운영 안전용 MCP 서버입니다. 축제·박람회·컨�
 ## 릴리스 상태
 
 - 현재 버전: `1.0.3`
-- 성숙도: 신뢰성 평가 85/100의 field-ready candidate. 이미 1.0.x 릴리스 라인에 있으므로 버전은 되돌리지 않고, 90점/95점은 다음 품질 목표로 관리합니다.
+- 성숙도: 신뢰성 평가 90/100의 trusted release 구간입니다. 이미 1.0.x 릴리스 라인에 있으므로 버전은 되돌리지 않고, 95점은 다음 품질 목표로 관리합니다.
+- 버전 정책: `package.json`/CLI의 `1.0.3`이 제품 릴리스 버전입니다. 일부 온톨로지 파일의 `version`은 데이터 스키마 또는 내부 pack 버전이며 제품 버전을 낮추는 의미가 아닙니다.
 - 릴리스 게이트와 배포 경계는 [RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)에 정리합니다.
 - 신뢰성 평가 기준은 [TRUSTED_SAFETY_LAW_RUBRIC.md](docs/TRUSTED_SAFETY_LAW_RUBRIC.md), 현재 점수표는 [TRUSTED_SAFETY_LAW_SCORECARD_2026-05-31.md](docs/TRUSTED_SAFETY_LAW_SCORECARD_2026-05-31.md)에 분리해 저장합니다.
 - npm 패키지는 raw PDF/HWP, full extracted 베뉴 Markdown, `.env`, 다운로드 쿠키, 검증 출력 저장소, graphify 캐시를 포함하지 않습니다. 공개 패키지에는 `data/public/venue-safety-summaries.json`과 `data/markdown/public/venue-safety-summaries.md`처럼 요약·체크포인트형 자료만 포함합니다.

@@ -58,6 +58,9 @@ const output = {
         url: source?.url,
         verificationStatus: source?.verificationStatus ?? "source_verified",
         offlineTextStatus: source?.offlineTextStatus,
+        currentAsOf: source?.currentAsOf,
+        reviewBy: source?.reviewBy,
+        freshnessStatus: source?.freshnessStatus,
         releasePolicy: "summary_only",
         reuseCaution: source?.reuseCaution ?? "원문 복제보다 링크와 체크포인트 요약 사용",
       };
@@ -71,6 +74,8 @@ const output = {
       website: venue.website,
       verificationStatus: venue.safetyProfile?.gaps?.length ? "needs_review" : "source_verified",
       lastReviewedAt: venue.safetyProfile?.lastReviewedAt,
+      reviewBy: venue.safetyProfile?.reviewBy,
+      freshnessStatus: venue.safetyProfile?.freshnessStatus,
       sources,
       spaces: limit(venue.spaces, 5).map((space) => ({
         id: space.id,
@@ -116,9 +121,14 @@ for (const venue of output.venues) {
   lines.push(`- Region: ${venue.region ?? "unknown"}`);
   lines.push(`- Verification: ${venue.verificationStatus}`);
   if (venue.lastReviewedAt) lines.push(`- Last reviewed: ${venue.lastReviewedAt}`);
+  if (venue.reviewBy) lines.push(`- Review by: ${venue.reviewBy}`);
+  if (venue.freshnessStatus) lines.push(`- Freshness: ${venue.freshnessStatus}`);
   lines.push("- Sources:");
   for (const source of venue.sources) {
-    lines.push(`  - ${source.id}: ${source.title}${source.url ? ` (${source.url})` : ""}`);
+    const freshness = [source.currentAsOf ? `currentAsOf=${source.currentAsOf}` : "", source.reviewBy ? `reviewBy=${source.reviewBy}` : "", source.freshnessStatus ? `freshness=${source.freshnessStatus}` : ""]
+      .filter(Boolean)
+      .join(", ");
+    lines.push(`  - ${source.id}: ${source.title}${source.url ? ` (${source.url})` : ""}${freshness ? ` [${freshness}]` : ""}`);
   }
   if (venue.spaces.length) {
     lines.push("- Spaces:");

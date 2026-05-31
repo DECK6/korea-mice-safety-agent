@@ -28,7 +28,7 @@
 - P2 live 운영 상태와 행사일 snapshot은 `operational-evidence-model.ts`의 공통 status/location/freshness helper를 공유한다.
 - `collect_mice_p0_ready_sources`는 `writeSnapshot=true`, `dryRun=false` 조건에서 API 키와 raw response 없이 sanitized snapshot을 로컬에 저장할 수 있다.
 - 웹 시뮬레이터는 `/api/simulate` 적용성 체크 외에 `/api/plan-review`로 계획서 생성·검수 요약을 카드형 보고서로 보여준다.
-- 온톨로지 파일의 `version: "1.0.0"`은 npm package release가 아니라 `versionType: "ontology_schema"`인 데이터 스키마 버전이다. 릴리스 산출물과 `generate-ontology-diff` report/snapshot의 `version`은 `package.json`의 npm version을 사용한다.
+- 온톨로지/manifest 파일의 `version: "1.0.0"` 또는 `version: "0.1.0"`은 npm package release가 아니라 `versionType`으로 표시된 데이터 스키마/내부 pack 버전이다. 제품 릴리스 버전은 `package.json`과 CLI의 `1.0.3`이며, 릴리스 산출물과 `generate-ontology-diff` report/snapshot의 `version`은 `package.json`의 npm version을 사용한다.
 
 ## law.go.kr / korean-law-mcp 검증 상태
 

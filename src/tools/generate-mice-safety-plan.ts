@@ -519,6 +519,12 @@ function buildExecutiveSummaryMarkdown(input: Input, sections: Record<string, st
   const nonApplicable = decisionRowsForInput(input).filter((row) => row[1] === "비적용");
   const conditional = conditionalRowsForInput(input, localOrdinances);
   const actions = priorityActionRowsFromChecklist(String(documentBundle.submissionChecklist ?? ""), 7);
+  const threeMinuteRows = actions.slice(0, 5).map((row) => [
+    row[1] ?? "해야 할 일",
+    row[2] ?? "담당 확인",
+    row[3] ?? "기한 확인",
+    row[4] ?? "증빙 확인",
+  ]);
   const remainingRisks = [
     "자동 생성 결과는 법률 자문이 아니며, 최신 법령 원문·조례 시행일·관할기관 접수창구 답변으로 보정해야 한다.",
     localOrdinances.some((record) => record.verificationStatus === "needs_review")
@@ -538,6 +544,9 @@ function buildExecutiveSummaryMarkdown(input: Input, sections: Record<string, st
     `- 관할·베뉴: ${input.jurisdiction ?? "관할 미입력"} / ${input.venueId ?? "베뉴 미지정"}`,
     "- 이 문서는 안전관리 실무 초안이며, 제출·승인 전 책임자와 관할기관 확인이 필요하다.",
     "- 자동 점수와 검수는 법적 적합성 판정이 아니라 입력 조건 대비 커버리지 점검이다.",
+    "",
+    "### 3분 판단용 실행 요약",
+    ...markdownTable(["먼저 할 일", "담당", "기한", "증빙"], threeMinuteRows.length > 0 ? threeMinuteRows : [["관할기관/베뉴 제출 대상 확인", "안전총괄", "기한 확인", "담당자 회신"]]),
     "",
     "### 이 행사에서 실제로 중요한 위험",
     ...markdownTable(["위험", "담당", "확인 증빙"], keyRiskRows.length > 0 ? keyRiskRows : [["행사 기본 리스크", "안전총괄", "인원·동선·피난·응급동선 현장 도면 확인"]]),

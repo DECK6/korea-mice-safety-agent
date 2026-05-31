@@ -115,8 +115,10 @@ function zipLooksValid(filePath) {
 function validateOntologyMaturity() {
   const failures = [];
   const lawRegistry = readJson("src/ontology/mice/law-registry.json");
+  const sourceRegistry = readJson("src/ontology/mice/source-registry.json");
   const legalArticles = readJson("src/ontology/mice/legal-article-ontology.json").articles ?? [];
-  const localOrdinances = readJson("src/ontology/mice/local-ordinance-pack.json").records ?? [];
+  const localOrdinancePack = readJson("src/ontology/mice/local-ordinance-pack.json");
+  const localOrdinances = localOrdinancePack.records ?? [];
   const duties = readJson("src/ontology/mice/mice-duty-master.json").duties ?? [];
   const hazards = readJson("src/ontology/mice/hazard-controls.json").hazards ?? [];
   const applicability = readJson("src/ontology/mice/mice-safety-applicability.json");
@@ -224,6 +226,15 @@ function validateOntologyMaturity() {
     for (const key of ["source", "articles", "threshold", "actionMapping"]) {
       if (!checks[key]) failures.push(`ordinance_verification_check:${record.id}:${key}`);
     }
+    for (const key of ["currentAsOf", "reviewBy", "freshnessStatus"]) {
+      if (!record[key]) failures.push(`ordinance_freshness:${record.id}:${key}`);
+    }
+  }
+  if ((ordinanceVerificationCounts.article_verified ?? 0) < 100) {
+    failures.push(`ordinance_article_verified_below_90_gate:${ordinanceVerificationCounts.article_verified ?? 0}`);
+  }
+  if ((localOrdinancePack.priorityArticleVerification?.verifiedRecords ?? 0) < 35) {
+    failures.push(`priority_article_verification_below_90_gate:${localOrdinancePack.priorityArticleVerification?.verifiedRecords ?? 0}`);
   }
   const categoryCounts = {};
   for (const record of localOrdinances) {
@@ -256,6 +267,19 @@ function validateOntologyMaturity() {
   for (const record of localOrdinances) {
     for (const dutyId of record.relatedDuties ?? []) if (!dutyIds.has(dutyId)) failures.push(`ordinance_unknown_duty:${record.id}:${dutyId}`);
     for (const hazardId of record.relatedHazards ?? []) if (!hazardIds.has(hazardId)) failures.push(`ordinance_unknown_hazard:${record.id}:${hazardId}`);
+  }
+  const sourceRegistryData = sourceRegistry;
+  for (const source of sourceRegistryData.sources ?? []) {
+    for (const key of ["currentAsOf", "reviewBy", "freshnessStatus"]) {
+      if (!source[key]) failures.push(`source_freshness:${source.id}:${key}`);
+    }
+  }
+  const venueRulesData = readJson("src/ontology/mice/venue-safety-rules.json");
+  for (const venue of venueRulesData.venues ?? []) {
+    const profile = venue.safetyProfile ?? {};
+    for (const key of ["lastReviewedAt", "reviewBy", "freshnessStatus"]) {
+      if (!profile[key]) failures.push(`venue_freshness:${venue.id}:${key}`);
+    }
   }
 
   const riskAreaCoverage = {
@@ -692,12 +716,12 @@ const outdoorPlanMarkdown = outdoorPlanResult.planMarkdown ?? "";
 const executiveSummaryNeedles = [
   "## 먼저 읽는 요약 보고서",
   "### 결론",
+  "### 3분 판단용 실행 요약",
+  "먼저 할 일",
   "### 이 행사에서 실제로 중요한 위험",
   "### 적용되는 법령·조례·베뉴 규정",
   "### 적용되지 않는 법령과 이유",
   "### 조건부 확인 항목",
-  "source_verified 조례 원문 조문 확인",
-  "원문 조문 확인 필요",
   "### 제출·협의 액션",
   "담당",
   "증빙",

@@ -2595,5 +2595,11 @@
       "threshold": "조문별 적용조건은 appliesTo, relatedDutyIds, relatedHazardIds 기준으로 확인",
       "sourceConfidence": "official_law_go_verified_article"
     }
-  ]
+  ],
+  "freshnessPolicy": {
+    "appliedAt": "2026-05-31",
+    "currentAsOf": "2026-05-21",
+    "reviewBy": "2026-08-31",
+    "note": "법령 조문 요약은 제출 전 최신 시행 법령 원문으로 재확인한다."
+  }
 }

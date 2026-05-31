@@ -468,7 +468,7 @@ function review(text: string, input: Input, documentBundle?: DocumentBundle): { 
   const documentCoverageMatrix = buildDocumentCoverageMatrix(text, input, documentBundle);
 
   addFinding(findings, !includesAny(text, ["행사 개요", "행사명"]), "error", "plan_structure", "행사 개요가 부족합니다.", "행사명, 일자, 장소, 주최/주관, 예상 인원, 행사 유형을 포함하세요.", { requirementId: "REQ_PLAN_OVERVIEW" });
-  addFinding(findings, !includesAll(text, ["먼저 읽는 요약 보고서", "적용되지 않는 법령과 이유", "조건부 확인 항목", "제출·협의 액션", "남은 리스크"]), "warning", "executive_summary", "맨 앞 요약 보고서의 실무 판단 구조가 부족합니다.", "결론, 핵심 위험, 적용/비적용 판단, 조건부 확인, 제출·협의 액션, 담당자·기한·증빙, 남은 리스크를 계획서 앞부분에 고정하세요.", { requirementId: "REQ_EXECUTIVE_SUMMARY_DECISION_FIRST" });
+  addFinding(findings, !includesAll(text, ["먼저 읽는 요약 보고서", "3분 판단용 실행 요약", "적용되지 않는 법령과 이유", "조건부 확인 항목", "제출·협의 액션", "남은 리스크"]), "warning", "executive_summary", "맨 앞 요약 보고서의 실무 판단 구조가 부족합니다.", "결론, 3분 실행 요약, 핵심 위험, 적용/비적용 판단, 조건부 확인, 제출·협의 액션, 담당자·기한·증빙, 남은 리스크를 계획서 앞부분에 고정하세요.", { requirementId: "REQ_EXECUTIVE_SUMMARY_DECISION_FIRST" });
   addFinding(findings, !includesAny(text, ["적용 법령", "법령·근거"]), "error", "legal_basis", "적용 법령 섹션이 없습니다.", "법령/조례/베뉴 규정의 근거 섹션을 추가하세요.", { requirementId: "REQ_LEGAL_BASIS" });
   addFinding(findings, !includesAny(text, ["제출·승인", "안전관리계획서"]), "error", "document_duty", "제출·승인 문서가 부족합니다.", "행사 안전관리계획서, 인파관리계획, 작업자 안전계획, 점검표를 문서 단위로 분리하세요.", { requirementId: "REQ_DOCUMENT_BUNDLE" });
   addFinding(findings, !includesAny(text, ["제출·협의 체크리스트", "제출/확인처", "기한/시점"]), "warning", "submission_checklist", "제출·협의 체크리스트가 부족합니다.", "지자체, 도로관리청, 소방, 베뉴, 위생, 가스, 개인정보, 경비, 의료, 시공협력사별 제출/확인 문서를 표로 정리하세요.", { requirementId: "REQ_SUBMISSION_CHECKLIST" });
