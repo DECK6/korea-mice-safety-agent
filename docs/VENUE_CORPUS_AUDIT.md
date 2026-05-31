@@ -6,7 +6,7 @@ Venue source documents stay offline as raw PDF/HWP plus Markdown extracts. The o
 
 - manifestItems: 15
 - markdownIndexItems: 15
-- sourceRegistrySources: 52
+- sourceRegistrySources: 53
 - venues: 19
 - facilityIndexedVenues: 19
 - facilityEntries: 5875

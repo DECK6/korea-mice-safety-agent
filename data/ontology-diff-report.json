@@ -1,8 +1,9 @@
 {
-  "version": "1.0.0",
-  "generatedAt": "2026-05-30T14:29:13.524Z",
-  "baselineGeneratedAt": "2026-05-29T13:38:26.847Z",
-  "currentGeneratedAt": "2026-05-30T14:29:13.518Z",
+  "version": "1.0.3",
+  "schemaVersion": "ontology-diff.v1",
+  "generatedAt": "2026-05-31T14:00:29.824Z",
+  "baselineGeneratedAt": "2026-05-31T14:00:25.852Z",
+  "currentGeneratedAt": "2026-05-31T14:00:29.821Z",
   "summary": {
     "laws": {
       "added": 0,
@@ -45,7 +46,7 @@
       "changed": 0
     },
     "p0OfflineEvidencePack": {
-      "added": 6,
+      "added": 0,
       "removed": 0,
       "changed": 0
     },
@@ -102,38 +103,7 @@
       "changed": []
     },
     "p0OfflineEvidencePack": {
-      "added": [
-        {
-          "id": "FOOD_SAFETY_KOREA",
-          "label": "식품안전나라 F&B/HACCP/회수정보 / collector_ready / needs_source_review",
-          "hash": "a65254d01a6104e5"
-        },
-        {
-          "id": "KCISA_KOPIS_PERFORMANCE_FACILITY",
-          "label": "KCISA KOPIS 공연시설별상세정보 / collected / source_verified",
-          "hash": "e6b93ae0ffa3e521"
-        },
-        {
-          "id": "KOPIS_PERFORMANCE_CATALOG",
-          "label": "KOPIS 공연/축제 catalog / collector_ready / needs_source_review",
-          "hash": "d41272c64ee6bc1f"
-        },
-        {
-          "id": "NEMC_EMERGENCY_MEDICAL",
-          "label": "응급의료기관/AED 정보 / collector_ready / needs_source_review",
-          "hash": "aff6ac2b942d952a"
-        },
-        {
-          "id": "TOUR_API_EVENT_CATALOG",
-          "label": "한국관광공사 TourAPI 행사/축제 catalog / collector_ready / needs_source_review",
-          "hash": "542e9c72d2419460"
-        },
-        {
-          "id": "VENUE_PUBLIC_OPERATION_DOCS",
-          "label": "베뉴 운영규정/PDF/HWP / collected_partial / source_verified",
-          "hash": "ee8b70440cf091e5"
-        }
-      ],
+      "added": [],
       "removed": [],
       "changed": []
     },

@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "extractionPolicy": "Venue PDF/HWP Markdown extracts are stored as compact operational facts with source path and line number. Full source documents remain outside redistributable ontology output.",
   "categories": [

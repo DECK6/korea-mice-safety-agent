@@ -1,48 +1,16 @@
 import { z } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
+import { baseMiceEventInputSchema, type MiceEventType } from "../lib/mice-event-input-schema.js";
 import type { McpToolResult, ToolDefinition } from "../lib/types.js";
 import { generateMiceSafetyPlanTool } from "./generate-mice-safety-plan.js";
 
-const EventTypeSchema = z.enum([
-  "festival",
-  "outdoor_event",
-  "exhibition",
-  "conference",
-  "performance",
-  "food_event",
-  "vip_event",
-]);
-
-const inputSchema = z.object({
+const inputSchema = baseMiceEventInputSchema.extend({
   planMarkdown: z.string().optional().describe("검수할 계획서 Markdown. 없으면 같은 입력으로 generate_mice_safety_plan을 먼저 호출합니다."),
-  eventName: z.string().optional(),
-  date: z.string().optional(),
-  eventDate: z.string().optional().describe("행사일 YYYY-MM-DD. date와 같은 의미의 alias입니다."),
-  location: z.string().optional(),
-  organizer: z.string().optional(),
-  eventTypes: z.array(EventTypeSchema).optional(),
-  venueId: z.string().optional(),
-  jurisdiction: z.string().optional(),
-  expectedCrowd: z.number().int().min(0).optional(),
-  outdoor: z.boolean().optional(),
-  outdoorEvent: z.boolean().optional(),
-  roadUse: z.boolean().optional(),
-  outdoorAdvertising: z.boolean().optional().describe("현수막, 배너, 지주형 안내판, 전광류 등 옥외광고물/외부 안내표지 설치 여부"),
-  unhostedCrowd: z.boolean().optional().describe("주최자·주관자 없이 자발적/예측형 다중운집이 발생하는 상황"),
-  temporaryStructures: z.boolean().optional(),
-  temporaryElectricity: z.boolean().optional(),
-  setupTeardown: z.boolean().optional(),
-  workAtHeight: z.boolean().optional(),
-  heavyObjectHandling: z.boolean().optional(),
-  hotWork: z.boolean().optional(),
-  lpgUse: z.boolean().optional(),
-  foodService: z.boolean().optional(),
-  performance: z.boolean().optional(),
-  personalDataProcessing: z.boolean().optional(),
-  vipSecurity: z.boolean().optional(),
+  documentBundle: z.record(z.unknown()).optional().describe("generate_mice_safety_plan/export 결과의 구조화 문서 묶음. 있으면 Markdown 키워드보다 우선해 문서 단위 커버리지를 검수합니다."),
 });
 
 type Input = z.infer<typeof inputSchema>;
+type DocumentBundle = Record<string, unknown>;
 
 type Severity = "error" | "warning" | "info";
 
@@ -90,11 +58,35 @@ interface ReviewContext {
 interface DocumentCoverageDefinition {
   documentId: string;
   title: string;
+  bundleKey?: string;
   terms: string[];
   appliesWhen: string;
   requirement: (input: Input, context: ReviewContext) => CoverageRequirement;
   missingSeverity?: Severity;
 }
+
+const documentBundleKeys: Record<string, string> = {
+  public_api_operational_evidence: "publicApiOperationalEvidence",
+  event_safety_plan: "eventSafetyPlan",
+  crowd_flow_plan: "crowdFlowPlan",
+  road_traffic_control_plan: "roadTrafficControlPlan",
+  unhosted_crowd_response_plan: "unhostedCrowdResponsePlan",
+  venue_facility_plan: "venueFacilityPlan",
+  worker_safety_plan: "workerSafetyPlan",
+  performance_stage_execution_plan: "performanceStagePlan",
+  fire_evacuation_checklist: "fireEvacuationChecklist",
+  food_lpg_checklist: "foodLpgChecklist",
+  privacy_cctv_checklist: "privacyCctvChecklist",
+  security_access_plan: "securityAccessPlan",
+  medical_response_plan: "medicalResponsePlan",
+  staff_assignment: "staffAssignment",
+  emergency_contacts: "emergencyContacts",
+  daily_safety_checklist: "dailySafetyChecklist",
+  operations_runsheet: "operationsRunsheet",
+  submission_checklist: "submissionChecklist",
+  incident_report_template: "incidentReportTemplate",
+  visitor_safety_notices: "visitorSafetyNotices",
+};
 
 function includesAny(text: string, terms: string[]): boolean {
   return terms.some((term) => text.includes(term));
@@ -111,6 +103,21 @@ function locateEvidence(text: string, terms: string[]): Finding["evidence"] | un
   return {
     line: index + 1,
     excerpt: lines[index].trim().slice(0, 180),
+  };
+}
+
+function nonEmptyBundleText(bundle: DocumentBundle | undefined, key: string | undefined): string {
+  if (!bundle || !key) return "";
+  const value = bundle[key];
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function locateBundleEvidence(bundle: DocumentBundle | undefined, key: string | undefined): Finding["evidence"] | undefined {
+  const value = nonEmptyBundleText(bundle, key);
+  if (!value) return undefined;
+  return {
+    line: 0,
+    excerpt: `documentBundle.${key} present (${value.length} chars)`,
   };
 }
 
@@ -142,7 +149,7 @@ function addFinding(
 }
 
 function hasEvent(input: Input, eventType: string): boolean {
-  return (input.eventTypes ?? []).includes(eventType as z.infer<typeof EventTypeSchema>);
+  return (input.eventTypes ?? []).includes(eventType as MiceEventType);
 }
 
 function buildReviewContext(input: Input): ReviewContext {
@@ -335,11 +342,12 @@ const documentCoverageDefinitions: DocumentCoverageDefinition[] = [
   },
 ];
 
-function buildDocumentCoverageMatrix(text: string, input: Input): DocumentCoverageRow[] {
+function buildDocumentCoverageMatrix(text: string, input: Input, documentBundle?: DocumentBundle): DocumentCoverageRow[] {
   const context = buildReviewContext(input);
   return documentCoverageDefinitions.map((definition) => {
     const requirement = definition.requirement(input, context);
-    const evidence = locateEvidence(text, definition.terms);
+    const bundleKey = definition.bundleKey ?? documentBundleKeys[definition.documentId];
+    const evidence = locateBundleEvidence(documentBundle, bundleKey) ?? locateEvidence(text, definition.terms);
     const status: CoverageStatus = requirement === "not_applicable"
       ? "not_applicable"
       : evidence ? "present" : "missing";
@@ -360,7 +368,7 @@ function formatDocumentCoverageMarkdown(rows: DocumentCoverageRow[]): string {
     "## 문서 커버리지 매트릭스",
     "| 문서 | 필요도 | 상태 | 적용 조건 | 근거 |",
     "| --- | --- | --- | --- | --- |",
-    ...rows.map((row) => `| ${row.title} | ${row.requirement} | ${row.status} | ${row.appliesWhen.replace(/\|/g, "/")} | ${row.evidence ? `line ${row.evidence.line}` : ""} |`),
+    ...rows.map((row) => `| ${row.title} | ${row.requirement} | ${row.status} | ${row.appliesWhen.replace(/\|/g, "/")} | ${row.evidence ? row.evidence.line > 0 ? `line ${row.evidence.line}` : row.evidence.excerpt : ""} |`),
   ].join("\n");
 }
 
@@ -380,13 +388,72 @@ function addCoverageFindings(findings: Finding[], coverageRows: DocumentCoverage
   }
 }
 
-async function resolvePlan(input: Input): Promise<string> {
-  if (input.planMarkdown?.trim()) return input.planMarkdown;
-  const generated = await generateMiceSafetyPlanTool.handler(input);
-  return String(generated.structuredContent?.planMarkdown ?? generated.content[0]?.text ?? "");
+function bundleHasTableColumns(markdown: string, columns: string[]): boolean {
+  return columns.every((column) => markdown.includes(column));
 }
 
-function review(text: string, input: Input): { findings: Finding[]; documentCoverageMatrix: DocumentCoverageRow[] } {
+function addStructuredBundleFindings(findings: Finding[], documentBundle: DocumentBundle | undefined, coverageRows: DocumentCoverageRow[]): void {
+  if (!documentBundle) return;
+
+  for (const row of coverageRows) {
+    if (row.requirement !== "required") continue;
+    const key = documentBundleKeys[row.documentId];
+    if (!key || nonEmptyBundleText(documentBundle, key)) continue;
+    addFinding(
+      findings,
+      true,
+      row.missingSeverity ?? "warning",
+      "structured_document_bundle",
+      `${row.title}가 documentBundle.${key}에 구조화 문서로 존재하지 않습니다.`,
+      "전체 Markdown에 문구가 있더라도 제출/검수 자동화에는 documentBundle의 개별 문서 키가 필요합니다.",
+      { requirementId: `REQ_STRUCT_DOC_${row.documentId.toUpperCase()}` },
+    );
+  }
+
+  const submissionChecklist = nonEmptyBundleText(documentBundle, "submissionChecklist");
+  addFinding(
+    findings,
+    Boolean(submissionChecklist) && !bundleHasTableColumns(submissionChecklist, ["제출/확인처", "문서/서식", "기한/시점", "근거/메모"]),
+    "error",
+    "structured_submission",
+    "제출·협의 체크리스트 표의 핵심 컬럼이 부족합니다.",
+    "관할기관 제출/확인처, 문서/서식, 조건, 기한/시점, 근거/메모, 상태가 구조화 표로 들어가야 합니다.",
+    { requirementId: "REQ_STRUCT_SUBMISSION_COLUMNS" },
+  );
+  addFinding(
+    findings,
+    Boolean(submissionChecklist) && !includesAny(submissionChecklist, ["RACI", "담당", "책임", "필수 증빙", "증빙"]),
+    "info",
+    "structured_submission",
+    "제출·협의 체크리스트에서 담당/RACI 또는 증빙 기준이 구조적으로 약합니다.",
+    "제출 일정·RACI 문서 또는 제출 체크리스트에 담당자, 책임자, 협의처, 필수 증빙을 명시하세요.",
+    { requirementId: "REQ_STRUCT_SUBMISSION_RACI_EVIDENCE" },
+  );
+
+  const operationsRunsheet = nonEmptyBundleText(documentBundle, "operationsRunsheet");
+  addFinding(
+    findings,
+    Boolean(operationsRunsheet) && !bundleHasTableColumns(operationsRunsheet, ["단계", "기준시점", "구역/대상", "확인/조치", "담당", "증빙", "escalation"]),
+    "warning",
+    "structured_runsheet",
+    "현장 운영 런시트의 실행 컬럼이 부족합니다.",
+    "단계, 기준시점, 대상, 확인/조치, 담당, 증빙, escalation 컬럼을 유지해 현장 실행과 사후 감사가 가능하게 하세요.",
+    { requirementId: "REQ_STRUCT_RUNSHEET_COLUMNS" },
+  );
+
+  const publicApiEvidence = nonEmptyBundleText(documentBundle, "publicApiOperationalEvidence");
+  addFinding(
+    findings,
+    Boolean(publicApiEvidence) && !includesAny(publicApiEvidence, ["법령·조례 근거가 아니라", "운영 판단", "D-1", "D-day"]),
+    "info",
+    "structured_public_api_evidence",
+    "공공 API 운영 증거가 법령 근거와 운영 보조 근거를 충분히 분리하지 않습니다.",
+    "공공 API snapshot/live 값은 법령 근거가 아니라 D-1/D-day 운영 확인 액션, 담당자, 증빙으로 분리해 표시하세요.",
+    { requirementId: "REQ_STRUCT_PUBLIC_API_LIMITS" },
+  );
+}
+
+function review(text: string, input: Input, documentBundle?: DocumentBundle): { findings: Finding[]; documentCoverageMatrix: DocumentCoverageRow[] } {
   const findings: Finding[] = [];
   const context = buildReviewContext(input);
   const isOutdoor = context.isOutdoor;
@@ -398,9 +465,10 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   const largeCrowd = context.largeCrowd;
   const unhostedCrowd = context.unhostedCrowd;
   const needsBuildingEgressReview = Boolean(input.venueId || context.isExhibition || context.isConference || input.temporaryStructures);
-  const documentCoverageMatrix = buildDocumentCoverageMatrix(text, input);
+  const documentCoverageMatrix = buildDocumentCoverageMatrix(text, input, documentBundle);
 
   addFinding(findings, !includesAny(text, ["행사 개요", "행사명"]), "error", "plan_structure", "행사 개요가 부족합니다.", "행사명, 일자, 장소, 주최/주관, 예상 인원, 행사 유형을 포함하세요.", { requirementId: "REQ_PLAN_OVERVIEW" });
+  addFinding(findings, !includesAll(text, ["먼저 읽는 요약 보고서", "적용되지 않는 법령과 이유", "조건부 확인 항목", "제출·협의 액션", "남은 리스크"]), "warning", "executive_summary", "맨 앞 요약 보고서의 실무 판단 구조가 부족합니다.", "결론, 핵심 위험, 적용/비적용 판단, 조건부 확인, 제출·협의 액션, 담당자·기한·증빙, 남은 리스크를 계획서 앞부분에 고정하세요.", { requirementId: "REQ_EXECUTIVE_SUMMARY_DECISION_FIRST" });
   addFinding(findings, !includesAny(text, ["적용 법령", "법령·근거"]), "error", "legal_basis", "적용 법령 섹션이 없습니다.", "법령/조례/베뉴 규정의 근거 섹션을 추가하세요.", { requirementId: "REQ_LEGAL_BASIS" });
   addFinding(findings, !includesAny(text, ["제출·승인", "안전관리계획서"]), "error", "document_duty", "제출·승인 문서가 부족합니다.", "행사 안전관리계획서, 인파관리계획, 작업자 안전계획, 점검표를 문서 단위로 분리하세요.", { requirementId: "REQ_DOCUMENT_BUNDLE" });
   addFinding(findings, !includesAny(text, ["제출·협의 체크리스트", "제출/확인처", "기한/시점"]), "warning", "submission_checklist", "제출·협의 체크리스트가 부족합니다.", "지자체, 도로관리청, 소방, 베뉴, 위생, 가스, 개인정보, 경비, 의료, 시공협력사별 제출/확인 문서를 표로 정리하세요.", { requirementId: "REQ_SUBMISSION_CHECKLIST" });
@@ -410,6 +478,8 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
 
   addFinding(findings, isOutdoor && !includesAny(text, ["지자체 조례", "옥외행사 안전관리 조례", "지역축제"]), "error", "local_ordinance", "옥외행사/축제 조례 근거가 누락됐습니다.", "관할 광역/기초 지자체의 옥외행사·지역축제 안전관리 조례 후보를 넣으세요.", { requirementId: "REQ_LOCAL_ORDINANCE" });
   addFinding(findings, isOutdoor && !includesAny(text, ["조례 우선순위", "우선순위 primary", "우선순위 secondary"]), "warning", "local_ordinance_priority", "조례 후보 우선순위 근거가 약합니다.", "베뉴 소재지, 관할 지자체, 옥외행사/도로점용/옥외광고물 조건별로 광역·기초 조례 우선순위를 표시하세요.", { requirementId: "REQ_LOCAL_ORDINANCE_PRIORITY" });
+  addFinding(findings, isOutdoor && includesAny(text, ["threshold: needs_review", "조례 threshold가 needs_review", "threshold 원문확인"]), "warning", "local_ordinance_threshold_review", "조례 threshold 원문 재확인 항목이 남아 있습니다.", "needs_review 조례는 제출 전 법제처 원문 조문과 관할 지자체 담당자 회신으로 인원 기준·제출기한·적용유형을 확정하세요.", { requirementId: "REQ_LOCAL_ORDINANCE_THRESHOLD_REVIEW", evidenceTerms: ["threshold: needs_review", "조례 threshold가 needs_review", "threshold 원문확인"], text });
+  addFinding(findings, isOutdoor && includesAny(text, ["검증상태: source_verified", "source_verified"]) && !includesAny(text, ["source_verified 조례 원문 조문 확인", "원문 조문 확인 필요", "공식 출처 확인(source_verified)"]), "warning", "local_ordinance_source_verified_review", "source_verified 조례의 원문 조문 확인 액션이 부족합니다.", "source_verified는 공식 출처 확인 상태일 뿐입니다. 우선 조례 후보에 대해 원문 조문, 시행일, 제출기한, 담당자 회신을 조건부 확인 액션으로 표시하세요.", { requirementId: "REQ_LOCAL_ORDINANCE_SOURCE_VERIFIED_REVIEW", evidenceTerms: ["검증상태: source_verified", "source_verified"], text });
   addFinding(findings, isOutdoor && !includesAny(text, ["제출기한", "일 전", "신고"]), "warning", "submission_deadline", "지자체 제출기한 또는 신고기한이 명확하지 않습니다.", "조례의 행사 개시 전 제출/신고 기한을 계획서 요약에 표시하세요.", { requirementId: "REQ_LOCAL_DEADLINE" });
   addFinding(findings, isOutdoor && !includesAny(text, ["관계기관", "경찰", "소방", "합동점검"]), "warning", "agency_coordination", "관계기관 협의 내용이 부족합니다.", "관할 지자체, 경찰, 소방, 의료/보건, 시설 관계자 협의 항목을 넣으세요.", { requirementId: "REQ_AGENCY_COORDINATION" });
   addFinding(findings, !isOutdoor && includesAny(text, ["옥외행사·지역축제 안전관리계획서"]), "warning", "over_application", "실내/비옥외 행사인데 옥외행사·지역축제 안전관리계획서가 제출 액션처럼 보입니다.", "옥외/축제 조건이 없으면 옥외행사 조례는 참고 후보로 내리거나 제거하세요.", { requirementId: "REQ_NO_OUTDOOR_ORDINANCE_OVERAPPLY", evidenceTerms: ["옥외행사·지역축제 안전관리계획서"], text });
@@ -450,7 +520,7 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, isPerformance && !includesAny(text, ["별표 1", "별표 1의2", "별지 제13호의3", "하위 별표"]), "warning", "legal_annex", "공연법 시행령 별표/시행규칙 서식 체크포인트가 부족합니다.", "안전관리조직 설치기준, 안전교육 내용, 재해대처계획 신고서식 첨부서류를 반영하세요.", { requirementId: "REQ_PERFORMANCE_ANNEX_FORM" });
   addFinding(findings, isPerformance && !includesAll(text, ["공연·무대 실행계획", "현장 실행 상태표", "무대·트러스 구조검토", "리깅 승인", "방염확인서", "스탠딩 펜스", "피난안내", "공연중지 기준", "무대감독"]), "warning", "performance_stage_execution", "공연·무대 현장 실행 기준이 부족합니다.", "공연·무대 실행계획에 무대·트러스 구조검토, 리깅 승인, 방염확인서, 스탠딩 펜스, 피난안내, 공연중지 기준, 무대감독 중지 신호를 넣으세요.", { requirementId: "REQ_PERFORMANCE_STAGE_EXECUTION", evidenceTerms: ["공연·무대 실행계획", "현장 실행 상태표", "무대·트러스 구조검토", "리깅 승인", "방염확인서", "스탠딩 펜스", "피난안내", "공연중지 기준", "무대감독"], text });
   addFinding(findings, isPerformance && !includesAll(text, ["무대 전면 압박", "아티스트/무대감독 중지 신호", "전원 차단", "관객 현 위치 대기", "조치 전후 사진"]), "warning", "performance_stop_resume", "공연 중지·재개 증빙 기준이 약합니다.", "무대 전면 압박, 아티스트/무대감독 중지 신호, 전원 차단, 관객 현 위치 대기, 조치 전후 사진 기준을 명시하세요.", { requirementId: "REQ_PERFORMANCE_STOP_RESUME", evidenceTerms: ["무대 전면 압박", "아티스트/무대감독 중지 신호", "전원 차단", "관객 현 위치 대기", "조치 전후 사진"], text });
-  addFinding(findings, !isPerformance && includesAny(text, ["공연법 시행령", "공연법 시행규칙", "공연 재해대처계획"]), "warning", "over_application", "공연 조건이 없는데 공연법이 적용됐을 수 있습니다.", "공연 프로그램이 없다면 공연법 항목을 제거하거나 조건부 후보로 낮추세요.", { requirementId: "REQ_NO_PERFORMANCE_OVERAPPLY", evidenceTerms: ["공연법 시행령", "공연법 시행규칙", "공연 재해대처계획"], text });
+  addFinding(findings, !isPerformance && includesAny(text, ["공연법 시행령", "공연법 시행규칙", "공연 재해대처계획 제출·수리"]), "warning", "over_application", "공연 조건이 없는데 공연법이 적용됐을 수 있습니다.", "공연 프로그램이 없다면 공연법 항목을 제거하거나 조건부 후보로 낮추세요.", { requirementId: "REQ_NO_PERFORMANCE_OVERAPPLY", evidenceTerms: ["공연법 시행령", "공연법 시행규칙", "공연 재해대처계획 제출·수리"], text });
 
   addFinding(findings, hasWorkerWork && !includesAny(text, ["산업안전보건기준", "산안기준규칙", "KOSHA", "작업자 안전계획서"]), "error", "worker_safety", "설치·철거 작업자 안전계획이 누락됐습니다.", "산안기준규칙 제38조/제42조, KOSHA Guide, 작업계획서, 보호구, 작업중지 기준을 넣으세요.", { requirementId: "REQ_WORKER_SAFETY" });
   addFinding(findings, input.workAtHeight === true && !includesAny(text, ["추락", "사다리", "고소작업대", "안전대"]), "error", "fall_prevention", "고소작업/추락 방지 항목이 부족합니다.", "사다리, 고소작업대, 작업발판, 안전대, 작업구역 통제 기준을 넣으세요.", { requirementId: "REQ_FALL_PREVENTION" });
@@ -467,14 +537,27 @@ function review(text: string, input: Input): { findings: Finding[]; documentCove
   addFinding(findings, Boolean(input.venueId) && !includesAny(text, ["베뉴 시설·수용", "바닥하중", "하역", "전기", "추정 밀도"]), "warning", "venue_facility_constraints", "베뉴 수용/하중/전기/하역 제약 반영이 약합니다.", "venue-facility-index의 수용·면적, 바닥하중, 층고, 반입·하역, 전기, 소방·피난 sourceSpan을 계획서에 반영하세요.", { requirementId: "REQ_VENUE_FACILITY_CONSTRAINTS" });
   addFinding(findings, isOutdoor && !includesAny(text, ["기상청 API Hub", "KMA_APIHUB_WEATHER", "초단기실황", "에어코리아", "AIRKOREA_AIR_QUALITY"]), "warning", "public_api_evidence", "옥외행사인데 기상·대기질 live 운영 증거가 부족합니다.", "기상청 API Hub 초단기실황과 에어코리아 값을 법령 근거가 아닌 운영증거로 분리하고, 확인 시각·확인자·조치 기준을 런시트에 넣으세요.", { requirementId: "REQ_PUBLIC_API_WEATHER_AIR" });
   addCoverageFindings(findings, documentCoverageMatrix);
+  addStructuredBundleFindings(findings, documentBundle, documentCoverageMatrix);
 
   return { findings, documentCoverageMatrix };
 }
 
+async function resolvePlan(input: Input): Promise<{ planMarkdown: string; documentBundle?: DocumentBundle }> {
+  if (input.planMarkdown?.trim()) {
+    return { planMarkdown: input.planMarkdown, documentBundle: input.documentBundle };
+  }
+  const generated = await generateMiceSafetyPlanTool.handler(input);
+  return {
+    planMarkdown: String(generated.structuredContent?.planMarkdown ?? generated.content[0]?.text ?? ""),
+    documentBundle: (generated.structuredContent?.documentBundle ?? input.documentBundle) as DocumentBundle | undefined,
+  };
+}
+
 async function handler(rawInput: unknown): Promise<McpToolResult> {
   const input = inputSchema.parse(rawInput ?? {});
-  const planMarkdown = await resolvePlan(input);
-  const reviewOutput = review(planMarkdown, input);
+  const resolved = await resolvePlan(input);
+  const { planMarkdown, documentBundle } = resolved;
+  const reviewOutput = review(planMarkdown, input, documentBundle);
   const { findings, documentCoverageMatrix } = reviewOutput;
   const errorCount = findings.filter((finding) => finding.severity === "error").length;
   const warningCount = findings.filter((finding) => finding.severity === "warning").length;
@@ -510,6 +593,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
       findings,
       documentCoverageMatrix,
       planMarkdown,
+      documentBundle,
       _meta: COMMON_RESPONSE_META,
     },
   };

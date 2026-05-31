@@ -1,48 +1,15 @@
 import { z } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
+import { baseMiceEventInputSchema, type MiceEventType } from "../lib/mice-event-input-schema.js";
 import type { McpToolResult, Strictness, ToolDefinition } from "../lib/types.js";
 import { findLegalAnnexes, strictnessLabel, uniqueById } from "../lib/mice-data.js";
 import { buildDefaultMiceVisitorNoticeBundle } from "../lib/mice-visitor-notices.js";
 import { buildPublicApiOperationalEvidence, type PublicApiOperationalEvidenceBundle } from "../lib/public-api-operational-evidence.js";
+import submissionActionRules from "../ontology/mice/submission-action-rules.json" with { type: "json" };
 import venueFacilityIndex from "../ontology/mice/venue-facility-index.json" with { type: "json" };
 import { queryMiceSafetyApplicabilityTool } from "./query-mice-safety-applicability.js";
 
-const EventTypeSchema = z.enum([
-  "festival",
-  "outdoor_event",
-  "exhibition",
-  "conference",
-  "performance",
-  "food_event",
-  "vip_event",
-]);
-
-const inputSchema = z.object({
-  eventName: z.string().optional().default("행사명 미정"),
-  date: z.string().optional(),
-  eventDate: z.string().optional().describe("행사일 YYYY-MM-DD. date와 같은 의미의 alias입니다."),
-  location: z.string().optional(),
-  organizer: z.string().optional(),
-  eventTypes: z.array(EventTypeSchema).optional(),
-  venueId: z.string().optional(),
-  jurisdiction: z.string().optional(),
-  expectedCrowd: z.number().int().min(0).optional(),
-  outdoor: z.boolean().optional(),
-  outdoorEvent: z.boolean().optional(),
-  roadUse: z.boolean().optional(),
-  outdoorAdvertising: z.boolean().optional().describe("현수막, 배너, 지주형 안내판, 전광류 등 옥외광고물/외부 안내표지 설치 여부"),
-  unhostedCrowd: z.boolean().optional().describe("주최자·주관자 없이 자발적/예측형 다중운집이 발생하는 상황"),
-  temporaryStructures: z.boolean().optional(),
-  temporaryElectricity: z.boolean().optional(),
-  setupTeardown: z.boolean().optional(),
-  workAtHeight: z.boolean().optional(),
-  heavyObjectHandling: z.boolean().optional(),
-  hotWork: z.boolean().optional(),
-  lpgUse: z.boolean().optional(),
-  foodService: z.boolean().optional(),
-  performance: z.boolean().optional(),
-  personalDataProcessing: z.boolean().optional(),
-  vipSecurity: z.boolean().optional(),
+const inputSchema = baseMiceEventInputSchema.extend({
   output: z.enum(["markdown", "structured"]).optional().default("markdown"),
 });
 
@@ -110,6 +77,29 @@ function formatMaybe(value: number | null, suffix: string, digits = 0): string |
   return `${value.toFixed(digits)}${suffix}`;
 }
 
+function firstSpan(sourceSpans: FacilityIndexEntry[], category: string): Record<string, unknown> | undefined {
+  const span = sourceSpans.find((entry) => entry.category === category);
+  if (!span) return undefined;
+  return {
+    sourceRef: span.sourceRef,
+    localMarkdownPath: span.localMarkdownPath,
+    line: span.line,
+    confidence: span.confidence,
+  };
+}
+
+function numericFact(value: number | null, unit: string, category: string, sourceSpans: FacilityIndexEntry[], note: string): Record<string, unknown> | undefined {
+  if (value === null) return undefined;
+  return {
+    value,
+    unit,
+    category,
+    sourceSpan: firstSpan(sourceSpans, category),
+    confidence: firstSpan(sourceSpans, category) ? "derived_from_structured_extract" : "derived_from_text",
+    note,
+  };
+}
+
 function buildVenueFacilitySummary(input: Input, venue: AnyRecord | null | undefined) {
   const entries = facilityEntriesForVenue(input.venueId);
   const capacity = valuesFor(entries, "capacity", 5);
@@ -127,7 +117,10 @@ function buildVenueFacilitySummary(input: Input, venue: AnyRecord | null | undef
   const safetyDocuments = valuesFor(entries, "safetyDocuments", 5);
 
   const areaSqm = maxNumberByPattern(capacity, /([\d,]+(?:\.\d+)?)\s*㎡/g);
+  const capacityPersons = maxNumberByPattern(capacity, /([\d,]+(?:\.\d+)?)\s*명/g);
   const boothCount = maxNumberByPattern(capacity, /(?:최대\s*)?([\d,]+)\s*부스/g);
+  const floorLoadKgPerSqm = maxNumberByPattern(floorLoad, /([\d,]+(?:\.\d+)?)\s*(?:kg|㎏|kgf)\s*\/?\s*(?:㎡|m2|m²)/gi);
+  const ceilingHeightM = maxNumberByPattern(ceilingHeight, /([\d,]+(?:\.\d+)?)\s*(?:m|M|미터)/g);
   const estimatedDensity = areaSqm && input.expectedCrowd !== undefined ? input.expectedCrowd / areaSqm : null;
   const fireAnnex7Capacity = areaSqm ? Math.floor(areaSqm / 4.6) : null;
 
@@ -154,6 +147,15 @@ function buildVenueFacilitySummary(input: Input, venue: AnyRecord | null | undef
     "foodRules",
     "safetyDocuments",
   ]);
+  const numericFacts = {
+    areaSqm: numericFact(areaSqm, "sqm", "capacity", sourceSpans, "베뉴 capacity 텍스트에서 추출한 최대 면적 후보. 홀별 실제 사용면적은 도면과 베뉴 담당자로 재확인한다."),
+    capacityPersons: numericFact(capacityPersons, "persons", "capacity", sourceSpans, "베뉴 capacity 텍스트에서 추출한 인원 후보. 피크 동시 체류 인원과 좌석/스탠딩 구성을 별도 확인한다."),
+    boothCount: numericFact(boothCount, "booths", "capacity", sourceSpans, "베뉴 capacity 텍스트에서 추출한 최대 부스 수 후보."),
+    floorLoadKgPerSqm: numericFact(floorLoadKgPerSqm, "kg_per_sqm", "floorLoad", sourceSpans, "바닥하중 텍스트에서 추출한 kg/㎡ 후보. 중량물 반입 전 하중분산계획과 베뉴 승인이 필요하다."),
+    ceilingHeightM: numericFact(ceilingHeightM, "m", "ceilingHeight", sourceSpans, "층고 텍스트에서 추출한 m 후보. 리깅·현수막·고소작업 전 현장 실측과 승인 조건을 확인한다."),
+    estimatedDensity: numericFact(estimatedDensity, "persons_per_sqm", "capacity", sourceSpans, "expectedCrowd / areaSqm 단순 계산값. 법적 수용인원이나 피난 산정을 대체하지 않는다."),
+    fireAnnex7Capacity: numericFact(fireAnnex7Capacity, "persons", "capacity", sourceSpans, "면적/4.6㎡ 참고 계산값. 실제 특정소방대상물 수용인원 산정은 용도·좌석·도면 기준으로 재확인한다."),
+  };
 
   return {
     venueName: String(venue?.name ?? input.venueId ?? "베뉴 미지정"),
@@ -172,6 +174,7 @@ function buildVenueFacilitySummary(input: Input, venue: AnyRecord | null | undef
     foodRules,
     safetyDocuments,
     derived,
+    numericFacts,
     sourceSpans,
   };
 }
@@ -233,14 +236,36 @@ function formatLocalOrdinance(record: AnyRecord): string {
       return `  - 핵심 발췌: ${article.title ?? article.article}: ${excerpt.length > 180 ? `${excerpt.slice(0, 180)}...` : excerpt}`;
     });
   const priorityReasons = asArray<string>(record.priorityReasons);
+  const thresholdStructured = record.thresholdStructured as AnyRecord | undefined;
+  const thresholdSummary = String(thresholdStructured?.summary ?? record.crowdThreshold ?? "확인 필요");
+  const thresholdConfidence = String(thresholdStructured?.confidence ?? "확인 필요");
+  const verificationStatus = String(record.verificationStatus ?? "확인 필요");
+  const basisLevel = localOrdinanceBasisLevel(record);
   return [
     `${record.jurisdiction ?? ""} — ${record.name ?? ""} (${record.categoryLabel ?? ""}, 시행 ${record.effectiveAt ?? "확인 필요"})`,
     `  - 조례 우선순위: ${record.priorityBand ?? "reference"} / ${record.priorityScore ?? 0}점${priorityReasons.length > 0 ? ` — ${priorityReasons.join("; ")}` : ""}`,
+    `  - 검증상태: ${verificationStatus} / threshold: ${thresholdConfidence}`,
+    `  - 근거수준: ${basisLevel}`,
     `  - 적용: ${record.appliesWhen ?? "확인 필요"}`,
-    `  - 인원/조건: ${record.crowdThreshold ?? "확인 필요"}`,
+    `  - 인원/조건: ${thresholdSummary}`,
     `  - 제출기한: ${record.submissionDeadline ?? "확인 필요"}`,
     ...extracts,
   ].join("\n");
+}
+
+function localOrdinanceBasisLevel(record: AnyRecord): string {
+  const verificationStatus = String(record.verificationStatus ?? "");
+  const thresholdStructured = record.thresholdStructured as AnyRecord | undefined;
+  if (verificationStatus === "article_verified") {
+    return "조문 발췌 확인(article_verified). 제출 전 최신 시행일과 관할기관 해석은 재확인";
+  }
+  if (verificationStatus === "source_verified") {
+    return "공식 출처 확인(source_verified). 적용 기준·제출기한·인원 threshold는 원문 조문 확인 필요";
+  }
+  if (verificationStatus === "needs_review" || thresholdStructured?.confidence === "needs_review") {
+    return "needs_review. threshold/조문 추출 품질 확인 후 제출 여부 판단";
+  }
+  return "검증 등급 확인 필요. 제출 전 원문과 관할기관 답변으로 보정";
 }
 
 function localOrdinanceTitle(record: AnyRecord): string {
@@ -275,6 +300,14 @@ function filterLocalOrdinancesForInput(records: AnyRecord[], input: Input): AnyR
   return records.filter((record) => isLocalOrdinanceApplicableToInput(record, input));
 }
 
+function markdownTable(headers: string[], rows: string[][]): string[] {
+  return [
+    `| ${headers.map(tableCell).join(" | ")} |`,
+    `| ${headers.map(() => "---").join(" | ")} |`,
+    ...rows.map((row) => `| ${row.map(tableCell).join(" | ")} |`),
+  ];
+}
+
 function formatWorkerRef(ref: AnyRecord): string {
   return `${ref.title ?? ref.id}: ${ref.summary ?? ""}`;
 }
@@ -302,6 +335,38 @@ function publicApiLinesFor(evidence: PublicApiOperationalEvidenceBundle, sourceI
       `${source.label}: ${source.operationalUse}`,
       ...source.planningActions.map((action) => `실행(${source.sourceId}): ${action}`),
       ...source.limitations.map((limitation) => `한계(${source.sourceId}): ${limitation}`),
+    ]);
+}
+
+interface SubmissionActionRule {
+  id: string;
+  condition: string;
+  audience: string;
+  document: string;
+  appliesWhen: string;
+  timing: string;
+  basis: string;
+  status: string;
+}
+
+function renderRuleTemplate(value: string, replacements: Record<string, string>): string {
+  return value.replace(/\{([A-Za-z0-9_]+)\}/g, (_match, key: string) => replacements[key] ?? "");
+}
+
+function buildSubmissionRowsFromRules(args: {
+  flags: Record<string, boolean>;
+  replacements: Record<string, string>;
+}): string[][] {
+  const rules = (submissionActionRules as { rules: SubmissionActionRule[] }).rules;
+  return rules
+    .filter((rule) => args.flags[rule.condition])
+    .map((rule) => [
+      renderRuleTemplate(rule.audience, args.replacements),
+      renderRuleTemplate(rule.document, args.replacements),
+      renderRuleTemplate(rule.appliesWhen, args.replacements),
+      renderRuleTemplate(rule.timing, args.replacements),
+      renderRuleTemplate(rule.basis, args.replacements),
+      rule.status,
     ]);
 }
 
@@ -368,6 +433,129 @@ function formatOperationsRunsheet(input: Input, rows: string[][]): string {
     "| 단계 | 기준시점 | 권장일자 | 구역/대상 | 확인/조치 | 담당 | 증빙 | escalation |",
     "| --- | --- | --- | --- | --- | --- | --- | --- |",
     ...rows.map((row) => `| ${row.map(tableCell).join(" | ")} |`),
+  ].join("\n");
+}
+
+function decisionRowsForInput(input: Input): string[][] {
+  const isPerformance = Boolean(input.performance || inputHasEvent(input, "performance"));
+  const hasFood = Boolean(input.foodService || inputHasEvent(input, "food_event"));
+  const hasWorker = Boolean(input.setupTeardown || input.temporaryStructures || input.temporaryElectricity || input.workAtHeight || input.heavyObjectHandling || input.hotWork);
+  const hasOutdoor = Boolean(input.outdoor || input.outdoorEvent || inputHasEvent(input, "festival") || inputHasEvent(input, "outdoor_event"));
+  return [
+    ["공연법/공연 안전", isPerformance ? "적용" : "비적용", isPerformance ? "공연 프로그램, 무대, 공연장 외 공연 조건이 있음" : "공연 조건이 입력되지 않았으므로 필수 제출 액션으로 올리지 않음"],
+    ["도로점용/교통통제", input.roadUse ? "적용" : hasOutdoor ? "조건부" : "비적용", input.roadUse ? "도로·보도·광장 점용 또는 통행 제한 조건이 있음" : hasOutdoor ? "옥외행사 외부 대기열·승하차·비상차량 접근 영향은 현장 확인 후보" : "도로점용 조건 없는 실내 행사로 필수 허가 액션 제외"],
+    ["식품위생/LPG", hasFood || input.lpgUse ? "적용" : "비적용", hasFood || input.lpgUse ? "식음료 판매·시식·케이터링 또는 LPG/화기 조건이 있음" : "식음료·LPG 조건이 입력되지 않아 필수 점검표만 전환 후보로 둠"],
+    ["설치·철거 작업자 안전", hasWorker ? "적용" : "비적용", hasWorker ? "설치·철거, 임시전기, 고소, 중량물, 화기 등 작업 위험 조건이 있음" : "작업 조건이 입력되지 않아 worker_safety_work_plan을 필수로 올리지 않음"],
+    ["개인정보/CCTV", input.personalDataProcessing ? "적용" : "조건부", input.personalDataProcessing ? "참가자 등록, 출입증, CCTV 또는 개인정보 처리 조건이 있음" : "현장 등록·촬영·CCTV 운영이 확정되면 개인정보 고지와 위탁/보존 기준으로 전환"],
+    ["VIP/보안검색/경비", input.vipSecurity ? "적용" : "비적용", input.vipSecurity ? "VIP, 출입통제, 보안검색 또는 민간경비 조건이 있음" : "VIP/보안검색 조건이 없어 경비업 하위기준을 제출 액션으로 올리지 않음"],
+    ["무주최 다중운집", input.unhostedCrowd ? "적용" : "조건부", input.unhostedCrowd ? "주최자 없음 또는 책임 공백형 다중운집 조건이 있음" : "주최자 통제 밖 군중 급증이 관찰될 때 공동대응계획으로 전환"],
+  ];
+}
+
+function conditionalRowsForInput(input: Input, localOrdinances: AnyRecord[]): string[][] {
+  const needsOrdinanceReview = localOrdinances.some((record) => {
+    const thresholdStructured = record.thresholdStructured as AnyRecord | undefined;
+    return record.verificationStatus === "needs_review" || thresholdStructured?.confidence === "needs_review";
+  });
+  const hasSourceVerifiedPriorityOrdinance = localOrdinances.some((record) => {
+    const band = localOrdinanceBand(record);
+    return ["primary", "secondary"].includes(band) && record.verificationStatus === "source_verified";
+  });
+  const rows: Array<string[] | undefined> = [
+    !input.roadUse ? ["도로점용", "대기열·안내시설·차량통제가 도로·보도·광장으로 확장", "점용구간 도면, 경찰·도로관리청 협의 메모"] : undefined,
+    !input.foodService && !input.lpgUse ? ["식음료/LPG", "푸드부스, 푸드트럭, 시식, 임시조리, LPG 용기 반입 추가", "영업신고/허가, 보존식, 온도기록, 가스점검 증빙"] : undefined,
+    !input.performance ? ["공연·무대", "공연 프로그램, 야외무대, 스탠딩 관객, 리깅/특수효과 추가", "공연 재해대처계획, 무대·트러스 구조검토, 피난안내"] : undefined,
+    !input.personalDataProcessing ? ["개인정보/CCTV", "사전등록, QR/출입증, 촬영, CCTV 모니터링, 명단 위탁 처리", "개인정보 처리 고지, 수탁자, 보관·파기 기준"] : undefined,
+    hasSourceVerifiedPriorityOrdinance ? ["source_verified 조례 원문 조문 확인", "우선 조례 후보가 공식 출처 확인 상태이나 article_verified는 아님", "자치법규 원문 조문 캡처, 시행일, 제출기한, 담당자 회신"] : undefined,
+    needsOrdinanceReview ? ["조례 threshold 원문확인", "조례 threshold 구조화가 needs_review인 후보가 계획서에 포함됨", "법제처 원문, 관할 지자체 담당자 회신, 최종 제출기한 메모"] : undefined,
+  ];
+  return rows.filter((row): row is string[] => Array.isArray(row));
+}
+
+function actionOwner(audience: string, document: string): string {
+  const text = `${audience} ${document}`;
+  if (/소방|피난|화재|방염/.test(text)) return "방재·시설 담당";
+  if (/경찰|도로|교통/.test(text)) return "교통·대외협력 담당";
+  if (/보건|식품|LPG|가스|의료|AED|응급/.test(text)) return "의료/F&B/시설 담당";
+  if (/개인정보|CCTV|보안|VIP|경비/.test(text)) return "등록·보안 담당";
+  if (/작업|철거|설치|전기|구조/.test(text)) return "작업안전 담당";
+  return "안전총괄";
+}
+
+function actionEvidence(document: string): string {
+  if (/계획|대책|도면/.test(document)) return "제출본, 회신, 도면 revision";
+  if (/점검|체크/.test(document)) return "점검표, 사진, 담당자 서명";
+  if (/교육/.test(document)) return "교육명단, 교육자료, 참석 확인";
+  if (/신고|허가|승인/.test(document)) return "허가증, 신고수리, 담당자 회신";
+  return "담당자 확인 메모, 사진, 회의록";
+}
+
+function priorityActionRowsFromChecklist(markdown: string, limit = 6): string[][] {
+  return markdown
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => /^\|\s*\d+\s*\|/.test(line))
+    .slice(0, limit)
+    .map((line) => line.split("|").map((cell) => cell.trim()).filter(Boolean))
+    .map((cells) => {
+      const audience = cells[1] ?? "확인처";
+      const document = cells[2] ?? "문서/서식";
+      const trigger = cells[3] ?? "조건 확인";
+      const timing = cells[4] ?? "기한 확인";
+      return [audience, document, actionOwner(audience, document), timing, actionEvidence(document), trigger];
+    });
+}
+
+function buildExecutiveSummaryMarkdown(input: Input, sections: Record<string, string[]>, documentBundle: Record<string, unknown>, localOrdinances: AnyRecord[]): string {
+  const keyRiskRows = sections.hazardControls.slice(0, 5).map((item) => {
+    const firstLine = item.split(/\r?\n/)[0] ?? item;
+    return [firstLine, "운영본부", "도면·사진·점검표로 통제 확인"];
+  });
+  const applicableBasis = [
+    ...sections.legalBasis.slice(0, 5),
+    ...sections.primaryLocalOrdinances.slice(0, 4),
+    ...sections.venueRules.slice(0, 3),
+  ];
+  const nonApplicable = decisionRowsForInput(input).filter((row) => row[1] === "비적용");
+  const conditional = conditionalRowsForInput(input, localOrdinances);
+  const actions = priorityActionRowsFromChecklist(String(documentBundle.submissionChecklist ?? ""), 7);
+  const remainingRisks = [
+    "자동 생성 결과는 법률 자문이 아니며, 최신 법령 원문·조례 시행일·관할기관 접수창구 답변으로 보정해야 한다.",
+    localOrdinances.some((record) => record.verificationStatus === "needs_review")
+      ? "일부 조례 threshold가 needs_review이므로 제출 전 원문 조문과 담당자 회신으로 확정해야 한다."
+      : "조례 threshold는 오프라인 구조화 기준이며, 관할 지자체 해석으로 최종 확정해야 한다.",
+    localOrdinances.some((record) => record.verificationStatus === "source_verified")
+      ? "source_verified 조례는 공식 출처 확인 상태이며, 제출기한·인원 기준·필수 서류는 원문 조문과 관할 담당자 회신으로 확정해야 한다."
+      : undefined,
+    "실제 도면, 부스 배치, 피난폭, 비상차량 접근로, 스태프 배치 인원은 현장 실측값으로 대체해야 한다.",
+  ].filter((item): item is string => Boolean(item));
+
+  return [
+    "## 먼저 읽는 요약 보고서",
+    "",
+    "### 결론",
+    `- 행사: ${input.eventName} / ${eventDateValue(input) ?? "일자 미입력"} / ${input.location ?? "장소 미입력"}`,
+    `- 관할·베뉴: ${input.jurisdiction ?? "관할 미입력"} / ${input.venueId ?? "베뉴 미지정"}`,
+    "- 이 문서는 안전관리 실무 초안이며, 제출·승인 전 책임자와 관할기관 확인이 필요하다.",
+    "- 자동 점수와 검수는 법적 적합성 판정이 아니라 입력 조건 대비 커버리지 점검이다.",
+    "",
+    "### 이 행사에서 실제로 중요한 위험",
+    ...markdownTable(["위험", "담당", "확인 증빙"], keyRiskRows.length > 0 ? keyRiskRows : [["행사 기본 리스크", "안전총괄", "인원·동선·피난·응급동선 현장 도면 확인"]]),
+    "",
+    "### 적용되는 법령·조례·베뉴 규정",
+    ...lineList(applicableBasis, "적용 근거 후보 없음. 행사 유형·관할·베뉴 입력을 보강해야 함"),
+    "",
+    "### 적용되지 않는 법령과 이유",
+    ...markdownTable(["영역", "판단", "이유"], nonApplicable.length > 0 ? nonApplicable : [["비적용 항목 없음", "확인", "현재 입력 조건에서는 명시적 비적용 후보 없음"]]),
+    "",
+    "### 조건부 확인 항목",
+    ...markdownTable(["항목", "전환 기준", "확인할 증빙"], conditional.length > 0 ? conditional : [["조건부 항목 없음", "현재 입력 조건 기준 추가 전환 후보 없음", "-"]]),
+    "",
+    "### 제출·협의 액션",
+    ...markdownTable(["확인처", "해야 할 일", "담당", "기한", "증빙", "적용 조건"], actions.length > 0 ? actions : [["관할기관/베뉴", "제출 대상 확인", "안전총괄", "기한 확인", "담당자 회신", "행사 조건 입력 보강"]]),
+    "",
+    "### 남은 리스크와 최종 확인",
+    ...lineList(remainingRisks, "남은 리스크 없음"),
   ].join("\n");
 }
 
@@ -728,7 +916,7 @@ function buildOperationsRunsheetRows(input: Input, options: {
 }
 
 function inputHasEvent(input: Input, eventType: string): boolean {
-  return (input.eventTypes ?? []).includes(eventType as z.infer<typeof EventTypeSchema>);
+  return (input.eventTypes ?? []).includes(eventType as MiceEventType);
 }
 
 function isLegalAnnexApplicable(annex: AnyRecord, input: Input): boolean {
@@ -841,128 +1029,29 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
     hazards,
     localOrdinances,
   });
-  const submissionRows = [
-    hasUnhostedCrowd ? [
-      input.jurisdiction ? `${input.jurisdiction} 재난안전상황실/경찰/소방` : "관할 지자체 재난안전상황실/경찰/소방",
-      "무주최 다중운집 관계기관 공동대응계획",
-      "주최자 없음, 자발적 군중, 역세권·광장·상권·도로변 등 관리주체가 분산된 장소",
-      "위험 기간 전 사전협의, 현장 관찰 단계 즉시 공동상황방 가동",
-      "재난안전법 다중운집 예방조치, 행안부 다중운집인파사고 안전관리 가이드라인",
-      "open",
-    ] : undefined,
-    isPerformance ? [
-      input.jurisdiction ? `${input.jurisdiction} 공연/문화 담당부서·베뉴` : "관할 공연/문화 담당부서·베뉴",
-      "공연 재해대처계획, 안전관리조직·안전교육, 공연·무대 실행계획",
-      "공연장 또는 공연장 외 공연, 야외 무대, 스탠딩 관객, 무대·트러스·음향·조명 운영이 있는 경우",
-      "공연 14일 전 신고/변경신고 여부와 베뉴 기술지원·리깅 승인 기한 확인",
-      "공연법 시행령/시행규칙, 공연법 별표·서식, 베뉴 리깅·무대 규정",
-      "open",
-    ] : undefined,
-    hasOutdoor && hasLocalOutdoorOrdinance ? [
-      input.jurisdiction ? `${input.jurisdiction} 안전/행사 담당부서` : "관할 지자체 안전/행사 담당부서",
-      "옥외행사·지역축제 안전관리계획서",
-      "옥외축제, 야외 공연, 주최/주관 행사 또는 순간 최대 인파 기준 해당 시",
-      String(localOrdinanceDeadline ?? "행사 5~21일 전 또는 조례별 기한 확인"),
-      "지자체 조례 우선순위 후보와 재난안전법 지역축제/다중운집 조항 확인",
-      "open",
-    ] : undefined,
-    hasRoadUse ? [
-      "도로관리청/교통부서/경찰",
-      "도로점용허가, 교통소통대책, 도로공사 시행·착수·준공 서식",
-      "도로·보도·광장 점용, 차 없는 거리, 퍼레이드, 셔틀 승하차장, 임시시설 설치",
-      "도로점용허가 신청 전, 설치·철거 착수 전, 종료 후 원상복구 시",
-      "도로법 시행령 별표 2, 도로법 시행규칙 별지 제11·12·13·33호서식",
-      "open",
-    ] : undefined,
-    hasRoadUse ? [
-      "도로관리청/경찰/지자체 홍보 채널",
-      "통행금지·제한 또는 차량 운행 제한 공고",
-      "일부 차로·보도·도로 통행 제한 또는 차량 운행 제한이 있는 경우",
-      "통제 시행 전 사전 공고 및 현장 안내물 설치 전",
-      "도로법 시행규칙 별지 제36호서식, 우회도로·문의처·비상차량 동선 포함",
-      "open",
-    ] : undefined,
-    hasOutdoorAdvertising && hasAdvertisingOrdinance ? [
-      "옥외광고 담당부서/베뉴",
-      "현수막·배너·안내판·전기 광고물 허가/신고",
-      "옥외 임시 안내물, 지주형 표시물, 전광류 또는 전기 사용 광고물을 설치하는 경우",
-      "표시·설치 전",
-      "옥외광고물법 시행령 제5·7·12·14조와 관할 조례 확인",
-      "open",
-    ] : undefined,
-    hasBuildingAnnex ? [
-      "관할 건축부서/베뉴 시설팀",
-      "가설건축물 축조신고서, 피난안전 확인서, 임시사용승인 확인",
-      "대형 텐트, 임시 전시장, 복층/다층 임시구조물, 공사 중 구역 임시 사용",
-      "설치 전 신고·승인, 개장 전 피난안전 확인",
-      "건축법 시행규칙 별지 제8·8의2·17호서식",
-      "open",
-    ] : undefined,
-    input.venueId ? [
-      "베뉴 운영/시설/전기/방재 담당",
-      "부스 시공, 전기, 하역, 소방통로, 반입제한, 제출 안전서류",
-      "전시장·컨벤션센터·공연장 등 베뉴를 사용하는 경우",
-      "주최자 매뉴얼 기한, 시공 전, 개장 전",
-      `${venue?.name ?? input.venueId} 운영규정/안전수칙과 venue-facility sourceSpan 확인`,
-      "open",
-    ] : undefined,
-    fireAnnexItems.length > 0 || input.hotWork || input.lpgUse ? [
-      "소방서/베뉴 방재실/안전총괄",
-      "소방·피난 점검표, 화기·위험물 반입 승인, 임시소방시설 확인",
-      "화기, 위험물, 임시전기, 부스·무대 설치, 피난통로 차단 위험이 있는 경우",
-      "설치 전, 개장 전, 피크 전, 철거 전",
-      "화재예방법·소방시설법 하위 별표와 베뉴 방재실 승인조건",
-      "open",
-    ] : undefined,
-    input.lpgUse ? [
-      "가스공급자/검사기관/지자체",
-      "LPG 완성·정기검사 신청서, 검사증명서, 공급자 안전점검, 보험증빙",
-      "푸드트럭, 야외 조리, LPG 용기·배관·사용시설 반입 또는 설치",
-      "개장 전 검사·증빙 확보, 운영 중 일일점검",
-      "LPG 시행규칙 별지 제36·37호서식, 별표 15·20·23",
-      "open",
-    ] : undefined,
-    input.foodService ? [
-      "보건/위생 담당부서/식음료 운영자",
-      "임시 식품영업 신고·위생 점검·식중독 대응 기록",
-      "푸드부스, 케이터링, 시식, 푸드트럭, 임시 조리·판매",
-      "영업 전 신고/허가 확인, 개장 전·운영 중 점검",
-      "식품위생법·시행규칙 별표 1, 보존식·신고·조사 연락체계",
-      "open",
-    ] : undefined,
-    hasPrivacy ? [
-      "개인정보 보호책임자/등록 대행사/보안 담당",
-      "개인정보 처리방침, 위탁계약, CCTV 안내, 접근권한·접속기록 점검",
-      "등록, QR/출입증, CCTV, 촬영, 앱 신고, VIP/초청자 명단 처리",
-      "수집 전 고지, 행사 전 위탁·보안점검, 종료 후 파기",
-      "개인정보보호법 제15·22·25·26·29·30조와 시행령 안전성 확보 조치",
-      "open",
-    ] : undefined,
-    hasSecurity ? [
-      "경찰/경비업체/베뉴 보안실",
-      "경비업 허가 범위, 경비지도사, 경비원 명부, 배치·폐지 신고",
-      "VIP, 보안검색, 민간경비, 혼잡·교통유도경비를 운영하는 경우",
-      "배치 전, 20일 이상 배치 또는 신고 대상 조건 확인",
-      "경비업법·시행령·시행규칙 별표/별지 서식",
-      "open",
-    ] : undefined,
-    hasMedical ? [
-      "의료담당/AED 관리책임자/119·이송병원",
-      "응급의료·AED·구급 이송 계획, AED 점검·교육·관리서류",
-      "대규모 인파, 고령자/영유아/장애인, 스탠딩 공연, 야외·폭염·야간 행사",
-      "개장 전, 운영 중, 사용/이송 발생 시",
-      "응급의료법 AED 설치·관리, 시행규칙 구급차 장비·운행기록 기준",
-      "open",
-    ] : undefined,
-    hasWorker ? [
-      "시공/하역/전기 협력사/안전총괄",
-      "설치·철거 작업자 안전계획서, 작업계획서, 교육명단, PPE·작업중지 기준",
-      "부스·무대·트러스·전기·고소·중량물·화기·철거 작업이 있는 경우",
-      "작업 전, 작업 중 변경 시, 철거 전",
-      "산안법, 산안기준규칙 제38·42·321조, KOSHA Guide worker-safety layer",
-      "open",
-    ] : undefined,
-  ].filter((row): row is string[] => Array.isArray(row));
+  const submissionRows = buildSubmissionRowsFromRules({
+    flags: {
+      hasUnhostedCrowd,
+      isPerformance,
+      hasOutdoorAndLocalOutdoorOrdinance: hasOutdoor && hasLocalOutdoorOrdinance,
+      hasRoadUse,
+      hasOutdoorAdvertisingAndAdvertisingOrdinance: hasOutdoorAdvertising && hasAdvertisingOrdinance,
+      hasBuildingAnnex,
+      hasVenue: Boolean(input.venueId),
+      hasFireOrHotWorkOrLpg: fireAnnexItems.length > 0 || Boolean(input.hotWork || input.lpgUse),
+      hasLpgUse: Boolean(input.lpgUse),
+      hasFoodService: Boolean(input.foodService),
+      hasPrivacy,
+      hasSecurity,
+      hasMedical,
+      hasWorker,
+    },
+    replacements: {
+      jurisdictionOrDefault: input.jurisdiction ?? "관할 지자체",
+      localOrdinanceDeadline: String(localOrdinanceDeadline ?? "행사 5~21일 전 또는 조례별 기한 확인"),
+      venueName: String(venue?.name ?? input.venueId ?? "베뉴"),
+    },
+  });
 
   const eventSafetyPlan = [
     `# ${input.eventName} 행사 안전관리계획서`,
@@ -1279,11 +1368,14 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     workerSafety: workerSafetyReferences.map(formatWorkerRef),
   };
   const documentBundle = buildDocumentBundle(input, sections, { ...data, localOrdinances: documentLocalOrdinances, legalAnnexes });
+  const executiveSummary = buildExecutiveSummaryMarkdown(input, sections, documentBundle, documentLocalOrdinances);
 
   const markdown = [
     `# ${input.eventName} 안전관리계획서 초안`,
     "",
     "> 이 문서는 로컬 MICE 안전 온톨로지 기반 초안입니다. 제출·승인 전 관할 지자체, 베뉴, 소방·경찰, 최신 법령 원문으로 확인해야 합니다.",
+    "",
+    executiveSummary,
     "",
     "## 1. 행사 개요",
     ...lineList(sections.overview, "행사 개요 입력 필요"),
@@ -1376,10 +1468,12 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
 
   return {
     content: [{ type: "text", text: markdown }],
-    structuredContent: {
-      input,
-      sections,
-      documentBundle,
+	    structuredContent: {
+	      input,
+	      sections,
+	      executiveSummary,
+	      documentBundle,
+	      venueFacility,
       applicability: data,
       planMarkdown: markdown,
       _meta: COMMON_RESPONSE_META,

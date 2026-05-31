@@ -21,6 +21,7 @@ const inputSchema = z.object({
 });
 
 function formatRecord(record: ReturnType<typeof findLocalOrdinances>[number], includeArticles: boolean): string {
+  const thresholdStructured = record.thresholdStructured;
   const articleLines = includeArticles && record.articleExtracts.length > 0
     ? [
       "  조문 발췌:",
@@ -31,6 +32,8 @@ function formatRecord(record: ReturnType<typeof findLocalOrdinances>[number], in
     `- ${record.jurisdiction} — ${record.name}`,
     `  우선순위: ${record.priorityBand} / ${record.priorityScore}점${record.priorityReasons.length > 0 ? ` — ${record.priorityReasons.join("; ")}` : ""}`,
     `  범주: ${record.categoryLabel} / 시행일: ${record.effectiveAt || "확인 필요"} / ordinSeq: ${record.ordinSeq}`,
+    `  검증: ${record.verificationStatus} / threshold ${thresholdStructured?.confidence ?? "확인 필요"}`,
+    `  인원/조건: ${thresholdStructured?.summary ?? record.threshold ?? record.crowdThreshold}`,
     `  원문: ${record.sourceUrl}`,
     ...articleLines,
   ].join("\n");

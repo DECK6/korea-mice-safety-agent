@@ -5,6 +5,9 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+const packageVersion = packageJson.version ?? "0.0.0";
+const ontologyDiffSchemaVersion = "ontology-diff.v1";
 const baselinePath = join(root, "data/snapshots/ontology-baseline.json");
 const reportJsonPath = join(root, "data/ontology-diff-report.json");
 const reportMdPath = join(root, "docs/ONTOLOGY_DIFF.md");
@@ -144,7 +147,8 @@ function buildSnapshot() {
     sources.map((source) => [source.key, normalizeSource(source)]),
   );
   return {
-    version: "1.0.0",
+    version: packageVersion,
+    schemaVersion: ontologyDiffSchemaVersion,
     generatedAt: new Date().toISOString(),
     collections,
   };
@@ -187,7 +191,8 @@ function buildReport(baseline, current) {
     }]),
   );
   return {
-    version: "1.0.0",
+    version: packageVersion,
+    schemaVersion: ontologyDiffSchemaVersion,
     generatedAt: new Date().toISOString(),
     baselineGeneratedAt: baseline?.generatedAt ?? null,
     currentGeneratedAt: current.generatedAt,
@@ -203,6 +208,8 @@ function writeReport(report) {
   const lines = [
     "# Ontology Diff Report",
     "",
+    `- version: ${report.version}`,
+    `- schemaVersion: ${report.schemaVersion}`,
     `- generatedAt: ${report.generatedAt}`,
     `- baselineGeneratedAt: ${report.baselineGeneratedAt ?? "none"}`,
     "",

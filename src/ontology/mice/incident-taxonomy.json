@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "scope": "Offline MICE incident taxonomy for routing, SLA, escalation, and first-response playbooks.",
   "statusFlow": [

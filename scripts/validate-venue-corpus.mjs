@@ -4,14 +4,23 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const args = process.argv.slice(2);
+const writeDefaultOutputs = args.includes("--write");
+
+function argValue(name, fallback) {
+  const index = args.indexOf(name);
+  if (index === -1) return fallback;
+  return args[index + 1] ?? fallback;
+}
 
 const manifestPath = join(root, "data/venue-pdf-manifest.json");
 const markdownIndexPath = join(root, "data/markdown/venue-manuals/index.json");
 const sourceRegistryPath = join(root, "src/ontology/mice/source-registry.json");
 const venueRulesPath = join(root, "src/ontology/mice/venue-safety-rules.json");
 const facilityIndexPath = join(root, "src/ontology/mice/venue-facility-index.json");
-const outputJsonPath = join(root, "data/venue-corpus-audit-report.json");
-const outputMdPath = join(root, "docs/VENUE_CORPUS_AUDIT.md");
+const outputJsonPath = argValue("--json-out", join(root, "data/venue-corpus-audit-report.json"));
+const outputMdPath = argValue("--md-out", join(root, "docs/VENUE_CORPUS_AUDIT.md"));
+const shouldWriteOutputs = writeDefaultOutputs || args.includes("--json-out") || args.includes("--md-out");
 
 const SAFETY_KEYWORDS = [
   "안전",
@@ -219,7 +228,7 @@ const counts = {
 };
 
 const report = {
-  version: "1.0.0",
+  version: sourceRegistry.version ?? "1.0.0",
   generatedAt: new Date().toISOString(),
   policy:
     "Venue source documents stay offline as raw PDF/HWP plus Markdown extracts. The ontology stores compact operational facts and source spans; recruitment/selection notices are excluded from the core safety corpus.",
@@ -233,10 +242,6 @@ const report = {
   venues,
   findings,
 };
-
-mkdirSync(dirname(outputJsonPath), { recursive: true });
-mkdirSync(dirname(outputMdPath), { recursive: true });
-writeFileSync(outputJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const markdown = [
   "# Venue Corpus Audit",
@@ -272,10 +277,16 @@ const markdown = [
   "- 지정등록업체 모집, 등록업체 선발 공고 등 공고성 문서는 core safety corpus에 넣지 않는다.",
 ].join("\n");
 
-writeFileSync(outputMdPath, `${markdown}\n`);
-
-console.log(`wrote ${relative(outputJsonPath)}`);
-console.log(`wrote ${relative(outputMdPath)}`);
+if (shouldWriteOutputs) {
+  mkdirSync(dirname(outputJsonPath), { recursive: true });
+  mkdirSync(dirname(outputMdPath), { recursive: true });
+  writeFileSync(outputJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+  writeFileSync(outputMdPath, `${markdown}\n`);
+  console.log(`wrote ${relative(outputJsonPath)}`);
+  console.log(`wrote ${relative(outputMdPath)}`);
+} else {
+  console.log("check-only: pass --write to refresh data/venue-corpus-audit-report.json and docs/VENUE_CORPUS_AUDIT.md");
+}
 console.log(`venue corpus: ${counts.venues} venues, ${counts.manifestItems} raw docs, ${counts.facilityEntries} facility entries`);
 
 if (counts.errors > 0) {

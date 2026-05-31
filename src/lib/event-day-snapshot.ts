@@ -1,4 +1,4 @@
-import { statusForEnvVar, type ApiAccessStatus } from "./api-access-status.js";
+import { statusForEnvVar } from "./api-access-status.js";
 import type { EnvLike } from "./env.js";
 import {
   fetchAirKoreaStation,
@@ -6,15 +6,18 @@ import {
   type LiveApiResult,
   type NormalizedExternalRecord,
 } from "./mice-public-api-clients.js";
+import {
+  addMinutes,
+  isExpired,
+  isSeoulJurisdiction,
+  sourceStatusFromApiAccess,
+  type OperationalEvidenceLocation,
+  type OperationalObservation,
+  type OperationalObservationLevel,
+  type OperationalSourceStatus,
+} from "./operational-evidence-model.js";
 
-export type SnapshotSourceStatus =
-  | "configured"
-  | "not_configured"
-  | "pending_key"
-  | "unsupported_region"
-  | "unavailable"
-  | "live_error"
-  | "live_call_skipped";
+export type SnapshotSourceStatus = OperationalSourceStatus;
 
 export interface SnapshotSourceResult {
   sourceId: string;
@@ -26,12 +29,7 @@ export interface SnapshotSourceResult {
   isStale: boolean;
   query: Record<string, unknown>;
   warnings: string[];
-  observations: Array<{
-    kind: string;
-    level: "info" | "watch" | "warning" | "critical";
-    summary: string;
-    advisoryOnly: true;
-  }>;
+  observations: OperationalObservation[];
   records?: NormalizedExternalRecord[];
 }
 
@@ -40,42 +38,23 @@ export interface EventDaySnapshot {
   capturedAt: string;
   expiresAt: string;
   isStale: boolean;
-  location: {
-    venueId?: string;
-    jurisdiction?: string;
-    latitude?: number;
-    longitude?: number;
-  };
+  location: OperationalEvidenceLocation;
   sources: SnapshotSourceResult[];
   warnings: string[];
 }
 
-function addMinutes(date: Date, minutes: number): Date {
-  return new Date(date.getTime() + minutes * 60_000);
-}
-
 export function isSnapshotStale(expiresAt: string, now = new Date()): boolean {
-  return new Date(expiresAt).getTime() <= now.getTime();
+  return isExpired(expiresAt, now);
 }
 
-function isSeoul(jurisdiction?: string): boolean {
-  return Boolean(jurisdiction && /서울/.test(jurisdiction));
-}
-
-function sourceStatusFromAccess(status: ApiAccessStatus): SnapshotSourceStatus {
-  if (status === "configured") return "configured";
-  if (status === "pending") return "pending_key";
-  return "not_configured";
-}
-
-function levelFromSeoulCongestion(level?: unknown): "info" | "watch" | "warning" | "critical" {
+function levelFromSeoulCongestion(level?: unknown): OperationalObservationLevel {
   const value = String(level ?? "");
   if (/붐빔/.test(value)) return "critical";
   if (/약간/.test(value)) return "watch";
   return "info";
 }
 
-function levelFromAirGrade(grade?: unknown): "info" | "watch" | "warning" | "critical" {
+function levelFromAirGrade(grade?: unknown): OperationalObservationLevel {
   const value = Number(grade);
   if (value >= 4) return "critical";
   if (value >= 3) return "warning";
@@ -143,12 +122,12 @@ export async function generateEventDaySnapshot(input: {
     airStationName: input.airStationName,
   };
 
-  const seoulStatus = isSeoul(input.jurisdiction)
-    ? sourceStatusFromAccess(statusForEnvVar("SEOUL_OPENAPI_KEY", env))
+  const seoulStatus = isSeoulJurisdiction(input.jurisdiction)
+    ? sourceStatusFromApiAccess(statusForEnvVar("SEOUL_OPENAPI_KEY", env))
     : "unsupported_region";
-  const airStatus = sourceStatusFromAccess(statusForEnvVar("AIRKOREA_SERVICE_KEY", env));
-  const itsStatus = sourceStatusFromAccess(statusForEnvVar("ITS_OPENAPI_KEY", env));
-  const safetyStatus = sourceStatusFromAccess(statusForEnvVar("SAFETY_DATA_API_KEY", env));
+  const airStatus = sourceStatusFromApiAccess(statusForEnvVar("AIRKOREA_SERVICE_KEY", env));
+  const itsStatus = sourceStatusFromApiAccess(statusForEnvVar("ITS_OPENAPI_KEY", env));
+  const safetyStatus = sourceStatusFromApiAccess(statusForEnvVar("SAFETY_DATA_API_KEY", env));
   const [seoulProbe, airProbe] = await Promise.all([
     live && seoulStatus === "configured"
       ? fetchSeoulCityData({ areaName: input.seoulAreaName, env: env as NodeJS.ProcessEnv | undefined })

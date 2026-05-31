@@ -17,10 +17,11 @@ Korean MICE 현장 운영 안전용 MCP 서버입니다. 축제·박람회·컨�
 
 ## 릴리스 상태
 
-- 현재 버전: `1.0.0`
-- 성숙도: 법령·조례·안전관리 적용성 기준의 1.0.0. 오프라인 법령/조례/베뉴/위험 온톨로지로 실무 안전계획 초안 생성·검수·export·운영 루프 smoke를 통과합니다. P0/P1/P2 API 경로는 현재 확보된 키와 공개 API 범위에서 상태 확인, 오프라인 반영, 행사일 스냅샷, 실시간 운영 증거 조회의 안전한 실패 처리를 포함합니다.
+- 현재 버전: `1.0.3`
+- 성숙도: 신뢰성 평가 85/100의 field-ready candidate. 이미 1.0.x 릴리스 라인에 있으므로 버전은 되돌리지 않고, 90점/95점은 다음 품질 목표로 관리합니다.
 - 릴리스 게이트와 배포 경계는 [RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md)에 정리합니다.
-- npm 패키지는 raw PDF/HWP, `.env`, 다운로드 쿠키, 검증 출력 저장소, graphify 캐시를 포함하지 않습니다.
+- 신뢰성 평가 기준은 [TRUSTED_SAFETY_LAW_RUBRIC.md](docs/TRUSTED_SAFETY_LAW_RUBRIC.md), 현재 점수표는 [TRUSTED_SAFETY_LAW_SCORECARD_2026-05-31.md](docs/TRUSTED_SAFETY_LAW_SCORECARD_2026-05-31.md)에 분리해 저장합니다.
+- npm 패키지는 raw PDF/HWP, full extracted 베뉴 Markdown, `.env`, 다운로드 쿠키, 검증 출력 저장소, graphify 캐시를 포함하지 않습니다. 공개 패키지에는 `data/public/venue-safety-summaries.json`과 `data/markdown/public/venue-safety-summaries.md`처럼 요약·체크포인트형 자료만 포함합니다.
 - clean tarball install 기준 `npm audit --omit=dev`를 통과합니다. xlsx export는 외부 spreadsheet 패키지 없이 내장 OOXML writer로 생성합니다.
 
 ## 사용
@@ -54,13 +55,16 @@ npm run web
 node build/cli.js web --host 127.0.0.1 --port 4317
 ```
 
-브라우저에서 `http://127.0.0.1:4317`을 열면 행사 유형, 예상 인파 수, 베뉴, 관할 지자체, 도로점용, 식음료/LPG, 설치·철거, 개인정보, VIP/보안, 무주최 다중운집 조건을 입력해 카드형 체크리스트를 바로 확인할 수 있습니다. 웹 시뮬레이터는 별도 네트워크 조회 없이 `query_mice_safety_applicability`와 동일한 오프라인 온톨로지를 사용합니다.
+브라우저에서 `http://127.0.0.1:4317`을 열면 행사 유형, 예상 인파 수, 베뉴, 관할 지자체, 도로점용, 식음료/LPG, 설치·철거, 개인정보, VIP/보안, 무주최 다중운집 조건을 입력해 카드형 체크리스트를 바로 확인할 수 있습니다. `계획서 요약·검수` 버튼은 같은 입력으로 `generate_mice_safety_plan`과 `review_mice_safety_plan`을 실행해 핵심 위험, 적용 근거, 제출·협의 액션, 검수 지적, 문서 묶음 키를 사람이 먼저 보는 보고서 형태로 보여줍니다. 웹 시뮬레이터는 별도 네트워크 조회 없이 오프라인 온톨로지만 사용합니다.
 
 API로도 호출할 수 있습니다.
 
 ```bash
 curl -sS http://127.0.0.1:4317/api/options
 curl -sS -X POST http://127.0.0.1:4317/api/simulate \
+  -H 'content-type: application/json' \
+  --data '{"eventName":"고양 야외 푸드 페스티벌","eventTypes":["festival","outdoor_event","food_event"],"jurisdiction":"경기도 고양시","expectedCrowd":8000,"outdoorEvent":true,"roadUse":true,"foodService":true,"lpgUse":true,"temporaryStructures":true,"temporaryElectricity":true,"setupTeardown":true}'
+curl -sS -X POST http://127.0.0.1:4317/api/plan-review \
   -H 'content-type: application/json' \
   --data '{"eventName":"고양 야외 푸드 페스티벌","eventTypes":["festival","outdoor_event","food_event"],"jurisdiction":"경기도 고양시","expectedCrowd":8000,"outdoorEvent":true,"roadUse":true,"foodService":true,"lpgUse":true,"temporaryStructures":true,"temporaryElectricity":true,"setupTeardown":true}'
 ```
@@ -80,16 +84,17 @@ export LAW_OC=...
 node build/cli.js call plan_korean_law_mcp_queries --inputJson '{"onlyNeedsReview":true}'
 ```
 
-1.0.0에는 `LAW_OC` 환경변수로 확인한 법령 MST/법령ID와 핵심 조문 요약이 들어 있습니다. 오프라인 법령팩은 35개 법령/행정규칙, 74개 조문, 35개 별표·서식 요약팩을 포함하며, 공연법 시행령/시행규칙, 식품위생법 시행규칙, LPG 시행규칙, 도로법 시행령/시행규칙, 옥외광고물법 시행령, 화재예방법 시행령, 소방시설법 시행령, 응급의료법 시행령/시행규칙, 건축법 시행령/시행규칙, 개인정보보호법 시행령, 경비업법 시행령/시행규칙까지 들어 있습니다. 조문 검증 완료 항목은 `verificationStatus: "verified"`로 표시했고, 오프라인 조문 온톨로지는 [legal-article-ontology.json](src/ontology/mice/legal-article-ontology.json), 별표·서식 온톨로지는 [legal-annex-ontology.json](src/ontology/mice/legal-annex-ontology.json)에 저장합니다.
+현재 오프라인 법령팩에는 `LAW_OC` 환경변수로 확인한 법령 MST/법령ID와 핵심 조문 요약이 들어 있습니다. 오프라인 법령팩은 35개 법령/행정규칙, 74개 조문, 35개 별표·서식 요약팩을 포함하며, 공연법 시행령/시행규칙, 식품위생법 시행규칙, LPG 시행규칙, 도로법 시행령/시행규칙, 옥외광고물법 시행령, 화재예방법 시행령, 소방시설법 시행령, 응급의료법 시행령/시행규칙, 건축법 시행령/시행규칙, 개인정보보호법 시행령, 경비업법 시행령/시행규칙까지 들어 있습니다. 조문 검증 완료 항목은 `verificationStatus: "verified"`로 표시했고, 오프라인 조문 온톨로지는 [legal-article-ontology.json](src/ontology/mice/legal-article-ontology.json), 별표·서식 온톨로지는 [legal-annex-ontology.json](src/ontology/mice/legal-annex-ontology.json)에 저장합니다.
 
 지자체 조례 수집은 실행 시점에만 `LAW_OC`를 사용하고 결과를 오프라인 JSON으로 저장합니다.
 
 ```bash
 export LAW_OC=...
 npm run collect:local-ordinances
+npm run refine:local-ordinances
 ```
 
-현재 오프라인 조례팩은 지역축제 안전관리 1건, 옥외행사 안전관리 189건, 도로점용·교통소통 333건, 옥외광고물 관리 228건을 로컬 인덱스로 보관합니다. 우선 지자체 73개 레코드는 조문 발췌까지 포함합니다. 각 레코드는 `jurisdiction`, `category`, `lawOrOrdinanceName`, `ordinanceName`, `ordinSeq/sourceUrl`, `sourceId`, `effectiveAt`, `appliesWhen`, `crowdThreshold`, `threshold`, `submissionDeadline`, `requiredPlanItems`, `inspectionRules`, `agencyCoordination`, `insuranceOrLiability`, `relatedDuties`, `relatedHazards`, `articleExtracts`, `verificationStatus`, `sourceConfidence`를 포함합니다.
+현재 오프라인 조례팩은 지역축제 안전관리 1건, 옥외행사 안전관리 189건, 도로점용·교통소통 333건, 옥외광고물 관리 228건을 로컬 인덱스로 보관합니다. 우선 지자체 73개 레코드는 조문 발췌까지 포함합니다. 각 레코드는 `jurisdiction`, `category`, `lawOrOrdinanceName`, `ordinanceName`, `ordinSeq/sourceUrl`, `sourceId`, `effectiveAt`, `appliesWhen`, `crowdThreshold`, `threshold`, `thresholdStructured`, `submissionDeadline`, `requiredPlanItems`, `inspectionRules`, `agencyCoordination`, `insuranceOrLiability`, `relatedDuties`, `relatedHazards`, `articleExtracts`, `verificationStatus`, `verificationChecks`, `sourceConfidence`를 포함합니다. 조례 `verificationStatus`는 `source_verified`, `article_verified`, `needs_review`로 세분화하며, threshold 추출이 중복·절단된 후보는 `needs_review`로 낮춥니다.
 
 `query_mice_local_ordinances`와 계획서 생성은 `jurisdiction`, `venueId`, `eventType(s)`, `roadUse`, `outdoorEvent`, `temporaryStructures`를 이용해 광역/기초 조례 후보를 `primary`, `secondary`, `reference`로 우선순위화합니다. 예를 들어 `venueId: "kintex"` 또는 `jurisdiction: "경기도 고양시"`를 넣으면 고양시 조례를 먼저, 경기도 조례를 그 다음 후보로 둡니다.
 
@@ -102,11 +107,13 @@ npm run collect:local-ordinances
 ```bash
 npm run sync:venue-pdfs
 npm run build:venue-index
+npm run build:public-venue-summaries
 npm run validate:venue-corpus
 ```
 
 - 원본 PDF/HWP: `data/raw/venue-pdfs/`, `data/raw/venue-hwp/`
-- Markdown 변환본: `data/markdown/venue-manuals/`
+- 내부 검증용 Markdown 변환본: `data/markdown/venue-manuals/` (npm package에는 포함하지 않음)
+- 공개 패키지용 요약본: `data/public/venue-safety-summaries.json`, `data/markdown/public/venue-safety-summaries.md`
 - 시설/안전 라인 인덱스: [venue-facility-index.json](src/ontology/mice/venue-facility-index.json)
 - 동기화 manifest: [venue-pdf-manifest.json](data/venue-pdf-manifest.json)
 - 베뉴 코퍼스 감사: [VENUE_CORPUS_AUDIT.md](docs/VENUE_CORPUS_AUDIT.md), [venue-corpus-audit-report.json](data/venue-corpus-audit-report.json)
@@ -124,6 +131,7 @@ npm run validate:venue-corpus
 npm run validate:scenarios
 node build/cli.js tools
 npm run audit:sources
+npm run audit:package-safety
 npm run diff:ontology
 ```
 
@@ -138,7 +146,7 @@ npm run diff:ontology
 - `collect_mice_p0_ready_sources`: available-key-first P0 source의 오프라인 pack 준비 상태 조회. `liveProbe:true`이면 KCISA/KOPIS/TourAPI/NEMC/FoodSafety를 소량 실제 호출해 정규화 결과를 검증
 - `generate_mice_event_day_snapshot`: P1 행사 당일 snapshot. `live:true`이면 서울 실시간 도시데이터와 에어코리아를 실제 호출하고, ITS/재난문자는 pending fallback으로 처리
 - `query_mice_live_operations_status`: P2 live adapter. `live:true`이면 기상청 API Hub 초단기실황, 서울 실시간 도시데이터, 에어코리아를 실제 호출해 법령 근거가 아닌 `operationalEvidence`로 반환
-- `generate_mice_safety_plan`: 오프라인 온톨로지 기반 안전관리계획서, 공공 API 운영 증거, 도로·교통 실행계획, 무주최 다중운집 관계기관 공동대응계획, 현장 운영 런시트, 제출·협의 체크리스트, 다국어 방문객 안내 초안 생성
+- `generate_mice_safety_plan`: 맨 앞에 결론, 핵심 위험, 적용/비적용 판단, 조건부 확인, 제출·협의 액션, 담당자·기한·증빙, 남은 리스크 요약을 고정하고, 뒤에 오프라인 온톨로지 기반 안전관리계획서, 공공 API 운영 증거, 도로·교통 실행계획, 무주최 다중운집 관계기관 공동대응계획, 현장 운영 런시트, 제출·협의 체크리스트, 다국어 방문객 안내 초안 생성
 - `export_mice_safety_plan_bundle`: 생성 계획서를 Markdown/CSV/docx/xlsx 파일 묶음으로 저장. 공공 API 운영 증거, 도로·교통 실행계획, 무주최 다중운집 대응계획, 공연·무대 실행 상태표 CSV, 식음료/LPG 실행 상태표 CSV, 현장 운영 런시트, 제출·협의 체크리스트, 제출 일정·RACI·증빙 매트릭스, 다국어 방문객 안전 안내문, 자체 검수 요약, 공유범위 필터가 적용된 관할기관별 제출 패키지를 포함
 - `review_mice_safety_plan`: 생성 계획서의 법령/조례/베뉴/작업자 안전/도로·교통/무주최 다중운집/공연·무대/식음료·LPG 현장 실행 기준, 공공 API 운영 증거 누락, 과잉 적용 후보, 문서 커버리지 매트릭스 검수
 - `query_mice_local_ordinances`: 지자체 조례 오프라인 인덱스/조문 발췌 조회와 베뉴/관할/행사조건 기반 우선순위 산정

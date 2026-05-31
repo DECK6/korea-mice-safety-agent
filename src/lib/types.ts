@@ -30,6 +30,11 @@ export type Strictness =
 
 export type VerificationStatus =
   | "verified"
+  | "article_verified"
+  | "threshold_structured"
+  | "needs_review"
+  | "summary_only"
+  | "obsolete_candidate"
   | "law_verified"
   | "source_verified"
   | "needs_article_review"

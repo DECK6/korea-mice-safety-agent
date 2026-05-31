@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "sourceTool": "korean-law-mcp",
   "lawOcHandling": "LAW_OC is passed only through the process environment and must not be committed.",

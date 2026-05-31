@@ -1,4 +1,4 @@
-import { statusForEnvVar, type ApiAccessStatus } from "./api-access-status.js";
+import { statusForEnvVar } from "./api-access-status.js";
 import type { EnvLike } from "./env.js";
 import {
   fetchAirKoreaStation,
@@ -7,25 +7,23 @@ import {
   type LiveApiResult,
   type NormalizedExternalRecord,
 } from "./mice-public-api-clients.js";
+import {
+  isSeoulJurisdiction,
+  sourceStatusFromApiAccess,
+  type OperationalEvidenceFreshness,
+  type OperationalEvidenceLocation,
+  type OperationalFreshnessMode,
+  type OperationalSourceStatus,
+} from "./operational-evidence-model.js";
 
-export type LiveAdapterStatus =
-  | "configured"
-  | "not_configured"
-  | "pending_key"
-  | "unsupported_region"
-  | "live_error"
-  | "live_call_skipped";
+export type LiveAdapterStatus = OperationalSourceStatus;
 
 export interface OperationalEvidence {
   sourceId: string;
   label: string;
   status: LiveAdapterStatus;
   capturedAt: string;
-  freshness: {
-    mode: "live" | "fallback" | "not_collected";
-    ttlMinutes: number;
-    isStale: boolean;
-  };
+  freshness: OperationalEvidenceFreshness;
   coverage: string[];
   warnings: string[];
   recommendations: string[];
@@ -34,25 +32,10 @@ export interface OperationalEvidence {
 
 export interface LiveOperationsStatus {
   generatedAt: string;
-  location: {
-    venueId?: string;
-    jurisdiction?: string;
-    latitude?: number;
-    longitude?: number;
-  };
+  location: OperationalEvidenceLocation;
   operationalEvidence: OperationalEvidence[];
   warnings: string[];
   legalBasis?: never;
-}
-
-function adapterStatus(status: ApiAccessStatus): LiveAdapterStatus {
-  if (status === "configured") return "configured";
-  if (status === "pending") return "pending_key";
-  return "not_configured";
-}
-
-function isSeoul(jurisdiction?: string): boolean {
-  return Boolean(jurisdiction && /서울/.test(jurisdiction));
 }
 
 function evidence(args: {
@@ -65,17 +48,19 @@ function evidence(args: {
   warnings?: string[];
   recommendations?: string[];
   data?: Record<string, unknown> | null;
+  freshnessMode?: OperationalFreshnessMode;
 }): OperationalEvidence {
   const collected = args.status === "configured" && args.data;
+  const freshnessMode = args.freshnessMode ?? (collected ? "live" : args.status === "configured" ? "not_collected" : "fallback");
   return {
     sourceId: args.sourceId,
     label: args.label,
     status: args.status,
     capturedAt: args.capturedAt,
     freshness: {
-      mode: collected ? "live" : args.status === "configured" ? "not_collected" : "fallback",
+      mode: freshnessMode,
       ttlMinutes: args.ttlMinutes ?? 10,
-      isStale: !collected,
+      isStale: freshnessMode !== "live",
     },
     coverage: args.coverage,
     warnings: args.warnings ?? [],
@@ -134,13 +119,14 @@ export async function queryLiveOperationsStatus(input: {
   const capturedAt = new Date().toISOString();
   const env = input.env;
   const live = input.live ?? !input.useFixtures;
-  const weatherStatus = adapterStatus(statusForEnvVar("KMA_APIHUB_KEY", env));
-  const crowdStatus = isSeoul(input.jurisdiction)
-    ? adapterStatus(statusForEnvVar("SEOUL_OPENAPI_KEY", env))
+  const usingFixtureFallback = input.useFixtures && !live;
+  const weatherStatus = sourceStatusFromApiAccess(statusForEnvVar("KMA_APIHUB_KEY", env));
+  const crowdStatus = isSeoulJurisdiction(input.jurisdiction)
+    ? sourceStatusFromApiAccess(statusForEnvVar("SEOUL_OPENAPI_KEY", env))
     : "unsupported_region";
-  const airStatus = adapterStatus(statusForEnvVar("AIRKOREA_SERVICE_KEY", env));
-  const safetyStatus = adapterStatus(statusForEnvVar("SAFETY_DATA_API_KEY", env));
-  const itsStatus = adapterStatus(statusForEnvVar("ITS_OPENAPI_KEY", env));
+  const airStatus = sourceStatusFromApiAccess(statusForEnvVar("AIRKOREA_SERVICE_KEY", env));
+  const safetyStatus = sourceStatusFromApiAccess(statusForEnvVar("SAFETY_DATA_API_KEY", env));
+  const itsStatus = sourceStatusFromApiAccess(statusForEnvVar("ITS_OPENAPI_KEY", env));
   const [weatherProbe, crowdProbe, airProbe] = await Promise.all([
     live && weatherStatus === "configured"
       ? fetchKmaUltraShort({ nx: input.nx, ny: input.ny, env: env as NodeJS.ProcessEnv | undefined })
@@ -171,9 +157,10 @@ export async function queryLiveOperationsStatus(input: {
         ? ["KMA_APIHUB_KEY 미설정: 기상 live adapter는 fallback만 반환"]
         : warningsFromProbe(weatherProbe),
       recommendations: ["야외 무대·트러스·현수막·임시전기 조건에서는 강풍/호우/낙뢰 특보를 행사중지 기준과 연결한다."],
+      freshnessMode: usingFixtureFallback ? "fallback" : undefined,
       data: weatherProbe?.ok
         ? { riskState: weatherRisk.state, summary: weatherRisk.summary, record: weatherRecord }
-        : input.useFixtures && weatherStatus === "configured"
+        : usingFixtureFallback && weatherStatus === "configured"
         ? { riskState: "normal", summary: "fixture weather normal" }
         : null,
     }),
@@ -190,9 +177,10 @@ export async function queryLiveOperationsStatus(input: {
           ? ["SEOUL_OPENAPI_KEY 미설정: 서울 live crowd adapter는 fallback만 반환"]
           : warningsFromProbe(crowdProbe),
       recommendations: ["혼잡도 급상승 시 입장 제한, 우회동선, 안내방송, 스태프 추가 투입 기준과 연결한다."],
+      freshnessMode: usingFixtureFallback ? "fallback" : undefined,
       data: crowdProbe?.ok
         ? { riskState: crowdRisk.state, summary: crowdRisk.summary, record: crowdRecord }
-        : input.useFixtures && crowdStatus === "configured"
+        : usingFixtureFallback && crowdStatus === "configured"
         ? { riskState: "watch", summary: "fixture Seoul crowd watch" }
         : null,
     }),
@@ -205,9 +193,10 @@ export async function queryLiveOperationsStatus(input: {
       coverage: ["pm10", "pm25", "ozone", "station_air_quality"],
       warnings: airStatus === "not_configured" ? ["AIRKOREA_SERVICE_KEY 미설정: 대기질 adapter는 fallback만 반환"] : warningsFromProbe(airProbe),
       recommendations: ["미세먼지/오존 악화 시 취약자 보호, 야외 대기열 완화, 마스크 안내를 검토한다."],
+      freshnessMode: usingFixtureFallback ? "fallback" : undefined,
       data: airProbe?.ok
         ? { riskState: airRisk.state, summary: airRisk.summary, record: airRecord }
-        : input.useFixtures && airStatus === "configured"
+        : usingFixtureFallback && airStatus === "configured"
         ? { riskState: "normal", summary: "fixture air quality normal" }
         : null,
     }),

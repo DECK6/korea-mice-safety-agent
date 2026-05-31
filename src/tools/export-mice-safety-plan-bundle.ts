@@ -4,6 +4,7 @@ import { join } from "node:path";
 import type { Paragraph as DocxParagraph } from "docx";
 import { z } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
+import { baseMiceEventInputSchema, type MiceEventType } from "../lib/mice-event-input-schema.js";
 import { objectRows, writeXlsxFile, type XlsxCell, type XlsxSheet } from "../lib/simple-xlsx.js";
 import {
   buildDefaultMiceVisitorNoticeBundle,
@@ -14,42 +15,7 @@ import { VERSION } from "../version.js";
 import { generateMiceSafetyPlanTool } from "./generate-mice-safety-plan.js";
 import { reviewMiceSafetyPlanTool } from "./review-mice-safety-plan.js";
 
-const EventTypeSchema = z.enum([
-  "festival",
-  "outdoor_event",
-  "exhibition",
-  "conference",
-  "performance",
-  "food_event",
-  "vip_event",
-]);
-
-const inputSchema = z.object({
-  eventName: z.string().optional().default("행사명 미정"),
-  date: z.string().optional(),
-  eventDate: z.string().optional().describe("행사일 YYYY-MM-DD. date와 같은 의미의 alias입니다."),
-  location: z.string().optional(),
-  organizer: z.string().optional(),
-  eventTypes: z.array(EventTypeSchema).optional(),
-  venueId: z.string().optional(),
-  jurisdiction: z.string().optional(),
-  expectedCrowd: z.number().int().min(0).optional(),
-  outdoor: z.boolean().optional(),
-  outdoorEvent: z.boolean().optional(),
-  roadUse: z.boolean().optional(),
-  outdoorAdvertising: z.boolean().optional().describe("현수막, 배너, 지주형 안내판, 전광류 등 옥외광고물/외부 안내표지 설치 여부"),
-  unhostedCrowd: z.boolean().optional().describe("주최자·주관자 없이 자발적/예측형 다중운집이 발생하는 상황"),
-  temporaryStructures: z.boolean().optional(),
-  temporaryElectricity: z.boolean().optional(),
-  setupTeardown: z.boolean().optional(),
-  workAtHeight: z.boolean().optional(),
-  heavyObjectHandling: z.boolean().optional(),
-  hotWork: z.boolean().optional(),
-  lpgUse: z.boolean().optional(),
-  foodService: z.boolean().optional(),
-  performance: z.boolean().optional(),
-  personalDataProcessing: z.boolean().optional(),
-  vipSecurity: z.boolean().optional(),
+const inputSchema = baseMiceEventInputSchema.extend({
   outputDir: z.string().optional().describe("생성 파일을 둘 디렉터리. 없으면 MICE_LOCAL_DIR/plan-bundles 아래에 만듭니다."),
 });
 
@@ -1359,7 +1325,7 @@ function coverageSummary(review: AnyRecord, coverageIds: string[]): string[] {
 }
 
 function hasEvent(input: z.infer<typeof inputSchema>, eventType: string): boolean {
-  return (input.eventTypes ?? []).includes(eventType as z.infer<typeof EventTypeSchema>);
+  return (input.eventTypes ?? []).includes(eventType as MiceEventType);
 }
 
 function buildPackageMarkdown(
@@ -1561,6 +1527,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   const reviewResult = await reviewMiceSafetyPlanTool.handler({
     ...input,
     planMarkdown,
+    documentBundle: structured.documentBundle,
   });
   const review = (reviewResult.structuredContent ?? {}) as AnyRecord;
   const reviewMarkdown = String(reviewResult.content[0]?.text ?? "");

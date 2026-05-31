@@ -5,10 +5,15 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const sourceRegistryPath = join(root, "src/ontology/mice/source-registry.json");
+const publicApiEvidencePath = join(root, "src/ontology/mice/public-api-operational-evidence.json");
+const packageJsonPath = join(root, "package.json");
 const outputJsonPath = join(root, "data/source-audit-report.json");
 const outputMdPath = join(root, "docs/SOURCE_AUDIT.md");
 
 const registry = JSON.parse(readFileSync(sourceRegistryPath, "utf8"));
+const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8"));
+const publicApiEvidence = JSON.parse(readFileSync(publicApiEvidencePath, "utf8"));
+const publicApiEvidenceById = new Map((publicApiEvidence.sources ?? []).map((source) => [source.sourceId, source]));
 
 const STATUSES = ["reusable", "summary_only", "link_only", "needs_license_review", "no_redistribution"];
 
@@ -30,7 +35,14 @@ function classify(source) {
     };
   }
 
-  if (source.id === "LOCAL_ORDINANCE_PACK_2026" || haystack.includes("law.go.kr") || haystack.includes("법령")) {
+  if (source.documentFormat === "api" && source.verificationStatus === "live_verified_snapshot") {
+    return {
+      status: "summary_only",
+      reason: "live 검증 API 결과는 키·원문 응답 없이 요약 snapshot과 운영 체크포인트로만 보관한다.",
+    };
+  }
+
+  if (source.id === "LOCAL_ORDINANCE_PACK_2026" || haystack.includes("law.go.kr") || (haystack.includes("법령") && source.documentFormat !== "api")) {
     return {
       status: "reusable",
       reason: "법령/조례 원문 기반 메타데이터와 필요한 조문 발췌를 오프라인 검증팩으로 사용한다. 제출 전 최신 원문 확인은 필수다.",
@@ -51,7 +63,7 @@ function classify(source) {
     };
   }
 
-  if (caution.includes("별도 확인") || caution.includes("확인 필요") || source.verificationStatus === "needs_review") {
+  if (caution.includes("별도 확인") || caution.includes("확인 필요") || ["needs_review", "needs_source_review"].includes(source.verificationStatus)) {
     return {
       status: "needs_license_review",
       reason: "이용조건 또는 최신성 확인이 남아 있다.",
@@ -66,6 +78,7 @@ function classify(source) {
 
 const sources = registry.sources.map((source) => {
   const audit = classify(source);
+  const evidence = publicApiEvidenceById.get(source.id);
   return {
     id: source.id,
     title: source.title,
@@ -76,6 +89,10 @@ const sources = registry.sources.map((source) => {
     localMarkdownPath: source.localMarkdownPath,
     offlineTextStatus: source.offlineTextStatus ?? "not_applicable",
     verificationStatus: source.verificationStatus,
+    evidenceSnapshotStatus: evidence ? publicApiEvidence.verificationStatus : undefined,
+    liveProbeAt: evidence?.liveProbeAt,
+    currentAsOf: evidence?.currentAsOf,
+    sourceConfidence: evidence?.sourceConfidence,
     licenseStatus: audit.status,
     licenseReason: audit.reason,
     reuseCaution: source.reuseCaution,
@@ -85,7 +102,7 @@ const sources = registry.sources.map((source) => {
 const counts = Object.fromEntries(STATUSES.map((status) => [status, sources.filter((source) => source.licenseStatus === status).length]));
 
 const report = {
-  version: "1.0.0",
+  version: packageJson.version,
   generatedAt: new Date().toISOString().slice(0, 10),
   policy:
     "MICE 안전 에이전트는 법령/조례/안전수칙/베뉴 정보를 런타임 오프라인으로 조회하되, 원문 재배포 제한이 있는 자료는 요약·링크·체크포인트 방식으로만 사용한다.",
@@ -101,7 +118,7 @@ writeFileSync(outputJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 const rows = sources
   .map(
     (source) =>
-      `| ${source.id} | ${source.licenseStatus} | ${source.documentFormat} | ${source.offlineTextStatus} | ${source.verificationStatus} | ${source.licenseReason} |`,
+      `| ${source.id} | ${source.licenseStatus} | ${source.documentFormat} | ${source.offlineTextStatus} | ${source.verificationStatus} | ${source.evidenceSnapshotStatus ?? ""} | ${source.currentAsOf ?? ""} | ${source.licenseReason} |`,
   )
   .join("\n");
 
@@ -124,8 +141,8 @@ const markdown = [
   "",
   "## Sources",
   "",
-  "| Source | License status | Format | Offline text | Verification | Reason |",
-  "| --- | --- | --- | --- | --- | --- |",
+  "| Source | License status | Format | Offline text | Verification | Evidence snapshot | Current as of | Reason |",
+  "| --- | --- | --- | --- | --- | --- | --- | --- |",
   rows,
   "",
   "## Notes",
@@ -133,6 +150,7 @@ const markdown = [
   "- `LAW_OC`는 수집 시점 환경변수로만 사용하고 이 리포트나 온톨로지 파일에 저장하지 않는다.",
   "- KOSHA Guide와 베뉴 PDF/HWP는 안전계획 생성용 요약·체크포인트로만 쓰고, 원문 제출·재배포 근거로 쓰지 않는다.",
   "- 조례/법령 pack은 오프라인 조회용이지만 실제 인허가 제출 전 최신 시행일과 관할청 해석을 재확인해야 한다.",
+  "- `live_verified_snapshot` API 출처는 공개 API live smoke에서 검증한 결과를 키·원문 응답 없이 요약 저장한 상태이며, D-day 운영 판단은 최신 live 재확인이 필요하다.",
 ].join("\n");
 
 writeFileSync(outputMdPath, `${markdown}\n`);
