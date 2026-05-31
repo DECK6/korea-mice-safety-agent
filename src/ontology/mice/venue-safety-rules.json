@@ -99,7 +99,9 @@
           "COEX_SERVICE_PARTNER_MANUAL"
         ],
         "gaps": [],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       }
     },
     {
@@ -154,7 +156,9 @@
           "KINTEX_CCTV_POLICY"
         ],
         "gaps": [],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       }
     },
     {
@@ -211,7 +215,9 @@
           "BEXCO_OPERATION_IMPLEMENTATION_RULES"
         ],
         "gaps": [],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       }
     },
     {
@@ -265,7 +271,9 @@
           "KDJ_PARTNER_DOCS"
         ],
         "gaps": [],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       }
     },
     {
@@ -303,7 +311,9 @@
         "gaps": [
           "운영규정/시행규정/작업안전 매뉴얼 원문 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       }
     },
     {
@@ -328,7 +338,9 @@
         "gaps": [
           "시설별 세부 안전 매뉴얼 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -371,7 +383,9 @@
         "gaps": [
           "전시장 운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -428,7 +442,9 @@
         "gaps": [
           "시설별 최신 면적·피난도면 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -469,7 +485,9 @@
         "gaps": [
           "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -524,7 +542,9 @@
         "gaps": [
           "시설별 면적·피난도면 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -567,7 +587,9 @@
         "gaps": [
           "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -624,7 +646,9 @@
         "gaps": [
           "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -679,7 +703,9 @@
         "gaps": [
           "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -736,7 +762,9 @@
         "gaps": [
           "별도 운영규정/작업안전 전문 문서 추가 확보 시 세부 수칙 보강 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -844,7 +872,9 @@
           "시설가이드 PDF/작업신고서 직접 다운로드와 MD화 필요",
           "지정등록업체 모집 공고는 핵심 코퍼스에서 제외"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -901,7 +931,9 @@
           "CECO_WORK_SAFETY_MANUAL"
         ],
         "gaps": [],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -956,7 +988,9 @@
         "gaps": [
           "작업안전 매뉴얼과 세부 시설도면 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -999,7 +1033,9 @@
         "gaps": [
           "운영규정/작업안전 매뉴얼 원문 추가 확보 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -1058,7 +1094,9 @@
         "gaps": [
           "자료실 개별 첨부 파일 다운로드와 PDF/HWP Markdown 변환 필요"
         ],
-        "lastReviewedAt": "2026-05-21"
+        "lastReviewedAt": "2026-05-21",
+        "reviewBy": "2026-08-31",
+        "freshnessStatus": "current"
       },
       "rules": [
         {
@@ -1092,5 +1130,10 @@
         }
       ]
     }
-  ]
+  ],
+  "freshnessPolicy": {
+    "appliedAt": "2026-05-31",
+    "defaultReviewBy": "2026-08-31",
+    "note": "베뉴 규정·시설 수치는 행사 신청 전 최신 운영규정, 도면, 베뉴 담당자 확인으로 보정한다."
+  }
 }

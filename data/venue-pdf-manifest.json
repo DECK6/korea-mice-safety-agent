@@ -1,5 +1,7 @@
 {
   "version": "0.1.0",
+  "versionType": "internal_source_manifest_schema",
+  "packageReleaseLine": "1.0.x",
   "generatedAt": "2026-05-21",
   "storagePolicy": "Official venue operation/safety documents are cached for local research and converted to markdown for offline ontology work. Redistribution of the original documents must be reviewed per source terms.",
   "items": [

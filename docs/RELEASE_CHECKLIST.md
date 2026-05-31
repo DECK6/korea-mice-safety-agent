@@ -2,9 +2,11 @@
 
 ## 1.0.3 Status
 
-`korea-mice-safety-agent` 1.0.3 is a field-ready candidate for offline MICE and outdoor-event safety planning. The release is still an operational draft assistant, not legal advice or a substitute for venue/public-agency approval.
+`korea-mice-safety-agent` 1.0.3 is in the trusted release quality band for offline MICE and outdoor-event safety planning. The release is still an operational draft assistant, not legal advice or a substitute for venue/public-agency approval.
 
-The project already entered the 1.0.x line, so version numbers must not move backward. The current trust score is 85/100; 90/95 are tracked as future quality targets with stronger ordinance article verification and source freshness gates.
+The project already entered the 1.0.x line, so version numbers must not move backward. The current trust score is 90/100; 95 is tracked as the next quality target with broader ordinance article verification and venue current-document checks.
+
+The package/CLI version is the product release version. Ontology pack `version` fields are data schema or corpus pack versions unless a file explicitly states `versionType: "package_release"`.
 
 ## Required Gates
 
@@ -13,6 +15,7 @@ The project already entered the 1.0.x line, so version numbers must not move bac
 - `npm run validate:scenarios`
 - `npm run validate:venue-corpus`
 - `npm run audit:sources`
+- `npm run audit:freshness`
 - `npm run audit:package-safety`
 - `npm run diff:ontology`
 - `npm audit --omit=dev`

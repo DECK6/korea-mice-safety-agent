@@ -91,7 +91,10 @@ const sources = registry.sources.map((source) => {
     verificationStatus: source.verificationStatus,
     evidenceSnapshotStatus: evidence ? publicApiEvidence.verificationStatus : undefined,
     liveProbeAt: evidence?.liveProbeAt,
-    currentAsOf: evidence?.currentAsOf,
+    currentAsOf: source.currentAsOf ?? evidence?.currentAsOf,
+    reviewBy: source.reviewBy,
+    freshnessStatus: source.freshnessStatus,
+    evidenceCurrentAsOf: evidence?.currentAsOf,
     sourceConfidence: evidence?.sourceConfidence,
     licenseStatus: audit.status,
     licenseReason: audit.reason,
@@ -118,7 +121,7 @@ writeFileSync(outputJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 const rows = sources
   .map(
     (source) =>
-      `| ${source.id} | ${source.licenseStatus} | ${source.documentFormat} | ${source.offlineTextStatus} | ${source.verificationStatus} | ${source.evidenceSnapshotStatus ?? ""} | ${source.currentAsOf ?? ""} | ${source.licenseReason} |`,
+      `| ${source.id} | ${source.licenseStatus} | ${source.documentFormat} | ${source.offlineTextStatus} | ${source.verificationStatus} | ${source.evidenceSnapshotStatus ?? ""} | ${source.currentAsOf ?? ""} | ${source.reviewBy ?? ""} | ${source.freshnessStatus ?? ""} | ${source.licenseReason} |`,
   )
   .join("\n");
 
@@ -141,8 +144,8 @@ const markdown = [
   "",
   "## Sources",
   "",
-  "| Source | License status | Format | Offline text | Verification | Evidence snapshot | Current as of | Reason |",
-  "| --- | --- | --- | --- | --- | --- | --- | --- |",
+  "| Source | License status | Format | Offline text | Verification | Evidence snapshot | Current as of | Review by | Freshness | Reason |",
+  "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
   rows,
   "",
   "## Notes",
