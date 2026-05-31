@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -220,4 +220,67 @@ const counts = pack.records.reduce((acc, record) => {
   acc[`threshold:${confidence}`] = (acc[`threshold:${confidence}`] ?? 0) + 1;
   return acc;
 }, {});
+
+const categoryLabels = Object.fromEntries((pack.categories ?? []).map((category) => [category.categoryId, category.label]));
+const categoryCounts = pack.records.reduce((acc, record) => {
+  const category = record.categoryId ?? record.category;
+  acc[category] ??= { total: 0, article_verified: 0, source_verified: 0, needs_review: 0 };
+  acc[category].total += 1;
+  acc[category][record.verificationStatus] = (acc[category][record.verificationStatus] ?? 0) + 1;
+  return acc;
+}, {});
+
+const mdPath = join(root, "data/markdown/legal/local-ordinance-pack.md");
+mkdirSync(dirname(mdPath), { recursive: true });
+const mdLines = [
+  "---",
+  'title: "MICE 지역 조례 오프라인 팩"',
+  `generatedAt: "${pack.refinedAt}"`,
+  'status: "offline_article_verified_pack"',
+  "---",
+  "",
+  "# MICE 지역 조례 오프라인 팩",
+  "",
+  "법제처 자치법규 공식 HTML에서 행사 안전과 직접 연결되는 조례 조문 발췌를 수집해 로컬 온톨로지로 저장했다. LAW_OC 값은 저장하지 않는다.",
+  "",
+  "## 검증 요약",
+  "",
+  `- 전체 조례: ${pack.records.length}건`,
+  `- article_verified: ${counts.article_verified ?? 0}건`,
+  `- source_verified: ${counts.source_verified ?? 0}건`,
+  `- needs_review: ${counts.needs_review ?? 0}건`,
+  `- article verification coverage: ${pack.articleVerificationSummary?.coveragePct ?? ""}%`,
+  `- verification method: ${pack.articleVerificationSummary?.method ?? "law.go.kr official HTML snapshot"}`,
+  "",
+  "## 범주별 현황",
+  "",
+  ...Object.entries(categoryCounts).map(([category, value]) => `- ${categoryLabels[category] ?? category}: ${value.total}건, article_verified ${value.article_verified ?? 0}건`),
+  "",
+  "## 공통 조문 패턴",
+  "",
+  ...(pack.articlePatterns ?? []).flatMap((pattern) => [
+    `### ${pattern.categoryId}`,
+    `- 조문 주제: ${pattern.commonArticleThemes.join(", ")}`,
+    `- MICE 의무 매핑: ${pattern.miceDutyMapping.join(", ")}`,
+    "",
+  ]),
+  "## 조례별 핵심 발췌",
+  "",
+  ...pack.records.flatMap((record) => [
+    `### ${record.jurisdiction} - ${record.ordinanceName ?? record.name}`,
+    `- 범주: ${record.categoryLabel ?? categoryLabels[record.categoryId] ?? record.categoryId}`,
+    `- 시행일: ${record.effectiveAt || "확인 필요"}`,
+    `- 검증: ${record.verificationStatus}`,
+    `- 적용: ${record.appliesWhen}`,
+    `- 인원/조건: ${record.threshold ?? record.crowdThreshold}`,
+    `- 제출기한: ${record.submissionDeadline}`,
+    `- 필요 항목: ${(record.requiredPlanItems ?? []).join(", ")}`,
+    `- 점검: ${(record.inspectionRules ?? []).join(", ")}`,
+    `- 관계기관: ${(record.agencyCoordination ?? []).join(", ")}`,
+    `- 원문: ${record.sourceUrl}`,
+    ...(record.articleExtracts ?? []).slice(0, 3).map((article) => `- ${cleanText(article.title || article.article)}: ${cleanText(article.textExcerpt)}`),
+    "",
+  ]),
+];
+writeFileSync(mdPath, `${mdLines.join("\n")}\n`, "utf8");
 console.log(JSON.stringify({ records: pack.records.length, counts }, null, 2));

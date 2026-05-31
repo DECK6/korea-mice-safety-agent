@@ -2,9 +2,9 @@
 
 ## 1.0.3 Status
 
-`korea-mice-safety-agent` 1.0.3 is in the trusted release quality band for offline MICE and outdoor-event safety planning. The release is still an operational draft assistant, not legal advice or a substitute for venue/public-agency approval.
+`korea-mice-safety-agent` 1.0.3 is in the high-trust release quality band for offline MICE and outdoor-event safety planning. The release is still an operational draft assistant, not legal advice or a substitute for venue/public-agency approval.
 
-The project already entered the 1.0.x line, so version numbers must not move backward. The current trust score is 90/100; 95 is tracked as the next quality target with broader ordinance article verification and venue current-document checks.
+The project already entered the 1.0.x line, so version numbers must not move backward. The current trust score is 95/100 after full local-ordinance article verification and official venue source-link verification.
 
 The package/CLI version is the product release version. Ontology pack `version` fields are data schema or corpus pack versions unless a file explicitly states `versionType: "package_release"`.
 
@@ -48,5 +48,6 @@ The package/CLI version is the product release version. Ontology pack `version` 
 ## 1.0.3 Release Evidence
 
 - `validate:scenarios` includes ontology maturity checks for required legal duty types, local ordinance fields, hazard/control/law/source linkage, positive scenarios, and negative over-application cases.
+- `audit:freshness` now fails unless all 751 local ordinance records are article-level verified, priority article verification is at least 750 records, and all 33 official venue source links are reachable.
 - xlsx export uses the built-in `simple-xlsx` writer and clean tarball install passes `npm audit --omit=dev`.
 - Source audit keeps `needs_license_review` and `no_redistribution` sources out of raw redistribution and documents summary/link-only policy.

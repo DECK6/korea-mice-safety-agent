@@ -2,7 +2,7 @@
 
 이 파일은 공개 패키지에 포함할 수 있는 베뉴 안전 요약본이다. 원본 PDF/HWP 및 full extracted Markdown은 내부 검증 코퍼스로만 유지하며 npm package에 포함하지 않는다.
 
-Generated at: 2026-05-31T14:18:12.508Z
+Generated at: 2026-05-31T14:34:13.392Z
 
 ## 코엑스 (coex)
 
@@ -11,10 +11,11 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 3/3 reachable, checked 2026-05-31
 - Sources:
-  - COEX_EXHIBITION_GUIDE_2025: 전시장 이용 안내서(2025) (https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9D%B4%EC%9A%A9-%EC%95%88%EB%82%B4%EC%84%9Cver-2023-10-10/) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - COEX_FACILITY_OPERATION_RULE_2023: 2023년 전시장 시설운영규정(국/영문) (https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%8B%9C%EC%84%A4%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EA%B5%AD-%EC%98%81%EB%AC%B8/) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - COEX_SERVICE_PARTNER_MANUAL: 코엑스 서비스협력업체 운영 매뉴얼 (https://lmsweb.coex.co.kr/com/attachfile/download.mvc?fileCateCD=NOTICE&fileKey=458&serialNo=2) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - COEX_EXHIBITION_GUIDE_2025: 전시장 이용 안내서(2025) (https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9D%B4%EC%9A%A9-%EC%95%88%EB%82%B4%EC%84%9Cver-2023-10-10/) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - COEX_FACILITY_OPERATION_RULE_2023: 2023년 전시장 시설운영규정(국/영문) (https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%8B%9C%EC%84%A4%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EA%B5%AD-%EC%98%81%EB%AC%B8/) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - COEX_SERVICE_PARTNER_MANUAL: 코엑스 서비스협력업체 운영 매뉴얼 (https://lmsweb.coex.co.kr/com/attachfile/download.mvc?fileCateCD=NOTICE&fileKey=458&serialNo=2) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Spaces:
   - Hall A: 공식 페이지 기준 면적 10,368㎡; 3m x 3m 기준 최대 520부스; 전시부스 배치 시 기본 도면과 홀별 도면 확인 필요
 - Safety checkpoints:
@@ -43,10 +44,11 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 3/3 reachable, checked 2026-05-31
 - Sources:
-  - KINTEX_SAFETY_EDUCATION: 킨텍스 전시장 작업자 안전교육자료 (https://www.kintex.com/download/formatModal/4.%EC%A7%80%EC%A0%95%EB%93%B1%EB%A1%9D%EC%97%85%EC%B2%B4%EC%95%88%EC%A0%84%EA%B5%90%EC%9C%A1%EC%9E%90%EB%A3%8C.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - KINTEX_ORGANIZER_MANUAL: 전시홀 주최자 매뉴얼 (https://www.kintex.com/download/formatModal/8.%EC%A0%84%EC%8B%9C%EC%A3%BC%EC%B5%9C%EC%9E%90%EB%A7%A4%EB%89%B4%EC%96%BC.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - KINTEX_CCTV_POLICY: 고정형 영상정보처리기기 운영·관리 방침 (https://www.kintex.com/web/ko/management_of_image_information.do) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - KINTEX_SAFETY_EDUCATION: 킨텍스 전시장 작업자 안전교육자료 (https://www.kintex.com/download/formatModal/4.%EC%A7%80%EC%A0%95%EB%93%B1%EB%A1%9D%EC%97%85%EC%B2%B4%EC%95%88%EC%A0%84%EA%B5%90%EC%9C%A1%EC%9E%90%EB%A3%8C.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/206]
+  - KINTEX_ORGANIZER_MANUAL: 전시홀 주최자 매뉴얼 (https://www.kintex.com/download/formatModal/8.%EC%A0%84%EC%8B%9C%EC%A3%BC%EC%B5%9C%EC%9E%90%EB%A7%A4%EB%89%B4%EC%96%BC.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - KINTEX_CCTV_POLICY: 고정형 영상정보처리기기 운영·관리 방침 (https://www.kintex.com/web/ko/management_of_image_information.do) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - work_safety_training: 전시홀 안전관리지침과 작업자 안전교육 이수·준수 여부를 확인한다.
     - 전시장 사용자 및 관람객 안전 확보 목적의 안전관리지침 확인
@@ -65,11 +67,12 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 4/4 reachable, checked 2026-05-31
 - Sources:
-  - BEXCO_USER_GUIDEBOOK: 벡스코 전시장 사용자 가이드북 (https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=5338&mCode=MN059&mgr_seq=36&mode=view) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - BEXCO_OPERATION_RULES: 행사장 운영규정 및 행사장 운영규정 시행요령 (https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2130&mCode=MN059&mgr_seq=36&mode=view) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - BEXCO_CONSTRUCTION_SAFETY_MANUAL: 벡스코 행사장 공사 안전 매뉴얼 (https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2854&mCode=MN059&mgr_seq=36&mode=view) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - BEXCO_OPERATION_IMPLEMENTATION_RULES: 행사장 운영규정 시행요령 (https://www.bexco.co.kr/organizer/ajx_json/UploadMgr/downloadRun.do?qcode=Qm9hcmQsMzI5NzcsWQ==) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - BEXCO_USER_GUIDEBOOK: 벡스코 전시장 사용자 가이드북 (https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=5338&mCode=MN059&mgr_seq=36&mode=view) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - BEXCO_OPERATION_RULES: 행사장 운영규정 및 행사장 운영규정 시행요령 (https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2130&mCode=MN059&mgr_seq=36&mode=view) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - BEXCO_CONSTRUCTION_SAFETY_MANUAL: 벡스코 행사장 공사 안전 매뉴얼 (https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2854&mCode=MN059&mgr_seq=36&mode=view) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - BEXCO_OPERATION_IMPLEMENTATION_RULES: 행사장 운영규정 시행요령 (https://www.bexco.co.kr/organizer/ajx_json/UploadMgr/downloadRun.do?qcode=Qm9hcmQsMzI5NzcsWQ==) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - organizer_manual: 전시장 임차인은 전시장 사용자 가이드북과 행사장 운영규정/시행요령 최신본을 확인한다.
     - 전시장 사용자 가이드북 최신 업데이트 확인
@@ -88,9 +91,10 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 2/2 reachable, checked 2026-05-31
 - Sources:
-  - KDJ_EXHIBITION_FORMS: 김대중컨벤션센터 전시장 임대신청 서식 (https://kdjcenter.gjto.or.kr/rental/forms/show-room) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - KDJ_PARTNER_DOCS: 김대중컨벤션센터 작업·전기·경비 제출 서류 안내 (https://kdjcenter.gjto.or.kr/partner/partnerLeaseappform) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - KDJ_EXHIBITION_FORMS: 김대중컨벤션센터 전시장 임대신청 서식 (https://kdjcenter.gjto.or.kr/rental/forms/show-room) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - KDJ_PARTNER_DOCS: 김대중컨벤션센터 작업·전기·경비 제출 서류 안내 (https://kdjcenter.gjto.or.kr/partner/partnerLeaseappform) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - permit_forms: 전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.
     - 전시장 운영규정 확인
@@ -109,8 +113,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - UECO_FACILITY_INFO: 울산전시컨벤션센터 시설안내 (https://ueco.or.kr/eng/facility/Conference) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - UECO_FACILITY_INFO: 울산전시컨벤션센터 시설안내 (https://ueco.or.kr/eng/facility/Conference) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/206]
 - Safety checkpoints:
   - capacity_layout: 회의실/컨벤션홀 수용능력과 도면을 기준으로 세팅, 피난, 혼잡도를 검토한다.
     - 행사 세팅별 수용능력 확인
@@ -125,8 +130,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - SETEC_OPERATING_GUIDE_2025: 서울무역전시장 SETEC 운영 요령 2025 (https://www.setec.or.kr/resources/front/files/2025_SETEC.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - SETEC_OPERATING_GUIDE_2025: 서울무역전시장 SETEC 운영 요령 2025 (https://www.setec.or.kr/resources/front/files/2025_SETEC.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/206]
 - Safety checkpoints:
   - operation_rule: SETEC 운영요령 최신본을 기준으로 대관, 설치·철거, 반입·반출, 제출서류를 행사 전 확인한다.
     - 운영요령 개정일 확인
@@ -141,9 +147,10 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 2/2 reachable, checked 2026-05-31
 - Sources:
-  - ATCENTER_FACILITY_INFO: aT센터 제1전시장 시설 안내 (https://www.at.or.kr/contents/acko321111/view.action) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - ATCENTER_RENTAL_INFO: aT센터 전시장 임대료 및 임대시설 현황 (https://www.at.or.kr/contents/acko322200/view.action) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - ATCENTER_FACILITY_INFO: aT센터 제1전시장 시설 안내 (https://www.at.or.kr/contents/acko321111/view.action) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - ATCENTER_RENTAL_INFO: aT센터 전시장 임대료 및 임대시설 현황 (https://www.at.or.kr/contents/acko322200/view.action) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - capacity_layout: 전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.
     - 제1·제2전시장별 면적과 위치 확인
@@ -162,8 +169,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - SONGDO_OPERATION_RULES: 송도컨벤시아 운영규정 (https://songdoconvensia.visitincheon.or.kr/file.do?n=5.+%EC%86%A1%EB%8F%84%EC%BB%A8%EB%B2%A4%EC%8B%9C%EC%95%84+%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf&path=202403%2F8d856c67-a47c-4599-9e2a-25e771e1a94f.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - SONGDO_OPERATION_RULES: 송도컨벤시아 운영규정 (https://songdoconvensia.visitincheon.or.kr/file.do?n=5.+%EC%86%A1%EB%8F%84%EC%BB%A8%EB%B2%A4%EC%8B%9C%EC%95%84+%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf&path=202403%2F8d856c67-a47c-4599-9e2a-25e771e1a94f.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/206]
 - Safety checkpoints:
   - operation_rule: 송도컨벤시아 운영규정에 따라 전시장 사용, 안전·질서 유지, 장치·철거, 반입·반출 조건을 확인한다.
     - 운영규정 최신본 확인
@@ -178,8 +186,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - SUWON_CONVENTION_FACILITY_INFO: 수원컨벤션센터 시설 안내 (https://www.scc.or.kr/) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - SUWON_CONVENTION_FACILITY_INFO: 수원컨벤션센터 시설 안내 (https://www.scc.or.kr/) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - capacity_layout: 전시장 7,877㎡ 기준으로 행사 규모, 부스 배치, 등록대, 피난·대기열 동선을 검토한다.
     - 전시홀 도면과 등록대 위치 검토
@@ -198,8 +207,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - SUWONMESSE_OPERATION_RULES: 수원메쎄 전시장 운영규정 (https://d70o0vfgysr3u.cloudfront.net/wp-content/uploads/2023/08/10171957/SUWONMESSE-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EC%B5%9C%EC%8B%A0%EB%B3%B8.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - SUWONMESSE_OPERATION_RULES: 수원메쎄 전시장 운영규정 (https://d70o0vfgysr3u.cloudfront.net/wp-content/uploads/2023/08/10171957/SUWONMESSE-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EC%B5%9C%EC%8B%A0%EB%B3%B8.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/206]
 - Safety checkpoints:
   - operation_rule: 수원메쎄 운영규정에 따라 작업시간, 반입·반출, 시설 훼손, 원상복구, 안전관리 책임을 확인한다.
     - 운영규정 최신본 확인
@@ -214,9 +224,10 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 2/2 reachable, checked 2026-05-31
 - Sources:
-  - DCC_FACILITY_INFO: 대전컨벤션센터 시설안내 (https://www.dcckorea.or.kr/content/view.do?contentKey=98&menuKey=179) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - DCC_RENTAL_INFO: 대전컨벤션센터 전시장 요금안내 (https://dcckorea.or.kr/content/view.do?contentKey=78&menuKey=173) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - DCC_FACILITY_INFO: 대전컨벤션센터 시설안내 (https://www.dcckorea.or.kr/content/view.do?contentKey=98&menuKey=179) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - DCC_RENTAL_INFO: 대전컨벤션센터 전시장 요금안내 (https://dcckorea.or.kr/content/view.do?contentKey=78&menuKey=173) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - operation_contact: 시설안내와 상황실 연락망을 기준으로 현장 지원, 외부장비 반입, 설치·철거 대응 연락체계를 둔다.
     - 상황실·AV·시설 담당 연락망 확인
@@ -235,8 +246,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - OSCO_EXHIBITION_RENTAL_INFO: 청주오스코 전시장 임대 안내 (https://osco.or.kr/lease/leasing-process/) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - OSCO_EXHIBITION_RENTAL_INFO: 청주오스코 전시장 임대 안내 (https://osco.or.kr/lease/leasing-process/) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - capacity_layout: Hall 1~3 분할/전관 사용 여부에 따라 부스 수, 피난통로, 반입·반출 동선을 분리해 검토한다.
     - 홀별 3,344㎡와 200부스 기준 확인
@@ -255,8 +267,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - EXCO_FACILITY_INFO: EXCO 전시장 시설 안내 (https://exco.co.kr/eng/facility/sub01.html) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - EXCO_FACILITY_INFO: EXCO 전시장 시설 안내 (https://exco.co.kr/eng/facility/sub01.html) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - capacity_layout: 서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.
     - 홀별 바닥하중과 천정고 확인
@@ -275,8 +288,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - HICO_FACILITY_GUIDE: 경주화백컨벤션센터 HICO 주최자 가이드북 (https://www.hico.or.kr/HICO_EXHIBITOR_GUIDEBOOK.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - HICO_FACILITY_GUIDE: 경주화백컨벤션센터 HICO 주최자 가이드북 (https://www.hico.or.kr/HICO_EXHIBITOR_GUIDEBOOK.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/206]
 - Safety checkpoints:
   - capacity_layout: HICO 전시장·회의실·대회의실은 면적, 부스 수, 수용인원, 바닥하중, 제한높이를 기준으로 행사 배치와 장치물 계획을 검토한다.
     - Hall 1+2 2,273㎡, 115부스 기준과 실제 부스 레이아웃 비교
@@ -307,9 +321,10 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 2/2 reachable, checked 2026-05-31
 - Sources:
-  - GUMICO_EXHIBITION_INFO: 구미코 전시장 시설 안내 (https://gumico.com/infra-info/exhibition) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - GUMICO_SAFETY_ORG_INFO: 구미코 조직도 및 시설 안전관리 연락 정보 (https://gumico.com/infra-info/organizational) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - GUMICO_EXHIBITION_INFO: 구미코 전시장 시설 안내 (https://gumico.com/infra-info/exhibition) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - GUMICO_SAFETY_ORG_INFO: 구미코 조직도 및 시설 안전관리 연락 정보 (https://gumico.com/infra-info/organizational) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - capacity_layout: 전시장 면적, 바닥하중, 전기·통신·급배수·압축공기 조건과 작업신고 서류를 설치·철거 계획에 반영한다.
     - 3,402㎡/180부스 기준 배치 검토
@@ -328,9 +343,10 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 2/2 reachable, checked 2026-05-31
 - Sources:
-  - CECO_OPERATION_RULES: 창원컨벤션센터 전시장 운영규정 (https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=28) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - CECO_WORK_SAFETY_MANUAL: 창원컨벤션센터 전시장 작업 안전 관리 매뉴얼 (https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=45) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - CECO_OPERATION_RULES: 창원컨벤션센터 전시장 운영규정 (https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=28) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - CECO_WORK_SAFETY_MANUAL: 창원컨벤션센터 전시장 작업 안전 관리 매뉴얼 (https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=45) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - work_safety: 전시장 작업은 CECO 작업신고·승인 후 수행하고, 위험물·화기·전기톱·가스통 등은 사전 승인 없이는 제한한다.
     - 작업신고 승인 확인
@@ -349,8 +365,9 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 1/1 reachable, checked 2026-05-31
 - Sources:
-  - GSCO_OPERATION_RULES: 군산새만금컨벤션센터 전시장 운영규정 (https://www.gsco.kr/files/GSCO%20%EC%A0%84%EC%8B%9C%EC%9E%A5%20%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - GSCO_OPERATION_RULES: 군산새만금컨벤션센터 전시장 운영규정 (https://www.gsco.kr/files/GSCO%20%EC%A0%84%EC%8B%9C%EC%9E%A5%20%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/206]
 - Safety checkpoints:
   - operation_rule: GSCO 전시장 운영규정에 따라 안전관리, 출입·반입, 시설보전, 원상복구, 공용공간 사용 조건을 확인한다.
     - 운영규정 최신본 확인
@@ -365,9 +382,10 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 2/2 reachable, checked 2026-05-31
 - Sources:
-  - ICCJEJU_EXHIBITION_INFO: ICC JEJU 전시장 시설 안내 (https://www.iccjeju.co.kr/info/02.php) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - ICCJEJU_TAMNA_INFO: ICC JEJU 탐라홀 시설 안내 (https://www.iccjeju.co.kr/info/01.php) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - ICCJEJU_EXHIBITION_INFO: ICC JEJU 전시장 시설 안내 (https://www.iccjeju.co.kr/info/02.php) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - ICCJEJU_TAMNA_INFO: ICC JEJU 탐라홀 시설 안내 (https://www.iccjeju.co.kr/info/01.php) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - capacity_layout: 전시장·탐라홀 수용능력, 화물출입구, 허용하중, 급배수·전원·통신 조건을 배치와 피난계획에 반영한다.
     - 탐라홀/전시장 행사 유형별 수용인원 확인
@@ -386,9 +404,10 @@ Generated at: 2026-05-31T14:18:12.508Z
 - Last reviewed: 2026-05-21
 - Review by: 2026-08-31
 - Freshness: current
+- Official source links: 2/2 reachable, checked 2026-05-31
 - Sources:
-  - YEOSU_EXPO_DOCUMENT_ROOM: 여수엑스포컨벤션센터 자료실 (https://yeosuexpoconvention.kr/yeosu/DocumentRoom) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
-  - YEOSU_EXPO_FACILITY_INFO: 여수엑스포컨벤션센터 시설 안내 (https://yeosuexpoconvention.kr/yeosu/FacilityInfoEx) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current]
+  - YEOSU_EXPO_DOCUMENT_ROOM: 여수엑스포컨벤션센터 자료실 (https://yeosuexpoconvention.kr/yeosu/DocumentRoom) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
+  - YEOSU_EXPO_FACILITY_INFO: 여수엑스포컨벤션센터 시설 안내 (https://yeosuexpoconvention.kr/yeosu/FacilityInfoEx) [currentAsOf=2026-05-31, reviewBy=2026-08-31, freshness=current, link=reachable/200]
 - Safety checkpoints:
   - operation_rule: 시설운영규정, 시행세칙, 작업신고서, 전시·대관시설 안전관리 신고서를 행사 전 필수 제출/검토 후보로 둔다.
     - 시설운영규정 최신 개정일 확인
