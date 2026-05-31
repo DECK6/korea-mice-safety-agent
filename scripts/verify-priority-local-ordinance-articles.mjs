@@ -7,6 +7,18 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const packPath = join(root, "src/ontology/mice/local-ordinance-pack.json");
 const lawBase = "https://www.law.go.kr/LSW";
 const today = new Date().toISOString().slice(0, 10);
+const args = process.argv.slice(2);
+
+function argValue(name, fallback) {
+  const index = args.indexOf(name);
+  return index === -1 ? fallback : args[index + 1] ?? fallback;
+}
+
+const scope = argValue("--scope", "priority");
+const maxRecords = Number(argValue("--max", "0"));
+const delayMs = Number(argValue("--delay-ms", "120"));
+const includeVerified = args.includes("--include-verified");
+const categoryFilter = argValue("--category", "");
 
 const priorityJurisdictions = new Set([
   "서울특별시",
@@ -165,10 +177,30 @@ function sleep(ms) {
 
 const pack = JSON.parse(readFileSync(packPath, "utf8"));
 const records = pack.records ?? [];
-const targets = records.filter((record) =>
-  priorityJurisdictions.has(record.jurisdiction)
-  && ["source_verified", "needs_review"].includes(record.verificationStatus)
-);
+const beforeCounts = countVerification(records);
+
+function countVerification(items) {
+  const byStatus = {};
+  const byCategory = {};
+  for (const item of items) {
+    byStatus[item.verificationStatus] = (byStatus[item.verificationStatus] ?? 0) + 1;
+    byCategory[item.categoryId] ??= {};
+    byCategory[item.categoryId][item.verificationStatus] = (byCategory[item.categoryId][item.verificationStatus] ?? 0) + 1;
+  }
+  return { byStatus, byCategory };
+}
+
+function isTarget(record) {
+  if (categoryFilter && record.categoryId !== categoryFilter && record.category !== categoryFilter) return false;
+  if (!includeVerified && record.verificationStatus === "article_verified") return false;
+  if (!["article_verified", "source_verified", "needs_review"].includes(record.verificationStatus)) return false;
+  if (scope === "all") return true;
+  return priorityJurisdictions.has(record.jurisdiction);
+}
+
+const targets = records
+  .filter(isTarget)
+  .slice(0, maxRecords > 0 ? maxRecords : undefined);
 
 const results = [];
 for (const record of targets) {
@@ -198,16 +230,40 @@ for (const record of targets) {
     };
     results.push({ id: record.id, jurisdiction: record.jurisdiction, status: "failed", reason: String(error.message ?? error) });
   }
-  await sleep(120);
+  await sleep(delayMs);
 }
+
+const afterCounts = countVerification(records);
+const newlyVerifiedRecords = results.filter((result) => result.status === "verified").length;
+const failedRecords = results.filter((result) => result.status === "failed").length;
+const totalArticleVerified = afterCounts.byStatus.article_verified ?? 0;
 
 pack.priorityArticleVerification = {
   generatedAt: today,
   method: "law.go.kr official HTML ordinInfoP/ordinInfoR snapshot without storing API keys",
+  scope,
   targetJurisdictions: [...priorityJurisdictions].sort((a, b) => a.localeCompare(b, "ko")),
-  verifiedRecords: results.filter((result) => result.status === "verified").length,
-  failedRecords: results.filter((result) => result.status === "failed").length,
+  selectedRecords: targets.length,
+  verifiedRecords: totalArticleVerified,
+  newlyVerifiedRecords,
+  failedRecords,
+};
+
+pack.articleVerificationSummary = {
+  generatedAt: today,
+  method: "law.go.kr official HTML ordinInfoP/ordinInfoR snapshot without storing API keys",
+  scope,
+  categoryFilter: categoryFilter || undefined,
+  selectedRecords: targets.length,
+  newlyVerifiedRecords,
+  failedRecords,
+  totalRecords: records.length,
+  totalArticleVerified,
+  coveragePct: Number(((totalArticleVerified / records.length) * 100).toFixed(1)),
+  beforeStatusCounts: beforeCounts.byStatus,
+  afterStatusCounts: afterCounts.byStatus,
+  afterCategoryStatusCounts: afterCounts.byCategory,
 };
 
 writeFileSync(packPath, `${JSON.stringify(pack, null, 2)}\n`);
-console.log(JSON.stringify(pack.priorityArticleVerification, null, 2));
+console.log(JSON.stringify(pack.articleVerificationSummary, null, 2));

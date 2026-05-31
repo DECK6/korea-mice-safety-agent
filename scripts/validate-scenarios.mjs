@@ -233,8 +233,23 @@ function validateOntologyMaturity() {
   if ((ordinanceVerificationCounts.article_verified ?? 0) < 100) {
     failures.push(`ordinance_article_verified_below_90_gate:${ordinanceVerificationCounts.article_verified ?? 0}`);
   }
+  if ((ordinanceVerificationCounts.article_verified ?? 0) < 750) {
+    failures.push(`ordinance_article_verified_below_95_gate:${ordinanceVerificationCounts.article_verified ?? 0}`);
+  }
+  if ((ordinanceVerificationCounts.source_verified ?? 0) > 0) {
+    failures.push(`ordinance_source_verified_remaining_for_95_gate:${ordinanceVerificationCounts.source_verified}`);
+  }
   if ((localOrdinancePack.priorityArticleVerification?.verifiedRecords ?? 0) < 35) {
     failures.push(`priority_article_verification_below_90_gate:${localOrdinancePack.priorityArticleVerification?.verifiedRecords ?? 0}`);
+  }
+  if ((localOrdinancePack.priorityArticleVerification?.verifiedRecords ?? 0) < 750) {
+    failures.push(`priority_article_verification_below_95_gate:${localOrdinancePack.priorityArticleVerification?.verifiedRecords ?? 0}`);
+  }
+  if ((localOrdinancePack.articleVerificationSummary?.totalArticleVerified ?? 0) < 750) {
+    failures.push(`article_verification_summary_below_95_gate:${localOrdinancePack.articleVerificationSummary?.totalArticleVerified ?? 0}`);
+  }
+  if ((localOrdinancePack.articleVerificationSummary?.failedRecords ?? 0) > 0) {
+    failures.push(`article_verification_summary_failed_records:${localOrdinancePack.articleVerificationSummary.failedRecords}`);
   }
   const categoryCounts = {};
   for (const record of localOrdinances) {
@@ -275,10 +290,24 @@ function validateOntologyMaturity() {
     }
   }
   const venueRulesData = readJson("src/ontology/mice/venue-safety-rules.json");
+  const sourceById = new Map((sourceRegistryData.sources ?? []).map((source) => [source.id, source]));
   for (const venue of venueRulesData.venues ?? []) {
     const profile = venue.safetyProfile ?? {};
     for (const key of ["lastReviewedAt", "reviewBy", "freshnessStatus"]) {
       if (!profile[key]) failures.push(`venue_freshness:${venue.id}:${key}`);
+    }
+    const sourceVerification = profile.officialSourceVerification;
+    if (!sourceVerification) {
+      failures.push(`venue_official_source_verification:${venue.id}:missing`);
+    } else {
+      if (sourceVerification.sourceRefs !== (venue.sourceRefs?.length ?? 0)) failures.push(`venue_official_source_verification:${venue.id}:source_count_mismatch`);
+      if (sourceVerification.reachableSourceRefs !== sourceVerification.sourceRefs) failures.push(`venue_official_source_verification:${venue.id}:not_all_reachable`);
+      if ((sourceVerification.manualReviewSourceRefs?.length ?? 0) > 0) failures.push(`venue_official_source_verification:${venue.id}:manual_review_remaining`);
+    }
+    for (const sourceRef of venue.sourceRefs ?? []) {
+      const source = sourceById.get(sourceRef);
+      if (!source) failures.push(`venue_source_ref_missing:${venue.id}:${sourceRef}`);
+      if (source?.linkVerification?.status !== "reachable") failures.push(`venue_source_link_not_reachable:${venue.id}:${sourceRef}`);
     }
   }
 

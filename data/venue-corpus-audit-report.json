@@ -1,6 +1,6 @@
 {
   "version": "1.0.3",
-  "generatedAt": "2026-05-31T14:18:24.537Z",
+  "generatedAt": "2026-05-31T14:34:13.709Z",
   "policy": "Venue source documents stay offline as raw PDF/HWP plus Markdown extracts. The ontology stores compact operational facts and source spans; recruitment/selection notices are excluded from the core safety corpus.",
   "thresholds": {
     "minExtractChars": 1500,

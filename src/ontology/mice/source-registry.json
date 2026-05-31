@@ -202,7 +202,16 @@
       "offlineTextStatus": "extracted",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9D%B4%EC%9A%A9-%EC%95%88%EB%82%B4%EC%84%9Cver-2023-10-10/",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "COEX_FACILITY_OPERATION_RULE_2023",
@@ -222,7 +231,16 @@
       "offlineTextStatus": "extracted",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%8B%9C%EC%84%A4%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EA%B5%AD-%EC%98%81%EB%AC%B8/",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "COEX_SERVICE_PARTNER_MANUAL",
@@ -246,7 +264,17 @@
       "offlineTextStatus": "extracted",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://lmsweb.coex.co.kr/com/attachfile/download.mvc?fileCateCD=NOTICE&fileKey=458&serialNo=2",
+        "contentType": "application/pdf;charset=EUC-KR",
+        "contentLength": "343294"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "KINTEX_SAFETY_EDUCATION",
@@ -267,7 +295,19 @@
       "offlineTextStatus": "extracted",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 206,
+        "finalUrl": "https://www.kintex.com/download/formatModal/4.%EC%A7%80%EC%A0%95%EB%93%B1%EB%A1%9D%EC%97%85%EC%B2%B4%EC%95%88%EC%A0%84%EA%B5%90%EC%9C%A1%EC%9E%90%EB%A3%8C.pdf",
+        "contentType": "application/pdf",
+        "contentLength": "2048",
+        "lastModified": "Wed, 18 Aug 2021 06:57:25 GMT",
+        "etag": "W/\"5381741-1629269845000\""
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "KINTEX_ORGANIZER_MANUAL",
@@ -290,7 +330,19 @@
       "offlineTextStatus": "extracted",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.kintex.com/download/formatModal/8.%EC%A0%84%EC%8B%9C%EC%A3%BC%EC%B5%9C%EC%9E%90%EB%A7%A4%EB%89%B4%EC%96%BC.pdf",
+        "contentType": "application/pdf",
+        "contentLength": "8107951",
+        "lastModified": "Thu, 29 Jan 2026 06:35:03 GMT",
+        "etag": "W/\"8107951-1769668503971\""
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "KINTEX_CCTV_POLICY",
@@ -308,7 +360,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.kintex.com/web/ko/management_of_image_information.do",
+        "contentType": "text/html;charset=utf-8"
+      },
+      "sourceConfidence": "official_source_link_verified_summary"
     },
     {
       "id": "BEXCO_USER_GUIDEBOOK",
@@ -325,7 +386,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=5338&mCode=MN059&mgr_seq=36&mode=view",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_summary"
     },
     {
       "id": "BEXCO_OPERATION_RULES",
@@ -346,7 +416,16 @@
       "offlineTextStatus": "extracted",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2130&mCode=MN059&mgr_seq=36&mode=view",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
@@ -367,7 +446,16 @@
       "offlineTextStatus": "extracted",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2854&mCode=MN059&mgr_seq=36&mode=view",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "KDJ_EXHIBITION_FORMS",
@@ -387,7 +475,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://kdjcenter.gjto.or.kr/rental/forms/show-room",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_summary"
     },
     {
       "id": "KDJ_PARTNER_DOCS",
@@ -406,7 +503,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://kdjcenter.gjto.or.kr/partner/partnerLeaseappform",
+        "contentType": "text/html;charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_summary"
     },
     {
       "id": "UECO_FACILITY_INFO",
@@ -423,7 +529,18 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 206,
+        "finalUrl": "https://ueco.or.kr/eng/facility/Conference",
+        "contentType": "text/html;charset=UTF-8",
+        "contentLength": "2048",
+        "lastModified": "Fri, 29 May 2026 01:08:56 GMT"
+      },
+      "sourceConfidence": "official_source_link_verified_summary"
     },
     {
       "id": "BEXCO_OPERATION_IMPLEMENTATION_RULES",
@@ -447,7 +564,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.bexco.co.kr/organizer/ajx_json/UploadMgr/downloadRun.do?qcode=Qm9hcmQsMzI5NzcsWQ==",
+        "contentType": "application/download;;charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "SETEC_OPERATING_GUIDE_2025",
@@ -472,7 +598,19 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 206,
+        "finalUrl": "https://www.setec.or.kr/resources/front/files/2025_SETEC.pdf",
+        "contentType": "application/pdf",
+        "contentLength": "2048",
+        "lastModified": "Mon, 24 Mar 2025 02:39:41 GMT",
+        "etag": "W/\"635857-1742783981000\""
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "SUWONMESSE_OPERATION_RULES",
@@ -497,7 +635,19 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 206,
+        "finalUrl": "https://d70o0vfgysr3u.cloudfront.net/wp-content/uploads/2023/08/10171957/SUWONMESSE-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EC%B5%9C%EC%8B%A0%EB%B3%B8.pdf",
+        "contentType": "application/pdf",
+        "contentLength": "2048",
+        "lastModified": "Thu, 10 Aug 2023 08:19:58 GMT",
+        "etag": "\"490fdeaeb1431bb837f529dcdec1f06d\""
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "SONGDO_OPERATION_RULES",
@@ -522,7 +672,17 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 206,
+        "finalUrl": "https://songdoconvensia.visitincheon.or.kr/file.do?n=5.+%EC%86%A1%EB%8F%84%EC%BB%A8%EB%B2%A4%EC%8B%9C%EC%95%84+%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf&path=202403%2F8d856c67-a47c-4599-9e2a-25e771e1a94f.pdf",
+        "contentType": "application/pdf",
+        "contentLength": "2048"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "CECO_OPERATION_RULES",
@@ -546,7 +706,17 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=28",
+        "contentType": "text/html; charset=utf-8",
+        "lastModified": "Sun, 31 May 2026 14:28:40 GMT"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "CECO_WORK_SAFETY_MANUAL",
@@ -576,7 +746,17 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=45",
+        "contentType": "text/html; charset=utf-8",
+        "lastModified": "Sun, 31 May 2026 14:28:40 GMT"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "HICO_FACILITY_GUIDE",
@@ -608,7 +788,19 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 206,
+        "finalUrl": "https://www.hico.or.kr/HICO_EXHIBITOR_GUIDEBOOK.pdf",
+        "contentType": "application/pdf",
+        "contentLength": "2048",
+        "lastModified": "Thu, 15 Jan 2026 09:37:21 GMT",
+        "etag": "\"17d560e-64869f8b95126\""
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "GSCO_OPERATION_RULES",
@@ -633,7 +825,19 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 206,
+        "finalUrl": "https://www.gsco.kr/files/GSCO%20%EC%A0%84%EC%8B%9C%EC%9E%A5%20%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf",
+        "contentType": "application/pdf",
+        "contentLength": "2048",
+        "lastModified": "Tue, 02 Dec 2025 06:43:01 GMT",
+        "etag": "\"3e23c-644f26833502d\""
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "ATCENTER_FACILITY_INFO",
@@ -656,7 +860,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.at.or.kr/contents/acko321111/view.action",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "ATCENTER_RENTAL_INFO",
@@ -679,7 +892,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.at.or.kr/contents/acko322200/view.action",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "SUWON_CONVENTION_FACILITY_INFO",
@@ -701,7 +923,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.scc.or.kr/",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "DCC_FACILITY_INFO",
@@ -723,7 +954,17 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.dcckorea.or.kr/content/view.do?contentKey=98&menuKey=179",
+        "contentType": "text/html;charset=UTF-8",
+        "contentLength": "5243"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "DCC_RENTAL_INFO",
@@ -745,7 +986,17 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://dcckorea.or.kr/content/view.do?contentKey=78&menuKey=173",
+        "contentType": "text/html;charset=UTF-8",
+        "contentLength": "9379"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "EXCO_FACILITY_INFO",
@@ -768,7 +1019,17 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.exco.co.kr/eng/facility/sub01.html",
+        "contentType": "text/html; Charset=utf-8",
+        "contentLength": "180391"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "OSCO_EXHIBITION_RENTAL_INFO",
@@ -791,7 +1052,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://osco.or.kr/lease/leasing-process/",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "GUMICO_EXHIBITION_INFO",
@@ -815,7 +1085,18 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://gumico.com/infra-info/exhibition",
+        "contentType": "text/html; charset=utf-8",
+        "contentLength": "52317",
+        "etag": "\"uaklmfy0sh13eg\""
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "GUMICO_SAFETY_ORG_INFO",
@@ -837,7 +1118,18 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://gumico.com/infra-info/organizational",
+        "contentType": "text/html; charset=utf-8",
+        "contentLength": "55379",
+        "etag": "\"d5drjdmo3715ii\""
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "ICCJEJU_EXHIBITION_INFO",
@@ -860,7 +1152,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.iccjeju.co.kr/info/02.php",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "ICCJEJU_TAMNA_INFO",
@@ -882,7 +1183,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://www.iccjeju.co.kr/info/01.php",
+        "contentType": "text/html; charset=UTF-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "YEOSU_EXPO_DOCUMENT_ROOM",
@@ -905,7 +1215,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://yeosuexpoconvention.kr/yeosu/DocumentRoom",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "YEOSU_EXPO_FACILITY_INFO",
@@ -927,7 +1246,16 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current"
+      "freshnessStatus": "current",
+      "linkVerification": {
+        "checkedAt": "2026-05-31",
+        "method": "http_get_range_official_source_url",
+        "status": "reachable",
+        "httpStatus": 200,
+        "finalUrl": "https://yeosuexpoconvention.kr/yeosu/FacilityInfoEx",
+        "contentType": "text/html; charset=utf-8"
+      },
+      "sourceConfidence": "official_source_link_verified_offline_extract"
     },
     {
       "id": "KOPIS_PERFORMANCE_CATALOG",

@@ -61,6 +61,9 @@ const output = {
         currentAsOf: source?.currentAsOf,
         reviewBy: source?.reviewBy,
         freshnessStatus: source?.freshnessStatus,
+        linkVerificationStatus: source?.linkVerification?.status,
+        linkCheckedAt: source?.linkVerification?.checkedAt,
+        linkHttpStatus: source?.linkVerification?.httpStatus,
         releasePolicy: "summary_only",
         reuseCaution: source?.reuseCaution ?? "원문 복제보다 링크와 체크포인트 요약 사용",
       };
@@ -76,6 +79,7 @@ const output = {
       lastReviewedAt: venue.safetyProfile?.lastReviewedAt,
       reviewBy: venue.safetyProfile?.reviewBy,
       freshnessStatus: venue.safetyProfile?.freshnessStatus,
+      officialSourceVerification: venue.safetyProfile?.officialSourceVerification,
       sources,
       spaces: limit(venue.spaces, 5).map((space) => ({
         id: space.id,
@@ -123,9 +127,17 @@ for (const venue of output.venues) {
   if (venue.lastReviewedAt) lines.push(`- Last reviewed: ${venue.lastReviewedAt}`);
   if (venue.reviewBy) lines.push(`- Review by: ${venue.reviewBy}`);
   if (venue.freshnessStatus) lines.push(`- Freshness: ${venue.freshnessStatus}`);
+  if (venue.officialSourceVerification) {
+    lines.push(`- Official source links: ${venue.officialSourceVerification.reachableSourceRefs}/${venue.officialSourceVerification.sourceRefs} reachable, checked ${venue.officialSourceVerification.checkedAt}`);
+  }
   lines.push("- Sources:");
   for (const source of venue.sources) {
-    const freshness = [source.currentAsOf ? `currentAsOf=${source.currentAsOf}` : "", source.reviewBy ? `reviewBy=${source.reviewBy}` : "", source.freshnessStatus ? `freshness=${source.freshnessStatus}` : ""]
+    const freshness = [
+      source.currentAsOf ? `currentAsOf=${source.currentAsOf}` : "",
+      source.reviewBy ? `reviewBy=${source.reviewBy}` : "",
+      source.freshnessStatus ? `freshness=${source.freshnessStatus}` : "",
+      source.linkVerificationStatus ? `link=${source.linkVerificationStatus}/${source.linkHttpStatus ?? ""}` : "",
+    ]
       .filter(Boolean)
       .join(", ");
     lines.push(`  - ${source.id}: ${source.title}${source.url ? ` (${source.url})` : ""}${freshness ? ` [${freshness}]` : ""}`);

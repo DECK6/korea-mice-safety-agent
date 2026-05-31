@@ -95,6 +95,9 @@ const sources = registry.sources.map((source) => {
     reviewBy: source.reviewBy,
     freshnessStatus: source.freshnessStatus,
     evidenceCurrentAsOf: evidence?.currentAsOf,
+    linkVerificationStatus: source.linkVerification?.status,
+    linkCheckedAt: source.linkVerification?.checkedAt,
+    linkHttpStatus: source.linkVerification?.httpStatus,
     sourceConfidence: evidence?.sourceConfidence,
     licenseStatus: audit.status,
     licenseReason: audit.reason,
@@ -121,7 +124,7 @@ writeFileSync(outputJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 const rows = sources
   .map(
     (source) =>
-      `| ${source.id} | ${source.licenseStatus} | ${source.documentFormat} | ${source.offlineTextStatus} | ${source.verificationStatus} | ${source.evidenceSnapshotStatus ?? ""} | ${source.currentAsOf ?? ""} | ${source.reviewBy ?? ""} | ${source.freshnessStatus ?? ""} | ${source.licenseReason} |`,
+      `| ${source.id} | ${source.licenseStatus} | ${source.documentFormat} | ${source.offlineTextStatus} | ${source.verificationStatus} | ${source.evidenceSnapshotStatus ?? ""} | ${source.currentAsOf ?? ""} | ${source.reviewBy ?? ""} | ${source.freshnessStatus ?? ""} | ${source.linkVerificationStatus ? `${source.linkVerificationStatus}/${source.linkHttpStatus ?? ""}` : ""} | ${source.licenseReason} |`,
   )
   .join("\n");
 
@@ -144,8 +147,8 @@ const markdown = [
   "",
   "## Sources",
   "",
-  "| Source | License status | Format | Offline text | Verification | Evidence snapshot | Current as of | Review by | Freshness | Reason |",
-  "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+  "| Source | License status | Format | Offline text | Verification | Evidence snapshot | Current as of | Review by | Freshness | Link | Reason |",
+  "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
   rows,
   "",
   "## Notes",

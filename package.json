@@ -44,6 +44,7 @@
     "audit:package-safety": "node scripts/audit-package-safety.mjs",
     "apply:freshness-policy": "node scripts/apply-source-freshness-policy.mjs",
     "audit:freshness": "node scripts/audit-source-freshness.mjs",
+    "verify:venue-sources": "node scripts/verify-venue-source-links.mjs",
     "collect:local-ordinances": "node scripts/collect-local-ordinances.mjs",
     "verify:priority-ordinances": "node scripts/verify-priority-local-ordinance-articles.mjs",
     "refine:local-ordinances": "node scripts/refine-local-ordinance-pack.mjs",
