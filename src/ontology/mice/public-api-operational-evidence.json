@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "generatedAt": "2026-05-31T00:16:46+09:00",
   "storagePolicy": "Sanitized operational evidence snapshot from public API live probes. API keys, raw response bodies, signed URLs, and request URLs are not stored. Runtime planning uses this as offline evidence only; D-day decisions must refresh live data when available.",
   "verificationStatus": "live_verified_snapshot",
@@ -8,19 +8,30 @@
       "sourceId": "KCISA_KOPIS_PERFORMANCE_FACILITY",
       "label": "KCISA KOPIS 공연시설별상세정보",
       "phase": "P0",
-      "appliesTo": ["venue_facility", "performance", "conference", "exhibition"],
+      "appliesTo": [
+        "venue_facility",
+        "performance",
+        "conference",
+        "exhibition"
+      ],
       "recordType": "performance_facility",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "2026-05-31",
       "totalCount": 2111,
       "recordsSampled": 3,
-      "sampleTitles": ["호평평내행정복지센터", "의외의 조합", "부산은행"],
+      "sampleTitles": [
+        "호평평내행정복지센터",
+        "의외의 조합",
+        "부산은행"
+      ],
       "operationalUse": "공연·컨벤션·전시장 성격의 베뉴 주소, 관할, 시설 분류를 보강해 공연법·베뉴 규정 확인 후보를 좁힌다.",
       "planningActions": [
         "venueId가 KOPIS 시설 또는 공연시설이면 주소·관할·시설 분류를 근거로 지자체 조례 후보와 공연장/공연장 외 공연 여부를 재확인한다.",
         "수용인원, 피난, 하역, 전기, 리깅, 반입금지 기준은 KOPIS가 아니라 베뉴 운영규정과 담당자 확인으로 확정한다."
       ],
-      "limitations": ["시설 디렉터리는 안전 승인자료가 아니므로 수용능력·피난·하중 판단을 대체하지 않는다."],
+      "limitations": [
+        "시설 디렉터리는 안전 승인자료가 아니므로 수용능력·피난·하중 판단을 대체하지 않는다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "high"
     },
@@ -28,7 +39,9 @@
       "sourceId": "KOPIS_PERFORMANCE_CATALOG",
       "label": "KOPIS 공연/축제 catalog",
       "phase": "P0",
-      "appliesTo": ["performance"],
+      "appliesTo": [
+        "performance"
+      ],
       "recordType": "performance_or_festival_event",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "2026-05-31",
@@ -45,7 +58,9 @@
         "공연 포함 행사에서는 KOPIS 공연명·시설명·기간을 운영 프로그램과 대조해 공연법 재해대처계획 대상 여부를 확인한다.",
         "KOPIS에 없거나 공연 외 부대행사인 경우에도 무대·트러스·스탠딩 관객 조건이 있으면 별도 공연·무대 안전계획으로 검토한다."
       ],
-      "limitations": ["KOPIS catalog 존재 여부만으로 법적 신고 대상이 확정되지 않는다."],
+      "limitations": [
+        "KOPIS catalog 존재 여부만으로 법적 신고 대상이 확정되지 않는다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "high"
     },
@@ -53,20 +68,30 @@
       "sourceId": "TOUR_API_EVENT_CATALOG",
       "label": "한국관광공사 TourAPI 행사/축제 catalog",
       "phase": "P0",
-      "appliesTo": ["festival", "outdoor_event", "road_occupancy"],
+      "appliesTo": [
+        "festival",
+        "outdoor_event",
+        "road_occupancy"
+      ],
       "recordType": "tourism_event",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "2026-05-31",
       "queryWindow": "2026-05-01..2026-05-31",
       "totalCount": 153,
       "recordsSampled": 3,
-      "sampleTitles": ["가족의 달 어린이 축제", "강북구 어린이날 대축제", "겸재문화예술제"],
+      "sampleTitles": [
+        "가족의 달 어린이 축제",
+        "강북구 어린이날 대축제",
+        "겸재문화예술제"
+      ],
       "operationalUse": "지역축제·옥외행사의 실존 행사명, 기간, 주소 후보를 확보해 관할 조례와 관계기관 협의 후보를 좁힌다.",
       "planningActions": [
         "옥외축제/관광행사는 TourAPI 주소·기간 후보를 관할 지자체, 도로점용, 옥외광고물, 경찰·소방 협의 일정과 대조한다.",
         "TourAPI에 있는 행사는 홍보성 catalog일 수 있으므로 주최자, 실제 장소 경계, 도로·공원·하천 점용 여부를 별도 확인한다."
       ],
-      "limitations": ["관광 catalog는 안전관리계획 제출 여부를 직접 증명하지 않는다."],
+      "limitations": [
+        "관광 catalog는 안전관리계획 제출 여부를 직접 증명하지 않는다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "high"
     },
@@ -74,20 +99,31 @@
       "sourceId": "NEMC_EMERGENCY_MEDICAL",
       "label": "응급의료기관 정보",
       "phase": "P0",
-      "appliesTo": ["medical_response", "large_crowd", "performance", "outdoor_event"],
+      "appliesTo": [
+        "medical_response",
+        "large_crowd",
+        "performance",
+        "outdoor_event"
+      ],
       "recordType": "emergency_medical_resource",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "2026-05-31",
       "queryArea": "서울특별시 강남구",
       "totalCount": 5,
       "recordsSampled": 3,
-      "sampleTitles": ["강남베드로병원", "더드림병원", "삼성서울병원"],
+      "sampleTitles": [
+        "강남베드로병원",
+        "더드림병원",
+        "삼성서울병원"
+      ],
       "operationalUse": "행사장 주변 응급의료기관 후보를 뽑아 이송병원, 119 연계, 환자 이송 RACI를 보강한다.",
       "planningActions": [
         "대규모·공연·옥외 행사는 행사 전 주변 응급의료기관 후보를 조회하고 실제 진료 가능 여부, 이송시간, 구급차 접근동선을 확인한다.",
         "의료팀은 NEMC 후보를 비상연락망과 응급의료·AED·이송 계획에 반영하되, 당일 수용 가능성은 전화 또는 119 협의로 재확인한다."
       ],
-      "limitations": ["응급의료기관 API 결과는 당일 진료 가능 여부와 병상 수용을 보장하지 않는다."],
+      "limitations": [
+        "응급의료기관 API 결과는 당일 진료 가능 여부와 병상 수용을 보장하지 않는다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "high"
     },
@@ -95,7 +131,11 @@
       "sourceId": "NEMC_AED",
       "label": "AED 위치 정보",
       "phase": "P0",
-      "appliesTo": ["medical_response", "large_crowd", "venue_facility"],
+      "appliesTo": [
+        "medical_response",
+        "large_crowd",
+        "venue_facility"
+      ],
       "recordType": "aed_resource",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "2026-05-31",
@@ -112,7 +152,9 @@
         "AED 후보 중 행사장 내부 또는 관람객 동선에서 실제 접근 가능한 장비만 현장 도면과 연락망에 반영한다.",
         "건설현장·사무실 등 행사 운영자가 즉시 접근하기 어려운 AED는 후보로만 두고 베뉴 방재실과 실제 사용 가능성을 확인한다."
       ],
-      "limitations": ["주변 AED 전체 수에는 행사 중 접근 불가한 민간·공사장 장비가 포함될 수 있다."],
+      "limitations": [
+        "주변 AED 전체 수에는 행사 중 접근 불가한 민간·공사장 장비가 포함될 수 있다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "high"
     },
@@ -120,19 +162,28 @@
       "sourceId": "FOOD_SAFETY_KOREA",
       "label": "식품안전나라 회수·판매중지 정보",
       "phase": "P0",
-      "appliesTo": ["food_event", "lpg_food_service"],
+      "appliesTo": [
+        "food_event",
+        "lpg_food_service"
+      ],
       "recordType": "food_recall",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "2026-05-31",
       "totalCount": 354,
       "recordsSampled": 3,
-      "sampleTitles": ["순태젓", "맛창젓", "낙지젓"],
+      "sampleTitles": [
+        "순태젓",
+        "맛창젓",
+        "낙지젓"
+      ],
       "operationalUse": "식음료 부스·시식·케이터링 운영 전 회수·판매중지 제품 후보를 확인해 반입검수와 판매중지 기준을 보강한다.",
       "planningActions": [
         "식음료 운영자는 D-1과 D-day 개장 전 식품안전나라 회수·판매중지 조회를 수행하고 메뉴·납품 제품과 대조한다.",
         "조회 결과와 반입검수 기록을 보존식, 냉장·보온 온도기록, 보건소 연락 기준과 함께 증빙철에 남긴다."
       ],
-      "limitations": ["회수·판매중지 조회는 영업신고, 원산지, 알레르기, 보존식, 온도관리 의무를 대체하지 않는다."],
+      "limitations": [
+        "회수·판매중지 조회는 영업신고, 원산지, 알레르기, 보존식, 온도관리 의무를 대체하지 않는다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "medium"
     },
@@ -140,19 +191,28 @@
       "sourceId": "KMA_APIHUB_WEATHER",
       "label": "기상청 API Hub 초단기실황",
       "phase": "P2",
-      "appliesTo": ["outdoor_event", "temporary_structure", "performance", "worker_safety"],
+      "appliesTo": [
+        "outdoor_event",
+        "temporary_structure",
+        "performance",
+        "worker_safety"
+      ],
       "recordType": "ultra_short_weather_observation",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "event-day live only",
       "totalCount": 1,
       "recordsSampled": 1,
-      "sampleTitles": ["격자 61,125 초단기실황"],
+      "sampleTitles": [
+        "격자 61,125 초단기실황"
+      ],
       "operationalUse": "옥외행사, 야외무대, 임시구조물, 고소·전기·하역 작업의 강풍·강수·폭염·낙뢰 운영중지 판단을 보강한다.",
       "planningActions": [
         "D-day에는 기상청 API Hub 초단기실황·예보와 현장 관측을 함께 확인하고 강풍·우천·낙뢰 기준 초과 시 작업중지 또는 행사중지 후보로 상향한다.",
         "기상값은 법령 근거가 아니라 운영증거이므로 판단 시각, 확인자, 기준값, 조치 결과를 런시트에 기록한다."
       ],
-      "limitations": ["P2 live data는 오래된 snapshot을 안전 판단 근거로 쓰면 안 된다."],
+      "limitations": [
+        "P2 live data는 오래된 snapshot을 안전 판단 근거로 쓰면 안 된다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "high"
     },
@@ -160,20 +220,28 @@
       "sourceId": "SEOUL_REALTIME_CITY_DATA",
       "label": "서울 실시간 도시데이터",
       "phase": "P2",
-      "appliesTo": ["crowd_control", "outdoor_event", "unhosted_crowd"],
+      "appliesTo": [
+        "crowd_control",
+        "outdoor_event",
+        "unhosted_crowd"
+      ],
       "recordType": "realtime_city_crowd",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "event-day live only",
       "queryArea": "강남역",
       "totalCount": 1,
       "recordsSampled": 1,
-      "sampleTitles": ["강남역"],
+      "sampleTitles": [
+        "강남역"
+      ],
       "operationalUse": "서울 주요 지점의 혼잡도 변화를 운영본부 상황판단, 우회 안내, 입장속도 조절 후보로 사용한다.",
       "planningActions": [
         "서울권 옥외행사·무주최 다중운집은 행사장 또는 인근 지점의 실시간 도시데이터를 현장 관찰값과 함께 확인한다.",
         "혼잡도 상승 시 대기열 절단, 우회 안내, 경찰·교통기관 협의, 방송문 송출 기준을 런시트에 기록한다."
       ],
-      "limitations": ["서울 제공 지점에 한정되며 현장 내부 밀도 측정을 대체하지 않는다."],
+      "limitations": [
+        "서울 제공 지점에 한정되며 현장 내부 밀도 측정을 대체하지 않는다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "high"
     },
@@ -181,20 +249,28 @@
       "sourceId": "AIRKOREA_AIR_QUALITY",
       "label": "에어코리아 측정소 대기질",
       "phase": "P2",
-      "appliesTo": ["outdoor_event", "medical_response", "vulnerable_visitor"],
+      "appliesTo": [
+        "outdoor_event",
+        "medical_response",
+        "vulnerable_visitor"
+      ],
       "recordType": "station_air_quality",
       "liveProbeAt": "2026-05-31T00:16:46+09:00",
       "currentAsOf": "event-day live only",
       "queryArea": "종로구",
       "totalCount": 1,
       "recordsSampled": 1,
-      "sampleTitles": ["종로구"],
+      "sampleTitles": [
+        "종로구"
+      ],
       "operationalUse": "야외행사에서 미세먼지·오존 등 취약자 보호, 프로그램 조정, 안내문 송출 후보를 보강한다.",
       "planningActions": [
         "야외행사는 개장 전과 피크 전 에어코리아 측정소 값을 확인하고 고령자·영유아·호흡기 취약자 안내와 의료팀 배치를 조정한다.",
         "대기질은 법적 제출근거가 아니라 운영증거로만 사용하고 현장 안내·조치 시각을 기록한다."
       ],
-      "limitations": ["측정소 값은 행사장 미세환경과 다를 수 있으므로 현장 관찰과 함께 판단한다."],
+      "limitations": [
+        "측정소 값은 행사장 미세환경과 다를 수 있으므로 현장 관찰과 함께 판단한다."
+      ],
       "licensePolicy": "summary_only",
       "sourceConfidence": "high"
     }

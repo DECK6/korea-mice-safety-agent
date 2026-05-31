@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "purpose": "Regression fixtures for judging whether the offline MICE safety ontology is useful across exhibitions, outdoor festivals, performances, conferences, food events, and venue-specific operations.",
   "scenarios": [

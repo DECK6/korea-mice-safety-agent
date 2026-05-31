@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "sourceTool": "korean-law-mcp",
   "storagePolicy": "MICE safety agents must answer core legal-duty questions from this local ontology first. Network law lookup is reserved for freshness checks and unmapped articles.",

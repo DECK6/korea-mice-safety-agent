@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "sourceTool": "korean-law-mcp get_annexes",
   "storagePolicy": "별표/서식 원문 전체 재배포 대신 MICE 실무 체크리스트에 필요한 요약·항목·출처 메타데이터만 오프라인 저장한다.",

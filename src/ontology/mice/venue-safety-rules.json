@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "reusePolicy": "Venue manuals are stored as links plus compact checklist concepts. Do not redistribute full venue PDFs through this ontology without source permission.",
   "venues": [

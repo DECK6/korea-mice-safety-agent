@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "generatedAt": "2026-05-30T14:45:05.542Z",
+  "version": "1.0.3",
+  "generatedAt": "2026-05-31T14:00:25.699Z",
   "policy": "Venue source documents stay offline as raw PDF/HWP plus Markdown extracts. The ontology stores compact operational facts and source spans; recruitment/selection notices are excluded from the core safety corpus.",
   "thresholds": {
     "minExtractChars": 1500,
@@ -36,7 +36,7 @@
   "counts": {
     "manifestItems": 15,
     "markdownIndexItems": 15,
-    "sourceRegistrySources": 52,
+    "sourceRegistrySources": 53,
     "venues": 19,
     "facilityIndexedVenues": 19,
     "facilityEntries": 5875,

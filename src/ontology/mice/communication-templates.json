@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "scope": "Offline Korean MICE operation communication templates for command decisions, staff radio, public announcement, push/SMS, and agency updates.",
   "placeholders": [

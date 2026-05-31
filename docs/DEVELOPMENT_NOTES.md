@@ -19,6 +19,17 @@
 - 과잉 적용 방지: 비공연 옥외축제에는 KOPIS 공연 catalog를 자동 적용하지 않고, 식음료 조건이 없으면 식품안전나라 확인을 필수로 올리지 않는다.
 - 한계: P2 live 데이터는 오래된 snapshot을 안전 판단 근거로 쓰면 안 되며, 실제 행사일에는 live 재조회와 관할기관·베뉴 확인이 필요하다.
 
+## 1.0.3 신뢰도 개선 메모
+
+- source audit은 `public-api-operational-evidence.json`의 live verified snapshot 상태를 읽어 `SOURCE_AUDIT.md`와 `source-audit-report.json`에 같은 상태로 반영한다.
+- `validate:scenarios`는 고정 `data/.validation-store` 대신 임시 디렉터리와 export manifest를 사용해 stale file에 속지 않도록 했다.
+- `review_mice_safety_plan`은 Markdown 키워드뿐 아니라 `documentBundle` 키와 주요 표 컬럼을 같이 확인해 제출물/RACI/증빙 누락을 더 구조적으로 잡는다.
+- 제출·협의 액션은 `submission-action-rules.json`으로 분리했다. 법령·조례 pack 변경 시 생성기 코드를 직접 고치지 않고 조건 규칙을 조정하는 방향이다.
+- P2 live 운영 상태와 행사일 snapshot은 `operational-evidence-model.ts`의 공통 status/location/freshness helper를 공유한다.
+- `collect_mice_p0_ready_sources`는 `writeSnapshot=true`, `dryRun=false` 조건에서 API 키와 raw response 없이 sanitized snapshot을 로컬에 저장할 수 있다.
+- 웹 시뮬레이터는 `/api/simulate` 적용성 체크 외에 `/api/plan-review`로 계획서 생성·검수 요약을 카드형 보고서로 보여준다.
+- 온톨로지 파일의 `version: "1.0.0"`은 npm package release가 아니라 `versionType: "ontology_schema"`인 데이터 스키마 버전이다. 릴리스 산출물과 `generate-ontology-diff` report/snapshot의 `version`은 `package.json`의 npm version을 사용한다.
+
 ## law.go.kr / korean-law-mcp 검증 상태
 
 `LAW_OC` 환경변수로 실제 조회 확인한 항목:
@@ -113,13 +124,15 @@ MICE 운영에서는 산안법·기준규칙·KOSHA Guide를 관람객/인파 �
 
 ## 지자체 조례 오프라인 팩
 
-`scripts/collect-local-ordinances.mjs`는 `LAW_OC`를 실행 환경에서만 읽고, 결과만 로컬 온톨로지에 저장한다.
+`scripts/collect-local-ordinances.mjs`는 `LAW_OC`를 실행 환경에서만 읽고, 결과만 로컬 온톨로지에 저장한다. 수집 뒤에는 `npm run refine:local-ordinances`로 threshold 구조화와 검증상태 세분화를 적용한다.
 
 - 저장 위치: `src/ontology/mice/local-ordinance-pack.json`
 - Markdown 요약: `data/markdown/legal/local-ordinance-pack.md`
 - 현재 수집량: 지역축제 안전관리 1건, 옥외행사 안전관리 189건, 도로점용·교통소통 333건, 옥외광고물 관리 228건
 - 우선 지자체 조문 발췌: 73개 레코드
-- 구조화 필드: `appliesWhen`, `crowdThreshold`, `submissionDeadline`, `requiredPlanItems`, `inspectionRules`, `agencyCoordination`, `insuranceOrLiability`, `relatedDuties`, `relatedHazards`
+- 구조화 필드: `appliesWhen`, `crowdThreshold`, `threshold`, `thresholdStructured`, `submissionDeadline`, `requiredPlanItems`, `inspectionRules`, `agencyCoordination`, `insuranceOrLiability`, `relatedDuties`, `relatedHazards`, `verificationChecks`
+- `thresholdStructured`는 인원 기준형 조례와 도로점용/옥외광고물 같은 조건 기준형 조례를 분리한다. 중복·절단된 threshold 문자열은 깨끗한 요약 후보로 바꾸되 `verificationStatus: "needs_review"`와 `thresholdStructured.confidence: "needs_review"`로 낮춰 제출 전 원문 재확인을 강제한다.
+- 조례 `verificationStatus`는 더 이상 포괄적인 `verified`를 쓰지 않는다. `source_verified`는 공식 자치법규 검색 결과만 확인된 상태, `article_verified`는 조문 발췌 기반 구조화 상태, `needs_review`는 threshold/조문 추출 품질 문제가 남은 상태다.
 
 도로점용·옥외광고물은 전국 검색 결과가 넓어서 `도로점용료/도로점용허가/교통소통`, `옥외광고물 관리와 옥외광고산업 진흥` 중심으로 필터링한다. 등록업체 모집·기금·위원회성 문서는 핵심 안전 코퍼스에서 제외한다.
 
@@ -128,6 +141,8 @@ MICE 운영에서는 산안법·기준규칙·KOSHA Guide를 관람객/인파 �
 ## 계획서 생성/검수
 
 `generate_mice_safety_plan`은 단일 장문의 설명문이 아니라 실무 문서 묶음을 만든다.
+
+계획서 본문 맨 앞에는 “먼저 읽는 요약 보고서”를 고정한다. 이 요약은 조항 나열이 아니라 결론, 실제 핵심 위험, 적용되는 법령·조례·베뉴 규정, 적용되지 않는 법령과 이유, 조건부 확인 항목, 제출·협의 액션, 담당자·기한·증빙, 남은 리스크를 먼저 보여준다.
 
 - 행사 안전관리계획서
 - 인파·동선 관리계획
@@ -218,15 +233,17 @@ docx는 `docx`로 생성하고, xlsx는 `src/lib/simple-xlsx.ts`의 내장 OOXML
 - 부스, 리깅/현수막, 식음료/LPG 규칙
 - 제출 안전문서, 출처, 로컬 Markdown 경로
 
-원본 PDF/HWP가 있는 자료는 `data/raw/`에 보관하고, `data/markdown/venue-manuals/`에 Markdown 변환본 또는 직접 시각 판독 요약본을 둔다. HICO 이미지 PDF는 직접 판독 기반 Markdown으로 구조화했다.
+원본 PDF/HWP가 있는 자료는 `data/raw/`에 보관하고, `data/markdown/venue-manuals/`에 Markdown 변환본 또는 직접 시각 판독 요약본을 둔다. 이 둘은 내부 검증 코퍼스이며 npm package에는 포함하지 않는다. HICO 이미지 PDF는 직접 판독 기반 Markdown으로 구조화했다.
 
 `npm run build:venue-index`는 베뉴 Markdown에서 시설·안전 관련 라인을 추출해 `src/ontology/mice/venue-facility-index.json`에 고정한다.
+`npm run build:public-venue-summaries`는 공개 배포용 `data/public/venue-safety-summaries.json`과 `data/markdown/public/venue-safety-summaries.md`를 생성한다. 이 파일은 원문성 extract가 아니라 구조화된 요약·체크포인트와 출처 링크만 담는다.
 
 - 현재 인덱스: 19개 베뉴, 5,875개 sourceSpan
 - 추출 필드: 수용/면적, 천장고, 바닥하중, 화물출입구, 로딩덕/하역, 전기, 소방통로, 피난동선, 금지물품, 부스, 리깅/현수막, 식음료/LPG, 안전문서
 - 각 항목은 `sourceRef`, `localMarkdownPath`, `line`, `confidence`를 포함한다.
 
 `npm run validate:venue-corpus`는 베뉴 원본/Markdown/source registry/venue rules/facility index를 상호 대조한다. 검증 항목은 manifest 필수 필드, PDF/HWP 헤더, Markdown 추출 길이, 변환 실패 marker, 안전 키워드 신호, source registry 경로 일치, venue `sourceRefs` 존재 여부, facility category coverage, 지정등록업체 모집·선발 공고성 문서의 core corpus 혼입 여부다. 결과는 `data/venue-corpus-audit-report.json`과 `docs/VENUE_CORPUS_AUDIT.md`에 저장된다. 현재 상태는 error 0건/warning 0건이다. 일부 지역 베뉴의 전기·소방·피난·부스·안전문서 항목은 `needs_source_review` 수칙으로 보강해 계획서에 담당자 확인사항으로 노출하며, 확정 수치처럼 사용하지 않는다.
+`npm run audit:package-safety`는 `npm pack --dry-run --json` 결과를 검사해 raw PDF/HWP, full extracted venue Markdown, `.env`, cookie, `node_modules`, validation store가 tarball에 섞이면 실패한다.
 
 `generate_mice_safety_plan`은 `venueId`가 들어오면 `venue-facility-index.json`의 sourceSpan을 읽어 베뉴 시설·수용·하역·전기 제약 체크 문서를 추가 생성한다. 이 문서는 면적/부스/수용 관련 추정치, 바닥하중, 층고·리깅, 화물 반입·하역, 전기·유틸리티, 소방·피난, 제한물품, 제출서류와 근거 위치를 함께 보여준다. 추정 수용인원과 밀도는 원문 수치를 보조 계산한 값이므로 제출 전 베뉴 도면과 담당자 확인이 필요하다.
 

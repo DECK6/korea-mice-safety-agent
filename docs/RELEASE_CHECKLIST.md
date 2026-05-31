@@ -1,8 +1,10 @@
 # Release Checklist
 
-## 1.0.0 Status
+## 1.0.3 Status
 
-`korea-mice-safety-agent` 1.0.0 meets the legal/safety-management maturity gate for offline MICE and outdoor-event safety planning. The release is still an operational draft assistant, not legal advice or a substitute for venue/public-agency approval.
+`korea-mice-safety-agent` 1.0.3 is a field-ready candidate for offline MICE and outdoor-event safety planning. The release is still an operational draft assistant, not legal advice or a substitute for venue/public-agency approval.
+
+The project already entered the 1.0.x line, so version numbers must not move backward. The current trust score is 85/100; 90/95 are tracked as future quality targets with stronger ordinance article verification and source freshness gates.
 
 ## Required Gates
 
@@ -11,6 +13,7 @@
 - `npm run validate:scenarios`
 - `npm run validate:venue-corpus`
 - `npm run audit:sources`
+- `npm run audit:package-safety`
 - `npm run diff:ontology`
 - `npm audit --omit=dev`
 - `npm pack --dry-run`
@@ -21,8 +24,9 @@
 
 ## Distribution Boundary
 
-- The npm package includes compiled runtime files, offline JSON ontology packs, validation fixtures, audit reports, and Markdown review artifacts.
-- Raw venue PDF/HWP files, download cookies, `.env` files, validation output stores, `node_modules`, and graph-analysis caches must not be included in the package tarball.
+- The npm package includes compiled runtime files, offline JSON ontology packs, validation fixtures, audit reports, worker-safety/local-ordinance Markdown summaries, and public-safe venue safety summaries.
+- Raw venue PDF/HWP files, full extracted venue Markdown, download cookies, `.env` files, validation output stores, `node_modules`, and graph-analysis caches must not be included in the package tarball.
+- `data/markdown/venue-manuals/` is an internal validation corpus only. Public package artifacts use `data/public/venue-safety-summaries.json` and `data/markdown/public/venue-safety-summaries.md`.
 - `LAW_OC` is used only at collection time and must never be stored in source, build output, reports, package tarballs, or examples.
 
 ## Source/Licensing Policy
@@ -38,7 +42,7 @@
 - Generated plans are operational drafts. They do not replace venue approval, public-agency interpretation, legal review, or the responsible safety manager's final sign-off.
 - Venue and ordinance packs are offline snapshots. Submission deadlines, forms, and local-agency interpretations must be checked before actual filing.
 
-## 1.0.0 Release Evidence
+## 1.0.3 Release Evidence
 
 - `validate:scenarios` includes ontology maturity checks for required legal duty types, local ordinance fields, hazard/control/law/source linkage, positive scenarios, and negative over-application cases.
 - xlsx export uses the built-in `simple-xlsx` writer and clean tarball install passes `npm audit --omit=dev`.

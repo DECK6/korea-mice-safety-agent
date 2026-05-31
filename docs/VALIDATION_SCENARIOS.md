@@ -14,11 +14,13 @@
 - 설치·철거 작업: 산안기준규칙, KOSHA Guide 기반 worker-safety reference, 작업자 안전계획서, 추락·중량물 위험이 함께 나온다.
 - 핵심 법령과 핵심 조문은 오프라인 온톨로지에 저장되어야 하며, `needsReview`로 남은 항목은 사용자가 알 수 있어야 한다.
 - 법령·조례 pack은 `plan_submission`, `permit_check`, `inspection`, `staff_deployment`, `training`, `evacuation`, `fire_prevention`, `crowd_control`, `medical_response`, `worker_safety`, `privacy_notice`, `incident_report`, `recordkeeping` 의무 유형을 포함해야 한다.
-- hazard → control → duty → law/source 관계는 자동 검증되어야 하며, 조례 레코드는 `lawOrOrdinanceName`, `sourceId`, `threshold`, `sourceConfidence`를 포함해야 한다.
+- hazard → control → duty → law/source 관계는 자동 검증되어야 하며, 조례 레코드는 `lawOrOrdinanceName`, `sourceId`, `threshold`, `thresholdStructured`, `verificationChecks`, `sourceConfidence`를 포함해야 한다.
+- 조례 `verificationStatus`는 포괄적 `verified`가 아니라 `source_verified`, `article_verified`, `needs_review` 등으로 세분화되어야 한다. 중복·절단된 threshold 문자열은 자동 검증에서 실패하거나 `needs_review`로 강등되어야 한다.
 - 공연법 시행령/시행규칙, 식품위생법 시행규칙, LPG 시행규칙, 도로법 시행령/시행규칙, 옥외광고물법 시행령, 화재예방법 시행령, 소방시설법 시행령, 응급의료법 시행령/시행규칙, 건축법 시행령/시행규칙, 개인정보보호법 시행령, 경비업법 시행령/시행규칙의 핵심 조문 또는 서식 근거는 네트워크 없이 조회되어야 한다.
 - 공연 안전조직/교육, 공연 재해대처계획 신고서식, 식품위생 취급기준, LPG 용기·사용시설·검사신청·검사증명·공급자 안전점검·공사계획·보험, 도로점용허가 기준, 도로공사 시행/착수/준공/통행제한 공고 서식, 가설건축물 축조신고·피난안전 확인·임시사용승인, 소방안전관리자/보조자, 특정소방대상물, 소방시설, 수용인원 산정, 임시소방시설, 응급처치 교육, 구급차 위탁·장비·관리기준, 경비지도사 선임·배치, 경비원 명부/배치신고 별표·서식은 `query_mice_legal_annexes`로 네트워크 없이 조회되어야 한다.
 - 지역 조례는 `local-ordinance-pack.json`에서 네트워크 없이 조회되어야 하며, 광역/기초 지자체 후보가 함께 나오고 베뉴/관할/행사조건 기반 우선순위 점수와 사유가 표시되어야 한다.
-- 계획서 생성은 법령, 조례 우선순위, 우선 적용/참고 조례 후보, 문서의무, 위험요인, 베뉴 시설 제약, 베뉴/작업자 안전 섹션을 포함해야 한다.
+- 계획서 생성은 맨 앞에 사람이 먼저 읽는 요약 보고서를 두고, 법령, 조례 우선순위, 우선 적용/참고 조례 후보, 문서의무, 위험요인, 베뉴 시설 제약, 베뉴/작업자 안전 섹션을 포함해야 한다.
+- 맨 앞 요약 보고서는 결론, 핵심 위험, 적용 근거, 비적용 근거와 이유, 조건부 확인, 제출·협의 액션, 담당자·기한·증빙, 남은 리스크를 포함해야 한다.
 - 계획서 생성은 행사 안전관리계획서, 인파·동선 관리계획, 도로·교통 실행계획, 무주최 다중운집 관계기관 공동대응계획, 베뉴 시설·수용·하역·전기 제약 체크, 작업자 안전계획서, 공연·무대 실행계획, 소방·피난 점검표, 식음료/LPG 점검표와 현장 실행 상태표, 개인정보/CCTV 점검표, 출입통제·보안검색·VIP 동선 계획, 응급의료·AED·구급 이송 계획, 스태프 배치표, 비상연락망, 일일점검표, 현장 운영 런시트, 제출·협의 체크리스트, 사고보고서 템플릿을 문서 묶음으로 포함해야 한다.
 - 계획서 export는 전체 계획서, 개별 Markdown 문서, CSV 체크리스트, docx, xlsx, manifest를 로컬 디렉터리에 저장해야 한다.
 - 계획서 검수는 법령/조례/베뉴/작업자 안전 누락과 과잉 적용 후보를 반환해야 하며, 검증용 옥외축제 샘플은 `needs_revision`이 아니어야 한다.

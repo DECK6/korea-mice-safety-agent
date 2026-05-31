@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "generatedAt": "2026-05-21",
+  "version": "1.0.3",
+  "generatedAt": "2026-05-31",
   "sources": [
     {
       "id": "KTO_MICE_SAFETY_MANUAL",
@@ -818,10 +818,10 @@
         "festival",
         "performance_act_applicability"
       ],
-      "reuseCaution": "인증키 기반 Open API. 출처 표기와 이용조건을 준수하고, 실제 키는 환경변수 KOPIS_SERVICE_KEY로만 사용한다. production collector endpoint는 운영 전 공식 개발가이드로 재확인한다.",
+      "reuseCaution": "인증키 기반 Open API. 출처 표기와 이용조건을 준수하고, 실제 키는 환경변수 KOPIS_SERVICE_KEY로만 사용한다. 2026-05-31 live smoke 결과는 키·원문 응답 없이 public-api-operational-evidence.json에 요약 snapshot으로만 저장했다.",
       "documentFormat": "api",
-      "offlineTextStatus": "pending",
-      "verificationStatus": "needs_source_review"
+      "offlineTextStatus": "offline_derived",
+      "verificationStatus": "live_verified_snapshot"
     },
     {
       "id": "TOUR_API_EVENT_CATALOG",
@@ -835,10 +835,10 @@
         "tourism_event",
         "jurisdiction_lookup"
       ],
-      "reuseCaution": "공공데이터포털 활용신청/인증키 기반 API. 실제 키는 환경변수 TOUR_API_SERVICE_KEY로만 사용하고, 행사 전 최신 원문을 재확인한다.",
+      "reuseCaution": "공공데이터포털 활용신청/인증키 기반 API. 실제 키는 환경변수 TOUR_API_SERVICE_KEY로만 사용하고, 2026-05-31 live smoke 결과는 키·원문 응답 없이 public-api-operational-evidence.json에 요약 snapshot으로만 저장했다.",
       "documentFormat": "api",
-      "offlineTextStatus": "pending",
-      "verificationStatus": "needs_source_review"
+      "offlineTextStatus": "offline_derived",
+      "verificationStatus": "live_verified_snapshot"
     },
     {
       "id": "NEMC_EMERGENCY_MEDICAL",
@@ -852,10 +852,27 @@
         "emergency_hospital",
         "transport_plan"
       ],
-      "reuseCaution": "응급의료기관/AED 후보를 offline pack으로 저장할 수 있으나, 행사 당일 운영 여부와 접근성은 최신 확인이 필요하다. 실제 키는 NEMC_SERVICE_KEY로만 사용한다.",
+      "reuseCaution": "응급의료기관 후보를 offline pack으로 저장할 수 있으나, 행사 당일 운영 여부와 접근성은 최신 확인이 필요하다. 실제 키는 NEMC_SERVICE_KEY로만 사용한다. 2026-05-31 live smoke 결과는 키·원문 응답 없이 public-api-operational-evidence.json에 요약 snapshot으로만 저장했다.",
       "documentFormat": "api",
-      "offlineTextStatus": "pending",
-      "verificationStatus": "needs_source_review"
+      "offlineTextStatus": "offline_derived",
+      "verificationStatus": "live_verified_snapshot"
+    },
+    {
+      "id": "NEMC_AED",
+      "title": "AED 위치 정보 조회",
+      "publisher": "국립중앙의료원 / E-GEN / 공공데이터포털",
+      "url": "https://www.e-gen.or.kr/nemc/open_api.do?viewPage=application",
+      "priority": "A-",
+      "coverage": [
+        "medical_response",
+        "aed",
+        "venue_facility",
+        "transport_plan"
+      ],
+      "reuseCaution": "AED 위치 후보는 public-api-operational-evidence.json에 요약 snapshot으로만 저장한다. 행사 당일 접근 가능 여부, 설치 위치, 관리자, 점검상태는 베뉴 방재실 또는 현장 확인으로 확정한다. 실제 키는 NEMC_SERVICE_KEY로만 사용한다.",
+      "documentFormat": "api",
+      "offlineTextStatus": "offline_derived",
+      "verificationStatus": "live_verified_snapshot"
     },
     {
       "id": "FOOD_SAFETY_KOREA",
@@ -869,10 +886,10 @@
         "recall",
         "food_event"
       ],
-      "reuseCaution": "식품 인허가/HACCP는 offline pack 후보, 회수·판매중지는 최신 snapshot/live 확인 대상이다. 실제 키는 FOOD_SAFETY_API_KEY로만 사용한다.",
+      "reuseCaution": "식품 인허가/HACCP는 offline pack 후보, 회수·판매중지는 최신 snapshot/live 확인 대상이다. 실제 키는 FOOD_SAFETY_API_KEY로만 사용한다. 2026-05-31 live smoke 결과는 키·원문 응답 없이 public-api-operational-evidence.json에 요약 snapshot으로만 저장했다.",
       "documentFormat": "api",
-      "offlineTextStatus": "pending",
-      "verificationStatus": "needs_source_review"
+      "offlineTextStatus": "offline_derived",
+      "verificationStatus": "live_verified_snapshot"
     },
     {
       "id": "SEOUL_REALTIME_CITY_DATA",
@@ -888,8 +905,8 @@
       ],
       "reuseCaution": "서울 지역에만 일반 적용한다. snapshot/live 데이터는 법령 근거가 아니라 운영 판단 보조 근거다. 실제 키는 SEOUL_OPENAPI_KEY로만 사용한다.",
       "documentFormat": "api",
-      "offlineTextStatus": "not_applicable",
-      "verificationStatus": "needs_source_review"
+      "offlineTextStatus": "live_snapshot_only",
+      "verificationStatus": "live_verified_snapshot"
     },
     {
       "id": "KMA_APIHUB_WEATHER",
@@ -905,8 +922,8 @@
       ],
       "reuseCaution": "기상 특보/예보는 live 운영 판단 근거다. 오래된 값은 안전 판단에 사용하지 않는다. 실제 키는 KMA_APIHUB_KEY로만 사용한다.",
       "documentFormat": "api",
-      "offlineTextStatus": "not_applicable",
-      "verificationStatus": "needs_source_review"
+      "offlineTextStatus": "live_snapshot_only",
+      "verificationStatus": "live_verified_snapshot"
     },
     {
       "id": "AIRKOREA_AIR_QUALITY",
@@ -921,8 +938,8 @@
       ],
       "reuseCaution": "대기질 snapshot/live 데이터는 운영 판단 보조 근거다. 실제 키는 AIRKOREA_SERVICE_KEY로만 사용한다.",
       "documentFormat": "api",
-      "offlineTextStatus": "not_applicable",
-      "verificationStatus": "needs_source_review"
+      "offlineTextStatus": "live_snapshot_only",
+      "verificationStatus": "live_verified_snapshot"
     },
     {
       "id": "ITS_TRAFFIC_OPENAPI",

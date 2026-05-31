@@ -1,0 +1,157 @@
+{
+  "version": "1.0.3",
+  "generatedAt": "2026-05-31",
+  "description": "Submission and coordination action rules for MICE safety plan bundles. Values are templates resolved by generate_mice_safety_plan.",
+  "rules": [
+    {
+      "id": "unhosted_crowd_joint_response",
+      "condition": "hasUnhostedCrowd",
+      "audience": "{jurisdictionOrDefault} 재난안전상황실/경찰/소방",
+      "document": "무주최 다중운집 관계기관 공동대응계획",
+      "appliesWhen": "주최자 없음, 자발적 군중, 역세권·광장·상권·도로변 등 관리주체가 분산된 장소",
+      "timing": "위험 기간 전 사전협의, 현장 관찰 단계 즉시 공동상황방 가동",
+      "basis": "재난안전법 다중운집 예방조치, 행안부 다중운집인파사고 안전관리 가이드라인",
+      "status": "open"
+    },
+    {
+      "id": "performance_disaster_plan",
+      "condition": "isPerformance",
+      "audience": "{jurisdictionOrDefault} 공연/문화 담당부서·베뉴",
+      "document": "공연 재해대처계획, 안전관리조직·안전교육, 공연·무대 실행계획",
+      "appliesWhen": "공연장 또는 공연장 외 공연, 야외 무대, 스탠딩 관객, 무대·트러스·음향·조명 운영이 있는 경우",
+      "timing": "공연 14일 전 신고/변경신고 여부와 베뉴 기술지원·리깅 승인 기한 확인",
+      "basis": "공연법 시행령/시행규칙, 공연법 별표·서식, 베뉴 리깅·무대 규정",
+      "status": "open"
+    },
+    {
+      "id": "outdoor_local_safety_plan",
+      "condition": "hasOutdoorAndLocalOutdoorOrdinance",
+      "audience": "{jurisdictionOrDefault} 안전/행사 담당부서",
+      "document": "옥외행사·지역축제 안전관리계획서",
+      "appliesWhen": "옥외축제, 야외 공연, 주최/주관 행사 또는 순간 최대 인파 기준 해당 시",
+      "timing": "{localOrdinanceDeadline}",
+      "basis": "지자체 조례 우선순위 후보와 재난안전법 지역축제/다중운집 조항 확인",
+      "status": "open"
+    },
+    {
+      "id": "road_occupancy_permit",
+      "condition": "hasRoadUse",
+      "audience": "도로관리청/교통부서/경찰",
+      "document": "도로점용허가, 교통소통대책, 도로공사 시행·착수·준공 서식",
+      "appliesWhen": "도로·보도·광장 점용, 차 없는 거리, 퍼레이드, 셔틀 승하차장, 임시시설 설치",
+      "timing": "도로점용허가 신청 전, 설치·철거 착수 전, 종료 후 원상복구 시",
+      "basis": "도로법 시행령 별표 2, 도로법 시행규칙 별지 제11·12·13·33호서식",
+      "status": "open"
+    },
+    {
+      "id": "road_traffic_restriction_notice",
+      "condition": "hasRoadUse",
+      "audience": "도로관리청/경찰/지자체 홍보 채널",
+      "document": "통행금지·제한 또는 차량 운행 제한 공고",
+      "appliesWhen": "일부 차로·보도·도로 통행 제한 또는 차량 운행 제한이 있는 경우",
+      "timing": "통제 시행 전 사전 공고 및 현장 안내물 설치 전",
+      "basis": "도로법 시행규칙 별지 제36호서식, 우회도로·문의처·비상차량 동선 포함",
+      "status": "open"
+    },
+    {
+      "id": "outdoor_advertising_permit",
+      "condition": "hasOutdoorAdvertisingAndAdvertisingOrdinance",
+      "audience": "옥외광고 담당부서/베뉴",
+      "document": "현수막·배너·안내판·전기 광고물 허가/신고",
+      "appliesWhen": "옥외 임시 안내물, 지주형 표시물, 전광류 또는 전기 사용 광고물을 설치하는 경우",
+      "timing": "표시·설치 전",
+      "basis": "옥외광고물법 시행령 제5·7·12·14조와 관할 조례 확인",
+      "status": "open"
+    },
+    {
+      "id": "temporary_building_egress",
+      "condition": "hasBuildingAnnex",
+      "audience": "관할 건축부서/베뉴 시설팀",
+      "document": "가설건축물 축조신고서, 피난안전 확인서, 임시사용승인 확인",
+      "appliesWhen": "대형 텐트, 임시 전시장, 복층/다층 임시구조물, 공사 중 구역 임시 사용",
+      "timing": "설치 전 신고·승인, 개장 전 피난안전 확인",
+      "basis": "건축법 시행규칙 별지 제8·8의2·17호서식",
+      "status": "open"
+    },
+    {
+      "id": "venue_facility_approval",
+      "condition": "hasVenue",
+      "audience": "베뉴 운영/시설/전기/방재 담당",
+      "document": "부스 시공, 전기, 하역, 소방통로, 반입제한, 제출 안전서류",
+      "appliesWhen": "전시장·컨벤션센터·공연장 등 베뉴를 사용하는 경우",
+      "timing": "주최자 매뉴얼 기한, 시공 전, 개장 전",
+      "basis": "{venueName} 운영규정/안전수칙과 venue-facility sourceSpan 확인",
+      "status": "open"
+    },
+    {
+      "id": "fire_evacuation_approval",
+      "condition": "hasFireOrHotWorkOrLpg",
+      "audience": "소방서/베뉴 방재실/안전총괄",
+      "document": "소방·피난 점검표, 화기·위험물 반입 승인, 임시소방시설 확인",
+      "appliesWhen": "화기, 위험물, 임시전기, 부스·무대 설치, 피난통로 차단 위험이 있는 경우",
+      "timing": "설치 전, 개장 전, 피크 전, 철거 전",
+      "basis": "화재예방법·소방시설법 하위 별표와 베뉴 방재실 승인조건",
+      "status": "open"
+    },
+    {
+      "id": "lpg_inspection",
+      "condition": "hasLpgUse",
+      "audience": "가스공급자/검사기관/지자체",
+      "document": "LPG 완성·정기검사 신청서, 검사증명서, 공급자 안전점검, 보험증빙",
+      "appliesWhen": "푸드트럭, 야외 조리, LPG 용기·배관·사용시설 반입 또는 설치",
+      "timing": "개장 전 검사·증빙 확보, 운영 중 일일점검",
+      "basis": "LPG 시행규칙 별지 제36·37호서식, 별표 15·20·23",
+      "status": "open"
+    },
+    {
+      "id": "food_hygiene",
+      "condition": "hasFoodService",
+      "audience": "보건/위생 담당부서/식음료 운영자",
+      "document": "임시 식품영업 신고·위생 점검·식중독 대응 기록",
+      "appliesWhen": "푸드부스, 케이터링, 시식, 푸드트럭, 임시 조리·판매",
+      "timing": "영업 전 신고/허가 확인, 개장 전·운영 중 점검",
+      "basis": "식품위생법·시행규칙 별표 1, 보존식·신고·조사 연락체계",
+      "status": "open"
+    },
+    {
+      "id": "privacy_cctv",
+      "condition": "hasPrivacy",
+      "audience": "개인정보 보호책임자/등록 대행사/보안 담당",
+      "document": "개인정보 처리방침, 위탁계약, CCTV 안내, 접근권한·접속기록 점검",
+      "appliesWhen": "등록, QR/출입증, CCTV, 촬영, 앱 신고, VIP/초청자 명단 처리",
+      "timing": "수집 전 고지, 행사 전 위탁·보안점검, 종료 후 파기",
+      "basis": "개인정보보호법 제15·22·25·26·29·30조와 시행령 안전성 확보 조치",
+      "status": "open"
+    },
+    {
+      "id": "security_access",
+      "condition": "hasSecurity",
+      "audience": "경찰/경비업체/베뉴 보안실",
+      "document": "경비업 허가 범위, 경비지도사, 경비원 명부, 배치·폐지 신고",
+      "appliesWhen": "VIP, 보안검색, 민간경비, 혼잡·교통유도경비를 운영하는 경우",
+      "timing": "배치 전, 20일 이상 배치 또는 신고 대상 조건 확인",
+      "basis": "경비업법·시행령·시행규칙 별표/별지 서식",
+      "status": "open"
+    },
+    {
+      "id": "medical_aed",
+      "condition": "hasMedical",
+      "audience": "의료담당/AED 관리책임자/119·이송병원",
+      "document": "응급의료·AED·구급 이송 계획, AED 점검·교육·관리서류",
+      "appliesWhen": "대규모 인파, 고령자/영유아/장애인, 스탠딩 공연, 야외·폭염·야간 행사",
+      "timing": "개장 전, 운영 중, 사용/이송 발생 시",
+      "basis": "응급의료법 AED 설치·관리, 시행규칙 구급차 장비·운행기록 기준",
+      "status": "open"
+    },
+    {
+      "id": "worker_safety",
+      "condition": "hasWorker",
+      "audience": "시공/하역/전기 협력사/안전총괄",
+      "document": "설치·철거 작업자 안전계획서, 작업계획서, 교육명단, PPE·작업중지 기준",
+      "appliesWhen": "부스·무대·트러스·전기·고소·중량물·화기·철거 작업이 있는 경우",
+      "timing": "작업 전, 작업 중 변경 시, 철거 전",
+      "basis": "산안법, 산안기준규칙 제38·42·321조, KOSHA Guide worker-safety layer",
+      "status": "open"
+    }
+  ]
+}

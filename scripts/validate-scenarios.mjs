@@ -1,21 +1,39 @@
 #!/usr/bin/env node
 import { execFileSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { mkdtempSync, readFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const fixturePath = join(root, "data/scenarios/mice-event-scenarios.json");
 const fixture = JSON.parse(readFileSync(fixturePath, "utf8"));
-const validationEnv = { ...process.env, MICE_LOCAL_DIR: join(root, "data/.validation-store") };
+const validationRoot = mkdtempSync(join(tmpdir(), "kmsa-scenarios-"));
+const validationStore = join(validationRoot, "store");
+const validationEnv = { ...process.env, MICE_LOCAL_DIR: validationStore };
+
+function validationPath(...parts) {
+  return join(validationRoot, ...parts);
+}
+
+function manifestPath(result, suffix) {
+  const file = (result.files ?? []).find((item) => String(item).endsWith(suffix));
+  if (!file) throw new Error(`export manifest missing file: ${suffix}`);
+  return String(file);
+}
+
+function readManifestFile(result, suffix) {
+  return readFileSync(manifestPath(result, suffix), "utf8");
+}
 
 function runVenueCorpusValidation() {
+  const reportPath = validationPath("venue-corpus-audit-report.json");
   execFileSync(
     process.execPath,
-    [join(root, "scripts/validate-venue-corpus.mjs")],
+    [join(root, "scripts/validate-venue-corpus.mjs"), "--json-out", reportPath, "--md-out", validationPath("VENUE_CORPUS_AUDIT.md")],
     { cwd: root, encoding: "utf8", maxBuffer: 20 * 1024 * 1024, env: validationEnv },
   );
-  return JSON.parse(readFileSync(join(root, "data/venue-corpus-audit-report.json"), "utf8"));
+  return JSON.parse(readFileSync(reportPath, "utf8"));
 }
 
 function callApplicability(input) {
@@ -42,6 +60,33 @@ function ids(items) {
 
 function readJson(relativePath) {
   return JSON.parse(readFileSync(join(root, relativePath), "utf8"));
+}
+
+const allowedVerificationStatuses = new Set([
+  "verified",
+  "article_verified",
+  "threshold_structured",
+  "law_verified",
+  "source_verified",
+  "needs_review",
+  "needs_article_review",
+  "needs_source_review",
+  "summary_only",
+  "obsolete_candidate",
+  "offline_derived",
+  "todo",
+]);
+
+function thresholdTextLooksBroken(value) {
+  const text = String(value ?? "").replace(/\s+/g, " ").trim();
+  if (!text) return false;
+  const slashCount = (text.match(/\//g) ?? []).length;
+  return text.length > 500
+    || /조제\d/.test(text)
+    || /최\s*\//.test(text)
+    || /\/\s*장/.test(text)
+    || /(?<![,\d])0명\s*미만/.test(text)
+    || slashCount >= 4;
 }
 
 function expectContains(kind, actualSet, expected, failures) {
@@ -113,7 +158,7 @@ function validateOntologyMaturity() {
         failures.push(`legal_article_field:${article.id}:${field}`);
       }
     }
-    if (!["verified", "needs_review", "summary_only", "obsolete_candidate"].includes(article.verificationStatus)) {
+    if (!allowedVerificationStatuses.has(article.verificationStatus)) {
       failures.push(`legal_article_verification:${article.id}:${article.verificationStatus}`);
     }
   }
@@ -129,6 +174,7 @@ function validateOntologyMaturity() {
     "appliesWhen",
     "crowdThreshold",
     "threshold",
+    "thresholdStructured",
     "submissionDeadline",
     "requiredPlanItems",
     "inspectionRules",
@@ -139,15 +185,44 @@ function validateOntologyMaturity() {
     "articleExtracts",
     "verificationStatus",
     "sourceConfidence",
+    "verificationChecks",
   ];
+  const ordinanceVerificationCounts = {};
+  const thresholdConfidenceCounts = {};
   for (const record of localOrdinances) {
     for (const field of requiredOrdinanceFields) {
       if (record[field] === undefined || record[field] === "" || (Array.isArray(record[field]) && field !== "articleExtracts" && record[field].length === 0)) {
         failures.push(`ordinance_field:${record.id}:${field}`);
       }
     }
-    if (!["verified", "needs_review", "summary_only", "obsolete_candidate"].includes(record.verificationStatus)) {
+    if (record.verificationStatus === "verified") {
+      failures.push(`ordinance_generic_verified:${record.id}`);
+    }
+    if (!allowedVerificationStatuses.has(record.verificationStatus)) {
       failures.push(`ordinance_verification:${record.id}:${record.verificationStatus}`);
+    }
+    ordinanceVerificationCounts[record.verificationStatus] = (ordinanceVerificationCounts[record.verificationStatus] ?? 0) + 1;
+    const thresholdStructured = record.thresholdStructured ?? {};
+    const thresholdConfidence = thresholdStructured.confidence ?? "missing";
+    thresholdConfidenceCounts[thresholdConfidence] = (thresholdConfidenceCounts[thresholdConfidence] ?? 0) + 1;
+    if (!thresholdStructured.summary || !thresholdStructured.kind || !thresholdStructured.confidence) {
+      failures.push(`ordinance_threshold_structured:${record.id}`);
+    }
+    if (thresholdTextLooksBroken(record.crowdThreshold) || thresholdTextLooksBroken(record.threshold)) {
+      failures.push(`ordinance_broken_threshold_text:${record.id}`);
+    }
+    if (thresholdTextLooksBroken(record.crowdThreshold) && record.verificationStatus !== "needs_review") {
+      failures.push(`ordinance_broken_threshold_not_downgraded:${record.id}`);
+    }
+    if (thresholdConfidence === "needs_review" && record.verificationStatus !== "needs_review") {
+      failures.push(`ordinance_threshold_review_status_mismatch:${record.id}`);
+    }
+    if (record.verificationStatus === "source_verified" && record.articleExtracts?.length > 0) {
+      failures.push(`ordinance_source_only_with_articles:${record.id}`);
+    }
+    const checks = record.verificationChecks ?? {};
+    for (const key of ["source", "articles", "threshold", "actionMapping"]) {
+      if (!checks[key]) failures.push(`ordinance_verification_check:${record.id}:${key}`);
     }
   }
   const categoryCounts = {};
@@ -207,7 +282,7 @@ function validateOntologyMaturity() {
     console.error(`FAIL ontology_maturity ${failures.slice(0, 20).join(" ")}`);
     return 1;
   }
-  console.log(`PASS ontology_maturity legalArticles=${legalArticles.length} ordinances=${localOrdinances.length} hazards=${hazards.length} duties=${duties.length}`);
+  console.log(`PASS ontology_maturity legalArticles=${legalArticles.length} ordinances=${localOrdinances.length} hazards=${hazards.length} duties=${duties.length} ordinanceStatus=${JSON.stringify(ordinanceVerificationCounts)} threshold=${JSON.stringify(thresholdConfidenceCounts)}`);
   return 0;
 }
 
@@ -598,12 +673,67 @@ const reviewResult = callTool("review_mice_safety_plan", {
   lpgUse: true,
   foodService: true,
 }).structuredContent;
+const outdoorPlanResult = callTool("generate_mice_safety_plan", {
+  eventName: "검증용 옥외축제",
+  eventTypes: ["festival", "food_event"],
+  jurisdiction: "경기도 고양시",
+  expectedCrowd: 5000,
+  outdoorEvent: true,
+  roadUse: true,
+  temporaryStructures: true,
+  temporaryElectricity: true,
+  setupTeardown: true,
+  workAtHeight: true,
+  heavyObjectHandling: true,
+  lpgUse: true,
+  foodService: true,
+}).structuredContent;
+const outdoorPlanMarkdown = outdoorPlanResult.planMarkdown ?? "";
+const executiveSummaryNeedles = [
+  "## 먼저 읽는 요약 보고서",
+  "### 결론",
+  "### 이 행사에서 실제로 중요한 위험",
+  "### 적용되는 법령·조례·베뉴 규정",
+  "### 적용되지 않는 법령과 이유",
+  "### 조건부 확인 항목",
+  "source_verified 조례 원문 조문 확인",
+  "원문 조문 확인 필요",
+  "### 제출·협의 액션",
+  "담당",
+  "증빙",
+  "### 남은 리스크와 최종 확인",
+];
+const missingExecutiveSummaryNeedles = executiveSummaryNeedles.filter((needle) => !outdoorPlanMarkdown.includes(needle));
+if (outdoorPlanMarkdown.includes("검증상태: source_verified") && !outdoorPlanMarkdown.includes("source_verified 조례 원문 조문 확인")) {
+  console.error("FAIL safety_plan_source_verified_ordinance_action missing source_verified ordinance action");
+  process.exitCode = 1;
+}
 const visitorNoticeReviewResult = callTool("review_mice_safety_plan", {
   planMarkdown: "# 외부 계획서\n\n## 행사 개요\n- 행사명: 외부행사\n\n## 적용 법령\n- 지자체 조례 확인\n\n## 제출·협의 체크리스트\n| No | 제출/확인처 | 문서/서식 | 조건 | 기한/시점 | 근거/메모 | 상태 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 1 | 지자체 | 안전관리계획서 | 옥외행사 | 행사 전 | 조례 | open |\n\n## 증빙·기록\n- 기록 보존",
   eventTypes: ["festival"],
   expectedCrowd: 5000,
   outdoorEvent: true,
 }).structuredContent;
+const incompletePlanReviewResult = callTool("review_mice_safety_plan", {
+  planMarkdown: "# 불완전 옥외축제 계획\n\n## 행사 개요\n- 옥외축제\n- 예상 5,000명\n\n## 운영 메모\n- 행사장 배치도는 추후 작성",
+  eventName: "검증용 불완전 옥외축제",
+  eventTypes: ["festival", "food_event"],
+  jurisdiction: "경기도 고양시",
+  expectedCrowd: 5000,
+  outdoorEvent: true,
+  roadUse: true,
+  foodService: true,
+  lpgUse: true,
+}).structuredContent;
+const incompleteRequiredFindings = [
+  "REQ_LEGAL_BASIS",
+  "REQ_LOCAL_ORDINANCE",
+  "REQ_CROWD_FLOW",
+  "REQ_ROAD_OCCUPANCY",
+  "REQ_FOOD_SAFETY",
+  "REQ_LPG_GAS",
+];
+const incompleteFindingIds = new Set((incompletePlanReviewResult.findings ?? []).map((finding) => finding.requirementId));
 
 if (reviewResult.verdict === "needs_revision") {
   console.error(`FAIL safety_plan_review verdict=${reviewResult.verdict}`);
@@ -626,11 +756,20 @@ if (reviewResult.verdict === "needs_revision") {
 } else if (!(reviewResult.documentCoverageMatrix ?? []).some((row) => row.documentId === "road_traffic_control_plan" && row.requirement === "required" && row.status === "present")) {
   console.error("FAIL safety_plan_review coverage_road_traffic_control_plan");
   failed += 1;
+} else if (missingExecutiveSummaryNeedles.length > 0) {
+  console.error(`FAIL safety_plan_review executive_summary_missing=${missingExecutiveSummaryNeedles.join(",")}`);
+  failed += 1;
 } else if (!(visitorNoticeReviewResult.documentCoverageMatrix ?? []).some((row) => row.documentId === "visitor_safety_notices" && row.status === "missing")) {
   console.error("FAIL safety_plan_review coverage_missing_visitor_notice");
   failed += 1;
+} else if (incompletePlanReviewResult.verdict !== "needs_revision") {
+  console.error(`FAIL safety_plan_review incomplete_plan_verdict=${incompletePlanReviewResult.verdict}`);
+  failed += 1;
+} else if (!incompleteRequiredFindings.every((id) => incompleteFindingIds.has(id))) {
+  console.error(`FAIL safety_plan_review incomplete_plan_missing_findings=${incompleteRequiredFindings.filter((id) => !incompleteFindingIds.has(id)).join(",")}`);
+  failed += 1;
 } else {
-  console.log(`PASS safety_plan_review verdict=${reviewResult.verdict}`);
+  console.log(`PASS safety_plan_review verdict=${reviewResult.verdict} incomplete=${incompletePlanReviewResult.verdict}`);
 }
 
 const unhostedPlanResult = callTool("generate_mice_safety_plan", {
@@ -679,7 +818,7 @@ const unhostedReview = callTool("review_mice_safety_plan", {
 }).structuredContent;
 if (
   missingUnhostedNeedles.length > 0
-  || unhostedReview.verdict !== "usable"
+  || !["usable", "usable_with_review"].includes(unhostedReview.verdict)
   || !(unhostedReview.documentCoverageMatrix ?? []).some((row) => row.documentId === "unhosted_crowd_response_plan" && row.requirement === "required" && row.status === "present")
   || (unhostedReview.findings ?? []).some((finding) => finding.requirementId === "REQ_BUILDING_EGRESS")
   || !(unhostedReview.findings ?? []).every((finding) => !["REQ_UNHOSTED_CROWD_RESPONSE", "REQ_UNHOSTED_CROWD_RACI"].includes(finding.requirementId) || finding.severity !== "error")
@@ -704,7 +843,7 @@ const exportResult = callTool("export_mice_safety_plan_bundle", {
   heavyObjectHandling: true,
   lpgUse: true,
   foodService: true,
-  outputDir: join(root, "data/.validation-store/plan-export"),
+  outputDir: validationPath("plan-export"),
 }).structuredContent;
 const unhostedExportResult = callTool("export_mice_safety_plan_bundle", {
   eventName: "검증용 무주최 다중운집",
@@ -715,7 +854,7 @@ const unhostedExportResult = callTool("export_mice_safety_plan_bundle", {
   outdoorEvent: true,
   unhostedCrowd: true,
   roadUse: false,
-  outputDir: join(root, "data/.validation-store/unhosted-plan-export"),
+  outputDir: validationPath("unhosted-plan-export"),
 }).structuredContent;
 const privacySecurityExportResult = callTool("export_mice_safety_plan_bundle", {
   eventName: "검증용 VIP 컨벤션",
@@ -723,7 +862,7 @@ const privacySecurityExportResult = callTool("export_mice_safety_plan_bundle", {
   expectedCrowd: 800,
   personalDataProcessing: true,
   vipSecurity: true,
-  outputDir: join(root, "data/.validation-store/privacy-package-export"),
+  outputDir: validationPath("privacy-package-export"),
 }).structuredContent;
 const performanceExportResult = callTool("export_mice_safety_plan_bundle", {
   eventName: "검증용 공연",
@@ -733,7 +872,7 @@ const performanceExportResult = callTool("export_mice_safety_plan_bundle", {
   temporaryStructures: true,
   temporaryElectricity: true,
   setupTeardown: true,
-  outputDir: join(root, "data/.validation-store/performance-plan-export"),
+  outputDir: validationPath("performance-plan-export"),
 }).structuredContent;
 const datedExportResult = callTool("export_mice_safety_plan_bundle", {
   eventName: "검증용 날짜기반 옥외축제",
@@ -747,44 +886,35 @@ const datedExportResult = callTool("export_mice_safety_plan_bundle", {
   lpgUse: true,
   temporaryStructures: true,
   setupTeardown: true,
-  outputDir: join(root, "data/.validation-store/dated-plan-export"),
+  outputDir: validationPath("dated-plan-export"),
 }).structuredContent;
-const visitorNoticeExportPath = join(root, "data/.validation-store/plan-export/bundle/documents/15-visitor-safety-notices.md");
-const visitorNoticeExportMarkdown = readFileSync(visitorNoticeExportPath, "utf8");
-const operationsRunsheetPath = join(root, "data/.validation-store/plan-export/bundle/documents/16-operations-runsheet.md");
-const operationsRunsheetMarkdown = readFileSync(operationsRunsheetPath, "utf8");
-const operationsRunsheetCsv = readFileSync(join(root, "data/.validation-store/plan-export/bundle/tables/operations-runsheet.csv"), "utf8");
-const foodLpgChecklistPath = join(root, "data/.validation-store/plan-export/bundle/documents/06-food-lpg-checklist.md");
-const foodLpgMarkdown = readFileSync(foodLpgChecklistPath, "utf8");
-const foodLpgExecutionCsv = readFileSync(join(root, "data/.validation-store/plan-export/bundle/tables/food-lpg-execution.csv"), "utf8");
-const roadTrafficPath = join(root, "data/.validation-store/plan-export/bundle/documents/19-road-traffic-control-plan.md");
-const roadTrafficMarkdown = readFileSync(roadTrafficPath, "utf8");
-const roadTrafficCsv = readFileSync(join(root, "data/.validation-store/plan-export/bundle/tables/road-traffic-control-plan.csv"), "utf8");
-const submissionSchedulePath = join(root, "data/.validation-store/plan-export/bundle/documents/18-submission-raci-calendar.md");
-const submissionScheduleMarkdown = readFileSync(submissionSchedulePath, "utf8");
-const submissionScheduleCsv = readFileSync(join(root, "data/.validation-store/plan-export/bundle/tables/submission-raci-calendar.csv"), "utf8");
-const publicApiEvidenceMarkdown = readFileSync(join(root, "data/.validation-store/plan-export/bundle/documents/22-public-api-operational-evidence.md"), "utf8");
-const packageIndexPath = join(root, "data/.validation-store/plan-export/bundle/submission-packages/package-index.csv");
-const localGovernmentPackagePath = join(root, "data/.validation-store/plan-export/bundle/submission-packages/01-local-government-package.md");
-const agencyPackagePath = join(root, "data/.validation-store/plan-export/bundle/submission-packages/03-fire-police-medical-package.md");
-const workerPackagePath = join(root, "data/.validation-store/plan-export/bundle/submission-packages/04-worker-contractor-package.md");
-const packageIndexCsv = readFileSync(packageIndexPath, "utf8");
-const localGovernmentPackageMarkdown = readFileSync(localGovernmentPackagePath, "utf8");
-const agencyPackageMarkdown = readFileSync(agencyPackagePath, "utf8");
-const workerPackageMarkdown = readFileSync(workerPackagePath, "utf8");
-const privacyVenuePackageMarkdown = readFileSync(join(root, "data/.validation-store/privacy-package-export/bundle/submission-packages/02-venue-package.md"), "utf8");
-const privacySecurityPackageMarkdown = readFileSync(join(root, "data/.validation-store/privacy-package-export/bundle/submission-packages/05-privacy-security-package.md"), "utf8");
-const privacyPackageIndexCsv = readFileSync(join(root, "data/.validation-store/privacy-package-export/bundle/submission-packages/package-index.csv"), "utf8");
-const unhostedExportMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/documents/20-unhosted-crowd-response-plan.md"), "utf8");
-const unhostedExportCsv = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/tables/unhosted-crowd-response-plan.csv"), "utf8");
-const unhostedOperationsRunsheetMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/documents/16-operations-runsheet.md"), "utf8");
-const unhostedLocalGovernmentPackageMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/submission-packages/01-local-government-package.md"), "utf8");
-const unhostedAgencyPackageMarkdown = readFileSync(join(root, "data/.validation-store/unhosted-plan-export/bundle/submission-packages/03-fire-police-medical-package.md"), "utf8");
-const performanceStageExportMarkdown = readFileSync(join(root, "data/.validation-store/performance-plan-export/bundle/documents/21-performance-stage-execution-plan.md"), "utf8");
-const performanceStageExecutionCsv = readFileSync(join(root, "data/.validation-store/performance-plan-export/bundle/tables/performance-stage-execution.csv"), "utf8");
-const datedSubmissionScheduleMarkdown = readFileSync(join(root, "data/.validation-store/dated-plan-export/bundle/documents/18-submission-raci-calendar.md"), "utf8");
-const datedSubmissionScheduleCsv = readFileSync(join(root, "data/.validation-store/dated-plan-export/bundle/tables/submission-raci-calendar.csv"), "utf8");
-const datedOperationsRunsheetMarkdown = readFileSync(join(root, "data/.validation-store/dated-plan-export/bundle/documents/16-operations-runsheet.md"), "utf8");
+const visitorNoticeExportMarkdown = readManifestFile(exportResult, "15-visitor-safety-notices.md");
+const operationsRunsheetMarkdown = readManifestFile(exportResult, "16-operations-runsheet.md");
+const operationsRunsheetCsv = readManifestFile(exportResult, "operations-runsheet.csv");
+const foodLpgMarkdown = readManifestFile(exportResult, "06-food-lpg-checklist.md");
+const foodLpgExecutionCsv = readManifestFile(exportResult, "food-lpg-execution.csv");
+const roadTrafficMarkdown = readManifestFile(exportResult, "19-road-traffic-control-plan.md");
+const roadTrafficCsv = readManifestFile(exportResult, "road-traffic-control-plan.csv");
+const submissionScheduleMarkdown = readManifestFile(exportResult, "18-submission-raci-calendar.md");
+const submissionScheduleCsv = readManifestFile(exportResult, "submission-raci-calendar.csv");
+const publicApiEvidenceMarkdown = readManifestFile(exportResult, "22-public-api-operational-evidence.md");
+const packageIndexCsv = readManifestFile(exportResult, "submission-packages/package-index.csv");
+const localGovernmentPackageMarkdown = readManifestFile(exportResult, "submission-packages/01-local-government-package.md");
+const agencyPackageMarkdown = readManifestFile(exportResult, "submission-packages/03-fire-police-medical-package.md");
+const workerPackageMarkdown = readManifestFile(exportResult, "submission-packages/04-worker-contractor-package.md");
+const privacyVenuePackageMarkdown = readManifestFile(privacySecurityExportResult, "submission-packages/02-venue-package.md");
+const privacySecurityPackageMarkdown = readManifestFile(privacySecurityExportResult, "submission-packages/05-privacy-security-package.md");
+const privacyPackageIndexCsv = readManifestFile(privacySecurityExportResult, "submission-packages/package-index.csv");
+const unhostedExportMarkdown = readManifestFile(unhostedExportResult, "20-unhosted-crowd-response-plan.md");
+const unhostedExportCsv = readManifestFile(unhostedExportResult, "unhosted-crowd-response-plan.csv");
+const unhostedOperationsRunsheetMarkdown = readManifestFile(unhostedExportResult, "16-operations-runsheet.md");
+const unhostedLocalGovernmentPackageMarkdown = readManifestFile(unhostedExportResult, "submission-packages/01-local-government-package.md");
+const unhostedAgencyPackageMarkdown = readManifestFile(unhostedExportResult, "submission-packages/03-fire-police-medical-package.md");
+const performanceStageExportMarkdown = readManifestFile(performanceExportResult, "21-performance-stage-execution-plan.md");
+const performanceStageExecutionCsv = readManifestFile(performanceExportResult, "performance-stage-execution.csv");
+const datedSubmissionScheduleMarkdown = readManifestFile(datedExportResult, "18-submission-raci-calendar.md");
+const datedSubmissionScheduleCsv = readManifestFile(datedExportResult, "submission-raci-calendar.csv");
+const datedOperationsRunsheetMarkdown = readManifestFile(datedExportResult, "16-operations-runsheet.md");
 
 if (
   datedExportResult.review?.verdict === "needs_revision"
@@ -827,7 +957,7 @@ if (
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("submission-packages/04-worker-contractor-package.md"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("safety-plan.docx"))
   || !(exportResult.files ?? []).some((file) => String(file).endsWith("safety-checklists.xlsx"))
-  || !zipLooksValid(join(root, "data/.validation-store/plan-export/bundle/tables/safety-checklists.xlsx"))
+  || !zipLooksValid(manifestPath(exportResult, "safety-checklists.xlsx"))
   || !(privacySecurityExportResult.files ?? []).some((file) => String(file).endsWith("submission-packages/05-privacy-security-package.md"))
   || !(performanceExportResult.files ?? []).some((file) => String(file).endsWith("21-performance-stage-execution-plan.md"))
   || !(performanceExportResult.files ?? []).some((file) => String(file).endsWith("performance-stage-execution.csv"))
@@ -961,7 +1091,7 @@ const runsheetDashboardResult = callTool("query_mice_operations_dashboard", {
 const runsheetDashboardExportResult = callTool("export_mice_operations_dashboard", {
   eventName: "검증용 런시트 행사",
   dueSoonMinutes: 30,
-  outputDir: join(root, "data/.validation-store/runsheet-dashboard-export"),
+  outputDir: validationPath("runsheet-dashboard-export"),
 }).structuredContent;
 
 if (
@@ -974,7 +1104,7 @@ if (
   || runsheetDashboardResult.runsheetSummary?.blocked < 1
   || !(runsheetDashboardResult.timeline ?? []).some((entry) => entry.eventType === "runsheet_updated")
   || !(runsheetDashboardExportResult.files ?? []).some((file) => String(file).endsWith("operations-dashboard.xlsx"))
-  || !zipLooksValid(join(root, "data/.validation-store/runsheet-dashboard-export/operations-dashboard.xlsx"))
+  || !zipLooksValid(manifestPath(runsheetDashboardExportResult, "operations-dashboard.xlsx"))
   || runsheetDashboardExportResult.dashboard?.runsheetSummary?.blocked < 1
 ) {
   console.error("FAIL operations_runsheet_execution");
@@ -1075,7 +1205,7 @@ const performanceRunsheetInitResult = callTool("initialize_mice_runsheet_executi
   temporaryStructures: true,
   temporaryElectricity: true,
   setupTeardown: true,
-  operationsRunsheetMarkdown: readFileSync(join(root, "data/.validation-store/performance-plan-export/bundle/documents/16-operations-runsheet.md"), "utf8"),
+  operationsRunsheetMarkdown: readManifestFile(performanceExportResult, "16-operations-runsheet.md"),
   source: "validation-performance-runsheet",
 }).structuredContent;
 const performanceRunsheetTarget = (performanceRunsheetInitResult.items ?? []).find((item) => /공연중지 기준|무대감독|무대 전면 압박|리깅 승인/.test(String(item.task ?? "")));
@@ -1167,7 +1297,7 @@ const dashboardAfterResolveResult = callTool("query_mice_operations_dashboard", 
 const dashboardExportResult = callTool("export_mice_operations_dashboard", {
   eventName: "검증용 옥외축제",
   dueSoonMinutes: 30,
-  outputDir: join(root, "data/.validation-store/operations-dashboard-export"),
+  outputDir: validationPath("operations-dashboard-export"),
 }).structuredContent;
 const completeResult = callTool("complete_mice_action", {
   actionId: actionResult.action?.id,
@@ -1222,7 +1352,7 @@ if (
   || !(dashboardAfterResolveResult.timeline ?? []).some((entry) => entry.eventType === "command_decision" && String(entry.title ?? "").includes("행사 재개승인"))
   || !(dashboardAfterResolveResult.timeline ?? []).some((entry) => entry.eventType === "action_assigned")
   || !(dashboardExportResult.files ?? []).some((file) => String(file).endsWith("operations-dashboard.xlsx"))
-  || !zipLooksValid(join(root, "data/.validation-store/operations-dashboard-export/operations-dashboard.xlsx"))
+  || !zipLooksValid(manifestPath(dashboardExportResult, "operations-dashboard.xlsx"))
   || completeResult.issue?.status !== "resolved"
   || !(reportResult.reportMarkdown ?? "").includes(issueId)
   || !(reportResult.reportMarkdown ?? "").includes("라우팅/SLA")

@@ -236,6 +236,21 @@ export interface LocalOrdinanceRecord {
   sourceUrl: string;
   appliesWhen: string;
   crowdThreshold: string;
+  threshold: string;
+  thresholdStructured?: {
+    kind: string;
+    summary: string;
+    minCrowd?: number | null;
+    maxCrowdExclusive?: number | null;
+    maxCrowdInclusive?: number | null;
+    densityLimitPersonsPerSqm?: number | null;
+    eventKinds?: string[];
+    basis?: string;
+    sourceArticles?: string[];
+    rawPhrases?: string[];
+    confidence: "article_structured" | "category_default" | "condition_based" | "needs_review";
+    reviewNotes?: string[];
+  };
   submissionDeadline: string;
   requiredPlanItems: string[];
   inspectionRules: string[];
@@ -248,6 +263,13 @@ export interface LocalOrdinanceRecord {
   structuredStatus: "article_extracted" | "category_default";
   articleExtracts: LocalOrdinanceArticleExtract[];
   verificationStatus: VerificationStatus;
+  verificationChecks?: {
+    source: string;
+    articles: string;
+    threshold: string;
+    actionMapping: string;
+  };
+  sourceConfidence?: string;
 }
 
 export interface RankedLocalOrdinanceRecord extends LocalOrdinanceRecord {
@@ -612,20 +634,26 @@ export function strictnessLabel(strictness: Strictness): string {
 }
 
 export function verificationRank(status: VerificationStatus): number {
-  switch (status) {
-    case "verified":
-      return 0;
-    case "law_verified":
-      return 1;
-    case "source_verified":
-      return 2;
-    case "needs_article_review":
-      return 3;
-    case "needs_source_review":
-      return 4;
-    case "offline_derived":
-      return 4;
-    case "todo":
-      return 5;
-  }
+	switch (status) {
+	  case "verified":
+	  case "article_verified":
+	  case "threshold_structured":
+	    return 0;
+	  case "law_verified":
+	    return 1;
+	  case "source_verified":
+	    return 2;
+	  case "summary_only":
+	  case "offline_derived":
+	    return 3;
+	  case "needs_review":
+	  case "needs_article_review":
+	    return 3;
+	  case "needs_source_review":
+	    return 4;
+	  case "obsolete_candidate":
+	    return 5;
+	  case "todo":
+	    return 5;
+	}
 }

@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "scope": "Korean MICE site-operation safety applicability domain pack. Deterministic guidance only; final legal decisions require current law text, local ordinance, and venue approval verification.",
   "commonLawIds": [

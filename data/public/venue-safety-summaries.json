@@ -1,0 +1,4336 @@
+{
+  "version": "1.0.3",
+  "versionType": "public_safe_summary",
+  "sourceOntologyVersion": "1.0.0",
+  "generatedAt": "2026-05-31T14:00:25.778Z",
+  "distributionPolicy": {
+    "publicPackage": "structured summaries and checklist facts only",
+    "internalCorpus": "full extracted venue Markdown remains in data/markdown/venue-manuals for local validation and is not included in npm package",
+    "useRestriction": "venue rules are operational draft support; confirm current requirements with the venue before submission or construction"
+  },
+  "venues": [
+    {
+      "venueId": "coex",
+      "name": "코엑스",
+      "region": "서울",
+      "operator": "Coex",
+      "website": "https://www.coex.co.kr/",
+      "verificationStatus": "source_verified",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "COEX_EXHIBITION_GUIDE_2025",
+          "title": "전시장 이용 안내서(2025)",
+          "publisher": "코엑스 BUSINESS",
+          "url": "https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9D%B4%EC%9A%A9-%EC%95%88%EB%82%B4%EC%84%9Cver-2023-10-10/",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 문서. 원문 복제보다 링크와 체크포인트 요약 사용."
+        },
+        {
+          "id": "COEX_FACILITY_OPERATION_RULE_2023",
+          "title": "2023년 전시장 시설운영규정(국/영문)",
+          "publisher": "코엑스 BUSINESS",
+          "url": "https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%8B%9C%EC%84%A4%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EA%B5%AD-%EC%98%81%EB%AC%B8/",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 운영규정. 최신 개정본 여부 확인 필요."
+        },
+        {
+          "id": "COEX_SERVICE_PARTNER_MANUAL",
+          "title": "코엑스 서비스협력업체 운영 매뉴얼",
+          "publisher": "코엑스 LMS",
+          "url": "https://lmsweb.coex.co.kr/com/attachfile/download.mvc?fileCateCD=NOTICE&fileKey=458&serialNo=2",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 협력업체 문서. 원문 복제보다 체크포인트 요약 사용."
+        }
+      ],
+      "spaces": [
+        {
+          "id": "hall_a",
+          "name": "Hall A",
+          "facts": [
+            "공식 페이지 기준 면적 10,368㎡",
+            "3m x 3m 기준 최대 520부스",
+            "전시부스 배치 시 기본 도면과 홀별 도면 확인 필요"
+          ],
+          "sourceUrl": "https://business.coex.co.kr/exhibition-hall/hall-a/"
+        }
+      ],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 138,
+          "ceilingHeight": 27,
+          "floorLoad": 29,
+          "freightEntrance": 76,
+          "loadingDock": 102,
+          "electricity": 55,
+          "fireLane": 54,
+          "evacuationRoutes": 53,
+          "restrictedItems": 78,
+          "boothRules": 308,
+          "riggingRules": 87,
+          "foodRules": 15,
+          "safetyDocuments": 123
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "서울 강남권 대형 전시장. Hall A 기준 10,368㎡와 최대 520부스 시설정보를 로컬 온톨로지에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "Hall A: 공식 페이지 기준 면적 10,368㎡; 3m x 3m 기준 최대 520부스; 전시부스 배치 시 기본 도면과 홀별 도면 확인 필요",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "서울 강남권 대형 전시장. Hall A 기준 10,368㎡와 최대 520부스 시설정보를 로컬 온톨로지에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "Hall A: 공식 페이지 기준 면적 10,368㎡; 3m x 3m 기준 최대 520부스; 전시부스 배치 시 기본 도면과 홀별 도면 확인 필요",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "Hall A: 공식 페이지 기준 면적 10,368㎡; 3m x 3m 기준 최대 520부스; 전시부스 배치 시 기본 도면과 홀별 도면 확인 필요",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "전시부스 배치 시 기본 도면과 홀별 도면 확인 필요",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "전시부스 통로, 비상구, EPS 출입문, 소화전, 화장실 입구, 후면 소방통로는 피난·소방 동선으로 관리한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "비상구·소화전·EPS·화장실 입구를 부스나 적재물로 막지 않기",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "전시부스 통로, 비상구, EPS 출입문, 소화전, 화장실 입구, 후면 소방통로는 피난·소방 동선으로 관리한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "비상구·소화전·EPS·화장실 입구를 부스나 적재물로 막지 않기",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "비상구·소화전·EPS·화장실 입구를 부스나 적재물로 막지 않기",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "후면 소방통로에 화물·자재·비품 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "후면 소방통로에 화물·자재·비품 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "restrictedItems",
+              "value": "기존 시설물 고정 금지 여부",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "기존 시설물 고정 금지 여부",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "riggingRules",
+              "value": "Check List / 광고안내시설물 설치신청서 / 주최자용 무료주차권 발급 신청서",
+              "sourceRef": "COEX_EXHIBITION_GUIDE_2025",
+              "confidence": 0.6
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "화기, 위험물질, 고압가스, 프로판 등 베뉴 허가·금지 항목을 참가업체 매뉴얼에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "foodRules",
+              "value": "*방염자재 사용 / 소화전 / 가스사용 / 복층 구조물 시공 / 전시장 제한하중",
+              "sourceRef": "COEX_EXHIBITION_GUIDE_2025",
+              "confidence": 0.6
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "프로판 등 전시장 내 반입 금지 여부",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "화물차 로딩덕 진입 동선, 작업용 차량 무료주차 조건, 전시기간 주차 운영을 사전 안내한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "*방염자재 사용 / 소화전 / 가스사용 / 복층 구조물 시공 / 전시장 제한하중",
+              "sourceRef": "COEX_EXHIBITION_GUIDE_2025",
+              "confidence": 0.65
+            },
+            {
+              "category": "floorLoad",
+              "value": "○ 면적 ○ 적재하중: 1.5tons/㎡",
+              "sourceRef": "COEX_EXHIBITION_GUIDE_2025",
+              "confidence": 0.8
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "*행사 준비: 부스 마킹, 광고배너 설치, 자재반입, 부스장치 구조물 설치, 전기 간선작업 등",
+              "sourceRef": "COEX_EXHIBITION_GUIDE_2025",
+              "confidence": 0.65
+            },
+            {
+              "category": "electricity",
+              "value": "- 코엑스는 고객 만족과 안전사고 예방을 위해 15개 분야(전시디자인 설치, 전기시설, 경비 등)",
+              "sourceRef": "COEX_EXHIBITION_GUIDE_2025",
+              "confidence": 0.8
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "○ 천장 높이: 9m(일부 7.5m) 높이 155cm",
+              "sourceRef": "COEX_EXHIBITION_GUIDE_2025",
+              "confidence": 0.6
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "○ 천장 높이: 9.5m(Bss 6.2m)",
+              "sourceRef": "COEX_EXHIBITION_GUIDE_2025",
+              "confidence": 0.6
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "coex_aisle_fire_lane_clearance",
+          "category": "egress_fire_lane",
+          "summary": "전시부스 통로, 비상구, EPS 출입문, 소화전, 화장실 입구, 후면 소방통로는 피난·소방 동선으로 관리한다.",
+          "checkpoints": [
+            "통로 폭과 부스 배치가 베뉴 도면·운영규정에 맞는지 확인",
+            "비상구·소화전·EPS·화장실 입구를 부스나 적재물로 막지 않기",
+            "후면 소방통로에 화물·자재·비품 적재 금지",
+            "개장 전 사진 증빙"
+          ],
+          "sourceRefs": [
+            "COEX_SERVICE_PARTNER_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "coex_booth_structure_approval",
+          "category": "temporary_structure",
+          "summary": "독립부스, 복층, 구조물은 코엑스 승인·구조검토·안전확인서 대상 여부를 확인한다.",
+          "checkpoints": [
+            "독립부스 승인 여부",
+            "복층/대형 구조물 구조계산서·제작도·현장감리 확인서 대상 여부",
+            "기존 시설물 고정 금지 여부",
+            "위반 시 확인서·경고·출입정지 등 제재 가능성 확인"
+          ],
+          "sourceRefs": [
+            "COEX_SERVICE_PARTNER_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "coex_hazardous_material_fire_rules",
+          "category": "fire_hazardous_material",
+          "summary": "화기, 위험물질, 고압가스, 프로판 등 베뉴 허가·금지 항목을 참가업체 매뉴얼에 반영한다.",
+          "checkpoints": [
+            "naked flame 사용 허가 필요 여부",
+            "위험물질 운반·보관 허가 필요 여부",
+            "프로판 등 전시장 내 반입 금지 여부",
+            "소화기와 화재예방 조치 확인"
+          ],
+          "sourceRefs": [
+            "COEX_SERVICE_PARTNER_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "coex_freight_parking_route",
+          "category": "logistics_traffic",
+          "summary": "화물차 로딩덕 진입 동선, 작업용 차량 무료주차 조건, 전시기간 주차 운영을 사전 안내한다.",
+          "checkpoints": [
+            "Hall A/B와 Hall C/D 화물차 진입 동선 분리 확인",
+            "준비·철거 기간 작업용 화물차 무료주차 조건 확인",
+            "전시장 내 관람객 동선과 물류 동선 분리"
+          ],
+          "sourceRefs": [
+            "COEX_EXHIBITION_GUIDE_2025"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "kintex",
+      "name": "킨텍스",
+      "region": "경기 고양",
+      "operator": "KINTEX",
+      "website": "https://www.kintex.com/",
+      "verificationStatus": "source_verified",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "KINTEX_SAFETY_EDUCATION",
+          "title": "킨텍스 전시장 작업자 안전교육자료",
+          "publisher": "KINTEX",
+          "url": "https://www.kintex.com/download/formatModal/4.%EC%A7%80%EC%A0%95%EB%93%B1%EB%A1%9D%EC%97%85%EC%B2%B4%EC%95%88%EC%A0%84%EA%B5%90%EC%9C%A1%EC%9E%90%EB%A3%8C.pdf",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 교육자료. 원문 복제보다 링크와 체크포인트 요약 사용."
+        },
+        {
+          "id": "KINTEX_ORGANIZER_MANUAL",
+          "title": "전시홀 주최자 매뉴얼",
+          "publisher": "KINTEX",
+          "url": "https://www.kintex.com/download/formatModal/8.%EC%A0%84%EC%8B%9C%EC%A3%BC%EC%B5%9C%EC%9E%90%EB%A7%A4%EB%89%B4%EC%96%BC.pdf",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 주최자 매뉴얼. 최신본 확인 필요."
+        },
+        {
+          "id": "KINTEX_CCTV_POLICY",
+          "title": "고정형 영상정보처리기기 운영·관리 방침",
+          "publisher": "KINTEX",
+          "url": "https://www.kintex.com/web/ko/management_of_image_information.do",
+          "verificationStatus": "source_verified",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "개인정보/CCTV 방침은 최신 페이지 확인 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 166,
+          "ceilingHeight": 22,
+          "floorLoad": 15,
+          "freightEntrance": 27,
+          "loadingDock": 62,
+          "electricity": 42,
+          "fireLane": 44,
+          "evacuationRoutes": 21,
+          "restrictedItems": 73,
+          "boothRules": 176,
+          "riggingRules": 120,
+          "foodRules": 35,
+          "safetyDocuments": 79
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "전시홀 안전관리지침과 작업자 안전교육 이수·준수 여부를 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "킨텍스 전시홀 안전관리지침 : 제1조",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.75
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "설치·철거·전기 등 현장 작업자 안전교육 이수 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "· 전기시설 개·보수",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.65
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "설치·철거·전기 등 현장 작업자 안전교육 이수 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "⊙ 행사 전체 기간(장치, 행사, 철거) 중 반드시 현장 상주",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.45
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "시설 안전·화재 예방·범죄 예방 목적의 영상정보처리기기 운영 방침과 행사 개인정보 처리 고지를 분리해 관리한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "방재실 031-995-8119 031-995-7119 · 전시홀 소화기 관리감독",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.65
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "방재실 031-995-8119 031-995-7119 · 전시홀 소화기 관리감독",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.6
+            },
+            {
+              "category": "restrictedItems",
+              "value": "안전조끼 계도기간 없음 자바라 및 배너설치금지 전시홀 칸막이",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.6
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "ex) 전시홀 입구/옥외광고 LED",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.45
+            },
+            {
+              "category": "riggingRules",
+              "value": "2. 공통사항 < 시설안내–리깅 가능 트러스(제1전시장 : 1~5홀) >",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.6
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "- 이 외의 천정구조물에는",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.45
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "⊙ 천정 구조물(현수막/리깅 등) 설치 기준 ⊙ 복층 면적 : 사용면적(바닥면적)의 1/2 이내",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.6
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "Notice - 작업신고 시 가능(자격 : 상기 자격조건을 득한다.)",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.5
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "2. 공통사항 < 작업신고 >",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.65
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "킨텍스가 정하는 소화전 및 비상구 3m 이상 이격 기존설치물 사이",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.8
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "⊙ 소화전 및 비상구의 위치, 가스전, 전원스위치 등 확인",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.65
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "시공 및 적재불가",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.45
+            },
+            {
+              "category": "loadingDock",
+              "value": "⊙ 현장대리인계 ⊙ 사전 반입 및 물품 적재 금지 ⊙ 시공부스 일일점검",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.6
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "⊙ 소화전 및 비상구의 위치, 가스전, 전원스위치 등 확인",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.6
+            },
+            {
+              "category": "foodRules",
+              "value": "- 전시홀 내에서는 구조물 조립 및 결속 외 작업 불가 (ex) 페인트작업, 그라인딩, 사포작업, 절삭작업, 그 외 본드 및 유해가스 발생되는 제분사용)",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.45
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "⊙ 현장대리인계 ⊙ 사전 반입 및 물품 적재 금지 ⊙ 시공부스 일일점검",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.6
+            },
+            {
+              "category": "freightEntrance",
+              "value": "⊙ 소방법의거 방염대상물 반입 시 방염 처리 후",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.6
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "⊙ 전시구조물이 중량물일 경우 사전에 홀매니저와 협의 진행(1㎡당 최대 5ton)",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.65
+            },
+            {
+              "category": "floorLoad",
+              "value": "- 중량물반입,대형 화물 차량 진입,제한된전동공구사용 등 자세로 근무에 임하여야 함",
+              "sourceRef": "KINTEX_SAFETY_EDUCATION",
+              "confidence": 0.65
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "kintex_worker_safety_training",
+          "category": "work_safety_training",
+          "summary": "전시홀 안전관리지침과 작업자 안전교육 이수·준수 여부를 확인한다.",
+          "checkpoints": [
+            "전시장 사용자 및 관람객 안전 확보 목적의 안전관리지침 확인",
+            "작업 전 안전점검과 무사고·무재해 목표 공유",
+            "설치·철거·전기 등 현장 작업자 안전교육 이수 확인"
+          ],
+          "sourceRefs": [
+            "KINTEX_SAFETY_EDUCATION"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "kintex_cctv_privacy",
+          "category": "privacy_cctv",
+          "summary": "시설 안전·화재 예방·범죄 예방 목적의 영상정보처리기기 운영 방침과 행사 개인정보 처리 고지를 분리해 관리한다.",
+          "checkpoints": [
+            "CCTV 촬영시간과 보관기간 확인",
+            "영상정보 접근권한자와 위탁 운영자 확인",
+            "행사 자체 촬영·등록정보 처리와 베뉴 CCTV 방침의 역할 분리"
+          ],
+          "sourceRefs": [
+            "KINTEX_CCTV_POLICY"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "bexco",
+      "name": "벡스코",
+      "region": "부산",
+      "operator": "BEXCO",
+      "website": "https://www.bexco.co.kr/",
+      "verificationStatus": "source_verified",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "BEXCO_USER_GUIDEBOOK",
+          "title": "벡스코 전시장 사용자 가이드북",
+          "publisher": "BEXCO",
+          "url": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=5338&mCode=MN059&mgr_seq=36&mode=view",
+          "verificationStatus": "source_verified",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "Google Drive 바로보기 링크를 포함한 베뉴 자료. 원문 재배포 금지."
+        },
+        {
+          "id": "BEXCO_OPERATION_RULES",
+          "title": "행사장 운영규정 및 행사장 운영규정 시행요령",
+          "publisher": "BEXCO",
+          "url": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2130&mCode=MN059&mgr_seq=36&mode=view",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 운영규정. 최신 파일과 개정일 확인 필요."
+        },
+        {
+          "id": "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+          "title": "벡스코 행사장 공사 안전 매뉴얼",
+          "publisher": "BEXCO",
+          "url": "https://www.bexco.co.kr/organizer/CMS/Board/Board.do?board_seq=2854&mCode=MN059&mgr_seq=36&mode=view",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 공사안전 매뉴얼. 원문 재배포 금지."
+        },
+        {
+          "id": "BEXCO_OPERATION_IMPLEMENTATION_RULES",
+          "title": "행사장 운영규정 시행요령",
+          "publisher": "BEXCO",
+          "url": "https://www.bexco.co.kr/organizer/ajx_json/UploadMgr/downloadRun.do?qcode=Qm9hcmQsMzI5NzcsWQ==",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 시행요령. 원문 재배포보다 링크와 요약 사용."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 101,
+          "ceilingHeight": 7,
+          "floorLoad": 85,
+          "freightEntrance": 75,
+          "loadingDock": 100,
+          "electricity": 62,
+          "fireLane": 48,
+          "evacuationRoutes": 29,
+          "restrictedItems": 74,
+          "boothRules": 209,
+          "riggingRules": 213,
+          "foodRules": 14,
+          "safetyDocuments": 112
+        },
+        "representativeEntries": {
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "행사장 공사 안전 매뉴얼을 설치·철거 단계 작업허가 및 현장 작업안전 기준으로 사용한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "부스 설치·철거·전기·리깅 등 작업 전 안전교육 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "부스 설치·철거·전기·리깅 등 작업 전 안전교육 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "source coverage: exhibition_hall",
+              "sourceRef": "BEXCO_USER_GUIDEBOOK",
+              "confidence": 0.55
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "부스 설치·철거·전기·리깅 등 작업 전 안전교육 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "전원차단, 행사장 폐쇄조치 및 행사장 사용승인을 취소할 수 있다.",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.65
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "부스 설치·철거·전기·리깅 등 작업 전 안전교육 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "riggingRules",
+              "value": "2. 할증 : 성수기 콘서트, 광고 및 광고성 행사",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "② 임차인은 방범, 소방, 환경, 위생 등의 공무수행을 목적으로 출입하고자 하는 공무원을",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.5
+            },
+            {
+              "category": "fireLane",
+              "value": "화재, 도난, 파손 등의 사고가 발생하여 BEXCO 또는 타인에게 손해를 입힌 경우에는",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.5
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "② 임차인은 방범, 소방, 환경, 위생 등의 공무수행을 목적으로 출입하고자 하는 공무원을",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.45
+            },
+            {
+              "category": "foodRules",
+              "value": "③ 가스, 화약류 등 위험물의 사용 및 취급은 소방법과 위험물 안전관리법 등 관련 법령에",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.45
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "제 10 조 (양도금지)",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.75
+            },
+            {
+              "category": "restrictedItems",
+              "value": "③ 가스, 화약류 등 위험물의 사용 및 취급은 소방법과 위험물 안전관리법 등 관련 법령에",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.45
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "④ 30일 이상인 장기행사의 경우 입장료 배분방식으로 임대료를 납부토록 할 수 있으며,",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.65
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "또는 입장권 판매개시 전",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.5
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "7. 임대차 계약 후, 신청서 기재사실이 허위로 밝혀졌을 때",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.8
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "7. 임대차계약 후, 신청서 기재사실이 허위로 밝혀졌을 때",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "② 임대기간은 행사개장을 위하여 시설, 장비 및 물품, 기타 자재반입 등이 시작되는",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "freightEntrance",
+              "value": "제 28 조 (중량물 반입제한)",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.75
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "② 임대기간은 행사개장을 위하여 시설, 장비 및 물품, 기타 자재반입 등이 시작되는",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "loadingDock",
+              "value": "제 28 조 (중량물 반입제한)",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.75
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "② 천정에는 원칙적으로 구조물을 임의 설치할 수 없다. 다만, 경량물체인 때에는",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.45
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "⑩ 천장이 막히는 구조의 경우 천장에 자동소화설비를 설치하여야 한다.",
+              "sourceRef": "BEXCO_CONSTRUCTION_SAFETY_MANUAL",
+              "confidence": 0.45
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "제 28 조 (중량물 반입제한)",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.8
+            },
+            {
+              "category": "floorLoad",
+              "value": "① 행사장 내에 반입하는 전시품, 장비, 물품 등은 아래의 하중을 초과할 수 없다.",
+              "sourceRef": "BEXCO_OPERATION_RULES",
+              "confidence": 0.65
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "bexco_user_guidebook_required",
+          "category": "organizer_manual",
+          "summary": "전시장 임차인은 전시장 사용자 가이드북과 행사장 운영규정/시행요령 최신본을 확인한다.",
+          "checkpoints": [
+            "전시장 사용자 가이드북 최신 업데이트 확인",
+            "행사장 운영규정 및 시행요령 적용 여부 확인",
+            "임대 관련 자료 게시판 첨부파일 개정일 확인"
+          ],
+          "sourceRefs": [
+            "BEXCO_USER_GUIDEBOOK",
+            "BEXCO_OPERATION_RULES"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "bexco_construction_safety_manual",
+          "category": "construction_safety",
+          "summary": "행사장 공사 안전 매뉴얼을 설치·철거 단계 작업허가 및 현장 작업안전 기준으로 사용한다.",
+          "checkpoints": [
+            "행사장 공사 안전 매뉴얼 공유",
+            "부스 설치·철거·전기·리깅 등 작업 전 안전교육 확인",
+            "현장 작업 중 보호구, 통제선, 정리정돈 점검"
+          ],
+          "sourceRefs": [
+            "BEXCO_CONSTRUCTION_SAFETY_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "kdjcenter",
+      "name": "김대중컨벤션센터",
+      "region": "광주",
+      "operator": "김대중컨벤션센터",
+      "website": "https://kdjcenter.gjto.or.kr/",
+      "verificationStatus": "source_verified",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "KDJ_EXHIBITION_FORMS",
+          "title": "김대중컨벤션센터 전시장 임대신청 서식",
+          "publisher": "김대중컨벤션센터",
+          "url": "https://kdjcenter.gjto.or.kr/rental/forms/show-room",
+          "verificationStatus": "source_verified",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "HWP 서식 링크. 원문 변환/재배포 전 이용조건 확인 필요."
+        },
+        {
+          "id": "KDJ_PARTNER_DOCS",
+          "title": "김대중컨벤션센터 작업·전기·경비 제출 서류 안내",
+          "publisher": "김대중컨벤션센터",
+          "url": "https://kdjcenter.gjto.or.kr/partner/partnerLeaseappform",
+          "verificationStatus": "source_verified",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 서식 안내. 최신성 확인 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 3,
+          "ceilingHeight": 0,
+          "floorLoad": 3,
+          "freightEntrance": 3,
+          "loadingDock": 3,
+          "electricity": 2,
+          "fireLane": 3,
+          "evacuationRoutes": 0,
+          "restrictedItems": 3,
+          "boothRules": 3,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 10
+        },
+        "representativeEntries": {
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "광주권 거점 컨벤션센터. 운영규정, 위험작업허가, 위험물·중량물 반입, 방화관리 책임 서식을 온톨로지에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "floorLoad",
+              "value": "전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "광주권 거점 컨벤션센터. 운영규정, 위험작업허가, 위험물·중량물 반입, 방화관리 책임 서식을 온톨로지에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "광주권 거점 컨벤션센터. 운영규정, 위험작업허가, 위험물·중량물 반입, 방화관리 책임 서식을 온톨로지에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "광주권 거점 컨벤션센터. 운영규정, 위험작업허가, 위험물·중량물 반입, 방화관리 책임 서식을 온톨로지에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "광주권 거점 컨벤션센터. 운영규정, 위험작업허가, 위험물·중량물 반입, 방화관리 책임 서식을 온톨로지에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "restrictedItems",
+              "value": "전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "광주권 거점 컨벤션센터. 운영규정, 위험작업허가, 위험물·중량물 반입, 방화관리 책임 서식을 온톨로지에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "기본부스, 독립부스, 전기, 파이텍스, 경비 등 작업 유형별 제출서류와 안전대책 계획서를 구분한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "기본/독립 부스 설치신청서와 작업신고서",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "기본부스, 독립부스, 전기, 파이텍스, 경비 등 작업 유형별 제출서류와 안전대책 계획서를 구분한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "전기 기술지원신청서·작업신고서·전기설비도면",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "기본부스, 독립부스, 전기, 파이텍스, 경비 등 작업 유형별 제출서류와 안전대책 계획서를 구분한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "기본/독립 부스 설치신청서와 작업신고서",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "kdj_exhibition_forms_and_permits",
+          "category": "permit_forms",
+          "summary": "전시장 운영규정, 위험작업허가서, 작업신고서, 위험물반입 허가신청서, 중량물반입신청서, 방화관리책임자신고서 등 제출 필요성을 확인한다.",
+          "checkpoints": [
+            "전시장 운영규정 확인",
+            "위험작업허가서 대상 작업 식별",
+            "위험물·중량물 반입 신청 대상 확인",
+            "방화관리책임자 및 상주요원/경비원 명단 제출 여부 확인"
+          ],
+          "sourceRefs": [
+            "KDJ_EXHIBITION_FORMS"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "kdj_work_submission_docs",
+          "category": "work_submission_control",
+          "summary": "기본부스, 독립부스, 전기, 파이텍스, 경비 등 작업 유형별 제출서류와 안전대책 계획서를 구분한다.",
+          "checkpoints": [
+            "기본/독립 부스 설치신청서와 작업신고서",
+            "독립부스 방염증빙서류",
+            "전기 기술지원신청서·작업신고서·전기설비도면",
+            "경비계획서, 근무일정표, 안전대책 계획서"
+          ],
+          "sourceRefs": [
+            "KDJ_PARTNER_DOCS"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "ueco",
+      "name": "울산전시컨벤션센터(UECO)",
+      "region": "울산",
+      "operator": "울산전시컨벤션센터",
+      "website": "https://ueco.or.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "UECO_FACILITY_INFO",
+          "title": "울산전시컨벤션센터 시설안내",
+          "publisher": "UECO",
+          "url": "https://ueco.or.kr/eng/facility/Conference",
+          "verificationStatus": "source_verified",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "시설정보 페이지. 안전 운영규정은 별도 확인 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 2,
+          "ceilingHeight": 0,
+          "floorLoad": 0,
+          "freightEntrance": 0,
+          "loadingDock": 0,
+          "electricity": 0,
+          "fireLane": 0,
+          "evacuationRoutes": 3,
+          "restrictedItems": 0,
+          "boothRules": 0,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 3
+        },
+        "representativeEntries": {
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "울산권 전시컨벤션센터. 현재 시설정보 중심으로 수용능력·도면 검토를 반영하고, 운영규정 원문 확보가 필요.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "회의실/컨벤션홀 수용능력과 도면을 기준으로 세팅, 피난, 혼잡도를 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "회의실/컨벤션홀 수용능력과 도면을 기준으로 세팅, 피난, 혼잡도를 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "도면 기반 피난동선·대기열·등록대 위치 검토",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "source coverage: facility_capacity",
+              "sourceRef": "UECO_FACILITY_INFO",
+              "confidence": 0.55
+            },
+            {
+              "category": "capacity",
+              "value": "source coverage: floor_plan",
+              "sourceRef": "UECO_FACILITY_INFO",
+              "confidence": 0.55
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "ueco_facility_capacity_review",
+          "category": "capacity_layout",
+          "summary": "회의실/컨벤션홀 수용능력과 도면을 기준으로 세팅, 피난, 혼잡도를 검토한다.",
+          "checkpoints": [
+            "행사 세팅별 수용능력 확인",
+            "도면 기반 피난동선·대기열·등록대 위치 검토",
+            "운영규정 본문 추가 확보 필요"
+          ],
+          "sourceRefs": [
+            "UECO_FACILITY_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "setec",
+      "name": "서울무역전시장(SETEC)",
+      "region": "서울 강남",
+      "operator": "SETEC",
+      "website": "https://www.setec.or.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "SETEC_OPERATING_GUIDE_2025",
+          "title": "서울무역전시장 SETEC 운영 요령 2025",
+          "publisher": "SETEC",
+          "url": "https://www.setec.or.kr/resources/front/files/2025_SETEC.pdf",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 운영요령. 원문 재배포보다 링크와 체크포인트 요약 사용."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 46,
+          "ceilingHeight": 3,
+          "floorLoad": 8,
+          "freightEntrance": 39,
+          "loadingDock": 35,
+          "electricity": 30,
+          "fireLane": 27,
+          "evacuationRoutes": 25,
+          "restrictedItems": 32,
+          "boothRules": 70,
+          "riggingRules": 16,
+          "foodRules": 9,
+          "safetyDocuments": 69
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "3개 전시실과 컨벤션/회의 기능을 갖춘 서울권 전시장.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "③ “옥내전시장”이란 건물 내에 위치한 제 1, 2, 3 전시실을 말한다.",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.6
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "SETEC 운영요령 최신본을 기준으로 대관, 설치·철거, 반입·반출, 제출서류를 행사 전 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "설치·철거 작업시간과 반입·반출 동선 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "SETEC 운영요령 최신본을 기준으로 대관, 설치·철거, 반입·반출, 제출서류를 행사 전 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "설치·철거 작업시간과 반입·반출 동선 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "SETEC 운영요령 최신본을 기준으로 대관, 설치·철거, 반입·반출, 제출서류를 행사 전 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "설치·철거 작업시간과 반입·반출 동선 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "SETEC 운영요령 최신본을 기준으로 대관, 설치·철거, 반입·반출, 제출서류를 행사 전 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "③ 사용자는 진흥원에서 제공하는 시설안내 자료를 숙지하고, [별지 제1호 서식] SETEC 전시장 사용 신청서를",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.8
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "⑦ “관람객”이란 전시회 관람을 위하여 전시장을 내방하는 입장객을 말한다.",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.5
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "제9조 (입장료 및 입장권의 판매)",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.8
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "전시지원 업무(전력공급 차단 등)를 중단 할 수 있다.",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.5
+            },
+            {
+              "category": "electricity",
+              "value": "관리비 및 제사용료는 기본관리비, 전기, 상·하수도료, 압축공기 사용료, 냉·난방비 등으로 구성되며, [별표 제2호]",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.8
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "② 전시물품 등의 도난, 파손, 화재 등에 대한 보험가입은 사용자의 책임으로 한다.",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.5
+            },
+            {
+              "category": "fireLane",
+              "value": "② 전시장에서 발생한 화재, 도난, 파손 등 기타 사고로 인하여 발생한 사용자의 재산상의 손해에 대하여 진흥원은",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.5
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "⑦ 전시장 2개관 이상 사용 또는 대형 무대장치(트러스 등), 다수의 독립부스와 목공부스를 설치하는 경우, 반드시",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.6
+            },
+            {
+              "category": "riggingRules",
+              "value": "9. 광고안내업체",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.6
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "② 전시주최자는 범죄예방, 소방, 환경, 위생 등의 공무수행을 목적으로 출입하고자 하는 공무원과 진흥원이 확인하는",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.45
+            },
+            {
+              "category": "foodRules",
+              "value": "② 위험물 취급에 관한 제반사항은 소방법령, 고압가스안전관리법령 및 기타 위험물 취급에 관한 법령에 따라야 한다.",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.45
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "제13조 (양도금지) 제11조에 의해 전시면적을 배정받은 사용자는 어떠한 경우에도 배정 면적의 전부 또는 일부를 전",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.9
+            },
+            {
+              "category": "restrictedItems",
+              "value": "제34조 (위험물의 반출입 및 취급제한)",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.9
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "제28조 (천정 및 시설물의 높이 제한)",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.75
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "① 천정에는 전시 및 선전광고용 물체 등을 설치할 수 없다. 다만 배너 등 경량물체인 경우는 진흥원의 사전승인을",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.6
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "① 옥내전시장에 진열되는 전시품의 하중은 2톤/㎡를 초과하지 못한다.",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.8
+            },
+            {
+              "category": "floorLoad",
+              "value": "② 중량물의 반입 시에는 [별지 제 11호 서식] 중량물 반입신고서를 작성 제출하여야 하며, 반입, 반출, 설치 시에는",
+              "sourceRef": "SETEC_OPERATING_GUIDE_2025",
+              "confidence": 0.95
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "setec_operating_guide_review",
+          "category": "operation_rule",
+          "summary": "SETEC 운영요령 최신본을 기준으로 대관, 설치·철거, 반입·반출, 제출서류를 행사 전 확인한다.",
+          "checkpoints": [
+            "운영요령 개정일 확인",
+            "설치·철거 작업시간과 반입·반출 동선 확인",
+            "안전관리계획 및 보험·신고 서류 대상 확인"
+          ],
+          "sourceRefs": [
+            "SETEC_OPERATING_GUIDE_2025"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "atcenter",
+      "name": "aT센터",
+      "region": "서울 양재",
+      "operator": "한국농수산식품유통공사",
+      "website": "https://www.at.or.kr/home/acko000000/index.action",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "ATCENTER_FACILITY_INFO",
+          "title": "aT센터 제1전시장 시설 안내",
+          "publisher": "한국농수산식품유통공사 aT센터",
+          "url": "https://www.at.or.kr/contents/acko321111/view.action",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 시설 페이지. 운영규정 원문은 별도 확보 필요."
+        },
+        {
+          "id": "ATCENTER_RENTAL_INFO",
+          "title": "aT센터 전시장 임대료 및 임대시설 현황",
+          "publisher": "한국농수산식품유통공사 aT센터",
+          "url": "https://www.at.or.kr/contents/acko322200/view.action",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 임대 안내 페이지. 운영 안전 규정은 별도 확보 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 10,
+          "ceilingHeight": 0,
+          "floorLoad": 5,
+          "freightEntrance": 1,
+          "loadingDock": 2,
+          "electricity": 4,
+          "fireLane": 3,
+          "evacuationRoutes": 3,
+          "restrictedItems": 1,
+          "boothRules": 5,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 3
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "제1전시장 3,793㎡, 제2전시장 4,254㎡, 전관 8,047㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "제1전시장 바닥하중 1.5ton/㎡, 189부스 기준 시설정보 확인.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "제1전시장 바닥하중 1.5ton/㎡, 189부스 기준 시설정보 확인.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "floorLoad",
+              "value": "전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "제1전시장 바닥하중 1.5ton/㎡, 189부스 기준 시설정보 확인.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "소방시설·소화전 주변 적재 금지 구역 지정",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "전원·통신·급배수 사용 위치 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "전시장별 비상구, 피난동선, 소방시설 위치는 행사 도면 확정 전 대관 담당과 별도 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "전시장별 비상구, 피난동선, 소방시설 위치는 행사 도면 확정 전 대관 담당과 별도 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "소방시설·소화전 주변 적재 금지 구역 지정",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "전시장별 비상구, 피난동선, 소방시설 위치는 행사 도면 확정 전 대관 담당과 별도 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "부스 배치도에 비상구와 피난동선 표시",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "소방시설·소화전 주변 적재 금지 구역 지정",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "atcenter_capacity_floor_load_review",
+          "category": "capacity_layout",
+          "summary": "전시장 면적, 부스 수, 바닥하중, 트렌치/전원/급배수 조건을 부스 배치와 중량물 반입 계획에 반영한다.",
+          "checkpoints": [
+            "제1·제2전시장별 면적과 위치 확인",
+            "중량 전시품 바닥하중 검토",
+            "전원·통신·급배수 사용 위치 확인"
+          ],
+          "sourceRefs": [
+            "ATCENTER_FACILITY_INFO",
+            "ATCENTER_RENTAL_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "atcenter_fire_egress_confirmation",
+          "category": "fire_egress_confirmation",
+          "summary": "전시장별 비상구, 피난동선, 소방시설 위치는 행사 도면 확정 전 대관 담당과 별도 확인한다.",
+          "checkpoints": [
+            "부스 배치도에 비상구와 피난동선 표시",
+            "소방시설·소화전 주변 적재 금지 구역 지정",
+            "개장 전 소방·피난 사진 증빙 확보"
+          ],
+          "sourceRefs": [
+            "ATCENTER_FACILITY_INFO",
+            "ATCENTER_RENTAL_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "songdo_convensia",
+      "name": "송도컨벤시아",
+      "region": "인천 송도",
+      "operator": "송도컨벤시아",
+      "website": "https://songdoconvensia.visitincheon.or.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "SONGDO_OPERATION_RULES",
+          "title": "송도컨벤시아 운영규정",
+          "publisher": "송도컨벤시아",
+          "url": "https://songdoconvensia.visitincheon.or.kr/file.do?n=5.+%EC%86%A1%EB%8F%84%EC%BB%A8%EB%B2%A4%EC%8B%9C%EC%95%84+%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf&path=202403%2F8d856c67-a47c-4599-9e2a-25e771e1a94f.pdf",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 운영규정. 원문 재배포보다 링크와 요약 사용."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 58,
+          "ceilingHeight": 4,
+          "floorLoad": 16,
+          "freightEntrance": 61,
+          "loadingDock": 64,
+          "electricity": 28,
+          "fireLane": 40,
+          "evacuationRoutes": 21,
+          "restrictedItems": 42,
+          "boothRules": 91,
+          "riggingRules": 28,
+          "foodRules": 13,
+          "safetyDocuments": 68
+        },
+        "representativeEntries": {
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "전시장 운영규정 기반으로 설치·철거·반입·반출·안전질서 책임을 확인.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "송도컨벤시아 운영규정에 따라 전시장 사용, 안전·질서 유지, 장치·철거, 반입·반출 조건을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "전시장 운영규정 기반으로 설치·철거·반입·반출·안전질서 책임을 확인.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "송도컨벤시아 운영규정에 따라 전시장 사용, 안전·질서 유지, 장치·철거, 반입·반출 조건을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "전시장 운영규정 기반으로 설치·철거·반입·반출·안전질서 책임을 확인.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "송도컨벤시아 운영규정에 따라 전시장 사용, 안전·질서 유지, 장치·철거, 반입·반출 조건을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "피난통로·방화시설 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "제3조(사용조건) ① 전시장을 사용하는 모든 행사의 운영 및 관리(안전, 방화관리 등)는 임",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "피난통로·방화시설 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "제8조(입장료 및 입장권의 판매) ① 임차인은 자신의 책임과 비용부담으로 전시회에 입장",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "피난통로·방화시설 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "restrictedItems",
+              "value": "제13조(양도금지) 전시장을 배정받은 자는 그 면적의 전부 또는 일부를 참가자 이외의 타인",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "제10절 전시부스 설계 및 장치공사........................................................................... 7",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "capacity",
+              "value": "제13조(양도금지) 전시장을 배정받은 자는 그 면적의 전부 또는 일부를 참가자 이외의 타인",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "◦ [별표 제1-3호] 광고안내시설물 설치요령............................................................ 26",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "riggingRules",
+              "value": "차인이 발주한 장치, 전기, 광고물 등 업체의 모든 행위는 임차인의 책임으로 귀속된다.",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "1차 또는 2차에 걸쳐 시정요구를 할 수 있으며, 불응 시 전시지원업무중지(전력공급차단",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.65
+            },
+            {
+              "category": "electricity",
+              "value": "2. 전기시설업체",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "② 임차인은 방범, 소방, 환경위생 등의 공무수행을 목적으로 출입하고자 하는 공무원의",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.45
+            },
+            {
+              "category": "foodRules",
+              "value": "제22조(전기, 수도, 압축공기 가스시설) 임차인은 공사와 사전협의하여 전시품 작동용 및",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "제10조(사용신청) ① 전시장 사용을 희망하는 자는 계약체결 이전에 전시장 사용신청서[전시장",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.8
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "부하여 전시부스(변경)신청서[전시장 제4호 서식]를 제출하고 공사와 협의하여야 한다.",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.95
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "제29조(천정 시설물) ① 천정에 전시 및 선전광고용 물체 등을 설치할 때에는 공사와 사전협의",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.75
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "5. 천장부분이 마감되는 경우에는 천장에 10 당 1개 이상의 자동 확산 소화기를 설치해야 한다.",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "제35조(중량전시품 반입 제한) ① 전시장 1홀, 2홀은 상면하중(정지하중)이 1.5t/㎡을 초과",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.95
+            },
+            {
+              "category": "floorLoad",
+              "value": "② 전시장 3홀, 4홀은 상면하중(정지하중)이 3t/㎡을 초과하는 중량전시품에 대해서는 전",
+              "sourceRef": "SONGDO_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "songdo_operation_rule_safety_review",
+          "category": "operation_rule",
+          "summary": "송도컨벤시아 운영규정에 따라 전시장 사용, 안전·질서 유지, 장치·철거, 반입·반출 조건을 확인한다.",
+          "checkpoints": [
+            "운영규정 최신본 확인",
+            "피난통로·방화시설 주변 적재 금지",
+            "작업시간·반입반출 동선과 차량 통제 확인"
+          ],
+          "sourceRefs": [
+            "SONGDO_OPERATION_RULES"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "suwon_convention_center",
+      "name": "수원컨벤션센터",
+      "region": "경기 수원",
+      "operator": "수원컨벤션센터",
+      "website": "https://www.scc.or.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "SUWON_CONVENTION_FACILITY_INFO",
+          "title": "수원컨벤션센터 시설 안내",
+          "publisher": "수원컨벤션센터",
+          "url": "https://www.scc.or.kr/",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 시설 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 7,
+          "ceilingHeight": 0,
+          "floorLoad": 0,
+          "freightEntrance": 0,
+          "loadingDock": 1,
+          "electricity": 4,
+          "fireLane": 1,
+          "evacuationRoutes": 4,
+          "restrictedItems": 1,
+          "boothRules": 3,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 1
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "공식 페이지 기준 전시 면적 7,877㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "전시장 7,877㎡ 기준으로 행사 규모, 부스 배치, 등록대, 피난·대기열 동선을 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "전시장 7,877㎡ 기준으로 행사 규모, 부스 배치, 등록대, 피난·대기열 동선을 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "광교중앙역·주차장 유입 동선 분리",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "전시장 7,877㎡ 기준으로 행사 규모, 부스 배치, 등록대, 피난·대기열 동선을 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "전시홀 전기·분전·유틸리티 사용 조건은 부스 배치와 시설 사용 신청 전 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "전시홀 도면과 등록대 위치 검토",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "피난통로와 소방시설 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "피난통로와 소방시설 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "피난통로와 소방시설 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "전시홀 전기·분전·유틸리티 사용 조건은 부스 배치와 시설 사용 신청 전 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "전기 용량과 분전 위치 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "suwon_convention_capacity_route_review",
+          "category": "capacity_layout",
+          "summary": "전시장 7,877㎡ 기준으로 행사 규모, 부스 배치, 등록대, 피난·대기열 동선을 검토한다.",
+          "checkpoints": [
+            "전시홀 도면과 등록대 위치 검토",
+            "광교중앙역·주차장 유입 동선 분리",
+            "피난통로와 소방시설 주변 적재 금지"
+          ],
+          "sourceRefs": [
+            "SUWON_CONVENTION_FACILITY_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "suwon_convention_electrical_confirmation",
+          "category": "electrical_utility_confirmation",
+          "summary": "전시홀 전기·분전·유틸리티 사용 조건은 부스 배치와 시설 사용 신청 전 확인한다.",
+          "checkpoints": [
+            "전기 용량과 분전 위치 확인",
+            "임시 전기 사용 시 전기공사·접지·누전차단 점검",
+            "전원 케이블이 피난통로와 관람객 동선을 침범하지 않도록 정리"
+          ],
+          "sourceRefs": [
+            "SUWON_CONVENTION_FACILITY_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "suwonmesse",
+      "name": "수원메쎄",
+      "region": "경기 수원",
+      "operator": "Suwon Messe",
+      "website": "https://suwonmesse.com/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "SUWONMESSE_OPERATION_RULES",
+          "title": "수원메쎄 전시장 운영규정",
+          "publisher": "Suwon Messe",
+          "url": "https://d70o0vfgysr3u.cloudfront.net/wp-content/uploads/2023/08/10171957/SUWONMESSE-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95%EC%B5%9C%EC%8B%A0%EB%B3%B8.pdf",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 운영규정. 최신 개정본 확인 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 27,
+          "ceilingHeight": 4,
+          "floorLoad": 6,
+          "freightEntrance": 22,
+          "loadingDock": 25,
+          "electricity": 24,
+          "fireLane": 20,
+          "evacuationRoutes": 11,
+          "restrictedItems": 22,
+          "boothRules": 45,
+          "riggingRules": 20,
+          "foodRules": 6,
+          "safetyDocuments": 14
+        },
+        "representativeEntries": {
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "전시장 사용·철거·원상복구·운영시간을 운영규정 기준으로 확인.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "설치·철거 작업시간 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "수원메쎄 운영규정에 따라 작업시간, 반입·반출, 시설 훼손, 원상복구, 안전관리 책임을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "사전 승인 없이 지정 장소 밖으로 반출하거나 이용목적 이외의 조작, 파손, 변경 등의",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "수원메쎄 운영규정에 따라 작업시간, 반입·반출, 시설 훼손, 원상복구, 안전관리 책임을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "사전 승인 없이 지정 장소 밖으로 반출하거나 이용목적 이외의 조작, 파손, 변경 등의",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "② 전시장을 사용하는 모든 행사의 운영, 관리(안전, 방화관리 등) 및 이로 인하여 발생된",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.5
+            },
+            {
+              "category": "fireLane",
+              "value": "① 임차인이 대관 중 화재, 도난, 파손 기타 사고를 발생케 하여 수원메쎄 또는 타인에게",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.5
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "에 걸쳐 시정요구를 할 수 있으며, 불응 시 전시지원 업무 중지(전력 공급 차단 등) 및",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.5
+            },
+            {
+              "category": "electricity",
+              "value": "③ 임차인은 소화전 및 비상구의 위치, 가스전, 전원 스위치의 장소 등을 확인하며, 매일",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.65
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "관리책임자명단제출서[별지 제4호 서식]를 전시장 사용 개시일 7일 전에 수원메쎄에 제",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.95
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "① 전시장 사용을 희망하는 자는 계약체결 이전에 전시장 사용신청서 [별지 제1호 서식]를",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "③ 임차인은 소화전 및 비상구의 위치, 가스전, 전원 스위치의 장소 등을 확인하며, 매일",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.65
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "제9조(입장료 및 입장권의 판매)",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "③ 임차인은 소화전 및 비상구의 위치, 가스전, 전원 스위치의 장소 등을 확인하며, 매일",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "restrictedItems",
+              "value": "제13조(양도금지)",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "③ 임차인은 소화전 및 비상구의 위치, 가스전, 전원 스위치의 장소 등을 확인하며, 매일",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "foodRules",
+              "value": "② 임차인은 방범, 소방, 환경위생 등의 공무수행을 목적으로 출입하고자 하는 공무원의",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.45
+            }
+          ],
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "① 임대 전시장을 배정받은 사용자는 수원메쎄의 사전 승인 없이 그 면적의 전부 또는 일",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "capacity",
+              "value": "① 전시장 임차 면적의 단위 기준은 1개 홀을 기준으로 하며. 1개 홀을 분할하여 사용할 수",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "그 내부에서 운영하되, 구조물의 설치는 수원메쎄 운영규정 제30조(천정 시설물의 높이",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.75
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "제30조(천정 시설물의 높이제한)",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.75
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "그 내부에서 운영하되, 구조물의 설치는 수원메쎄 운영규정 제30조(천정 시설물의 높이",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.75
+            },
+            {
+              "category": "riggingRules",
+              "value": "주한 장치, 전기, 광고물 등 업체의 모든 행위는 임차인의 책임으로 귀속된다.",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "① 상면 하중(정지 하중)이 2t/m²을 초과하는 중량전시품에 대해서는 전시장 내에 반입하",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.8
+            },
+            {
+              "category": "floorLoad",
+              "value": "거나 전시할 수 없으며, 1톤 이상 전시품에 대해서는 반입 전에 중량물반입신청서 [별",
+              "sourceRef": "SUWONMESSE_OPERATION_RULES",
+              "confidence": 0.95
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "suwonmesse_operation_rule_review",
+          "category": "operation_rule",
+          "summary": "수원메쎄 운영규정에 따라 작업시간, 반입·반출, 시설 훼손, 원상복구, 안전관리 책임을 확인한다.",
+          "checkpoints": [
+            "운영규정 최신본 확인",
+            "설치·철거 작업시간 확인",
+            "시설보호와 원상복구 책임 확인"
+          ],
+          "sourceRefs": [
+            "SUWONMESSE_OPERATION_RULES"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "dcc",
+      "name": "대전컨벤션센터(DCC)",
+      "region": "대전 유성",
+      "operator": "대전컨벤션센터",
+      "website": "https://www.dcckorea.or.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "DCC_FACILITY_INFO",
+          "title": "대전컨벤션센터 시설안내",
+          "publisher": "대전컨벤션센터",
+          "url": "https://www.dcckorea.or.kr/content/view.do?contentKey=98&menuKey=179",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 시설 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요."
+        },
+        {
+          "id": "DCC_RENTAL_INFO",
+          "title": "대전컨벤션센터 전시장 요금안내",
+          "publisher": "대전컨벤션센터",
+          "url": "https://dcckorea.or.kr/content/view.do?contentKey=78&menuKey=173",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 임대 안내 페이지. 안전 세부 규정 추가 확보 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 5,
+          "ceilingHeight": 0,
+          "floorLoad": 0,
+          "freightEntrance": 3,
+          "loadingDock": 4,
+          "electricity": 2,
+          "fireLane": 2,
+          "evacuationRoutes": 2,
+          "restrictedItems": 1,
+          "boothRules": 2,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 8
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "제2전시장 1~4홀은 각 약 2,524~2,574㎡ 규모.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "홀별 면적과 시간외 사용 조건 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "제2전시장 상황실 연락 체계를 운영본부 연락망에 반영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "시설안내와 상황실 연락망을 기준으로 현장 지원, 외부장비 반입, 설치·철거 대응 연락체계를 둔다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "시설안내와 상황실 연락망을 기준으로 현장 지원, 외부장비 반입, 설치·철거 대응 연락체계를 둔다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "외부장비 반입·작업신고 서류 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "시설안내와 상황실 연락망을 기준으로 현장 지원, 외부장비 반입, 설치·철거 대응 연락체계를 둔다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "외부장비 반입·작업신고 서류 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "시설안내와 상황실 연락망을 기준으로 현장 지원, 외부장비 반입, 설치·철거 대응 연락체계를 둔다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "source coverage: exhibition_hall",
+              "sourceRef": "DCC_RENTAL_INFO",
+              "confidence": 0.55
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "제2전시장 홀별 전기, 소방시설, 비상구·피난동선은 상황실·시설 담당 연락망으로 행사 전 확정한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "전기 사용량과 분전 위치를 시설 담당과 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "제2전시장 홀별 전기, 소방시설, 비상구·피난동선은 상황실·시설 담당 연락망으로 행사 전 확정한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "소방시설·소화전 주변 적재 금지와 소방통로 확보",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "제2전시장 홀별 전기, 소방시설, 비상구·피난동선은 상황실·시설 담당 연락망으로 행사 전 확정한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "비상구·피난동선과 외부장비 반입 동선 분리",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "소방시설·소화전 주변 적재 금지와 소방통로 확보",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "dcc_facility_contact_and_setup_review",
+          "category": "operation_contact",
+          "summary": "시설안내와 상황실 연락망을 기준으로 현장 지원, 외부장비 반입, 설치·철거 대응 연락체계를 둔다.",
+          "checkpoints": [
+            "상황실·AV·시설 담당 연락망 확인",
+            "외부장비 반입·작업신고 서류 확인",
+            "홀별 면적과 시간외 사용 조건 확인"
+          ],
+          "sourceRefs": [
+            "DCC_FACILITY_INFO",
+            "DCC_RENTAL_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "dcc_electrical_fire_egress_confirmation",
+          "category": "electrical_fire_egress_confirmation",
+          "summary": "제2전시장 홀별 전기, 소방시설, 비상구·피난동선은 상황실·시설 담당 연락망으로 행사 전 확정한다.",
+          "checkpoints": [
+            "전기 사용량과 분전 위치를 시설 담당과 확인",
+            "소방시설·소화전 주변 적재 금지와 소방통로 확보",
+            "비상구·피난동선과 외부장비 반입 동선 분리"
+          ],
+          "sourceRefs": [
+            "DCC_FACILITY_INFO",
+            "DCC_RENTAL_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "osco",
+      "name": "청주오스코(OSCO)",
+      "region": "충북 청주 오송",
+      "operator": "OSCO",
+      "website": "https://osco.or.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "OSCO_EXHIBITION_RENTAL_INFO",
+          "title": "청주오스코 전시장 임대 안내",
+          "publisher": "OSCO",
+          "url": "https://osco.or.kr/lease/leasing-process/",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 임대 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 11,
+          "ceilingHeight": 0,
+          "floorLoad": 0,
+          "freightEntrance": 1,
+          "loadingDock": 2,
+          "electricity": 2,
+          "fireLane": 2,
+          "evacuationRoutes": 4,
+          "restrictedItems": 1,
+          "boothRules": 11,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 3
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "전시장 총 10,031㎡, Hall 1~3 각 3,344㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "총 600부스 규모 기준으로 동선·혼잡·작업구역 분리 검토.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "총 600부스 규모 기준으로 동선·혼잡·작업구역 분리 검토.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "Hall 1~3 분할/전관 사용 여부에 따라 부스 수, 피난통로, 반입·반출 동선을 분리해 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "Hall 1~3 분할/전관 사용 여부에 따라 부스 수, 피난통로, 반입·반출 동선을 분리해 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "Hall 1~3 분할/전관 사용 여부에 따라 부스 수, 피난통로, 반입·반출 동선을 분리해 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "소방시설·비상구·피난통로 주변 부스/적재물 배치 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "Hall 1~3 분할/전관 사용 여부에 따라 부스 수, 피난통로, 반입·반출 동선을 분리해 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "전관 600부스 행사 시 입퇴장 병목 검토",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "전관 600부스 규모 행사에서는 전기 사용, 소방시설, 피난통로, 제출서류를 홀별로 분리 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "홀별 전기 용량·분전·케이블 동선 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "전관 600부스 규모 행사에서는 전기 사용, 소방시설, 피난통로, 제출서류를 홀별로 분리 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "소방시설·비상구·피난통로 주변 부스/적재물 배치 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "전관 600부스 규모 행사에서는 전기 사용, 소방시설, 피난통로, 제출서류를 홀별로 분리 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "관리비 예치금, 사용시간, 설치·철거 관련 제출서류 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "소방시설·비상구·피난통로 주변 부스/적재물 배치 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "osco_hall_capacity_booth_review",
+          "category": "capacity_layout",
+          "summary": "Hall 1~3 분할/전관 사용 여부에 따라 부스 수, 피난통로, 반입·반출 동선을 분리해 검토한다.",
+          "checkpoints": [
+            "홀별 3,344㎡와 200부스 기준 확인",
+            "전관 600부스 행사 시 입퇴장 병목 검토",
+            "관리비 예치금·사용시간·설치철거 시간 조건 확인"
+          ],
+          "sourceRefs": [
+            "OSCO_EXHIBITION_RENTAL_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "osco_electrical_fire_document_confirmation",
+          "category": "electrical_fire_document_confirmation",
+          "summary": "전관 600부스 규모 행사에서는 전기 사용, 소방시설, 피난통로, 제출서류를 홀별로 분리 확인한다.",
+          "checkpoints": [
+            "홀별 전기 용량·분전·케이블 동선 확인",
+            "소방시설·비상구·피난통로 주변 부스/적재물 배치 금지",
+            "관리비 예치금, 사용시간, 설치·철거 관련 제출서류 확인"
+          ],
+          "sourceRefs": [
+            "OSCO_EXHIBITION_RENTAL_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "exco",
+      "name": "EXCO",
+      "region": "대구",
+      "operator": "EXCO",
+      "website": "https://exco.co.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "EXCO_FACILITY_INFO",
+          "title": "EXCO 전시장 시설 안내",
+          "publisher": "EXCO",
+          "url": "https://exco.co.kr/eng/facility/sub01.html",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 시설 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 5,
+          "ceilingHeight": 4,
+          "floorLoad": 5,
+          "freightEntrance": 0,
+          "loadingDock": 1,
+          "electricity": 7,
+          "fireLane": 2,
+          "evacuationRoutes": 4,
+          "restrictedItems": 5,
+          "boothRules": 2,
+          "riggingRules": 4,
+          "foodRules": 4,
+          "safetyDocuments": 2
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "서관 제1전시장 22,159㎡, 동관 제2전시장 15,024㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "홀별 바닥하중, 천정고, Floor Box, 전기·급배수·가스·압축공기 조건 확인 대상.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "홀별 바닥하중, 천정고, Floor Box, 전기·급배수·가스·압축공기 조건 확인 대상.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "floorLoad",
+              "value": "서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "홀별 바닥하중, 천정고, Floor Box, 전기·급배수·가스·압축공기 조건 확인 대상.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "홀별 바닥하중, 천정고, Floor Box, 전기·급배수·가스·압축공기 조건 확인 대상.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "restrictedItems",
+              "value": "전기·급배수·압축공기·가스 사용 신청 조건 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "홀별 바닥하중, 천정고, Floor Box, 전기·급배수·가스·압축공기 조건 확인 대상.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "riggingRules",
+              "value": "서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "홀별 바닥하중, 천정고, Floor Box, 전기·급배수·가스·압축공기 조건 확인 대상.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "foodRules",
+              "value": "전기·급배수·압축공기·가스 사용 신청 조건 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "source coverage: exhibition_hall",
+              "sourceRef": "EXCO_FACILITY_INFO",
+              "confidence": 0.55
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "대형 행사 시 서관/동관 간 관람객 동선 분리",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "서관/동관 분산 행사에서는 소방시설·피난동선과 전기·가스·압축공기 사용 신청서류를 홀별로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "서관/동관 분산 행사에서는 소방시설·피난동선과 전기·가스·압축공기 사용 신청서류를 홀별로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "홀별 소방시설·소화전·비상구 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "서관/동관 분산 행사에서는 소방시설·피난동선과 전기·가스·압축공기 사용 신청서류를 홀별로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "전기·급배수·압축공기·가스 사용 신청서류 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "홀별 소방시설·소화전·비상구 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "exco_hall_utility_floor_load_review",
+          "category": "capacity_layout",
+          "summary": "서관/동관 홀별 면적, 바닥하중, 천정고, 유틸리티 조건을 부스·중량물·리깅 계획에 반영한다.",
+          "checkpoints": [
+            "홀별 바닥하중과 천정고 확인",
+            "전기·급배수·압축공기·가스 사용 신청 조건 확인",
+            "대형 행사 시 서관/동관 간 관람객 동선 분리"
+          ],
+          "sourceRefs": [
+            "EXCO_FACILITY_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "exco_fire_document_confirmation",
+          "category": "fire_document_confirmation",
+          "summary": "서관/동관 분산 행사에서는 소방시설·피난동선과 전기·가스·압축공기 사용 신청서류를 홀별로 확인한다.",
+          "checkpoints": [
+            "홀별 소방시설·소화전·비상구 주변 적재 금지",
+            "전기·급배수·압축공기·가스 사용 신청서류 확인",
+            "서관/동관 간 관람객 동선과 피난동선 분리"
+          ],
+          "sourceRefs": [
+            "EXCO_FACILITY_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "hico",
+      "name": "경주화백컨벤션센터(HICO)",
+      "region": "경북 경주",
+      "operator": "HICO",
+      "website": "https://www.hico.or.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "HICO_FACILITY_GUIDE",
+          "title": "경주화백컨벤션센터 HICO 주최자 가이드북",
+          "publisher": "HICO",
+          "url": "https://www.hico.or.kr/HICO_EXHIBITOR_GUIDEBOOK.pdf",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 PDF. 이미지 기반 원문이므로 로컬 Markdown은 직접 시각 판독 기반 구조화 요약으로 보관."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 59,
+          "ceilingHeight": 13,
+          "floorLoad": 11,
+          "freightEntrance": 8,
+          "loadingDock": 4,
+          "electricity": 22,
+          "fireLane": 19,
+          "evacuationRoutes": 13,
+          "restrictedItems": 16,
+          "boothRules": 31,
+          "riggingRules": 33,
+          "foodRules": 5,
+          "safetyDocuments": 10
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "전시장 Hall 1+2는 2,273㎡, 57.6m x 36.9m x 8m, 115부스 기준.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "1F 전시장 바닥하중은 3ton/㎡, 화물출입구 높이는 4.2m.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "전시장 Hall 1+2는 2,273㎡, 57.6m x 36.9m x 8m, 115부스 기준.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "3F 대회의실 전체는 3,421㎡, theater 3,000명, 전시부스 180개 기준.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "1F 전시장 바닥하중은 3ton/㎡, 화물출입구 높이는 4.2m.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "floorLoad",
+              "value": "로비와 3F 대회의실 바닥하중은 0.5ton/㎡, 제한높이는 5m로 관리.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "1F 전시장 바닥하중은 3ton/㎡, 화물출입구 높이는 4.2m.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "로비·대회의실 제한높이 5m와 화물출입구 4.2m 조건 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "1F 전시장 바닥하중은 3ton/㎡, 화물출입구 높이는 4.2m.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "로비·대회의실 제한높이 5m와 화물출입구 4.2m 조건 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "로비와 3F 대회의실 바닥하중은 0.5ton/㎡, 제한높이는 5m로 관리.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "HICO 전시장·회의실·대회의실은 면적, 부스 수, 수용인원, 바닥하중, 제한높이를 기준으로 행사 배치와 장치물 계획을 검토한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "행사 구조물과 부스는 소화전, 방화셔터, 비상구, 비상대피로, 소방통로와 충돌하지 않도록 배치한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "소화전이 보이도록 부스·장치물·적재물 배치",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "소화전이 보이도록 부스·장치물·적재물 배치",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "전시장 내 흡연과 외부음식 반입 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "층별 AED, 청정소화기, 캐비닛소화기, 분말소화기 위치 현장 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "restrictedItems",
+              "value": "로비와 회의실은 유틸리티, 판매, 외부음식, 시설훼손 금지 조건을 별도로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "행사 2주 전까지 마킹·설치·철거·공용부분 사용·경비인력·광고물·VIP 일정 협의",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "riggingRules",
+              "value": "내·외부 현수막과 광고물은 설치 위치·규격·수량을 사전 협의하고, 외부 설치물은 기상악화 시 사전 철거한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "행사 1주 전까지 작업신고서, 안전작업서약서, 기술지원신청서 제출",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "상주요원과 장비원 명단, 행사보험 또는 영업배상책임보험 증권 준비",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "부스·전기·급배수 등 설비 설치는 HICO 감독 하 진행",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "로비와 회의실은 유틸리티, 판매, 외부음식, 시설훼손 금지 조건을 별도로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "로비와 회의실은 유틸리티, 판매, 외부음식, 시설훼손 금지 조건을 별도로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "foodRules",
+              "value": "로비는 전기·전화·인터넷 사용 가능, 가스·수도·압축공기 사용 불가",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "hico_capacity_floor_load_review",
+          "category": "capacity_layout",
+          "summary": "HICO 전시장·회의실·대회의실은 면적, 부스 수, 수용인원, 바닥하중, 제한높이를 기준으로 행사 배치와 장치물 계획을 검토한다.",
+          "checkpoints": [
+            "Hall 1+2 2,273㎡, 115부스 기준과 실제 부스 레이아웃 비교",
+            "3F 대회의실 3,421㎡, theater 3,000명, 부스 180개 기준과 실제 세팅 비교",
+            "전시장 바닥하중 3ton/㎡와 로비/대회의실 0.5ton/㎡ 초과 여부 확인",
+            "로비·대회의실 제한높이 5m와 화물출입구 4.2m 조건 확인"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "hico_fire_egress_and_fixed_facility",
+          "category": "egress_fire_lane",
+          "summary": "행사 구조물과 부스는 소화전, 방화셔터, 비상구, 비상대피로, 소방통로와 충돌하지 않도록 배치한다.",
+          "checkpoints": [
+            "소화전이 보이도록 부스·장치물·적재물 배치",
+            "방화셔터 구간을 피해 구조물 설치",
+            "비상구와 비상대피로 폐쇄 여부 확인",
+            "소방통로 최소 폭 1m 확보",
+            "층별 AED, 청정소화기, 캐비닛소화기, 분말소화기 위치 현장 확인"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "hico_pre_event_documents_and_supervision",
+          "category": "pre_event_documents",
+          "summary": "전시장·회의실 사용 전 홀매니저 협의, 작업·안전 서류 제출, 보험증권, 설치감독 조건을 준비한다.",
+          "checkpoints": [
+            "행사 2주 전까지 마킹·설치·철거·공용부분 사용·경비인력·광고물·VIP 일정 협의",
+            "행사 1주 전까지 작업신고서, 안전작업서약서, 기술지원신청서 제출",
+            "상주요원과 장비원 명단, 행사보험 또는 영업배상책임보험 증권 준비",
+            "부스·전기·급배수 등 설비 설치는 HICO 감독 하 진행",
+            "세팅 변경은 최소 3일 전까지 홀매니저와 협의"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "hico_signage_weather_approval",
+          "category": "signage_advertising",
+          "summary": "내·외부 현수막과 광고물은 설치 위치·규격·수량을 사전 협의하고, 외부 설치물은 기상악화 시 사전 철거한다.",
+          "checkpoints": [
+            "모든 홍보물 설치 장소와 시기 홀매니저 사전 협의",
+            "외부 광고·안내시설물 태풍 등 기상이변 예보 시 사전 철거",
+            "현수막 규격, 수량, 설치 위치 준수",
+            "빔프로젝터 화면을 가리지 않는 현수막 폭 확인"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "hico_lobby_utility_and_sales_restrictions",
+          "category": "utility_and_use_restriction",
+          "summary": "로비와 회의실은 유틸리티, 판매, 외부음식, 시설훼손 금지 조건을 별도로 확인한다.",
+          "checkpoints": [
+            "로비는 전기·전화·인터넷 사용 가능, 가스·수도·압축공기 사용 불가",
+            "로비 장치물 높이 5m 이하, 무게 500kg/㎡ 이하 확인",
+            "회의실 내 물품 판매 원칙적 금지",
+            "회의실 구멍뚫기, 못박기, 접착제 사용 등 시설 훼손 작업 금지",
+            "전시장 내 흡연과 외부음식 반입 금지"
+          ],
+          "sourceRefs": [
+            "HICO_FACILITY_GUIDE"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "gumico",
+      "name": "구미코(GUMICO)",
+      "region": "경북 구미",
+      "operator": "GUMICO",
+      "website": "https://gumico.com/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "GUMICO_EXHIBITION_INFO",
+          "title": "구미코 전시장 시설 안내",
+          "publisher": "GUMICO",
+          "url": "https://gumico.com/infra-info/exhibition",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 시설 페이지. 지정등록업체 공고는 핵심 코퍼스에서 제외하고 시설/작업신고 정보만 사용."
+        },
+        {
+          "id": "GUMICO_SAFETY_ORG_INFO",
+          "title": "구미코 조직도 및 시설 안전관리 연락 정보",
+          "publisher": "GUMICO",
+          "url": "https://gumico.com/infra-info/organizational",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 조직도. 담당자 최신성 확인 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 8,
+          "ceilingHeight": 0,
+          "floorLoad": 6,
+          "freightEntrance": 2,
+          "loadingDock": 3,
+          "electricity": 3,
+          "fireLane": 2,
+          "evacuationRoutes": 2,
+          "restrictedItems": 1,
+          "boothRules": 6,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 9
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "전시장 3,402㎡, 180부스, 바닥하중 1.5t/㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "전시장 면적, 바닥하중, 전기·통신·급배수·압축공기 조건과 작업신고 서류를 설치·철거 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "전시장 3,402㎡, 180부스, 바닥하중 1.5t/㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "floorLoad",
+              "value": "전시장 면적, 바닥하중, 전기·통신·급배수·압축공기 조건과 작업신고 서류를 설치·철거 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "전시장 3,402㎡, 180부스, 바닥하중 1.5t/㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "전시장 면적, 바닥하중, 전기·통신·급배수·압축공기 조건과 작업신고 서류를 설치·철거 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "전시장 면적, 바닥하중, 전기·통신·급배수·압축공기 조건과 작업신고 서류를 설치·철거 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "전시장 3,402㎡, 180부스, 바닥하중 1.5t/㎡, Floor Box 36개, 전기·통신·급배수·압축공기 조건 확인 대상.",
+              "sourceRef": "GUMICO_EXHIBITION_INFO",
+              "confidence": 0.8
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "전시장 면적, 바닥하중, 전기·통신·급배수·압축공기 조건과 작업신고 서류를 설치·철거 계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "바닥하중 1.5t/㎡와 중량물 반입 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "바닥하중 1.5t/㎡와 중량물 반입 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "비상구와 피난동선이 부스·중량물 반입 동선과 겹치지 않게 배치",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "바닥하중 1.5t/㎡와 중량물 반입 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "소방시설·소화전 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "전시장 작업신고와 홀매니징 연락망을 기준으로 소방시설, 비상구, 피난동선을 행사 전 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "소방시설·소화전 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "전시장 작업신고와 홀매니징 연락망을 기준으로 소방시설, 비상구, 피난동선을 행사 전 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "비상구와 피난동선이 부스·중량물 반입 동선과 겹치지 않게 배치",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "소방시설·소화전 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "gumico_exhibition_facility_work_report_review",
+          "category": "capacity_layout",
+          "summary": "전시장 면적, 바닥하중, 전기·통신·급배수·압축공기 조건과 작업신고 서류를 설치·철거 계획에 반영한다.",
+          "checkpoints": [
+            "3,402㎡/180부스 기준 배치 검토",
+            "바닥하중 1.5t/㎡와 중량물 반입 확인",
+            "홀매니저·시설안전관리 연락망 확인"
+          ],
+          "sourceRefs": [
+            "GUMICO_EXHIBITION_INFO",
+            "GUMICO_SAFETY_ORG_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "gumico_fire_egress_confirmation",
+          "category": "fire_egress_confirmation",
+          "summary": "전시장 작업신고와 홀매니징 연락망을 기준으로 소방시설, 비상구, 피난동선을 행사 전 확인한다.",
+          "checkpoints": [
+            "소방시설·소화전 주변 적재 금지",
+            "비상구와 피난동선이 부스·중량물 반입 동선과 겹치지 않게 배치",
+            "시설안전관리·홀매니저 연락망을 운영본부 비상연락망에 반영"
+          ],
+          "sourceRefs": [
+            "GUMICO_EXHIBITION_INFO",
+            "GUMICO_SAFETY_ORG_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "ceco",
+      "name": "창원컨벤션센터(CECO)",
+      "region": "경남 창원",
+      "operator": "CECO",
+      "website": "https://www.ceco.co.kr/",
+      "verificationStatus": "source_verified",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "CECO_OPERATION_RULES",
+          "title": "창원컨벤션센터 전시장 운영규정",
+          "publisher": "CECO",
+          "url": "https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=28",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 운영규정. 원문 재배포보다 링크와 요약 사용."
+        },
+        {
+          "id": "CECO_WORK_SAFETY_MANUAL",
+          "title": "창원컨벤션센터 전시장 작업 안전 관리 매뉴얼",
+          "publisher": "CECO",
+          "url": "https://www.ceco.co.kr/bbx/board.php?bx_table=02_02_04_01&wr_id=45",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 작업안전 HWP. 원문 재배포보다 체크포인트 요약 사용."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 81,
+          "ceilingHeight": 13,
+          "floorLoad": 11,
+          "freightEntrance": 47,
+          "loadingDock": 54,
+          "electricity": 57,
+          "fireLane": 31,
+          "evacuationRoutes": 23,
+          "restrictedItems": 53,
+          "boothRules": 168,
+          "riggingRules": 53,
+          "foodRules": 19,
+          "safetyDocuments": 111
+        },
+        "representativeEntries": {
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "작업안전 HWP에서 화기·위험물·통로·차량·공구 제한 수칙 추출 완료.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "restrictedItems",
+              "value": "전시장 작업은 CECO 작업신고·승인 후 수행하고, 위험물·화기·전기톱·가스통 등은 사전 승인 없이는 제한한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "전시장 작업은 CECO 작업신고·승인 후 수행하고, 위험물·화기·전기톱·가스통 등은 사전 승인 없이는 제한한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "foodRules",
+              "value": "위험물·화기·가스 취급 사전 승인 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "전시장 작업은 CECO 작업신고·승인 후 수행하고, 위험물·화기·전기톱·가스통 등은 사전 승인 없이는 제한한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "작업신고 승인 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "소화전, 비상구, EPS, 화장실 입구와 벽체 주변 통로를 확보하고, 대형 차량·고위험 공구 반입 제한을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "제31조(초중량전시품 반입 제한) ① 상면하중(정지하중)이 2.0ton을 초과하는 중",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "소화전, 비상구, EPS, 화장실 입구와 벽체 주변 통로를 확보하고, 대형 차량·고위험 공구 반입 제한을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "제31조(초중량전시품 반입 제한) ① 상면하중(정지하중)이 2.0ton을 초과하는 중",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "소화전, 비상구, EPS, 화장실 입구와 벽체 주변 통로를 확보하고, 대형 차량·고위험 공구 반입 제한을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "소화전·비상구·EPS·화장실 입구 차단 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "소화전, 비상구, EPS, 화장실 입구와 벽체 주변 통로를 확보하고, 대형 차량·고위험 공구 반입 제한을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "소화전·비상구·EPS·화장실 입구 차단 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "② 불특정 다수를 대상으로 제품 등을 판매목적으로 광고‧홍보 등 영업활동을",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.45
+            },
+            {
+              "category": "riggingRules",
+              "value": "제20조(광고·홍보물의 설치) ① 임차인은 행사홍보 및 안내를 위한 현수막, 입",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.75
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "3. 행사기간 :준비 및 철거 일을 포함하여 7일 이내",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "boothRules",
+              "value": "② 행사 준비 및 철거 시 시간외 사용 무상 제공은 다음 각 호에 따른 임대기",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.45
+            }
+          ],
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "④ 임차인은 계약된 전시장 면적의 50% 이상에 대하여는 위약금의 지급 의사",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "capacity",
+              "value": "제25조(설치공사의 승인) ① 재단은 제출된 관련 서류를 검토한 후 전시부스의",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "제11조(관리비) ① 관리비는 냉난방비, 전기, 상·하수도, 압축공기 등을 말한다.",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.95
+            },
+            {
+              "category": "electricity",
+              "value": "지원업무 중지(전력공급 차단 등) 및 행사장 폐쇄 등의 조치를 취할 수 있다.",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.5
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "제27조(천장 및 시설물의 높이제한) ① 전시장 천장에는 전시 및 선전광고용 물",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.75
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "6. 천장 부분이 막히게 마감되는 경우, 천장에 10㎡당 1개 이상의 자동 확산",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "제31조(초중량전시품 반입 제한) ① 상면하중(정지하중)이 2.0ton을 초과하는 중",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.95
+            },
+            {
+              "category": "floorLoad",
+              "value": "② 중량전시품 중 제1항의 상면하중을 초과하는 전시품이 있는 경우 사용자는",
+              "sourceRef": "CECO_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "ceco_work_approval_and_hot_work_control",
+          "category": "work_safety",
+          "summary": "전시장 작업은 CECO 작업신고·승인 후 수행하고, 위험물·화기·전기톱·가스통 등은 사전 승인 없이는 제한한다.",
+          "checkpoints": [
+            "작업신고 승인 확인",
+            "위험물·화기·가스 취급 사전 승인 확인",
+            "흡연·음주 금지와 보호구 착용 확인"
+          ],
+          "sourceRefs": [
+            "CECO_WORK_SAFETY_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "ceco_fire_lane_and_vehicle_limits",
+          "category": "egress_fire_lane",
+          "summary": "소화전, 비상구, EPS, 화장실 입구와 벽체 주변 통로를 확보하고, 대형 차량·고위험 공구 반입 제한을 확인한다.",
+          "checkpoints": [
+            "소화전·비상구·EPS·화장실 입구 차단 금지",
+            "벽면/구조물 주변 이격 확보",
+            "5t 초과 또는 높이 4m 이상 차량 진입 제한 확인"
+          ],
+          "sourceRefs": [
+            "CECO_WORK_SAFETY_MANUAL"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "gsco",
+      "name": "군산새만금컨벤션센터(GSCO)",
+      "region": "전북 군산",
+      "operator": "GSCO",
+      "website": "https://www.gsco.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "GSCO_OPERATION_RULES",
+          "title": "군산새만금컨벤션센터 전시장 운영규정",
+          "publisher": "GSCO",
+          "url": "https://www.gsco.kr/files/GSCO%20%EC%A0%84%EC%8B%9C%EC%9E%A5%20%EC%9A%B4%EC%98%81%EA%B7%9C%EC%A0%95.pdf",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "extracted",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "베뉴 운영규정. 원문 재배포보다 링크와 요약 사용."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 26,
+          "ceilingHeight": 2,
+          "floorLoad": 4,
+          "freightEntrance": 23,
+          "loadingDock": 23,
+          "electricity": 22,
+          "fireLane": 14,
+          "evacuationRoutes": 8,
+          "restrictedItems": 15,
+          "boothRules": 59,
+          "riggingRules": 7,
+          "foodRules": 6,
+          "safetyDocuments": 29
+        },
+        "representativeEntries": {
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "GSCO 전시장 운영규정에 따라 안전관리, 출입·반입, 시설보전, 원상복구, 공용공간 사용 조건을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "제25조(중량전시품반입 제한) ①상면하중(정지하중)이 1톤을 초과하는 중량전시품에 대",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "GSCO 전시장 운영규정에 따라 안전관리, 출입·반입, 시설보전, 원상복구, 공용공간 사용 조건을 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "제25조(중량전시품반입 제한) ①상면하중(정지하중)이 1톤을 초과하는 중량전시품에 대",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "전기·가스·화기 사용 승인 필요성 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "제10조(관리비) ①전시장 관리비는 전기, 상·하수도 요금, 폐기물 처리비 등을 말하며",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.95
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "전기·가스·화기 사용 승인 필요성 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "restrictedItems",
+              "value": "제6조(양도금지) 지정된 기간에 전시장을 배정받은 자는 군산새만금컨벤션센터의 사전",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "foodRules": [
+            {
+              "category": "foodRules",
+              "value": "전기·가스·화기 사용 승인 필요성 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "foodRules",
+              "value": "②위험물 취급에 관한 사항은 소방법령, 고압가스 안전관리법 및 센터 안전관리요원",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.45
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "제2조(사용신청) 전시장을 사용하고자 하는 자는 사전에 “사용신청서” (별표3 서식)를",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.8
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "경)신청서(별표5 서식) 및 기술지원 신청서(별표6 서식), 전체 평면도, 전시스탠드별",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.8
+            }
+          ],
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "②전 1항의 사용면적을 취소하는 경우 아래표의 위약금 상당액을 군산새만금컨벤션",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.6
+            },
+            {
+              "category": "capacity",
+              "value": "3. 계약된 전시장 면적의 50%이상을 취소하는 경우",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "해당 지정협력업체를 통하여 전시장내 해당 공동구에 연결 시공할 수 있으며 그 비",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.45
+            },
+            {
+              "category": "boothRules",
+              "value": "제17조(설계도서 제출) 전시장 사용자는 전시장 사용개시 7일전까지 전시스탠드설치(변",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.9
+            }
+          ],
+          "ceilingHeight": [
+            {
+              "category": "ceilingHeight",
+              "value": "제20조(전시장 천장 및 시설물의 높이 제한) ①천장에는 전시 및 선전광고용 물체 등을",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.75
+            },
+            {
+              "category": "ceilingHeight",
+              "value": "6. 천장 부분이 마감되는 경우에는 천장에 10㎡당 1개 이상의 자동 확산소화기를 설",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.6
+            }
+          ],
+          "riggingRules": [
+            {
+              "category": "riggingRules",
+              "value": "제20조(전시장 천장 및 시설물의 높이 제한) ①천장에는 전시 및 선전광고용 물체 등을",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.75
+            },
+            {
+              "category": "riggingRules",
+              "value": "설치할 수 없다. 단, 배너 등 경량물체인 경우에는 군산새만금컨벤션센터의 사전승",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.45
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "5. 복층내부에는 보행거리 10m마다 소화기를 비치한다.",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.65
+            },
+            {
+              "category": "fireLane",
+              "value": "6. 천장 부분이 마감되는 경우에는 천장에 10㎡당 1개 이상의 자동 확산소화기를 설",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.65
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "7. 복층 출입구는 넓이 0.9m이상으로 피난방향으로 열려야 하며, 입구 앞 상단에는",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.65
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "②통로는 비상구와 직선으로 연결한다.",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.65
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "제25조(중량전시품반입 제한) ①상면하중(정지하중)이 1톤을 초과하는 중량전시품에 대",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.95
+            },
+            {
+              "category": "floorLoad",
+              "value": "②중량전시품 중 전항의 상면하중을 초과하는 전시품이 있는 경우 사용자는 동 전시",
+              "sourceRef": "GSCO_OPERATION_RULES",
+              "confidence": 0.65
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "gsco_operation_rule_safety_control",
+          "category": "operation_rule",
+          "summary": "GSCO 전시장 운영규정에 따라 안전관리, 출입·반입, 시설보전, 원상복구, 공용공간 사용 조건을 확인한다.",
+          "checkpoints": [
+            "운영규정 최신본 확인",
+            "주최자 안전·질서 유지 책임 확인",
+            "전기·가스·화기 사용 승인 필요성 확인"
+          ],
+          "sourceRefs": [
+            "GSCO_OPERATION_RULES"
+          ],
+          "verificationStatus": "source_verified"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "icc_jeju",
+      "name": "제주국제컨벤션센터(ICC JEJU)",
+      "region": "제주 서귀포",
+      "operator": "ICC JEJU",
+      "website": "https://www.iccjeju.co.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "ICCJEJU_EXHIBITION_INFO",
+          "title": "ICC JEJU 전시장 시설 안내",
+          "publisher": "ICC JEJU",
+          "url": "https://www.iccjeju.co.kr/info/02.php",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 시설 페이지. 운영규정/안전 매뉴얼 원문 추가 확보 필요."
+        },
+        {
+          "id": "ICCJEJU_TAMNA_INFO",
+          "title": "ICC JEJU 탐라홀 시설 안내",
+          "publisher": "ICC JEJU",
+          "url": "https://www.iccjeju.co.kr/info/01.php",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 시설 페이지. 행사별 수용인원과 피난계획 별도 확인 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 10,
+          "ceilingHeight": 0,
+          "floorLoad": 5,
+          "freightEntrance": 6,
+          "loadingDock": 2,
+          "electricity": 2,
+          "fireLane": 2,
+          "evacuationRoutes": 9,
+          "restrictedItems": 1,
+          "boothRules": 3,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 2
+        },
+        "representativeEntries": {
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "전시장 A+B+C 2,503㎡, 3개 분할 가능, 허용하중 2,000kg/㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "탐라홀 A+B+C 4,061㎡, 극장식 4,300명 규모.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "floorLoad": [
+            {
+              "category": "floorLoad",
+              "value": "전시장 A+B+C 2,503㎡, 3개 분할 가능, 허용하중 2,000kg/㎡.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "floorLoad",
+              "value": "전시장·탐라홀 수용능력, 화물출입구, 허용하중, 급배수·전원·통신 조건을 배치와 피난계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "freightEntrance": [
+            {
+              "category": "freightEntrance",
+              "value": "전시장·탐라홀 수용능력, 화물출입구, 허용하중, 급배수·전원·통신 조건을 배치와 피난계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "freightEntrance",
+              "value": "전시장 화물출입구 2.3m와 허용하중 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "전시장·탐라홀 수용능력, 화물출입구, 허용하중, 급배수·전원·통신 조건을 배치와 피난계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "전시장 A+B+C 2,503㎡, 3개 분할 가능, 화물출입구 높이 2.3m, 허용하중 2,000kg/㎡, 급배수·전원·통신 제공.",
+              "sourceRef": "ICCJEJU_EXHIBITION_INFO",
+              "confidence": 0.8
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "전시장·탐라홀 수용능력, 화물출입구, 허용하중, 급배수·전원·통신 조건을 배치와 피난계획에 반영한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "전시장 화물출입구 2.3m와 허용하중 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "전시장·탐라홀 대규모 행사는 소방시설, 부스 배치, 안전 관련 제출서류를 수용인원과 화물출입구 조건에 맞춰 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "소방시설·비상구·피난동선 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "전시장·탐라홀 대규모 행사는 소방시설, 부스 배치, 안전 관련 제출서류를 수용인원과 화물출입구 조건에 맞춰 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "부스 배치와 관람객 동선이 화물출입구 및 대피동선과 충돌하지 않게 검토",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "전시장·탐라홀 대규모 행사는 소방시설, 부스 배치, 안전 관련 제출서류를 수용인원과 화물출입구 조건에 맞춰 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "안전관리 계획서·작업신고·시설 사용 신청서류 대상 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "소방시설·비상구·피난동선 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "loadingDock",
+              "value": "source coverage: loading",
+              "sourceRef": "ICCJEJU_EXHIBITION_INFO",
+              "confidence": 0.55
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "소방시설·비상구·피난동선 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "iccjeju_capacity_loading_review",
+          "category": "capacity_layout",
+          "summary": "전시장·탐라홀 수용능력, 화물출입구, 허용하중, 급배수·전원·통신 조건을 배치와 피난계획에 반영한다.",
+          "checkpoints": [
+            "탐라홀/전시장 행사 유형별 수용인원 확인",
+            "전시장 화물출입구 2.3m와 허용하중 확인",
+            "관광지형 대규모 이동 동선과 셔틀/버스 승하차 계획 확인"
+          ],
+          "sourceRefs": [
+            "ICCJEJU_EXHIBITION_INFO",
+            "ICCJEJU_TAMNA_INFO"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "iccjeju_fire_booth_document_confirmation",
+          "category": "fire_booth_document_confirmation",
+          "summary": "전시장·탐라홀 대규모 행사는 소방시설, 부스 배치, 안전 관련 제출서류를 수용인원과 화물출입구 조건에 맞춰 확인한다.",
+          "checkpoints": [
+            "소방시설·비상구·피난동선 주변 적재 금지",
+            "부스 배치와 관람객 동선이 화물출입구 및 대피동선과 충돌하지 않게 검토",
+            "안전관리 계획서·작업신고·시설 사용 신청서류 대상 확인"
+          ],
+          "sourceRefs": [
+            "ICCJEJU_EXHIBITION_INFO",
+            "ICCJEJU_TAMNA_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    },
+    {
+      "venueId": "yeosu_expo",
+      "name": "여수엑스포컨벤션센터",
+      "region": "전남 여수",
+      "operator": "여수엑스포컨벤션센터",
+      "website": "https://yeosuexpoconvention.kr/",
+      "verificationStatus": "needs_review",
+      "lastReviewedAt": "2026-05-21",
+      "sources": [
+        {
+          "id": "YEOSU_EXPO_DOCUMENT_ROOM",
+          "title": "여수엑스포컨벤션센터 자료실",
+          "publisher": "여수엑스포컨벤션센터",
+          "url": "https://yeosuexpoconvention.kr/yeosu/DocumentRoom",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 자료실. 개별 첨부 파일 직접 다운로드와 Markdown 변환이 후속 과제."
+        },
+        {
+          "id": "YEOSU_EXPO_FACILITY_INFO",
+          "title": "여수엑스포컨벤션센터 시설 안내",
+          "publisher": "여수엑스포컨벤션센터",
+          "url": "https://yeosuexpoconvention.kr/yeosu/FacilityInfoEx",
+          "verificationStatus": "source_verified",
+          "offlineTextStatus": "offline_derived",
+          "releasePolicy": "summary_only",
+          "reuseCaution": "공식 시설 페이지. 운영규정 첨부 원문 확보 필요."
+        }
+      ],
+      "spaces": [],
+      "facilitySummary": {
+        "categoryCounts": {
+          "capacity": 8,
+          "ceilingHeight": 0,
+          "floorLoad": 0,
+          "freightEntrance": 0,
+          "loadingDock": 1,
+          "electricity": 3,
+          "fireLane": 2,
+          "evacuationRoutes": 3,
+          "restrictedItems": 1,
+          "boothRules": 3,
+          "riggingRules": 0,
+          "foodRules": 0,
+          "safetyDocuments": 11
+        },
+        "representativeEntries": {
+          "safetyDocuments": [
+            {
+              "category": "safetyDocuments",
+              "value": "자료실에 시설운영규정, 시행세칙, 작업신고서, 전시·대관시설 이용 안전관리 신고 및 신청서가 공개.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "safetyDocuments",
+              "value": "시설운영규정, 시행세칙, 작업신고서, 전시·대관시설 안전관리 신고서를 행사 전 필수 제출/검토 후보로 둔다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "capacity": [
+            {
+              "category": "capacity",
+              "value": "전시실 D1~D5와 엑스포디지털갤러리(EDG)를 전시·대형 행사 공간으로 운영.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "capacity",
+              "value": "전시실 D1~D5와 EDG 사용 시 소방시설, 비상구·피난동선, 부스·전기 사용 조건을 시설운영규정과 신청서류로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "electricity": [
+            {
+              "category": "electricity",
+              "value": "전시실 D1~D5와 EDG 사용 시 소방시설, 비상구·피난동선, 부스·전기 사용 조건을 시설운영규정과 신청서류로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "electricity",
+              "value": "부스 배치, 전기 사용, 작업신고서, 전시·대관시설 안전관리 신고서 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "fireLane": [
+            {
+              "category": "fireLane",
+              "value": "전시실 D1~D5와 EDG 사용 시 소방시설, 비상구·피난동선, 부스·전기 사용 조건을 시설운영규정과 신청서류로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "fireLane",
+              "value": "소방시설·소화전·비상구 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "evacuationRoutes": [
+            {
+              "category": "evacuationRoutes",
+              "value": "전시실 D1~D5와 EDG 사용 시 소방시설, 비상구·피난동선, 부스·전기 사용 조건을 시설운영규정과 신청서류로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "evacuationRoutes",
+              "value": "소방시설·소화전·비상구 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "boothRules": [
+            {
+              "category": "boothRules",
+              "value": "전시실 D1~D5와 EDG 사용 시 소방시설, 비상구·피난동선, 부스·전기 사용 조건을 시설운영규정과 신청서류로 확인한다.",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            },
+            {
+              "category": "boothRules",
+              "value": "부스 배치, 전기 사용, 작업신고서, 전시·대관시설 안전관리 신고서 확인",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "loadingDock": [
+            {
+              "category": "loadingDock",
+              "value": "소방시설·소화전·비상구 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ],
+          "restrictedItems": [
+            {
+              "category": "restrictedItems",
+              "value": "소방시설·소화전·비상구 주변 적재 금지",
+              "sourceRef": "venue-safety-rules",
+              "confidence": 0.7
+            }
+          ]
+        }
+      },
+      "safetyRules": [
+        {
+          "id": "yeosu_expo_document_room_safety_forms",
+          "category": "operation_rule",
+          "summary": "시설운영규정, 시행세칙, 작업신고서, 전시·대관시설 안전관리 신고서를 행사 전 필수 제출/검토 후보로 둔다.",
+          "checkpoints": [
+            "시설운영규정 최신 개정일 확인",
+            "작업신고서 제출 대상 작업 식별",
+            "전시·대관시설 이용 안전관리 신고 및 신청서 대상 확인"
+          ],
+          "sourceRefs": [
+            "YEOSU_EXPO_DOCUMENT_ROOM"
+          ],
+          "verificationStatus": "source_verified"
+        },
+        {
+          "id": "yeosu_expo_fire_egress_booth_confirmation",
+          "category": "fire_egress_booth_confirmation",
+          "summary": "전시실 D1~D5와 EDG 사용 시 소방시설, 비상구·피난동선, 부스·전기 사용 조건을 시설운영규정과 신청서류로 확인한다.",
+          "checkpoints": [
+            "소방시설·소화전·비상구 주변 적재 금지",
+            "전시실별 피난동선과 관람객 입퇴장 동선 분리",
+            "부스 배치, 전기 사용, 작업신고서, 전시·대관시설 안전관리 신고서 확인"
+          ],
+          "sourceRefs": [
+            "YEOSU_EXPO_DOCUMENT_ROOM",
+            "YEOSU_EXPO_FACILITY_INFO"
+          ],
+          "verificationStatus": "needs_source_review"
+        }
+      ],
+      "reviewNotice": "베뉴 운영규정·작업 매뉴얼은 최신 개정 여부와 행사별 승인 조건을 베뉴 담당자에게 확인해야 한다."
+    }
+  ]
+}

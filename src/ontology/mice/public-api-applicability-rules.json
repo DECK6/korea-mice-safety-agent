@@ -1,0 +1,79 @@
+{
+  "version": "1.0.3",
+  "generatedAt": "2026-05-31",
+  "description": "Rules for selecting sanitized public API operational evidence from offline snapshot. These rules prevent broad string-matching over-application.",
+  "rules": [
+    {
+      "sourceId": "KCISA_KOPIS_PERFORMANCE_FACILITY",
+      "anyOf": [
+        "venue",
+        "performance",
+        "conference",
+        "exhibition"
+      ]
+    },
+    {
+      "sourceId": "KOPIS_PERFORMANCE_CATALOG",
+      "anyOf": [
+        "performance"
+      ]
+    },
+    {
+      "sourceId": "TOUR_API_EVENT_CATALOG",
+      "anyOf": [
+        "outdoor",
+        "roadUse"
+      ]
+    },
+    {
+      "sourceId": "NEMC_EMERGENCY_MEDICAL",
+      "anyOf": [
+        "largeCrowd",
+        "outdoor",
+        "performance",
+        "food"
+      ]
+    },
+    {
+      "sourceId": "NEMC_AED",
+      "anyOf": [
+        "largeCrowd",
+        "outdoor",
+        "performance",
+        "food"
+      ]
+    },
+    {
+      "sourceId": "FOOD_SAFETY_KOREA",
+      "anyOf": [
+        "food"
+      ]
+    },
+    {
+      "sourceId": "KMA_APIHUB_WEATHER",
+      "anyOf": [
+        "outdoor",
+        "performance",
+        "temporaryStructures",
+        "workerExposure"
+      ]
+    },
+    {
+      "sourceId": "SEOUL_REALTIME_CITY_DATA",
+      "allOf": [
+        "seoulJurisdiction"
+      ],
+      "anyOf": [
+        "unhostedCrowd",
+        "outdoor",
+        "largeCrowd"
+      ]
+    },
+    {
+      "sourceId": "AIRKOREA_AIR_QUALITY",
+      "anyOf": [
+        "outdoor"
+      ]
+    }
+  ]
+}

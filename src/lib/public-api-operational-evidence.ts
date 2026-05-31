@@ -1,4 +1,5 @@
 import evidenceSnapshot from "../ontology/mice/public-api-operational-evidence.json" with { type: "json" };
+import applicabilityRules from "../ontology/mice/public-api-applicability-rules.json" with { type: "json" };
 
 type InputLike = {
   eventTypes?: string[];
@@ -48,10 +49,20 @@ export interface PublicApiOperationalEvidenceBundle {
   cautionLines: string[];
 }
 
+interface PublicApiApplicabilityRule {
+  sourceId: string;
+  anyOf?: string[];
+  allOf?: string[];
+}
+
 const snapshot = evidenceSnapshot as {
   generatedAt: string;
   verificationStatus: string;
   sources: PublicApiOperationalEvidenceSource[];
+};
+
+const rules = applicabilityRules as {
+  rules: PublicApiApplicabilityRule[];
 };
 
 function hasEvent(input: InputLike, eventType: string): boolean {
@@ -84,25 +95,35 @@ function isLargeCrowd(input: InputLike): boolean {
   return typeof input.expectedCrowd === "number" && input.expectedCrowd >= 1000;
 }
 
+function inputFacts(input: InputLike): Set<string> {
+  const facts = new Set<string>();
+  if (input.venueId) facts.add("venue");
+  if (hasEvent(input, "conference")) facts.add("conference");
+  if (hasEvent(input, "exhibition")) facts.add("exhibition");
+  if (isPerformance(input)) facts.add("performance");
+  if (isOutdoor(input)) facts.add("outdoor");
+  if (input.roadUse === true) facts.add("roadUse");
+  if (input.temporaryStructures === true) facts.add("temporaryStructures");
+  if (input.unhostedCrowd === true) facts.add("unhostedCrowd");
+  if (hasFood(input)) facts.add("food");
+  if (hasWorkerExposure(input)) facts.add("workerExposure");
+  if (isLargeCrowd(input)) facts.add("largeCrowd");
+  if (String(input.jurisdiction ?? "").includes("서울")) facts.add("seoulJurisdiction");
+  return facts;
+}
+
+function matchesRule(rule: PublicApiApplicabilityRule, facts: Set<string>): boolean {
+  const allOf = rule.allOf ?? [];
+  const anyOf = rule.anyOf ?? [];
+  if (allOf.some((fact) => !facts.has(fact))) return false;
+  if (anyOf.length === 0) return true;
+  return anyOf.some((fact) => facts.has(fact));
+}
+
 function shouldUseSource(source: PublicApiOperationalEvidenceSource, input: InputLike): boolean {
-  const appliesTo = new Set(source.appliesTo);
-  if (source.sourceId === "KCISA_KOPIS_PERFORMANCE_FACILITY") {
-    return Boolean(input.venueId || isPerformance(input) || hasEvent(input, "conference") || hasEvent(input, "exhibition"));
-  }
-  if (source.sourceId === "KOPIS_PERFORMANCE_CATALOG") return isPerformance(input);
-  if (source.sourceId === "TOUR_API_EVENT_CATALOG") return isOutdoor(input) || input.roadUse === true;
-  if (source.sourceId === "NEMC_EMERGENCY_MEDICAL" || source.sourceId === "NEMC_AED") {
-    return isLargeCrowd(input) || isOutdoor(input) || isPerformance(input) || hasFood(input);
-  }
-  if (source.sourceId === "FOOD_SAFETY_KOREA") return hasFood(input);
-  if (source.sourceId === "KMA_APIHUB_WEATHER") {
-    return isOutdoor(input) || isPerformance(input) || input.temporaryStructures === true || hasWorkerExposure(input);
-  }
-  if (source.sourceId === "SEOUL_REALTIME_CITY_DATA") {
-    return Boolean(input.unhostedCrowd || isOutdoor(input) || isLargeCrowd(input)) && String(input.jurisdiction ?? "").includes("서울");
-  }
-  if (source.sourceId === "AIRKOREA_AIR_QUALITY") return isOutdoor(input);
-  return [...appliesTo].some((value) => value && JSON.stringify(input).includes(value));
+  const rule = rules.rules.find((item) => item.sourceId === source.sourceId);
+  if (!rule) return false;
+  return matchesRule(rule, inputFacts(input));
 }
 
 function formatSample(source: PublicApiOperationalEvidenceSource): string {

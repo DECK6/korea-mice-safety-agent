@@ -1,5 +1,6 @@
 {
   "version": "1.0.0",
+  "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
   "scope": "MICE setup, teardown, booth build, stage, electrical, hot work, ladder, scaffold, aerial lift, and heavy object handling worker-safety references organized for this project. agent-safety-oss is recorded only as related design context for OSH/KOSHA coverage review.",
   "references": [

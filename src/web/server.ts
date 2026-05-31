@@ -1,9 +1,12 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { URL } from "node:url";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
+import { baseMiceEventInputSchema } from "../lib/mice-event-input-schema.js";
 import { MICE_DATA, strictnessLabel } from "../lib/mice-data.js";
 import type { Strictness } from "../lib/types.js";
+import { generateMiceSafetyPlanTool } from "../tools/generate-mice-safety-plan.js";
 import { queryMiceSafetyApplicabilityTool } from "../tools/query-mice-safety-applicability.js";
+import { reviewMiceSafetyPlanTool } from "../tools/review-mice-safety-plan.js";
 import { SERVER_NAME, VERSION } from "../version.js";
 
 type AnyRecord = Record<string, unknown>;
@@ -15,6 +18,10 @@ interface WebServerOptions {
 
 function toArray(value: unknown): AnyRecord[] {
   return Array.isArray(value) ? value as AnyRecord[] : [];
+}
+
+function isPlainRecord(value: unknown): value is AnyRecord {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
 
 function toStringArray(value: unknown): string[] {
@@ -154,7 +161,7 @@ function htmlPage(): string {
     .sample-row { display: flex; gap: 8px; flex-wrap: wrap; }
     .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
-    .stat strong { display: block; font-size: 30px; color: var(--blue); line-height: 1.05; }
+    .stat strong { display: block; font-size: clamp(18px, 3vw, 30px); color: var(--blue); line-height: 1.05; overflow-wrap: anywhere; }
     .stat span { color: var(--muted); font-size: 13px; font-weight: 800; }
     .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .card-topline { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
@@ -207,6 +214,7 @@ function htmlPage(): string {
       <span class="badge primary">${SERVER_NAME} v${VERSION}</span>
       <span class="badge">offline ontology web simulator</span>
       <span class="badge">query_mice_safety_applicability</span>
+      <span class="badge">generate/review plan</span>
     </div>
     <section class="heading">
       <div>
@@ -251,6 +259,7 @@ function htmlPage(): string {
           </div>
           <div class="actions">
             <button id="submitBtn" type="submit">체크리스트 생성</button>
+            <button class="secondary" type="button" id="planBtn">계획서 요약·검수</button>
             <button class="secondary" type="button" id="printBtn">인쇄</button>
             <span id="status" class="muted"></span>
           </div>
@@ -424,6 +433,34 @@ function htmlPage(): string {
         '<section class="card"><div class="notice">이 결과는 안전관리 실무 초안입니다. 법률 자문이나 관할기관 승인을 대체하지 않으며, 실제 도면·배치·운영계획으로 보정해야 합니다.</div></section>'
       ].join("");
     }
+    function renderPlanReview(payload) {
+      const review = payload.review || {};
+      const plan = payload.plan || {};
+      const summary = plan.executiveSummary || {};
+      const findings = review.topFindings || [];
+      $("#result").innerHTML = [
+        '<section class="stats">',
+        '<div class="card stat"><strong>' + escapeHtml(review.verdict || "review") + '</strong><span>검수 판정</span></div>',
+        '<div class="card stat"><strong>' + escapeHtml(review.score ?? "-") + '</strong><span>커버리지 점수</span></div>',
+        '<div class="card stat"><strong>' + escapeHtml(plan.documentCount || 0) + '</strong><span>문서 묶음</span></div>',
+        '<div class="card stat"><strong>' + escapeHtml((review.counts && review.counts.warning) || 0) + '</strong><span>warning</span></div>',
+        '</section>',
+        '<section class="card">',
+        '<h2>' + escapeHtml(payload.input.eventName || "계획서 요약") + '</h2>',
+        '<p class="muted">생성 계획서 전문보다 먼저 보는 실무 판단 요약입니다. 법적 효력 판단이 아니라 제출 준비용 초안 검수입니다.</p>',
+        '</section>',
+        '<section class="grid">',
+        '<div class="card"><h2>핵심 위험</h2>' + (summary.keyRisks && summary.keyRisks.length ? list(summary.keyRisks) : '<p class="muted">핵심 위험 후보 없음</p>') + '</div>',
+        '<div class="card"><h2>적용 근거</h2>' + (summary.applicableBasis && summary.applicableBasis.length ? list(summary.applicableBasis) : '<p class="muted">적용 근거 후보 없음</p>') + '</div>',
+        '</section>',
+        '<section class="card"><h2>제출·협의 액션</h2>' + (summary.submissionActions && summary.submissionActions.length ? list(summary.submissionActions) : '<p class="muted">제출·협의 액션 후보 없음</p>') + '</section>',
+        '<section class="card"><h2>검수 지적</h2><div class="list">',
+        findings.length ? findings.map((f) => card(f.requirementId || f.category || "finding", f.severity || "info", f.message || f.recommendation || "확인 필요", f.severity === "error" ? "tone-danger" : f.severity === "warning" ? "tone-warning" : "tone-muted")).join("") : '<p class="muted">상위 지적 없음</p>',
+        '</div></section>',
+        '<section class="card"><h2>문서 묶음</h2><div class="chips">' + (plan.documentKeys || []).map((key) => chip(key)).join("") + '</div></section>',
+        '<section class="card"><div class="notice">전문 Markdown, CSV, DOCX/XLSX 내보내기는 CLI의 export_mice_safety_plan_bundle에서 수행합니다. 이 화면은 공개 접근용 빠른 시뮬레이터입니다.</div></section>'
+      ].join("");
+    }
     async function simulate(event) {
       event?.preventDefault();
       $("#submitBtn").disabled = true;
@@ -445,6 +482,26 @@ function htmlPage(): string {
         $("#submitBtn").disabled = false;
       }
     }
+    async function generatePlanReview() {
+      $("#planBtn").disabled = true;
+      $("#status").textContent = "계획서 생성·검수 중";
+      try {
+        const res = await fetch("/api/plan-review", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(formInput())
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        renderPlanReview(json);
+        $("#status").textContent = "완료";
+      } catch (err) {
+        $("#result").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+        $("#status").textContent = "오류";
+      } finally {
+        $("#planBtn").disabled = false;
+      }
+    }
     async function init() {
       renderCheckboxes($("#eventTypes"), EVENT_TYPES, ["exhibition"]);
       renderCheckboxes($("#featureFlags"), FEATURES);
@@ -455,6 +512,7 @@ function htmlPage(): string {
       $("#jurisdictionOptions").innerHTML = options.jurisdictions.map((item) => '<option value="' + escapeHtml(item) + '"></option>').join("");
       applyInput(SAMPLES.indoor);
       $("#sim-form").addEventListener("submit", simulate);
+      $("#planBtn").addEventListener("click", generatePlanReview);
       $("#printBtn").addEventListener("click", () => window.print());
       for (const button of document.querySelectorAll("[data-sample]")) {
         button.addEventListener("click", () => applyInput(SAMPLES[button.dataset.sample]));
@@ -681,6 +739,69 @@ async function simulate(input: unknown): Promise<AnyRecord> {
   };
 }
 
+function previewLines(value: unknown, max = 6): string[] {
+  if (Array.isArray(value)) return value.map((item) => String(item)).filter(Boolean).slice(0, max);
+  return String(value ?? "")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#"))
+    .slice(0, max);
+}
+
+function submissionActionPreview(markdown: unknown, max = 6): string[] {
+  return String(markdown ?? "")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => /^\|\s*\d+\s*\|/.test(line))
+    .slice(0, max)
+    .map((line) => line
+      .split("|")
+      .map((cell) => cell.trim())
+      .filter(Boolean)
+      .slice(1, 5)
+      .join(" — "));
+}
+
+async function planReview(input: unknown): Promise<AnyRecord> {
+  const normalizedInput = baseMiceEventInputSchema.parse(isPlainRecord(input) ? input : {});
+  const generated = await generateMiceSafetyPlanTool.handler({ ...normalizedInput, output: "structured" });
+  const plan = generated.structuredContent ?? {};
+  const documentBundle = (plan.documentBundle ?? {}) as AnyRecord;
+  const reviewResult = await reviewMiceSafetyPlanTool.handler({
+    ...normalizedInput,
+    planMarkdown: String(plan.planMarkdown ?? generated.content[0]?.text ?? ""),
+    documentBundle,
+  });
+  const review = reviewResult.structuredContent ?? {};
+  const sections = (plan.sections ?? {}) as AnyRecord;
+  const findings = toArray(review.findings);
+
+  return {
+    version: VERSION,
+    input: (plan.input ?? normalizedInput) as AnyRecord,
+    plan: {
+      documentCount: Object.keys(documentBundle).length,
+      documentKeys: Object.keys(documentBundle),
+      executiveSummary: {
+        keyRisks: previewLines(sections.hazardControls, 6),
+        applicableBasis: [
+          ...previewLines(sections.legalBasis, 4),
+          ...previewLines(sections.localOrdinances, 3),
+        ].slice(0, 7),
+        submissionActions: submissionActionPreview(documentBundle.submissionChecklist, 7),
+      },
+    },
+    review: {
+      verdict: review.verdict,
+      score: review.score,
+      grade: review.grade,
+      counts: review.counts,
+      topFindings: findings.slice(0, 8),
+    },
+    _meta: COMMON_RESPONSE_META,
+  };
+}
+
 async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const url = new URL(req.url ?? "/", "http://localhost");
   if (req.method === "GET" && url.pathname === "/") {
@@ -698,6 +819,11 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === "POST" && url.pathname === "/api/simulate") {
     const input = await readJson(req);
     responseJson(res, 200, await simulate(input));
+    return;
+  }
+  if (req.method === "POST" && url.pathname === "/api/plan-review") {
+    const input = await readJson(req);
+    responseJson(res, 200, await planReview(input));
     return;
   }
   responseJson(res, 404, { error: "not found" });
