@@ -30,7 +30,7 @@ MICE 안전 에이전트는 법령/조례/안전수칙/베뉴 정보를 런타�
 | OSH_STANDARDS_RULE_WORK_PLAN | summary_only | mixed | offline_derived | source_verified |  | 2026-05-31 | 2026-08-31 | current |  | KOSHA Guide는 기술 권고 요약과 출처 연결만 보관하고 원문 대량 재배포를 피한다. |
 | KOSHA_WORKER_SAFETY_GUIDE_SET | summary_only | mixed | offline_derived | offline_derived |  | 2026-05-31 | 2026-08-31 | current |  | KOSHA Guide는 기술 권고 요약과 출처 연결만 보관하고 원문 대량 재배포를 피한다. |
 | LOCAL_ORDINANCE_PACK_2026 | reusable | mixed | extracted | source_verified |  | 2026-05-31 | 2026-08-31 | current |  | 법령/조례 원문 기반 메타데이터와 필요한 조문 발췌를 오프라인 검증팩으로 사용한다. 제출 전 최신 원문 확인은 필수다. |
-| COEX_EXHIBITION_GUIDE_2025 | summary_only | pdf | extracted | source_verified |  | 2026-05-31 | 2026-08-31 | current | reachable/200 | 베뉴 PDF/HWP는 운영·안전 체크포인트 요약과 출처 링크 중심으로 사용한다. |
+| COEX_EXHIBITION_GUIDE_2025 | summary_only | pdf | extracted | source_verified |  | 2026-05-31 | 2026-08-31 | older_edition_link_reachable | reachable/200 | 베뉴 PDF/HWP는 운영·안전 체크포인트 요약과 출처 링크 중심으로 사용한다. |
 | COEX_FACILITY_OPERATION_RULE_2023 | summary_only | pdf | extracted | source_verified |  | 2026-05-31 | 2026-08-31 | current | reachable/200 | 베뉴 PDF/HWP는 운영·안전 체크포인트 요약과 출처 링크 중심으로 사용한다. |
 | COEX_SERVICE_PARTNER_MANUAL | summary_only | pdf | extracted | source_verified |  | 2026-05-31 | 2026-08-31 | current | reachable/200 | 베뉴 PDF/HWP는 운영·안전 체크포인트 요약과 출처 링크 중심으로 사용한다. |
 | KINTEX_SAFETY_EDUCATION | summary_only | pdf | extracted | source_verified |  | 2026-05-31 | 2026-08-31 | current | reachable/206 | 베뉴 PDF/HWP는 운영·안전 체크포인트 요약과 출처 링크 중심으로 사용한다. |

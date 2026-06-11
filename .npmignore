@@ -1,0 +1,30 @@
+# Defensive deny-list backstop.
+# The package.json "files" allowlist is the primary control; this file is a
+# second line of defense so proprietary raw data / secrets can never ship even
+# if a future "files" glob over-includes.
+
+# Proprietary venue manuals and raw source data
+data/markdown/venue-manuals/
+data/raw/
+data/out-of-scope/
+data/.validation-store/
+
+# Download cookie jars and validation/handoff outputs
+data/raw/venue-pdfs/.download-cookies.txt
+outputs/
+outputs/handoff-mcst-contest/
+
+# Document binaries (proprietary manuals)
+*.pdf
+*.hwp
+*.hwpx
+
+# Secrets and cookies (any format/location)
+.env
+.env.*
+*cookie*
+
+# Misc
+*.tgz
+*.log
+.DS_Store

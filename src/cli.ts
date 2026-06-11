@@ -106,11 +106,16 @@ program
     }
 
     const args = parseKeyValueArgs(cmd.args.slice(1));
-    const input = "inputJson" in args
-      ? parseInputJson(args.inputJson)
-      : args;
 
     try {
+      let input: unknown = args;
+      if ("inputJson" in args) {
+        const otherKeys = Object.keys(args).filter((key) => key !== "inputJson");
+        if (otherKeys.length > 0) {
+          throw new Error("--inputJson은 다른 --key 플래그와 함께 쓸 수 없습니다");
+        }
+        input = parseInputJson(args.inputJson);
+      }
       // eslint-disable-next-line no-console
       console.log(JSON.stringify(attachMeta(await tool.handler(input)), null, 2));
     } catch (err) {
@@ -125,6 +130,19 @@ function parseInputJson(value: unknown): unknown {
   return JSON.parse(value);
 }
 
+// Keys whose schema type is numeric across registered tools. All-digit values for
+// any other key (e.g. venueId, jurisdiction) must stay strings to satisfy z.string().
+const NUMERIC_ARG_KEYS = new Set([
+  "expectedCrowd",
+  "limit",
+  "latitude",
+  "longitude",
+  "ttlMinutes",
+  "dueSoonMinutes",
+  "nx",
+  "ny",
+]);
+
 function parseKeyValueArgs(tokens: string[]): Record<string, unknown> {
   const out: Record<string, unknown> = {};
   for (let i = 0; i < tokens.length; i += 1) {
@@ -136,13 +154,13 @@ function parseKeyValueArgs(tokens: string[]): Record<string, unknown> {
       out[key] = true;
       continue;
     }
-    out[key] = coerceArgValue(next);
+    out[key] = coerceArgValue(key, next);
     i += 1;
   }
   return out;
 }
 
-function coerceArgValue(raw: string): unknown {
+function coerceArgValue(key: string, raw: string): unknown {
   if (raw === "true") return true;
   if (raw === "false") return false;
   if (/^[\[{]/.test(raw)) {
@@ -152,7 +170,7 @@ function coerceArgValue(raw: string): unknown {
       return raw;
     }
   }
-  if (/^-?\d+(\.\d+)?$/.test(raw)) return Number(raw);
+  if (NUMERIC_ARG_KEYS.has(key) && /^-?\d+(\.\d+)?$/.test(raw)) return Number(raw);
   return raw;
 }
 

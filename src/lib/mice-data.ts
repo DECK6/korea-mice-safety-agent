@@ -439,7 +439,7 @@ export function findWorkerSafetyReferences(filters: {
   });
 }
 
-function normalizeEventTypeForLookup(eventType: string): string {
+export function normalizeEventTypeForLookup(eventType: string): string {
   return eventType === "outdoor_event" ? "festival" : eventType;
 }
 

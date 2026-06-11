@@ -1,4 +1,5 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, copyFileSync, existsSync, mkdirSync, openSync, fsyncSync, closeSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { createHash, randomUUID } from "node:crypto";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { VERSION } from "../version.js";
@@ -30,6 +31,9 @@ export interface MiceIssue {
   detectedAt: string;
   createdAt: string;
   updatedAt: string;
+  recordedAt: string;
+  seq: number;
+  prevHash: string;
 }
 
 export interface MiceEvidence {
@@ -38,9 +42,14 @@ export interface MiceEvidence {
   actionId?: string;
   evidenceType: "photo" | "video" | "document" | "note";
   localPath?: string;
+  fileSha256?: string | null;
+  fileBytes?: number | null;
   description: string;
   capturedAt: string;
   createdAt: string;
+  recordedAt: string;
+  seq: number;
+  prevHash: string;
 }
 
 export interface MiceAction {
@@ -78,6 +87,9 @@ export interface MiceCommandDecision {
   supersededAt?: string;
   supersededByDecisionId?: string;
   createdAt: string;
+  recordedAt: string;
+  seq: number;
+  prevHash: string;
 }
 
 export interface MiceRunsheetItem {
@@ -105,6 +117,8 @@ export interface MiceRunsheetItem {
 
 export interface MiceOperationsState {
   version: string;
+  seqCounter: number;
+  lastHash: string;
   issues: MiceIssue[];
   evidences: MiceEvidence[];
   actions: MiceAction[];
@@ -125,19 +139,61 @@ function storePath(): string {
   return join(storeDir(), "operations.json");
 }
 
+function backupPath(): string {
+  return join(storeDir(), "operations.json.bak");
+}
+
+function journalPath(): string {
+  return join(storeDir(), "operations-journal.jsonl");
+}
+
 function nowIso(): string {
   return new Date().toISOString();
 }
 
 function createId(prefix: string): string {
-  const stamp = new Date().toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
-  const random = Math.random().toString(36).slice(2, 8);
-  return `${prefix}_${stamp}_${random}`;
+  const stamp = new Date().toISOString().replace(/[-:.TZ]/g, "");
+  return `${prefix}_${stamp}_${randomUUID()}`;
+}
+
+function canonicalJson(record: unknown): string {
+  return JSON.stringify(record, Object.keys(record as Record<string, unknown>).sort());
+}
+
+function hashRecord(record: unknown): string {
+  return createHash("sha256").update(canonicalJson(record)).digest("hex");
+}
+
+// Stamps non-overridable server recordedAt + monotonic seq + hash-chain prevHash on a new
+// record, appends it to the append-only journal, and advances the chain. The record object is
+// mutated in place so callers keep a reference to the stamped version.
+function sealRecord<T extends { recordedAt?: string; seq?: number; prevHash?: string }>(
+  state: MiceOperationsState,
+  kind: string,
+  record: T,
+): T {
+  state.seqCounter = (state.seqCounter ?? 0) + 1;
+  record.recordedAt = nowIso();
+  record.seq = state.seqCounter;
+  record.prevHash = state.lastHash ?? "";
+  const recordHash = hashRecord(record);
+  state.lastHash = recordHash;
+  appendFileSync(journalPath(), `${JSON.stringify({ kind, recordHash, record })}\n`);
+  return record;
+}
+
+// Appends a non-record audit event (e.g. illegal transition) to the journal without disturbing
+// the snapshot's hash chain.
+function journalAnomaly(detail: Record<string, unknown>): void {
+  mkdirSync(storeDir(), { recursive: true });
+  appendFileSync(journalPath(), `${JSON.stringify({ kind: "anomaly", at: nowIso(), ...detail })}\n`);
 }
 
 function initialState(): MiceOperationsState {
   return {
     version: VERSION,
+    seqCounter: 0,
+    lastHash: "",
     issues: [],
     evidences: [],
     actions: [],
@@ -158,8 +214,10 @@ function commandScopeKey(decision: Pick<MiceCommandDecision, "eventName" | "zone
   return `${decision.eventName}|${decision.zone ?? "*"}`;
 }
 
-function decisionOrderValue(decision: Pick<MiceCommandDecision, "effectiveAt" | "createdAt" | "id">): string {
-  return `${decision.effectiveAt}|${decision.createdAt}|${decision.id}`;
+function decisionOrderValue(decision: Pick<MiceCommandDecision, "recordedAt" | "effectiveAt" | "createdAt" | "id">): string {
+  // recordedAt is the non-overridable server timestamp and is the authoritative audit/ordering key
+  // (caller-supplied effectiveAt is declared-but-untrusted and could be backdated).
+  return `${decision.recordedAt ?? ""}|${decision.effectiveAt}|${decision.createdAt}|${decision.id}`;
 }
 
 function recomputeLegacyCommandLifecycle(decisions: MiceCommandDecision[]): MiceCommandDecision[] {
@@ -208,6 +266,8 @@ function migrateState(state: MiceOperationsState): MiceOperationsState {
   const hasLegacyDecision = commandDecisions.some((decision) => !decision.status);
   return {
     ...state,
+    seqCounter: state.seqCounter ?? 0,
+    lastHash: state.lastHash ?? "",
     issues: state.issues ?? [],
     evidences: state.evidences ?? [],
     actions: state.actions ?? [],
@@ -216,26 +276,55 @@ function migrateState(state: MiceOperationsState): MiceOperationsState {
   };
 }
 
+function parseStore(path: string): MiceOperationsState {
+  return JSON.parse(readFileSync(path, "utf8")) as MiceOperationsState;
+}
+
 export function readStore(): StoreSnapshot {
   const dir = storeDir();
   const path = storePath();
   mkdirSync(dir, { recursive: true });
   if (!existsSync(path)) {
     const state = initialState();
-    writeFileSync(path, `${JSON.stringify(state, null, 2)}\n`);
+    writeStore(state);
     return { dir, state };
   }
-  return { dir, state: migrateState(JSON.parse(readFileSync(path, "utf8")) as MiceOperationsState) };
+  try {
+    return { dir, state: migrateState(parseStore(path)) };
+  } catch {
+    // Primary snapshot is corrupt (e.g. partial write before atomic rename landed).
+    // Fall back to the rolling backup so the audit trail survives.
+    if (existsSync(backupPath())) {
+      return { dir, state: migrateState(parseStore(backupPath())) };
+    }
+    throw new Error(`operations.json is corrupt and no usable ${backupPath()} backup exists`);
+  }
 }
 
 export function writeStore(state: MiceOperationsState): StoreSnapshot {
   const dir = storeDir();
+  const path = storePath();
   mkdirSync(dir, { recursive: true });
-  writeFileSync(storePath(), `${JSON.stringify(state, null, 2)}\n`);
+  const serialized = `${JSON.stringify(state, null, 2)}\n`;
+  // Roll the current good snapshot into the backup before we overwrite it.
+  if (existsSync(path)) {
+    copyFileSync(path, backupPath());
+  }
+  // Write to a temp file in the SAME directory, fsync, then atomically rename over the target
+  // (rename is atomic on POSIX, so a crash mid-write never leaves a half-written operations.json).
+  const tmpPath = join(dir, `operations.json.tmp-${process.pid}-${Date.now()}`);
+  const fd = openSync(tmpPath, "w");
+  try {
+    writeFileSync(fd, serialized);
+    fsyncSync(fd);
+  } finally {
+    closeSync(fd);
+  }
+  renameSync(tmpPath, path);
   return { dir, state };
 }
 
-export function registerIssue(input: Omit<MiceIssue, "id" | "status" | "createdAt" | "updatedAt"> & { status?: IssueStatus }): StoreSnapshot & { issue: MiceIssue } {
+export function registerIssue(input: Omit<MiceIssue, "id" | "status" | "createdAt" | "updatedAt" | "recordedAt" | "seq" | "prevHash"> & { status?: IssueStatus }): StoreSnapshot & { issue: MiceIssue } {
   const snapshot = readStore();
   const timestamp = nowIso();
   const issue: MiceIssue = {
@@ -244,13 +333,17 @@ export function registerIssue(input: Omit<MiceIssue, "id" | "status" | "createdA
     status: input.status ?? "open",
     createdAt: timestamp,
     updatedAt: timestamp,
+    recordedAt: "",
+    seq: 0,
+    prevHash: "",
   };
+  sealRecord(snapshot.state, "issue", issue);
   snapshot.state.issues.push(issue);
   const saved = writeStore(snapshot.state);
   return { ...saved, issue };
 }
 
-export function recordEvidence(input: Omit<MiceEvidence, "id" | "createdAt">): StoreSnapshot & { evidence: MiceEvidence } {
+export function recordEvidence(input: Omit<MiceEvidence, "id" | "createdAt" | "recordedAt" | "seq" | "prevHash">): StoreSnapshot & { evidence: MiceEvidence } {
   const snapshot = readStore();
   if (!snapshot.state.issues.some((issue) => issue.id === input.issueId)) {
     throw new Error(`Unknown issueId: ${input.issueId}`);
@@ -259,7 +352,11 @@ export function recordEvidence(input: Omit<MiceEvidence, "id" | "createdAt">): S
     ...input,
     id: createId("evidence"),
     createdAt: nowIso(),
+    recordedAt: "",
+    seq: 0,
+    prevHash: "",
   };
+  sealRecord(snapshot.state, "evidence", evidence);
   snapshot.state.evidences.push(evidence);
   const saved = writeStore(snapshot.state);
   return { ...saved, evidence };
@@ -302,6 +399,20 @@ export function completeAction(input: {
   if (!action) throw new Error(`Unknown actionId: ${input.actionId}`);
   const issue = snapshot.state.issues.find((item) => item.id === action.issueId);
   if (!issue) throw new Error(`Unknown issueId: ${action.issueId}`);
+  // Reject double-complete / completing a cancelled action so the original completion record is
+  // never silently overwritten; log the illegal transition to the append-only journal.
+  if (action.status === "completed" || action.status === "cancelled") {
+    journalAnomaly({
+      kind: "anomaly",
+      anomaly: "illegal_action_transition",
+      actionId: action.id,
+      issueId: issue.id,
+      from: action.status,
+      to: "completed",
+      attemptedBy: input.completedBy,
+    });
+    throw new Error(`Action ${action.id} is already ${action.status}; cannot complete again`);
+  }
   action.status = "completed";
   action.completedAt = nowIso();
   action.completionNote = input.completedBy ? `${input.completionNote} (완료자: ${input.completedBy})` : input.completionNote;
@@ -343,7 +454,7 @@ function applyNewCommandLifecycle(state: MiceOperationsState, commandDecision: M
   }
 }
 
-export function recordCommandDecision(input: Omit<MiceCommandDecision, "id" | "createdAt" | "status">): StoreSnapshot & { commandDecision: MiceCommandDecision } {
+export function recordCommandDecision(input: Omit<MiceCommandDecision, "id" | "createdAt" | "status" | "recordedAt" | "seq" | "prevHash">): StoreSnapshot & { commandDecision: MiceCommandDecision } {
   const snapshot = readStore();
   if (input.issueId && !snapshot.state.issues.some((issue) => issue.id === input.issueId)) {
     throw new Error(`Unknown issueId: ${input.issueId}`);
@@ -353,9 +464,13 @@ export function recordCommandDecision(input: Omit<MiceCommandDecision, "id" | "c
     id: createId("command"),
     status: "informational",
     createdAt: nowIso(),
+    recordedAt: "",
+    seq: 0,
+    prevHash: "",
   };
   snapshot.state.commandDecisions.push(commandDecision);
   applyNewCommandLifecycle(snapshot.state, commandDecision);
+  sealRecord(snapshot.state, "command_decision", commandDecision);
   const saved = writeStore(snapshot.state);
   return { ...saved, commandDecision };
 }
@@ -388,6 +503,27 @@ export function resolveCommandDecision(input: {
       ? `No active command decision found for id: ${input.commandDecisionId}`
       : "No active command decision found for the requested event/zone");
   }
+  // Validate the resolution is a release-type decision applied to a still-active target.
+  if (!isReleaseCommandDecisionType(input.resolutionType)) {
+    journalAnomaly({
+      anomaly: "illegal_command_resolution",
+      targetDecisionId: targetDecision.id,
+      from: targetDecision.status,
+      resolutionType: input.resolutionType,
+      decidedBy: input.decidedBy,
+    });
+    throw new Error(`resolutionType ${input.resolutionType} is not a valid release/all_clear resolution`);
+  }
+  if (targetDecision.status !== "active") {
+    journalAnomaly({
+      anomaly: "illegal_command_resolution",
+      targetDecisionId: targetDecision.id,
+      from: targetDecision.status,
+      resolutionType: input.resolutionType,
+      decidedBy: input.decidedBy,
+    });
+    throw new Error(`Command decision ${targetDecision.id} is ${targetDecision.status}; only active decisions can be resolved`);
+  }
 
   const effectiveAt = input.effectiveAt ?? nowIso();
   const resolutionDecision: MiceCommandDecision = {
@@ -404,6 +540,9 @@ export function resolveCommandDecision(input: {
     notifyTargets: input.notifyTargets ?? targetDecision.notifyTargets,
     conditionsForResume: input.conditionsMet ?? [],
     createdAt: nowIso(),
+    recordedAt: "",
+    seq: 0,
+    prevHash: "",
   };
 
   snapshot.state.commandDecisions.push(resolutionDecision);
@@ -412,6 +551,7 @@ export function resolveCommandDecision(input: {
   targetDecision.releasedByDecisionId = resolutionDecision.id;
   targetDecision.releaseReason = input.reason;
   targetDecision.conditionsMet = input.conditionsMet ?? [];
+  sealRecord(snapshot.state, "command_decision", resolutionDecision);
 
   const saved = writeStore(snapshot.state);
   return { ...saved, targetDecision, resolutionDecision };
@@ -495,6 +635,19 @@ export function updateRunsheetItem(input: {
   }
   if (input.actionId && !snapshot.state.actions.some((action) => action.id === input.actionId)) {
     throw new Error(`Unknown actionId: ${input.actionId}`);
+  }
+  // 'done' is terminal: reject transitions that would re-open it and discard the original
+  // completedAt; log the illegal transition to the append-only journal.
+  if (item.status === "done" && input.status !== "done") {
+    journalAnomaly({
+      anomaly: "illegal_runsheet_transition",
+      itemId: item.id,
+      eventName: item.eventName,
+      from: item.status,
+      to: input.status,
+      attemptedBy: input.updatedBy,
+    });
+    throw new Error(`Runsheet item ${item.id} is done; cannot transition to ${input.status}`);
   }
 
   item.status = input.status;

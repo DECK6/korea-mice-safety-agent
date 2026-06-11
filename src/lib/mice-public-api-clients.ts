@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { loadEnvOnce } from "./env.js";
 import { fetchPerformanceFacilities } from "./kcisa-client.js";
 
@@ -39,15 +40,81 @@ interface RequestResult {
   text: string;
 }
 
+// Light schemas guarding only the fields actually read below. Upstream payloads
+// are validated before mapping so a malformed/hostile response cannot be cast
+// straight into a record stamped as verified.
+const RecordObject = z.record(z.string(), z.unknown());
+
+const TourApiSchema = z.object({
+  response: z.object({
+    header: z.object({ resultCode: z.string().optional(), resultMsg: z.string().optional() }).optional(),
+    body: z.object({
+      totalCount: z.number().optional(),
+      items: z.object({ item: z.union([RecordObject, z.array(RecordObject)]).optional() }).optional(),
+    }).optional(),
+  }).optional(),
+});
+
+const FoodSafetySchema = z.object({
+  I0490: z.object({
+    total_count: z.string().optional(),
+    RESULT: z.object({ CODE: z.string().optional(), MSG: z.string().optional() }).optional(),
+    row: z.array(RecordObject).optional(),
+  }).optional(),
+});
+
+const SeoulCityDataSchema = z.object({
+  RESULT: z.object({ "RESULT.CODE": z.string().optional(), "RESULT.MESSAGE": z.string().optional() }).optional(),
+  CITYDATA: z.object({
+    AREA_NM: z.string().optional(),
+    AREA_CD: z.string().optional(),
+    LIVE_PPLTN_STTS: z.array(RecordObject).optional(),
+  }).optional(),
+});
+
 function envValue(name: string, env?: NodeJS.ProcessEnv): string | undefined {
   if (!env) loadEnvOnce();
   return (env ?? process.env)[name];
 }
 
+// 에러 메시지에서 키/시크릿이 새지 않도록 마스킹한다.
+// 쿼리 파라미터(serviceKey/authKey/service/*Key/*key)와 URL 경로에 박힌
+// 키 세그먼트(FoodSafety: /api/<key>/..., Seoul: /<key>/json/...)를 모두 가린다.
 function safeError(err: unknown): string {
   const message = err instanceof Error ? err.message : String(err);
-  return message.replace(/serviceKey=[^&\s]+/gi, "serviceKey=[redacted]")
-    .replace(/authKey=[^&\s]+/gi, "authKey=[redacted]");
+  return message
+    // service=<key>, serviceKey=<key>, authKey=<key>, anything ending in Key/key.
+    .replace(/(\b[\w-]*(?:[Kk]ey)\b)=[^&\s]+/g, "$1=[redacted]")
+    .replace(/(\bservice)=[^&\s]+/gi, "$1=[redacted]")
+    // path-embedded keys: long opaque segments inside a URL path leak the raw key.
+    .replace(/(https?:\/\/[^\s/]+\/)([^/\s?#]{16,})/gi, "$1[redacted]")
+    .replace(/(\/api\/)[^/\s?#]+/gi, "$1[redacted]");
+}
+
+// Cap response bodies so a hostile/misbehaving upstream cannot exhaust memory.
+export const MAX_RESPONSE_BYTES = 8 * 1024 * 1024;
+
+export async function readTextCapped(response: Response, maxBytes = MAX_RESPONSE_BYTES): Promise<string> {
+  const declared = Number(response.headers.get("content-length"));
+  if (Number.isFinite(declared) && declared > maxBytes) {
+    throw new Error(`response body too large (${declared} bytes > ${maxBytes})`);
+  }
+  if (!response.body) return (await response.text()).slice(0, maxBytes);
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > maxBytes) throw new Error(`response body too large (> ${maxBytes} bytes)`);
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  return new TextDecoder().decode(Buffer.concat(chunks.map((chunk) => Buffer.from(chunk))));
 }
 
 async function requestText(url: string, options: ApiClientOptions = {}): Promise<RequestResult> {
@@ -56,7 +123,7 @@ async function requestText(url: string, options: ApiClientOptions = {}): Promise
   const timer = setTimeout(() => controller.abort(), options.timeoutMs ?? 12_000);
   try {
     const response = await fetchImpl(url, { signal: controller.signal });
-    const text = await response.text();
+    const text = await readTextCapped(response);
     return { ok: response.ok, httpStatus: response.status, text };
   } finally {
     clearTimeout(timer);
@@ -220,13 +287,11 @@ export async function fetchTourApiFestivalCatalog(options: ApiClientOptions & {
   try {
     const response = await requestText(url, options);
     if (!response.ok) throw new Error(`TourAPI HTTP ${response.httpStatus}`);
-    const parsed = JSON.parse(response.text) as {
-      response?: { header?: { resultCode?: string; resultMsg?: string }; body?: { totalCount?: number; items?: { item?: unknown } } };
-    };
+    const parsed = TourApiSchema.parse(JSON.parse(response.text));
     const header = parsed.response?.header;
     if (header?.resultCode !== "0000") throw new Error(`TourAPI resultCode ${header?.resultCode ?? "unknown"}: ${header?.resultMsg ?? ""}`);
     const rawItems = parsed.response?.body?.items?.item;
-    const items = Array.isArray(rawItems) ? rawItems as Array<Record<string, string>> : rawItems ? [rawItems as Record<string, string>] : [];
+    const items = (Array.isArray(rawItems) ? rawItems : rawItems ? [rawItems] : []) as Array<Record<string, string>>;
     const records = items.map((item) => ({
       sourceId: "TOUR_API_EVENT_CATALOG",
       recordType: "tourism_event",
@@ -341,16 +406,16 @@ export async function fetchFoodSafetyRecalls(options: ApiClientOptions & {
   try {
     const response = await requestText(`https://openapi.foodsafetykorea.go.kr/api/${encodeURIComponent(key)}/I0490/json/1/${options.limit ?? 5}`, options);
     if (!response.ok) throw new Error(`FoodSafety HTTP ${response.httpStatus}`);
-    const parsed = JSON.parse(response.text) as { I0490?: { total_count?: string; RESULT?: { CODE?: string; MSG?: string }; row?: Array<Record<string, string>> } };
+    const parsed = FoodSafetySchema.parse(JSON.parse(response.text));
     const body = parsed.I0490;
     if (!body) throw new Error("FoodSafety I0490 response missing");
-    const records = (body.row ?? []).map((item) => ({
+    const records = ((body.row ?? []) as Array<Record<string, string>>).map((item) => ({
       sourceId: "FOOD_SAFETY_KOREA",
       recordType: "food_recall",
       title: item.PRDTNM ?? item.PRDLST_NM ?? item.PRDT_NM ?? "회수 제품명 미상",
       summary: item.RTRVLPRVNS ?? item.RTRVL_GRD ?? undefined,
       sourceConfidence: "medium" as const,
-      verificationStatus: "live_verified" as const,
+      verificationStatus: "source_verified" as const,
       fields: {
         reportNo: item.PRDLST_REPORT_NO,
         company: item.BSSHNM ?? item.BSSH_NM,
@@ -374,12 +439,10 @@ export async function fetchSeoulCityData(options: ApiClientOptions & {
   if (!key) return missing("SEOUL_REALTIME_CITY_DATA", "SEOUL_OPENAPI_KEY");
   try {
     const areaName = options.areaName ?? "강남역";
-    const response = await requestText(`http://openapi.seoul.go.kr:8088/${key}/json/citydata/1/5/${encodeURIComponent(areaName)}`, options);
+    // Seoul's open data portal supports https; use it so the API key is not sent in cleartext.
+    const response = await requestText(`https://openapi.seoul.go.kr:8088/${key}/json/citydata/1/5/${encodeURIComponent(areaName)}`, options);
     if (!response.ok) throw new Error(`Seoul OpenAPI HTTP ${response.httpStatus}`);
-    const parsed = JSON.parse(response.text) as {
-      RESULT?: { "RESULT.CODE"?: string; "RESULT.MESSAGE"?: string };
-      CITYDATA?: { AREA_NM?: string; AREA_CD?: string; LIVE_PPLTN_STTS?: Array<Record<string, string>> };
-    };
+    const parsed = SeoulCityDataSchema.parse(JSON.parse(response.text));
     if (parsed.RESULT?.["RESULT.CODE"] !== "INFO-000") {
       throw new Error(`Seoul OpenAPI ${parsed.RESULT?.["RESULT.CODE"] ?? "unknown"}: ${parsed.RESULT?.["RESULT.MESSAGE"] ?? ""}`);
     }
@@ -389,8 +452,8 @@ export async function fetchSeoulCityData(options: ApiClientOptions & {
       recordType: "realtime_city_crowd",
       title: parsed.CITYDATA?.AREA_NM ?? areaName,
       jurisdiction: "서울특별시",
-      sourceConfidence: "high",
-      verificationStatus: "live_verified",
+      sourceConfidence: "medium",
+      verificationStatus: "source_verified",
       fields: {
         areaCode: parsed.CITYDATA?.AREA_CD,
         congestionLevel: population.AREA_CONGEST_LVL,
