@@ -40,7 +40,8 @@ Rubric: [TRUSTED_SAFETY_LAW_RUBRIC.md](TRUSTED_SAFETY_LAW_RUBRIC.md), `2026-05-3
 
 ## Remaining Risks
 
-- 95점은 법률 자문 품질 보증이 아니라 offline source coverage와 validation gate 기준의 신뢰도 점수다.
+- 95점은 자체 평가(self-assessed)이며 외부 기관의 독립 검증을 거친 점수가 아니다. 법률 자문 품질 보증이 아니라 offline source coverage와 validation gate 기준의 신뢰도 점수다.
+- **`verified`/`article_verified`의 의미 한정**: 이 라벨은 law.go.kr 원문 텍스트를 자동 수집해 키워드로 대조한 "스크래퍼 매칭 성공" 상태를 뜻하며, 사람의 현행성·조문 선택 적합성·시행일 검수를 거쳤다는 뜻이 아니다. 스크래퍼가 폐지·개정 전 조문이나 잘못된 하위 조항을 가져와도 동일하게 `verified`로 표기될 수 있다. 자동 검증 커버리지를 인간 검증과 동일시하지 않는다. (조문별 시행일·검수자 메타는 후속 보강 대상)
 - 조례 조문은 751건 모두 발췌됐지만, 실제 제출기한·서식·관할부서 해석은 행사 전 관할기관 확인이 필요하다.
 - 베뉴 공식 링크 33건은 reachable이지만, 일부 베뉴는 운영규정 전문 문서가 아니라 공식 시설/임대 페이지 요약 기반이다.
 - 실제 밀도·폭·체류시간 기반의 정량 인파 시뮬레이션은 아직 별도 실시간/공간 데이터가 필요하다.

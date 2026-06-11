@@ -1,6 +1,6 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { lstatSync, mkdirSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { isAbsolute, join, resolve, sep } from "node:path";
 import type { Paragraph as DocxParagraph } from "docx";
 import { z } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
@@ -121,8 +121,9 @@ function nowStamp(): string {
 }
 
 function csvEscape(value: string): string {
-  if (!/[",\n]/.test(value)) return value;
-  return `"${value.replace(/"/g, '""')}"`;
+  const neutralized = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+  if (neutralized === value && !/[",\n]/.test(value)) return value;
+  return `"${neutralized.replace(/"/g, '""')}"`;
 }
 
 function htmlEscape(value: unknown): string {
@@ -211,7 +212,7 @@ async function writeDocx(markdown: string, filePath: string): Promise<void> {
     ],
   });
   const buffer = await docx.Packer.toBuffer(doc);
-  writeFileSync(filePath, buffer);
+  writeFileSync(filePath, buffer, { flag: "wx" });
 }
 
 function bulletRows(markdown: string, sheet: string): Array<Record<string, string>> {
@@ -1539,8 +1540,20 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   };
   const submissionSchedule = buildSubmissionSchedule(input, exportDocumentBundle.submissionChecklist);
   const submissionPackages = buildSubmissionPackages(input, exportDocumentBundle, review, submissionSchedule);
-  const bundleDir = input.outputDir ?? join(defaultRoot(), "plan-bundles", `${safeName(input.eventName)}-${nowStamp()}`);
+  const root = defaultRoot();
+  let bundleDir: string;
+  if (input.outputDir) {
+    if (input.outputDir.split(/[\\/]/).includes("..")) throw new Error("outputDir에 상위 경로 이동(..)은 허용되지 않습니다");
+    const resolved = resolve(root, input.outputDir);
+    if (!isAbsolute(input.outputDir) && resolved !== root && !resolved.startsWith(root + sep)) {
+      throw new Error("outputDir가 허용 루트를 벗어났습니다");
+    }
+    bundleDir = resolved;
+  } else {
+    bundleDir = join(root, "plan-bundles", `${safeName(input.eventName)}-${nowStamp()}`);
+  }
   mkdirSync(bundleDir, { recursive: true });
+  if (lstatSync(bundleDir).isSymbolicLink()) throw new Error("bundleDir가 심볼릭 링크입니다");
   const detailsDir = join(bundleDir, "bundle");
   const documentsDir = join(detailsDir, "documents");
   const tablesDir = join(detailsDir, "tables");
@@ -1565,14 +1578,14 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     submissionPackages,
   });
   const executiveReportPath = join(bundleDir, "00-executive-report.md");
-  writeFileSync(executiveReportPath, `${executiveReport}\n`);
+  writeFileSync(executiveReportPath, `${executiveReport}\n`, { flag: "wx" });
   files.push(executiveReportPath);
   const executiveHtmlReportPath = join(bundleDir, "00-executive-report.html");
-  writeFileSync(executiveHtmlReportPath, `${executiveHtmlReport}\n`);
+  writeFileSync(executiveHtmlReportPath, `${executiveHtmlReport}\n`, { flag: "wx" });
   files.push(executiveHtmlReportPath);
 
   const fullPlanPath = join(documentsDir, "00-full-safety-plan.md");
-  writeFileSync(fullPlanPath, `${planMarkdown}\n`);
+  writeFileSync(fullPlanPath, `${planMarkdown}\n`, { flag: "wx" });
   files.push(fullPlanPath);
 
   const docxPath = join(documentsDir, "safety-plan.docx");
@@ -1583,7 +1596,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     const value = exportDocumentBundle[key];
     if (typeof value !== "string" || value.trim().length === 0) continue;
     const filePath = join(documentsDir, fileName);
-    writeFileSync(filePath, `${value}\n`);
+    writeFileSync(filePath, `${value}\n`, { flag: "wx" });
     files.push(filePath);
   }
 
@@ -1606,20 +1619,20 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     if (!markdown.trim()) continue;
     const filePath = join(tablesDir, fileName);
     const csv = fileName === "submission-checklist.csv" || fileName === "operations-runsheet.csv" ? tableToCsv(markdown) : bulletsToCsv(markdown, title);
-    writeFileSync(filePath, `${csv}\n`);
+    writeFileSync(filePath, `${csv}\n`, { flag: "wx" });
     files.push(filePath);
   }
 
   const foodLpgExecutionCsv = tableToCsv(String(documentBundle.foodLpgChecklist ?? ""));
   if (foodLpgExecutionCsv.trim()) {
     const filePath = join(tablesDir, "food-lpg-execution.csv");
-    writeFileSync(filePath, `${foodLpgExecutionCsv}\n`);
+    writeFileSync(filePath, `${foodLpgExecutionCsv}\n`, { flag: "wx" });
     files.push(filePath);
   }
   const performanceStageExecutionCsv = tableToCsv(String(documentBundle.performanceStagePlan ?? ""));
   if (performanceStageExecutionCsv.trim()) {
     const filePath = join(tablesDir, "performance-stage-execution.csv");
-    writeFileSync(filePath, `${performanceStageExecutionCsv}\n`);
+    writeFileSync(filePath, `${performanceStageExecutionCsv}\n`, { flag: "wx" });
     files.push(filePath);
   }
 
@@ -1636,11 +1649,11 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
       ])
       .filter((row) => row[3])),
   ];
-  writeFileSync(visitorNoticesCsvPath, `${visitorNoticeRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`);
+  writeFileSync(visitorNoticesCsvPath, `${visitorNoticeRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`, { flag: "wx" });
   files.push(visitorNoticesCsvPath);
 
   const reviewSummaryPath = join(documentsDir, "17-review-summary.md");
-  writeFileSync(reviewSummaryPath, `${reviewMarkdown}\n`);
+  writeFileSync(reviewSummaryPath, `${reviewMarkdown}\n`, { flag: "wx" });
   files.push(reviewSummaryPath);
 
   const reviewCoveragePath = join(tablesDir, "review-coverage-matrix.csv");
@@ -1655,7 +1668,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
       String((row.evidence as AnyRecord | undefined)?.line ?? ""),
     ]),
   ];
-  writeFileSync(reviewCoveragePath, `${coverageRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`);
+  writeFileSync(reviewCoveragePath, `${coverageRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`, { flag: "wx" });
   files.push(reviewCoveragePath);
 
   const reviewFindingsPath = join(tablesDir, "review-findings.csv");
@@ -1670,18 +1683,18 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
       String((finding.evidence as AnyRecord | undefined)?.line ?? ""),
     ]),
   ];
-  writeFileSync(reviewFindingsPath, `${findingRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`);
+  writeFileSync(reviewFindingsPath, `${findingRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`, { flag: "wx" });
   files.push(reviewFindingsPath);
 
   const submissionSchedulePath = join(documentsDir, "18-submission-raci-calendar.md");
-  writeFileSync(submissionSchedulePath, `${submissionScheduleMarkdown(input, submissionSchedule)}\n`);
+  writeFileSync(submissionSchedulePath, `${submissionScheduleMarkdown(input, submissionSchedule)}\n`, { flag: "wx" });
   files.push(submissionSchedulePath);
 
   const submissionScheduleCsvPath = join(tablesDir, "submission-raci-calendar.csv");
   const submissionScheduleCsv = submissionScheduleRows(submissionSchedule)
     .map((row) => row.map(csvEscape).join(","))
     .join("\n");
-  writeFileSync(submissionScheduleCsvPath, `${submissionScheduleCsv}\n`);
+  writeFileSync(submissionScheduleCsvPath, `${submissionScheduleCsv}\n`, { flag: "wx" });
   files.push(submissionScheduleCsvPath);
 
   const packageDir = join(detailsDir, "submission-packages");
@@ -1700,7 +1713,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     ]),
   ];
   const packageIndexPath = join(packageDir, "package-index.csv");
-  writeFileSync(packageIndexPath, `${packageIndexRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`);
+  writeFileSync(packageIndexPath, `${packageIndexRows.map((row) => row.map(csvEscape).join(",")).join("\n")}\n`, { flag: "wx" });
   files.push(packageIndexPath);
 
   const packageManifest = {
@@ -1721,12 +1734,12 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     })),
   };
   const packageManifestPath = join(packageDir, "manifest.json");
-  writeFileSync(packageManifestPath, `${JSON.stringify(packageManifest, null, 2)}\n`);
+  writeFileSync(packageManifestPath, `${JSON.stringify(packageManifest, null, 2)}\n`, { flag: "wx" });
   files.push(packageManifestPath);
 
   for (const item of submissionPackages) {
     const filePath = join(packageDir, item.fileName);
-    writeFileSync(filePath, `${item.markdown}\n`);
+    writeFileSync(filePath, `${item.markdown}\n`, { flag: "wx" });
     files.push(filePath);
   }
 
@@ -1777,7 +1790,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
       documents: item.documentKeys,
     })),
   };
-  writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+  writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, { flag: "wx" });
   files.push(manifestPath);
 
   const text = [

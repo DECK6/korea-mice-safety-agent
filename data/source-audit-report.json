@@ -1,6 +1,6 @@
 {
   "version": "1.0.3",
-  "generatedAt": "2026-05-31",
+  "generatedAt": "2026-06-11",
   "policy": "MICE 안전 에이전트는 법령/조례/안전수칙/베뉴 정보를 런타임 오프라인으로 조회하되, 원문 재배포 제한이 있는 자료는 요약·링크·체크포인트 방식으로만 사용한다.",
   "statuses": [
     "reusable",
@@ -142,7 +142,7 @@
     },
     {
       "id": "COEX_EXHIBITION_GUIDE_2025",
-      "title": "전시장 이용 안내서(2025)",
+      "title": "전시장 이용 안내서(2023-10-10 개정판)",
       "publisher": "코엑스 BUSINESS",
       "url": "https://business.coex.co.kr/post-ex-notice/2023%EB%85%84-%EC%A0%84%EC%8B%9C%EC%9E%A5-%EC%9D%B4%EC%9A%A9-%EC%95%88%EB%82%B4%EC%84%9Cver-2023-10-10/",
       "documentFormat": "pdf",
@@ -152,13 +152,13 @@
       "verificationStatus": "source_verified",
       "currentAsOf": "2026-05-31",
       "reviewBy": "2026-08-31",
-      "freshnessStatus": "current",
+      "freshnessStatus": "older_edition_link_reachable",
       "linkVerificationStatus": "reachable",
       "linkCheckedAt": "2026-05-31",
       "linkHttpStatus": 200,
       "licenseStatus": "summary_only",
       "licenseReason": "베뉴 PDF/HWP는 운영·안전 체크포인트 요약과 출처 링크 중심으로 사용한다.",
-      "reuseCaution": "베뉴 문서. 원문 복제보다 링크와 체크포인트 요약 사용."
+      "reuseCaution": "베뉴 문서. 원문 복제보다 링크와 체크포인트 요약 사용. 원문은 2023-10-10 개정판이므로 천장고·바닥하중·반입금지 등 수치는 베뉴 최신본으로 재확인 필요."
     },
     {
       "id": "COEX_FACILITY_OPERATION_RULE_2023",

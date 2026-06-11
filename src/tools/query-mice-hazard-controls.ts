@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
 import type { McpToolResult, ToolDefinition } from "../lib/types.js";
-import { MICE_DATA } from "../lib/mice-data.js";
+import { MICE_DATA, normalizeEventTypeForLookup } from "../lib/mice-data.js";
 
 const inputSchema = z.object({
   eventType: z.string().optional(),
@@ -11,8 +11,9 @@ const inputSchema = z.object({
 
 async function handler(rawInput: unknown): Promise<McpToolResult> {
   const input = inputSchema.parse(rawInput ?? {});
+  const normalizedEventType = input.eventType ? normalizeEventTypeForLookup(input.eventType) : undefined;
   const hazards = MICE_DATA.hazards
-    .filter((hazard) => !input.eventType || hazard.eventTypes.includes(input.eventType))
+    .filter((hazard) => !normalizedEventType || hazard.eventTypes.some((type) => normalizeEventTypeForLookup(type) === normalizedEventType))
     .filter((hazard) => !input.riskLevel || hazard.riskLevel === input.riskLevel)
     .filter((hazard) => !input.trigger || hazard.triggers.includes(input.trigger));
 

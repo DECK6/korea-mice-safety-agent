@@ -51,6 +51,7 @@ interface ReviewContext {
   hasVipSecurity: boolean;
   hasVenue: boolean;
   largeCrowd: boolean;
+  midCrowd: boolean;
   roadUse: boolean;
   unhostedCrowd: boolean;
 }
@@ -163,6 +164,7 @@ function buildReviewContext(input: Input): ReviewContext {
   const hasVipSecurity = Boolean(input.vipSecurity || hasEvent(input, "vip_event"));
   const hasVenue = Boolean(input.venueId || isExhibition || isConference || isPerformance);
   const largeCrowd = typeof input.expectedCrowd === "number" && input.expectedCrowd >= 1000;
+  const midCrowd = typeof input.expectedCrowd === "number" && input.expectedCrowd >= 300 && input.expectedCrowd < 1000;
   return {
     isOutdoor,
     isExhibition,
@@ -174,6 +176,7 @@ function buildReviewContext(input: Input): ReviewContext {
     hasVipSecurity,
     hasVenue,
     largeCrowd,
+    midCrowd,
     roadUse: input.roadUse === true,
     unhostedCrowd: input.unhostedCrowd === true,
   };
@@ -463,6 +466,7 @@ function review(text: string, input: Input, documentBundle?: DocumentBundle): { 
   const hasLpg = input.lpgUse === true;
   const hasWorkerWork = context.hasWorkerWork;
   const largeCrowd = context.largeCrowd;
+  const midCrowd = context.midCrowd;
   const unhostedCrowd = context.unhostedCrowd;
   const needsBuildingEgressReview = Boolean(input.venueId || context.isExhibition || context.isConference || input.temporaryStructures);
   const documentCoverageMatrix = buildDocumentCoverageMatrix(text, input, documentBundle);
@@ -490,7 +494,9 @@ function review(text: string, input: Input, documentBundle?: DocumentBundle): { 
   addFinding(findings, unhostedCrowd && !includesAny(text, ["방송", "전광판", "SNS", "문자", "상황전파"]), "warning", "unhosted_crowd_public_notice", "무주최 다중운집 외부 안내 채널이 부족합니다.", "주최자가 없는 상황에서도 방송, 전광판, 역사 안내, SNS, 문자, 현장 안내요원 문구를 일관되게 관리하세요.", { requirementId: "REQ_UNHOSTED_CROWD_NOTICE" });
 
   addFinding(findings, largeCrowd && !includesAny(text, ["인파", "동선", "혼잡", "밀집"]), "error", "crowd_control", "대규모 인파 관리계획이 누락됐습니다.", "구역별 수용능력, 게이트 처리량, 대기열, 우회동선, 혼잡 단계별 통제 기준을 넣으세요.", { requirementId: "REQ_CROWD_FLOW" });
+  addFinding(findings, midCrowd && !includesAny(text, ["인파", "동선", "혼잡", "밀집"]), "warning", "crowd_control", "중규모 인파(300명 이상) 동선·혼잡 검토가 부족합니다.", "단일 게이트·병목·대기열 등 중규모 행사의 입퇴장 동선과 혼잡 단계 기준을 넣으세요. 1,000명 미만이라도 병목 위험은 별도 검토가 필요합니다.", { requirementId: "REQ_CROWD_FLOW_MID" });
   addFinding(findings, largeCrowd && !includesAny(text, ["AED", "응급", "의무실", "119"]), "warning", "medical_response", "응급의료/AED 대응이 부족합니다.", "AED, 의무실, 119 신고, 구급차 접근동선, 이송병원 정보를 넣으세요.", { requirementId: "REQ_MEDICAL_RESPONSE" });
+  addFinding(findings, midCrowd && !includesAny(text, ["AED", "응급", "의무실", "119"]), "warning", "medical_response", "중규모 인파 응급의료/AED 대응이 부족합니다.", "AED, 응급처치, 119 신고, 구급차 접근동선, 이송병원 정보를 중규모 행사에도 반영하세요.", { requirementId: "REQ_MEDICAL_RESPONSE_MID" });
   addFinding(findings, largeCrowd && !includesAny(text, ["관리책임자", "월 1회", "사용교육", "응급장비", "구급차"]), "warning", "medical_aed_management", "AED 관리책임자·점검·사용교육 또는 구급 이송 기준이 부족합니다.", "AED 관리책임자, 월 1회 점검, 사용교육, 관리서류, 구급차 장비·소독·통신·운행기록 기준을 넣으세요.", { requirementId: "REQ_MEDICAL_AED_MANAGEMENT" });
   addFinding(findings, largeCrowd && !includesAny(text, ["NEMC", "응급의료기관 정보", "AED 위치 정보", "NEMC_AED"]), "warning", "public_api_evidence", "대규모 행사인데 응급의료기관/AED 공공 API 운영 증거가 부족합니다.", "NEMC 응급의료기관/AED 후보를 오프라인 스냅샷 또는 D-day live 조회로 확인하고 실제 접근 가능성, 이송병원, 119 협의 기준을 계획서에 넣으세요.", { requirementId: "REQ_PUBLIC_API_NEMC_AED" });
   addFinding(findings, largeCrowd && !includesAny(text, ["특정소방대상물", "수용인원", "별표 7", "소방안전관리자"]), "warning", "fire_evacuation_annex", "대규모 행사 소방 하위기준 체크포인트가 부족합니다.", "특정소방대상물, 수용인원 산정, 소방시설, 소방안전관리자/보조자 기준을 점검표에 반영하세요.", { requirementId: "REQ_FIRE_FACILITY_ANNEX" });

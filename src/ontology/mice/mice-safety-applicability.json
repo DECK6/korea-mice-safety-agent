@@ -241,6 +241,28 @@
       ]
     },
     {
+      "id": "mid_crowd_rule",
+      "match": {
+        "field": "expectedCrowd",
+        "operator": ">=",
+        "value": 300
+      },
+      "label": "중규모 인파(권고) — 동선·의료 사전검토",
+      "lawIds": [
+        "framework_act_disaster_safety",
+        "emergency_medical_service_act"
+      ],
+      "dutyIds": [
+        "mice_crowd_management_plan",
+        "medical_aed_response_plan"
+      ],
+      "hazardIds": [
+        "crowd_density_high",
+        "ingress_egress_bottleneck",
+        "medical_emergency"
+      ]
+    },
+    {
       "id": "unhosted_crowd_rule",
       "match": {
         "flag": "unhostedCrowd"
@@ -458,6 +480,20 @@
         "ingress_egress_bottleneck",
         "weather_outdoor_event"
       ]
+    },
+    {
+      "id": "outdoor_advertising_rule",
+      "match": {
+        "flag": "outdoorAdvertising"
+      },
+      "label": "옥외광고물·현수막·지주형 안내판·전광류 설치",
+      "lawIds": [
+        "outdoor_advertisements_act"
+      ],
+      "dutyIds": [
+        "road_traffic_and_outdoor_signage_permit"
+      ],
+      "hazardIds": []
     },
     {
       "id": "vip_security_rule",

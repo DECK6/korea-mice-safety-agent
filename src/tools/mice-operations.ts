@@ -1,6 +1,7 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { isAbsolute, join, resolve, sep } from "node:path";
 import { z } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
 import { objectRows, writeXlsxFile, type XlsxCell, type XlsxSheet } from "../lib/simple-xlsx.js";
@@ -49,7 +50,7 @@ const registerIssueInputSchema = z.object({
   jurisdiction: z.string().optional(),
   zone: z.string().optional(),
   relatedHazards: z.array(z.string()).optional().default([]),
-  detectedAt: z.string().optional(),
+  detectedAt: z.string().datetime().optional().describe("declared-but-untrusted ISO 시각. 감사 정렬 기준은 서버 recordedAt입니다."),
 });
 
 const recordEvidenceInputSchema = z.object({
@@ -58,7 +59,7 @@ const recordEvidenceInputSchema = z.object({
   evidenceType: EvidenceTypeSchema.default("note"),
   localPath: z.string().optional().describe("사진/영상/문서가 로컬에 있을 때 경로만 기록합니다. 파일 복사는 하지 않습니다."),
   description: z.string().min(1),
-  capturedAt: z.string().optional(),
+  capturedAt: z.string().datetime().optional().describe("declared-but-untrusted ISO 시각. 감사 정렬 기준은 서버 recordedAt입니다."),
 });
 
 const assignActionInputSchema = z.object({
@@ -167,7 +168,7 @@ const commandDecisionInputSchema = z.object({
   decidedBy: z.string().min(1),
   issueId: z.string().optional(),
   zone: z.string().optional(),
-  effectiveAt: z.string().optional(),
+  effectiveAt: z.string().datetime().optional().describe("declared-but-untrusted ISO 시각. 감사 정렬 기준은 서버 recordedAt입니다."),
   notifyTargets: z.array(z.string()).optional().default([]),
   conditionsForResume: z.array(z.string()).optional().default([]),
 });
@@ -179,7 +180,7 @@ const resolveCommandDecisionInputSchema = z.object({
   resolutionType: z.enum(["event_resume", "all_clear"]).optional().default("all_clear"),
   reason: z.string().min(1),
   decidedBy: z.string().min(1),
-  effectiveAt: z.string().optional(),
+  effectiveAt: z.string().datetime().optional().describe("declared-but-untrusted ISO 시각. 감사 정렬 기준은 서버 recordedAt입니다."),
   notifyTargets: z.array(z.string()).optional().default([]),
   conditionsMet: z.array(z.string()).optional().default([]),
 });
@@ -223,6 +224,20 @@ const visitorNoticeInputSchema = z.object({
 
 function nowIso(): string {
   return new Date().toISOString();
+}
+
+// At capture time, fingerprint the referenced artifact (sha256 + byte size) so later tampering of
+// the file is detectable. If the file is missing/unreadable, return nulls and continue.
+function fingerprintEvidenceFile(localPath?: string): { fileSha256: string | null; fileBytes: number | null } {
+  if (!localPath || !existsSync(localPath)) return { fileSha256: null, fileBytes: null };
+  try {
+    const stat = statSync(localPath);
+    if (!stat.isFile()) return { fileSha256: null, fileBytes: null };
+    const sha256 = createHash("sha256").update(readFileSync(localPath)).digest("hex");
+    return { fileSha256: sha256, fileBytes: stat.size };
+  } catch {
+    return { fileSha256: null, fileBytes: null };
+  }
 }
 
 type Severity = z.infer<typeof SeveritySchema>;
@@ -386,6 +401,21 @@ function inferIssueTypeFromRunsheetItem(item: MiceRunsheetItem): string {
 
 function defaultRoot(): string {
   return process.env.MICE_LOCAL_DIR ?? join(homedir(), ".korea-mice-safety-agent");
+}
+
+// Reject "../" traversal in a caller-supplied output directory and confine relative paths to
+// defaultRoot(); an explicit absolute path is the operator's choice and is allowed, mirroring the
+// plan-bundle export confinement.
+function confineToRoot(outputDir: string): string {
+  const root = resolve(defaultRoot());
+  if (outputDir.split(/[\\/]/).includes("..")) {
+    throw new Error(`outputDir must not contain ".." traversal segments: ${outputDir}`);
+  }
+  const resolved = resolve(root, outputDir);
+  if (!isAbsolute(outputDir) && resolved !== root && !resolved.startsWith(root + sep)) {
+    throw new Error(`outputDir escapes the allowed root (${root}): ${outputDir}`);
+  }
+  return resolved;
 }
 
 function safeName(value: string): string {
@@ -852,9 +882,12 @@ export const recordMiceEvidenceTool: ToolDefinition = {
   inputSchema: recordEvidenceInputSchema,
   handler(rawInput: unknown): McpToolResult {
     const input = recordEvidenceInputSchema.parse(rawInput ?? {});
+    const fingerprint = fingerprintEvidenceFile(input.localPath);
     const result = recordEvidence({
       ...input,
       capturedAt: input.capturedAt ?? nowIso(),
+      fileSha256: fingerprint.fileSha256,
+      fileBytes: fingerprint.fileBytes,
     });
     return {
       content: [{
@@ -1315,7 +1348,9 @@ export const exportMiceOperationsDashboardTool: ToolDefinition = {
   async handler(rawInput: unknown): Promise<McpToolResult> {
     const input = exportDashboardInputSchema.parse(rawInput ?? {});
     const dashboard = buildDashboardData(input);
-    const exportDir = input.outputDir ?? join(defaultRoot(), "operation-dashboards", `${safeName(input.eventName ?? "all-events")}-${nowStamp()}`);
+    const exportDir = input.outputDir
+      ? confineToRoot(input.outputDir)
+      : join(defaultRoot(), "operation-dashboards", `${safeName(input.eventName ?? "all-events")}-${nowStamp()}`);
     mkdirSync(exportDir, { recursive: true });
     const xlsxPath = join(exportDir, "operations-dashboard.xlsx");
     await writeDashboardXlsx(dashboard, xlsxPath);

@@ -33,6 +33,7 @@ const inputSchema = z.object({
   outdoor: z.boolean().optional(),
   outdoorEvent: z.boolean().optional(),
   roadUse: z.boolean().optional(),
+  outdoorAdvertising: z.boolean().optional().describe("현수막, 배너, 지주형 안내판, 전광류 등 옥외광고물/외부 안내표지 설치 여부"),
   unhostedCrowd: z.boolean().optional().describe("주최자·주관자 없이 자발적/예측형 다중운집이 발생하는 상황"),
   temporaryStructures: z.boolean().optional(),
   temporaryElectricity: z.boolean().optional(),
@@ -54,12 +55,11 @@ function eventTypeFromFlags(input: Input): string[] {
   const explicitEventTypes = new Set((input.eventTypes ?? []).map(normalizeEventType));
   const hasFestivalContext = explicitEventTypes.has("festival") || input.outdoor || input.outdoorEvent || input.roadUse;
   if (input.outdoor || input.outdoorEvent || input.roadUse) inferred.push("festival");
-  if ((input.temporaryStructures || input.setupTeardown || input.workAtHeight || input.heavyObjectHandling) && !hasFestivalContext && !input.performance) {
+  if ((input.temporaryStructures || input.setupTeardown || input.workAtHeight || input.heavyObjectHandling || input.hotWork || input.temporaryElectricity) && !hasFestivalContext && !input.performance) {
     inferred.push("exhibition");
   }
   if (input.performance) inferred.push("performance");
   if (input.foodService || input.lpgUse) inferred.push("food_event");
-  if (input.personalDataProcessing && !input.performance && !input.foodService) inferred.push("conference");
   if (input.vipSecurity) inferred.push("vip_event");
   return inferred;
 }
@@ -150,6 +150,21 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
       }
       : null;
 
+  const scopeWarnings: string[] = [];
+  if (input.venueId && !resolvedVenue) {
+    scopeWarnings.push(`지정한 베뉴 ID '${input.venueId}'를 찾을 수 없습니다 (오타 또는 미지원 베뉴). 베뉴 규정은 결과에 반영되지 않았습니다.`);
+  }
+  if (typeof input.expectedCrowd === "number" && input.expectedCrowd > 100000) {
+    scopeWarnings.push(`예상 인원 ${input.expectedCrowd.toLocaleString("ko-KR")}명은 본 도구의 검증 범위(약 10만 명)를 초과합니다. 초대형 다중운집은 별도 정밀 계획과 관계기관 사전협의가 필요합니다.`);
+  }
+  const knownKeys = new Set(Object.keys(inputSchema.shape));
+  const ignoredKeys = rawInput && typeof rawInput === "object" && !Array.isArray(rawInput)
+    ? Object.keys(rawInput as Record<string, unknown>).filter((key) => !knownKeys.has(key))
+    : [];
+  if (ignoredKeys.length > 0) {
+    scopeWarnings.push(`인식하지 못해 무시된 입력 항목: ${ignoredKeys.join(", ")}. 드론·불꽃·발파 등 별도 법령이 적용되는 조건이면 해당 법령을 직접 확인하세요.`);
+  }
+
   const commonLaws = findLaws(MICE_DATA.applicability.commonLawIds);
   const conditionalLawIds = [
     ...matchedEvents.flatMap((event) => event.conditionalLawIds),
@@ -217,12 +232,15 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
     localOrdinances,
     sources,
     needsReview,
+    scopeWarnings,
     _meta: COMMON_RESPONSE_META,
   };
 
   const text = [
     "# MICE 안전 적용성 결과",
     `입력: ${JSON.stringify(input)}`,
+    scopeWarnings.length > 0 ? `\n## ⚠ 검증 범위 경고\n${scopeWarnings.map((warning) => `- ${warning}`).join("\n")}` : "",
+    `\n> 데이터 기준일 ${COMMON_RESPONSE_META.dataAsOf} · ${COMMON_RESPONSE_META.freshnessWarning}`,
     "",
     "## 행사 유형",
     matchedEvents.length > 0

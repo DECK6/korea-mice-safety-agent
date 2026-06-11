@@ -1,5 +1,6 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { URL } from "node:url";
+import { ZodError } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
 import { baseMiceEventInputSchema } from "../lib/mice-event-input-schema.js";
 import { MICE_DATA, strictnessLabel } from "../lib/mice-data.js";
@@ -657,6 +658,13 @@ function responseHtml(res: ServerResponse, body: string): void {
   res.end(body);
 }
 
+function isClientInputError(err: unknown): boolean {
+  if (err instanceof ZodError) return true;
+  if (err instanceof SyntaxError) return true;
+  if (err instanceof Error && err.message === "request body too large") return true;
+  return false;
+}
+
 async function readJson(req: IncomingMessage): Promise<unknown> {
   const chunks: Buffer[] = [];
   let size = 0;
@@ -832,9 +840,19 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
 export async function startWebServer(options: WebServerOptions = {}): Promise<void> {
   const host = options.host ?? process.env.HOST ?? "127.0.0.1";
   const port = options.port ?? Number(process.env.PORT ?? 4317);
+  if (host !== "127.0.0.1" && host !== "::1" && host !== "localhost") {
+    // eslint-disable-next-line no-console
+    console.error(`⚠ 비루프백 주소(${host})에 바인딩 — 인증/접근제어 없음. 신뢰된 네트워크에서만 사용하세요.`);
+  }
   const server = createServer((req, res) => {
     route(req, res).catch((err: unknown) => {
-      responseJson(res, 500, { error: err instanceof Error ? err.message : String(err) });
+      if (isClientInputError(err)) {
+        responseJson(res, 400, { error: "invalid request" });
+        return;
+      }
+      // eslint-disable-next-line no-console
+      console.error(`[${SERVER_NAME}] internal error`, err);
+      responseJson(res, 500, { error: "internal error" });
     });
   });
   await new Promise<void>((resolve, reject) => {

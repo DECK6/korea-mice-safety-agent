@@ -107,6 +107,7 @@ function zip(files: Array<{ path: string; data: Buffer }>): Buffer {
 
 function xml(value: string): string {
   return value
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -272,5 +273,5 @@ export function writeXlsxFile(filePath: string, inputSheets: XlsxSheet[]): void 
     })),
   ];
 
-  writeFileSync(filePath, zip(files));
+  writeFileSync(filePath, zip(files), { flag: "wx" });
 }

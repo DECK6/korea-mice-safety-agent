@@ -1,5 +1,10 @@
 import { loadEnvOnce } from "./env.js";
 
+// Match requestText() in mice-public-api-clients.ts: a hung upstream must not block forever,
+// and an unbounded body must not exhaust memory.
+const KCISA_TIMEOUT_MS = 12_000;
+const KCISA_MAX_RESPONSE_BYTES = 8 * 1024 * 1024;
+
 // 문체부 문화데이터 오픈API (KCISA 한국문화정보원) 클라이언트.
 // 예술경영지원센터 KOPIS 공연시설별 상세정보(전국 약 2,111곳)를 venue 인덱스로 가져온다.
 // 내장 fetch만 사용하며, 응답은 XML이므로 평면 <item> 레코드를 정규화한다.
@@ -89,11 +94,22 @@ async function callKcisa(
   // 사이트 안내: 조건이 없어도 keyword 파라미터는 포함해 호출한다.
   params.set("keyword", query.keyword ?? "");
 
-  const response = await fetch(`${url}?${params.toString()}`);
-  if (!response.ok) {
-    throw new Error(`KCISA HTTP ${response.status} ${response.statusText}`);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), KCISA_TIMEOUT_MS);
+  let xml: string;
+  try {
+    const response = await fetch(`${url}?${params.toString()}`, { signal: controller.signal });
+    if (!response.ok) {
+      throw new Error(`KCISA HTTP ${response.status} ${response.statusText}`);
+    }
+    const declared = Number(response.headers.get("content-length"));
+    if (Number.isFinite(declared) && declared > KCISA_MAX_RESPONSE_BYTES) {
+      throw new Error(`KCISA response body too large (${declared} bytes > ${KCISA_MAX_RESPONSE_BYTES})`);
+    }
+    xml = (await response.text()).slice(0, KCISA_MAX_RESPONSE_BYTES);
+  } finally {
+    clearTimeout(timer);
   }
-  const xml = await response.text();
   const page = parseKcisaXml(xml);
   if (page.resultCode !== "0000") {
     const hint = RESULT_CODE_HINTS[page.resultCode] ?? page.resultMsg;
