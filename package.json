@@ -39,6 +39,8 @@
     "sync:venue-pdfs": "node scripts/sync-venue-pdfs.mjs",
     "build:venue-index": "node scripts/build-venue-facility-index.mjs",
     "build:public-venue-summaries": "node scripts/generate-public-venue-summaries.mjs",
+    "build:persona-sample": "node scripts/build-nemotron-persona-sample.mjs",
+    "sync:public-site": "node scripts/sync-public-site.mjs",
     "build:kopis-directory": "node build/cli.js build-venue-directory",
     "validate:venue-corpus": "node scripts/validate-venue-corpus.mjs",
     "audit:deps": "npm audit --omit=dev --audit-level=high",

@@ -18,6 +18,7 @@ const COPY_FILES = [
   "kopis-venue-directory.json",
   "worker-safety-references.json",
   "source-registry.json",
+  "nemotron-persona-sample.json",
 ];
 
 const ORDINANCE_RECORD_FIELDS = [

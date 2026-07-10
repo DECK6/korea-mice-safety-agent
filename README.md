@@ -14,6 +14,7 @@ Korean MICE 현장 운영 안전용 MCP 서버입니다. 축제·박람회·컨�
 - 계획서/검수: 안전관리계획서 단일 문서가 아니라 인파·동선, 도로·교통 실행계획, 무주최 다중운집 관계기관 공동대응계획, 베뉴 시설·수용·하역·전기 제약, 작업자 안전, 공연·무대 실행계획, 소방·피난, 식음료/LPG 현장 실행 상태표, 개인정보/CCTV, 출입통제·보안검색/VIP 동선, 응급의료·AED·구급 이송, 스태프 배치, 비상연락망, 일일점검표, 현장 운영 런시트, 제출·협의 체크리스트, 사고보고서 템플릿을 묶음으로 생성하고 검수
 - 파일 export: 생성된 문서 묶음을 Markdown, CSV 체크리스트, 도로·교통 실행계획, 무주최 다중운집 대응계획, 공연·무대 실행 CSV, 식음료/LPG 실행 CSV, 현장 운영 런시트, `.docx`, `.xlsx`로 로컬 디렉터리에 저장
 - 운영 루프: 현장 이슈 등록, 이슈 유형별 권장팀·초동 SLA·escalation·playbook 자동 부여, 대피개시/행사중지/재개승인 등 지휘 판단 기록, 방송·무전·문자 템플릿 조회, 증빙 기록, 담당자 조치 배정, 조치 완료, 사고/조치 보고서를 로컬 저장소에 기록
+- 합성 관람객 QA: Nemotron-Personas-Korea 비식별 소형 샘플로 전국/개최지역/고령층/가족/현장작업자 코호트를 만들고, 기존 계획서를 사람 중심 사각지대와 아동·장애·비한국어 필수 센티널로 스트레스 테스트
 
 ## 릴리스 상태
 
@@ -43,6 +44,8 @@ node build/cli.js call generate_mice_safety_plan --inputJson '{"eventName":"고�
 node build/cli.js call review_mice_safety_plan --inputJson '{"eventName":"고양 야외 푸드 페스티벌","eventTypes":["festival","food_event"],"jurisdiction":"경기도 고양시","expectedCrowd":5000,"outdoorEvent":true,"roadUse":true,"foodService":true,"lpgUse":true,"temporaryStructures":true,"temporaryElectricity":true,"setupTeardown":true,"workAtHeight":true,"heavyObjectHandling":true}'
 node build/cli.js call export_mice_safety_plan_bundle --inputJson '{"eventName":"고양 야외 푸드 페스티벌","eventDate":"2026-06-20","eventTypes":["festival","food_event"],"jurisdiction":"경기도 고양시","expectedCrowd":5000,"outdoorEvent":true,"roadUse":true,"foodService":true,"lpgUse":true,"temporaryStructures":true,"temporaryElectricity":true,"setupTeardown":true,"workAtHeight":true,"heavyObjectHandling":true}'
 node build/cli.js call register_mice_safety_issue --inputJson '{"eventName":"고양 야외 푸드 페스티벌","issueType":"crowd_bottleneck","severity":"high","description":"B게이트 대기열이 보행동선을 침범함","zone":"B게이트","relatedHazards":["ingress_egress_bottleneck"]}'
+node build/cli.js call sample_mice_persona_cohort --inputJson '{"preset":"senior_inclusive","cohortSize":100,"seed":20260710}'
+node build/cli.js call stress_test_mice_safety_plan --inputJson '{"eventName":"고령층 포함 야외축제","eventTypes":["festival"],"expectedCrowd":3000,"outdoorEvent":true,"personaPreset":"senior_inclusive","cohortSize":100}'
 ```
 
 `outdoor_event`는 입력 편의용 별칭이며 내부 적용성 판정에서는 `festival`로 정규화합니다.
@@ -68,6 +71,9 @@ curl -sS -X POST http://127.0.0.1:4317/api/simulate \
 curl -sS -X POST http://127.0.0.1:4317/api/plan-review \
   -H 'content-type: application/json' \
   --data '{"eventName":"고양 야외 푸드 페스티벌","eventTypes":["festival","outdoor_event","food_event"],"jurisdiction":"경기도 고양시","expectedCrowd":8000,"outdoorEvent":true,"roadUse":true,"foodService":true,"lpgUse":true,"temporaryStructures":true,"temporaryElectricity":true,"setupTeardown":true}'
+curl -sS -X POST http://127.0.0.1:4317/api/persona-stress-test \
+  -H 'content-type: application/json' \
+  --data '{"eventName":"고령층 포함 야외축제","eventTypes":["festival"],"expectedCrowd":3000,"outdoorEvent":true,"personaPreset":"senior_inclusive","cohortSize":100}'
 ```
 
 MCP 서버:
@@ -169,6 +175,8 @@ npm run diff:ontology
 - `export_mice_operations_dashboard`: 운영본부 SLA 대시보드, 미해결 조치, 지휘 판단을 `.xlsx` 상황판으로 저장
 - `query_mice_communication_templates`: 지휘 판단별 방송·무전·문자·관계기관 공유 템플릿 조회
 - `generate_mice_visitor_notice`: 방문객 대상 안전 안내를 한국어·영어·일본어·중국어 오프라인 템플릿으로 생성
+- `sample_mice_persona_cohort`: Nemotron-Personas-Korea 비식별 소형 샘플에서 합성 관람객 코호트를 구성. 실제 참석자·행동·의료·사고 예측 용도가 아님
+- `stress_test_mice_safety_plan`: 기존 계획서 검수와 분리해 합성 관람객 QA 커버리지 및 아동·장애·비한국어 센티널 공백을 반환
 - `list_mice_laws`: MICE 법령 레지스트리 조회
 - `query_mice_legal_articles`: 로컬 법령 조문 온톨로지 조회
 - `query_mice_legal_annexes`: 로컬 별표·서식 요약팩 조회
