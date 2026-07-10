@@ -28,6 +28,13 @@ ontology pack for Korean MICE site-operation safety.
   metadata (facility name, address, category, contact) is stored offline in
   `kopis-venue-directory.json` for jurisdiction lookup. Reconfirm jurisdiction
   and contacts with the venue before an actual event.
+- `nemotron-persona-sample.json` is a normalized 320-row deterministic sample
+  derived from NVIDIA's `nvidia/Nemotron-Personas-Korea` public-core dataset,
+  licensed under CC BY 4.0. NVIDIA is the data developer. The pack excludes
+  source UUIDs, synthetic names, and narrative personas and is provided only
+  for synthetic cohort safety-plan QA. Source and revision metadata are stored
+  inside the JSON pack. It must not be used for attendance, behavior, medical,
+  incident, or individual-risk prediction.
 - API service keys (`LAW_OC`, `KCISA_KOPIS_FACILITY_KEY`) must never be
   committed. Pass them through the process environment or `.env` (git-ignored).
 

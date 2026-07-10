@@ -31,6 +31,7 @@ const requiredFiles = [
   "data/markdown/public/venue-safety-summaries.md",
   "build/ontology/mice/venue-safety-rules.json",
   "build/ontology/mice/venue-facility-index.json",
+  "build/ontology/mice/nemotron-persona-sample.json",
 ];
 
 const violations = [];

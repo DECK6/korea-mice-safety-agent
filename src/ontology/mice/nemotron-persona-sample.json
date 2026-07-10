@@ -1,0 +1,3228 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-07-10T03:53:34.008Z",
+  "provenance": {
+    "title": "Nemotron-Personas-Korea public core sample",
+    "dataset": "nvidia/Nemotron-Personas-Korea",
+    "sourceUrl": "https://huggingface.co/datasets/nvidia/Nemotron-Personas-Korea",
+    "revision": "ada0f5b53a38bb5a30cce09358adde883c1ab63a",
+    "license": "cc-by-4.0",
+    "sourceRowCount": 1000000,
+    "sampledRowCount": 320,
+    "samplingMethod": "deterministic evenly-spaced offsets (20 x 16) via Hugging Face datasets-server",
+    "variant": "public-core-26-field"
+  },
+  "usageBoundary": {
+    "purpose": "Synthetic cohort safety-plan QA; not attendance, behavior, medical, or incident prediction.",
+    "browserPolicy": "Only normalized demographic fields are shipped. Synthetic names, UUIDs, and narrative personas are excluded.",
+    "legalBoundary": "Persona results must not change statutory applicability decisions."
+  },
+  "limitations": [
+    "The source contains synthetic adults aged 19 and older; it does not cover children.",
+    "The public core variant does not provide validated disability, mobility, language-proficiency, or event-attendance labels.",
+    "A 320-row deterministic sample is for product QA, not official population estimation.",
+    "Rare but safety-critical needs must be tested with explicit sentinel scenarios regardless of sample prevalence."
+  ],
+  "personas": [
+    {
+      "id": "nemotron-ko-0001",
+      "age": 74,
+      "sex": "남자",
+      "province": "광주",
+      "district": "광주-서구",
+      "educationLevel": "초등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "하역 및 적재 관련 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0002",
+      "age": 71,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-서초구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "회계 사무원"
+    },
+    {
+      "id": "nemotron-ko-0003",
+      "age": 73,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-양천구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0004",
+      "age": 46,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-성남시 분당구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·미혼 형제자매와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0005",
+      "age": 50,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-기장군",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 서비스 관련 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0006",
+      "age": 33,
+      "sex": "여자",
+      "province": "인천",
+      "district": "인천-연수구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "경리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0007",
+      "age": 31,
+      "sex": "남자",
+      "province": "경상북",
+      "district": "경상북-영주시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주",
+      "occupation": "강구조물 가공원"
+    },
+    {
+      "id": "nemotron-ko-0008",
+      "age": 76,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-양천구",
+      "educationLevel": "중학교",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0009",
+      "age": 44,
+      "sex": "남자",
+      "province": "강원",
+      "district": "강원-원주시",
+      "educationLevel": "고등학교",
+      "familyType": "기타2세대",
+      "occupation": "전화 상담원"
+    },
+    {
+      "id": "nemotron-ko-0010",
+      "age": 27,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-파주시",
+      "educationLevel": "고등학교",
+      "familyType": "기타3세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0011",
+      "age": 74,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-의정부시",
+      "educationLevel": "중학교",
+      "familyType": "혼자 거주",
+      "occupation": "음료 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0012",
+      "age": 61,
+      "sex": "남자",
+      "province": "부산",
+      "district": "부산-남구",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 일반 영업원"
+    },
+    {
+      "id": "nemotron-ko-0013",
+      "age": 61,
+      "sex": "남자",
+      "province": "제주",
+      "district": "제주-제주시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "부동산 컨설턴트"
+    },
+    {
+      "id": "nemotron-ko-0014",
+      "age": 26,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-마포구",
+      "educationLevel": "고등학교",
+      "familyType": "기타3세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0015",
+      "age": 76,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-부산진구",
+      "educationLevel": "중학교",
+      "familyType": "자녀·어머니와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0016",
+      "age": 69,
+      "sex": "남자",
+      "province": "강원",
+      "district": "강원-횡성군",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "건물 경비원"
+    },
+    {
+      "id": "nemotron-ko-0017",
+      "age": 74,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-강북구",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "운송장비 청소원"
+    },
+    {
+      "id": "nemotron-ko-0018",
+      "age": 28,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-송파구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "비친족 동거",
+      "occupation": "철도운송 관련 종사원"
+    },
+    {
+      "id": "nemotron-ko-0019",
+      "age": 86,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-강서구",
+      "educationLevel": "중학교",
+      "familyType": "혼자 거주 (배우자 별거)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0020",
+      "age": 56,
+      "sex": "여자",
+      "province": "전라남",
+      "district": "전라남-구례군",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "건물 청소원"
+    },
+    {
+      "id": "nemotron-ko-0021",
+      "age": 59,
+      "sex": "여자",
+      "province": "울산",
+      "district": "울산-동구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 돌봄 및 보건 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0022",
+      "age": 32,
+      "sex": "남자",
+      "province": "전라남",
+      "district": "전라남-여수시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "양식 조리사"
+    },
+    {
+      "id": "nemotron-ko-0023",
+      "age": 58,
+      "sex": "남자",
+      "province": "경상북",
+      "district": "경상북-칠곡군",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0024",
+      "age": 57,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-금천구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0025",
+      "age": 72,
+      "sex": "남자",
+      "province": "경상남",
+      "district": "경상남-김해시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "복지시설 생활 지도원"
+    },
+    {
+      "id": "nemotron-ko-0026",
+      "age": 37,
+      "sex": "남자",
+      "province": "충청남",
+      "district": "충청남-아산시",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "가스 생산기 조작원"
+    },
+    {
+      "id": "nemotron-ko-0027",
+      "age": 31,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-용인시 수지구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "품질 관리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0028",
+      "age": 53,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-부천시 원미구",
+      "educationLevel": "고등학교",
+      "familyType": "자녀와 거주 (배우자 별거)",
+      "occupation": "주방 보조원"
+    },
+    {
+      "id": "nemotron-ko-0029",
+      "age": 58,
+      "sex": "남자",
+      "province": "경상남",
+      "district": "경상남-통영시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "플랜트 배관공"
+    },
+    {
+      "id": "nemotron-ko-0030",
+      "age": 49,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-하남시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "경영 컨설턴트"
+    },
+    {
+      "id": "nemotron-ko-0031",
+      "age": 19,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-양천구",
+      "educationLevel": "고등학교",
+      "familyType": "아버지와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0032",
+      "age": 57,
+      "sex": "여자",
+      "province": "전라남",
+      "district": "전라남-여수시",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0033",
+      "age": 21,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-광진구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "전직 국가행정 사무원, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0034",
+      "age": 37,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-시흥시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0035",
+      "age": 53,
+      "sex": "남자",
+      "province": "세종",
+      "district": "세종-세종시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "영업 관리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0036",
+      "age": 29,
+      "sex": "여자",
+      "province": "인천",
+      "district": "인천-미추홀구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0037",
+      "age": 46,
+      "sex": "남자",
+      "province": "전북",
+      "district": "전북-전주시 완산구",
+      "educationLevel": "고등학교",
+      "familyType": "기타2세대",
+      "occupation": "소규모 상점 경영자"
+    },
+    {
+      "id": "nemotron-ko-0038",
+      "age": 27,
+      "sex": "남자",
+      "province": "충청북",
+      "district": "충청북-청주시 청원구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0039",
+      "age": 74,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-안성시",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "그 외 하역 및 적재 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0040",
+      "age": 78,
+      "sex": "여자",
+      "province": "전북",
+      "district": "전북-익산시",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "매장 계산원"
+    },
+    {
+      "id": "nemotron-ko-0041",
+      "age": 19,
+      "sex": "여자",
+      "province": "전북",
+      "district": "전북-전주시 완산구",
+      "educationLevel": "고등학교",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0042",
+      "age": 56,
+      "sex": "남자",
+      "province": "경상남",
+      "district": "경상남-함안군",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "승용차 및 승합차 운전원"
+    },
+    {
+      "id": "nemotron-ko-0043",
+      "age": 23,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-관악구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "그 외 미용 관련 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0044",
+      "age": 73,
+      "sex": "남자",
+      "province": "대구",
+      "district": "대구-서구",
+      "educationLevel": "초등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "건물 경비원"
+    },
+    {
+      "id": "nemotron-ko-0045",
+      "age": 35,
+      "sex": "여자",
+      "province": "충청북",
+      "district": "충청북-제천시",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "한식 조리사"
+    },
+    {
+      "id": "nemotron-ko-0046",
+      "age": 57,
+      "sex": "남자",
+      "province": "경상남",
+      "district": "경상남-김해시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "하역 및 적재 관련 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0047",
+      "age": 76,
+      "sex": "여자",
+      "province": "대전",
+      "district": "대전-유성구",
+      "educationLevel": "초등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0048",
+      "age": 51,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-구로구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·친인척과 거주",
+      "occupation": "식품 영업원"
+    },
+    {
+      "id": "nemotron-ko-0049",
+      "age": 43,
+      "sex": "남자",
+      "province": "부산",
+      "district": "부산-강서구",
+      "educationLevel": "고등학교",
+      "familyType": "자녀와 거주 (배우자 별거)",
+      "occupation": "선박 전기 설치원"
+    },
+    {
+      "id": "nemotron-ko-0050",
+      "age": 52,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-부천시 원미구",
+      "educationLevel": "초등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 건축 도장공"
+    },
+    {
+      "id": "nemotron-ko-0051",
+      "age": 23,
+      "sex": "남자",
+      "province": "강원",
+      "district": "강원-횡성군",
+      "educationLevel": "고등학교",
+      "familyType": "부모와 동거",
+      "occupation": "전화 상담원"
+    },
+    {
+      "id": "nemotron-ko-0052",
+      "age": 83,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-성동구",
+      "educationLevel": "초등학교",
+      "familyType": "기타2세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0053",
+      "age": 77,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-사하구",
+      "educationLevel": "초등학교",
+      "familyType": "자녀·어머니와 거주",
+      "occupation": "건물 청소원"
+    },
+    {
+      "id": "nemotron-ko-0054",
+      "age": 74,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-수원시 권선구",
+      "educationLevel": "중학교",
+      "familyType": "자녀·어머니와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0055",
+      "age": 56,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-고양시 일산서구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "마케팅 전문가"
+    },
+    {
+      "id": "nemotron-ko-0056",
+      "age": 73,
+      "sex": "남자",
+      "province": "충청북",
+      "district": "충청북-충주시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "형제자매와 동거 (가구주)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0057",
+      "age": 27,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-안양시 동안구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "어머니와 동거",
+      "occupation": "법무 사무원"
+    },
+    {
+      "id": "nemotron-ko-0058",
+      "age": 55,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-부산진구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0059",
+      "age": 53,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-성남시 수정구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0060",
+      "age": 85,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-양주시",
+      "educationLevel": "초등학교",
+      "familyType": "기타3세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0061",
+      "age": 61,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-파주시",
+      "educationLevel": "대학원",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0062",
+      "age": 81,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-구로구",
+      "educationLevel": "초등학교",
+      "familyType": "친인척과 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0063",
+      "age": 55,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-칠곡군",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "자동 조립라인 조작원"
+    },
+    {
+      "id": "nemotron-ko-0064",
+      "age": 50,
+      "sex": "남자",
+      "province": "충청북",
+      "district": "충청북-보은군",
+      "educationLevel": "고등학교",
+      "familyType": "비친족 동거",
+      "occupation": "지게차 운전원"
+    },
+    {
+      "id": "nemotron-ko-0065",
+      "age": 36,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-서대문구",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 상점 판매원"
+    },
+    {
+      "id": "nemotron-ko-0066",
+      "age": 27,
+      "sex": "여자",
+      "province": "인천",
+      "district": "인천-서구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0067",
+      "age": 27,
+      "sex": "남자",
+      "province": "전북",
+      "district": "전북-전주시 완산구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "그 외 물품 이동 장비 조작원"
+    },
+    {
+      "id": "nemotron-ko-0068",
+      "age": 51,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-미추홀구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "건설 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0069",
+      "age": 38,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-용인시 수지구",
+      "educationLevel": "대학원",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "데이터 분석가"
+    },
+    {
+      "id": "nemotron-ko-0070",
+      "age": 44,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-용인시 처인구",
+      "educationLevel": "중학교",
+      "familyType": "혼자 거주",
+      "occupation": "도로운송 사무원"
+    },
+    {
+      "id": "nemotron-ko-0071",
+      "age": 55,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-의정부시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀·어머니와 거주",
+      "occupation": "하역 및 적재 관련 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0072",
+      "age": 47,
+      "sex": "여자",
+      "province": "충청남",
+      "district": "충청남-아산시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "산업 특화 소프트웨어 프로그래머"
+    },
+    {
+      "id": "nemotron-ko-0073",
+      "age": 22,
+      "sex": "여자",
+      "province": "대구",
+      "district": "대구-달성군",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "어머니와 동거",
+      "occupation": "한식 조리사"
+    },
+    {
+      "id": "nemotron-ko-0074",
+      "age": 34,
+      "sex": "여자",
+      "province": "대구",
+      "district": "대구-달성군",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "음식 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0075",
+      "age": 89,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-사하구",
+      "educationLevel": "무학",
+      "familyType": "기타2세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0076",
+      "age": 33,
+      "sex": "남자",
+      "province": "부산",
+      "district": "부산-동래구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·미혼 형제자매와 거주",
+      "occupation": "그 외 일반 영업원"
+    },
+    {
+      "id": "nemotron-ko-0077",
+      "age": 58,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-하남시",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "계기 검침원"
+    },
+    {
+      "id": "nemotron-ko-0078",
+      "age": 81,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-수원시 팔달구",
+      "educationLevel": "고등학교",
+      "familyType": "친인척과 거주",
+      "occupation": "매장 계산원"
+    },
+    {
+      "id": "nemotron-ko-0079",
+      "age": 89,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-부산진구",
+      "educationLevel": "초등학교",
+      "familyType": "기타2세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0080",
+      "age": 39,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-마포구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0081",
+      "age": 23,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-영등포구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "아버지와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0082",
+      "age": 63,
+      "sex": "남자",
+      "province": "울산",
+      "district": "울산-울주군",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0083",
+      "age": 36,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-관악구",
+      "educationLevel": "고등학교",
+      "familyType": "부모와 동거",
+      "occupation": "시설 경비원"
+    },
+    {
+      "id": "nemotron-ko-0084",
+      "age": 69,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-안성시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0085",
+      "age": 70,
+      "sex": "남자",
+      "province": "경상남",
+      "district": "경상남-통영시",
+      "educationLevel": "초등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0086",
+      "age": 52,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-노원구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "건물 청소원"
+    },
+    {
+      "id": "nemotron-ko-0087",
+      "age": 33,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-군포시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "사무 보조원"
+    },
+    {
+      "id": "nemotron-ko-0088",
+      "age": 69,
+      "sex": "여자",
+      "province": "광주",
+      "district": "광주-서구",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "건물 청소원"
+    },
+    {
+      "id": "nemotron-ko-0089",
+      "age": 89,
+      "sex": "여자",
+      "province": "충청북",
+      "district": "충청북-영동군",
+      "educationLevel": "무학",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0090",
+      "age": 27,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-강남구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "마케팅 전문가"
+    },
+    {
+      "id": "nemotron-ko-0091",
+      "age": 24,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-관악구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "어머니와 동거",
+      "occupation": "일반 비서"
+    },
+    {
+      "id": "nemotron-ko-0092",
+      "age": 49,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-용인시 수지구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "소규모 상점 경영자"
+    },
+    {
+      "id": "nemotron-ko-0093",
+      "age": 63,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-고양시 덕양구",
+      "educationLevel": "대학원",
+      "familyType": "배우자와 거주",
+      "occupation": "그 외 경영 지원 관리자"
+    },
+    {
+      "id": "nemotron-ko-0094",
+      "age": 55,
+      "sex": "남자",
+      "province": "대구",
+      "district": "대구-서구",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "용접기 조작원"
+    },
+    {
+      "id": "nemotron-ko-0095",
+      "age": 37,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-구미시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "기타3세대",
+      "occupation": "유치원 교사"
+    },
+    {
+      "id": "nemotron-ko-0096",
+      "age": 26,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-강남구",
+      "educationLevel": "대학원",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0097",
+      "age": 68,
+      "sex": "남자",
+      "province": "전북",
+      "district": "전북-김제시",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0098",
+      "age": 68,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-안양시 동안구",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "건물 경비원"
+    },
+    {
+      "id": "nemotron-ko-0099",
+      "age": 67,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-관악구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0100",
+      "age": 27,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-김천시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0101",
+      "age": 51,
+      "sex": "여자",
+      "province": "충청북",
+      "district": "충청북-진천군",
+      "educationLevel": "초등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0102",
+      "age": 35,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-강서구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "어머니와 동거",
+      "occupation": "회계 사무원"
+    },
+    {
+      "id": "nemotron-ko-0103",
+      "age": 63,
+      "sex": "여자",
+      "province": "울산",
+      "district": "울산-남구",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "노인 및 장애인 돌봄 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0104",
+      "age": 53,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-서대문구",
+      "educationLevel": "대학원",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "조사 전문가"
+    },
+    {
+      "id": "nemotron-ko-0105",
+      "age": 35,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-성남시 중원구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "건물 경비원"
+    },
+    {
+      "id": "nemotron-ko-0106",
+      "age": 52,
+      "sex": "남자",
+      "province": "강원",
+      "district": "강원-홍천군",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 일반 영업원"
+    },
+    {
+      "id": "nemotron-ko-0107",
+      "age": 47,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-고양시 일산서구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0108",
+      "age": 35,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-성동구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "음식 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0109",
+      "age": 69,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-종로구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0110",
+      "age": 33,
+      "sex": "여자",
+      "province": "충청남",
+      "district": "충청남-천안시 서북구",
+      "educationLevel": "고등학교",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "회계 사무원"
+    },
+    {
+      "id": "nemotron-ko-0111",
+      "age": 64,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-화성시",
+      "educationLevel": "대학원",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0112",
+      "age": 80,
+      "sex": "여자",
+      "province": "울산",
+      "district": "울산-울주군",
+      "educationLevel": "무학",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0113",
+      "age": 82,
+      "sex": "남자",
+      "province": "경상북",
+      "district": "경상북-봉화군",
+      "educationLevel": "무학",
+      "familyType": "배우자와 거주",
+      "occupation": "지방행정 사무원"
+    },
+    {
+      "id": "nemotron-ko-0114",
+      "age": 52,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-금정구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "하역 및 적재 관련 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0115",
+      "age": 53,
+      "sex": "여자",
+      "province": "광주",
+      "district": "광주-북구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "보육교사"
+    },
+    {
+      "id": "nemotron-ko-0116",
+      "age": 62,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-수원시 장안구",
+      "educationLevel": "중학교",
+      "familyType": "기타2세대",
+      "occupation": "전직 매장 정리원, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0117",
+      "age": 27,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-송파구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0118",
+      "age": 91,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-노원구",
+      "educationLevel": "중학교",
+      "familyType": "친인척과 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0119",
+      "age": 64,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-고양시 덕양구",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0120",
+      "age": 61,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-파주시",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0121",
+      "age": 46,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-안산시 단원구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "중식 조리사"
+    },
+    {
+      "id": "nemotron-ko-0122",
+      "age": 54,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-성남시 분당구",
+      "educationLevel": "대학원",
+      "familyType": "혼자 거주 (배우자 별거)",
+      "occupation": "농림·수산업 및 수의학 교수"
+    },
+    {
+      "id": "nemotron-ko-0123",
+      "age": 54,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-의정부시",
+      "educationLevel": "대학원",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "기업 고위 임원"
+    },
+    {
+      "id": "nemotron-ko-0124",
+      "age": 28,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-강서구",
+      "educationLevel": "대학원",
+      "familyType": "혼자 거주",
+      "occupation": "번역가"
+    },
+    {
+      "id": "nemotron-ko-0125",
+      "age": 71,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-화성시",
+      "educationLevel": "고등학교",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "그 외 돌봄 및 보건 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0126",
+      "age": 66,
+      "sex": "남자",
+      "province": "제주",
+      "district": "제주-제주시",
+      "educationLevel": "대학원",
+      "familyType": "혼자 거주 (배우자 별거)",
+      "occupation": "경영 컨설턴트"
+    },
+    {
+      "id": "nemotron-ko-0127",
+      "age": 36,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-부천시 소사구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자와 거주",
+      "occupation": "미디어 콘텐츠 창작자"
+    },
+    {
+      "id": "nemotron-ko-0128",
+      "age": 69,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-송파구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "호이스트 운전원"
+    },
+    {
+      "id": "nemotron-ko-0129",
+      "age": 48,
+      "sex": "여자",
+      "province": "대전",
+      "district": "대전-중구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "주방 보조원"
+    },
+    {
+      "id": "nemotron-ko-0130",
+      "age": 29,
+      "sex": "남자",
+      "province": "충청북",
+      "district": "충청북-청주시 서원구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0131",
+      "age": 53,
+      "sex": "남자",
+      "province": "광주",
+      "district": "광주-광산구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "자녀와 거주 (배우자 별거)",
+      "occupation": "전기 용접원"
+    },
+    {
+      "id": "nemotron-ko-0132",
+      "age": 68,
+      "sex": "남자",
+      "province": "강원",
+      "district": "강원-평창군",
+      "educationLevel": "대학원",
+      "familyType": "혼자 거주",
+      "occupation": "회원 단체 관련 관리자"
+    },
+    {
+      "id": "nemotron-ko-0133",
+      "age": 22,
+      "sex": "여자",
+      "province": "인천",
+      "district": "인천-미추홀구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0134",
+      "age": 33,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-강북구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모와 동거",
+      "occupation": "데스크 안내원"
+    },
+    {
+      "id": "nemotron-ko-0135",
+      "age": 60,
+      "sex": "남자",
+      "province": "전북",
+      "district": "전북-남원시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "건물 경비원"
+    },
+    {
+      "id": "nemotron-ko-0136",
+      "age": 58,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-경주시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "부동산 중개사"
+    },
+    {
+      "id": "nemotron-ko-0137",
+      "age": 36,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-강동구",
+      "educationLevel": "대학원",
+      "familyType": "어머니와 동거",
+      "occupation": "119 구조대원"
+    },
+    {
+      "id": "nemotron-ko-0138",
+      "age": 38,
+      "sex": "여자",
+      "province": "세종",
+      "district": "세종-세종시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "공공행정 전문가"
+    },
+    {
+      "id": "nemotron-ko-0139",
+      "age": 20,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-이천시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "어머니와 동거",
+      "occupation": "전직 자재 관리 사무원, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0140",
+      "age": 63,
+      "sex": "여자",
+      "province": "인천",
+      "district": "인천-부평구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0141",
+      "age": 35,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-안양시 동안구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0142",
+      "age": 30,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-하남시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "미디어 콘텐츠 창작자"
+    },
+    {
+      "id": "nemotron-ko-0143",
+      "age": 73,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-연제구",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0144",
+      "age": 45,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-고양시 덕양구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0145",
+      "age": 69,
+      "sex": "남자",
+      "province": "강원",
+      "district": "강원-동해시",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0146",
+      "age": 64,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-용인시 기흥구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0147",
+      "age": 55,
+      "sex": "남자",
+      "province": "충청북",
+      "district": "충청북-진천군",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "중식 조리사"
+    },
+    {
+      "id": "nemotron-ko-0148",
+      "age": 52,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-미추홀구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀·어머니와 거주",
+      "occupation": "화학물 증류기 및 반응기 조작원"
+    },
+    {
+      "id": "nemotron-ko-0149",
+      "age": 54,
+      "sex": "여자",
+      "province": "대구",
+      "district": "대구-수성구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "컴퓨터 설치 및 수리원"
+    },
+    {
+      "id": "nemotron-ko-0150",
+      "age": 65,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-성동구",
+      "educationLevel": "고등학교",
+      "familyType": "기타2세대",
+      "occupation": "방문 고객 상담원"
+    },
+    {
+      "id": "nemotron-ko-0151",
+      "age": 61,
+      "sex": "남자",
+      "province": "전북",
+      "district": "전북-군산시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주 (배우자 별거)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0152",
+      "age": 55,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-서구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "혼자 거주 (배우자 별거)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0153",
+      "age": 59,
+      "sex": "여자",
+      "province": "광주",
+      "district": "광주-북구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자와 거주",
+      "occupation": "데이터 설계 및 프로그래머"
+    },
+    {
+      "id": "nemotron-ko-0154",
+      "age": 28,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-용인시 기흥구",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0155",
+      "age": 53,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-사하구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀·어머니와 거주",
+      "occupation": "소규모 상점 경영자"
+    },
+    {
+      "id": "nemotron-ko-0156",
+      "age": 73,
+      "sex": "여자",
+      "province": "광주",
+      "district": "광주-북구",
+      "educationLevel": "무학",
+      "familyType": "배우자와 거주",
+      "occupation": "건물 청소원"
+    },
+    {
+      "id": "nemotron-ko-0157",
+      "age": 45,
+      "sex": "남자",
+      "province": "경상북",
+      "district": "경상북-경주시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "컴퓨터 설치 및 수리원"
+    },
+    {
+      "id": "nemotron-ko-0158",
+      "age": 21,
+      "sex": "남자",
+      "province": "부산",
+      "district": "부산-연제구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0159",
+      "age": 80,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-도봉구",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0160",
+      "age": 55,
+      "sex": "여자",
+      "province": "인천",
+      "district": "인천-연수구",
+      "educationLevel": "초등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "건물 청소원"
+    },
+    {
+      "id": "nemotron-ko-0161",
+      "age": 58,
+      "sex": "여자",
+      "province": "대전",
+      "district": "대전-중구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "국가행정 사무원"
+    },
+    {
+      "id": "nemotron-ko-0162",
+      "age": 42,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-평택시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0163",
+      "age": 42,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-종로구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "어머니와 동거",
+      "occupation": "총무 및 인사 관리자"
+    },
+    {
+      "id": "nemotron-ko-0164",
+      "age": 66,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-구로구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0165",
+      "age": 63,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-광주시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0166",
+      "age": 61,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-고양시 덕양구",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0167",
+      "age": 28,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-용인시 처인구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "기타1세대",
+      "occupation": "품질 관리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0168",
+      "age": 30,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-용산구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "비친족 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0169",
+      "age": 50,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-연수구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "시내버스 운전원"
+    },
+    {
+      "id": "nemotron-ko-0170",
+      "age": 60,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-송파구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀·형제자매와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0171",
+      "age": 66,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-남양주시",
+      "educationLevel": "초등학교",
+      "familyType": "배우자·손자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0172",
+      "age": 61,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-송파구",
+      "educationLevel": "고등학교",
+      "familyType": "기타2세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0173",
+      "age": 44,
+      "sex": "여자",
+      "province": "경상남",
+      "district": "경상남-양산시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "기타3세대",
+      "occupation": "화학물 증류기 및 반응기 조작원"
+    },
+    {
+      "id": "nemotron-ko-0174",
+      "age": 50,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-부평구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자와 거주",
+      "occupation": "전자 부품 제조 기계 조작원"
+    },
+    {
+      "id": "nemotron-ko-0175",
+      "age": 76,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-강동구",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "그 외 전기·전자 부품 및 제품 조립원"
+    },
+    {
+      "id": "nemotron-ko-0176",
+      "age": 20,
+      "sex": "여자",
+      "province": "세종",
+      "district": "세종-세종시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모·조모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0177",
+      "age": 39,
+      "sex": "여자",
+      "province": "대전",
+      "district": "대전-대덕구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "의류 판매원"
+    },
+    {
+      "id": "nemotron-ko-0178",
+      "age": 35,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-해운대구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "사무 보조원"
+    },
+    {
+      "id": "nemotron-ko-0179",
+      "age": 31,
+      "sex": "남자",
+      "province": "대전",
+      "district": "대전-동구",
+      "educationLevel": "대학원",
+      "familyType": "혼자 거주",
+      "occupation": "전자 의료기기 개발 기술자 및 연구원"
+    },
+    {
+      "id": "nemotron-ko-0180",
+      "age": 65,
+      "sex": "여자",
+      "province": "대구",
+      "district": "대구-달서구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0181",
+      "age": 51,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-부천시 원미구",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0182",
+      "age": 59,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-경주시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "건물 청소원"
+    },
+    {
+      "id": "nemotron-ko-0183",
+      "age": 32,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-평택시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "혼자 거주",
+      "occupation": "로봇공학 기술자 및 연구원"
+    },
+    {
+      "id": "nemotron-ko-0184",
+      "age": 54,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-안산시 상록구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "마케팅 전문가"
+    },
+    {
+      "id": "nemotron-ko-0185",
+      "age": 44,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-성남시 수정구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "일반 비서"
+    },
+    {
+      "id": "nemotron-ko-0186",
+      "age": 81,
+      "sex": "여자",
+      "province": "전라남",
+      "district": "전라남-화순군",
+      "educationLevel": "무학",
+      "familyType": "기타3세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0187",
+      "age": 20,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-수원시 영통구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0188",
+      "age": 37,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-수원시 장안구",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0189",
+      "age": 68,
+      "sex": "여자",
+      "province": "경상남",
+      "district": "경상남-김해시",
+      "educationLevel": "초등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0190",
+      "age": 53,
+      "sex": "여자",
+      "province": "울산",
+      "district": "울산-동구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0191",
+      "age": 35,
+      "sex": "남자",
+      "province": "대구",
+      "district": "대구-동구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "비친족 동거",
+      "occupation": "자재 관리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0192",
+      "age": 36,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-고양시 덕양구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "사무 보조원"
+    },
+    {
+      "id": "nemotron-ko-0193",
+      "age": 60,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-김포시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0194",
+      "age": 22,
+      "sex": "남자",
+      "province": "충청남",
+      "district": "충청남-당진시",
+      "educationLevel": "고등학교",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0195",
+      "age": 26,
+      "sex": "여자",
+      "province": "대구",
+      "district": "대구-달서구",
+      "educationLevel": "고등학교",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0196",
+      "age": 30,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-부평구",
+      "educationLevel": "대학원",
+      "familyType": "부모와 동거",
+      "occupation": "기업 대표이사"
+    },
+    {
+      "id": "nemotron-ko-0197",
+      "age": 67,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-금천구",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0198",
+      "age": 28,
+      "sex": "남자",
+      "province": "충청남",
+      "district": "충청남-서산시",
+      "educationLevel": "고등학교",
+      "familyType": "부모·조모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0199",
+      "age": 51,
+      "sex": "남자",
+      "province": "충청남",
+      "district": "충청남-아산시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "하역 및 적재 관련 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0200",
+      "age": 20,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-성북구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모와 동거",
+      "occupation": "전직 일반 간호사, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0201",
+      "age": 58,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-경주시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "석재 부설원"
+    },
+    {
+      "id": "nemotron-ko-0202",
+      "age": 47,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-연수구",
+      "educationLevel": "대학원",
+      "familyType": "배우자·자녀·어머니와 거주",
+      "occupation": "화장품·비누제품 기술자 및 연구원"
+    },
+    {
+      "id": "nemotron-ko-0203",
+      "age": 41,
+      "sex": "남자",
+      "province": "부산",
+      "district": "부산-사하구",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "차량 도장기 조작원"
+    },
+    {
+      "id": "nemotron-ko-0204",
+      "age": 38,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-평택시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "기타1세대",
+      "occupation": "생산관리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0205",
+      "age": 61,
+      "sex": "여자",
+      "province": "울산",
+      "district": "울산-남구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0206",
+      "age": 39,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-파주시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모와 동거",
+      "occupation": "회계 사무원"
+    },
+    {
+      "id": "nemotron-ko-0207",
+      "age": 36,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-동래구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 제품 디자이너"
+    },
+    {
+      "id": "nemotron-ko-0208",
+      "age": 47,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-안산시 단원구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "건물 청소원"
+    },
+    {
+      "id": "nemotron-ko-0209",
+      "age": 36,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-김포시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주 (배우자 별거)",
+      "occupation": "회계 사무원"
+    },
+    {
+      "id": "nemotron-ko-0210",
+      "age": 49,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-파주시",
+      "educationLevel": "대학원",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0211",
+      "age": 89,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-포천시",
+      "educationLevel": "무학",
+      "familyType": "친인척과 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0212",
+      "age": 89,
+      "sex": "여자",
+      "province": "강원",
+      "district": "강원-고성군",
+      "educationLevel": "초등학교",
+      "familyType": "기타2세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0213",
+      "age": 51,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-포항시 남구",
+      "educationLevel": "고등학교",
+      "familyType": "형제자매와 동거 (가구주)",
+      "occupation": "텔레마케터"
+    },
+    {
+      "id": "nemotron-ko-0214",
+      "age": 73,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-서구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "전직 그 외 전기·전자 부품 및 제품 조립원, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0215",
+      "age": 35,
+      "sex": "여자",
+      "province": "경상남",
+      "district": "경상남-김해시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "어머니와 동거",
+      "occupation": "온라인 쇼핑 판매원"
+    },
+    {
+      "id": "nemotron-ko-0216",
+      "age": 47,
+      "sex": "여자",
+      "province": "충청남",
+      "district": "충청남-아산시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "치과위생사"
+    },
+    {
+      "id": "nemotron-ko-0217",
+      "age": 37,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-하남시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "범용 소프트웨어 프로그래머"
+    },
+    {
+      "id": "nemotron-ko-0218",
+      "age": 32,
+      "sex": "남자",
+      "province": "충청북",
+      "district": "충청북-청주시 서원구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주",
+      "occupation": "전기 부품 제조 기계 조작원"
+    },
+    {
+      "id": "nemotron-ko-0219",
+      "age": 46,
+      "sex": "여자",
+      "province": "충청북",
+      "district": "충청북-청주시 상당구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "경리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0220",
+      "age": 20,
+      "sex": "여자",
+      "province": "전라남",
+      "district": "전라남-화순군",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "아버지와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0221",
+      "age": 48,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-구리시",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "지게차 운전원"
+    },
+    {
+      "id": "nemotron-ko-0222",
+      "age": 42,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-노원구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀·부모와 거주",
+      "occupation": "마케팅 전문가"
+    },
+    {
+      "id": "nemotron-ko-0223",
+      "age": 42,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-안산시 상록구",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무대 및 세트 디자이너"
+    },
+    {
+      "id": "nemotron-ko-0224",
+      "age": 68,
+      "sex": "여자",
+      "province": "강원",
+      "district": "강원-강릉시",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "신용카드 모집인"
+    },
+    {
+      "id": "nemotron-ko-0225",
+      "age": 29,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-안성시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "어머니와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0226",
+      "age": 39,
+      "sex": "남자",
+      "province": "울산",
+      "district": "울산-북구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주",
+      "occupation": "용접기 조작원"
+    },
+    {
+      "id": "nemotron-ko-0227",
+      "age": 69,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-용산구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀·부모와 거주",
+      "occupation": "간호조무사"
+    },
+    {
+      "id": "nemotron-ko-0228",
+      "age": 58,
+      "sex": "남자",
+      "province": "경상남",
+      "district": "경상남-창원시 성산구",
+      "educationLevel": "대학원",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "금융 관리자"
+    },
+    {
+      "id": "nemotron-ko-0229",
+      "age": 26,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-송파구",
+      "educationLevel": "고등학교",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0230",
+      "age": 26,
+      "sex": "여자",
+      "province": "세종",
+      "district": "세종-세종시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "혼자 거주",
+      "occupation": "데이터 분석가"
+    },
+    {
+      "id": "nemotron-ko-0231",
+      "age": 41,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-노원구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "일반 간호사"
+    },
+    {
+      "id": "nemotron-ko-0232",
+      "age": 56,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-동작구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "소규모 상점 경영자"
+    },
+    {
+      "id": "nemotron-ko-0233",
+      "age": 62,
+      "sex": "남자",
+      "province": "광주",
+      "district": "광주-북구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "노점 및 이동 판매원"
+    },
+    {
+      "id": "nemotron-ko-0234",
+      "age": 34,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-광진구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "경리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0235",
+      "age": 22,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-광진구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "전직 청각장애인 특수교육 교사, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0236",
+      "age": 48,
+      "sex": "여자",
+      "province": "광주",
+      "district": "광주-북구",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "그 외 조리사"
+    },
+    {
+      "id": "nemotron-ko-0237",
+      "age": 54,
+      "sex": "남자",
+      "province": "경상북",
+      "district": "경상북-청송군",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0238",
+      "age": 46,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-동대문구",
+      "educationLevel": "고등학교",
+      "familyType": "형제자매와 동거 (가구주)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0239",
+      "age": 65,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-광진구",
+      "educationLevel": "초등학교",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0240",
+      "age": 25,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-의왕시",
+      "educationLevel": "고등학교",
+      "familyType": "부모·조부와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0241",
+      "age": 49,
+      "sex": "여자",
+      "province": "인천",
+      "district": "인천-연수구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "펄프 제조 장치 조작원"
+    },
+    {
+      "id": "nemotron-ko-0242",
+      "age": 31,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-강서구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0243",
+      "age": 73,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-노원구",
+      "educationLevel": "무학",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0244",
+      "age": 69,
+      "sex": "여자",
+      "province": "부산",
+      "district": "부산-부산진구",
+      "educationLevel": "중학교",
+      "familyType": "기타3세대",
+      "occupation": "금속 세척기 조작원"
+    },
+    {
+      "id": "nemotron-ko-0245",
+      "age": 56,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-송파구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "자재 관리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0246",
+      "age": 53,
+      "sex": "여자",
+      "province": "충청북",
+      "district": "충청북-진천군",
+      "educationLevel": "4년제 대학교",
+      "familyType": "자녀와 거주 (배우자 별거)",
+      "occupation": "실업 교사"
+    },
+    {
+      "id": "nemotron-ko-0247",
+      "age": 64,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-부천시 원미구",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "육아 도우미"
+    },
+    {
+      "id": "nemotron-ko-0248",
+      "age": 60,
+      "sex": "남자",
+      "province": "충청남",
+      "district": "충청남-예산군",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "판매 사무원"
+    },
+    {
+      "id": "nemotron-ko-0249",
+      "age": 63,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-안양시 동안구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0250",
+      "age": 63,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-용인시 처인구",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "음식 배달원"
+    },
+    {
+      "id": "nemotron-ko-0251",
+      "age": 25,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-영덕군",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "기타3세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0252",
+      "age": 49,
+      "sex": "여자",
+      "province": "충청북",
+      "district": "충청북-음성군",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0253",
+      "age": 66,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-김포시",
+      "educationLevel": "초등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "전직 한식 조리사, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0254",
+      "age": 54,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-용인시 처인구",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0255",
+      "age": 65,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-포항시 북구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0256",
+      "age": 57,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-남양주시",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "시설 경비원"
+    },
+    {
+      "id": "nemotron-ko-0257",
+      "age": 52,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-수원시 영통구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀·어머니와 거주",
+      "occupation": "자동차 부품 기술 영업원"
+    },
+    {
+      "id": "nemotron-ko-0258",
+      "age": 23,
+      "sex": "여자",
+      "province": "전북",
+      "district": "전북-전주시 덕진구",
+      "educationLevel": "고등학교",
+      "familyType": "조부 또는 조모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0259",
+      "age": 82,
+      "sex": "여자",
+      "province": "강원",
+      "district": "강원-원주시",
+      "educationLevel": "무학",
+      "familyType": "친인척과 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0260",
+      "age": 64,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-화성시",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "건설 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0261",
+      "age": 73,
+      "sex": "여자",
+      "province": "전북",
+      "district": "전북-군산시",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0262",
+      "age": 73,
+      "sex": "남자",
+      "province": "전북",
+      "district": "전북-순창군",
+      "educationLevel": "고등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0263",
+      "age": 49,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-수원시 팔달구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "혼자 거주",
+      "occupation": "약사"
+    },
+    {
+      "id": "nemotron-ko-0264",
+      "age": 81,
+      "sex": "남자",
+      "province": "대구",
+      "district": "대구-동구",
+      "educationLevel": "고등학교",
+      "familyType": "친인척과 거주",
+      "occupation": "가전제품 설치 및 수리원"
+    },
+    {
+      "id": "nemotron-ko-0265",
+      "age": 41,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-동대문구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "재활용 처리 기계 조작원"
+    },
+    {
+      "id": "nemotron-ko-0266",
+      "age": 65,
+      "sex": "남자",
+      "province": "충청북",
+      "district": "충청북-청주시 상당구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "우편집배원"
+    },
+    {
+      "id": "nemotron-ko-0267",
+      "age": 61,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-성북구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0268",
+      "age": 88,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-양평군",
+      "educationLevel": "무학",
+      "familyType": "기타3세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0269",
+      "age": 76,
+      "sex": "남자",
+      "province": "대구",
+      "district": "대구-남구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀·아버지와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0270",
+      "age": 21,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-김포시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0271",
+      "age": 50,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-양천구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "혼자 거주",
+      "occupation": "육군 부사관"
+    },
+    {
+      "id": "nemotron-ko-0272",
+      "age": 73,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-고양시 덕양구",
+      "educationLevel": "초등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "그 외 서비스 관련 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0273",
+      "age": 23,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-포항시 남구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "기타2세대",
+      "occupation": "매장 정리원"
+    },
+    {
+      "id": "nemotron-ko-0274",
+      "age": 81,
+      "sex": "남자",
+      "province": "부산",
+      "district": "부산-금정구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자와 거주",
+      "occupation": "그 외 기능 관련 종사원"
+    },
+    {
+      "id": "nemotron-ko-0275",
+      "age": 45,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-남양주시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0276",
+      "age": 67,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-용인시 처인구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "그 외 기계 조작원"
+    },
+    {
+      "id": "nemotron-ko-0277",
+      "age": 21,
+      "sex": "여자",
+      "province": "제주",
+      "district": "제주-제주시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주",
+      "occupation": "한식 조리사"
+    },
+    {
+      "id": "nemotron-ko-0278",
+      "age": 74,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-수원시 권선구",
+      "educationLevel": "중학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0279",
+      "age": 52,
+      "sex": "여자",
+      "province": "대구",
+      "district": "대구-북구",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 택배원"
+    },
+    {
+      "id": "nemotron-ko-0280",
+      "age": 30,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-서대문구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "혼자 거주",
+      "occupation": "일반 비서"
+    },
+    {
+      "id": "nemotron-ko-0281",
+      "age": 75,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-부천시 원미구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "자녀와 거주 (한부모)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0282",
+      "age": 28,
+      "sex": "남자",
+      "province": "광주",
+      "district": "광주-광산구",
+      "educationLevel": "고등학교",
+      "familyType": "기타2세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0283",
+      "age": 46,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-안산시 상록구",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀·어머니와 거주",
+      "occupation": "그 외 자동차 부품 조립원"
+    },
+    {
+      "id": "nemotron-ko-0284",
+      "age": 54,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-광명시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "전직 공공행정 전문가, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0285",
+      "age": 55,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-안양시 만안구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "음료 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0286",
+      "age": 79,
+      "sex": "남자",
+      "province": "전라남",
+      "district": "전라남-무안군",
+      "educationLevel": "무학",
+      "familyType": "배우자와 거주",
+      "occupation": "산불 감시원"
+    },
+    {
+      "id": "nemotron-ko-0287",
+      "age": 88,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-의정부시",
+      "educationLevel": "무학",
+      "familyType": "친인척과 거주",
+      "occupation": "그 외 기계 조작원"
+    },
+    {
+      "id": "nemotron-ko-0288",
+      "age": 57,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-광명시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "그 외 목재가공 관련 기계 조작원"
+    },
+    {
+      "id": "nemotron-ko-0289",
+      "age": 59,
+      "sex": "여자",
+      "province": "서울",
+      "district": "서울-강동구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "모피 패턴사"
+    },
+    {
+      "id": "nemotron-ko-0290",
+      "age": 53,
+      "sex": "남자",
+      "province": "대구",
+      "district": "대구-동구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "도로운송 사무원"
+    },
+    {
+      "id": "nemotron-ko-0291",
+      "age": 33,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-성북구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "보육교사"
+    },
+    {
+      "id": "nemotron-ko-0292",
+      "age": 44,
+      "sex": "여자",
+      "province": "경상남",
+      "district": "경상남-창녕군",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀·형제자매와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0293",
+      "age": 44,
+      "sex": "여자",
+      "province": "대구",
+      "district": "대구-북구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "부동산 감정 전문가"
+    },
+    {
+      "id": "nemotron-ko-0294",
+      "age": 33,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-수원시 권선구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모와 동거",
+      "occupation": "유치원 교사"
+    },
+    {
+      "id": "nemotron-ko-0295",
+      "age": 81,
+      "sex": "여자",
+      "province": "대구",
+      "district": "대구-남구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0296",
+      "age": 81,
+      "sex": "남자",
+      "province": "부산",
+      "district": "부산-해운대구",
+      "educationLevel": "중학교",
+      "familyType": "친인척과 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0297",
+      "age": 58,
+      "sex": "여자",
+      "province": "제주",
+      "district": "제주-제주시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "경리 사무원"
+    },
+    {
+      "id": "nemotron-ko-0298",
+      "age": 46,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-광주시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "사무 보조원"
+    },
+    {
+      "id": "nemotron-ko-0299",
+      "age": 25,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-파주시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "부모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0300",
+      "age": 68,
+      "sex": "여자",
+      "province": "전북",
+      "district": "전북-고창군",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "가사 도우미"
+    },
+    {
+      "id": "nemotron-ko-0301",
+      "age": 63,
+      "sex": "여자",
+      "province": "전라남",
+      "district": "전라남-순천시",
+      "educationLevel": "중학교",
+      "familyType": "배우자와 거주",
+      "occupation": "그 외 하역 및 적재 단순 종사원"
+    },
+    {
+      "id": "nemotron-ko-0302",
+      "age": 56,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-김포시",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "시설 경비원"
+    },
+    {
+      "id": "nemotron-ko-0303",
+      "age": 54,
+      "sex": "여자",
+      "province": "광주",
+      "district": "광주-광산구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "그 외 돌봄 및 보건 서비스 종사원"
+    },
+    {
+      "id": "nemotron-ko-0304",
+      "age": 62,
+      "sex": "여자",
+      "province": "경상남",
+      "district": "경상남-양산시",
+      "educationLevel": "중학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "검표원"
+    },
+    {
+      "id": "nemotron-ko-0305",
+      "age": 28,
+      "sex": "남자",
+      "province": "충청남",
+      "district": "충청남-홍성군",
+      "educationLevel": "고등학교",
+      "familyType": "조부 또는 조모와 동거",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0306",
+      "age": 30,
+      "sex": "남자",
+      "province": "대전",
+      "district": "대전-동구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "철도운송 관련 종사원"
+    },
+    {
+      "id": "nemotron-ko-0307",
+      "age": 80,
+      "sex": "남자",
+      "province": "인천",
+      "district": "인천-서구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0308",
+      "age": 38,
+      "sex": "남자",
+      "province": "경상남",
+      "district": "경상남-진주시",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "혼자 거주",
+      "occupation": "육군 부사관"
+    },
+    {
+      "id": "nemotron-ko-0309",
+      "age": 78,
+      "sex": "여자",
+      "province": "경상북",
+      "district": "경상북-영천시",
+      "educationLevel": "초등학교",
+      "familyType": "기타2세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0310",
+      "age": 25,
+      "sex": "여자",
+      "province": "인천",
+      "district": "인천-중구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "부모와 동거",
+      "occupation": "그 외 타이어 및 고무제품 생산기 조작원"
+    },
+    {
+      "id": "nemotron-ko-0311",
+      "age": 62,
+      "sex": "여자",
+      "province": "제주",
+      "district": "제주-서귀포시",
+      "educationLevel": "고등학교",
+      "familyType": "기타2세대",
+      "occupation": "한식 조리사"
+    },
+    {
+      "id": "nemotron-ko-0312",
+      "age": 52,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-수원시 권선구",
+      "educationLevel": "초등학교",
+      "familyType": "부모와 동거",
+      "occupation": "전직 건물 경비원, 현재 구직중"
+    },
+    {
+      "id": "nemotron-ko-0313",
+      "age": 41,
+      "sex": "여자",
+      "province": "경기",
+      "district": "경기-화성시",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0314",
+      "age": 20,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-시흥시",
+      "educationLevel": "고등학교",
+      "familyType": "어머니와 동거",
+      "occupation": "그 외 식품가공 관련 기계 조작원"
+    },
+    {
+      "id": "nemotron-ko-0315",
+      "age": 47,
+      "sex": "남자",
+      "province": "서울",
+      "district": "서울-동대문구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "데이터 분석가"
+    },
+    {
+      "id": "nemotron-ko-0316",
+      "age": 64,
+      "sex": "여자",
+      "province": "강원",
+      "district": "강원-춘천시",
+      "educationLevel": "고등학교",
+      "familyType": "기타2세대",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0317",
+      "age": 96,
+      "sex": "여자",
+      "province": "광주",
+      "district": "광주-북구",
+      "educationLevel": "초등학교",
+      "familyType": "혼자 거주",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0318",
+      "age": 48,
+      "sex": "남자",
+      "province": "경기",
+      "district": "경기-성남시 수정구",
+      "educationLevel": "2~3년제 전문대학",
+      "familyType": "형제자매와 동거 (가구주)",
+      "occupation": "무직"
+    },
+    {
+      "id": "nemotron-ko-0319",
+      "age": 41,
+      "sex": "여자",
+      "province": "경상남",
+      "district": "경상남-창원시 진해구",
+      "educationLevel": "4년제 대학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "산업 안전원"
+    },
+    {
+      "id": "nemotron-ko-0320",
+      "age": 40,
+      "sex": "여자",
+      "province": "울산",
+      "district": "울산-북구",
+      "educationLevel": "고등학교",
+      "familyType": "배우자·자녀와 거주",
+      "occupation": "화학물 가열 처리 장치 조작원"
+    }
+  ]
+}

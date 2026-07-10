@@ -4,10 +4,12 @@ import { ZodError } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
 import { baseMiceEventInputSchema } from "../lib/mice-event-input-schema.js";
 import { MICE_DATA, strictnessLabel } from "../lib/mice-data.js";
+import { PERSONA_PRESETS } from "../lib/mice-personas.js";
 import type { Strictness } from "../lib/types.js";
 import { generateMiceSafetyPlanTool } from "../tools/generate-mice-safety-plan.js";
 import { queryMiceSafetyApplicabilityTool } from "../tools/query-mice-safety-applicability.js";
 import { reviewMiceSafetyPlanTool } from "../tools/review-mice-safety-plan.js";
+import { stressTestMiceSafetyPlanTool } from "../tools/stress-test-mice-safety-plan.js";
 import { SERVER_NAME, VERSION } from "../version.js";
 
 type AnyRecord = Record<string, unknown>;
@@ -252,6 +254,13 @@ function htmlPage(): string {
             <label>특수 조건</label>
             <div id="featureFlags" class="checkbox-grid"></div>
           </div>
+          <div>
+            <label for="personaPreset">합성 관람객 안전 QA</label>
+            <select id="personaPreset" name="personaPreset"></select>
+            <label for="cohortSize" style="margin-top:8px">코호트 크기</label>
+            <input id="cohortSize" name="cohortSize" type="number" min="10" max="200" step="10" value="100">
+            <p class="muted">실제 참석자 예측이 아니라 계획서 사각지대를 찾는 합성 테스트입니다.</p>
+          </div>
           <div class="sample-row" aria-label="샘플 입력">
             <button class="secondary" type="button" data-sample="indoor">실내 전시</button>
             <button class="secondary" type="button" data-sample="festival">옥외축제</button>
@@ -261,6 +270,7 @@ function htmlPage(): string {
           <div class="actions">
             <button id="submitBtn" type="submit">체크리스트 생성</button>
             <button class="secondary" type="button" id="planBtn">계획서 요약·검수</button>
+            <button class="secondary" type="button" id="personaBtn">관람객 스트레스 테스트</button>
             <button class="secondary" type="button" id="printBtn">인쇄</button>
             <span id="status" class="muted"></span>
           </div>
@@ -372,7 +382,10 @@ function htmlPage(): string {
         eventTypes,
         venueId: $("#venueId").value || undefined,
         jurisdiction: $("#jurisdiction").value.trim() || undefined,
-        expectedCrowd: $("#expectedCrowd").value ? Number($("#expectedCrowd").value) : undefined
+        expectedCrowd: $("#expectedCrowd").value ? Number($("#expectedCrowd").value) : undefined,
+        personaPreset: $("#personaPreset").value || "national",
+        cohortSize: $("#cohortSize").value ? Number($("#cohortSize").value) : 100,
+        targetProvince: $("#jurisdiction").value.trim() || undefined
       };
       for (const [key] of FEATURES) {
         input[key] = Boolean(document.querySelector('#featureFlags input[value="' + key + '"]')?.checked);
@@ -385,6 +398,8 @@ function htmlPage(): string {
       $("#expectedCrowd").value = input.expectedCrowd ?? "";
       $("#venueId").value = input.venueId || "";
       $("#jurisdiction").value = input.jurisdiction || "";
+      if (input.personaPreset) $("#personaPreset").value = input.personaPreset;
+      if (input.cohortSize) $("#cohortSize").value = input.cohortSize;
       for (const box of document.querySelectorAll("#eventTypes input")) box.checked = (input.eventTypes || []).includes(box.value);
       for (const box of document.querySelectorAll("#featureFlags input")) box.checked = Boolean(input[box.value]);
     }
@@ -462,6 +477,43 @@ function htmlPage(): string {
         '<section class="card"><div class="notice">전문 Markdown, CSV, DOCX/XLSX 내보내기는 CLI의 export_mice_safety_plan_bundle에서 수행합니다. 이 화면은 공개 접근용 빠른 시뮬레이터입니다.</div></section>'
       ].join("");
     }
+    function renderPersonaStress(payload) {
+      const cohort = payload.cohort || {};
+      const shares = cohort.shares || {};
+      const coverage = payload.personaCoverage || {};
+      const base = payload.basePlanReview || {};
+      const findings = coverage.findings || [];
+      const gaps = findings.filter((item) => item.status === "gap");
+      const covered = findings.filter((item) => item.status === "covered");
+      const profiles = cohort.representativeProfiles || [];
+      const pct = (value) => Math.round(Number(value || 0) * 100) + "%";
+      $("#result").innerHTML = [
+        '<section class="stats">',
+        '<div class="card stat"><strong>' + escapeHtml(cohort.actualSize || 0) + '</strong><span>합성 코호트</span></div>',
+        '<div class="card stat"><strong>' + escapeHtml(coverage.score ?? "-") + '</strong><span>사람 중심 QA</span></div>',
+        '<div class="card stat"><strong>' + escapeHtml(base.score ?? "-") + '</strong><span>기존 문서 커버리지</span></div>',
+        '<div class="card stat"><strong>' + escapeHtml(gaps.length) + '</strong><span>보완 필요</span></div>',
+        '</section>',
+        '<section class="card">',
+        '<h2>' + escapeHtml(cohort.presetLabel || "합성 관람객") + '</h2>',
+        '<div class="chips">' + [
+          '고령층 ' + pct(shares.senior),
+          '가족·보호자 ' + pct(shares.familyCoordination),
+          '쉬운 안내 지원 ' + pct(shares.plainLanguageSupport),
+          '현장 직군 ' + pct(shares.operationsWorkforce)
+        ].map((item) => chip(item)).join("") + '</div>',
+        '<p class="muted">Nemotron-Personas-Korea 비식별 소형 샘플 기반 합성 QA입니다. 실제 참석자·행동·의료·사고 확률을 예측하지 않습니다.</p>',
+        '</section>',
+        '<section class="card"><h2>보완 필요</h2><div class="list">',
+        gaps.length ? gaps.map((f) => card(f.title, f.sentinel ? "필수 센티널" : f.priority, f.recommendation, f.priority === "high" ? "tone-danger" : "tone-warning")).join("") : '<p class="muted">주요 페르소나 QA 공백 없음</p>',
+        '</div></section>',
+        '<section class="card"><h2>확인된 항목</h2><div class="chips">' + (covered.length ? covered.map((f) => chip(f.title, "good")).join("") : '<span class="muted">확인된 항목 없음</span>') + '</div></section>',
+        '<section class="card"><h2>대표 합성 프로필</h2><div class="grid">',
+        profiles.map((profile) => card(profile.ageBand + " · " + profile.province, profile.occupationGroup, [profile.familyType, profile.educationLevel, profile.occupation].filter(Boolean).join(" / "), "tone-muted")).join(""),
+        '</div></section>',
+        '<section class="card"><div class="notice">아동·장애 접근성·비한국어 방문객은 표본 빈도와 무관하게 필수 센티널로 검사합니다. 이 결과는 법령 적용 판단을 변경하지 않습니다.</div></section>'
+      ].join("");
+    }
     async function simulate(event) {
       event?.preventDefault();
       $("#submitBtn").disabled = true;
@@ -503,6 +555,26 @@ function htmlPage(): string {
         $("#planBtn").disabled = false;
       }
     }
+    async function runPersonaStress() {
+      $("#personaBtn").disabled = true;
+      $("#status").textContent = "합성 관람객 QA 중";
+      try {
+        const res = await fetch("/api/persona-stress-test", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(formInput())
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        renderPersonaStress(json);
+        $("#status").textContent = "완료";
+      } catch (err) {
+        $("#result").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+        $("#status").textContent = "오류";
+      } finally {
+        $("#personaBtn").disabled = false;
+      }
+    }
     async function init() {
       renderCheckboxes($("#eventTypes"), EVENT_TYPES, ["exhibition"]);
       renderCheckboxes($("#featureFlags"), FEATURES);
@@ -511,9 +583,13 @@ function htmlPage(): string {
         '<option value="' + escapeHtml(venue.id) + '">' + escapeHtml(venue.name + " / " + venue.region) + '</option>'
       ).join("");
       $("#jurisdictionOptions").innerHTML = options.jurisdictions.map((item) => '<option value="' + escapeHtml(item) + '"></option>').join("");
+      $("#personaPreset").innerHTML = options.personaPresets.map((item) =>
+        '<option value="' + escapeHtml(item.id) + '">' + escapeHtml(item.label) + '</option>'
+      ).join("");
       applyInput(SAMPLES.indoor);
       $("#sim-form").addEventListener("submit", simulate);
       $("#planBtn").addEventListener("click", generatePlanReview);
+      $("#personaBtn").addEventListener("click", runPersonaStress);
       $("#printBtn").addEventListener("click", () => window.print());
       for (const button of document.querySelectorAll("[data-sample]")) {
         button.addEventListener("click", () => applyInput(SAMPLES[button.dataset.sample]));
@@ -696,6 +772,7 @@ function optionsPayload(): AnyRecord {
       city: venue.city,
     })),
     jurisdictions,
+    personaPresets: PERSONA_PRESETS,
     _meta: COMMON_RESPONSE_META,
   };
 }
@@ -810,6 +887,15 @@ async function planReview(input: unknown): Promise<AnyRecord> {
   };
 }
 
+async function personaStress(input: unknown): Promise<AnyRecord> {
+  const result = await stressTestMiceSafetyPlanTool.handler(input);
+  return {
+    version: VERSION,
+    ...(result.structuredContent ?? {}),
+    _meta: COMMON_RESPONSE_META,
+  };
+}
+
 async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const url = new URL(req.url ?? "/", "http://localhost");
   if (req.method === "GET" && url.pathname === "/") {
@@ -832,6 +918,11 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === "POST" && url.pathname === "/api/plan-review") {
     const input = await readJson(req);
     responseJson(res, 200, await planReview(input));
+    return;
+  }
+  if (req.method === "POST" && url.pathname === "/api/persona-stress-test") {
+    const input = await readJson(req);
+    responseJson(res, 200, await personaStress(input));
     return;
   }
   responseJson(res, 404, { error: "not found" });
