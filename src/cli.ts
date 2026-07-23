@@ -141,6 +141,10 @@ const NUMERIC_ARG_KEYS = new Set([
   "dueSoonMinutes",
   "nx",
   "ny",
+  "cohortSize",
+  "seed",
+  "personaSeed",
+  "representativeLimit",
 ]);
 
 function parseKeyValueArgs(tokens: string[]): Record<string, unknown> {

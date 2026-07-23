@@ -38,6 +38,8 @@ import { queryMiceVenueSafetyRulesTool } from "./tools/query-mice-venue-safety-r
 import { queryPerformanceVenuesTool } from "./tools/query-performance-venues.js";
 import { queryMiceWorkerSafetyReferencesTool } from "./tools/query-mice-worker-safety-references.js";
 import { reviewMiceSafetyPlanTool } from "./tools/review-mice-safety-plan.js";
+import { sampleMicePersonaCohortTool } from "./tools/sample-mice-persona-cohort.js";
+import { stressTestMiceSafetyPlanTool } from "./tools/stress-test-mice-safety-plan.js";
 
 export const TOOLS: ToolDefinition[] = [
   queryMiceApiAccessStatusTool,
@@ -48,6 +50,8 @@ export const TOOLS: ToolDefinition[] = [
   generateMiceSafetyPlanTool,
   exportMiceSafetyPlanBundleTool,
   reviewMiceSafetyPlanTool,
+  sampleMicePersonaCohortTool,
+  stressTestMiceSafetyPlanTool,
   queryMiceLocalOrdinancesTool,
   queryMiceWorkerSafetyReferencesTool,
   queryMiceVenueSafetyRulesTool,
