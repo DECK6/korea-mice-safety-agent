@@ -45,6 +45,32 @@ for (const path of files) {
   }
 }
 
+// The npm allowlist above only guards the tarball; the public git repository needs
+// the same rules. Redistribution-restricted sources and generated event outputs
+// must never be tracked, even though they may exist on disk.
+const gitForbiddenPathPatterns = [...forbiddenPathPatterns, /^outputs\//];
+const gitAllowedPaths = new Set([".env.example"]);
+try {
+  const tracked = execFileSync("git", ["ls-files"], {
+    cwd: root,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  })
+    .split(/\r?\n/)
+    .filter(Boolean);
+  for (const path of tracked) {
+    if (gitAllowedPaths.has(path)) continue;
+    for (const pattern of gitForbiddenPathPatterns) {
+      if (pattern.test(path)) {
+        violations.push({ type: "git_tracked_forbidden_path", path, pattern: String(pattern) });
+        break;
+      }
+    }
+  }
+} catch {
+  // Not a git checkout (e.g. auditing an unpacked tarball) — npm checks still apply.
+}
+
 for (const path of requiredFiles) {
   if (!files.includes(path)) {
     violations.push({ type: "missing_required_file", path });
