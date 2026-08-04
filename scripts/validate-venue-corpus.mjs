@@ -15,6 +15,14 @@ function argValue(name, fallback) {
 
 const manifestPath = join(root, "data/venue-pdf-manifest.json");
 const markdownIndexPath = join(root, "data/markdown/venue-manuals/index.json");
+
+// The extracted venue manual corpus is redistribution-restricted and therefore
+// local-only (untracked). In a clean checkout (CI, fresh clone) this validation
+// has nothing to check; skip instead of failing so the gate stays offline-safe.
+if (!existsSync(markdownIndexPath)) {
+  console.log("validate:venue-corpus skipped — local-only venue manual corpus not present (data/markdown/venue-manuals/).");
+  process.exit(0);
+}
 const sourceRegistryPath = join(root, "src/ontology/mice/source-registry.json");
 const venueRulesPath = join(root, "src/ontology/mice/venue-safety-rules.json");
 const facilityIndexPath = join(root, "src/ontology/mice/venue-facility-index.json");
