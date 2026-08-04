@@ -343,7 +343,9 @@ let failed = 0;
 const rows = [];
 
 const venueCorpusAudit = runVenueCorpusValidation();
-if (
+if (venueCorpusAudit.skipped) {
+  console.log(`SKIP venue_corpus_audit — ${venueCorpusAudit.reason}`);
+} else if (
   venueCorpusAudit.counts?.errors > 0
   || venueCorpusAudit.counts?.warnings > 0
   || venueCorpusAudit.counts?.manifestItems < 15
