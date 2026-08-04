@@ -14,6 +14,8 @@ import { isLoopbackAddress, startWebServer } from "../build/web/server.js";
 
 // The stubs stand in for the operator's signed-in CLIs so the whole bridge can be exercised without
 // spending a real subscription call. They are put ahead of the real binaries on PATH.
+// The prompt arrives on stdin (not argv): the real codex waits for "additional input" whenever
+// stdin is an open pipe, so the bridge always feeds and closes it. Stubs mirror that contract.
 const CLAUDE_STUB = `#!/bin/sh
 if [ "$1" = "--version" ]; then
   echo "9.9.9 (Claude Code stub)"
@@ -22,7 +24,9 @@ fi
 for arg in "$@"; do
   printf '%s\\n' "$arg"
 done > "$MICE_STUB_ARGV_FILE"
-if printf '%s' "$*" | grep -q FORCE_FAILURE; then
+prompt=$(cat)
+printf '%s' "$prompt" > "$MICE_STUB_PROMPT_FILE"
+if printf '%s' "$prompt" | grep -q FORCE_FAILURE; then
   echo "stub refused: forced failure" >&2
   exit 1
 fi
@@ -42,6 +46,8 @@ for arg in "$@"; do
   if [ "$prev" = "-o" ]; then out="$arg"; fi
   prev="$arg"
 done
+prompt=$(cat)
+printf '%s' "$prompt" > "$MICE_STUB_PROMPT_FILE"
 echo "codex session header noise"
 if [ -n "$out" ]; then
   printf '%s\\n' "CODEX STUB LAST MESSAGE" > "$out"
@@ -58,10 +64,12 @@ const LIVE_STATUS_FIXTURE = {
 let stubDir;
 let originalPath;
 let argvFile;
+let promptFile;
 
 before(async () => {
   stubDir = await mkdtemp(join(tmpdir(), "mice-ai-stub-"));
   argvFile = join(stubDir, "argv.txt");
+  promptFile = join(stubDir, "prompt.txt");
   for (const [name, body] of [["claude", CLAUDE_STUB], ["codex", CODEX_STUB]]) {
     const path = join(stubDir, name);
     await writeFile(path, body, "utf8");
@@ -70,11 +78,13 @@ before(async () => {
   originalPath = process.env.PATH;
   process.env.PATH = `${stubDir}:${originalPath}`;
   process.env.MICE_STUB_ARGV_FILE = argvFile;
+  process.env.MICE_STUB_PROMPT_FILE = promptFile;
 });
 
 after(async () => {
   process.env.PATH = originalPath;
   delete process.env.MICE_STUB_ARGV_FILE;
+  delete process.env.MICE_STUB_PROMPT_FILE;
   await rm(stubDir, { recursive: true, force: true });
 });
 
@@ -89,7 +99,7 @@ test("detectEngines reports both CLIs with the version each one prints", async (
   assert(engines[1].version.includes("0.0.0-stub"));
 });
 
-test("runBriefing drives claude headlessly with a tool-free args array", async () => {
+test("runBriefing drives claude headlessly with a tool-free args array and stdin prompt", async () => {
   const result = await runBriefing("claude", "브리핑 프롬프트 본문", { timeoutMs: 10000 });
   assert.equal(result.engine, "claude");
   assert(result.text.includes("STUB BRIEFING OK"));
@@ -97,11 +107,13 @@ test("runBriefing drives claude headlessly with a tool-free args array", async (
 
   const argv = (await readFile(argvFile, "utf8")).split("\n").filter(Boolean);
   assert.equal(argv[0], "-p");
-  assert.equal(argv[1], "브리핑 프롬프트 본문");
   assert(argv.includes("--output-format"));
   assert(argv.includes("--strict-mcp-config"));
   // Tools stay off: live-feed text must not be able to reach the filesystem or a shell.
   assert(argv.includes("--tools"));
+  // The prompt must travel over stdin, never argv (ps exposure + codex stdin-wait bug).
+  assert.equal(argv.includes("브리핑 프롬프트 본문"), false);
+  assert.equal(await readFile(promptFile, "utf8"), "브리핑 프롬프트 본문");
 });
 
 test("runBriefing takes the codex answer from the last-message file, not the session header", async () => {
@@ -109,6 +121,7 @@ test("runBriefing takes the codex answer from the last-message file, not the ses
   assert.equal(result.engine, "codex");
   assert.equal(result.text, "CODEX STUB LAST MESSAGE");
   assert.equal(result.text.includes("session header noise"), false);
+  assert.equal(await readFile(promptFile, "utf8"), "브리핑 프롬프트 본문");
 });
 
 test("runBriefing surfaces the engine failure reason instead of a bare throw", async () => {
@@ -185,9 +198,10 @@ test("ai endpoints answer on loopback and run the briefing only when asked", asy
     assert(briefingJson.briefing.includes("STUB BRIEFING OK"));
     assert(briefingJson.disclaimer.includes("법적 판단"));
     // The prompt the endpoint built must carry the collected live status, not just the question.
-    const argv = await readFile(argvFile, "utf8");
-    assert(argv.includes("unsupported_region"));
-    assert(argv.includes("데이터 가드"));
+    // It arrives at the engine over stdin (captured by the stub), never argv.
+    const sentPrompt = await readFile(promptFile, "utf8");
+    assert(sentPrompt.includes("unsupported_region"));
+    assert(sentPrompt.includes("데이터 가드"));
 
     const unknownEngine = await fetch(`${base}/api/ai-briefing`, {
       method: "POST",

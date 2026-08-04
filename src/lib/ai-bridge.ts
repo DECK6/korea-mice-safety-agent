@@ -1,4 +1,4 @@
-import { execFile } from "node:child_process";
+import { execFile, spawn } from "node:child_process";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -156,18 +156,59 @@ function engineFailureMessage(command: string, err: unknown): string {
 }
 
 // Always an args array: a shell string would let a venue name or an operator question turn into
-// a command on the machine running the dashboard.
-async function runEngine(command: string, args: string[], options: BriefingRunOptions): Promise<string> {
-  try {
-    const { stdout } = await execFileAsync(command, args, {
-      timeout: options.timeoutMs ?? BRIEFING_TIMEOUT_MS,
-      maxBuffer: MAX_OUTPUT_BYTES,
-      cwd: options.cwd,
+// a command on the machine running the dashboard. The prompt travels over stdin, not argv: an open
+// stdin pipe makes codex wait for "additional input" and exit with an empty answer, and argv would
+// expose live-feed text and operator questions to `ps` while the engine runs.
+async function runEngine(
+  command: string,
+  args: string[],
+  options: BriefingRunOptions,
+  stdinInput?: string,
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, { cwd: options.cwd, stdio: ["pipe", "pipe", "pipe"] });
+    const timeoutMs = options.timeoutMs ?? BRIEFING_TIMEOUT_MS;
+    let stdout = "";
+    let stderr = "";
+    let settled = false;
+    let timedOut = false;
+    const timer = setTimeout(() => {
+      timedOut = true;
+      child.kill("SIGKILL");
+    }, timeoutMs);
+    const fail = (err: AiBridgeError) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      reject(err);
+    };
+    child.on("error", (err) => fail(new AiBridgeError("engine_failed", engineFailureMessage(command, err))));
+    child.stdout.on("data", (chunk: Buffer) => {
+      stdout += chunk;
+      if (stdout.length > MAX_OUTPUT_BYTES) {
+        child.kill("SIGKILL");
+        fail(new AiBridgeError("engine_failed", `${command} 출력이 상한(1MB)을 넘어 중단했습니다.`));
+      }
     });
-    return stdout;
-  } catch (err) {
-    throw new AiBridgeError("engine_failed", engineFailureMessage(command, err));
-  }
+    child.stderr.on("data", (chunk: Buffer) => {
+      stderr = (stderr + chunk).slice(-MAX_OUTPUT_BYTES);
+    });
+    child.on("close", (code) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      if (timedOut) {
+        reject(new AiBridgeError("engine_failed", `${command} 실행이 제한 시간 안에 끝나지 않아 중단했습니다.`));
+      } else if (code !== 0) {
+        reject(new AiBridgeError("engine_failed", engineFailureMessage(command, { stderr, message: `exit code ${code}` })));
+      } else {
+        resolve(stdout);
+      }
+    });
+    child.stdin.on("error", () => {});
+    if (stdinInput) child.stdin.write(stdinInput);
+    child.stdin.end();
+  });
 }
 
 // Text-only briefing: no built-in tools and no MCP servers, so a hostile string inside a live feed
@@ -175,13 +216,12 @@ async function runEngine(command: string, args: string[], options: BriefingRunOp
 async function runClaude(prompt: string, options: BriefingRunOptions): Promise<string> {
   const stdout = await runEngine("claude", [
     "-p",
-    prompt,
     "--output-format",
     "text",
     "--strict-mcp-config",
     "--tools",
     "",
-  ], options);
+  ], options, prompt);
   return stdout.trim();
 }
 
@@ -200,8 +240,7 @@ async function runCodex(prompt: string, options: BriefingRunOptions): Promise<st
       "never",
       "-o",
       messageFile,
-      prompt,
-    ], options);
+    ], options, prompt);
     const lastMessage = await readFile(messageFile, "utf8").catch(() => "");
     return lastMessage.trim() || stdout.trim();
   } finally {
