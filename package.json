@@ -50,6 +50,7 @@
     "audit:freshness": "node scripts/audit-source-freshness.mjs",
     "verify:venue-sources": "node scripts/verify-venue-source-links.mjs",
     "collect:local-ordinances": "node scripts/collect-local-ordinances.mjs",
+    "collect:skt-pois": "node scripts/collect-skt-place-pois.mjs",
     "verify:priority-ordinances": "node scripts/verify-priority-local-ordinance-articles.mjs",
     "refine:local-ordinances": "node scripts/refine-local-ordinance-pack.mjs",
     "audit:sources": "node scripts/generate-source-audit.mjs",

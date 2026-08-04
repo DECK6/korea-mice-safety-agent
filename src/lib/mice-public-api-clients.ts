@@ -72,6 +72,42 @@ const SeoulCityDataSchema = z.object({
   }).optional(),
 });
 
+const SktStatusSchema = z.object({
+  code: z.string().optional(),
+  message: z.string().optional(),
+  totalCount: z.number().optional(),
+});
+
+const SktPlacePoiSchema = z.object({
+  status: SktStatusSchema.optional(),
+  contents: z.array(z.object({ poiId: z.string(), poiName: z.string() })).optional(),
+});
+
+const SktPlaceCongestionSchema = z.object({
+  status: SktStatusSchema.optional(),
+  contents: z.object({
+    poiId: z.string().optional(),
+    poiName: z.string().optional(),
+    rltm: z.array(z.object({
+      datetime: z.string().optional(),
+      congestion: z.number().optional(),
+      congestionLevel: z.number().optional(),
+      type: z.number().optional(),
+    })).optional(),
+  }).optional(),
+});
+
+export type SktCongestionState = "normal" | "watch" | "critical";
+
+// SK open API PUZZLE-POI 문서의 혼잡도 등급 정의. 밀도 구간은 문서 원문 값이며,
+// 운영 판단용 state는 4등급만 즉시 대응(critical), 3등급은 감시(watch)로 좁혀 매핑한다.
+export const SKT_CONGESTION_LEVELS: Record<number, { label: string; densityBand: string; state: SktCongestionState }> = {
+  1: { label: "여유", densityBand: "0.025명/㎡ 미만", state: "normal" },
+  2: { label: "보통", densityBand: "0.025~0.05명/㎡", state: "normal" },
+  3: { label: "혼잡", densityBand: "0.05~0.3명/㎡", state: "watch" },
+  4: { label: "매우 혼잡", densityBand: "0.3명/㎡ 이상", state: "critical" },
+};
+
 function envValue(name: string, env?: NodeJS.ProcessEnv): string | undefined {
   if (!env) loadEnvOnce();
   return (env ?? process.env)[name];
@@ -117,12 +153,12 @@ export async function readTextCapped(response: Response, maxBytes = MAX_RESPONSE
   return new TextDecoder().decode(Buffer.concat(chunks.map((chunk) => Buffer.from(chunk))));
 }
 
-async function requestText(url: string, options: ApiClientOptions = {}): Promise<RequestResult> {
+async function requestText(url: string, options: ApiClientOptions = {}, headers?: Record<string, string>): Promise<RequestResult> {
   const fetchImpl = options.fetchImpl ?? fetch;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), options.timeoutMs ?? 12_000);
   try {
-    const response = await fetchImpl(url, { signal: controller.signal });
+    const response = await fetchImpl(url, { signal: controller.signal, headers });
     const text = await readTextCapped(response);
     return { ok: response.ok, httpStatus: response.status, text };
   } finally {
@@ -467,6 +503,84 @@ export async function fetchSeoulCityData(options: ApiClientOptions & {
     }], { totalCount: 1 });
   } catch (err) {
     return failed("SEOUL_REALTIME_CITY_DATA", err);
+  }
+}
+
+// SKT 지오비전 퍼즐 장소 혼잡도: 서울 밖까지 커버하는 기지국 기반 실시간 인파.
+// 무료 플랜은 모든 puzzle POI 엔드포인트 합산 월 10건이라, 호출 예산은 이 모듈이 아니라
+// skt-place-congestion 원장이 관리한다. 여기서는 정규화만 한다.
+export async function fetchSktPlaceCongestion(options: ApiClientOptions & {
+  poiId: string;
+}): Promise<LiveApiResult<NormalizedExternalRecord>> {
+  const key = envValue("SK_OPEN_API_APP_KEY", options.env);
+  if (!key) return missing("SKT_PUZZLE_PLACE_CONGESTION", "SK_OPEN_API_APP_KEY");
+  try {
+    const url = `https://apis.openapi.sk.com/puzzle/place/congestion/rltm/pois/${encodeURIComponent(options.poiId)}`;
+    const response = await requestText(url, options, { appKey: key, accept: "application/json" });
+    if (!response.ok) throw new Error(`SKT puzzle HTTP ${response.httpStatus}`);
+    const parsed = SktPlaceCongestionSchema.parse(JSON.parse(response.text));
+    if (parsed.status?.code !== "00") {
+      throw new Error(`SKT puzzle status ${parsed.status?.code ?? "unknown"}: ${parsed.status?.message ?? ""}`);
+    }
+    const latest = parsed.contents?.rltm?.[0];
+    if (!latest) throw new Error("SKT puzzle 응답에 실시간 관측치(rltm)가 없습니다");
+    const level = SKT_CONGESTION_LEVELS[latest.congestionLevel ?? 0];
+    return result("SKT_PUZZLE_PLACE_CONGESTION", [{
+      sourceId: "SKT_PUZZLE_PLACE_CONGESTION",
+      recordType: "realtime_place_congestion",
+      title: parsed.contents?.poiName ?? options.poiId,
+      sourceConfidence: "medium",
+      verificationStatus: "source_verified",
+      fields: {
+        poiId: parsed.contents?.poiId ?? options.poiId,
+        congestionLevel: latest.congestionLevel,
+        congestionLabel: level?.label,
+        densityBand: level?.densityBand,
+        riskState: level?.state ?? "unknown",
+        congestion: latest.congestion,
+        datetime: latest.datetime,
+        type: latest.type,
+      },
+    }], { totalCount: 1 });
+  } catch (err) {
+    return failed("SKT_PUZZLE_PLACE_CONGESTION", err);
+  }
+}
+
+// 장소 메타 목록. 이름 검색 파라미터가 없어 offset/limit 순회로만 받을 수 있고,
+// 그래서 결과를 오프라인 인덱스로 저장해 대시보드 검색은 쿼터 없이 처리한다.
+export async function fetchSktPlacePois(options: ApiClientOptions & {
+  offset?: number;
+  limit?: number;
+} = {}): Promise<LiveApiResult<NormalizedExternalRecord>> {
+  const key = envValue("SK_OPEN_API_APP_KEY", options.env);
+  if (!key) return missing("SKT_PUZZLE_PLACE_POI_META", "SK_OPEN_API_APP_KEY");
+  const params = new URLSearchParams({
+    offset: String(Math.max(options.offset ?? 0, 0)),
+    limit: String(Math.min(Math.max(options.limit ?? 100, 1), 1000)),
+  });
+  try {
+    const response = await requestText(
+      `https://apis.openapi.sk.com/puzzle/place/meta/pois?${params.toString()}`,
+      options,
+      { appKey: key, accept: "application/json" },
+    );
+    if (!response.ok) throw new Error(`SKT puzzle meta HTTP ${response.httpStatus}`);
+    const parsed = SktPlacePoiSchema.parse(JSON.parse(response.text));
+    if (parsed.status?.code !== "00") {
+      throw new Error(`SKT puzzle meta status ${parsed.status?.code ?? "unknown"}: ${parsed.status?.message ?? ""}`);
+    }
+    const records = (parsed.contents ?? []).map((poi) => ({
+      sourceId: "SKT_PUZZLE_PLACE_POI_META",
+      recordType: "place_poi_meta",
+      title: poi.poiName,
+      sourceConfidence: "high" as const,
+      verificationStatus: "live_verified" as const,
+      fields: { poiId: poi.poiId },
+    }));
+    return result("SKT_PUZZLE_PLACE_POI_META", records, { totalCount: parsed.status?.totalCount ?? records.length });
+  } catch (err) {
+    return failed("SKT_PUZZLE_PLACE_POI_META", err);
   }
 }
 

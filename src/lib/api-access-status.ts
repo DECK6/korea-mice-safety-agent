@@ -140,7 +140,7 @@ export const API_ACCESS_DEFINITIONS: ApiAccessDefinition[] = [
     statusWhenUnset: "pending",
     requiredForHappyPath: false,
     offlineMode: "live_adapter",
-    notes: "서울 밖을 커버하는 유일한 공개형 실시간 기지국 인파 API. SK open API(openapi.sk.com)에서 appKey 발급, 무료 티어 있음. 백화점·지하철·쇼핑·여가 등 전국 주요 장소의 실시간/시간대별 혼잡도를 제공한다. 키 발급 후 live adapter 연동 예정.",
+    notes: "서울 밖을 커버하는 공개형 실시간 기지국 인파 API. SK open API(openapi.sk.com) appKey를 헤더로 보낸다. 무료 플랜은 메타 목록을 포함한 모든 puzzle POI 엔드포인트 합산 월 10건이고 초과하면 자동 차단되므로, 60초 자동 갱신에 넣지 않고 /live 대시보드의 전국 모드 수동 조회 전용으로만 쓴다(로컬 원장 skt-quota.json으로 사용량 추정, poiId별 10분 캐시). 메타 API에 이름 검색 파라미터가 없어 상위 1,000곳 오프라인 POI 인덱스로 장소 검색을 쿼터 없이 처리한다.",
   },
   {
     id: "kto_congestion_forecast",

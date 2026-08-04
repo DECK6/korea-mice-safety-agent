@@ -14,6 +14,13 @@ import { queryLiveOperationsStatus, type LiveOperationsStatus, type OperationalE
 import { baseMiceEventInputSchema } from "../lib/mice-event-input-schema.js";
 import { MICE_DATA, strictnessLabel } from "../lib/mice-data.js";
 import { PERSONA_PRESETS } from "../lib/mice-personas.js";
+import {
+  getSktCongestion,
+  searchSktPois,
+  SKT_OUT_OF_INDEX_NOTE,
+  SKT_POI_INDEX_META,
+  SKT_POI_SEARCH_NOTE,
+} from "../lib/skt-place-congestion.js";
 import type { Strictness } from "../lib/types.js";
 import { generateMiceSafetyPlanTool } from "../tools/generate-mice-safety-plan.js";
 import { queryMiceSafetyApplicabilityTool } from "../tools/query-mice-safety-applicability.js";
@@ -656,9 +663,9 @@ const LIVE_DISCLAIMER =
   "이 화면의 값은 법령 적용 근거가 아니라 현장 운영 판단을 돕는 보조 데이터입니다. 중지·우회·입장제한 결정은 현장 책임자 판단과 경찰·소방·지자체 협의로 확정하고, 수치는 각 제공기관 원본으로 재확인하세요.";
 
 const NATIONWIDE_CROWD_GUIDANCE =
-  "공개된 실시간 기지국 인파 API는 서울 실시간 도시데이터가 유일합니다. 전국 중점관리지역 약 100곳을 다루는 행정안전부 인파관리지원시스템은 지자체·경찰·소방 상황실 전용이라 공개 API가 없습니다. 서울 외 지역은 관할 지자체 재난상황실과 공동대응 협의를 열어 행사기간 인파 정보 공유를 요청하고, 현장 계수·CCTV 관제·게이트 카운트로 보완하세요.";
+  "무료로 쓸 수 있는 실시간 기지국 인파 API는 서울 실시간 도시데이터(자동 갱신)와 SKT 지오비전 퍼즐 장소 혼잡도(월 10건 한도, 전국 모드 수동 조회) 둘뿐입니다. 전국 중점관리지역 약 100곳을 다루는 행정안전부 인파관리지원시스템은 지자체·경찰·소방 상황실 전용이라 공개 API가 없습니다. 둘 다 커버하지 못하는 장소는 관할 지자체 재난상황실과 공동대응 협의를 열어 행사기간 인파 정보 공유를 요청하고, 현장 계수·CCTV 관제·게이트 카운트로 보완하세요.";
 
-const CROWD_COVERAGE_NOTE = "실시간 인파는 서울 실시간 도시데이터(기지국 기반) 제공 지역만 조회할 수 있습니다.";
+const CROWD_COVERAGE_NOTE = "이 카드의 자동 갱신 값은 서울 실시간 도시데이터(기지국 기반) 제공 지역만 조회합니다. 서울 밖은 전국 SKT(수동) 모드로 전환하세요.";
 
 type LivePanelState = "critical" | "warning" | "watch" | "normal" | "unknown";
 
@@ -908,6 +915,30 @@ async function liveStatus(url: URL): Promise<AnyRecord> {
   });
 }
 
+// Offline index lookup only: no upstream call, so it stays out of the quota ledger entirely.
+function sktPoiSearch(url: URL): AnyRecord {
+  const query = (url.searchParams.get("q") ?? "").trim();
+  return {
+    version: VERSION,
+    query,
+    index: SKT_POI_INDEX_META,
+    pois: searchSktPois(query, 20),
+    note: SKT_POI_SEARCH_NOTE,
+    outOfIndexNote: SKT_OUT_OF_INDEX_NOTE,
+    _meta: COMMON_RESPONSE_META,
+  };
+}
+
+async function sktCongestion(url: URL): Promise<AnyRecord> {
+  const result = await getSktCongestion({ poiId: url.searchParams.get("poiId") ?? "" });
+  return {
+    version: VERSION,
+    generatedAt: new Date().toISOString(),
+    ...result,
+    _meta: COMMON_RESPONSE_META,
+  };
+}
+
 // The AI panel spawns a CLI process on this machine, so it must never answer another host: a
 // remote request would otherwise be a remote trigger for local process execution.
 export function isLoopbackAddress(address?: string | null): boolean {
@@ -970,6 +1001,9 @@ ${SHARED_STYLE}
     .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; align-items: end; }
     .controls .actions { align-self: end; }
     .panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+    /* An author display:grid outranks the UA [hidden] rule, so the national card needs this to hide. */
+    .panel-grid[hidden] { display: none; }
+    #sktSection { margin-bottom: 14px; }
     .panel {
       background: var(--paper);
       border: 1px solid var(--line);
@@ -1028,6 +1062,13 @@ ${SHARED_STYLE}
       <h2>조회 조건</h2>
       <div class="controls">
         <div>
+          <label>인파 카드 모드</label>
+          <div class="engine-choice" id="crowdMode">
+            <label class="check"><input type="radio" name="crowdMode" value="seoul" checked> 서울 실시간(자동)</label>
+            <label class="check"><input type="radio" name="crowdMode" value="skt"> 전국 SKT(수동)</label>
+          </div>
+        </div>
+        <div>
           <label for="areaSelect">서울 실시간 인파 지역</label>
           <select id="areaSelect"></select>
         </div>
@@ -1045,6 +1086,33 @@ ${SHARED_STYLE}
         </div>
       </div>
       <p class="muted" id="lastUpdated" style="margin-top:12px"></p>
+    </section>
+    <!-- The national card keeps its own DOM outside #panels: the 60s cycle rewrites #panels, and a
+         rebuild there would wipe the operator's place selection and the manually fetched reading. -->
+    <section id="sktSection" class="panel-grid" hidden>
+      <article class="panel state-unknown" id="sktPanel">
+        <div class="panel-head">
+          <h3>인파 밀집 — 전국 SKT(수동)</h3>
+          <span class="state-pill" id="sktState">확인 필요</span>
+        </div>
+        <p class="muted">SKT 지오비전 퍼즐 장소 혼잡도는 무료 플랜 월 10건 한도라 60초 자동 갱신에 넣지 않습니다. 장소 검색은 오프라인 인덱스라 무료이고, <strong>혼잡도 조회</strong> 버튼을 누를 때만 1건을 사용합니다.</p>
+        <div class="controls">
+          <div>
+            <label for="sktSearch">장소 검색(오프라인 인덱스)</label>
+            <input id="sktSearch" type="text" placeholder="예: 코엑스, 킨텍스, 벡스코">
+          </div>
+          <div>
+            <label for="sktPoi">장소 선택</label>
+            <select id="sktPoi"></select>
+          </div>
+          <div class="actions">
+            <button id="sktBtn" type="button" disabled>혼잡도 조회</button>
+            <span id="sktStatus" class="muted"></span>
+          </div>
+        </div>
+        <div id="sktResult"></div>
+        <div class="notice" id="sktGuidance" hidden></div>
+      </article>
     </section>
     <section id="panels" class="panel-grid" aria-live="polite">
       <div class="empty">실시간 상태를 불러오는 중입니다.</div>
@@ -1069,6 +1137,7 @@ ${SHARED_STYLE}
   </main>
   <script>
     const HOTSPOTS = ${JSON.stringify(SEOUL_LIVE_HOTSPOTS)};
+    const OUT_OF_INDEX_GUIDANCE = ${JSON.stringify(`${SKT_OUT_OF_INDEX_NOTE} ${NATIONWIDE_CROWD_GUIDANCE}`)};
     const REFRESH_MS = 60000;
     const $ = (selector) => document.querySelector(selector);
     const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (ch) => ({
@@ -1101,9 +1170,14 @@ ${SHARED_STYLE}
       const detail = heat.apparentTemperatureC === null ? "" : " · 체감 " + heat.apparentTemperatureC + "℃";
       return '<span class="chip ' + tone + '">폭염 ' + escapeHtml(heat.label) + escapeHtml(detail) + '</span>';
     }
+    function crowdMode() {
+      const selected = document.querySelector('input[name="crowdMode"]:checked');
+      return selected ? selected.value : "seoul";
+    }
     function render(payload) {
+      const nationwide = crowdMode() === "skt";
       $("#panels").innerHTML = [
-        panelHtml(payload.crowd),
+        nationwide ? "" : panelHtml(payload.crowd),
         panelHtml(payload.weather, heatBadge(payload.weather.heat)),
         panelHtml(payload.air),
         panelHtml(payload.traffic),
@@ -1111,7 +1185,9 @@ ${SHARED_STYLE}
       ].join("");
       $("#disclaimer").textContent = payload.disclaimer;
       $("#lastUpdated").textContent = "마지막 갱신 " + new Date(payload.generatedAt).toLocaleString("ko-KR")
-        + " / 인파 지역 " + (payload.query.areaName || "서울 외(공개 실시간 인파 API 없음)")
+        + " / 인파 " + (nationwide
+          ? "전국 SKT(수동 조회, 자동 갱신 제외)"
+          : (payload.query.areaName || "서울 외(자동 갱신 대상 아님)"))
         + " / 측정소 " + payload.query.stationName;
     }
     async function load() {
@@ -1133,6 +1209,85 @@ ${SHARED_STYLE}
       } finally {
         $("#refreshBtn").disabled = false;
       }
+    }
+    function sktTime(value) {
+      const parts = String(value || "").match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})/);
+      return parts ? parts[1] + "-" + parts[2] + "-" + parts[3] + " " + parts[4] + ":" + parts[5] : String(value || "-");
+    }
+    function setSktGuidance(text) {
+      const guidance = $("#sktGuidance");
+      guidance.hidden = !text;
+      guidance.textContent = text || "";
+    }
+    function setSktPois(pois) {
+      $("#sktPoi").innerHTML = pois.map((poi) =>
+        '<option value="' + escapeHtml(poi.poiId) + '">' + escapeHtml(poi.poiName) + '</option>'
+      ).join("");
+      $("#sktBtn").disabled = pois.length === 0;
+      setSktGuidance(pois.length || !$("#sktSearch").value.trim() ? "" : OUT_OF_INDEX_GUIDANCE);
+    }
+    async function searchPois() {
+      const query = $("#sktSearch").value.trim();
+      if (!query) {
+        setSktPois([]);
+        return;
+      }
+      try {
+        const res = await fetch("/api/skt-pois?q=" + encodeURIComponent(query));
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        setSktPois(json.pois || []);
+      } catch (err) {
+        setSktGuidance(String(err.message || err));
+      }
+    }
+    function renderSkt(json) {
+      const state = json.state || "unknown";
+      $("#sktPanel").className = "panel state-" + state;
+      $("#sktState").className = "state-pill " + state;
+      $("#sktState").textContent = STATE_LABEL[state] || state;
+      const metrics = [];
+      if (json.poi) metrics.push({ label: "장소", value: json.poi.poiName });
+      if (json.levelLabel) metrics.push({ label: "혼잡도 등급", value: json.levelLabel + " (레벨 " + json.level + ")" });
+      if (json.densityBand) metrics.push({ label: "등급 밀도구간", value: json.densityBand });
+      if (typeof json.congestion === "number") metrics.push({ label: "측정 밀도", value: json.congestion.toFixed(4) + "명/㎡" });
+      if (json.datetime) metrics.push({ label: "기준시각", value: sktTime(json.datetime) });
+      if (json.fetchedAt) metrics.push({ label: "조회시각", value: new Date(json.fetchedAt).toLocaleString("ko-KR") });
+      metrics.push({
+        label: "월 사용량",
+        value: "추정 사용 " + json.quota.used + "/" + json.quota.limit + " (" + json.quota.month + ")"
+      });
+      $("#sktResult").innerHTML = '<p>' + escapeHtml(json.message) + '</p>'
+        + (json.cached ? '<div class="chips"><span class="chip">10분 캐시 응답 · 쿼터 미사용</span></div>' : "")
+        + metricsHtml(metrics)
+        + (json.warnings && json.warnings.length
+          ? '<div class="notice">' + escapeHtml(json.warnings.join(" / ")) + '</div>' : "")
+        + '<p class="source-line">' + escapeHtml(json.quotaNote) + '</p>'
+        + '<p class="source-line">' + escapeHtml(json.disclaimer) + '</p>';
+      setSktGuidance(json.status === "unknown_poi" || json.status === "quota_exhausted" ? OUT_OF_INDEX_GUIDANCE : "");
+    }
+    // Manual only: this is the one control on the page that spends the shared monthly quota.
+    async function requestSktCongestion() {
+      const poiId = $("#sktPoi").value;
+      if (!poiId) return;
+      $("#sktBtn").disabled = true;
+      $("#sktStatus").textContent = "조회 중";
+      try {
+        const res = await fetch("/api/skt-congestion?poiId=" + encodeURIComponent(poiId));
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        renderSkt(json);
+        $("#sktStatus").textContent = json.cached ? "캐시" : json.status === "ok" ? "완료" : json.status;
+      } catch (err) {
+        $("#sktResult").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+        $("#sktStatus").textContent = "오류";
+      } finally {
+        $("#sktBtn").disabled = false;
+      }
+    }
+    function applyCrowdMode() {
+      $("#sktSection").hidden = crowdMode() !== "skt";
+      load();
     }
     let aiReady = false;
     function renderEngines(engines) {
@@ -1205,6 +1360,15 @@ ${SHARED_STYLE}
         load();
       });
       $("#refreshBtn").addEventListener("click", load);
+      for (const radio of document.querySelectorAll('input[name="crowdMode"]')) {
+        radio.addEventListener("change", applyCrowdMode);
+      }
+      let searchTimer = null;
+      $("#sktSearch").addEventListener("input", () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(searchPois, 250);
+      });
+      $("#sktBtn").addEventListener("click", requestSktCongestion);
       $("#aiBtn").addEventListener("click", requestBriefing);
       // The briefing stays out of the 60s cycle so the operator's subscription is only spent on
       // an explicit click.
@@ -1524,9 +1688,9 @@ async function personaStress(input: unknown): Promise<AnyRecord> {
   };
 }
 
-function requireLoopback(req: IncomingMessage, res: ServerResponse): boolean {
+function requireLoopback(req: IncomingMessage, res: ServerResponse, what = "AI bridge"): boolean {
   if (isLoopbackAddress(req.socket.remoteAddress)) return true;
-  responseJson(res, 403, { error: "AI bridge is local-only" });
+  responseJson(res, 403, { error: `${what} is local-only` });
   return false;
 }
 
@@ -1550,6 +1714,17 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
   if (req.method === "GET" && url.pathname === "/api/live-status") {
     responseJson(res, 200, await liveStatus(url));
+    return;
+  }
+  if (req.method === "GET" && url.pathname === "/api/skt-pois") {
+    responseJson(res, 200, sktPoiSearch(url));
+    return;
+  }
+  if (req.method === "GET" && url.pathname === "/api/skt-congestion") {
+    // One probe spends one of ten shared monthly calls, so a remote host must not be able to
+    // trigger it — same reasoning as the AI bridge below.
+    if (!requireLoopback(req, res, "SKT congestion probe")) return;
+    responseJson(res, 200, await sktCongestion(url));
     return;
   }
   if (req.method === "GET" && url.pathname === "/api/ai-engines") {

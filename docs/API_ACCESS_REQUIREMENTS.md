@@ -123,14 +123,16 @@ P1 데이터는 행사 전·당일 위험 보강용이다. 수집 시점에 API�
 | 구분 | 데이터 | 공개 여부 | 실시간성 | 커버리지 | 확보 경로 |
 | --- | --- | --- | --- | --- | --- |
 | 1. 공개 실시간 | 서울 실시간 도시데이터 `citydata` | 공개 API. `SEOUL_OPENAPI_KEY`로 즉시 조회 | 실시간. 5분 내외 갱신 | 서울 등록 POI 지역만 | 서울 열린데이터광장 인증키 |
-| 2. 공개형 실시간(전국) | SKT 지오비전 퍼즐 장소 혼잡도 | SK open API(openapi.sk.com) appKey 발급, 무료 티어 | 실시간/시간대별(통신 기지국) | 전국 주요 장소(백화점·지하철·쇼핑·여가 등) | appKey 발급 후 live adapter 연동 예정 (`SK_OPEN_API_APP_KEY`, 현재 pending) |
+| 2. 공개형 실시간(전국) | SKT 지오비전 퍼즐 장소 혼잡도 | SK open API(openapi.sk.com) appKey를 `appKey` 헤더로. **무료 플랜 월 10건**(메타 목록 포함 모든 puzzle POI 엔드포인트 합산, 초과 시 자동 차단) | 실시간/시간대별(통신 기지국) | 전국 33,647곳 등록 POI(백화점·지하철·쇼핑·여가·전시장 등) | `SK_OPEN_API_APP_KEY` 연동 완료. 쿼터 때문에 자동 갱신 금지, `/live` 전국 모드 **수동 조회 전용** |
 | 3. 비공개 실시간 | 행정안전부 인파관리지원시스템 | 공개 API 없음 | 실시간(통신 기지국) | 전국 중점관리지역 약 100곳 | 지자체·경찰·소방 상황실 전용. 주최자는 관할 지자체 재난상황실 공동대응 협의로 요청 |
 | 4. 예측(비실시간) | 한국관광공사 관광지 혼잡도(집중률) 예측 | data.go.kr 활용 신청(기존 TourAPI 키 계열) | 일 단위 예측 | 전국 관광지 | 행사 전 수요 예측 참고용 (`kto_congestion_forecast`, pending) |
 | 5. 상용 통계 | 통신사 빅데이터 유동인구(KT BDP 등) | 유료 계약 | 비실시간(집계 주기 있는 통계) | 계약 범위 | 사업자 계약 |
 
-- 이 저장소의 현장 라이브 대시보드(`/live`, `GET /api/live-status`)가 실제로 호출하는 인파 소스는 **1번(서울 실시간 도시데이터)뿐이다.**
-- 대시보드에서 서울 외 지역을 선택하거나 지역을 비우면 인파 카드는 값을 만들어내지 않고 `unsupported_region` 상태와 함께 2번 경로(관할 지자체 재난상황실 공동대응 협의) 안내를 표시한다. 무주최 다중운집 관계기관 공동대응계획이 그 협조 창구다.
-- 2~5번은 `api-access-status` 레지스트리에 `skt_puzzle_place_congestion`(`pending`), `mois_crowd_management`(`externally_available`), `kto_congestion_forecast`(`pending`), `telecom_bdp_floating_population`(`pending`)로 등록돼 있다. 현재 런타임이 직접 호출하는 것은 없으며, 상태 표기로만 존재를 드러낸다. SKT 지오비전 퍼즐은 appKey 발급 즉시 live adapter로 승격할 1순위 후보다.
+- 현장 라이브 대시보드(`/live`)의 인파 카드는 두 모드로 나뉜다. **서울 실시간(자동)** 모드는 1번을 60초 주기로 갱신하고(`GET /api/live-status`), **전국 SKT(수동)** 모드는 2번을 조작자가 버튼을 누를 때만 1건 호출한다(`GET /api/skt-congestion?poiId=`).
+- 대시보드에서 서울 외 지역을 선택하거나 지역을 비우면 인파 카드는 값을 만들어내지 않고 `unsupported_region` 상태와 함께 전국 SKT 모드 또는 3번 경로(관할 지자체 재난상황실 공동대응 협의) 안내를 표시한다. 무주최 다중운집 관계기관 공동대응계획이 그 협조 창구다.
+- 2번 SKT 연동은 월 10건 한도를 지키는 것이 설계 제약이다. 실호출 직전에 로컬 원장(`MICE_LOCAL_DIR/skt-quota.json`, 기본 `~/.korea-mice-safety-agent`)의 사용량을 올리고, 10건에 닿으면 호출하지 않고 `quota_exhausted`를 돌려준다. 같은 poiId는 10분 캐시로 흡수해 쿼터를 쓰지 않는다. 원장은 이 머신 기준 **추정치**이며 수동 프로브는 포함하지 않으므로 SK 콘솔 사용량이 실제 기준이다.
+- 2번 메타 API(`GET /puzzle/place/meta/pois?offset=&limit=`, limit 최대 1,000)에는 **이름 검색 파라미터가 없다.** 그래서 상위 1,000곳을 `src/ontology/mice/skt-place-poi-index.json`에 오프라인 인덱스로 번들해 두고, 대시보드 장소 검색(`GET /api/skt-pois?q=`)은 쿼터 0으로 로컬 처리한다. 인덱스 확장은 `npm run collect:skt-pois -- --offset N --limit 1000 --max-calls 1`로 하되 호출 1건당 쿼터 1건을 쓴다(CI·테스트에서 실행 금지). 인덱스 밖 장소는 값을 만들지 않고 3번 경로 안내로 연결한다.
+- 3~5번은 `api-access-status` 레지스트리에 `mois_crowd_management`(`externally_available`), `kto_congestion_forecast`(`pending`), `telecom_bdp_floating_population`(`pending`)로 등록돼 있고, 런타임이 직접 호출하지 않는다. 상태 표기로만 존재를 드러낸다.
 - 지역명은 서울에 등록된 POI 이름과 정확히 일치해야 한다. 대시보드 프리셋 20곳은 2026-08-04에 `citydata_ppltn`으로 `INFO-000` 응답을 확인했다. 예를 들어 `코엑스`는 등록명이 아니고 `강남 MICE 관광특구`로 조회한다.
 - `openapi.seoul.go.kr:8088`은 평문 HTTP만 응답하고 443 포트는 열려 있지 않다. https URL은 TLS 핸드셰이크에서 실패하므로 클라이언트는 http로 호출하며, 인증키가 경로에 평문으로 실린다는 점을 감수한다. 서울이 TLS를 제공하면 되돌린다.
 
