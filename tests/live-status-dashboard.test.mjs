@@ -206,6 +206,69 @@ test("/live carries both tabs and wires the law tab to /api/simulate", async () 
   }
 });
 
+test("/vendor serves the bundled Leaflet build and refuses to escape the vendor directory", async () => {
+  const server = await startWebServer({ host: "127.0.0.1", port: 0 });
+  const { port } = server.address();
+  const base = `http://127.0.0.1:${port}`;
+  try {
+    const script = await fetch(`${base}/vendor/leaflet/leaflet.js`);
+    assert.equal(script.status, 200);
+    assert.match(script.headers.get("content-type"), /text\/javascript/);
+    assert((await script.text()).includes("Leaflet"));
+
+    const css = await fetch(`${base}/vendor/leaflet/leaflet.css`);
+    assert.equal(css.status, 200);
+    assert.match(css.headers.get("content-type"), /text\/css/);
+    // leaflet.css resolves images/ relatively, so the image directory has to travel with it.
+    assert.equal((await fetch(`${base}/vendor/leaflet/images/layers.png`)).status, 200);
+
+    // The URL parser normalises a plain "../", but not a percent-encoded slash — that is the
+    // request the in-handler confinement check exists for.
+    assert.equal((await fetch(`${base}/vendor/leaflet%2f..%2f..%2f..%2fpackage.json`)).status, 403);
+    // Only the declared asset extensions are served: no source maps, no unknown files.
+    assert.equal((await fetch(`${base}/vendor/leaflet/leaflet.js.map`)).status, 404);
+    assert.equal((await fetch(`${base}/vendor/leaflet/missing.js`)).status, 404);
+  } finally {
+    server.close();
+  }
+});
+
+test("/live ships a self-contained map panel on one central dark token block", async () => {
+  const server = await startWebServer({ host: "127.0.0.1", port: 0 });
+  const { port } = server.address();
+  try {
+    const html = await (await fetch(`http://127.0.0.1:${port}/live`)).text();
+
+    // Colours are declared once in :root and referenced by role everywhere else.
+    assert(html.includes("--ink-bg: #0b0e14"));
+    assert(html.includes("--accent: #22d3ee"));
+    assert(html.includes("--critical: #f2545b"));
+
+    assert(html.includes('<div id="map"></div>'));
+    // Vendored, never a CDN: a venue network may have no outbound access at all.
+    assert(html.includes('src="/vendor/leaflet/leaflet.js"'));
+    assert(html.includes('href="/vendor/leaflet/leaflet.css"'));
+    assert.equal(/(unpkg\.com|jsdelivr|cdnjs)/i.test(html), false);
+    // OSM tiles carry attribution, and an unreachable tile server says so instead of showing a void.
+    assert(html.includes("tile.openstreetmap.org"));
+    assert(html.includes("OpenStreetMap"));
+    assert(html.includes("지도 타일 오프라인"));
+
+    // Every Seoul preset needs a display coordinate or selecting it cannot move the map.
+    for (const area of ["강남역", "홍대 관광특구", "DDP(동대문디자인플라자)"]) {
+      assert(html.includes(`"${area}": [37.`), area);
+    }
+    // MICE venues are keyed by the poiId the SKT congestion probe echoes back.
+    assert(html.includes('"187757": { name: "코엑스"'));
+    assert(html.includes('"729930": { name: "킨텍스제1전시장"'));
+
+    // A dropped fetch must surface the Korean recovery line, never the browser's raw message.
+    assert(html.includes("서버 연결 실패 — 서버가 재시작 중일 수 있습니다."));
+  } finally {
+    server.close();
+  }
+});
+
 test("law tab lookup returns 적용 법령 and 의무 문서 for 축제+옥외+5000명", async () => {
   const server = await startWebServer({ host: "127.0.0.1", port: 0 });
   const { port } = server.address();

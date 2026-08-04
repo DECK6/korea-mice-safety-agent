@@ -1,5 +1,7 @@
+import { readFile } from "node:fs/promises";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
-import { URL } from "node:url";
+import { extname, resolve, sep } from "node:path";
+import { fileURLToPath, URL } from "node:url";
 import { ZodError, type AnyZodObject } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
 import {
@@ -993,6 +995,420 @@ async function aiBriefing(input: unknown): Promise<AnyRecord> {
   };
 }
 
+// The live board is a situation-room screen and owns its own dark theme, so it does not reuse
+// SHARED_STYLE (the light simulator sheet). Every colour and spacing value is declared once in the
+// :root block below; nothing further down this sheet carries a raw hex.
+const LIVE_STYLE = `    :root {
+      color-scheme: dark;
+      /* Surfaces — DEXA dark: ink plane with raised hardware panels. */
+      --ink-bg: #0b0e14;
+      --ink-deep: #070a0f;
+      --panel: #131822;
+      --panel-raised: #1a2130;
+      --panel-sunken: #0e131b;
+      --line: #263042;
+      --line-soft: #1c2432;
+      /* Ink */
+      --text: #e6ecf6;
+      --text-strong: #ffffff;
+      --muted: #8d9ab0;
+      --dim: #5d6a7e;
+      /* Accent — chrome only (tabs, links, focus, the live indicator). It is deliberately never a
+         data mark: cyan sits only ΔE 12 from --ok, too close to tell apart as a status colour. */
+      --accent: #22d3ee;
+      --accent-deep: #0e7490;
+      --accent-wash: rgba(34, 211, 238, 0.12);
+      --accent-line: rgba(34, 211, 238, 0.34);
+      /* Status — validated against --panel: worst pair CVD ΔE 10.6, normal-vision ΔE 21.2, all
+         >= 3:1 contrast. State is never colour alone; every use carries its Korean label. */
+      --ok: #34d399;
+      --ok-wash: rgba(52, 211, 153, 0.10);
+      --ok-line: rgba(52, 211, 153, 0.38);
+      --watch: #fbbf24;
+      --watch-wash: rgba(251, 191, 36, 0.10);
+      --watch-line: rgba(251, 191, 36, 0.38);
+      --critical: #f2545b;
+      --critical-wash: rgba(242, 84, 91, 0.12);
+      --critical-line: rgba(242, 84, 91, 0.46);
+      --critical-glow: rgba(242, 84, 91, 0.28);
+      /* Geometry & type */
+      --radius: 10px;
+      --radius-sm: 7px;
+      --gap: 14px;
+      --shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", "JetBrains Mono", Menlo, monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--ink-bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+    .page { max-width: 1560px; margin: 0 auto; padding: 20px 20px 56px; }
+    h1 { margin: 0; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.01em; }
+    h2 { margin: 0 0 12px; font-size: 17px; line-height: 1.3; }
+    h3 { margin: 0 0 8px; font-size: 15px; }
+    p { margin: 0 0 10px; }
+    a { color: var(--accent); }
+    .muted { color: var(--muted); }
+    .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+    /* Uppercase micro label — the control-room caption above every readout. */
+    .micro {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    /* Status LED. Always sits beside a text label, never carries state on its own. */
+    .led {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dim);
+      box-shadow: 0 0 0 3px rgba(93, 106, 126, 0.16);
+      flex: 0 0 auto;
+    }
+    .led.normal, .led.ok { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-wash); }
+    .led.watch, .led.warning { background: var(--watch); box-shadow: 0 0 0 3px var(--watch-wash); }
+    .led.critical { background: var(--critical); box-shadow: 0 0 0 3px var(--critical-wash); }
+    .led.live { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+    button, input, select { font: inherit; }
+    button {
+      min-height: 38px;
+      border: 1px solid var(--accent-line);
+      border-radius: var(--radius-sm);
+      background: var(--accent-wash);
+      color: var(--accent);
+      font-weight: 800;
+      cursor: pointer;
+      padding: 8px 14px;
+    }
+    button:hover { background: var(--accent-deep); color: var(--text-strong); }
+    button.secondary { background: var(--panel-raised); color: var(--text); border-color: var(--line); }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    label { display: block; color: var(--muted); font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--panel-sunken);
+      color: var(--text);
+      padding: 8px 10px;
+    }
+    /* Top status strip — the always-on header of the situation room. */
+    .strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 26px;
+      align-items: center;
+      background: linear-gradient(var(--panel-raised), var(--panel));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .strip-cell { display: flex; align-items: center; gap: 9px; min-width: 0; }
+    .strip-cell strong { font-size: 14px; overflow-wrap: anywhere; }
+    .strip-cell .micro { margin-bottom: 1px; }
+    .strip-links { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 32px;
+      padding: 5px 11px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--panel-sunken);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .badge.primary { color: var(--accent); border-color: var(--accent-line); background: var(--accent-wash); }
+    .heading { margin-bottom: 16px; }
+    .heading p { max-width: 90ch; }
+    .tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+    .tab-btn {
+      background: transparent;
+      color: var(--muted);
+      border-color: transparent;
+      border-bottom: 2px solid transparent;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { background: var(--panel); color: var(--text); }
+    .tab-btn.active { background: var(--panel); color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-panel[hidden] { display: none; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: var(--gap);
+      box-shadow: var(--shadow);
+    }
+    .mini-card {
+      background: var(--panel-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+    }
+    .empty {
+      background: var(--panel);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; align-items: end; }
+    .controls .actions { align-self: end; }
+    .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      background: var(--panel-sunken);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .check:hover { border-color: var(--accent-line); }
+    .check input { accent-color: var(--accent); }
+    .checkbox-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .engine-choice { display: flex; flex-wrap: wrap; gap: 8px; }
+    .engine-choice .check { flex: 0 1 auto; }
+    /* Connection banner — a dropped fetch must not blank the board, so the warning lands here and
+       the last good reading stays on screen underneath. */
+    .conn-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--watch-line);
+      border-left: 4px solid var(--watch);
+      background: var(--watch-wash);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      margin-bottom: var(--gap);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .conn-banner[hidden] { display: none; }
+    /* Stat tiles — the headline readouts. Value is a large mono figure; the state colour rides the
+       top rule and the LED, never the number itself. */
+    .stat-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin-bottom: var(--gap); }
+    .stat-tile {
+      position: relative;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 16px 13px;
+      box-shadow: var(--shadow);
+    }
+    .stat-tile::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 2px;
+      background: var(--dim);
+    }
+    .stat-tile.state-normal::before { background: var(--ok); }
+    .stat-tile.state-watch::before, .stat-tile.state-warning::before { background: var(--watch); }
+    .stat-tile.state-critical::before { background: var(--critical); }
+    .tile-value {
+      display: block;
+      margin: 7px 0 2px;
+      font-family: var(--mono);
+      font-size: clamp(21px, 2.5vw, 31px);
+      line-height: 1.1;
+      color: var(--text-strong);
+      overflow-wrap: anywhere;
+    }
+    .tile-sub { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+    .tile-state { display: inline-flex; align-items: center; gap: 6px; margin-top: 9px; font-size: 12px; font-weight: 800; color: var(--muted); }
+    /* Map left, live panels right on a wide screen. */
+    .ops-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(330px, 0.85fr); gap: var(--gap); align-items: start; }
+    .map-panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    /* The panel rail is far taller than the map, so on a wide screen the map tracks the scroll
+       instead of leaving a dead column beside it. */
+    @media (min-width: 1181px) {
+      .map-panel { position: sticky; top: 12px; }
+    }
+    .map-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 13px 16px; border-bottom: 1px solid var(--line); }
+    .map-legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; font-weight: 800; color: var(--muted); }
+    .map-legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .map-shell { position: relative; background: var(--panel-sunken); }
+    #map { height: clamp(340px, 54vh, 620px); width: 100%; }
+    .map-fallback {
+      position: absolute;
+      inset: 0;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      padding: 24px;
+      text-align: center;
+      background: var(--panel-sunken);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .map-fallback[hidden] { display: none; }
+    .map-fallback strong { color: var(--text); font-size: 15px; }
+    .map-foot { padding: 10px 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    /* Leaflet ships a light UI; these rules tone the tiles and its chrome down to the ink theme.
+       The filter keeps label contrast usable rather than dimming the map into unreadability. */
+    .map-shell .leaflet-container { background: var(--panel-sunken); font-family: var(--sans); }
+    .map-shell .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.88) contrast(0.92) saturate(0.55); }
+    .map-shell .leaflet-bar a, .map-shell .leaflet-bar a:hover {
+      background: var(--panel-raised);
+      color: var(--text);
+      border-bottom-color: var(--line);
+    }
+    .map-shell .leaflet-bar { border: 1px solid var(--line); }
+    .map-shell .leaflet-control-attribution {
+      background: var(--ink-deep);
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .map-shell .leaflet-control-attribution a { color: var(--accent); }
+    .map-shell .leaflet-popup-content-wrapper, .map-shell .leaflet-popup-tip {
+      background: var(--panel-raised);
+      color: var(--text);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .map-shell .leaflet-popup-content { margin: 11px 13px; font-size: 13px; }
+    .map-shell .leaflet-popup-close-button { color: var(--muted); }
+    .map-shell .leaflet-tooltip {
+      background: var(--ink-deep);
+      color: var(--text);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+    .map-shell .leaflet-tooltip::before { border-top-color: var(--line); }
+    .popup-title { display: block; font-weight: 800; margin-bottom: 4px; }
+    .popup-line { display: block; color: var(--muted); font-size: 12px; }
+    .panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--gap); }
+    /* An author display:grid outranks the UA [hidden] rule, so the national card needs this to hide. */
+    .panel-grid[hidden] { display: none; }
+    #sktSection { margin-bottom: var(--gap); }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .panel.state-critical { border-color: var(--critical-line); background: var(--critical-wash); box-shadow: var(--shadow), 0 0 22px -6px var(--critical-glow); }
+    .panel.state-warning { border-color: var(--watch-line); background: var(--watch-wash); }
+    .panel.state-watch { border-color: var(--watch-line); }
+    .panel.state-normal { border-color: var(--ok-line); }
+    .panel-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .panel-head h3 { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 15px; }
+    .state-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel-sunken);
+      color: var(--muted);
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .state-pill.critical { color: var(--critical); border-color: var(--critical-line); }
+    .state-pill.warning, .state-pill.watch { color: var(--watch); border-color: var(--watch-line); }
+    .state-pill.normal { color: var(--ok); border-color: var(--ok-line); }
+    .metrics { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 5px; }
+    .metrics li { display: flex; justify-content: space-between; gap: 14px; border-top: 1px solid var(--line-soft); padding-top: 5px; font-size: 13px; }
+    .metrics li span { color: var(--muted); font-weight: 700; white-space: nowrap; }
+    .metrics li strong { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; overflow-wrap: anywhere; }
+    .panel .notice { margin-top: 12px; font-size: 13px; }
+    .source-line { color: var(--dim); font-size: 11px; font-weight: 700; margin: 10px 0 0; font-family: var(--mono); }
+    .notice {
+      border: 1px solid var(--watch-line);
+      border-left: 4px solid var(--watch);
+      background: var(--watch-wash);
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--text);
+    }
+    .notice.error { border-color: var(--critical-line); border-left-color: var(--critical); background: var(--critical-wash); }
+    .ai-output { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 6px; }
+    #aiResult { margin-top: 14px; }
+    /* Law tab reuses the simulator's card vocabulary, restyled onto the same dark tokens. */
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: var(--gap); }
+    .stat { padding: 14px 16px; }
+    .stat strong { display: block; font-family: var(--mono); font-size: clamp(19px, 2.4vw, 28px); color: var(--text-strong); line-height: 1.1; overflow-wrap: anywhere; }
+    .stat span { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .list { display: grid; gap: 10px; }
+    .card-topline { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; margin-bottom: 6px; }
+    .pill, .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: var(--panel-sunken);
+      color: var(--muted);
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tone-good { border-color: var(--ok-line); background: var(--ok-wash); }
+    .tone-good .pill, .tone-good strong, .chip.good { color: var(--ok); }
+    .tone-warning { border-color: var(--watch-line); background: var(--watch-wash); }
+    .tone-warning .pill, .tone-warning strong, .chip.warn { color: var(--watch); }
+    .tone-danger { border-color: var(--critical-line); background: var(--critical-wash); }
+    .tone-danger .pill, .tone-danger strong, .chip.danger { color: var(--critical); }
+    .compact-list { margin: 0; padding-left: 18px; }
+    .compact-list li + li { margin-top: 5px; }
+    .law-field { margin-top: 12px; }
+    #lawResult .card:first-child { margin-top: 0; }
+    @media (max-width: 1180px) {
+      .ops-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      .page { padding: 14px 12px 44px; }
+      .strip { gap: 10px 16px; padding: 12px 14px; }
+      .strip-links { margin-left: 0; }
+      .tabs .tab-btn { flex: 1 1 140px; }
+      .stat-row, .stats, .grid, .checkbox-grid { grid-template-columns: 1fr; }
+      #map { height: 320px; }
+    }
+    @media print {
+      body { background: #fff; color: #000; }
+      .page { max-width: none; padding: 0; }
+      .tabs, .actions, .map-panel { display: none; }
+      .panel, .card, .stat-tile { box-shadow: none; break-inside: avoid; }
+    }`;
+
 function livePage(): string {
   return `<!doctype html>
 <html lang="ko">
@@ -1000,89 +1416,61 @@ function livePage(): string {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MICE 현장 운영 라이브 대시보드</title>
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+  <script src="/vendor/leaflet/leaflet.js"></script>
   <style>
-${SHARED_STYLE}
-    .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; align-items: end; }
-    .controls .actions { align-self: end; }
-    .panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
-    /* An author display:grid outranks the UA [hidden] rule, so the national card needs this to hide. */
-    .panel-grid[hidden] { display: none; }
-    #sktSection { margin-bottom: 14px; }
-    .panel {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-left: 5px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .panel.state-critical { border-left-color: var(--red); background: var(--red-soft); }
-    .panel.state-warning { border-left-color: var(--yellow); background: var(--yellow-soft); }
-    .panel.state-watch { border-left-color: var(--yellow); }
-    .panel.state-normal { border-left-color: var(--green); }
-    .panel.state-unknown { border-left-color: var(--line); background: #f8fafc; }
-    .panel-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; margin-bottom: 6px; }
-    .panel-head h3 { margin: 0; font-size: 17px; }
-    .state-pill {
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      background: var(--paper);
-      color: #334155;
-      padding: 4px 9px;
-      font-size: 12px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-    .state-pill.critical { color: var(--red); border-color: #f1a5a5; }
-    .state-pill.warning, .state-pill.watch { color: var(--yellow); border-color: #ead28a; }
-    .state-pill.normal { color: var(--green); border-color: #93d5b7; }
-    .metrics { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
-    .metrics li { display: flex; justify-content: space-between; gap: 14px; border-top: 1px dashed var(--line); padding-top: 6px; font-size: 13px; }
-    .metrics li span { color: var(--muted); font-weight: 800; white-space: nowrap; }
-    .metrics li strong { text-align: right; overflow-wrap: anywhere; }
-    .panel .notice { margin-top: 12px; font-size: 13px; }
-    .source-line { color: var(--muted); font-size: 12px; font-weight: 800; margin-top: 10px; }
-    .engine-choice { display: flex; flex-wrap: wrap; gap: 8px; }
-    .engine-choice .check { flex: 0 1 auto; }
-    .ai-output { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 6px; }
-    #aiResult { margin-top: 14px; }
-    .tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
-    .tab-btn {
-      background: var(--paper);
-      color: #334155;
-      border-color: var(--line);
-      border-bottom-color: transparent;
-      border-radius: 8px 8px 0 0;
-      margin-bottom: -1px;
-    }
-    .tab-btn.active { background: var(--blue-soft); color: var(--blue); border-color: #b9c9f5; border-bottom-color: var(--blue-soft); }
-    .tab-panel[hidden] { display: none; }
-    .law-field { margin-top: 12px; }
-    #lawResult .card:first-child { margin-top: 0; }
-    @media (max-width: 720px) {
-      .tabs .tab-btn { flex: 1 1 140px; }
-    }
+${LIVE_STYLE}
   </style>
 </head>
 <body>
   <main class="page">
-    <div class="topbar">
-      <span class="badge primary">${SERVER_NAME} v${VERSION}</span>
-      <span class="badge">현장 운영 라이브 대시보드</span>
-      <span class="badge">60초 자동 새로고침</span>
-      <a class="badge" href="/">← 적용성 체크리스트</a>
-    </div>
-    <section class="heading">
-      <div>
-        <h1>현장 운영 라이브 대시보드</h1>
-        <p class="muted">행사 당일 인파·날씨·대기질·교통·재난문자를 한 화면에서 봅니다. 공개 API가 없는 항목은 없는 대로 표시합니다.</p>
+    <header class="strip">
+      <div class="strip-cell">
+        <span class="led live"></span>
+        <div>
+          <span class="micro">System</span>
+          <strong>${SERVER_NAME} v${VERSION}</strong>
+        </div>
       </div>
+      <div class="strip-cell">
+        <div>
+          <span class="micro">모니터링 대상</span>
+          <strong id="stripArea">—</strong>
+        </div>
+      </div>
+      <div class="strip-cell">
+        <div>
+          <span class="micro">현재시각</span>
+          <strong id="stripClock" class="mono">--:--:--</strong>
+        </div>
+      </div>
+      <div class="strip-cell">
+        <div>
+          <span class="micro">종합 상태</span>
+          <span class="state-pill" id="stripState"><span class="led"></span>확인 필요</span>
+        </div>
+      </div>
+      <div class="strip-cell">
+        <div>
+          <span class="micro">마지막 갱신</span>
+          <strong id="stripUpdated" class="mono">—</strong>
+        </div>
+      </div>
+      <div class="strip-links">
+        <span class="badge">60초 자동 갱신</span>
+        <a class="badge primary" href="/">← 적용성 체크리스트</a>
+      </div>
+    </header>
+    <section class="heading">
+      <h1>현장 운영 라이브 대시보드</h1>
+      <p class="muted">행사 당일 인파·날씨·대기질·교통·재난문자를 한 화면에서 봅니다. 공개 API가 없는 항목은 없는 대로 표시합니다.</p>
     </section>
     <div class="tabs" role="tablist">
       <button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="tab-live" data-tab="live">실시간 현황</button>
       <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-laws" data-tab="laws">법령·의무 문서</button>
     </div>
     <div id="tab-live" class="tab-panel" role="tabpanel">
+    <div class="conn-banner" id="connBanner" hidden></div>
     <section class="card">
       <h2>조회 조건</h2>
       <div class="controls">
@@ -1117,7 +1505,7 @@ ${SHARED_STYLE}
     <section id="sktSection" class="panel-grid" hidden>
       <article class="panel state-unknown" id="sktPanel">
         <div class="panel-head">
-          <h3>인파 밀집 — 전국 SKT(수동)</h3>
+          <h3><span class="led" id="sktLed"></span>인파 밀집 — 전국 SKT(수동)</h3>
           <span class="state-pill" id="sktState">확인 필요</span>
         </div>
         <p class="muted">SKT 지오비전 퍼즐 장소 혼잡도는 무료 플랜 월 10건 한도라 60초 자동 갱신에 넣지 않습니다. 장소 검색은 오프라인 인덱스라 무료이고, <strong>혼잡도 조회</strong> 버튼을 누를 때만 1건을 사용합니다.</p>
@@ -1139,8 +1527,58 @@ ${SHARED_STYLE}
         <div class="notice" id="sktGuidance" hidden></div>
       </article>
     </section>
-    <section id="panels" class="panel-grid" aria-live="polite">
-      <div class="empty">실시간 상태를 불러오는 중입니다.</div>
+    <section class="stat-row">
+      <article class="stat-tile" id="tileCrowd">
+        <span class="micro">인파 밀집</span>
+        <strong class="tile-value">—</strong>
+        <span class="tile-sub">조회 대기</span>
+        <span class="tile-state"><span class="led"></span>확인 필요</span>
+      </article>
+      <article class="stat-tile" id="tileHeat">
+        <span class="micro">체감온도</span>
+        <strong class="tile-value">—</strong>
+        <span class="tile-sub">조회 대기</span>
+        <span class="tile-state"><span class="led"></span>확인 필요</span>
+      </article>
+      <article class="stat-tile" id="tileAir">
+        <span class="micro">대기질</span>
+        <strong class="tile-value">—</strong>
+        <span class="tile-sub">조회 대기</span>
+        <span class="tile-state"><span class="led"></span>확인 필요</span>
+      </article>
+      <article class="stat-tile" id="tileAlerts">
+        <span class="micro">주의 이상 패널</span>
+        <strong class="tile-value">—</strong>
+        <span class="tile-sub">조회 대기</span>
+        <span class="tile-state"><span class="led"></span>확인 필요</span>
+      </article>
+    </section>
+    <section class="ops-grid">
+      <section class="map-panel">
+        <div class="map-head">
+          <div>
+            <span class="micro">Situation Map</span>
+            <strong>현장 위치 · 인파 강조</strong>
+          </div>
+          <div class="map-legend">
+            <span><span class="led normal"></span>정상</span>
+            <span><span class="led watch"></span>주의·경보</span>
+            <span><span class="led critical"></span>위험</span>
+            <span><span class="led"></span>확인 필요</span>
+          </div>
+        </div>
+        <div class="map-shell">
+          <div id="map"></div>
+          <div class="map-fallback" id="mapFallback" hidden>
+            <strong>지도 타일 오프라인</strong>
+            <span id="mapFallbackDetail">OpenStreetMap 타일 서버에 연결하지 못했습니다. 좌표와 상태값은 아래 패널에서 그대로 확인할 수 있습니다.</span>
+          </div>
+        </div>
+        <p class="map-foot" id="mapNote">표시 좌표는 지점 식별용 근사값입니다. 거리·수용인원 계산에 쓰지 마세요.</p>
+      </section>
+      <section id="panels" class="panel-grid" aria-live="polite">
+        <div class="empty">실시간 상태를 불러오는 중입니다.</div>
+      </section>
     </section>
     <section class="card" style="margin-top:16px">
       <h2>AI 상황 브리핑</h2>
@@ -1211,6 +1649,85 @@ ${SHARED_STYLE}
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
     }[ch]));
     const STATE_LABEL = { critical: "위험", warning: "경보", watch: "주의", normal: "정상", unknown: "확인 필요" };
+    const STATE_RANK = { unknown: 0, normal: 1, watch: 2, warning: 3, critical: 4 };
+    const PANEL_SOURCE = {
+      crowd: "Seoul RTD",
+      weather: "KMA API Hub",
+      air: "AirKorea",
+      traffic: "ITS OpenAPI",
+      disasterMessage: "Safety Data"
+    };
+    // A dropped request mid-restart surfaces as a bare "Failed to fetch"; the operator gets the
+    // recovery line instead, and the last good reading stays on screen.
+    const CONNECTION_ERROR = "서버 연결 실패 — 서버가 재시작 중일 수 있습니다. 다음 자동 갱신에서 재시도합니다.";
+    const TILE_OFFLINE_DETAIL = "OpenStreetMap 타일 서버에 연결하지 못했습니다. 좌표와 상태값은 아래 패널에서 그대로 확인할 수 있습니다.";
+    // Display coordinates only. Each point is the commonly cited centre of the area or venue —
+    // close enough to place a marker, not a surveyed position. Never used for distance, capacity
+    // or density math, and never sent upstream.
+    const SEOUL_AREA_COORDS = {
+      "강남역": [37.4981, 127.0276],
+      "강남 MICE 관광특구": [37.5115, 127.0595],
+      "잠실 관광특구": [37.5133, 127.1000],
+      "잠실종합운동장": [37.5159, 127.0727],
+      "잠실한강공원": [37.5180, 127.0820],
+      "여의도한강공원": [37.5285, 126.9330],
+      "반포한강공원": [37.5100, 126.9960],
+      "뚝섬한강공원": [37.5290, 127.0700],
+      "서울숲공원": [37.5444, 127.0374],
+      "월드컵공원": [37.5710, 126.8780],
+      "광화문·덕수궁": [37.5720, 126.9769],
+      "명동 관광특구": [37.5636, 126.9827],
+      "이태원 관광특구": [37.5345, 126.9946],
+      "홍대 관광특구": [37.5563, 126.9236],
+      "신촌·이대역": [37.5560, 126.9410],
+      "DDP(동대문디자인플라자)": [37.5665, 127.0090],
+      "성수카페거리": [37.5445, 127.0557],
+      "서울역": [37.5547, 126.9707],
+      "고속터미널역": [37.5049, 127.0048],
+      "건대입구역": [37.5403, 127.0700]
+    };
+    // Keyed by the SKT place-congestion poiId so a national lookup can move the map straight to
+    // the venue it just measured. Same display-only caveat as above.
+    const SKT_VENUE_COORDS = {
+      "187757": { name: "코엑스", coords: [37.5118, 127.0592] },
+      "729930": { name: "킨텍스제1전시장", coords: [37.6683, 126.7449] },
+      "2754697": { name: "킨텍스제2전시장", coords: [37.6660, 126.7350] },
+      "385078": { name: "벡스코제1전시장", coords: [35.1691, 129.1360] },
+      "2872904": { name: "벡스코제2전시장", coords: [35.1717, 129.1310] },
+      "1136310": { name: "김대중컨벤션센터", coords: [35.1466, 126.9220] },
+      "7883604": { name: "수원컨벤션센터", coords: [37.2860, 127.0555] },
+      "1141991": { name: "창원컨벤션센터", coords: [35.2225, 128.6811] },
+      "1166194": { name: "송도컨벤시아", coords: [37.3886, 126.6390] }
+    };
+    const MAP_TILE_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+    const MAP_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+    const MAP_HOME = [36.5, 127.9];
+    // Marker colours come from the same :root tokens as the rest of the sheet, so the map cannot
+    // drift away from the panel palette.
+    const cssToken = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    let STATE_COLORS = {};
+    function loadStateColors() {
+      const dim = cssToken("--dim");
+      STATE_COLORS = {
+        critical: cssToken("--critical") || dim,
+        warning: cssToken("--watch") || dim,
+        watch: cssToken("--watch") || dim,
+        normal: cssToken("--ok") || dim,
+        unknown: dim
+      };
+    }
+    const stateColor = (state) => STATE_COLORS[state] || STATE_COLORS.unknown;
+    // ko-KR's default time style spells out 시/분/초, which is too wide for a strip readout.
+    const clockText = (date) => date.toLocaleTimeString("ko-KR", {
+      hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit"
+    });
+    function friendlyError(err, prefix) {
+      const raw = String((err && err.message) || err || "");
+      if (!raw || /failed to fetch|networkerror|load failed|network request failed/i.test(raw)) {
+        return CONNECTION_ERROR;
+      }
+      return prefix ? prefix + " — " + raw : raw;
+    }
     function metricsHtml(metrics) {
       if (!metrics || !metrics.length) return "";
       return '<ul class="metrics">' + metrics.map((metric) =>
@@ -1221,15 +1738,107 @@ ${SHARED_STYLE}
       const state = panel.state || "unknown";
       return [
         '<article class="panel state-' + escapeHtml(state) + '">',
-        '<div class="panel-head"><h3>' + escapeHtml(panel.label) + '</h3><span class="state-pill ' + escapeHtml(state) + '">' + escapeHtml(STATE_LABEL[state] || state) + '</span></div>',
-        extraBadge ? '<div class="chips">' + extraBadge + '</div>' : "",
-        '<p>' + escapeHtml(panel.summary) + '</p>',
+        '<div class="panel-head"><h3><span class="led ' + escapeHtml(state) + '"></span>' + escapeHtml(panel.label) + '</h3>'
+          + '<span class="state-pill ' + escapeHtml(state) + '">' + escapeHtml(STATE_LABEL[state] || state) + '</span></div>',
+        '<span class="micro">' + escapeHtml(PANEL_SOURCE[panel.id] || "Source") + '</span>',
+        extraBadge ? '<div class="chips" style="margin-top:8px">' + extraBadge + '</div>' : "",
+        '<p style="margin-top:8px">' + escapeHtml(panel.summary) + '</p>',
         metricsHtml(panel.metrics),
         panel.nationwideGuidance ? '<div class="notice">' + escapeHtml(panel.nationwideGuidance) + '</div>' : "",
         panel.note ? '<p class="source-line">' + escapeHtml(panel.note) + '</p>' : "",
         '<p class="source-line">status: ' + escapeHtml(panel.status) + ' / mode: ' + escapeHtml(panel.mode) + '</p>',
         '</article>'
       ].join("");
+    }
+    // --- Situation map -------------------------------------------------------------------
+    let map = null;
+    let baseLayer = null;
+    let focusLayer = null;
+    let tileFailures = 0;
+    let mapReady = false;
+    function setMapFallback(detail) {
+      $("#mapFallbackDetail").textContent = detail;
+      $("#mapFallback").hidden = false;
+    }
+    function setMapNote(text) {
+      $("#mapNote").textContent = text || "표시 좌표는 지점 식별용 근사값입니다. 거리·수용인원 계산에 쓰지 마세요.";
+    }
+    function setupMap() {
+      if (typeof L === "undefined") {
+        setMapFallback("지도 라이브러리를 불러오지 못했습니다. /vendor/leaflet/leaflet.js 배포 상태를 확인하세요.");
+        return;
+      }
+      // Wheel zoom stays off so scrolling the board never gets captured by the map.
+      map = L.map("map", { scrollWheelZoom: false, attributionControl: true }).setView(MAP_HOME, 7);
+      const tiles = L.tileLayer(MAP_TILE_URL, { maxZoom: 18, attribution: MAP_ATTRIBUTION });
+      tiles.on("tileerror", () => {
+        tileFailures += 1;
+        if (tileFailures >= 3 && !mapReady) setMapFallback(TILE_OFFLINE_DETAIL);
+      });
+      tiles.on("tileload", () => {
+        mapReady = true;
+        $("#mapFallback").hidden = true;
+      });
+      tiles.addTo(map);
+      baseLayer = L.layerGroup().addTo(map);
+      focusLayer = L.layerGroup().addTo(map);
+      drawBaseMarkers();
+    }
+    // Reference dots for every place the active mode can reach. They stay neutral: only the
+    // selected point carries a status colour, so a dot is never mistaken for a reading.
+    function drawBaseMarkers() {
+      if (!baseLayer) return;
+      baseLayer.clearLayers();
+      const points = crowdMode() === "skt"
+        ? Object.keys(SKT_VENUE_COORDS).map((id) => [SKT_VENUE_COORDS[id].name, SKT_VENUE_COORDS[id].coords])
+        : Object.keys(SEOUL_AREA_COORDS).map((name) => [name, SEOUL_AREA_COORDS[name]]);
+      const dim = cssToken("--dim");
+      for (const entry of points) {
+        L.circleMarker(entry[1], {
+          radius: 3.5,
+          color: dim,
+          weight: 1,
+          fillColor: dim,
+          fillOpacity: 0.6,
+          interactive: true
+        }).bindTooltip(entry[0], { direction: "top" }).addTo(baseLayer);
+      }
+    }
+    function popupHtml(title, state, lines) {
+      return '<span class="popup-title">' + escapeHtml(title) + '</span>'
+        + '<span class="popup-line">상태 ' + escapeHtml(STATE_LABEL[state] || state) + '</span>'
+        + lines.filter(Boolean).map((line) => '<span class="popup-line">' + escapeHtml(line) + '</span>').join("");
+    }
+    function focusPoint(coords, title, state, lines, zoom) {
+      if (!map || !focusLayer) return;
+      focusLayer.clearLayers();
+      const color = stateColor(state);
+      L.circle(coords, { radius: 700, color: color, weight: 1.5, opacity: 0.8, fillColor: color, fillOpacity: 0.13 }).addTo(focusLayer);
+      L.circleMarker(coords, { radius: 9, color: color, weight: 3, fillColor: color, fillOpacity: 0.55 })
+        .bindPopup(popupHtml(title, state, lines))
+        .addTo(focusLayer);
+      map.setView(coords, zoom || 14, { animate: true });
+    }
+    function clearFocus() {
+      if (focusLayer) focusLayer.clearLayers();
+    }
+    // --- Headline tiles ------------------------------------------------------------------
+    function setTile(id, value, sub, state) {
+      const tile = $(id);
+      if (!tile) return;
+      const resolved = state || "unknown";
+      tile.className = "stat-tile state-" + resolved;
+      tile.querySelector(".tile-value").textContent = value;
+      tile.querySelector(".tile-sub").textContent = sub;
+      tile.querySelector(".tile-state").innerHTML = '<span class="led ' + escapeHtml(resolved) + '"></span>'
+        + escapeHtml(STATE_LABEL[resolved] || resolved);
+    }
+    const metricValue = (panel, label) => {
+      const found = ((panel && panel.metrics) || []).find((metric) => metric.label === label);
+      return found ? found.value : "";
+    };
+    function worstState(states) {
+      return states.reduce((worst, state) => (STATE_RANK[state] || 0) > (STATE_RANK[worst] || 0) ? state : worst, "unknown");
     }
     function heatBadge(heat) {
       if (!heat) return "";
@@ -1241,8 +1850,64 @@ ${SHARED_STYLE}
       const selected = document.querySelector('input[name="crowdMode"]:checked');
       return selected ? selected.value : "seoul";
     }
+    function updateStrip(payload, panels, areaText) {
+      $("#stripArea").textContent = areaText;
+      $("#stripUpdated").textContent = clockText(new Date(payload.generatedAt));
+      const state = worstState(panels.map((panel) => panel.state));
+      const pill = $("#stripState");
+      pill.className = "state-pill " + state;
+      pill.innerHTML = '<span class="led ' + escapeHtml(state) + '"></span>' + escapeHtml(STATE_LABEL[state] || state);
+    }
+    function updateTiles(payload, panels, nationwide) {
+      // The national card owns the crowd tile in SKT mode, so the Seoul feed must not overwrite it.
+      if (!nationwide) {
+        const crowd = payload.crowd;
+        setTile("#tileCrowd", metricValue(crowd, "혼잡도 등급") || "—",
+          metricValue(crowd, "실시간 인구 추정") || crowd.summary, crowd.state);
+      }
+      const heat = payload.weather.heat || {};
+      const apparent = heat.apparentTemperatureC;
+      setTile("#tileHeat", apparent === null || apparent === undefined ? "—" : apparent + "℃",
+        heat.label || "관측 없음", payload.weather.state);
+      const pm25 = metricValue(payload.air, "PM2.5");
+      setTile("#tileAir", metricValue(payload.air, "통합대기환경지수") || "—",
+        pm25 ? "PM2.5 " + pm25 : payload.air.summary, payload.air.state);
+      const alerts = panels.filter((panel) => ["critical", "warning", "watch"].includes(panel.state));
+      setTile("#tileAlerts", String(alerts.length),
+        alerts.length ? alerts.map((panel) => panel.label).join(", ") : "주의 이상 상태 없음",
+        worstState(panels.map((panel) => panel.state)));
+    }
+    function updateCrowdMap(payload) {
+      if (!map) return;
+      const area = payload.query.areaName;
+      const coords = area ? SEOUL_AREA_COORDS[area] : null;
+      if (!coords) {
+        clearFocus();
+        setMapNote(area
+          ? area + " 의 표시 좌표가 없어 지도를 이동하지 않았습니다. 좌표가 없어도 아래 패널 값은 그대로 유효합니다."
+          : "서울 외 지역은 실시간 인파 강조 대상이 아닙니다. 전국 SKT(수동) 모드에서 베뉴를 조회하세요.");
+        return;
+      }
+      const crowd = payload.crowd;
+      const level = metricValue(crowd, "혼잡도 등급");
+      const population = metricValue(crowd, "실시간 인구 추정");
+      const updatedAt = metricValue(crowd, "인파 갱신시각");
+      focusPoint(coords, area, crowd.state, [
+        level ? "혼잡도 " + level : "",
+        population ? "실시간 인구 " + population : "",
+        updatedAt ? "갱신 " + updatedAt : ""
+      ], 14);
+      setMapNote("");
+    }
     function render(payload) {
       const nationwide = crowdMode() === "skt";
+      const shown = [
+        nationwide ? null : payload.crowd,
+        payload.weather,
+        payload.air,
+        payload.traffic,
+        payload.disasterMessage
+      ].filter(Boolean);
       $("#panels").innerHTML = [
         nationwide ? "" : panelHtml(payload.crowd),
         panelHtml(payload.weather, heatBadge(payload.weather.heat)),
@@ -1251,11 +1916,28 @@ ${SHARED_STYLE}
         panelHtml(payload.disasterMessage)
       ].join("");
       $("#disclaimer").textContent = payload.disclaimer;
+      const areaText = nationwide
+        ? "전국 SKT(수동 조회, 자동 갱신 제외)"
+        : (payload.query.areaName || "서울 외(자동 갱신 대상 아님)");
       $("#lastUpdated").textContent = "마지막 갱신 " + new Date(payload.generatedAt).toLocaleString("ko-KR")
-        + " / 인파 " + (nationwide
-          ? "전국 SKT(수동 조회, 자동 갱신 제외)"
-          : (payload.query.areaName || "서울 외(자동 갱신 대상 아님)"))
-        + " / 측정소 " + payload.query.stationName;
+        + " / 인파 " + areaText + " / 측정소 " + payload.query.stationName;
+      updateStrip(payload, shown, areaText);
+      updateTiles(payload, shown, nationwide);
+      if (!nationwide) updateCrowdMap(payload);
+    }
+    let hasLiveData = false;
+    // A failed refresh never clears the board: the operator keeps reading the last good values
+    // while the banner says the connection dropped and that the next cycle retries.
+    function showConnectionIssue(message) {
+      const banner = $("#connBanner");
+      banner.innerHTML = '<span class="led critical"></span>' + escapeHtml(message);
+      banner.hidden = false;
+      const pill = $("#stripState");
+      pill.className = "state-pill";
+      pill.innerHTML = '<span class="led"></span>연결 끊김';
+      if (!hasLiveData) {
+        $("#panels").innerHTML = '<div class="empty">' + escapeHtml(message) + '</div>';
+      }
     }
     async function load() {
       $("#refreshBtn").disabled = true;
@@ -1269,10 +1951,12 @@ ${SHARED_STYLE}
         const json = await res.json();
         if (!res.ok) throw new Error(json.error || "요청 실패");
         render(json);
+        hasLiveData = true;
+        $("#connBanner").hidden = true;
         $("#status").textContent = "완료";
       } catch (err) {
-        $("#status").textContent = "오류";
-        $("#panels").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+        showConnectionIssue(friendlyError(err, "실시간 조회 실패"));
+        $("#status").textContent = "재시도 대기";
       } finally {
         $("#refreshBtn").disabled = false;
       }
@@ -1305,12 +1989,13 @@ ${SHARED_STYLE}
         if (!res.ok) throw new Error(json.error || "요청 실패");
         setSktPois(json.pois || []);
       } catch (err) {
-        setSktGuidance(String(err.message || err));
+        setSktGuidance(friendlyError(err, "장소 검색 실패"));
       }
     }
     function renderSkt(json) {
       const state = json.state || "unknown";
       $("#sktPanel").className = "panel state-" + state;
+      $("#sktLed").className = "led " + state;
       $("#sktState").className = "state-pill " + state;
       $("#sktState").textContent = STATE_LABEL[state] || state;
       const metrics = [];
@@ -1332,6 +2017,21 @@ ${SHARED_STYLE}
         + '<p class="source-line">' + escapeHtml(json.quotaNote) + '</p>'
         + '<p class="source-line">' + escapeHtml(json.disclaimer) + '</p>';
       setSktGuidance(json.status === "unknown_poi" || json.status === "quota_exhausted" ? OUT_OF_INDEX_GUIDANCE : "");
+      // The national mode drives the map from this manual lookup, since no Seoul feed applies.
+      const placeName = json.poi ? String(json.poi.poiName || "") : "선택 장소";
+      const venue = SKT_VENUE_COORDS[json.poi ? String(json.poi.poiId || "") : ""];
+      if (venue) {
+        focusPoint(venue.coords, placeName, state, [
+          json.levelLabel ? "혼잡도 " + json.levelLabel : "",
+          typeof json.congestion === "number" ? "측정 밀도 " + json.congestion.toFixed(4) + "명/㎡" : "",
+          json.datetime ? "기준 " + sktTime(json.datetime) : ""
+        ], 15);
+        setMapNote("");
+      } else {
+        clearFocus();
+        setMapNote(placeName + " 의 표시 좌표가 이 대시보드에 없어 지도는 이동하지 않았습니다. 혼잡도 값은 위 카드에 그대로 표시됩니다.");
+      }
+      setTile("#tileCrowd", json.levelLabel || "—", placeName || "전국 SKT(수동)", state);
     }
     // Manual only: this is the one control on the page that spends the shared monthly quota.
     async function requestSktCongestion() {
@@ -1346,14 +2046,22 @@ ${SHARED_STYLE}
         renderSkt(json);
         $("#sktStatus").textContent = json.cached ? "캐시" : json.status === "ok" ? "완료" : json.status;
       } catch (err) {
-        $("#sktResult").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
-        $("#sktStatus").textContent = "오류";
+        $("#sktResult").innerHTML = '<div class="notice error">' + escapeHtml(friendlyError(err, "혼잡도 조회 실패")) + '</div>';
+        $("#sktStatus").textContent = "재시도 대기";
       } finally {
         $("#sktBtn").disabled = false;
       }
     }
     function applyCrowdMode() {
-      $("#sktSection").hidden = crowdMode() !== "skt";
+      const nationwide = crowdMode() === "skt";
+      $("#sktSection").hidden = !nationwide;
+      drawBaseMarkers();
+      clearFocus();
+      if (nationwide) {
+        setTile("#tileCrowd", "—", "전국 SKT 수동 조회 대기", "unknown");
+        setMapNote("전국 SKT(수동) 모드입니다. 장소를 검색해 혼잡도를 조회하면 해당 베뉴로 지도가 이동합니다.");
+        if (map) map.setView(MAP_HOME, 7, { animate: true });
+      }
       load();
     }
     let aiReady = false;
@@ -1382,7 +2090,7 @@ ${SHARED_STYLE}
         if (!res.ok) throw new Error(json.error || "요청 실패");
         renderEngines(json.engines || []);
       } catch (err) {
-        $("#aiResult").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+        $("#aiResult").innerHTML = '<div class="notice error">' + escapeHtml(friendlyError(err, "AI 엔진 확인 실패")) + '</div>';
       }
     }
     async function requestBriefing() {
@@ -1410,8 +2118,8 @@ ${SHARED_STYLE}
           + '<p class="source-line">' + escapeHtml(json.disclaimer) + '</p></article>';
         $("#aiStatus").textContent = "완료";
       } catch (err) {
-        $("#aiResult").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
-        $("#aiStatus").textContent = "오류";
+        $("#aiResult").innerHTML = '<div class="notice error">' + escapeHtml(friendlyError(err, "AI 브리핑 실패")) + '</div>';
+        $("#aiStatus").textContent = "재시도 대기";
       } finally {
         $("#aiBtn").disabled = !aiReady;
       }
@@ -1524,8 +2232,8 @@ ${SHARED_STYLE}
         renderLaws(json);
         $("#lawStatus").textContent = "완료";
       } catch (err) {
-        $("#lawResult").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
-        $("#lawStatus").textContent = "오류";
+        $("#lawResult").innerHTML = '<div class="notice error">' + escapeHtml(friendlyError(err, "적용성 조회 실패")) + '</div>';
+        $("#lawStatus").textContent = "재시도 대기";
       } finally {
         $("#lawBtn").disabled = false;
       }
@@ -1556,7 +2264,17 @@ ${SHARED_STYLE}
         button.setAttribute("aria-selected", on ? "true" : "false");
       }
     }
+    function startClock() {
+      const tick = () => {
+        $("#stripClock").textContent = clockText(new Date());
+      };
+      tick();
+      setInterval(tick, 1000);
+    }
     function init() {
+      loadStateColors();
+      setupMap();
+      startClock();
       $("#areaSelect").innerHTML = HOTSPOTS.map((name) =>
         '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>'
       ).join("") + '<option value="">서울 외 지역 / 직접 입력</option>';
@@ -1731,6 +2449,45 @@ function responseHtml(res: ServerResponse, body: string): void {
     "cache-control": "no-store",
   });
   res.end(body);
+}
+
+// Leaflet is copied here by scripts/copy-web-vendor.mjs at build time. Serving it from the package
+// keeps the dashboard self-contained: a venue network with no outbound access still gets a map.
+const VENDOR_ROOT = resolve(fileURLToPath(new URL("./vendor/", import.meta.url)));
+
+const VENDOR_CONTENT_TYPES: Record<string, string> = {
+  ".js": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+};
+
+async function serveVendorAsset(res: ServerResponse, pathname: string): Promise<void> {
+  let relative: string;
+  try {
+    relative = decodeURIComponent(pathname.slice("/vendor/".length));
+  } catch {
+    responseJson(res, 400, { error: "invalid request" });
+    return;
+  }
+  // A "../" segment must not let a request read outside the vendor directory.
+  const target = resolve(VENDOR_ROOT, relative);
+  if (!target.startsWith(VENDOR_ROOT + sep)) {
+    responseJson(res, 403, { error: "forbidden" });
+    return;
+  }
+  const contentType = VENDOR_CONTENT_TYPES[extname(target).toLowerCase()];
+  if (!contentType) {
+    responseJson(res, 404, { error: "not found" });
+    return;
+  }
+  try {
+    const body = await readFile(target);
+    res.writeHead(200, { "content-type": contentType, "cache-control": "public, max-age=3600" });
+    res.end(body);
+  } catch {
+    responseJson(res, 404, { error: "not found" });
+  }
 }
 
 function isClientInputError(err: unknown): boolean {
@@ -1921,6 +2678,10 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
   if (req.method === "GET" && url.pathname === "/live") {
     responseHtml(res, livePage());
+    return;
+  }
+  if (req.method === "GET" && url.pathname.startsWith("/vendor/")) {
+    await serveVendorAsset(res, url.pathname);
     return;
   }
   if (req.method === "GET" && url.pathname === "/health") {

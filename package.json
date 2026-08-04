@@ -30,7 +30,7 @@
     "NOTICE.md"
   ],
   "scripts": {
-    "build": "tsc && node -e \"import('fs').then(fs=>fs.chmodSync('build/cli.js',0o755))\"",
+    "build": "tsc && node scripts/copy-web-vendor.mjs && node -e \"import('fs').then(fs=>fs.chmodSync('build/cli.js',0o755))\"",
     "start": "node build/index.js",
     "mcp:start": "node build/cli.js serve",
     "web": "node build/cli.js web",
@@ -82,6 +82,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.19.19",
+    "leaflet": "^1.9.4",
     "typescript": "^5.7.2"
   }
 }
