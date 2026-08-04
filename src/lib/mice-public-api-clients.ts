@@ -439,8 +439,10 @@ export async function fetchSeoulCityData(options: ApiClientOptions & {
   if (!key) return missing("SEOUL_REALTIME_CITY_DATA", "SEOUL_OPENAPI_KEY");
   try {
     const areaName = options.areaName ?? "강남역";
-    // Seoul's open data portal supports https; use it so the API key is not sent in cleartext.
-    const response = await requestText(`https://openapi.seoul.go.kr:8088/${key}/json/citydata/1/5/${encodeURIComponent(areaName)}`, options);
+    // openapi.seoul.go.kr serves plain HTTP on 8088 and does not answer on 443, so an https URL
+    // fails the TLS handshake (ERR_SSL_WRONG_VERSION_NUMBER) instead of protecting anything. The
+    // key travels in the path in cleartext; switch back to https only after Seoul offers TLS.
+    const response = await requestText(`http://openapi.seoul.go.kr:8088/${key}/json/citydata/1/5/${encodeURIComponent(areaName)}`, options);
     if (!response.ok) throw new Error(`Seoul OpenAPI HTTP ${response.httpStatus}`);
     const parsed = SeoulCityDataSchema.parse(JSON.parse(response.text));
     if (parsed.RESULT?.["RESULT.CODE"] !== "INFO-000") {

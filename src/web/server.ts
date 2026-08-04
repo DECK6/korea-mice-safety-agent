@@ -1,7 +1,9 @@
-import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
+import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import { URL } from "node:url";
 import { ZodError, type AnyZodObject } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
+import { assessHeatRisk } from "../lib/heat-thresholds.js";
+import { queryLiveOperationsStatus, type LiveOperationsStatus, type OperationalEvidence } from "../lib/live-operations-adapters.js";
 import { baseMiceEventInputSchema } from "../lib/mice-event-input-schema.js";
 import { MICE_DATA, strictnessLabel } from "../lib/mice-data.js";
 import { PERSONA_PRESETS } from "../lib/mice-personas.js";
@@ -46,15 +48,7 @@ function strictnessValue(value: unknown): Strictness {
   return "needs_review";
 }
 
-function htmlPage(): string {
-  return `<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MICE 행사 안전 적용성 체크리스트</title>
-  <style>
-    :root {
+const SHARED_STYLE = `    :root {
       color-scheme: light;
       --bg: #f6f8fb;
       --paper: #ffffff;
@@ -114,6 +108,7 @@ function htmlPage(): string {
       font-weight: 800;
     }
     .badge.primary { color: var(--blue); border-color: #b9c9f5; background: var(--blue-soft); }
+    a.badge { text-decoration: none; }
     .heading {
       display: flex;
       justify-content: space-between;
@@ -208,7 +203,17 @@ function htmlPage(): string {
       .topbar, .input-panel, .actions, .sample-row { display: none; }
       .layout { display: block; }
       .card, .mini-card, .empty { box-shadow: none; break-inside: avoid; }
-    }
+    }`;
+
+function htmlPage(): string {
+  return `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MICE 행사 안전 적용성 체크리스트</title>
+  <style>
+${SHARED_STYLE}
   </style>
 </head>
 <body>
@@ -218,6 +223,7 @@ function htmlPage(): string {
       <span class="badge">offline ontology web simulator</span>
       <span class="badge">query_mice_safety_applicability</span>
       <span class="badge">generate/review plan</span>
+      <a class="badge primary" href="/live">현장 라이브 대시보드 →</a>
     </div>
     <section class="heading">
       <div>
@@ -606,6 +612,462 @@ function htmlPage(): string {
 </html>`;
 }
 
+// Seoul is the only jurisdiction that publishes a realtime, base-station backed crowd API, so the
+// dashboard ships its area names as presets. Any other place has to come through the local
+// government situation room, which is what NATIONWIDE_CROWD_GUIDANCE tells the operator.
+// Every name below returned INFO-000 from citydata on 2026-08-04; the API rejects unlisted names,
+// so a name that is not a registered POI (e.g. 코엑스, which sits inside 강남 MICE 관광특구) must not
+// be added here without checking it first.
+const SEOUL_LIVE_HOTSPOTS = [
+  "강남역",
+  "강남 MICE 관광특구",
+  "잠실 관광특구",
+  "잠실종합운동장",
+  "잠실한강공원",
+  "여의도한강공원",
+  "반포한강공원",
+  "뚝섬한강공원",
+  "서울숲공원",
+  "월드컵공원",
+  "광화문·덕수궁",
+  "명동 관광특구",
+  "이태원 관광특구",
+  "홍대 관광특구",
+  "신촌·이대역",
+  "DDP(동대문디자인플라자)",
+  "성수카페거리",
+  "서울역",
+  "고속터미널역",
+  "건대입구역",
+];
+
+const DEFAULT_SEOUL_AREA = "강남역";
+const DEFAULT_AIR_STATION = "종로구";
+const SEOUL_JURISDICTION = "서울특별시";
+
+const LIVE_DISCLAIMER =
+  "이 화면의 값은 법령 적용 근거가 아니라 현장 운영 판단을 돕는 보조 데이터입니다. 중지·우회·입장제한 결정은 현장 책임자 판단과 경찰·소방·지자체 협의로 확정하고, 수치는 각 제공기관 원본으로 재확인하세요.";
+
+const NATIONWIDE_CROWD_GUIDANCE =
+  "공개된 실시간 기지국 인파 API는 서울 실시간 도시데이터가 유일합니다. 전국 중점관리지역 약 100곳을 다루는 행정안전부 인파관리지원시스템은 지자체·경찰·소방 상황실 전용이라 공개 API가 없습니다. 서울 외 지역은 관할 지자체 재난상황실과 공동대응 협의를 열어 행사기간 인파 정보 공유를 요청하고, 현장 계수·CCTV 관제·게이트 카운트로 보완하세요.";
+
+const CROWD_COVERAGE_NOTE = "실시간 인파는 서울 실시간 도시데이터(기지국 기반) 제공 지역만 조회할 수 있습니다.";
+
+type LivePanelState = "critical" | "warning" | "watch" | "normal" | "unknown";
+
+interface LiveMetric {
+  label: string;
+  value: string;
+}
+
+interface LivePanel {
+  id: string;
+  label: string;
+  state: LivePanelState;
+  status: string;
+  mode: string;
+  summary: string;
+  metrics: LiveMetric[];
+  warnings: string[];
+  note?: string;
+}
+
+function findEvidence(status: LiveOperationsStatus, sourceId: string): OperationalEvidence | undefined {
+  return status.operationalEvidence.find((item) => item.sourceId === sourceId);
+}
+
+function evidenceRecord(item?: OperationalEvidence): AnyRecord {
+  const data = item?.data;
+  const record = isPlainRecord(data) ? data.record : undefined;
+  return isPlainRecord(record) ? record : {};
+}
+
+function evidenceFields(item?: OperationalEvidence): AnyRecord {
+  const fields = evidenceRecord(item).fields;
+  return isPlainRecord(fields) ? fields : {};
+}
+
+function evidenceState(item?: OperationalEvidence): LivePanelState {
+  const data = item?.data;
+  const riskState = isPlainRecord(data) ? String(data.riskState ?? "") : "";
+  return ["critical", "warning", "watch", "normal"].includes(riskState) ? riskState as LivePanelState : "unknown";
+}
+
+// A panel with no data must say why instead of rendering an empty card.
+function noDataSummary(item?: OperationalEvidence): string {
+  switch (item?.status) {
+    case "live_error":
+      return "실시간 조회에 실패했습니다. 제공기관 API 상태와 요청 지역/측정소 이름을 확인하세요.";
+    case "not_configured":
+      return "API 키 미설정 상태라 실시간 값이 없습니다.";
+    case "pending_key":
+      return "API 키 발급 대기 상태라 실시간 연동이 없습니다.";
+    case "unsupported_region":
+      return "서울 실시간 도시데이터 제공 지역이 아닙니다.";
+    default:
+      return "수집된 실시간 값이 없습니다.";
+  }
+}
+
+function evidenceSummary(item?: OperationalEvidence): string {
+  const data = item?.data;
+  const summary = isPlainRecord(data) ? String(data.summary ?? "") : "";
+  return summary || noDataSummary(item);
+}
+
+function numberText(value: unknown, suffix = ""): string | undefined {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? `${numeric.toLocaleString("ko-KR")}${suffix}` : undefined;
+}
+
+function pushMetric(metrics: LiveMetric[], label: string, value?: string): void {
+  if (value) metrics.push({ label, value });
+}
+
+function precipitationLabel(code: unknown): string | undefined {
+  const labels: Record<string, string> = {
+    "0": "없음",
+    "1": "비",
+    "2": "비/눈",
+    "3": "눈",
+    "5": "빗방울",
+    "6": "빗방울눈날림",
+    "7": "눈날림",
+  };
+  return labels[String(code ?? "")];
+}
+
+function airGradeLabel(grade: unknown): string | undefined {
+  const labels: Record<string, string> = { "1": "좋음", "2": "보통", "3": "나쁨", "4": "매우나쁨" };
+  return labels[String(grade ?? "")];
+}
+
+function crowdPanel(status: LiveOperationsStatus, areaName?: string): LivePanel & {
+  areaName: string | null;
+  nationwideGuidance: string | null;
+} {
+  const item = findEvidence(status, "SEOUL_REALTIME_CITY_DATA");
+  const fields = evidenceFields(item);
+  const metrics: LiveMetric[] = [];
+  const resolvedArea = String(evidenceRecord(item).title ?? areaName ?? "");
+  pushMetric(metrics, "지역", resolvedArea || undefined);
+  pushMetric(metrics, "혼잡도 등급", fields.congestionLevel ? String(fields.congestionLevel) : undefined);
+  const min = numberText(fields.minPopulation);
+  const max = numberText(fields.maxPopulation);
+  pushMetric(metrics, "실시간 인구 추정", min && max ? `${min}~${max}명` : min ?? max);
+  pushMetric(metrics, "인파 갱신시각", fields.updatedAt ? String(fields.updatedAt) : undefined);
+  pushMetric(metrics, "서울시 안내", fields.congestionMessage ? String(fields.congestionMessage) : undefined);
+  return {
+    id: "crowd",
+    label: "인파 밀집",
+    state: evidenceState(item),
+    status: String(item?.status ?? "unavailable"),
+    mode: String(item?.freshness.mode ?? "not_collected"),
+    summary: evidenceSummary(item),
+    metrics,
+    warnings: item?.warnings ?? [],
+    note: CROWD_COVERAGE_NOTE,
+    areaName: areaName ?? null,
+    nationwideGuidance: item?.status === "unsupported_region" ? NATIONWIDE_CROWD_GUIDANCE : null,
+  };
+}
+
+function weatherPanel(status: LiveOperationsStatus): LivePanel & {
+  heat: { level: string; label: string; apparentTemperatureC: number | null };
+} {
+  const item = findEvidence(status, "KMA_APIHUB_WEATHER");
+  const fields = evidenceFields(item);
+  const heat = assessHeatRisk(fields.temperatureC, fields.humidityPct);
+  const hasObservation = Object.keys(fields).length > 0;
+  const metrics: LiveMetric[] = [];
+  pushMetric(metrics, "기온", numberText(fields.temperatureC, "℃"));
+  pushMetric(metrics, "습도", numberText(fields.humidityPct, "%"));
+  pushMetric(metrics, "체감온도", heat.apparentTemperatureC === undefined ? undefined : `${heat.apparentTemperatureC}℃`);
+  pushMetric(metrics, "풍속", numberText(fields.windSpeedMs, "m/s"));
+  pushMetric(metrics, "1시간 강수", numberText(fields.precipitationMm, "mm"));
+  pushMetric(metrics, "강수형태", precipitationLabel(fields.precipitationType));
+  pushMetric(metrics, "관측 기준", fields.baseDate ? `${String(fields.baseDate)} ${String(fields.baseTime ?? "")}`.trim() : undefined);
+  return {
+    id: "weather",
+    label: "날씨·폭염",
+    state: evidenceState(item),
+    status: String(item?.status ?? "unavailable"),
+    mode: String(item?.freshness.mode ?? "not_collected"),
+    summary: evidenceSummary(item),
+    metrics,
+    warnings: item?.warnings ?? [],
+    heat: {
+      level: hasObservation ? heat.level : "unknown",
+      label: !hasObservation
+        ? "관측 없음"
+        : heat.level === "warning"
+          ? "폭염경보급"
+          : heat.level === "advisory"
+            ? "폭염주의보급"
+            : "폭염 신호 없음",
+      apparentTemperatureC: heat.apparentTemperatureC ?? null,
+    },
+  };
+}
+
+function airPanel(status: LiveOperationsStatus, stationName: string): LivePanel & { stationName: string } {
+  const item = findEvidence(status, "AIRKOREA_AIR_QUALITY");
+  const fields = evidenceFields(item);
+  const metrics: LiveMetric[] = [];
+  pushMetric(metrics, "측정소", String(evidenceRecord(item).title ?? stationName));
+  const grade = airGradeLabel(fields.khaiGrade);
+  pushMetric(metrics, "통합대기환경지수", grade ? `${grade}(${String(fields.khaiValue ?? "-")})` : undefined);
+  pushMetric(metrics, "PM10", numberText(fields.pm10Value, "㎍/㎥"));
+  pushMetric(metrics, "PM2.5", numberText(fields.pm25Value, "㎍/㎥"));
+  pushMetric(metrics, "오존", fields.o3Value ? `${String(fields.o3Value)}ppm` : undefined);
+  pushMetric(metrics, "측정시각", fields.dataTime ? String(fields.dataTime) : undefined);
+  return {
+    id: "air",
+    label: "대기질",
+    state: evidenceState(item),
+    status: String(item?.status ?? "unavailable"),
+    mode: String(item?.freshness.mode ?? "not_collected"),
+    summary: evidenceSummary(item),
+    metrics,
+    warnings: item?.warnings ?? [],
+    stationName,
+  };
+}
+
+// ITS traffic and the disaster-message feed have no key yet. They stay on the board so the operator
+// sees the gap and falls back to the manual channel instead of assuming the panel is quiet.
+function pendingPanel(status: LiveOperationsStatus, sourceId: string, id: string, label: string): LivePanel {
+  const item = findEvidence(status, sourceId);
+  return {
+    id,
+    label,
+    state: evidenceState(item),
+    status: String(item?.status ?? "unavailable"),
+    mode: String(item?.freshness.mode ?? "not_collected"),
+    summary: item?.warnings[0] ?? noDataSummary(item),
+    metrics: [],
+    warnings: item?.warnings ?? [],
+    note: item?.recommendations[0],
+  };
+}
+
+export function buildLiveStatusPayload(status: LiveOperationsStatus, query: {
+  areaName?: string;
+  stationName: string;
+  live: boolean;
+}): AnyRecord {
+  return {
+    version: VERSION,
+    generatedAt: status.generatedAt,
+    query: {
+      areaName: query.areaName ?? null,
+      stationName: query.stationName,
+      live: query.live,
+      jurisdiction: status.location.jurisdiction ?? null,
+    },
+    crowd: crowdPanel(status, query.areaName),
+    weather: weatherPanel(status),
+    air: airPanel(status, query.stationName),
+    traffic: pendingPanel(status, "ITS_TRAFFIC_OPENAPI", "traffic", "교통·돌발"),
+    disasterMessage: pendingPanel(status, "SAFETY_DATA_DISASTER_MESSAGE", "disasterMessage", "재난문자"),
+    warnings: status.warnings,
+    disclaimer: LIVE_DISCLAIMER,
+    _meta: COMMON_RESPONSE_META,
+  };
+}
+
+async function liveStatus(url: URL): Promise<AnyRecord> {
+  const requestedArea = (url.searchParams.get("areaName") ?? DEFAULT_SEOUL_AREA).trim();
+  const areaName = requestedArea || undefined;
+  const stationName = (url.searchParams.get("stationName") ?? "").trim() || DEFAULT_AIR_STATION;
+  const live = url.searchParams.get("live") !== "false";
+  const status = await queryLiveOperationsStatus({
+    // The crowd adapter only runs for Seoul, so an empty area means the operator is outside the
+    // covered region and should get the situation-room guidance instead of a fabricated reading.
+    jurisdiction: areaName ? SEOUL_JURISDICTION : undefined,
+    seoulAreaName: areaName,
+    airStationName: stationName,
+    live,
+  });
+  return buildLiveStatusPayload(status, { areaName, stationName, live });
+}
+
+function livePage(): string {
+  return `<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MICE 현장 운영 라이브 대시보드</title>
+  <style>
+${SHARED_STYLE}
+    .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; align-items: end; }
+    .controls .actions { align-self: end; }
+    .panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .panel.state-critical { border-left-color: var(--red); background: var(--red-soft); }
+    .panel.state-warning { border-left-color: var(--yellow); background: var(--yellow-soft); }
+    .panel.state-watch { border-left-color: var(--yellow); }
+    .panel.state-normal { border-left-color: var(--green); }
+    .panel.state-unknown { border-left-color: var(--line); background: #f8fafc; }
+    .panel-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; margin-bottom: 6px; }
+    .panel-head h3 { margin: 0; font-size: 17px; }
+    .state-pill {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: var(--paper);
+      color: #334155;
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .state-pill.critical { color: var(--red); border-color: #f1a5a5; }
+    .state-pill.warning, .state-pill.watch { color: var(--yellow); border-color: #ead28a; }
+    .state-pill.normal { color: var(--green); border-color: #93d5b7; }
+    .metrics { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+    .metrics li { display: flex; justify-content: space-between; gap: 14px; border-top: 1px dashed var(--line); padding-top: 6px; font-size: 13px; }
+    .metrics li span { color: var(--muted); font-weight: 800; white-space: nowrap; }
+    .metrics li strong { text-align: right; overflow-wrap: anywhere; }
+    .panel .notice { margin-top: 12px; font-size: 13px; }
+    .source-line { color: var(--muted); font-size: 12px; font-weight: 800; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <span class="badge primary">${SERVER_NAME} v${VERSION}</span>
+      <span class="badge">현장 운영 라이브 대시보드</span>
+      <span class="badge">60초 자동 새로고침</span>
+      <a class="badge" href="/">← 적용성 체크리스트</a>
+    </div>
+    <section class="heading">
+      <div>
+        <h1>현장 운영 라이브 대시보드</h1>
+        <p class="muted">행사 당일 인파·날씨·대기질·교통·재난문자를 한 화면에서 봅니다. 공개 API가 없는 항목은 없는 대로 표시합니다.</p>
+      </div>
+    </section>
+    <section class="card">
+      <h2>조회 조건</h2>
+      <div class="controls">
+        <div>
+          <label for="areaSelect">서울 실시간 인파 지역</label>
+          <select id="areaSelect"></select>
+        </div>
+        <div>
+          <label for="areaInput">지역명 직접 입력</label>
+          <input id="areaInput" type="text" placeholder="비우면 서울 외 지역으로 처리">
+        </div>
+        <div>
+          <label for="stationInput">대기질 측정소</label>
+          <input id="stationInput" type="text" value="${DEFAULT_AIR_STATION}">
+        </div>
+        <div class="actions">
+          <button id="refreshBtn" type="button">새로고침</button>
+          <span id="status" class="muted"></span>
+        </div>
+      </div>
+      <p class="muted" id="lastUpdated" style="margin-top:12px"></p>
+    </section>
+    <section id="panels" class="panel-grid" aria-live="polite">
+      <div class="empty">실시간 상태를 불러오는 중입니다.</div>
+    </section>
+    <section class="card" style="margin-top:16px"><div class="notice" id="disclaimer"></div></section>
+  </main>
+  <script>
+    const HOTSPOTS = ${JSON.stringify(SEOUL_LIVE_HOTSPOTS)};
+    const REFRESH_MS = 60000;
+    const $ = (selector) => document.querySelector(selector);
+    const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (ch) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[ch]));
+    const STATE_LABEL = { critical: "위험", warning: "경보", watch: "주의", normal: "정상", unknown: "확인 필요" };
+    function metricsHtml(metrics) {
+      if (!metrics || !metrics.length) return "";
+      return '<ul class="metrics">' + metrics.map((metric) =>
+        '<li><span>' + escapeHtml(metric.label) + '</span><strong>' + escapeHtml(metric.value) + '</strong></li>'
+      ).join("") + '</ul>';
+    }
+    function panelHtml(panel, extraBadge) {
+      const state = panel.state || "unknown";
+      return [
+        '<article class="panel state-' + escapeHtml(state) + '">',
+        '<div class="panel-head"><h3>' + escapeHtml(panel.label) + '</h3><span class="state-pill ' + escapeHtml(state) + '">' + escapeHtml(STATE_LABEL[state] || state) + '</span></div>',
+        extraBadge ? '<div class="chips">' + extraBadge + '</div>' : "",
+        '<p>' + escapeHtml(panel.summary) + '</p>',
+        metricsHtml(panel.metrics),
+        panel.nationwideGuidance ? '<div class="notice">' + escapeHtml(panel.nationwideGuidance) + '</div>' : "",
+        panel.note ? '<p class="source-line">' + escapeHtml(panel.note) + '</p>' : "",
+        '<p class="source-line">status: ' + escapeHtml(panel.status) + ' / mode: ' + escapeHtml(panel.mode) + '</p>',
+        '</article>'
+      ].join("");
+    }
+    function heatBadge(heat) {
+      if (!heat) return "";
+      const tone = heat.level === "warning" ? "danger" : heat.level === "advisory" ? "warn" : "";
+      const detail = heat.apparentTemperatureC === null ? "" : " · 체감 " + heat.apparentTemperatureC + "℃";
+      return '<span class="chip ' + tone + '">폭염 ' + escapeHtml(heat.label) + escapeHtml(detail) + '</span>';
+    }
+    function render(payload) {
+      $("#panels").innerHTML = [
+        panelHtml(payload.crowd),
+        panelHtml(payload.weather, heatBadge(payload.weather.heat)),
+        panelHtml(payload.air),
+        panelHtml(payload.traffic),
+        panelHtml(payload.disasterMessage)
+      ].join("");
+      $("#disclaimer").textContent = payload.disclaimer;
+      $("#lastUpdated").textContent = "마지막 갱신 " + new Date(payload.generatedAt).toLocaleString("ko-KR")
+        + " / 인파 지역 " + (payload.query.areaName || "서울 외(공개 실시간 인파 API 없음)")
+        + " / 측정소 " + payload.query.stationName;
+    }
+    async function load() {
+      $("#refreshBtn").disabled = true;
+      $("#status").textContent = "조회 중";
+      const params = new URLSearchParams({
+        areaName: $("#areaInput").value.trim(),
+        stationName: $("#stationInput").value.trim()
+      });
+      try {
+        const res = await fetch("/api/live-status?" + params.toString());
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        render(json);
+        $("#status").textContent = "완료";
+      } catch (err) {
+        $("#status").textContent = "오류";
+        $("#panels").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+      } finally {
+        $("#refreshBtn").disabled = false;
+      }
+    }
+    function init() {
+      $("#areaSelect").innerHTML = HOTSPOTS.map((name) =>
+        '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>'
+      ).join("") + '<option value="">서울 외 지역 / 직접 입력</option>';
+      $("#areaSelect").value = ${JSON.stringify(DEFAULT_SEOUL_AREA)};
+      $("#areaInput").value = ${JSON.stringify(DEFAULT_SEOUL_AREA)};
+      $("#areaSelect").addEventListener("change", () => {
+        $("#areaInput").value = $("#areaSelect").value;
+        load();
+      });
+      $("#refreshBtn").addEventListener("click", load);
+      setInterval(load, REFRESH_MS);
+      load();
+    }
+    init();
+  </script>
+</body>
+</html>`;
+}
+
 function inputFlags(input: AnyRecord): string[] {
   const flags: string[] = [];
   if (Array.isArray(input.eventTypes)) flags.push(...input.eventTypes.map(String));
@@ -918,12 +1380,20 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
     responseHtml(res, htmlPage());
     return;
   }
+  if (req.method === "GET" && url.pathname === "/live") {
+    responseHtml(res, livePage());
+    return;
+  }
   if (req.method === "GET" && url.pathname === "/health") {
     responseJson(res, 200, { ok: true, name: SERVER_NAME, version: VERSION });
     return;
   }
   if (req.method === "GET" && url.pathname === "/api/options") {
     responseJson(res, 200, optionsPayload());
+    return;
+  }
+  if (req.method === "GET" && url.pathname === "/api/live-status") {
+    responseJson(res, 200, await liveStatus(url));
     return;
   }
   if (req.method === "POST" && url.pathname === "/api/simulate") {
@@ -944,7 +1414,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   responseJson(res, 404, { error: "not found" });
 }
 
-export async function startWebServer(options: WebServerOptions = {}): Promise<void> {
+export async function startWebServer(options: WebServerOptions = {}): Promise<Server> {
   const host = options.host ?? process.env.HOST ?? "127.0.0.1";
   const port = options.port ?? Number(process.env.PORT ?? 4317);
   if (host !== "127.0.0.1" && host !== "::1" && host !== "localhost") {
@@ -966,6 +1436,9 @@ export async function startWebServer(options: WebServerOptions = {}): Promise<vo
     server.once("error", reject);
     server.listen(port, host, () => resolve());
   });
+  const address = server.address();
+  const boundPort = typeof address === "object" && address ? address.port : port;
   // eslint-disable-next-line no-console
-  console.log(`[${SERVER_NAME}] web ready: http://${host}:${port}`);
+  console.log(`[${SERVER_NAME}] web ready: http://${host}:${boundPort}`);
+  return server;
 }

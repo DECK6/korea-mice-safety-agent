@@ -89,8 +89,10 @@ function riskFromKma(record?: NormalizedExternalRecord): { state: string; summar
 
 function riskFromSeoul(record?: NormalizedExternalRecord): { state: string; summary: string } {
   const level = String(record?.fields.congestionLevel ?? "");
-  if (/붐빔/.test(level)) return { state: "critical", summary: `서울 실시간 혼잡도 ${level}` };
+  // Seoul grades a place 여유/보통/약간 붐빔/붐빔. "약간 붐빔" contains 붐빔, so it has to be matched
+  // first or the top grade loses its meaning and every busy street reads as critical.
   if (/약간/.test(level)) return { state: "watch", summary: `서울 실시간 혼잡도 ${level}` };
+  if (/붐빔/.test(level)) return { state: "critical", summary: `서울 실시간 혼잡도 ${level}` };
   return { state: "normal", summary: `서울 실시간 혼잡도 ${level || "확인 필요"}` };
 }
 
@@ -118,6 +120,7 @@ export async function queryLiveOperationsStatus(input: {
   airStationName?: string;
   nx?: number;
   ny?: number;
+  fetchImpl?: typeof fetch;
 } = {}): Promise<LiveOperationsStatus> {
   const capturedAt = new Date().toISOString();
   const env = input.env;
@@ -132,13 +135,13 @@ export async function queryLiveOperationsStatus(input: {
   const itsStatus = sourceStatusFromApiAccess(statusForEnvVar("ITS_OPENAPI_KEY", env));
   const [weatherProbe, crowdProbe, airProbe] = await Promise.all([
     live && weatherStatus === "configured"
-      ? fetchKmaUltraShort({ nx: input.nx, ny: input.ny, env: env as NodeJS.ProcessEnv | undefined })
+      ? fetchKmaUltraShort({ nx: input.nx, ny: input.ny, env: env as NodeJS.ProcessEnv | undefined, fetchImpl: input.fetchImpl })
       : Promise.resolve(undefined),
     live && crowdStatus === "configured"
-      ? fetchSeoulCityData({ areaName: input.seoulAreaName, env: env as NodeJS.ProcessEnv | undefined })
+      ? fetchSeoulCityData({ areaName: input.seoulAreaName, env: env as NodeJS.ProcessEnv | undefined, fetchImpl: input.fetchImpl })
       : Promise.resolve(undefined),
     live && airStatus === "configured"
-      ? fetchAirKoreaStation({ stationName: input.airStationName, env: env as NodeJS.ProcessEnv | undefined })
+      ? fetchAirKoreaStation({ stationName: input.airStationName, env: env as NodeJS.ProcessEnv | undefined, fetchImpl: input.fetchImpl })
       : Promise.resolve(undefined),
   ]);
   const weatherRecord = weatherProbe?.records[0];
