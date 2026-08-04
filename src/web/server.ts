@@ -219,6 +219,18 @@ const SHARED_STYLE = `    :root {
       .card, .mini-card, .empty { box-shadow: none; break-inside: avoid; }
     }`;
 
+// Both the simulator form and the live dashboard's law tab offer the same event-type choices, so
+// the list lives here instead of drifting apart in two inline scripts.
+const EVENT_TYPE_OPTIONS: Array<[string, string]> = [
+  ["exhibition", "전시·박람회"],
+  ["conference", "컨벤션·회의"],
+  ["festival", "축제"],
+  ["outdoor_event", "옥외행사"],
+  ["performance", "공연"],
+  ["food_event", "식음료"],
+  ["vip_event", "VIP"],
+];
+
 function htmlPage(): string {
   return `<!doctype html>
 <html lang="ko">
@@ -305,15 +317,7 @@ ${SHARED_STYLE}
     </section>
   </main>
   <script>
-    const EVENT_TYPES = [
-      ["exhibition", "전시·박람회"],
-      ["conference", "컨벤션·회의"],
-      ["festival", "축제"],
-      ["outdoor_event", "옥외행사"],
-      ["performance", "공연"],
-      ["food_event", "식음료"],
-      ["vip_event", "VIP"]
-    ];
+    const EVENT_TYPES = ${JSON.stringify(EVENT_TYPE_OPTIONS)};
     const FEATURES = [
       ["outdoorEvent", "완전/부분 옥외"],
       ["roadUse", "도로점용·교통통제"],
@@ -1042,6 +1046,22 @@ ${SHARED_STYLE}
     .engine-choice .check { flex: 0 1 auto; }
     .ai-output { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 6px; }
     #aiResult { margin-top: 14px; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+    .tab-btn {
+      background: var(--paper);
+      color: #334155;
+      border-color: var(--line);
+      border-bottom-color: transparent;
+      border-radius: 8px 8px 0 0;
+      margin-bottom: -1px;
+    }
+    .tab-btn.active { background: var(--blue-soft); color: var(--blue); border-color: #b9c9f5; border-bottom-color: var(--blue-soft); }
+    .tab-panel[hidden] { display: none; }
+    .law-field { margin-top: 12px; }
+    #lawResult .card:first-child { margin-top: 0; }
+    @media (max-width: 720px) {
+      .tabs .tab-btn { flex: 1 1 140px; }
+    }
   </style>
 </head>
 <body>
@@ -1058,6 +1078,11 @@ ${SHARED_STYLE}
         <p class="muted">행사 당일 인파·날씨·대기질·교통·재난문자를 한 화면에서 봅니다. 공개 API가 없는 항목은 없는 대로 표시합니다.</p>
       </div>
     </section>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="tab-live" data-tab="live">실시간 현황</button>
+      <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-laws" data-tab="laws">법령·의무 문서</button>
+    </div>
+    <div id="tab-live" class="tab-panel" role="tabpanel">
     <section class="card">
       <h2>조회 조건</h2>
       <div class="controls">
@@ -1134,6 +1159,48 @@ ${SHARED_STYLE}
       <div id="aiResult"></div>
     </section>
     <section class="card" style="margin-top:16px"><div class="notice" id="disclaimer"></div></section>
+    </div>
+    <!-- Offline ontology lookup: no upstream call and no quota, but it answers to the entered event
+         conditions, so it runs on the button instead of the 60s cycle. -->
+    <div id="tab-laws" class="tab-panel" role="tabpanel" hidden>
+      <section class="card">
+        <h2>행사 조건</h2>
+        <p class="muted">이 행사에 적용되는 법령·지침과 제출해야 할 의무 문서를 오프라인 온톨로지에서 조회합니다. 실시간 데이터와 무관하며 자동 갱신하지 않습니다.</p>
+        <div class="controls">
+          <div>
+            <label for="lawCrowd">예상 인파 수</label>
+            <input id="lawCrowd" type="number" min="0" step="100" value="5000">
+          </div>
+          <div>
+            <label for="lawVenue">베뉴</label>
+            <select id="lawVenue"><option value="">베뉴 미지정</option></select>
+          </div>
+          <div>
+            <label for="lawJurisdiction">관할 지자체</label>
+            <input id="lawJurisdiction" type="text" list="lawJurisdictions" placeholder="예: 경기도 고양시">
+            <datalist id="lawJurisdictions"></datalist>
+          </div>
+          <div class="actions">
+            <button id="lawBtn" type="button">적용성 조회</button>
+            <span id="lawStatus" class="muted"></span>
+          </div>
+        </div>
+        <div class="law-field">
+          <label>행사 유형</label>
+          <div id="lawEventTypes" class="checkbox-grid"></div>
+        </div>
+        <div class="law-field">
+          <label>주요 조건</label>
+          <div id="lawFlags" class="checkbox-grid"></div>
+        </div>
+      </section>
+      <section id="lawResult" aria-live="polite">
+        <div class="empty">
+          <strong>행사 조건을 지정하고 적용성 조회를 누르세요.</strong>
+          <p>결과는 이 repo에 포함된 오프라인 온톨로지에서만 계산됩니다.</p>
+        </div>
+      </section>
+    </div>
   </main>
   <script>
     const HOTSPOTS = ${JSON.stringify(SEOUL_LIVE_HOTSPOTS)};
@@ -1349,6 +1416,146 @@ ${SHARED_STYLE}
         $("#aiBtn").disabled = !aiReady;
       }
     }
+    const LAW_EVENT_TYPES = ${JSON.stringify(EVENT_TYPE_OPTIONS)};
+    // A field crew needs the conditions that change the legal picture, not the full simulator form.
+    const LAW_FEATURES = [
+      ["outdoorEvent", "완전/부분 옥외"],
+      ["roadUse", "도로점용·교통통제"],
+      ["foodService", "식음료 판매"],
+      ["lpgUse", "LPG 사용"],
+      ["setupTeardown", "설치·철거 작업"],
+      ["temporaryStructures", "임시구조물"],
+      ["vipSecurity", "VIP·보안검색"],
+      ["personalDataProcessing", "개인정보 처리"]
+    ];
+    function lawChecks(selector, items, checked) {
+      $(selector).innerHTML = items.map((entry) =>
+        '<label class="check"><input type="checkbox" value="' + escapeHtml(entry[0]) + '"'
+        + (checked.includes(entry[0]) ? " checked" : "") + '> ' + escapeHtml(entry[1]) + '</label>'
+      ).join("");
+    }
+    function lawCard(title, status, body, tone) {
+      return '<article class="mini-card ' + tone + '"><div class="card-topline"><strong>' + escapeHtml(title)
+        + '</strong><span class="pill">' + escapeHtml(status) + '</span></div><p>' + escapeHtml(body) + '</p></article>';
+    }
+    function lawInput() {
+      const input = {
+        eventTypes: Array.from(document.querySelectorAll("#lawEventTypes input:checked")).map((item) => item.value),
+        venueId: $("#lawVenue").value || undefined,
+        jurisdiction: $("#lawJurisdiction").value.trim() || undefined,
+        expectedCrowd: $("#lawCrowd").value ? Number($("#lawCrowd").value) : undefined
+      };
+      for (const entry of LAW_FEATURES) {
+        input[entry[0]] = Boolean(document.querySelector('#lawFlags input[value="' + entry[0] + '"]')?.checked);
+      }
+      if (input.outdoorEvent) input.outdoor = true;
+      return input;
+    }
+    function dutyBody(duty) {
+      const refs = duty.lawRefs || [];
+      return [
+        duty.requiredWhen || "적용 조건 확인 필요",
+        refs.length ? "근거 " + refs.slice(0, 3).join(", ") : ""
+      ].filter(Boolean).join(" / ");
+    }
+    function ordinanceCards(ordinances) {
+      return ordinances.map((item) => lawCard(
+        (item.jurisdiction || "지자체") + " · " + (item.categoryLabel || "조례"),
+        item.priorityBand === "primary" ? "우선 적용" : "참고",
+        (item.name || item.ordinanceName || "조례") + " / 제출기한: " + (item.submissionDeadline || "확인 필요"),
+        item.priorityBand === "primary" ? "tone-warning" : "tone-muted"
+      )).join("");
+    }
+    function renderLaws(payload) {
+      const data = payload.applicability || {};
+      const laws = data.laws || [];
+      const duties = data.duties || [];
+      const ordinances = data.localOrdinances || [];
+      const warnings = data.scopeWarnings || [];
+      const primary = ordinances.filter((item) => item.priorityBand === "primary");
+      const reference = ordinances.filter((item) => item.priorityBand !== "primary");
+      $("#lawResult").innerHTML = [
+        warnings.length
+          ? '<section class="card">' + warnings.map((item) => '<div class="notice error">⚠ ' + escapeHtml(item) + '</div>').join("") + '</section>'
+          : "",
+        '<section class="stats">',
+        '<div class="card stat"><strong>' + laws.length + '</strong><span>적용 법령·지침</span></div>',
+        '<div class="card stat"><strong>' + duties.length + '</strong><span>의무·문서</span></div>',
+        '<div class="card stat"><strong>' + primary.length + '</strong><span>우선 조례</span></div>',
+        '<div class="card stat"><strong>' + reference.length + '</strong><span>참고 조례</span></div>',
+        '</section>',
+        '<section class="card"><h2>조회 조건</h2><div class="chips">'
+          + (payload.summary?.inputFlags || []).map((item) => '<span class="chip">' + escapeHtml(item) + '</span>').join("")
+          + '</div></section>',
+        '<section class="card"><h2>적용 법령·지침</h2><div class="grid">',
+        laws.map((law) => lawCard(
+          law.shortName || law.name || law.id,
+          law.verificationStatus || "확인",
+          law.miceUse || "MICE 적용 근거 확인 필요",
+          "tone-muted"
+        )).join("") || '<p class="muted">적용 법령 후보가 없습니다.</p>',
+        '</div></section>',
+        '<section class="card"><h2>의무·문서 체크리스트</h2><div class="list">',
+        duties.map((duty) => lawCard(
+          duty.title || duty.id,
+          duty.strictnessLabel || duty.strictness || "확인",
+          dutyBody(duty),
+          duty.strictness === "statutory_required" || duty.strictness === "local_required" ? "tone-good" : "tone-muted"
+        )).join("") || '<p class="muted">조건부 의무 문서가 없습니다.</p>',
+        '</div></section>',
+        '<section class="card"><h2>조례 후보</h2>',
+        '<h3>우선 적용</h3><div class="grid">' + (ordinanceCards(primary) || '<p class="muted">우선 적용 조례 후보 없음</p>') + '</div>',
+        '<h3 style="margin-top:14px">참고</h3><div class="grid">' + (ordinanceCards(reference) || '<p class="muted">참고 조례 후보 없음</p>') + '</div>',
+        '</section>',
+        '<section class="card"><div class="notice">적용 판단은 관할기관 협의와 최신 원문 확인으로 확정해야 합니다. 이 목록은 제출 준비용 초안입니다.</div></section>'
+      ].join("");
+    }
+    async function requestLaws() {
+      $("#lawBtn").disabled = true;
+      $("#lawStatus").textContent = "조회 중";
+      try {
+        const res = await fetch("/api/simulate", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(lawInput())
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        renderLaws(json);
+        $("#lawStatus").textContent = "완료";
+      } catch (err) {
+        $("#lawResult").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+        $("#lawStatus").textContent = "오류";
+      } finally {
+        $("#lawBtn").disabled = false;
+      }
+    }
+    async function loadLawOptions() {
+      try {
+        const res = await fetch("/api/options");
+        const options = await res.json();
+        if (!res.ok) throw new Error(options.error || "요청 실패");
+        $("#lawVenue").innerHTML = '<option value="">베뉴 미지정</option>' + (options.venues || []).map((venue) =>
+          '<option value="' + escapeHtml(venue.id) + '">' + escapeHtml(venue.name + " / " + venue.region) + '</option>'
+        ).join("");
+        $("#lawJurisdictions").innerHTML = (options.jurisdictions || []).map((item) =>
+          '<option value="' + escapeHtml(item) + '"></option>'
+        ).join("");
+      } catch (err) {
+        $("#lawStatus").textContent = "베뉴·지자체 목록을 불러오지 못했습니다";
+      }
+    }
+    // Switching only toggles visibility, so a fetched law result survives a trip to the live tab.
+    function showTab(name) {
+      const active = name === "laws" ? "laws" : "live";
+      $("#tab-live").hidden = active !== "live";
+      $("#tab-laws").hidden = active !== "laws";
+      for (const button of document.querySelectorAll(".tab-btn")) {
+        const on = button.dataset.tab === active;
+        button.classList.toggle("active", on);
+        button.setAttribute("aria-selected", on ? "true" : "false");
+      }
+    }
     function init() {
       $("#areaSelect").innerHTML = HOTSPOTS.map((name) =>
         '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>'
@@ -1370,6 +1577,18 @@ ${SHARED_STYLE}
       });
       $("#sktBtn").addEventListener("click", requestSktCongestion);
       $("#aiBtn").addEventListener("click", requestBriefing);
+      lawChecks("#lawEventTypes", LAW_EVENT_TYPES, ["festival"]);
+      lawChecks("#lawFlags", LAW_FEATURES, ["outdoorEvent"]);
+      $("#lawBtn").addEventListener("click", requestLaws);
+      for (const button of document.querySelectorAll(".tab-btn")) {
+        button.addEventListener("click", () => {
+          location.hash = button.dataset.tab;
+          showTab(button.dataset.tab);
+        });
+      }
+      window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
+      showTab(location.hash.slice(1));
+      loadLawOptions();
       // The briefing stays out of the 60s cycle so the operator's subscription is only spent on
       // an explicit click.
       setInterval(load, REFRESH_MS);

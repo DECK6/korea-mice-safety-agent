@@ -181,3 +181,61 @@ test("web server serves /live and /api/live-status without network calls", async
     server.close();
   }
 });
+
+test("/live carries both tabs and wires the law tab to /api/simulate", async () => {
+  const server = await startWebServer({ host: "127.0.0.1", port: 0 });
+  const { port } = server.address();
+  try {
+    const page = await fetch(`http://127.0.0.1:${port}/live`);
+    const html = await page.text();
+    assert.equal(page.status, 200);
+
+    assert(html.includes(">실시간 현황<"));
+    assert(html.includes(">법령·의무 문서<"));
+    assert(html.includes('id="tab-live"'));
+    assert(html.includes('id="tab-laws"'));
+    // The law lookup is button-triggered against the offline ontology, not part of the 60s cycle.
+    assert(html.includes("function requestLaws"));
+    assert(html.includes('fetch("/api/simulate"'));
+    assert(html.includes("function showTab"));
+    // The national SKT card must keep its own DOM outside the auto-refreshed #panels.
+    assert(html.indexOf('id="sktSection"') < html.indexOf('id="panels"'));
+    assert(html.includes("REFRESH_MS"));
+  } finally {
+    server.close();
+  }
+});
+
+test("law tab lookup returns 적용 법령 and 의무 문서 for 축제+옥외+5000명", async () => {
+  const server = await startWebServer({ host: "127.0.0.1", port: 0 });
+  const { port } = server.address();
+  try {
+    // The exact body the law tab sends with its default selections.
+    const response = await fetch(`http://127.0.0.1:${port}/api/simulate`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        eventTypes: ["festival"],
+        jurisdiction: "경기도 고양시",
+        expectedCrowd: 5000,
+        outdoorEvent: true,
+        outdoor: true,
+      }),
+    });
+    const json = await response.json();
+    assert.equal(response.status, 200);
+
+    const { laws, duties, localOrdinances, scopeWarnings } = json.applicability;
+    assert(laws.length > 0);
+    assert(duties.length > 0);
+    assert(duties.every((duty) => duty.title && duty.strictnessLabel && duty.requiredWhen));
+    // UI-only keys are filtered before the tool runs, so a plain lookup must not warn about scope.
+    assert.deepEqual(scopeWarnings, []);
+    // 우선/참고 split the law tab renders.
+    assert(localOrdinances.some((item) => item.priorityBand === "primary"));
+    assert(localOrdinances.some((item) => item.jurisdiction === "경기도 고양시"));
+    assert(json.summary.inputFlags.includes("옥외"));
+  } finally {
+    server.close();
+  }
+});
