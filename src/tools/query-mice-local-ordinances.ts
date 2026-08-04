@@ -13,6 +13,7 @@ const inputSchema = z.object({
   hazardId: z.string().optional(),
   query: z.string().optional().describe("조례명/지역명 부분 검색어"),
   roadUse: z.boolean().optional().describe("도로점용/교통통제 조건"),
+  expectedCrowd: z.number().int().min(0).optional().describe("예상 인파 수. 조례 인원 하한(minCrowd) 미달 시 reference로 강등"),
   outdoor: z.boolean().optional(),
   outdoorEvent: z.boolean().optional(),
   temporaryStructures: z.boolean().optional(),
@@ -22,6 +23,12 @@ const inputSchema = z.object({
 
 function formatRecord(record: ReturnType<typeof findLocalOrdinances>[number], includeArticles: boolean): string {
   const thresholdStructured = record.thresholdStructured;
+  // verificationStatus is article_verified for every record, but only structuredStatus
+  // article_extracted rows had their thresholds read off the ordinance text. category_default rows
+  // carry a filled-in category template, so the numbers must not be read as the ordinance's own.
+  const thresholdSourceLines = record.structuredStatus === "category_default"
+    ? ["  주의: 인원 기준·제출기한은 카테고리 기본값 — 조례 원문 확인 필요"]
+    : [];
   const articleLines = includeArticles && record.articleExtracts.length > 0
     ? [
       "  조문 발췌:",
@@ -34,6 +41,7 @@ function formatRecord(record: ReturnType<typeof findLocalOrdinances>[number], in
     `  범주: ${record.categoryLabel} / 시행일: ${record.effectiveAt || "확인 필요"} / ordinSeq: ${record.ordinSeq}`,
     `  검증: ${record.verificationStatus} / threshold ${thresholdStructured?.confidence ?? "확인 필요"}`,
     `  인원/조건: ${thresholdStructured?.summary ?? record.threshold ?? record.crowdThreshold}`,
+    ...thresholdSourceLines,
     `  원문: ${record.sourceUrl}`,
     ...articleLines,
   ].join("\n");

@@ -1,5 +1,6 @@
 import evidenceSnapshot from "../ontology/mice/public-api-operational-evidence.json" with { type: "json" };
 import applicabilityRules from "../ontology/mice/public-api-applicability-rules.json" with { type: "json" };
+import { crowdThresholds } from "./mice-data.js";
 
 type InputLike = {
   eventTypes?: string[];
@@ -92,7 +93,7 @@ function hasWorkerExposure(input: InputLike): boolean {
 }
 
 function isLargeCrowd(input: InputLike): boolean {
-  return typeof input.expectedCrowd === "number" && input.expectedCrowd >= 1000;
+  return typeof input.expectedCrowd === "number" && input.expectedCrowd >= crowdThresholds.large;
 }
 
 function inputFacts(input: InputLike): Set<string> {

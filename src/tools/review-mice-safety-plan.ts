@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
+import { crowdThresholds } from "../lib/mice-data.js";
 import { baseMiceEventInputSchema, type MiceEventType } from "../lib/mice-event-input-schema.js";
 import type { McpToolResult, ToolDefinition } from "../lib/types.js";
 import { generateMiceSafetyPlanTool } from "./generate-mice-safety-plan.js";
@@ -163,8 +164,8 @@ function buildReviewContext(input: Input): ReviewContext {
   const hasPrivacy = Boolean(input.personalDataProcessing || hasEvent(input, "conference") || hasEvent(input, "vip_event"));
   const hasVipSecurity = Boolean(input.vipSecurity || hasEvent(input, "vip_event"));
   const hasVenue = Boolean(input.venueId || isExhibition || isConference || isPerformance);
-  const largeCrowd = typeof input.expectedCrowd === "number" && input.expectedCrowd >= 1000;
-  const midCrowd = typeof input.expectedCrowd === "number" && input.expectedCrowd >= 300 && input.expectedCrowd < 1000;
+  const largeCrowd = typeof input.expectedCrowd === "number" && input.expectedCrowd >= crowdThresholds.large;
+  const midCrowd = typeof input.expectedCrowd === "number" && input.expectedCrowd >= crowdThresholds.mid && input.expectedCrowd < crowdThresholds.large;
   return {
     isOutdoor,
     isExhibition,

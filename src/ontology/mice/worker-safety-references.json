@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "versionType": "ontology_schema",
   "generatedAt": "2026-05-21",
-  "scope": "MICE setup, teardown, booth build, stage, electrical, hot work, ladder, scaffold, aerial lift, and heavy object handling worker-safety references organized for this project. agent-safety-oss is recorded only as related design context for OSH/KOSHA coverage review.",
+  "scope": "MICE setup, teardown, booth build, stage, electrical, hot work, ladder, scaffold, aerial lift, heavy object handling, and heat illness prevention worker-safety references organized for this project. agent-safety-oss is recorded only as related design context for OSH/KOSHA coverage review.",
   "references": [
     {
       "id": "osh_standards_rule_article_38_work_plan",
@@ -57,6 +57,60 @@
       "summary": "높이 작업은 작업발판 등 안전한 작업면 확보가 우선이며, 곤란한 경우 추락방호망·안전대 등 대체 조치를 계획서에 명시한다.",
       "offlineSourcePath": "data/markdown/worker-safety/osh-standards-rule-work-plan.md",
       "sourceUrl": "https://www.law.go.kr/법령/산업안전보건기준에관한규칙/제42조",
+      "verificationStatus": "source_verified"
+    },
+    {
+      "id": "osh_standards_rule_heat_outdoor_work",
+      "kind": "law_article",
+      "title": "산업안전보건기준에 관한 규칙 폭염작업 보건조치(2025년 개정, 제566조 계열)",
+      "appliesWhen": "체감온도 33도 이상이 예상되는 여름철 옥외 설치·철거, 야외무대·부스 작업, 옥외 주차·안내·경비 등 폭염 직접 노출 근무가 있을 때",
+      "dutyTypes": [
+        "heat_illness_prevention",
+        "rest_break",
+        "worker_instruction",
+        "recordkeeping"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_standards_rule:제566조"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan"
+      ],
+      "relatedHazardIds": [
+        "weather_outdoor_event",
+        "medical_emergency"
+      ],
+      "summary": "체감온도 33도 이상 옥외작업에 온·습도 측정기기 비치, 증상·예방조치 사전 고지, 체감온도와 조치사항 일자별 기록, 주기적 휴식 부여(2시간마다 20분 이상 등) 의무가 2025년 개정으로 강화된 것으로 파악된다. 조문 번호·시행일·휴식 부여 문구는 원문 확인 필요(law.go.kr)이며 오프라인 팩에 폭염 조문 본문이 아직 수록돼 있지 않다. 법적 판단 근거로 사용하기 전 반드시 원문 대조할 것.",
+      "offlineSourcePath": "data/markdown/worker-safety/osh-standards-rule-work-plan.md",
+      "sourceUrl": "https://www.law.go.kr/법령/산업안전보건기준에관한규칙",
+      "verificationStatus": "needs_source_review"
+    },
+    {
+      "id": "kosha_guide_heat_illness_prevention",
+      "kind": "kosha_guide",
+      "title": "KOSHA/고용노동부 온열질환 예방 3대 기본수칙(물·그늘·휴식)",
+      "appliesWhen": "여름철 옥외 설치·철거, 야외행사 운영, 옥외 대기열·주차 안내 등 폭염 노출 작업과 근무가 있을 때",
+      "dutyTypes": [
+        "heat_illness_prevention",
+        "rest_break",
+        "worker_training",
+        "emergency_response"
+      ],
+      "relatedLawRefs": [
+        "occupational_safety_health_act:*",
+        "occupational_safety_health_standards_rule:폭염작업"
+      ],
+      "relatedDutyIds": [
+        "worker_safety_work_plan",
+        "booth_construction_safety_checklist"
+      ],
+      "relatedHazardIds": [
+        "weather_outdoor_event",
+        "medical_emergency"
+      ],
+      "summary": "시원한 물, 그늘·냉방쉼터, 규칙적 휴식의 3대 기본수칙과 무더위 시간대 작업 조정, 2인 1조 상호 관찰, 온열질환 의심 시 냉각·119 신고 절차를 옥외 작업조건으로 둔다. 세부 수칙 문구와 최신 예방지침 판번호는 KOSHA 온열질환 예방지침 원문 확인 필요.",
+      "offlineSourcePath": "data/markdown/worker-safety/kosha-worker-safety-guides.md",
+      "sourceUrl": "https://www.kosha.or.kr/kosha/data/guideExp.do",
       "verificationStatus": "source_verified"
     },
     {

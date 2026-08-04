@@ -155,7 +155,9 @@ function cellXml(cell: XlsxCell, rowIndex: number, columnIndex: number, header: 
 
 function worksheetXml(sheet: XlsxSheet): string {
   const rows = sheet.rows.length > 0 ? sheet.rows : [[]];
-  const maxColumns = Math.max(1, ...rows.map((row) => row.length));
+  // Loop instead of Math.max(...spread): a spread of 120k+ row lengths overflows the call stack.
+  let maxColumns = 1;
+  for (const row of rows) if (row.length > maxColumns) maxColumns = row.length;
   const dimension = `A1:${columnName(maxColumns - 1)}${rows.length}`;
   const body = rows.map((row, rowIndex) => {
     const cells = row.map((cell, columnIndex) => cellXml(cell, rowIndex, columnIndex, rowIndex === 0)).join("");

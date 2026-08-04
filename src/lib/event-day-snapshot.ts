@@ -1,7 +1,9 @@
 import { statusForEnvVar } from "./api-access-status.js";
 import type { EnvLike } from "./env.js";
+import { assessHeatRisk, type HeatLevel } from "./heat-thresholds.js";
 import {
   fetchAirKoreaStation,
+  fetchKmaUltraShort,
   fetchSeoulCityData,
   type LiveApiResult,
   type NormalizedExternalRecord,
@@ -51,6 +53,12 @@ function levelFromSeoulCongestion(level?: unknown): OperationalObservationLevel 
   const value = String(level ?? "");
   if (/붐빔/.test(value)) return "critical";
   if (/약간/.test(value)) return "watch";
+  return "info";
+}
+
+function levelFromHeat(level: HeatLevel): OperationalObservationLevel {
+  if (level === "warning") return "critical";
+  if (level === "advisory") return "warning";
   return "info";
 }
 
@@ -122,13 +130,17 @@ export async function generateEventDaySnapshot(input: {
     airStationName: input.airStationName,
   };
 
+  const weatherStatus = sourceStatusFromApiAccess(statusForEnvVar("KMA_APIHUB_KEY", env));
   const seoulStatus = isSeoulJurisdiction(input.jurisdiction)
     ? sourceStatusFromApiAccess(statusForEnvVar("SEOUL_OPENAPI_KEY", env))
     : "unsupported_region";
   const airStatus = sourceStatusFromApiAccess(statusForEnvVar("AIRKOREA_SERVICE_KEY", env));
   const itsStatus = sourceStatusFromApiAccess(statusForEnvVar("ITS_OPENAPI_KEY", env));
   const safetyStatus = sourceStatusFromApiAccess(statusForEnvVar("SAFETY_DATA_API_KEY", env));
-  const [seoulProbe, airProbe] = await Promise.all([
+  const [weatherProbe, seoulProbe, airProbe] = await Promise.all([
+    live && weatherStatus === "configured"
+      ? fetchKmaUltraShort({ env: env as NodeJS.ProcessEnv | undefined })
+      : Promise.resolve(undefined),
     live && seoulStatus === "configured"
       ? fetchSeoulCityData({ areaName: input.seoulAreaName, env: env as NodeJS.ProcessEnv | undefined })
       : Promise.resolve(undefined),
@@ -137,10 +149,34 @@ export async function generateEventDaySnapshot(input: {
       : Promise.resolve(undefined),
   ]);
 
+  const weatherRecord = weatherProbe?.records[0];
   const seoulRecord = seoulProbe?.records[0];
   const airRecord = airProbe?.records[0];
+  const heat = assessHeatRisk(weatherRecord?.fields.temperatureC, weatherRecord?.fields.humidityPct);
 
   const sources: SnapshotSourceResult[] = [
+    sourceFromProbe({
+      sourceId: "KMA_APIHUB_WEATHER",
+      label: "기상청 초단기실황(기온·체감온도)",
+      envVar: "KMA_APIHUB_KEY",
+      status: weatherStatus,
+      capturedAt,
+      expiresAt,
+      query,
+      stale,
+      warnings: weatherStatus === "not_configured" ? ["KMA_APIHUB_KEY 미설정: 기상 snapshot 미수집"] : [],
+      probe: weatherProbe,
+      observations: weatherProbe?.ok && weatherRecord
+        ? [{
+          kind: "heat",
+          level: levelFromHeat(heat.level),
+          summary: heat.summary,
+          advisoryOnly: true,
+        }]
+        : input.useFixtures && weatherStatus === "configured"
+        ? [{ kind: "heat", level: "info", summary: "fixture 체감온도 폭염 임계값 미만", advisoryOnly: true }]
+        : [],
+    }),
     sourceFromProbe({
       sourceId: "SEOUL_REALTIME_CITY_DATA",
       label: "서울 실시간 도시/인구 데이터",

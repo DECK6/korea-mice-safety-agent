@@ -29,7 +29,7 @@ Korean MICE 현장 운영 안전용 MCP 서버입니다. 축제·박람회·컨�
 ## 사용
 
 ```bash
-cd /Volumes/data/Dev/korea-mice-safety-agent
+cd korea-mice-safety-agent
 npm install
 npm run build
 node build/cli.js tools
@@ -79,8 +79,43 @@ curl -sS -X POST http://127.0.0.1:4317/api/persona-stress-test \
 MCP 서버:
 
 ```bash
-node /Volumes/data/Dev/korea-mice-safety-agent/build/cli.js serve
+node /absolute/path/to/korea-mice-safety-agent/build/cli.js serve
 ```
+
+## MCP 클라이언트 등록
+
+Claude Desktop은 `claude_desktop_config.json`, Claude Code는 프로젝트 루트의 `.mcp.json`에 아래 `mcpServers` 항목을 추가합니다.
+
+npm 설치 기준:
+
+```json
+{
+  "mcpServers": {
+    "korea-mice-safety": {
+      "command": "npx",
+      "args": ["-y", "korea-mice-safety-agent", "serve"]
+    }
+  }
+}
+```
+
+로컬 클론 기준. `/absolute/path/to`를 클론 위치로 바꾸고 `npm run build`를 먼저 실행해야 합니다.
+
+```json
+{
+  "mcpServers": {
+    "korea-mice-safety": {
+      "command": "node",
+      "args": ["/absolute/path/to/korea-mice-safety-agent/build/cli.js", "serve"],
+      "env": {
+        "MICE_LOCAL_DIR": "/absolute/path/to/mice-local-store"
+      }
+    }
+  }
+}
+```
+
+`MICE_LOCAL_DIR`은 선택 항목이며, 생략하면 `~/.korea-mice-safety-agent`에 운영 기록과 export 묶음을 저장합니다.
 
 ## korean-law-mcp 연동
 

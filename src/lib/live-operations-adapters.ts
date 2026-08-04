@@ -1,5 +1,6 @@
 import { statusForEnvVar } from "./api-access-status.js";
 import type { EnvLike } from "./env.js";
+import { assessHeatRisk } from "./heat-thresholds.js";
 import {
   fetchAirKoreaStation,
   fetchKmaUltraShort,
@@ -74,12 +75,14 @@ function riskFromKma(record?: NormalizedExternalRecord): { state: string; summar
   const wind = Number(fields.windSpeedMs);
   const rain = Number(fields.precipitationMm);
   const pty = String(fields.precipitationType ?? "0");
+  const heat = assessHeatRisk(fields.temperatureC, fields.humidityPct);
   const risks: string[] = [];
   if (Number.isFinite(wind) && wind >= 8) risks.push(`풍속 ${wind}m/s`);
   if (Number.isFinite(rain) && rain > 0) risks.push(`강수 ${rain}mm`);
   if (pty !== "0") risks.push(`강수형태 ${pty}`);
+  if (heat.level !== "none") risks.push(heat.summary);
   return {
-    state: risks.length ? "watch" : "normal",
+    state: heat.level === "warning" ? "warning" : risks.length ? "watch" : "normal",
     summary: risks.length ? risks.join(", ") : "초단기실황 기준 즉시 중지 수준 기상 신호 없음",
   };
 }
@@ -156,7 +159,10 @@ export async function queryLiveOperationsStatus(input: {
       warnings: weatherStatus === "not_configured"
         ? ["KMA_APIHUB_KEY 미설정: 기상 live adapter는 fallback만 반환"]
         : warningsFromProbe(weatherProbe),
-      recommendations: ["야외 무대·트러스·현수막·임시전기 조건에서는 강풍/호우/낙뢰 특보를 행사중지 기준과 연결한다."],
+      recommendations: [
+        "야외 무대·트러스·현수막·임시전기 조건에서는 강풍/호우/낙뢰 특보를 행사중지 기준과 연결한다.",
+        "체감온도 33도 이상이면 급수·그늘·휴식 주기와 옥외작업 휴식 의무를, 35도 이상이면 프로그램 축소·중지 기준을 함께 검토한다.",
+      ],
       freshnessMode: usingFixtureFallback ? "fallback" : undefined,
       data: weatherProbe?.ok
         ? { riskState: weatherRisk.state, summary: weatherRisk.summary, record: weatherRecord }

@@ -1,6 +1,6 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { URL } from "node:url";
-import { ZodError } from "zod";
+import { ZodError, type AnyZodObject } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
 import { baseMiceEventInputSchema } from "../lib/mice-event-input-schema.js";
 import { MICE_DATA, strictnessLabel } from "../lib/mice-data.js";
@@ -414,7 +414,11 @@ function htmlPage(): string {
       const workerRefs = data.workerSafetyReferences || [];
       const decisions = summary.decisions || [];
       const actions = summary.priorityActions || [];
+      const scopeWarnings = data.scopeWarnings || [];
       $("#result").innerHTML = [
+        scopeWarnings.length
+          ? '<section class="card"><div class="list">' + scopeWarnings.map((warning) => '<div class="notice error">⚠ ' + escapeHtml(warning) + '</div>').join("") + '</div></section>'
+          : "",
         '<section class="stats">',
         '<div class="card stat"><strong>' + laws.length + '</strong><span>적용 법령·지침</span></div>',
         '<div class="card stat"><strong>' + duties.length + '</strong><span>의무·문서</span></div>',
@@ -777,8 +781,20 @@ function optionsPayload(): AnyRecord {
   };
 }
 
+const APPLICABILITY_INPUT_KEYS = new Set(
+  Object.keys((queryMiceSafetyApplicabilityTool.inputSchema as AnyZodObject).shape),
+);
+
+// The web form also carries UI-only fields (eventName, persona controls) that the plan-review
+// and persona paths need. The applicability tool does not declare them and would report them
+// as ignored input, so drop them here instead of surfacing a false scope warning.
+function pickApplicabilityInput(input: unknown): unknown {
+  if (!isPlainRecord(input)) return input;
+  return Object.fromEntries(Object.entries(input).filter(([key]) => APPLICABILITY_INPUT_KEYS.has(key)));
+}
+
 async function simulate(input: unknown): Promise<AnyRecord> {
-  const toolResult = await queryMiceSafetyApplicabilityTool.handler(input);
+  const toolResult = await queryMiceSafetyApplicabilityTool.handler(pickApplicabilityInput(input));
   const applicability = toolResult.structuredContent ?? {};
   const normalizedInput = (applicability.input ?? input ?? {}) as AnyRecord;
   const laws = toArray(applicability.laws);

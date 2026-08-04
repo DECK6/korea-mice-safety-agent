@@ -2,7 +2,7 @@ import { z } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
 import { baseMiceEventInputSchema, type MiceEventType } from "../lib/mice-event-input-schema.js";
 import type { McpToolResult, Strictness, ToolDefinition } from "../lib/types.js";
-import { findLegalAnnexes, strictnessLabel, uniqueById } from "../lib/mice-data.js";
+import { crowdThresholds, findLegalAnnexes, strictnessLabel, uniqueById } from "../lib/mice-data.js";
 import { buildDefaultMiceVisitorNoticeBundle } from "../lib/mice-visitor-notices.js";
 import { buildPublicApiOperationalEvidence, type PublicApiOperationalEvidenceBundle } from "../lib/public-api-operational-evidence.js";
 import submissionActionRules from "../ontology/mice/submission-action-rules.json" with { type: "json" };
@@ -947,7 +947,7 @@ function isLegalAnnexApplicable(annex: AnyRecord, input: Input): boolean {
   if (lawEntryId === "fire_prevention_act_enforcement_decree") return Boolean(isIndoorMice || isPerformance);
   if (annexId === "fire_facilities_act_enforcement_decree__annex_8") return hasWorkerWork;
   if (lawEntryId === "fire_facilities_act_enforcement_decree") {
-    return Boolean(isIndoorMice || isPerformance || isFestival || isFood || (typeof input.expectedCrowd === "number" && input.expectedCrowd >= 1000));
+    return Boolean(isIndoorMice || isPerformance || isFestival || isFood || (typeof input.expectedCrowd === "number" && input.expectedCrowd >= crowdThresholds.large));
   }
   return true;
 }
@@ -1020,7 +1020,7 @@ function buildDocumentBundle(input: Input, sections: Record<string, string[]>, d
   const hasBuildingAnnex = buildingAnnexItems.length > 0;
   const hasRoadAnnex = roadAnnexItems.length > 0;
   const hasSecurity = hasSecurityInput;
-  const hasMedical = medicalHazards.length > 0 || medicalLawItems.length > 0 || (typeof input.expectedCrowd === "number" && input.expectedCrowd >= 1000);
+  const hasMedical = medicalHazards.length > 0 || medicalLawItems.length > 0 || (typeof input.expectedCrowd === "number" && input.expectedCrowd >= crowdThresholds.large);
   const hasPrivacy = hasPrivacyInput;
   const hasWorker = workerHazards.length > 0 || sections.workerSafety.length > 0;
   const hasFood = Boolean(input.foodService || inputHasEvent(input, "food_event"));

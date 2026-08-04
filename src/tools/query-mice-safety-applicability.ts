@@ -197,6 +197,7 @@ async function handler(rawInput: unknown): Promise<McpToolResult> {
   const localOrdinances = findLocalOrdinances({
     jurisdiction: resolvedJurisdiction,
     venueId: input.venueId,
+    expectedCrowd: input.expectedCrowd,
     eventType: requestedEventTypes.includes("festival") ? "festival" : requestedEventTypes[0],
     eventTypes: requestedEventTypes,
     roadUse: input.roadUse,

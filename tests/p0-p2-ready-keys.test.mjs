@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import { getApiAccessStatus } from "../build/lib/api-access-status.js";
 import { generateEventDaySnapshot, isSnapshotStale } from "../build/lib/event-day-snapshot.js";
+import { assessHeatRisk } from "../build/lib/heat-thresholds.js";
 import { queryLiveOperationsStatus } from "../build/lib/live-operations-adapters.js";
 import { fetchFoodSafetyRecalls, fetchKmaUltraShort, fetchTourApiFestivalCatalog, parseXmlRecords } from "../build/lib/mice-public-api-clients.js";
 import { getP0ReadinessReport, normalizeP0FixtureRecords } from "../build/lib/p0-ready-sources.js";
@@ -85,6 +86,57 @@ test("P2 live operations aggregates partial operationalEvidence and no legalBasi
   assert.equal(status.operationalEvidence.find((item) => item.sourceId === "ITS_TRAFFIC_OPENAPI")?.status, "pending_key");
   assert.equal(status.operationalEvidence.find((item) => item.sourceId === "SAFETY_DATA_DISASTER_MESSAGE")?.status, "pending_key");
   assert(status.warnings.some((warning) => warning.includes("서울 지역이 아니므로")));
+});
+
+test("P1 snapshot exposes KMA heat source with apparent-temperature observation", async () => {
+  const snapshot = await generateEventDaySnapshot({
+    jurisdiction: "부산광역시 해운대구",
+    capturedAt: "2026-08-01T00:00:00.000Z",
+    useFixtures: true,
+    env: {
+      KMA_APIHUB_KEY: "x",
+    },
+  });
+  const weather = snapshot.sources.find((source) => source.sourceId === "KMA_APIHUB_WEATHER");
+  assert.equal(weather?.status, "configured");
+  assert.equal(weather?.observations[0]?.kind, "heat");
+  assert.equal(weather?.observations[0]?.advisoryOnly, true);
+});
+
+test("heat risk assessment applies 33/35 apparent-temperature thresholds", () => {
+  const normal = assessHeatRisk(30, 40);
+  assert.equal(normal.level, "none");
+  assert(normal.summary.includes("체감온도"));
+
+  const nearAdvisory = assessHeatRisk(32, 55);
+  assert.equal(nearAdvisory.level, "none");
+  assert(nearAdvisory.apparentTemperatureC < 33);
+
+  const advisory = assessHeatRisk(33, 70);
+  assert.equal(advisory.level, "advisory");
+  assert(advisory.apparentTemperatureC >= 33 && advisory.apparentTemperatureC < 35);
+  assert(advisory.summary.includes("폭염주의보 수준"));
+
+  // Humidity, not dry-bulb temperature alone, decides the band.
+  assert.equal(assessHeatRisk(31, 80).level, "advisory");
+  assert.equal(assessHeatRisk(33, 40).level, "none");
+
+  const warning = assessHeatRisk(35, 70);
+  assert.equal(warning.level, "warning");
+  assert(warning.apparentTemperatureC >= 35);
+  assert(warning.summary.includes("폭염경보 수준"));
+
+  // KMA observation values arrive as strings.
+  assert.equal(assessHeatRisk("35.0", "70").level, "warning");
+});
+
+test("heat risk falls back to dry-bulb temperature when humidity is missing", () => {
+  assert.equal(assessHeatRisk(32).level, "none");
+  assert.equal(assessHeatRisk(33).level, "advisory");
+  assert.equal(assessHeatRisk(35).level, "warning");
+  assert(assessHeatRisk(33).summary.includes("습도 결측"));
+  assert.equal(assessHeatRisk(33).apparentTemperatureC, undefined);
+  assert.equal(assessHeatRisk(undefined, 70).level, "none");
 });
 
 test("public API clients normalize real provider response shapes without leaking keys", async () => {

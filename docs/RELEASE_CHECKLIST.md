@@ -12,6 +12,7 @@ The package/CLI version is the product release version. Ontology pack `version` 
 
 - `npm run typecheck`
 - `npm run build`
+- `npm test`
 - `npm run validate:scenarios`
 - `npm run validate:venue-corpus`
 - `npm run audit:sources`

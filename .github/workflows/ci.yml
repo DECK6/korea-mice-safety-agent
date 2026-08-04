@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22.x'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # Runs the build first, so every later gate can rely on build/.
+      - name: Test
+        run: npm test
+
+      - name: Validate venue corpus
+        run: npm run validate:venue-corpus
+
+      # Drives build/cli.js, so it must stay after the build.
+      - name: Validate scenarios
+        run: npm run validate:scenarios
+
+      # The script alone: `npm run audit:package-safety` also runs `npm audit`,
+      # whose result depends on the advisory database rather than this commit.
+      - name: Audit package safety
+        run: node scripts/audit-package-safety.mjs

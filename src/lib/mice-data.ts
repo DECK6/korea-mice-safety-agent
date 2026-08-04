@@ -277,6 +277,7 @@ export interface RankedLocalOrdinanceRecord extends LocalOrdinanceRecord {
   priorityBand: "primary" | "secondary" | "reference";
   priorityReasons: string[];
   matchedJurisdictionHints: string[];
+  crowdThresholdNote?: string;
 }
 
 export interface LocalOrdinanceArticlePattern {
@@ -347,6 +348,20 @@ export const MICE_DATA = {
   workerSafetyReferences: workerSafetyData.references,
   localOrdinances: localOrdinanceData,
   applicability: applicabilityData,
+} as const;
+
+function crowdThresholdOf(ruleId: string): number {
+  const value = applicabilityData.featureRules.find((rule) => rule.id === ruleId)?.match.value;
+  if (typeof value !== "number") {
+    throw new Error(`mice-safety-applicability.json featureRule '${ruleId}' has no numeric expectedCrowd threshold`);
+  }
+  return value;
+}
+
+// Crowd-size thresholds are owned by the ontology featureRules; code must read them here, not re-declare them.
+export const crowdThresholds = {
+  large: crowdThresholdOf("large_crowd_rule"),
+  mid: crowdThresholdOf("mid_crowd_rule"),
 } as const;
 
 export function uniqueById<T extends { id: string }>(items: T[]): T[] {
@@ -541,6 +556,17 @@ function categoryPriority(record: LocalOrdinanceRecord, filters: {
   return { score, reasons };
 }
 
+function crowdThresholdPriority(record: LocalOrdinanceRecord, expectedCrowd?: number): { belowMinCrowd: boolean; note?: string } {
+  const minCrowd = record.thresholdStructured?.minCrowd;
+  if (typeof expectedCrowd !== "number" || typeof minCrowd !== "number" || expectedCrowd >= minCrowd) {
+    return { belowMinCrowd: false };
+  }
+  return {
+    belowMinCrowd: true,
+    note: `인원 ${minCrowd.toLocaleString("ko-KR")}명 이상 적용 — 현재 입력 ${expectedCrowd.toLocaleString("ko-KR")}명 미달`,
+  };
+}
+
 export function findLocalOrdinances(filters: {
   categoryId?: string;
   jurisdiction?: string;
@@ -550,6 +576,7 @@ export function findLocalOrdinances(filters: {
   dutyId?: string;
   hazardId?: string;
   query?: string;
+  expectedCrowd?: number;
   roadUse?: boolean;
   outdoor?: boolean;
   outdoorEvent?: boolean;
@@ -585,17 +612,24 @@ export function findLocalOrdinances(filters: {
     .map((record) => {
       const jurisdiction = jurisdictionPriority(record, jurisdictionHints);
       const category = categoryPriority(record, filters);
+      const crowd = crowdThresholdPriority(record, filters.expectedCrowd);
       const priorityScore = jurisdiction.score + category.score;
       const ranked: RankedLocalOrdinanceRecord = {
         ...record,
         priorityScore,
-        priorityBand: priorityScore >= 500 ? "primary" : priorityScore >= 250 ? "secondary" : "reference",
-        priorityReasons: [...jurisdiction.reasons, ...category.reasons],
+        priorityBand: crowd.belowMinCrowd
+          ? "reference"
+          : priorityScore >= 500 ? "primary" : priorityScore >= 250 ? "secondary" : "reference",
+        priorityReasons: [...jurisdiction.reasons, ...category.reasons, ...(crowd.note ? [crowd.note] : [])],
         matchedJurisdictionHints: jurisdiction.matches,
+        crowdThresholdNote: crowd.note,
       };
       return ranked;
     })
     .sort((a, b) => {
+      const aBelowMinCrowd = a.crowdThresholdNote ? 1 : 0;
+      const bBelowMinCrowd = b.crowdThresholdNote ? 1 : 0;
+      if (aBelowMinCrowd !== bBelowMinCrowd) return aBelowMinCrowd - bBelowMinCrowd;
       if (b.priorityScore !== a.priorityScore) return b.priorityScore - a.priorityScore;
       if (a.categoryId !== b.categoryId) return a.categoryId.localeCompare(b.categoryId);
       if (a.jurisdiction !== b.jurisdiction) return a.jurisdiction.localeCompare(b.jurisdiction, "ko");

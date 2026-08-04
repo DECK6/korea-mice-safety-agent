@@ -73,7 +73,7 @@
       "id": "blocked_exit",
       "label": "비상구·피난통로 차단",
       "relatedHazardIds": [
-        "blocked_egress_fire_lane"
+        "blocked_evacuation_route"
       ],
       "recommendedTeam": "시설·소방팀",
       "defaultPriority": "critical",
@@ -121,6 +121,34 @@
         "119 신고 기준 확인",
         "주변 인파 통제",
         "이송동선 확보와 기록 담당 분리"
+      ]
+    },
+    {
+      "id": "heat_illness",
+      "label": "온열질환·열사병 의심",
+      "relatedHazardIds": [
+        "medical_emergency",
+        "weather_outdoor_event"
+      ],
+      "recommendedTeam": "의료팀",
+      "defaultPriority": "critical",
+      "slaMinutesBySeverity": {
+        "critical": 3,
+        "high": 5,
+        "medium": 10,
+        "low": 20
+      },
+      "escalationPath": [
+        "의료담당",
+        "운영본부",
+        "119",
+        "이송병원"
+      ],
+      "playbookSteps": [
+        "환자를 그늘·냉방 쉼터 등 서늘한 구역으로 즉시 이동",
+        "겉옷을 벗기고 물·얼음팩·부채질로 체온을 낮추며 의식이 있으면 수분 보충",
+        "의식 수준, 체온, 발한 여부, 경련 유무를 확인하고 기록",
+        "의식 저하·경련·발한 정지 등 열사병 의심 시 즉시 119 신고와 의료팀 이관"
       ]
     },
     {
@@ -343,6 +371,8 @@
       "playbookSteps": [
         "현수막·무대·텐트 고정상태 확인",
         "우천/강풍 단계별 중지 기준 확인",
+        "체감온도 33도 이상이면 급수대·그늘막·냉방쉼터 안내와 옥외 근무·대기열 휴식 주기를 시행하고, 35도 이상이면 야외 프로그램 축소·중지 기준을 적용",
+        "온열질환 의심자 발견 시 heat_illness 절차로 전환하고 의료팀에 즉시 이관",
         "대피장소와 안내문구 송출",
         "취소·축소 의사결정 기록"
       ]

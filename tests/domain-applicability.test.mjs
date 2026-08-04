@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import { queryMiceSafetyApplicabilityTool } from "../build/tools/query-mice-safety-applicability.js";
 import { queryMiceHazardControlsTool } from "../build/tools/query-mice-hazard-controls.js";
+import { crowdThresholds, findLocalOrdinances } from "../build/lib/mice-data.js";
 
 const hasId = (items, id) => items.some((item) => item.id === id);
 
@@ -22,6 +23,56 @@ test("mid-size crowd (>=300, <1000) surfaces crowd-management and medical duties
   const { structuredContent } = await queryMiceSafetyApplicabilityTool.handler({ expectedCrowd: 500 });
   assert.equal(hasId(structuredContent.duties, "mice_crowd_management_plan"), true);
   assert.equal(hasId(structuredContent.duties, "medical_aed_response_plan"), true);
+});
+
+test("crowd thresholds come from the ontology feature rules", () => {
+  assert.equal(crowdThresholds.mid, 300);
+  assert.equal(crowdThresholds.large, 1000);
+});
+
+test("299 stays below the mid-crowd threshold and 300 crosses it", async () => {
+  const below = await queryMiceSafetyApplicabilityTool.handler({ expectedCrowd: crowdThresholds.mid - 1 });
+  assert.equal(hasId(below.structuredContent.duties, "mice_crowd_management_plan"), false);
+  const atThreshold = await queryMiceSafetyApplicabilityTool.handler({ expectedCrowd: crowdThresholds.mid });
+  assert.equal(hasId(atThreshold.structuredContent.duties, "mice_crowd_management_plan"), true);
+  assert.equal(hasId(atThreshold.structuredContent.duties, "medical_aed_response_plan"), true);
+});
+
+test("999 stays mid-crowd and 1000 escalates to the large-crowd duties", async () => {
+  const below = await queryMiceSafetyApplicabilityTool.handler({ expectedCrowd: crowdThresholds.large - 1 });
+  assert.equal(hasId(below.structuredContent.duties, "mice_crowd_management_plan"), true);
+  assert.equal(hasId(below.structuredContent.duties, "elevator_escalator_crowd_control"), false);
+  const atThreshold = await queryMiceSafetyApplicabilityTool.handler({ expectedCrowd: crowdThresholds.large });
+  assert.equal(hasId(atThreshold.structuredContent.duties, "elevator_escalator_crowd_control"), true);
+});
+
+test("vipSecurity keeps the staff assignment roster duty instead of dropping a dangling id", async () => {
+  const { structuredContent } = await queryMiceSafetyApplicabilityTool.handler({ vipSecurity: true });
+  assert.equal(hasId(structuredContent.duties, "staff_assignment_roster"), true);
+  assert.equal(hasId(structuredContent.duties, "security_access_control_plan"), true);
+});
+
+test("ordinances above the input crowd size are shown as reference, not silently dropped", () => {
+  const ordinanceId = "outdoor_event_safety:1844457";
+  const filters = { jurisdiction: "강원특별자치도", categoryId: "outdoor_event_safety", limit: 100 };
+
+  const applied = findLocalOrdinances({ ...filters, expectedCrowd: 500 });
+  const appliedRecord = applied.find((record) => record.id === ordinanceId);
+  assert.equal(appliedRecord.thresholdStructured.minCrowd, 500);
+  assert.equal(appliedRecord.crowdThresholdNote, undefined);
+  assert.equal(appliedRecord.priorityBand, "primary");
+
+  const belowThreshold = findLocalOrdinances({ ...filters, expectedCrowd: 50 });
+  const belowRecord = belowThreshold.find((record) => record.id === ordinanceId);
+  assert.equal(belowThreshold.length, applied.length);
+  assert.equal(belowRecord.priorityBand, "reference");
+  assert.equal(belowRecord.crowdThresholdNote.includes("500명 이상"), true);
+  assert.equal(belowRecord.priorityReasons.includes(belowRecord.crowdThresholdNote), true);
+});
+
+test("ordinance crowd filtering stays inert when no expectedCrowd is given", () => {
+  const records = findLocalOrdinances({ jurisdiction: "강원특별자치도", categoryId: "outdoor_event_safety", limit: 100 });
+  assert.equal(records.every((record) => record.crowdThresholdNote === undefined), true);
 });
 
 test("personalDataProcessing alone keeps privacy duty but does not fabricate a full conference event", async () => {
