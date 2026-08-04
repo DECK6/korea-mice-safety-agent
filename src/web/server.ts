@@ -2,6 +2,13 @@ import { createServer, type IncomingMessage, type Server, type ServerResponse } 
 import { URL } from "node:url";
 import { ZodError, type AnyZodObject } from "zod";
 import { COMMON_RESPONSE_META } from "../config/constants.js";
+import {
+  AI_BRIEFING_DISCLAIMER,
+  AiBridgeError,
+  buildBriefingPrompt,
+  detectEngines,
+  runBriefing,
+} from "../lib/ai-bridge.js";
 import { assessHeatRisk } from "../lib/heat-thresholds.js";
 import { queryLiveOperationsStatus, type LiveOperationsStatus, type OperationalEvidence } from "../lib/live-operations-adapters.js";
 import { baseMiceEventInputSchema } from "../lib/mice-event-input-schema.js";
@@ -876,20 +883,79 @@ export function buildLiveStatusPayload(status: LiveOperationsStatus, query: {
   };
 }
 
-async function liveStatus(url: URL): Promise<AnyRecord> {
-  const requestedArea = (url.searchParams.get("areaName") ?? DEFAULT_SEOUL_AREA).trim();
-  const areaName = requestedArea || undefined;
-  const stationName = (url.searchParams.get("stationName") ?? "").trim() || DEFAULT_AIR_STATION;
-  const live = url.searchParams.get("live") !== "false";
+async function collectLiveStatus(query: {
+  areaName?: string;
+  stationName: string;
+  live: boolean;
+}): Promise<AnyRecord> {
   const status = await queryLiveOperationsStatus({
     // The crowd adapter only runs for Seoul, so an empty area means the operator is outside the
     // covered region and should get the situation-room guidance instead of a fabricated reading.
-    jurisdiction: areaName ? SEOUL_JURISDICTION : undefined,
-    seoulAreaName: areaName,
-    airStationName: stationName,
-    live,
+    jurisdiction: query.areaName ? SEOUL_JURISDICTION : undefined,
+    seoulAreaName: query.areaName,
+    airStationName: query.stationName,
+    live: query.live,
   });
-  return buildLiveStatusPayload(status, { areaName, stationName, live });
+  return buildLiveStatusPayload(status, query);
+}
+
+async function liveStatus(url: URL): Promise<AnyRecord> {
+  const requestedArea = (url.searchParams.get("areaName") ?? DEFAULT_SEOUL_AREA).trim();
+  return collectLiveStatus({
+    areaName: requestedArea || undefined,
+    stationName: (url.searchParams.get("stationName") ?? "").trim() || DEFAULT_AIR_STATION,
+    live: url.searchParams.get("live") !== "false",
+  });
+}
+
+// The AI panel spawns a CLI process on this machine, so it must never answer another host: a
+// remote request would otherwise be a remote trigger for local process execution.
+export function isLoopbackAddress(address?: string | null): boolean {
+  if (!address) return false;
+  const normalized = address.startsWith("::ffff:") ? address.slice("::ffff:".length) : address;
+  return normalized === "::1" || normalized === "127.0.0.1" || normalized.startsWith("127.");
+}
+
+async function aiEnginesPayload(): Promise<AnyRecord> {
+  return {
+    version: VERSION,
+    engines: await detectEngines(),
+    disclaimer: AI_BRIEFING_DISCLAIMER,
+    _meta: COMMON_RESPONSE_META,
+  };
+}
+
+async function aiBriefing(input: unknown): Promise<AnyRecord> {
+  const body = isPlainRecord(input) ? input : {};
+  const requested = String(body.engine ?? "").trim();
+  const engines = await detectEngines();
+  const engine = requested
+    ? engines.find((item) => item.id === requested)
+    : engines.find((item) => item.available);
+  if (!engine?.available) {
+    throw new AiBridgeError("engine_unavailable", requested
+      ? `${requested} CLI를 찾을 수 없습니다. 설치와 로그인 상태를 확인하세요.`
+      : "이 머신에 로그인된 Claude Code 또는 Codex CLI가 없습니다.");
+  }
+  const requestedArea = String(body.areaName ?? DEFAULT_SEOUL_AREA).trim();
+  const status = await collectLiveStatus({
+    areaName: requestedArea || undefined,
+    stationName: String(body.stationName ?? "").trim() || DEFAULT_AIR_STATION,
+    live: body.live !== false,
+  });
+  const question = typeof body.question === "string" ? body.question : undefined;
+  const run = await runBriefing(engine.id, buildBriefingPrompt(status, question));
+  return {
+    version: VERSION,
+    engine: run.engine,
+    engineLabel: engine.label,
+    briefing: run.text,
+    elapsedMs: run.elapsedMs,
+    query: status.query,
+    generatedAt: new Date().toISOString(),
+    disclaimer: AI_BRIEFING_DISCLAIMER,
+    _meta: COMMON_RESPONSE_META,
+  };
 }
 
 function livePage(): string {
@@ -938,6 +1004,10 @@ ${SHARED_STYLE}
     .metrics li strong { text-align: right; overflow-wrap: anywhere; }
     .panel .notice { margin-top: 12px; font-size: 13px; }
     .source-line { color: var(--muted); font-size: 12px; font-weight: 800; margin-top: 10px; }
+    .engine-choice { display: flex; flex-wrap: wrap; gap: 8px; }
+    .engine-choice .check { flex: 0 1 auto; }
+    .ai-output { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 6px; }
+    #aiResult { margin-top: 14px; }
   </style>
 </head>
 <body>
@@ -978,6 +1048,22 @@ ${SHARED_STYLE}
     </section>
     <section id="panels" class="panel-grid" aria-live="polite">
       <div class="empty">실시간 상태를 불러오는 중입니다.</div>
+    </section>
+    <section class="card" style="margin-top:16px">
+      <h2>AI 상황 브리핑</h2>
+      <p class="muted">이 머신에 로그인된 공식 CLI를 그대로 실행합니다. API 키를 쓰지 않고, 로컬(127.0.0.1) 요청에서만 동작합니다. 자동 갱신에 포함되지 않으며 버튼을 누를 때만 실행합니다.</p>
+      <div id="aiEngines" class="engine-choice"></div>
+      <div class="controls" style="margin-top:12px">
+        <div>
+          <label for="aiQuestion">질문(선택)</label>
+          <input id="aiQuestion" type="text" placeholder="비우면 현재 상황 브리핑을 생성합니다">
+        </div>
+        <div class="actions">
+          <button id="aiBtn" type="button" disabled>AI 상황 브리핑</button>
+          <span id="aiStatus" class="muted"></span>
+        </div>
+      </div>
+      <div id="aiResult"></div>
     </section>
     <section class="card" style="margin-top:16px"><div class="notice" id="disclaimer"></div></section>
   </main>
@@ -1048,6 +1134,66 @@ ${SHARED_STYLE}
         $("#refreshBtn").disabled = false;
       }
     }
+    let aiReady = false;
+    function renderEngines(engines) {
+      const available = engines.filter((engine) => engine.available);
+      aiReady = available.length > 0;
+      if (!aiReady) {
+        $("#aiEngines").innerHTML = "";
+        $("#aiResult").innerHTML = '<div class="notice">Claude Code 또는 Codex CLI 로그인이 필요합니다. 설치 후 CLI에서 한 번 로그인하면 이 패널이 켜집니다.'
+          + '<ul class="compact-list">'
+          + engines.map((engine) => '<li>' + escapeHtml(engine.label + ": " + engine.installCommand) + '</li>').join("")
+          + '</ul></div>';
+        return;
+      }
+      $("#aiEngines").innerHTML = available.map((engine, index) =>
+        '<label class="check"><input type="radio" name="aiEngine" value="' + escapeHtml(engine.id) + '"'
+        + (index === 0 ? " checked" : "") + '> '
+        + escapeHtml(engine.label + (engine.version ? " " + engine.version : "")) + '</label>'
+      ).join("");
+      $("#aiBtn").disabled = false;
+    }
+    async function loadEngines() {
+      try {
+        const res = await fetch("/api/ai-engines");
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        renderEngines(json.engines || []);
+      } catch (err) {
+        $("#aiResult").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+      }
+    }
+    async function requestBriefing() {
+      const selected = document.querySelector('input[name="aiEngine"]:checked');
+      $("#aiBtn").disabled = true;
+      $("#aiStatus").textContent = "브리핑 생성 중(최대 2분)";
+      $("#aiResult").innerHTML = '<p class="muted">엔진 응답을 기다리는 중입니다.</p>';
+      try {
+        const res = await fetch("/api/ai-briefing", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            engine: selected ? selected.value : undefined,
+            areaName: $("#areaInput").value.trim(),
+            stationName: $("#stationInput").value.trim(),
+            question: $("#aiQuestion").value.trim() || undefined
+          })
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        $("#aiResult").innerHTML = '<article class="mini-card">'
+          + '<div class="card-topline"><strong>' + escapeHtml(json.engineLabel || json.engine) + '</strong>'
+          + '<span class="pill">' + escapeHtml(Math.round((json.elapsedMs || 0) / 1000) + "초") + '</span></div>'
+          + '<div class="ai-output">' + escapeHtml(json.briefing) + '</div>'
+          + '<p class="source-line">' + escapeHtml(json.disclaimer) + '</p></article>';
+        $("#aiStatus").textContent = "완료";
+      } catch (err) {
+        $("#aiResult").innerHTML = '<div class="notice error">' + escapeHtml(err.message || err) + '</div>';
+        $("#aiStatus").textContent = "오류";
+      } finally {
+        $("#aiBtn").disabled = !aiReady;
+      }
+    }
     function init() {
       $("#areaSelect").innerHTML = HOTSPOTS.map((name) =>
         '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>'
@@ -1059,8 +1205,12 @@ ${SHARED_STYLE}
         load();
       });
       $("#refreshBtn").addEventListener("click", load);
+      $("#aiBtn").addEventListener("click", requestBriefing);
+      // The briefing stays out of the 60s cycle so the operator's subscription is only spent on
+      // an explicit click.
       setInterval(load, REFRESH_MS);
       load();
+      loadEngines();
     }
     init();
   </script>
@@ -1374,6 +1524,12 @@ async function personaStress(input: unknown): Promise<AnyRecord> {
   };
 }
 
+function requireLoopback(req: IncomingMessage, res: ServerResponse): boolean {
+  if (isLoopbackAddress(req.socket.remoteAddress)) return true;
+  responseJson(res, 403, { error: "AI bridge is local-only" });
+  return false;
+}
+
 async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const url = new URL(req.url ?? "/", "http://localhost");
   if (req.method === "GET" && url.pathname === "/") {
@@ -1394,6 +1550,16 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
   if (req.method === "GET" && url.pathname === "/api/live-status") {
     responseJson(res, 200, await liveStatus(url));
+    return;
+  }
+  if (req.method === "GET" && url.pathname === "/api/ai-engines") {
+    if (!requireLoopback(req, res)) return;
+    responseJson(res, 200, await aiEnginesPayload());
+    return;
+  }
+  if (req.method === "POST" && url.pathname === "/api/ai-briefing") {
+    if (!requireLoopback(req, res)) return;
+    responseJson(res, 200, await aiBriefing(await readJson(req)));
     return;
   }
   if (req.method === "POST" && url.pathname === "/api/simulate") {
@@ -1425,6 +1591,12 @@ export async function startWebServer(options: WebServerOptions = {}): Promise<Se
     route(req, res).catch((err: unknown) => {
       if (isClientInputError(err)) {
         responseJson(res, 400, { error: "invalid request" });
+        return;
+      }
+      // The local CLI is an upstream dependency, not a server fault: say which engine failed and why
+      // so the operator can fix the install or fall back to the panels.
+      if (err instanceof AiBridgeError) {
+        responseJson(res, 503, { error: err.message, reason: err.reason });
         return;
       }
       // eslint-disable-next-line no-console

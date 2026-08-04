@@ -61,6 +61,8 @@ node build/cli.js web --host 127.0.0.1 --port 4317
 
 브라우저에서 `http://127.0.0.1:4317`을 열면 행사 유형, 예상 인파 수, 베뉴, 관할 지자체, 도로점용, 식음료/LPG, 설치·철거, 개인정보, VIP/보안, 무주최 다중운집 조건을 입력해 카드형 체크리스트를 바로 확인할 수 있습니다. `계획서 요약·검수` 버튼은 같은 입력으로 `generate_mice_safety_plan`과 `review_mice_safety_plan`을 실행해 핵심 위험, 적용 근거, 제출·협의 액션, 검수 지적, 문서 묶음 키를 사람이 먼저 보는 보고서 형태로 보여줍니다. 웹 시뮬레이터는 별도 네트워크 조회 없이 오프라인 온톨로지만 사용합니다.
 
+`/live`는 행사 당일용 현장 라이브 대시보드입니다. 인파(서울 실시간 도시데이터 핫스팟, 서울 외 지역은 관할 재난상황실 협조 안내), 날씨(체감온도 33/35°C 폭염 배지), 대기질, 교통·재난문자(키 발급 전 pending 표시) 카드를 60초 간격으로 갱신하며, `GET /api/live-status`로 같은 데이터를 JSON으로 받을 수 있습니다. 실시간 값은 법적 근거가 아니라 운영 참고용입니다.
+
 API로도 호출할 수 있습니다.
 
 ```bash
@@ -75,6 +77,10 @@ curl -sS -X POST http://127.0.0.1:4317/api/persona-stress-test \
   -H 'content-type: application/json' \
   --data '{"eventName":"고령층 포함 야외축제","eventTypes":["festival"],"expectedCrowd":3000,"outdoorEvent":true,"personaPreset":"senior_inclusive","cohortSize":100}'
 ```
+
+AI 상황 브리핑(선택):
+
+`/live` 대시보드의 `AI 상황 브리핑` 패널은 현재 인파·날씨·대기질·교통·재난문자 상태를 컨텍스트로 넣어 한국어 브리핑을 생성합니다. API 키를 쓰지 않고, 이 머신에 이미 로그인된 공식 CLI(`claude`, `codex`)를 헤드리스로 실행하므로 호출은 사용자 본인 구독으로 청구됩니다. 둘 다 없으면 패널이 비활성 상태로 설치 명령(`npm i -g @anthropic-ai/claude-code`, `npm i -g @openai/codex`)만 안내합니다. `/api/ai-engines`와 `/api/ai-briefing`은 CLI 실행이 원격 트리거가 되지 않도록 루프백(127.0.0.1/::1) 요청에만 응답하며, 브리핑은 60초 자동 갱신에 포함되지 않고 버튼을 누를 때만 실행됩니다. 결과는 법적 판단이 아니라 운영 참고 초안입니다.
 
 MCP 서버:
 
