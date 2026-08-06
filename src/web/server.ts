@@ -16,6 +16,7 @@ import { queryLiveOperationsStatus, type LiveOperationsStatus, type OperationalE
 import { baseMiceEventInputSchema } from "../lib/mice-event-input-schema.js";
 import { MICE_DATA, strictnessLabel } from "../lib/mice-data.js";
 import { PERSONA_PRESETS } from "../lib/mice-personas.js";
+import { buildOperationsMap, saveEventLocation } from "../lib/operations-map.js";
 import {
   getSktCongestion,
   searchSktPois,
@@ -921,6 +922,27 @@ async function liveStatus(url: URL): Promise<AnyRecord> {
   });
 }
 
+// Local operations store only: no upstream call and no quota, so the home tab can poll it on the
+// same 60s cycle as the live panels.
+function operationsMap(url: URL): AnyRecord {
+  const requested = Number(url.searchParams.get("dueSoonMinutes"));
+  return {
+    version: VERSION,
+    ...buildOperationsMap({
+      dueSoonMinutes: Number.isFinite(requested) && requested > 0 ? Math.min(requested, 240) : undefined,
+    }),
+    _meta: COMMON_RESPONSE_META,
+  };
+}
+
+function operationsMapLocation(input: unknown): AnyRecord {
+  return {
+    version: VERSION,
+    ...saveEventLocation(input),
+    _meta: COMMON_RESPONSE_META,
+  };
+}
+
 // Offline index lookup only: no upstream call, so it stays out of the quota ledger entirely.
 function sktPoiSearch(url: URL): AnyRecord {
   const query = (url.searchParams.get("q") ?? "").trim();
@@ -995,74 +1017,130 @@ async function aiBriefing(input: unknown): Promise<AnyRecord> {
   };
 }
 
-// The live board is a situation-room screen and owns its own dark theme, so it does not reuse
-// SHARED_STYLE (the light simulator sheet). Every colour and spacing value is declared once in the
-// :root block below; nothing further down this sheet carries a raw hex.
+// The live board is a DEXA "dark exhibition surface": Ink panels, cyan accent, hardware-panel
+// chrome (screws, status line, recessed displays). Token names and values below are the ones
+// declared in the design system source of truth, /Dev/adxdeck-dexa-daily-main/dexa-theme.css, so an
+// audit can diff them line for line. --ok/--watch are the one documented extension: the canonical
+// sheet has no amber/green because dexa.art never shows operational state, and this board cannot
+// carry critical/watch/normal on red alone. Below :root only the print reset carries a raw colour.
 const LIVE_STYLE = `    :root {
       color-scheme: dark;
-      /* Surfaces — DEXA dark: ink plane with raised hardware panels. */
-      --ink-bg: #0b0e14;
-      --ink-deep: #070a0f;
-      --panel: #131822;
-      --panel-raised: #1a2130;
-      --panel-sunken: #0e131b;
-      --line: #263042;
-      --line-soft: #1c2432;
-      /* Ink */
-      --text: #e6ecf6;
-      --text-strong: #ffffff;
-      --muted: #8d9ab0;
-      --dim: #5d6a7e;
-      /* Accent — chrome only (tabs, links, focus, the live indicator). It is deliberately never a
-         data mark: cyan sits only ΔE 12 from --ok, too close to tell apart as a status colour. */
-      --accent: #22d3ee;
-      --accent-deep: #0e7490;
-      --accent-wash: rgba(34, 211, 238, 0.12);
-      --accent-line: rgba(34, 211, 238, 0.34);
-      /* Status — validated against --panel: worst pair CVD ΔE 10.6, normal-vision ΔE 21.2, all
-         >= 3:1 contrast. State is never colour alone; every use carries its Korean label. */
-      --ok: #34d399;
+      /* Surfaces — canonical Ink ladder. Page is the recessed display plane, panels sit on it. */
+      --ink: #17181B;
+      --ink-display: #0D0E10;
+      --ink-key: #2A2B2E;
+      --ink-key2: #3A3B3F;
+      --ink-key2-wash: rgba(58, 59, 63, 0.35);
+      /* Ink type — heading / body / meta. */
+      --ink-heading: #F7FAFC;
+      --ink-text: #8A8D93;
+      --ink-text-dim: #5A5D63;
+      /* Dexa Cyan — accent and LIVE mark. Never a status colour: it sits too close to --ok to be
+         told apart as one, and on this board it means "chrome", not "safe". */
+      --cyan: #5EE7F3;
+      --cyan-wash: rgba(94, 231, 243, 0.12);
+      --cyan-line: rgba(94, 231, 243, 0.34);
+      /* Canonical red is the danger mark. State is never colour alone; every use carries its
+         Korean label and an LED. */
+      --red: #E0402A;
+      --red-wash: rgba(224, 64, 42, 0.14);
+      --red-line: rgba(224, 64, 42, 0.48);
+      --red-glow: rgba(224, 64, 42, 0.30);
+      /* Semantic extension beyond the canonical palette — see the note above. */
+      --ok: #34D399;
       --ok-wash: rgba(52, 211, 153, 0.10);
       --ok-line: rgba(52, 211, 153, 0.38);
-      --watch: #fbbf24;
+      --watch: #FBBF24;
       --watch-wash: rgba(251, 191, 36, 0.10);
       --watch-line: rgba(251, 191, 36, 0.38);
-      --critical: #f2545b;
-      --critical-wash: rgba(242, 84, 91, 0.12);
-      --critical-line: rgba(242, 84, 91, 0.46);
-      --critical-glow: rgba(242, 84, 91, 0.28);
-      /* Geometry & type */
-      --radius: 10px;
-      --radius-sm: 7px;
+      /* Geometry — canonical radii: 16px hardware panel, 12px card, 8px display/button, 6px chip. */
+      --radius-hw: 16px;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-xs: 6px;
       --gap: 14px;
       --shadow: 0 18px 44px rgba(0, 0, 0, 0.45);
-      --mono: ui-monospace, SFMono-Regular, "SF Mono", "JetBrains Mono", Menlo, monospace;
-      --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      /* Canonical stacks. No webfont is loaded — the board has to render on a venue network with
+         no outbound access — so the system faces after 'Noto Sans KR' carry Korean when the DEXA
+         faces are not installed locally. */
+      --font-sans: 'Space Grotesk', 'Pretendard Variable', Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+    }
+    /* Hardware panel — the canonical .hero-panel motif: Ink face, 16px radius, an 8px --ink-key2
+       screw at each corner (painted, so it costs no markup) and a mono status line on top. */
+    .hw {
+      position: relative;
+      border-radius: var(--radius-hw);
+      background:
+        radial-gradient(circle 4px at 14px 14px, var(--ink-key2) 99%, transparent 100%),
+        radial-gradient(circle 4px at calc(100% - 14px) 14px, var(--ink-key2) 99%, transparent 100%),
+        radial-gradient(circle 4px at 14px calc(100% - 14px), var(--ink-key2) 99%, transparent 100%),
+        radial-gradient(circle 4px at calc(100% - 14px) calc(100% - 14px), var(--ink-key2) 99%, transparent 100%),
+        var(--ink);
+    }
+    .hw-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 11px 30px 9px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--ink-text);
+    }
+    .hw-status .live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--cyan);
+    }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      flex: 0 0 auto;
+    }
+    .blink { animation: dexa-blink 1.6s infinite; }
+    @keyframes dexa-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0.15; } }
+    @media (prefers-reduced-motion: reduce) { .blink { animation: none; } }
+    /* Recessed numeric display — the canonical .hero-display: sunken plane, mono, cyan. */
+    .display {
+      background: var(--ink-display);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      color: var(--cyan);
+      letter-spacing: 0.06em;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: var(--ink-bg);
-      color: var(--text);
-      font-family: var(--sans);
+      background: var(--ink-display);
+      color: var(--ink-text);
+      font-family: var(--font-sans);
       line-height: 1.55;
     }
     .page { max-width: 1560px; margin: 0 auto; padding: 20px 20px 56px; }
-    h1 { margin: 0; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.01em; }
-    h2 { margin: 0 0 12px; font-size: 17px; line-height: 1.3; }
-    h3 { margin: 0 0 8px; font-size: 15px; }
+    h1 { margin: 0; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; color: var(--ink-heading); }
+    h2 { margin: 0 0 12px; font-size: 17px; line-height: 1.3; letter-spacing: -0.01em; font-weight: 700; color: var(--ink-heading); }
+    h3 { margin: 0 0 8px; font-size: 15px; font-weight: 700; color: var(--ink-heading); }
     p { margin: 0 0 10px; }
-    a { color: var(--accent); }
-    .muted { color: var(--muted); }
-    .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-    /* Uppercase micro label — the control-room caption above every readout. */
+    strong { color: var(--ink-heading); }
+    a { color: var(--cyan); }
+    .muted { color: var(--ink-text); }
+    .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    /* Micro label — the canonical .dx-kicker: mono, uppercase, wide-tracked, meta colour. */
     .micro {
       display: block;
+      font-family: var(--font-mono);
       font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--dim);
+      color: var(--ink-text-dim);
     }
     /* Status LED. Always sits beside a text label, never carries state on its own. */
     .led {
@@ -1070,108 +1148,133 @@ const LIVE_STYLE = `    :root {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--dim);
-      box-shadow: 0 0 0 3px rgba(93, 106, 126, 0.16);
+      background: var(--ink-key2);
+      box-shadow: 0 0 0 3px var(--ink-key2-wash);
       flex: 0 0 auto;
     }
     .led.normal, .led.ok { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-wash); }
     .led.watch, .led.warning { background: var(--watch); box-shadow: 0 0 0 3px var(--watch-wash); }
-    .led.critical { background: var(--critical); box-shadow: 0 0 0 3px var(--critical-wash); }
-    .led.live { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+    .led.critical { background: var(--red); box-shadow: 0 0 0 3px var(--red-wash); }
+    .led.live { background: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-wash); }
     button, input, select { font: inherit; }
+    /* Primary = the canonical .btn-primary inverted for a dark surface: the accent carries the
+       fill and Ink carries the text. Signal Orange stays out of here — it is light-chrome only. */
     button {
       min-height: 38px;
-      border: 1px solid var(--accent-line);
+      border: none;
       border-radius: var(--radius-sm);
-      background: var(--accent-wash);
-      color: var(--accent);
-      font-weight: 800;
+      background: var(--cyan);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-weight: 700;
+      letter-spacing: 0.02em;
       cursor: pointer;
-      padding: 8px 14px;
+      padding: 9px 18px;
     }
-    button:hover { background: var(--accent-deep); color: var(--text-strong); }
-    button.secondary { background: var(--panel-raised); color: var(--text); border-color: var(--line); }
+    button:hover { filter: brightness(1.12); }
+    /* Ghost = the canonical .btn-ghost: mono, no fill, meta colour until hover. */
+    button.secondary {
+      background: transparent;
+      color: var(--ink-text);
+      border: 1px solid var(--ink-key);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+    button.secondary:hover { filter: none; color: var(--ink-heading); border-color: var(--ink-key2); }
     button:disabled { opacity: .45; cursor: not-allowed; }
+    button:disabled:hover { filter: none; }
     button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible {
-      outline: 2px solid var(--accent);
+      outline: 2px solid var(--cyan);
       outline-offset: 2px;
     }
-    label { display: block; color: var(--muted); font-size: 12px; font-weight: 800; margin-bottom: 6px; }
+    label {
+      display: block;
+      font-family: var(--font-mono);
+      color: var(--ink-text-dim);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
     input[type="text"], input[type="number"], select {
       width: 100%;
       min-height: 38px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--ink-key);
       border-radius: var(--radius-sm);
-      background: var(--panel-sunken);
-      color: var(--text);
+      background: var(--ink-display);
+      color: var(--ink-text);
       padding: 8px 10px;
     }
-    /* Top status strip — the always-on header of the situation room. */
-    .strip {
+    /* Top status strip — a hardware panel: screws, a mono status line, then the readout cells. */
+    .strip { margin-bottom: 16px; box-shadow: var(--shadow); overflow: hidden; }
+    .strip-cells {
       display: flex;
       flex-wrap: wrap;
       gap: 10px 26px;
       align-items: center;
-      background: linear-gradient(var(--panel-raised), var(--panel));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 12px 18px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
+      padding: 4px 30px 16px;
     }
     .strip-cell { display: flex; align-items: center; gap: 9px; min-width: 0; }
     .strip-cell strong { font-size: 14px; overflow-wrap: anywhere; }
-    .strip-cell .micro { margin-bottom: 1px; }
+    .strip-cell .micro { margin-bottom: 2px; }
     .strip-links { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    /* Canonical .dx-badge-dark: mono micro type in a pill, cyan when it is the live one. */
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      min-height: 32px;
-      padding: 5px 11px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      background: var(--panel-sunken);
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
+      min-height: 30px;
+      padding: 5px 12px;
+      border: 1px solid var(--ink-key2);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--ink-text);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
       text-decoration: none;
     }
-    .badge.primary { color: var(--accent); border-color: var(--accent-line); background: var(--accent-wash); }
+    .badge.primary { color: var(--cyan); border-color: var(--cyan); }
     .heading { margin-bottom: 16px; }
     .heading p { max-width: 90ch; }
-    .tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+    .tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--ink-key); margin-bottom: 16px; }
     .tab-btn {
       background: transparent;
-      color: var(--muted);
-      border-color: transparent;
+      color: var(--ink-text);
+      border: none;
       border-bottom: 2px solid transparent;
       border-radius: var(--radius-sm) var(--radius-sm) 0 0;
       margin-bottom: -1px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
     }
-    .tab-btn:hover { background: var(--panel); color: var(--text); }
-    .tab-btn.active { background: var(--panel); color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-btn:hover { filter: none; background: var(--ink); color: var(--ink-heading); }
+    .tab-btn.active { background: var(--ink); color: var(--cyan); border-bottom-color: var(--cyan); }
     .tab-panel[hidden] { display: none; }
     .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
+      background: var(--ink);
+      border: 1px solid var(--ink-key);
       border-radius: var(--radius);
       padding: 18px;
       margin-bottom: var(--gap);
       box-shadow: var(--shadow);
     }
     .mini-card {
-      background: var(--panel-raised);
-      border: 1px solid var(--line);
+      background: var(--ink-key);
+      border: 1px solid var(--ink-key);
       border-radius: var(--radius-sm);
       padding: 14px;
     }
     .empty {
-      background: var(--panel);
-      border: 1px dashed var(--line);
+      background: var(--ink);
+      border: 1px dashed var(--ink-key);
       border-radius: var(--radius);
       padding: 30px;
-      color: var(--muted);
+      color: var(--ink-text);
       text-align: center;
     }
     .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; align-items: end; }
@@ -1182,17 +1285,17 @@ const LIVE_STYLE = `    :root {
       align-items: center;
       gap: 8px;
       min-height: 36px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--ink-key);
       border-radius: var(--radius-sm);
       padding: 6px 10px;
-      background: var(--panel-sunken);
-      color: var(--text);
+      background: var(--ink-display);
+      color: var(--ink-text);
       font-weight: 700;
       font-size: 13px;
       cursor: pointer;
     }
-    .check:hover { border-color: var(--accent-line); }
-    .check input { accent-color: var(--accent); }
+    .check:hover { border-color: var(--cyan-line); }
+    .check input { accent-color: var(--cyan); }
     .checkbox-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
     .engine-choice { display: flex; flex-wrap: wrap; gap: 8px; }
     .engine-choice .check { flex: 0 1 auto; }
@@ -1205,7 +1308,7 @@ const LIVE_STYLE = `    :root {
       border: 1px solid var(--watch-line);
       border-left: 4px solid var(--watch);
       background: var(--watch-wash);
-      color: var(--text);
+      color: var(--ink-text);
       border-radius: var(--radius-sm);
       padding: 11px 14px;
       margin-bottom: var(--gap);
@@ -1213,14 +1316,14 @@ const LIVE_STYLE = `    :root {
       font-weight: 700;
     }
     .conn-banner[hidden] { display: none; }
-    /* Stat tiles — the headline readouts. Value is a large mono figure; the state colour rides the
-       top rule and the LED, never the number itself. */
+    /* Stat tiles — the headline readouts. The figure sits in a recessed .hero-display well (mono,
+       cyan, --ink-display) and the state colour rides the top rule and the LED, never the number. */
     .stat-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); margin-bottom: var(--gap); }
     .stat-tile {
       position: relative;
       overflow: hidden;
-      background: var(--panel);
-      border: 1px solid var(--line);
+      background: var(--ink);
+      border: 1px solid var(--ink-key);
       border-radius: var(--radius);
       padding: 14px 16px 13px;
       box-shadow: var(--shadow);
@@ -1230,35 +1333,39 @@ const LIVE_STYLE = `    :root {
       position: absolute;
       inset: 0 0 auto;
       height: 2px;
-      background: var(--dim);
+      background: var(--ink-key2);
     }
     .stat-tile.state-normal::before { background: var(--ok); }
     .stat-tile.state-watch::before, .stat-tile.state-warning::before { background: var(--watch); }
-    .stat-tile.state-critical::before { background: var(--critical); }
+    .stat-tile.state-critical::before { background: var(--red); }
     .tile-value {
       display: block;
-      margin: 7px 0 2px;
-      font-family: var(--mono);
-      font-size: clamp(21px, 2.5vw, 31px);
-      line-height: 1.1;
-      color: var(--text-strong);
+      margin: 8px 0 8px;
+      padding: 10px 14px;
+      background: var(--ink-display);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: clamp(19px, 2.3vw, 28px);
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      color: var(--cyan);
       overflow-wrap: anywhere;
     }
-    .tile-sub { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
-    .tile-state { display: inline-flex; align-items: center; gap: 6px; margin-top: 9px; font-size: 12px; font-weight: 800; color: var(--muted); }
-    /* Map left, live panels right on a wide screen. */
-    .ops-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(330px, 0.85fr); gap: var(--gap); align-items: start; }
-    .map-panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
-    /* The panel rail is far taller than the map, so on a wide screen the map tracks the scroll
-       instead of leaving a dead column beside it. */
+    .tile-sub { display: block; color: var(--ink-text); font-size: 12px; overflow-wrap: anywhere; }
+    .tile-state { display: inline-flex; align-items: center; gap: 6px; margin-top: 9px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--ink-text); }
+    .map-panel { box-shadow: var(--shadow); overflow: hidden; }
+    /* The rail can outrun the map, so on a wide screen the map tracks the scroll instead of
+       leaving a dead column beside it. */
     @media (min-width: 1181px) {
       .map-panel { position: sticky; top: 12px; }
     }
-    .map-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 13px 16px; border-bottom: 1px solid var(--line); }
-    .map-legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; font-weight: 800; color: var(--muted); }
+    .map-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 4px 30px 13px; }
+    .map-legend { display: flex; gap: 12px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--ink-text); }
     .map-legend span { display: inline-flex; align-items: center; gap: 6px; }
-    .map-shell { position: relative; background: var(--panel-sunken); }
-    #map { height: clamp(340px, 54vh, 620px); width: 100%; }
+    /* The map is a display well cut into the panel face, so it carries --ink-display and the
+       recessed radius rather than the panel's own 16px corner. */
+    .map-shell { position: relative; background: var(--ink-display); margin: 0 14px; border-radius: var(--radius-sm); overflow: hidden; }
+    #map { height: clamp(420px, 62vh, 720px); width: 100%; }
     .map-fallback {
       position: absolute;
       inset: 0;
@@ -1269,114 +1376,193 @@ const LIVE_STYLE = `    :root {
       gap: 6px;
       padding: 24px;
       text-align: center;
-      background: var(--panel-sunken);
-      color: var(--muted);
+      background: var(--ink-display);
+      color: var(--ink-text);
       font-size: 13px;
     }
     .map-fallback[hidden] { display: none; }
-    .map-fallback strong { color: var(--text); font-size: 15px; }
-    .map-foot { padding: 10px 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .map-fallback strong { color: var(--ink-heading); font-size: 15px; }
+    .map-foot { padding: 12px 30px 16px; color: var(--ink-text-dim); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; }
     /* Leaflet ships a light UI; these rules tone the tiles and its chrome down to the ink theme.
-       The filter keeps label contrast usable rather than dimming the map into unreadability. */
-    .map-shell .leaflet-container { background: var(--panel-sunken); font-family: var(--sans); }
-    .map-shell .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.88) contrast(0.92) saturate(0.55); }
+       Saturation is pulled almost out so OSM's parks and roads settle into a neutral dark basemap
+       on the --ink-display plane instead of a green slab competing with the status marks.
+       Brightness stops short of dimming the labels into unreadability. */
+    .map-shell .leaflet-container { background: var(--ink-display); font-family: var(--font-sans); }
+    .map-shell .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.76) contrast(1.02) saturate(0.16); }
     .map-shell .leaflet-bar a, .map-shell .leaflet-bar a:hover {
-      background: var(--panel-raised);
-      color: var(--text);
-      border-bottom-color: var(--line);
+      background: var(--ink-key);
+      color: var(--ink-text);
+      border-bottom-color: var(--ink-key);
     }
-    .map-shell .leaflet-bar { border: 1px solid var(--line); }
+    .map-shell .leaflet-bar { border: 1px solid var(--ink-key); }
     .map-shell .leaflet-control-attribution {
-      background: var(--ink-deep);
-      color: var(--muted);
+      background: var(--ink);
+      color: var(--ink-text);
       font-size: 10px;
     }
-    .map-shell .leaflet-control-attribution a { color: var(--accent); }
+    .map-shell .leaflet-control-attribution a { color: var(--cyan); }
     .map-shell .leaflet-popup-content-wrapper, .map-shell .leaflet-popup-tip {
-      background: var(--panel-raised);
-      color: var(--text);
-      border: 1px solid var(--line);
+      background: var(--ink-key);
+      color: var(--ink-text);
+      border: 1px solid var(--ink-key);
       box-shadow: var(--shadow);
     }
     .map-shell .leaflet-popup-content { margin: 11px 13px; font-size: 13px; }
-    .map-shell .leaflet-popup-close-button { color: var(--muted); }
+    .map-shell .leaflet-popup-close-button { color: var(--ink-text); }
     .map-shell .leaflet-tooltip {
-      background: var(--ink-deep);
-      color: var(--text);
-      border: 1px solid var(--line);
+      background: var(--ink);
+      color: var(--ink-text);
+      border: 1px solid var(--ink-key);
       box-shadow: none;
     }
-    .map-shell .leaflet-tooltip::before { border-top-color: var(--line); }
+    .map-shell .leaflet-tooltip::before { border-top-color: var(--ink-key); }
     .popup-title { display: block; font-weight: 800; margin-bottom: 4px; }
-    .popup-line { display: block; color: var(--muted); font-size: 12px; }
+    .popup-line { display: block; color: var(--ink-text); font-size: 12px; }
+    /* Home tab — the map is the board; the rail beside it carries the work. */
+    .home-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.78fr); gap: var(--gap); align-items: start; }
+    .ops-rail { display: grid; gap: var(--gap); }
+    .rail-card { padding: 14px 15px; margin-bottom: 0; }
+    .rail-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+    .rail-head h2 { margin: 0; font-size: 15px; }
+    .rail-head .micro { text-align: right; }
+    /* A long event or task list scrolls inside its card instead of pushing the map off screen. */
+    .row-list { display: grid; gap: 7px; max-height: 320px; overflow-y: auto; }
+    /* Rail rows sit on the recessed plane like the canonical .work-card, with the state colour on
+       the left key edge instead of a fill. */
+    .row-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      min-height: 0;
+      border: 1px solid var(--ink-key);
+      border-left: 3px solid var(--ink-key2);
+      border-radius: var(--radius-xs);
+      background: var(--ink-display);
+      color: var(--ink-text);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      letter-spacing: 0;
+      padding: 10px 12px;
+    }
+    button.row-item:hover { filter: none; border-color: var(--cyan); }
+    .row-item.state-critical { border-left-color: var(--red); }
+    .row-item.state-watch { border-left-color: var(--watch); }
+    .row-item.state-normal { border-left-color: var(--ok); }
+    .row-item.selected { border-color: var(--cyan); background: var(--cyan-wash); }
+    .row-title { display: flex; justify-content: space-between; gap: 9px; align-items: baseline; }
+    .row-title strong { font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
+    .row-meta { display: block; margin-top: 5px; font-family: var(--font-mono); color: var(--ink-text-dim); font-size: 10px; letter-spacing: 0.04em; overflow-wrap: anywhere; }
+    .sla-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; white-space: nowrap; color: var(--ink-text-dim); }
+    .sla-tag.overdue, .sla-tag.critical { color: var(--red); }
+    .sla-tag.due_soon, .sla-tag.watch { color: var(--watch); }
+    .sla-tag.normal { color: var(--ok); }
+    /* Live summary badges on the map head — .hero-display wells: recessed plane, mono, cyan value.
+       A glance at the signal tab without leaving home. */
+    .mini-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .mini-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--ink-display);
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 6px 13px;
+    }
+    .mini-badge:hover { filter: none; outline: 1px solid var(--cyan-line); }
+    .mini-badge .micro { display: inline; color: var(--ink-text-dim); }
+    .loc-picker { margin-top: 9px; }
+    .loc-picker select { min-height: 34px; font-size: 13px; }
+    .leaflet-popup-content .loc-picker label { margin-bottom: 4px; }
     .panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--gap); }
     /* An author display:grid outranks the UA [hidden] rule, so the national card needs this to hide. */
     .panel-grid[hidden] { display: none; }
     #sktSection { margin-bottom: var(--gap); }
     .panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
+      background: var(--ink);
+      border: 1px solid var(--ink-key);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 16px;
     }
-    .panel.state-critical { border-color: var(--critical-line); background: var(--critical-wash); box-shadow: var(--shadow), 0 0 22px -6px var(--critical-glow); }
+    .panel.state-critical { border-color: var(--red-line); background: var(--red-wash); box-shadow: var(--shadow), 0 0 22px -6px var(--red-glow); }
     .panel.state-warning { border-color: var(--watch-line); background: var(--watch-wash); }
     .panel.state-watch { border-color: var(--watch-line); }
     .panel.state-normal { border-color: var(--ok-line); }
     .panel-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 8px; }
     .panel-head h3 { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 15px; }
+    /* Canonical .dx-badge-dark shape: mono micro type in a 20px pill, colour-matched border. */
     .state-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--panel-sunken);
-      color: var(--muted);
+      border: 1px solid var(--ink-key2);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--ink-text);
       padding: 4px 10px;
-      font-size: 12px;
-      font-weight: 800;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
       white-space: nowrap;
     }
-    .state-pill.critical { color: var(--critical); border-color: var(--critical-line); }
+    .state-pill.critical { color: var(--red); border-color: var(--red-line); }
     .state-pill.warning, .state-pill.watch { color: var(--watch); border-color: var(--watch-line); }
     .state-pill.normal { color: var(--ok); border-color: var(--ok-line); }
+    /* Canonical .spec-row: mono key/value pairs, key in meta colour. */
     .metrics { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 5px; }
-    .metrics li { display: flex; justify-content: space-between; gap: 14px; border-top: 1px solid var(--line-soft); padding-top: 5px; font-size: 13px; }
-    .metrics li span { color: var(--muted); font-weight: 700; white-space: nowrap; }
-    .metrics li strong { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; overflow-wrap: anywhere; }
+    .metrics li { display: flex; justify-content: space-between; gap: 14px; border-top: 1px solid var(--ink-key); padding-top: 6px; font-family: var(--font-mono); font-size: 12px; }
+    .metrics li span { color: var(--ink-text-dim); white-space: nowrap; }
+    .metrics li strong { font-variant-numeric: tabular-nums; text-align: right; overflow-wrap: anywhere; font-weight: 500; color: var(--ink-heading); }
     .panel .notice { margin-top: 12px; font-size: 13px; }
-    .source-line { color: var(--dim); font-size: 11px; font-weight: 700; margin: 10px 0 0; font-family: var(--mono); }
+    .source-line { color: var(--ink-text-dim); font-size: 10px; letter-spacing: 0.04em; margin: 10px 0 0; font-family: var(--font-mono); }
     .notice {
       border: 1px solid var(--watch-line);
       border-left: 4px solid var(--watch);
       background: var(--watch-wash);
       padding: 12px 14px;
       border-radius: var(--radius-sm);
-      color: var(--text);
+      color: var(--ink-text);
     }
-    .notice.error { border-color: var(--critical-line); border-left-color: var(--critical); background: var(--critical-wash); }
+    .notice.error { border-color: var(--red-line); border-left-color: var(--red); background: var(--red-wash); }
     .ai-output { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 6px; }
     #aiResult { margin-top: 14px; }
     /* Law tab reuses the simulator's card vocabulary, restyled onto the same dark tokens. */
     .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: var(--gap); }
     .stat { padding: 14px 16px; }
-    .stat strong { display: block; font-family: var(--mono); font-size: clamp(19px, 2.4vw, 28px); color: var(--text-strong); line-height: 1.1; overflow-wrap: anywhere; }
-    .stat span { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .stat strong {
+      display: block;
+      margin-bottom: 8px;
+      padding: 10px 14px;
+      background: var(--ink-display);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: clamp(19px, 2.4vw, 28px);
+      letter-spacing: 0.02em;
+      color: var(--cyan);
+      line-height: 1.15;
+      overflow-wrap: anywhere;
+    }
+    .stat span { font-family: var(--font-mono); color: var(--ink-text-dim); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
     .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .list { display: grid; gap: 10px; }
     .card-topline { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; margin-bottom: 6px; }
     .pill, .chip {
       display: inline-flex;
       align-items: center;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--line);
-      background: var(--panel-sunken);
-      color: var(--muted);
-      padding: 4px 8px;
-      font-size: 12px;
-      font-weight: 800;
+      border-radius: 20px;
+      border: 1px solid var(--ink-key2);
+      background: transparent;
+      color: var(--ink-text);
+      padding: 4px 9px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
       white-space: nowrap;
     }
     .chips { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -1384,23 +1570,25 @@ const LIVE_STYLE = `    :root {
     .tone-good .pill, .tone-good strong, .chip.good { color: var(--ok); }
     .tone-warning { border-color: var(--watch-line); background: var(--watch-wash); }
     .tone-warning .pill, .tone-warning strong, .chip.warn { color: var(--watch); }
-    .tone-danger { border-color: var(--critical-line); background: var(--critical-wash); }
-    .tone-danger .pill, .tone-danger strong, .chip.danger { color: var(--critical); }
+    .tone-danger { border-color: var(--red-line); background: var(--red-wash); }
+    .tone-danger .pill, .tone-danger strong, .chip.danger { color: var(--red); }
     .compact-list { margin: 0; padding-left: 18px; }
     .compact-list li + li { margin-top: 5px; }
     .law-field { margin-top: 12px; }
     #lawResult .card:first-child { margin-top: 0; }
     @media (max-width: 1180px) {
-      .ops-grid { grid-template-columns: 1fr; }
+      .home-grid { grid-template-columns: 1fr; }
       .stat-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 720px) {
       .page { padding: 14px 12px 44px; }
-      .strip { gap: 10px 16px; padding: 12px 14px; }
+      /* The hardware panels keep their screws, so the inner gutter only narrows to 18px. */
+      .hw-status, .strip-cells, .map-head, .map-foot { padding-left: 18px; padding-right: 18px; }
+      .strip-cells { gap: 10px 16px; }
       .strip-links { margin-left: 0; }
       .tabs .tab-btn { flex: 1 1 140px; }
       .stat-row, .stats, .grid, .checkbox-grid { grid-template-columns: 1fr; }
-      #map { height: 320px; }
+      #map { height: 340px; }
     }
     @media print {
       body { background: #fff; color: #000; }
@@ -1424,52 +1612,118 @@ ${LIVE_STYLE}
 </head>
 <body>
   <main class="page">
-    <header class="strip">
-      <div class="strip-cell">
-        <span class="led live"></span>
-        <div>
-          <span class="micro">System</span>
-          <strong>${SERVER_NAME} v${VERSION}</strong>
-        </div>
+    <header class="strip hw">
+      <div class="hw-status">
+        <span class="path">/ ${SERVER_NAME} / live</span>
+        <span class="live"><span class="live-dot blink"></span>LIVE</span>
       </div>
-      <div class="strip-cell">
-        <div>
-          <span class="micro">모니터링 대상</span>
-          <strong id="stripArea">—</strong>
+      <div class="strip-cells">
+        <div class="strip-cell">
+          <div>
+            <span class="micro">System</span>
+            <strong>v${VERSION}</strong>
+          </div>
         </div>
-      </div>
-      <div class="strip-cell">
-        <div>
-          <span class="micro">현재시각</span>
-          <strong id="stripClock" class="mono">--:--:--</strong>
+        <div class="strip-cell">
+          <div>
+            <span class="micro">모니터링 대상</span>
+            <strong id="stripArea">—</strong>
+          </div>
         </div>
-      </div>
-      <div class="strip-cell">
-        <div>
-          <span class="micro">종합 상태</span>
-          <span class="state-pill" id="stripState"><span class="led"></span>확인 필요</span>
+        <div class="strip-cell">
+          <div>
+            <span class="micro">현재시각</span>
+            <strong id="stripClock" class="mono">--:--:--</strong>
+          </div>
         </div>
-      </div>
-      <div class="strip-cell">
-        <div>
-          <span class="micro">마지막 갱신</span>
-          <strong id="stripUpdated" class="mono">—</strong>
+        <div class="strip-cell">
+          <div>
+            <span class="micro">종합 상태</span>
+            <span class="state-pill" id="stripState"><span class="led"></span>확인 필요</span>
+          </div>
         </div>
-      </div>
-      <div class="strip-links">
-        <span class="badge">60초 자동 갱신</span>
-        <a class="badge primary" href="/">← 적용성 체크리스트</a>
+        <div class="strip-cell">
+          <div>
+            <span class="micro">마지막 갱신</span>
+            <strong id="stripUpdated" class="mono">—</strong>
+          </div>
+        </div>
+        <div class="strip-links">
+          <span class="badge">60초 자동 갱신</span>
+          <a class="badge primary" href="/">← 적용성 체크리스트</a>
+        </div>
       </div>
     </header>
     <section class="heading">
       <h1>현장 운영 라이브 대시보드</h1>
-      <p class="muted">행사 당일 인파·날씨·대기질·교통·재난문자를 한 화면에서 봅니다. 공개 API가 없는 항목은 없는 대로 표시합니다.</p>
+      <p class="muted">기본 화면은 행사와 작업이 지도 위에 올라간 상황판입니다. 인파·날씨 같은 실시간 신호와 법령·의무 문서는 옆 탭에서 봅니다.</p>
     </section>
     <div class="tabs" role="tablist">
-      <button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="tab-live" data-tab="live">실시간 현황</button>
+      <button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="tab-home" data-tab="home">홈 · 행사 지도</button>
+      <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-live" data-tab="live">실시간 신호</button>
       <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="tab-laws" data-tab="laws">법령·의무 문서</button>
     </div>
-    <div id="tab-live" class="tab-panel" role="tabpanel">
+    <!-- Home owns the map instance. The live tab hides it, so every tab switch back has to call
+         invalidateSize() or Leaflet keeps the stale size it measured while display:none. -->
+    <div id="tab-home" class="tab-panel" role="tabpanel">
+      <div class="conn-banner" id="opsBanner" hidden></div>
+      <section class="home-grid">
+        <section class="map-panel hw">
+          <div class="hw-status">
+            <span class="path">/ mice / operations / map</span>
+            <span class="live"><span class="live-dot blink"></span>LIVE</span>
+          </div>
+          <div class="map-head">
+            <div>
+              <span class="micro">Event Operations Map</span>
+              <strong>행사 위치 · 작업 상태</strong>
+            </div>
+            <div class="map-legend">
+              <span><span class="led critical"></span>위험</span>
+              <span><span class="led watch"></span>주의</span>
+              <span><span class="led normal"></span>정상</span>
+              <span><span class="led"></span>인파 관측 지점</span>
+            </div>
+            <div class="mini-badges">
+              <button class="mini-badge" type="button" data-goto-live title="실시간 신호 탭으로 이동">
+                <span class="led" id="badgeCrowdLed"></span><span class="micro">인파</span><span id="badgeCrowdText">확인 필요</span>
+              </button>
+              <button class="mini-badge" type="button" data-goto-live title="실시간 신호 탭으로 이동">
+                <span class="led" id="badgeHeatLed"></span><span class="micro">폭염</span><span id="badgeHeatText">확인 필요</span>
+              </button>
+            </div>
+          </div>
+          <div class="map-shell">
+            <div id="map"></div>
+            <div class="map-fallback" id="mapFallback" hidden>
+              <strong>지도 타일 오프라인</strong>
+              <span id="mapFallbackDetail">OpenStreetMap 타일 서버에 연결하지 못했습니다. 좌표와 상태값은 옆 목록에서 그대로 확인할 수 있습니다.</span>
+            </div>
+          </div>
+          <p class="map-foot" id="mapNote">표시 좌표는 지점 식별용 근사값입니다. 거리·수용인원 계산에 쓰지 마세요.</p>
+        </section>
+        <aside class="ops-rail">
+          <section class="card rail-card">
+            <div class="rail-head"><h2>행사</h2><span class="micro" id="opsSummary">조회 중</span></div>
+            <div id="opsEvents" class="row-list" aria-live="polite">
+              <p class="muted">운영 저장소를 불러오는 중입니다.</p>
+            </div>
+          </section>
+          <section class="card rail-card">
+            <div class="rail-head"><h2>작업 · SLA 급한 순</h2><span class="micro" id="opsTaskEvent">행사 미선택</span></div>
+            <div id="opsTasks" class="row-list" aria-live="polite">
+              <p class="muted">행사를 선택하면 이슈·조치가 여기에 표시됩니다.</p>
+            </div>
+          </section>
+          <section class="card rail-card" id="opsUnlocatedCard" hidden>
+            <div class="rail-head"><h2>위치 미지정 행사</h2><span class="micro">지도 표시 대상 아님</span></div>
+            <div id="opsUnlocated" class="row-list"></div>
+          </section>
+        </aside>
+      </section>
+      <section class="card"><div class="notice" id="opsDisclaimer"></div></section>
+    </div>
+    <div id="tab-live" class="tab-panel" role="tabpanel" hidden>
     <div class="conn-banner" id="connBanner" hidden></div>
     <section class="card">
       <h2>조회 조건</h2>
@@ -1553,32 +1807,8 @@ ${LIVE_STYLE}
         <span class="tile-state"><span class="led"></span>확인 필요</span>
       </article>
     </section>
-    <section class="ops-grid">
-      <section class="map-panel">
-        <div class="map-head">
-          <div>
-            <span class="micro">Situation Map</span>
-            <strong>현장 위치 · 인파 강조</strong>
-          </div>
-          <div class="map-legend">
-            <span><span class="led normal"></span>정상</span>
-            <span><span class="led watch"></span>주의·경보</span>
-            <span><span class="led critical"></span>위험</span>
-            <span><span class="led"></span>확인 필요</span>
-          </div>
-        </div>
-        <div class="map-shell">
-          <div id="map"></div>
-          <div class="map-fallback" id="mapFallback" hidden>
-            <strong>지도 타일 오프라인</strong>
-            <span id="mapFallbackDetail">OpenStreetMap 타일 서버에 연결하지 못했습니다. 좌표와 상태값은 아래 패널에서 그대로 확인할 수 있습니다.</span>
-          </div>
-        </div>
-        <p class="map-foot" id="mapNote">표시 좌표는 지점 식별용 근사값입니다. 거리·수용인원 계산에 쓰지 마세요.</p>
-      </section>
-      <section id="panels" class="panel-grid" aria-live="polite">
-        <div class="empty">실시간 상태를 불러오는 중입니다.</div>
-      </section>
+    <section id="panels" class="panel-grid" aria-live="polite">
+      <div class="empty">실시간 상태를 불러오는 중입니다.</div>
     </section>
     <section class="card" style="margin-top:16px">
       <h2>AI 상황 브리핑</h2>
@@ -1707,13 +1937,13 @@ ${LIVE_STYLE}
     const cssToken = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     let STATE_COLORS = {};
     function loadStateColors() {
-      const dim = cssToken("--dim");
+      const key = cssToken("--ink-key2");
       STATE_COLORS = {
-        critical: cssToken("--critical") || dim,
-        warning: cssToken("--watch") || dim,
-        watch: cssToken("--watch") || dim,
-        normal: cssToken("--ok") || dim,
-        unknown: dim
+        critical: cssToken("--red") || key,
+        warning: cssToken("--watch") || key,
+        watch: cssToken("--watch") || key,
+        normal: cssToken("--ok") || key,
+        unknown: key
       };
     }
     const stateColor = (state) => STATE_COLORS[state] || STATE_COLORS.unknown;
@@ -1754,6 +1984,7 @@ ${LIVE_STYLE}
     let map = null;
     let baseLayer = null;
     let focusLayer = null;
+    let eventLayer = null;
     let tileFailures = 0;
     let mapReady = false;
     function setMapFallback(detail) {
@@ -1780,8 +2011,11 @@ ${LIVE_STYLE}
         $("#mapFallback").hidden = true;
       });
       tiles.addTo(map);
+      // Added in draw order: reference dots at the bottom, the crowd focus above them, event
+      // markers on top so a venue pin is never buried under the area highlight.
       baseLayer = L.layerGroup().addTo(map);
       focusLayer = L.layerGroup().addTo(map);
+      eventLayer = L.layerGroup().addTo(map);
       drawBaseMarkers();
     }
     // Reference dots for every place the active mode can reach. They stay neutral: only the
@@ -1792,7 +2026,7 @@ ${LIVE_STYLE}
       const points = crowdMode() === "skt"
         ? Object.keys(SKT_VENUE_COORDS).map((id) => [SKT_VENUE_COORDS[id].name, SKT_VENUE_COORDS[id].coords])
         : Object.keys(SEOUL_AREA_COORDS).map((name) => [name, SEOUL_AREA_COORDS[name]]);
-      const dim = cssToken("--dim");
+      const dim = cssToken("--ink-key2");
       for (const entry of points) {
         L.circleMarker(entry[1], {
           radius: 3.5,
@@ -1821,6 +2055,203 @@ ${LIVE_STYLE}
     }
     function clearFocus() {
       if (focusLayer) focusLayer.clearLayers();
+    }
+    // --- Event operations board (home tab) -----------------------------------------------
+    // Everything here comes from the local operations store: issues, staff actions, runsheet
+    // execution and command decisions the MCP tools already wrote. Nothing is synthesised, so an
+    // empty store shows an empty board rather than a demo event.
+    let opsPayload = null;
+    let selectedEvent = null;
+    let fittedEventBounds = false;
+    const SLA_LABEL = { overdue: "SLA 초과", due_soon: "SLA 임박", normal: "여유", no_sla: "기한 없음" };
+    const TASK_KIND_LABEL = { issue: "이슈", action: "조치" };
+    const findEvent = (name) => (opsPayload?.events || []).find((event) => event.eventName === name) || null;
+    const dueText = (value) => value
+      ? new Date(value).toLocaleString("ko-KR", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })
+      : "기한 없음";
+    const taskTone = (slaState) => slaState === "overdue" ? "critical" : slaState === "due_soon" ? "watch" : "normal";
+    function showOpsIssue(message) {
+      const banner = $("#opsBanner");
+      banner.innerHTML = '<span class="led critical"></span>' + escapeHtml(message);
+      banner.hidden = false;
+    }
+    // Only venues with a display coordinate are offered; anything else has to be pinned through the
+    // API with explicit lat/lng rather than dropped on the map at a guessed point.
+    function locationSelectHtml(eventName, venueId) {
+      const options = (opsPayload?.venueOptions || []).map((venue) =>
+        '<option value="' + escapeHtml(venue.id) + '"' + (venue.id === venueId ? " selected" : "") + '>'
+        + escapeHtml(venue.label) + '</option>'
+      ).join("");
+      return '<div class="loc-picker"><label>위치 지정(베뉴)'
+        + '<select data-loc-event="' + escapeHtml(eventName) + '">'
+        + '<option value="">' + (venueId ? "베뉴 변경" : "베뉴 선택") + '</option>'
+        + options + '</select></label></div>';
+    }
+    function eventLines(event) {
+      const severity = event.issues.bySeverity;
+      return [
+        "미해결 이슈 " + event.issues.open + "건 (위험 " + severity.critical + " · 높음 " + severity.high + ")",
+        "SLA 초과 " + event.sla.overdue + " · 임박 " + event.sla.dueSoon,
+        "런시트 " + event.runsheet.done + "/" + event.runsheet.total + " 완료 · 막힘 "
+          + (event.runsheet.blocked + event.runsheet.escalated),
+        event.activeCommandDecisions.length
+          ? "활성 지휘판단 " + event.activeCommandDecisions.map((decision) => decision.label).join(", ")
+          : "활성 지휘판단 없음",
+        event.lastActivityAt ? "마지막 활동 " + new Date(event.lastActivityAt).toLocaleString("ko-KR") : ""
+      ].filter(Boolean);
+    }
+    function eventPopupHtml(event) {
+      return '<span class="popup-title">' + escapeHtml(event.eventName) + '</span>'
+        + '<span class="popup-line">상태 ' + escapeHtml(STATE_LABEL[event.state] || event.state)
+        + (event.stateReasons.length ? " · " + escapeHtml(event.stateReasons.join(", ")) : "") + '</span>'
+        + eventLines(event).map((line) => '<span class="popup-line">' + escapeHtml(line) + '</span>').join("")
+        + locationSelectHtml(event.eventName, event.location ? event.location.venueId : null);
+    }
+    function drawEventMarkers() {
+      if (!eventLayer) return;
+      eventLayer.clearLayers();
+      const located = (opsPayload?.events || []).filter((event) => event.location);
+      for (const event of located) {
+        const coords = [event.location.lat, event.location.lng];
+        const color = stateColor(event.state);
+        const selected = event.eventName === selectedEvent;
+        L.circle(coords, {
+          radius: selected ? 1100 : 800,
+          color: color,
+          weight: selected ? 2.5 : 1.5,
+          opacity: 0.85,
+          fillColor: color,
+          fillOpacity: selected ? 0.2 : 0.11
+        }).addTo(eventLayer);
+        L.circleMarker(coords, {
+          radius: selected ? 11 : 8,
+          color: color,
+          weight: 3,
+          fillColor: color,
+          fillOpacity: 0.6
+        })
+          .bindTooltip(event.eventName + " · " + (STATE_LABEL[event.state] || event.state), { direction: "top" })
+          .bindPopup(eventPopupHtml(event))
+          // Selecting from the marker only refreshes the rail: redrawing the layer here would
+          // destroy the marker Leaflet is currently opening a popup on.
+          .on("click", () => {
+            selectedEvent = event.eventName;
+            renderOpsRail();
+          })
+          .addTo(eventLayer);
+      }
+      if (!fittedEventBounds && located.length && map) {
+        fittedEventBounds = true;
+        map.fitBounds(located.map((event) => [event.location.lat, event.location.lng]), {
+          padding: [46, 46],
+          maxZoom: 13
+        });
+      }
+    }
+    function eventRowHtml(event) {
+      const severity = event.issues.bySeverity;
+      return '<button class="row-item state-' + escapeHtml(event.state)
+        + (event.eventName === selectedEvent ? " selected" : "")
+        + '" type="button" data-select-event="' + escapeHtml(event.eventName) + '">'
+        + '<span class="row-title"><strong>' + escapeHtml(event.eventName) + '</strong>'
+        + '<span class="sla-tag ' + escapeHtml(event.state) + '">'
+        + escapeHtml(STATE_LABEL[event.state] || event.state) + '</span></span>'
+        + '<span class="row-meta">이슈 ' + event.issues.open + '(위험 ' + severity.critical + ')'
+        + ' · SLA 초과 ' + event.sla.overdue
+        + ' · 런시트 ' + event.runsheet.done + '/' + event.runsheet.total
+        + (event.location ? "" : " · 위치 미지정") + '</span></button>';
+    }
+    function taskRowHtml(task) {
+      return '<div class="row-item state-' + escapeHtml(taskTone(task.slaState)) + '">'
+        + '<span class="row-title"><strong>' + escapeHtml(task.title) + '</strong>'
+        + '<span class="sla-tag ' + escapeHtml(task.slaState) + '">'
+        + escapeHtml(SLA_LABEL[task.slaState] || task.slaState) + '</span></span>'
+        + '<span class="row-meta">' + escapeHtml(TASK_KIND_LABEL[task.kind] || task.kind)
+        + ' · ' + escapeHtml(task.category)
+        + ' · ' + escapeHtml(task.team)
+        + ' · ' + escapeHtml(task.level)
+        + ' · 기한 ' + escapeHtml(dueText(task.dueAt))
+        + (task.zone ? ' · ' + escapeHtml(task.zone) : "") + '</span></div>';
+    }
+    function unlocatedRowHtml(event) {
+      return '<div class="row-item state-' + escapeHtml(event.state) + '">'
+        + '<span class="row-title"><strong>' + escapeHtml(event.eventName) + '</strong>'
+        + '<span class="sla-tag ' + escapeHtml(event.state) + '">'
+        + escapeHtml(STATE_LABEL[event.state] || event.state) + '</span></span>'
+        + locationSelectHtml(event.eventName, null) + '</div>';
+    }
+    function renderOpsRail() {
+      if (!opsPayload) return;
+      const events = opsPayload.events || [];
+      const summary = opsPayload.summary || {};
+      $("#opsSummary").textContent = events.length
+        ? "전체 " + summary.events + " · 위험 " + summary.critical + " · 주의 " + summary.watch
+          + " · 지도 표시 " + summary.located
+        : "행사 0건";
+      $("#opsEvents").innerHTML = events.length
+        ? events.map(eventRowHtml).join("")
+        : '<p class="muted">' + escapeHtml(opsPayload.emptyNote) + '</p>';
+      const selected = findEvent(selectedEvent);
+      $("#opsTaskEvent").textContent = selected ? selected.eventName : "행사 미선택";
+      $("#opsTasks").innerHTML = !selected
+        ? '<p class="muted">행사를 선택하면 이슈·조치가 여기에 표시됩니다.</p>'
+        : selected.tasks.length
+          ? selected.tasks.map(taskRowHtml).join("")
+          : '<p class="muted">미해결 이슈·조치가 없습니다.</p>';
+      const unlocated = events.filter((event) => !event.location);
+      $("#opsUnlocatedCard").hidden = unlocated.length === 0;
+      $("#opsUnlocated").innerHTML = unlocated.map(unlocatedRowHtml).join("");
+      if ((opsPayload.warnings || []).length) showOpsIssue(opsPayload.warnings.join(" / "));
+    }
+    function renderOps(payload) {
+      opsPayload = payload;
+      const events = payload.events || [];
+      // The refresh must not move the operator's selection unless the event went away entirely.
+      if (!events.some((event) => event.eventName === selectedEvent)) {
+        selectedEvent = events.length ? events[0].eventName : null;
+      }
+      $("#opsDisclaimer").textContent = payload.disclaimer;
+      drawEventMarkers();
+      renderOpsRail();
+    }
+    function selectFromRail(eventName) {
+      selectedEvent = eventName;
+      const event = findEvent(eventName);
+      if (event?.location && map) {
+        map.setView([event.location.lat, event.location.lng], 14, { animate: true });
+      }
+      drawEventMarkers();
+      renderOpsRail();
+    }
+    async function loadOps() {
+      try {
+        const res = await fetch("/api/operations-map");
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        $("#opsBanner").hidden = true;
+        renderOps(json);
+      } catch (err) {
+        showOpsIssue(friendlyError(err, "운영 상황 조회 실패"));
+      }
+    }
+    // Writes the pin file beside operations.json but outside its hash chain — it is a display
+    // position, not an operational record.
+    async function assignLocation(eventName, venueId) {
+      try {
+        const res = await fetch("/api/operations-map/location", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ eventName: eventName, venueId: venueId })
+        });
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.error || "요청 실패");
+        selectedEvent = eventName;
+        fittedEventBounds = false;
+        if (map) map.closePopup();
+        await loadOps();
+      } catch (err) {
+        showOpsIssue(friendlyError(err, "위치 지정 실패"));
+      }
     }
     // --- Headline tiles ------------------------------------------------------------------
     function setTile(id, value, sub, state) {
@@ -1877,6 +2308,21 @@ ${LIVE_STYLE}
         alerts.length ? alerts.map((panel) => panel.label).join(", ") : "주의 이상 상태 없음",
         worstState(panels.map((panel) => panel.state)));
     }
+    // The home tab keeps a two-badge summary of the live signal so the operator sees a crowd or
+    // heat change without leaving the map; clicking either opens the signal tab.
+    function setMiniBadge(ledSelector, textSelector, state, text) {
+      $(ledSelector).className = "led " + (state || "unknown");
+      $(textSelector).textContent = text;
+    }
+    function updateHomeBadges(payload, nationwide) {
+      setMiniBadge("#badgeCrowdLed", "#badgeCrowdText",
+        nationwide ? "unknown" : payload.crowd.state,
+        nationwide
+          ? "전국 SKT 수동"
+          : metricValue(payload.crowd, "혼잡도 등급") || STATE_LABEL[payload.crowd.state] || "확인 필요");
+      const heat = payload.weather.heat || {};
+      setMiniBadge("#badgeHeatLed", "#badgeHeatText", payload.weather.state, heat.label || "관측 없음");
+    }
     function updateCrowdMap(payload) {
       if (!map) return;
       const area = payload.query.areaName;
@@ -1923,6 +2369,7 @@ ${LIVE_STYLE}
         + " / 인파 " + areaText + " / 측정소 " + payload.query.stationName;
       updateStrip(payload, shown, areaText);
       updateTiles(payload, shown, nationwide);
+      updateHomeBadges(payload, nationwide);
       if (!nationwide) updateCrowdMap(payload);
     }
     let hasLiveData = false;
@@ -2032,6 +2479,7 @@ ${LIVE_STYLE}
         setMapNote(placeName + " 의 표시 좌표가 이 대시보드에 없어 지도는 이동하지 않았습니다. 혼잡도 값은 위 카드에 그대로 표시됩니다.");
       }
       setTile("#tileCrowd", json.levelLabel || "—", placeName || "전국 SKT(수동)", state);
+      setMiniBadge("#badgeCrowdLed", "#badgeCrowdText", state, json.levelLabel || placeName || "전국 SKT 수동");
     }
     // Manual only: this is the one control on the page that spends the shared monthly quota.
     async function requestSktCongestion() {
@@ -2253,16 +2701,21 @@ ${LIVE_STYLE}
         $("#lawStatus").textContent = "베뉴·지자체 목록을 불러오지 못했습니다";
       }
     }
-    // Switching only toggles visibility, so a fetched law result survives a trip to the live tab.
+    // Switching only toggles visibility, so a fetched law result survives a trip to another tab.
+    const TAB_NAMES = ["home", "live", "laws"];
     function showTab(name) {
-      const active = name === "laws" ? "laws" : "live";
-      $("#tab-live").hidden = active !== "live";
-      $("#tab-laws").hidden = active !== "laws";
+      const active = TAB_NAMES.includes(name) ? name : "home";
+      for (const tab of TAB_NAMES) {
+        $("#tab-" + tab).hidden = tab !== active;
+      }
       for (const button of document.querySelectorAll(".tab-btn")) {
         const on = button.dataset.tab === active;
         button.classList.toggle("active", on);
         button.setAttribute("aria-selected", on ? "true" : "false");
       }
+      // Leaflet measures its container once. A map that was display:none keeps that stale size and
+      // renders torn tiles until it is told to re-measure after the panel is visible again.
+      if (active === "home" && map) requestAnimationFrame(() => map.invalidateSize());
     }
     function startClock() {
       const tick = () => {
@@ -2304,13 +2757,33 @@ ${LIVE_STYLE}
           showTab(button.dataset.tab);
         });
       }
+      // Event rows, the live-signal badges and the location selects are all rebuilt on every
+      // refresh (and Leaflet popups live outside the rail), so they are handled by delegation.
+      document.addEventListener("click", (clickEvent) => {
+        const row = clickEvent.target.closest("[data-select-event]");
+        if (row) {
+          selectFromRail(row.dataset.selectEvent);
+          return;
+        }
+        if (clickEvent.target.closest("[data-goto-live]")) {
+          location.hash = "live";
+          showTab("live");
+        }
+      });
+      document.addEventListener("change", (changeEvent) => {
+        const select = changeEvent.target;
+        if (!select.matches || !select.matches("[data-loc-event]") || !select.value) return;
+        assignLocation(select.dataset.locEvent, select.value);
+      });
       window.addEventListener("hashchange", () => showTab(location.hash.slice(1)));
       showTab(location.hash.slice(1));
       loadLawOptions();
-      // The briefing stays out of the 60s cycle so the operator's subscription is only spent on
-      // an explicit click.
+      // Both cycles read only local files and free public APIs. The AI briefing and the SKT probe
+      // stay out of them so the operator's subscription and monthly quota are only spent on a click.
       setInterval(load, REFRESH_MS);
+      setInterval(loadOps, REFRESH_MS);
       load();
+      loadOps();
       loadEngines();
     }
     init();
@@ -2694,6 +3167,14 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
   if (req.method === "GET" && url.pathname === "/api/live-status") {
     responseJson(res, 200, await liveStatus(url));
+    return;
+  }
+  if (req.method === "GET" && url.pathname === "/api/operations-map") {
+    responseJson(res, 200, operationsMap(url));
+    return;
+  }
+  if (req.method === "POST" && url.pathname === "/api/operations-map/location") {
+    responseJson(res, 200, operationsMapLocation(await readJson(req)));
     return;
   }
   if (req.method === "GET" && url.pathname === "/api/skt-pois") {

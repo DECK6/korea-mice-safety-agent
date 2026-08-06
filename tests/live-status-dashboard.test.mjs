@@ -182,7 +182,7 @@ test("web server serves /live and /api/live-status without network calls", async
   }
 });
 
-test("/live carries both tabs and wires the law tab to /api/simulate", async () => {
+test("/live carries the signal and law tabs and wires the law tab to /api/simulate", async () => {
   const server = await startWebServer({ host: "127.0.0.1", port: 0 });
   const { port } = server.address();
   try {
@@ -190,7 +190,7 @@ test("/live carries both tabs and wires the law tab to /api/simulate", async () 
     const html = await page.text();
     assert.equal(page.status, 200);
 
-    assert(html.includes(">실시간 현황<"));
+    assert(html.includes(">실시간 신호<"));
     assert(html.includes(">법령·의무 문서<"));
     assert(html.includes('id="tab-live"'));
     assert(html.includes('id="tab-laws"'));
@@ -239,10 +239,32 @@ test("/live ships a self-contained map panel on one central dark token block", a
   try {
     const html = await (await fetch(`http://127.0.0.1:${port}/live`)).text();
 
-    // Colours are declared once in :root and referenced by role everywhere else.
-    assert(html.includes("--ink-bg: #0b0e14"));
-    assert(html.includes("--accent: #22d3ee"));
-    assert(html.includes("--critical: #f2545b"));
+    // Colours are declared once in :root and referenced by role everywhere else. The values are
+    // the DEXA design system's own, so this list is the diff against dexa-theme.css.
+    for (const token of [
+      "--ink: #17181B",
+      "--ink-display: #0D0E10",
+      "--ink-key: #2A2B2E",
+      "--ink-key2: #3A3B3F",
+      "--ink-text: #8A8D93",
+      "--ink-text-dim: #5A5D63",
+      "--ink-heading: #F7FAFC",
+      "--cyan: #5EE7F3",
+      "--red: #E0402A",
+    ]) {
+      assert(html.includes(token), token);
+    }
+    // Canonical font stacks, and no webfont request: the board has to render offline.
+    assert(html.includes("'Space Grotesk', 'Pretendard Variable', Pretendard, 'Noto Sans KR'"));
+    assert(html.includes("'JetBrains Mono'"));
+    assert.equal(/fonts\.(googleapis|gstatic)|@font-face/i.test(html), false);
+    // Hardware-panel motif: corner screws, the mono status line and the cyan LIVE blink.
+    assert(html.includes("--ink-key2) 99%"), "corner screws are painted from the key token");
+    assert(html.includes("@keyframes dexa-blink"));
+    assert(html.includes("prefers-reduced-motion"));
+    assert(html.includes('<span class="live-dot blink"></span>LIVE'));
+    // Signal Orange is light-chrome only and must never reach this dark surface.
+    assert.equal(html.toUpperCase().includes("#FF5A1F"), false);
 
     assert(html.includes('<div id="map"></div>'));
     // Vendored, never a CDN: a venue network may have no outbound access at all.
