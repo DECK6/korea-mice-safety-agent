@@ -967,12 +967,24 @@ async function sktCongestion(url: URL): Promise<AnyRecord> {
   };
 }
 
-// The AI panel spawns a CLI process on this machine, so it must never answer another host: a
-// remote request would otherwise be a remote trigger for local process execution.
+// The AI panel spawns a CLI process on this machine, so it must never answer an arbitrary host: a
+// remote request would otherwise be a remote trigger for local process execution. Loopback is
+// always trusted; the Tailscale CGNAT range (100.64.0.0/10) can be opted in via
+// MICE_TRUST_TAILNET=1 — a tailnet is the operator's own signed-in devices, and the metered/CLI
+// endpoints stay unreachable from the public internet either way.
 export function isLoopbackAddress(address?: string | null): boolean {
   if (!address) return false;
   const normalized = address.startsWith("::ffff:") ? address.slice("::ffff:".length) : address;
-  return normalized === "::1" || normalized === "127.0.0.1" || normalized.startsWith("127.");
+  if (normalized === "::1" || normalized === "127.0.0.1" || normalized.startsWith("127.")) return true;
+  if (process.env.MICE_TRUST_TAILNET === "1") return isTailnetAddress(normalized);
+  return false;
+}
+
+function isTailnetAddress(address: string): boolean {
+  const parts = address.split(".");
+  if (parts.length !== 4) return false;
+  const [a, b] = [Number(parts[0]), Number(parts[1])];
+  return a === 100 && b >= 64 && b <= 127;
 }
 
 async function aiEnginesPayload(): Promise<AnyRecord> {
